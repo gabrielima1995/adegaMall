@@ -1,0 +1,8 @@
+﻿@{
+    var userConfig = Domain.UserConfig.UserConfiguration.Current;
+}
+
+@if (userConfig.ChatConfig.Enabled && !string.IsNullOrWhiteSpace(userConfig.ChatConfig.Script))
+{
+    @Html.Raw(userConfig.ChatConfig.GetScript())
+}

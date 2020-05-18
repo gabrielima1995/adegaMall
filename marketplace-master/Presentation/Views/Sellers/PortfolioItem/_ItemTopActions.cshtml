@@ -1,0 +1,29 @@
+﻿@model Presentation.Models.PortfolioViewModels.PortfolioItemPageVM
+
+@{
+    var config = MaaSConfig.Current;
+
+    var searchUrl = Url.ActionLocalized("Index", "Search");
+}
+
+<div class="row product-top-actions-bar">
+    <div class="col-xs-12">
+        <p>
+            @if (config.Search.Enabled)
+            {
+                <a href="@searchUrl" class="product-top-actions-bar-search">
+                    <small>
+                        &lsaquo;
+                        @Request.GetLocalizedString("PORTFOLIO_SEARCH_TITLE")
+                    </small>
+                </a>
+            }
+
+            <a href="@Url.ActionLocalized("Seller", "Register")" class="product-top-actions-bar-register-seller pull-right">
+                <small>
+                    @Request.GetLocalizedString("SELLER_WANNA_SELL_TOO")
+                </small>
+            </a>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿@model PublicProfileInvisibleVM
+
+@{
+    var searchUrl = Url.ActionLocalized("Index", "Search");
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-0">
+    <div class="container">
+        <div class="row padding-bottom-15">
+            <div class="col-xs-12">
+                <h1 class="seller-title m-b-0">@Model.Seller.PublicProfileName</h1>
+                @Html.Localized("SELLER_PROFILE_INVISIBLE", "p")
+                <p>
+                    @Html.Localized("FIND_OTHER_SELLERS", "a", new { href = searchUrl })
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

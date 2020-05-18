@@ -1,0 +1,8 @@
+﻿@model Domain.Entities.IWithProductVariant
+
+@Html.DropDownListFor(m => m.Variant,
+    new SelectList(Model.Variants, "Id", "Name", Model.Variant),
+    Request.GetLocalizedString("PRODUCT_VARIANT_SELECT"),
+    new { @class = "form-control js-variant js-select" })
+
+@Html.ValidationMessageFor(model => model.Variant, "", new { @class = "text-danger" })

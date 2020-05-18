@@ -1,0 +1,23 @@
+﻿<p>Produtos:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Sub-total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.Products)
+        {
+        <tr>
+            <td>@item.Item</td>
+
+            <td>@item.Quantity</td>
+
+            <td>@item.Amount</td>
+        </tr>
+        }
+    </tbody>
+</table>

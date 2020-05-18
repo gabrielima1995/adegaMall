@@ -1,0 +1,24 @@
+﻿@{
+    var config = MaaSConfig.Current;
+}
+
+@if (config.HelpQuestions.IsVisible)
+{
+    <!-- HELP QUESTIONS -->
+    <div class="col-xs-12 col-sm-6 col-md-offset-1 col-md-5">
+        <div class="box-content text-center equal-height">
+            @Html.Localized("SIGN_TITLE", "h2")
+
+            <ul class="icon-list">
+                @for (int i = 1; i <= config.HelpQuestions.Items.Count; i++)
+                {
+                    <li>
+                        <img src="@config.HelpQuestions.Items[i - 1].ImageUrl" />
+                        @Html.Localized("HELP_QUESTION_" + i)
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <!-- /HELP QUESTIONS -->
+}

@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.4" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
+    <PackageReference Include="Unity" Version="5.11.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NewContext.Acl\NewContext.Acl.csproj" />
+    <ProjectReference Include="..\NewContext.Application\NewContext.Application.csproj" />
+    <ProjectReference Include="..\NewContext.Core\NewContext.Core.csproj" />
+    <ProjectReference Include="..\NewContext.Domain\NewContext.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,93 @@
+﻿@model PublicProfileVM
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+<div class="area bg-white padding-top-30 padding-bottom-30">
+    <div class="hidden-xs padding-top-30"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                @Html.Localized("CONTACT_TITLE", "h4")
+
+                @if (config.Seller.Email.ShowInPublicProfile)
+                {
+                    <p><span class="far fa-envelope"></span> @Model.Seller.Email</p>
+                }
+
+                @if (config.Seller.Phone.ShowInPublicProfile && config.Seller.Phone.Enabled && !string.IsNullOrEmpty(Model.Seller.PhoneNumber))
+                {
+                    <p><span class="glyphicon glyphicon-earphone"></span> @Model.Seller.PhoneNumber</p>
+                }
+
+                @if (config.Seller.WhatsAppNumber.ShowInPublicProfile && config.Seller.WhatsAppNumber.Enabled && !string.IsNullOrEmpty(Model.Seller.WhatsAppNumber))
+                {
+                    var wppUrl = System.Text.RegularExpressions.Regex.Replace(Model.Seller.WhatsAppNumber, @"\D+", "");
+
+                    <p><strong><a target="_blank" class="text-success" href="@("https://wa.me/55" + wppUrl)"><i class="fab fa-whatsapp"></i> @Model.Seller.WhatsAppNumber</a></strong></p>
+                }
+
+                <!-- ADDRESS -->
+                @if (config.Seller.Address.ShowText && config.Seller.Address.Enabled && Model.Seller.Address != null && Model.Seller.Address.HasFullAddress)
+                {
+                    <p>
+                        @Model.Seller.Address.ToString()
+                        @MapLinks()
+                    </p>
+
+                }
+                else if (config.Seller.Neighborhood.ShowInPublicProfile && config.Seller.Address.Enabled && Model.Seller.Address != null && Model.Seller.Address.HasFullAddress)
+                {
+                    <p>
+                        @Model.Seller.Address.Neighborhood, @Model.Seller.Address.CityAndState
+                        @MapLinks()
+                    </p>
+                }
+                else if (config.Seller.CityAndState.ShowText && config.Seller.CityAndState.Enabled && Model.Seller.Address != null && Model.Seller.Address.HasCityAndState)
+                {
+                    <p>
+                        @Model.Seller.Address.CityAndState
+                        @MapLinks()
+                    </p>
+                }
+
+                <ul class="social">
+                    @if (config.Seller.FacebookProfile.ShowInPublicProfile && config.Seller.FacebookProfile.Enabled && !string.IsNullOrEmpty(Model.Seller.FacebookProfile))
+                    {
+                        <li><a href="@Model.Seller.FacebookProfile" class="icone social-facebook" target="_blank"></a></li>
+                    }
+
+                    @if (config.Seller.InstagramProfile.ShowInPublicProfile && config.Seller.InstagramProfile.Enabled && !string.IsNullOrEmpty(Model.Seller.InstagramProfile))
+                    {
+                        <li><a href="@Model.Seller.InstagramProfile" class="icone social-instagram" target="_blank"></a></li>
+                    }
+
+                    @if (config.Seller.LinkedInProfile.ShowInPublicProfile && config.Seller.LinkedInProfile.Enabled && !string.IsNullOrEmpty(Model.Seller.LinkedInProfile))
+                    {
+                        <li><a href="@Model.Seller.LinkedInProfile" class="icone social-linkedin" target="_blank"></a></li>
+                    }
+                </ul>
+
+                @Html.Partial("_ProfileHireButton")
+            </div>
+        </div>
+    </div>
+    <div class="hidden-xs padding-bottom-30"></div>
+</div>
+
+@helper MapLinks()
+{
+    if (Model.Links != null)
+    {
+        <br />
+        <a href="@Model.Links.Search" target="_blank">
+            <i class="fa fa-map-marker-alt"></i>
+            @Html.Localized("PROFILE_CONTACT_VIEW_ON_MAP")
+        </a> @:|
+        <a href="@Model.Links.Directions" target="_blank">
+            <i class="fa fa-car"></i>
+            @Html.Localized("PROFILE_CONTACT_DIRECTIONS")
+        </a>
+    }
+}

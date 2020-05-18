@@ -1,0 +1,70 @@
+﻿@model Presentation.Models.CompleteRatingViewModel
+@{
+    ViewBag.Title = $"Avaliar {Model.TargetName}";
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <img class="border-radius avatar m-b-sm" src="@Model.TargetAvatar" />
+                        <h2 class="text-center">@Model.TargetName</h2>
+                    </div>
+                    <div class="col-xs-12 col-md-8">
+                        <h3>@Request.GetLocalizedString("RATINGS_SEND_TITLE")</h3>
+                        @using (Html.BeginForm("SendRating", "UserRating", FormMethod.Post))
+                        {
+                            @Html.HiddenFor(model => model.Rating.RatingId)
+
+                            <div class="form-group">
+                                @Html.Label("Comentário")
+                                @Html.TextAreaFor(model => model.Rating.Comment, new { @class = "form-control", @style = "resize:vertical;" })
+                                @Html.ValidationMessageFor(model => model.Rating.Comment, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group text-center">
+                                @Html.Label("Avaliação")
+                                <br />
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <i class="far fa-star rating-star" id="js-rating-star-@i" style="cursor:pointer"></i>
+                                }
+                                @Html.HiddenFor(model => model.Rating.RatingValue, new { id = "js-rating-value" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.Rating.RatingValue, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success">Enviar Avaliação</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        (function ($, MaaS) {
+            for (var i = 1; i <= 5; i++) {
+                let star = $('#js-rating-star-' + i);
+                star.on('click', { rating: i }, onClickRatingStar);
+            }
+
+            function onClickRatingStar(event) {
+                $('#js-rating-value').val(event.data.rating);
+
+                for (var i = 1; i <= 5; i++) {
+                    let star = $('#js-rating-star-' + i).removeClass();
+                    if (event.data.rating < i)
+                        star.addClass("far fa-star rating-star");
+                    else
+                        star.addClass("fas fa-star rating-star");
+                }
+            }
+        })(window.jQuery, window.MaaS);
+    </script>
+}

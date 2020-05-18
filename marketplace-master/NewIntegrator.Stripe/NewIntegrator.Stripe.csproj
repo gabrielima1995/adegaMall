@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3E99A5BA-642C-4C6D-BABE-8ACE5D5DE897}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NewIntegrator.Stripe</RootNamespace>
+    <AssemblyName>NewIntegrator.Stripe</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Stripe.net, Version=27.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.27.2.0\lib\net45\Stripe.net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Customers\CustomerExtensions.cs" />
+    <Compile Include="Customers\StripeCustomer.cs" />
+    <Compile Include="Customers\StripeCustomerCreate.cs" />
+    <Compile Include="Customers\StripeCustomerService.cs" />
+    <Compile Include="Customers\StripeCustomerUpdate.cs" />
+    <Compile Include="Invoices\InvoiceExtensions.cs" />
+    <Compile Include="Invoices\StripeInvoice.cs" />
+    <Compile Include="Invoices\StripeInvoiceService.cs" />
+    <Compile Include="Invoices\StripeInvoiceStatus.cs" />
+    <Compile Include="PaymentIntents\ConfirmPaymentRequest.cs" />
+    <Compile Include="PaymentIntents\PaymentIntentExtensions.cs" />
+    <Compile Include="PaymentIntents\StripePaymentIntent.cs" />
+    <Compile Include="PaymentIntents\StripePaymentIntentService.cs" />
+    <Compile Include="PaymentIntents\StripePaymentIntentStatus.cs" />
+    <Compile Include="Plans\PlanExtensions.cs" />
+    <Compile Include="Plans\StripePlan.cs" />
+    <Compile Include="Plans\StripePlanInterval.cs" />
+    <Compile Include="Plans\StripePlanService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Retro\Plans\StripeRetroPlan.cs" />
+    <Compile Include="Retro\Customers\StripeRetroCustomerOperations.cs" />
+    <Compile Include="Retro\Plans\StripeRetroPlanOperations.cs" />
+    <Compile Include="StripeSetup.cs" />
+    <Compile Include="Subscriptions\StripeSubscription.cs" />
+    <Compile Include="Subscriptions\StripeSubscriptionService.cs" />
+    <Compile Include="Subscriptions\StripeSubscriptionStatus.cs" />
+    <Compile Include="Subscriptions\SubscriptionExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{c54c6f75-69c6-4aef-adca-70c08bd1a02c}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{44a771e7-f5af-43a7-b1dc-efc36e3ac340}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaymentIntegrator.Core\PaymentIntegrator.Core.csproj">
+      <Project>{880230cf-fe0c-4943-ade0-88575aefc8a0}</Project>
+      <Name>PaymentIntegrator.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

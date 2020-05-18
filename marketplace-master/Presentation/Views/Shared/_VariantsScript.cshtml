@@ -1,0 +1,45 @@
+﻿<script>
+    $(function () {
+        $('body').on('change', '.js-variantType', function (e) {
+            var $this = $(this);
+
+            $.ajax({
+                url: '@Html.Raw(Url.ActionLocalized("Select", "ProductVariants", null))&variantType=' + $this.val(),
+                success: function (data) {
+                    $this.parent().parent().parent().find('.js-variant').html(data);
+                }
+            });
+        });
+    });
+
+    (function ($, MaaS) {
+        var $body = $('body');
+
+        $body.on('click', '.variant .plus', function (e) {
+            e.preventDefault();
+
+            if ($('.variant').length < 30) {
+                var $this = $(this);
+
+                $.ajax({
+                    url: '@Url.ActionLocalized("AddVariant", "Store")',
+                    success: function (data) {
+
+                        var $variant = $this.parents('.variant');
+
+                        $(data).insertAfter($variant).slideDown();
+                    }
+                });
+            }
+        });
+
+        $body.on('click', '.variant .minus', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+
+            if ($('.variant').length !== 1) {
+                $this.parents('.variant').remove();
+            }
+        });
+    })(window.jQuery, window.MaaS);
+</script>

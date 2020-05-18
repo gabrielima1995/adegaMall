@@ -1,0 +1,92 @@
+﻿@using Application.Sellers
+
+@model PublicProfileVM
+
+@{
+    ViewBag.Title = Model.Seller.PublicProfileName;
+
+    ViewBag.Description = !string.IsNullOrWhiteSpace(Model.Seller.AboutMe)
+        ? Model.Seller.AboutMe.Truncate(155)
+        : Request.GetLocalizedString("PROFILE_DEFAULT_DESCRIPTION_TEXT");
+
+    ViewBag.Url = Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.Seller.FriendlyUrl });
+
+    if (Model.Seller.HasAvatar)
+    {
+        ViewBag.Image = Model.Seller.GetAvatarUrl(600, 600);
+    }
+
+    var config = MaaSConfig.Current;
+}
+
+@section styles
+{
+    @if (Model.Visualization.ShowScheduleTimeline)
+    {
+        @Styles.Render("~/Content/fullcalendar-scheduler")
+        @Styles.Render("~/Content/fullcalendar-scheduler-mobile.css")
+    }
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-0">
+    @Html.Partial("_ProfileInfos", Model)
+
+    @if (config.Portfolio.Enabled)
+    {
+        @Html.Partial("_Portfolio", Model)
+    }
+
+    @if (config.Product.Enabled && !config.Product.HideStoreMenusFromSeller)
+    {
+        @Html.Partial("_Products", Model)
+    }
+
+    @if (config.Seller.UserRatings.Enabled)
+    {
+        @Html.Partial("_LastRatings", Model)
+    }
+
+    @Html.Partial("_ProfileContact", Model)
+
+    @Html.Partial("_ProfileMap", Model)
+</div>
+
+@section plugins
+{
+    @if (Model.Visualization.ShowScheduleTimeline)
+    {
+        @Scripts.Render("~/bundles/scripts/fullcalendar-scheduler")
+    }
+}
+
+@section scripts {
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+                if (window.location.hash) {
+                    $(window.location.hash).modal();
+                }
+
+                $('.portfolio-modal')
+                    .on('show.bs.modal', function (e) {
+                        $(this).find('.video-wrapper').fitVids({
+                            customSelector: ['iframe']
+                        });
+                    })
+                    .on('hidden.bs.modal', function (e) {
+                        var $iframe = $(this).find('.video-wrapper iframe');
+
+                        $iframe.attr('src', $iframe.attr('src'));
+                    });
+            });
+        })(window.jQuery);
+    </script>
+
+    @Html.Partial("_ProfileMapScript", Model)
+    @Html.Partial("_ProductWishScript")
+
+    @if (Model.Visualization.ShowScheduleTimeline)
+    {
+        @Html.Partial("_ScheduleTimelineScript")
+    }
+}

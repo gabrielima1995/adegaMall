@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    var isSeller = User.Identity.GetLoginProfile().IsSellerOrSellerAssistant();
+    var config = MaaSConfig.Current;
+    var loginProfile = User.Identity.GetLoginProfile();
+    bool showCallToAction = isSeller ? (true) : (config.Buyer.CallToAction.ShowGeneralQuoteButton || config.Buyer.CallToAction.ShowSearchButton);
+}
+
+@if (showCallToAction)
+{
+    <div class="col-xs-12 text-center">
+        @if (isSeller)
+        {
+            
+        }
+        else
+        {
+            if (config.Quote.Enabled)
+            {
+                if (config.Search.Enabled && config.Buyer.CallToAction.ShowSearchButton)
+                {
+                    <a class="btn btn-sm btn-default m-b-sm" href="@Url.ActionLocalized("Index", "Search")">
+                        <i class="fas fa-search"></i>
+                        @Html.Localized("CALL_TO_ACTION_SEARCH_QUOTE", "strong")
+                    </a>
+                }
+                if (config.Quote.GeneralQuote.Enabled && config.Buyer.CallToAction.ShowGeneralQuoteButton)
+                {
+                    <a class="btn btn-sm btn-default m-b-sm" href="@Url.ActionLocalized("Request", "Quotes")">
+                        <i class="far fa-handshake"></i>
+                        @Html.Localized("CALL_TO_ACTION_REQUEST_QUOTE", "strong")
+                    </a>
+                }
+            }
+            else if (config.Product.Enabled)
+            {
+                if (config.Search.Enabled && config.Buyer.CallToAction.ShowSearchButton)
+                {
+                    <a class="btn btn-sm btn-default m-b-sm" href="@Url.ActionLocalized("Index", "Search")">
+                        <i class="fas fa-search"></i>
+                        @Html.Localized("CALL_TO_ACTION_SEARCH_PRODUCT", "strong")
+                    </a>
+                }
+            }
+        }
+    </div>
+}

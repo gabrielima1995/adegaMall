@@ -1,0 +1,60 @@
+﻿@using Application.Sellers
+@model Application.Modules.Portfolio.Search.SearchResultViewModel
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (Model.Results == null || Model.Results.Count == 0)
+{
+    <div class="col-xs-12 well text-center">
+        <span class="text-gray">@Html.Markdown(Request.GetLocalizedString("SEARCH_EMPTY_HELP"))</span>
+    </div>
+}
+
+@foreach (var seller in Model.Results)
+{
+    var sellerProfileUrl = Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = seller.FriendlyUrl });
+
+    <div class="col-xs-12 col-sm-4 col-md-3">
+        <div class="card equal-height">
+            <a href="@sellerProfileUrl" title="@seller.PublicProfileName" class="card-product-img-link">
+                <img src="@seller.GetAvatarUrl()" alt="@seller.PublicProfileName" />
+            </a>
+
+            <h5>@seller.PublicProfileName</h5>
+
+            <p>
+                @if ((config.Seller.Address.Enabled || config.Seller.CityAndState.Enabled) && !string.IsNullOrWhiteSpace(seller.Address?.CityAndState))
+                {
+                    @(seller.Address.CityAndState)
+                }
+                else
+                {
+                    @:&nbsp;
+                }
+            </p>
+
+            <p>
+                @if (config.Seller.AdditionalInfo2.Enabled && !string.IsNullOrWhiteSpace(seller.AdditionalInfo2))
+                {
+                    @Html.Localized("ADDITIONAL_INFO_2_PUBLIC_PROFILE")
+                    <span>@seller.AdditionalInfo2</span>
+                }
+                else
+                {
+                    @:&nbsp;
+                }
+            </p>
+
+            @if (config.Search.ShowDescription)
+            {
+                <em>@(seller.AboutMe?.Truncate(config.Search.DescriptionMaxLength, ""))</em>
+            }
+
+            @Html.Localized("SEARCH_SELLER_PROFILE_BUTTON", "a", new { href = sellerProfileUrl, @class = "btn btn-default" })
+        </div>
+    </div>
+}
+
+<input type="hidden" class="js-next-url" style="display: none" value="@(Model.NextResults ?? "")" />

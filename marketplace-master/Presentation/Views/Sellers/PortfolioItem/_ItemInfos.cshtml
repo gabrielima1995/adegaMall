@@ -1,0 +1,69 @@
+﻿@using Presentation.Helpers
+
+@model Presentation.Models.PortfolioViewModels.PortfolioItemPageVM
+
+@{
+    var config = MaaSConfig.Current;
+    var hasDescription = !string.IsNullOrWhiteSpace(Model.Description);
+    var hasCategories = Model.SubCategories.Any();
+}
+
+<div class="row m-b-md">
+    @if (hasDescription)
+    {
+        <div class="product-infos-description col-xs-12 m-b-md">
+            <h4>
+                <i class="far fa-sticky-note product-section-icon" aria-hidden="true"></i>
+                @Html.Localized("PORTFOLIO_ITEM_DESCRIPTION_LABEL")
+            </h4>
+            @Html.Markdown(Model.Description)
+        </div>
+    }
+
+    @if (config.CustomFields.Portfolio.Enabled && Model.CustomFieldDefinitions?.Count > 0 && Model.CustomFields?.Count > 0)
+    {
+        <div class="product-infos-custom-fields col-xs-12 m-b-md">
+            <h4>
+                <i class="fas fa-info-circle product-section-icon"></i>
+                @Html.Localized("CUSTOM_FIELDS_AREA_LABEL")
+            </h4>
+            <ul class="list-unstyled">
+                @foreach (var field in Model.CustomFields)
+                {
+                    if (Model.CustomFieldDefinitions[new Guid(field.Key)].IsPublic)
+                    {
+                        var value = Model.CustomFields[field.Key.ToString()];
+                        <li>
+                            <strong>@Model.CustomFieldDefinitions[new Guid(field.Key)].NameLocalized(Request.GetCurrentLang()):</strong>
+                            @if (CustomFieldHelper.IsLink(value))
+                            {
+                                <a href="@value"><i class="fas fa-paperclip"></i> @Request.GetLocalizedString("CUSTOM_FIELD_VIEW_FILE")</a>
+                            }
+                            else
+                            {
+                                <span>@CustomFieldHelper.LocalizeField(value, Request.GetCurrentLang())</span>
+                            }
+                            <br />
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    }
+
+    @if (hasCategories)
+    {
+        <div class="product-infos-custom-fields col-xs-12 m-b-md">
+            <h4>
+                <i class="fas fa-info-circle product-section-icon"></i>
+                @Html.Localized("PORTFOLIO_ITEM_CATEGORIES_LABEL")
+            </h4>
+            <ul>
+                @foreach (var item in Model.SubCategories)
+                {
+                    <li>@item.Category.Name &#8231; @item.Name</li>
+                }
+            </ul>
+        </div>
+    }
+</div>

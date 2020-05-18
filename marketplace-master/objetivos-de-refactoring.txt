@@ -1,0 +1,102 @@
+Remover dependências incorretas
+- De Application para Infra
+- De Domain para Libs (ex. Order.Status é um tipo de Enum definido em Infra.CrossCutting.PaymentIntegrator)
+
+Trabalhar com CQRS
+- Separar classes responsáveis pela {execução de operações} das classes que {retornam dados}
+- Métodos que executam operações devem retornar apenas OperationResult (sem dados adicionais), ex. OrderService.CreateOrder
+- Métodos que retornam dados não devem gerar efeitos colaterais no sistema
+- Fazer Domain gerar mais eventos e fazer a camada de Application responder a eles
+- Coordenar eventos através de um MessageDispatcher centralizado
+
+Separar conceitos de Acesso a Dados
+- Tipo 1 - Operacionais: dados que são acessados para serem trabalhados e então persistidos novamente
+	- Serão responsabilidade dos Repositórios
+	- Deve haver um repositório específico para cada Agregado (destruir o repositório genérico)
+	- Um repositório não pode retornar dados de outros Agregados
+	- Um repositório deve sempre retornar o Agregado completo (preferencialmente com LazyLoading)
+	- Um repositório nunca deve retornar IQueryable
+	- Estes dados nunca chegam para o usuário
+- Tipo 2 - Visualização: dados para serem mostrados ao usuário
+	- Serão de responsabilidade das classes de Query
+	- Podem ser retornados por EntityFramework ou SQL direto
+	- Considerar sempre a possibilidade de cache
+	- Caso a classe faça cache, deve considerar eventos de Domain que devam invalidar esse cache
+	- Como os dados sobem para o mundo externo, devem sempre ser convertidos em um DTO
+
+Remover ViewModels de Application
+- Onde pertinente, tranformar em um DTO, que provavelmente poderá ser remodelado
+- ViewModels devem ser específicas da camada de Apresentação, e por isso devem ser definidos lá
+
+Melhorar MessageDispatcher (atual IBus)
+- Trabalhar registro de EventHandlers através de Dependency Injection
+- O container deve ser capaz de resolver mais de um serviço por tipo (ou seja, mais de um Handler por DomainEvent)
+
+Sobre interfaces implementadas em Infra
+- Definir no nível de Application interfaces como: ICloudStorage, IEmailSender, ICacheManager, IOrderQueries
+- Definir no nível de Domain somente IRepository
+
+----------------------------------------
+
+Estrutura ideal do projeto (exemplo):
+
+Presentation
+	/Controllers
+		- CustomersController
+	/Models
+		- CustomerListViewModel
+		- CreateCustomerViewModel
+
+Application
+	/Interfaces
+		- ICloudStorage
+		- IEmailSender
+	/CustomerRegistration (BoundedContext)
+		- CreateCustomerAppCommand
+		- CustomerAppService
+		- ICustomerQueries
+		- SendEmailToNewCustomer (event handler for CustomerAddedEvent)
+	/DTO
+		- FileUploadDTO
+
+Domain
+	/CustomerRegistration (BoundedContext)
+		/CustomerAggregate
+			/Commands
+				- CreateCustomerCommand
+			/Interfaces
+				- ICustomerRepository
+			- Customer
+	/Events
+		- CustomerAddedEvent
+	/ValueObjects
+		- Address
+		- PhoneNumber
+
+Domain.Core (atual Framework)
+	/Messaging
+		- DomainEvent
+		- Command
+		- IEventHandler
+		- IEventStore
+		- IMessageDispatcher (atual IBus)
+		- Message
+	- Entity
+	- ValueObject
+	- IAggregateRoot
+	- OperationResult
+	- ErrorEntryCollection
+	- ErrorEntry
+	- Guard
+
+Infra
+	/CustomerRegistration
+		- CustomerRepository
+		- CustomerQueries
+	/Data
+		/Mapping
+			- CustomerMapping
+		- ApplicationDbContext (atual ScaffoldContext)
+	- AzureCloudStorage
+	- SendGridEmailSender
+	- SqlEventStore

@@ -1,0 +1,81 @@
+﻿@model Application.Modules.Portfolio.Search.SearchViewModel
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+<form action="@Url.ActionLocalized("Search", "Sellers", new { area = "" })" method="get" name="search_home container-fluid">
+    @Html.HiddenFor(model => model.Lang)
+
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <div class="form-group">
+                @Html.Partial("_CategoriesSelect", Model)
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <div class="form-group">
+                @Html.Partial("_SubCategoriesSelect", Model)
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <div class="form-group">
+                @Html.TextBoxFor(model => model.Seller, new { @class = "form-control", placeholder = Request.GetLocalizedString("SELLER_FILTER_INPUT") })
+            </div>
+        </div>
+
+        @*
+        @if (config.Portfolio.Search.ByCityAndState.Enabled)
+        {
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    @Html.Partial("_CitiesSelect", Model)
+                </div>
+            </div>
+        }
+
+        @if (config.Portfolio.Search.ByAdditionalInfo2.Enabled)
+        {
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <select id="AdditionalInfo2" name="AdditionalInfo2" class="form-control js-select">
+                        <option value="">@Request.GetLocalizedString("ADDITIONAL_INFO_2_INPUT")</option>
+                        <option value="1">1 ano</option>
+                        <option value="2">2 anos</option>
+                        <option value="3">3 anos</option>
+                        <option value="5">5 anos</option>
+                        <option value="10">10 anos</option>
+                    </select>
+                </div>
+            </div>
+        }
+
+        @if (config.Portfolio.Search.ByOnlyAvatar.Enabled)
+        {
+            <div class="col-xs-12 col-md-4">
+                <label for="OnlyAvatar" data-label="FILTER_ONLY_AVATAR_LABEL">
+                    @Html.CheckBoxFor(i => i.OnlyAvatar) @Request.GetLocalizedString("FILTER_ONLY_AVATAR_LABEL")
+                </label>
+            </div>
+        }
+        *@
+
+    </div>
+    <div class="row margin-top-10 margin-bottom-default text-center">
+        <div class="col-xs-12">
+            @Html.Localized("FIND_SELLER_BUTTON", "button", new { type = "submit", @class = "btn btn-primary xl" })
+        </div>
+    </div>
+</form>
+
+<div class="row text-center">
+    <div class="col-xs-12">
+        @if (config.Quote.Enabled && config.Quote.GeneralQuote.Enabled)
+        {
+            @Html.Localized("GENERAL_QUOTE_BUTTON", "a", new { href = Url.ActionLocalized("Request", "Quotes"), @class = "btn btn-default btn-sm" })
+        }
+    </div>
+</div>
+

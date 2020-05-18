@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E653D119-3ABF-42C2-B3CD-F9127FC0B044}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Application</RootNamespace>
+    <AssemblyName>Application</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DemoOrcamento|AnyCPU'">
+    <OutputPath>bin\DemoOrcamento\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DemoProduto|AnyCPU'">
+    <OutputPath>bin\DemoProduto\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExpressiveAnnotations, Version=2.7.1.0, Culture=neutral, PublicKeyToken=d3e372f3c1e83cec, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExpressiveAnnotations.dll.2.7.1\lib\net45\ExpressiveAnnotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.7.5.0\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Geocoding, Version=3.6.0.0, Culture=neutral, PublicKeyToken=7c714700b88674c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Geocoding.net.3.6.1\lib\net40\Geocoding.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.20.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.20.0\lib\net45\Google.Apis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.20.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.20.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.20.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.20.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.20.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.20.0\lib\net45\Google.Apis.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.20.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.20.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.YouTube.v3, Version=1.20.0.701, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.YouTube.v3.1.20.0.701\lib\net45\Google.Apis.YouTube.v3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LinqToTwitter.AspNet, Version=3.2.0.30483, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\linqtotwitter.4.1.0\lib\net45\LinqToTwitter.AspNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LinqToTwitter.net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=957107be965c25d9, processorArchitecture=MSIL">
+      <HintPath>..\packages\linqtotwitter.4.1.0\lib\net45\LinqToTwitter.net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MediatR, Version=8.0.1.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.8.0.1\lib\net461\MediatR.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.Primitives, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Primitives.4.3.0\lib\net45\System.ComponentModel.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Zlib.Portable, Version=1.11.0.0, Culture=neutral, PublicKeyToken=431cba815f6a8b5b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zlib.Portable.Signed.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Addresses\AddressAppService.cs" />
+    <Compile Include="Addresses\AddressHelper.cs" />
+    <Compile Include="Addresses\Geocoder.cs" />
+    <Compile Include="Addresses\IAddressAppService.cs" />
+    <Compile Include="AssemblyMarker.cs" />
+    <Compile Include="Auth\ApiTokenAuthorizedProvider.cs" />
+    <Compile Include="Auth\AuthorizationStatus.cs" />
+    <Compile Include="Avatar\AvatarAppService.cs" />
+    <Compile Include="CacheExpiredEvent.cs" />
+    <Compile Include="Helpers\DateHelper.cs" />
+    <Compile Include="Helpers\DocumentHelper.cs" />
+    <Compile Include="Modules\BatchImport\BatchImportAppService.cs" />
+    <Compile Include="Modules\BatchImport\Events\ProductImportedEvent.cs" />
+    <Compile Include="Modules\BatchImport\Models\BatchImportSourceType.cs" />
+    <Compile Include="Modules\BatchImport\Models\BatchImportType.cs" />
+    <Compile Include="Modules\BatchImport\Models\CustomFieldDto.cs" />
+    <Compile Include="Modules\BatchImport\Events\DownloadAvatarWhenSellerIsImported.cs" />
+    <Compile Include="Modules\BatchImport\IBatchImportQueries.cs" />
+    <Compile Include="Modules\BatchImport\IBatchImportService.cs" />
+    <Compile Include="Modules\BatchImport\Models\IInvalidRecord.cs" />
+    <Compile Include="Modules\BatchImport\Models\ImportResult.cs" />
+    <Compile Include="Modules\BatchImport\ISellerAvatarUpdater.cs" />
+    <Compile Include="Modules\BatchImport\ISocialImageProvider.cs" />
+    <Compile Include="Modules\BatchImport\Products\GenerateProductTemplateCommand.cs" />
+    <Compile Include="Modules\BatchImport\Products\ImportProductImagesCommand.cs" />
+    <Compile Include="Modules\BatchImport\Products\ImportProductsCommand.cs" />
+    <Compile Include="Modules\BatchImport\Products\InvalidImportImage.cs" />
+    <Compile Include="Modules\BatchImport\Products\InvalidImportProduct.cs" />
+    <Compile Include="Modules\BatchImport\Products\IProductImagesZipExtractor.cs" />
+    <Compile Include="Modules\BatchImport\Products\IProductImportQueries.cs" />
+    <Compile Include="Modules\BatchImport\Products\IProductImportRepository.cs" />
+    <Compile Include="Modules\BatchImport\Products\ProductModelDataExtensions.cs" />
+    <Compile Include="Modules\BatchImport\Products\ProductsImportAppService.cs" />
+    <Compile Include="Modules\BatchImport\Sellers\SellerImportAppService.cs" />
+    <Compile Include="Modules\BatchImport\Sellers\SellerDto.cs" />
+    <Compile Include="Modules\BatchImport\Events\SellerImportedEvent.cs" />
+    <Compile Include="Modules\Portfolio\Categories\CategoryAppService.cs" />
+    <Compile Include="Modules\Portfolio\Categories\CategoryViewModel.cs" />
+    <Compile Include="Modules\Portfolio\Categories\ICategoryAppService.cs" />
+    <Compile Include="CreditCards\CreditCardModel.cs" />
+    <Compile Include="Home\SellersSearchHomeViewModel.cs" />
+    <Compile Include="Modules\Products\Categories\IProductCategoryAppService.cs" />
+    <Compile Include="Modules\Products\Categories\ProductCategoryAppService.cs" />
+    <Compile Include="Modules\Products\Categories\ProductCategoryViewModel.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToAdminOnOrderPaymentCompleted.cs" />
+    <Compile Include="Modules\Products\ProductPriceLogic.cs" />
+    <Compile Include="Modules\Products\Orders\NewRentalProductPeriodViewModel.cs" />
+    <Compile Include="Modules\Products\ProductSmartSearchAppService.cs" />
+    <Compile Include="Modules\Products\Queries\IProductSearchQueries.cs" />
+    <Compile Include="Modules\Products\IProductDetailsToSelectPeriodViewModel.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\NewTransactionRentalOnOrder.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToBuyerAndSellerOnDisputeResolved.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToBuyerAndSellerOnDisputeOpened.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToAdminsOnRequestMediation.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToBuyerOnNoShippingOrderPaymentCompleted.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToSellerOnOrderCancelledByBuyer.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToBuyerOnOrderCancelledBySeller.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToBuyerOnOrderDelivered.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToBuyerOnOrderDeliveryOnTheWay.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToBuyerOnOrderReturned.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToBuyerOnOrderPaymentCompleted.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToSellerOnOrderAwaitingDelivery.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToBuyerOnOrderAwaitingDelivery.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToBuyerOnOrderPaymentPending.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToSellerOnNoShippingOrderPaymentCompleted.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\SendEmailToSellerAndAdminOnOrderPaymentPending.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\RequestUserRatingOnOrderCompleted.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\TransferPaymentOnOrderCompleted.cs" />
+    <Compile Include="Modules\Products\Orders\ChangeRentalProductPeriodViewModel.cs" />
+    <Compile Include="Modules\Products\Orders\OrderReviewViewModel.cs" />
+    <Compile Include="Modules\Products\Orders\EventHandlers\RefundOrderOnOrderCancelledOrRejected.cs" />
+    <Compile Include="Modules\Products\PrivateFleetParameterViewModel.cs" />
+    <Compile Include="Modules\Products\ProductSearchStore.cs" />
+    <Compile Include="Modules\Products\Queries\IProductQueries.cs" />
+    <Compile Include="Modules\Products\Queries\ProductSelectItem.cs" />
+    <Compile Include="Modules\Products\RenewProductSearchCacheOnCacheExpired.cs" />
+    <Compile Include="Modules\Products\RentalShiftViewModel.cs" />
+    <Compile Include="Modules\Products\Rental\RentalShiftsAppService.cs" />
+    <Compile Include="Modules\Products\Search\NearbyProductsViewModel.cs" />
+    <Compile Include="Modules\Products\Search\NearbyProductsResultViewModel.cs" />
+    <Compile Include="Modules\Products\Search\NearbyProductsRequestViewModel.cs" />
+    <Compile Include="Modules\Products\Search\FacetGroup.cs" />
+    <Compile Include="Modules\Products\Search\FacetItem.cs" />
+    <Compile Include="Modules\Products\IProductAppService.cs" />
+    <Compile Include="Modules\Products\Orders\MyOrdersViewModel.cs" />
+    <Compile Include="Modules\Products\Orders\MySalesViewModel.cs" />
+    <Compile Include="Modules\Products\Orders\OrderAppService.cs" />
+    <Compile Include="Modules\Products\ProductAppService.cs" />
+    <Compile Include="Modules\Products\ProductPageViewModel.cs" />
+    <Compile Include="Modules\Products\Search\ProductsSearchHomeViewModel.cs" />
+    <Compile Include="Modules\Products\Search\SearchDaysOfWeek.cs" />
+    <Compile Include="Modules\Products\Search\SearchRequestViewModel.cs" />
+    <Compile Include="Modules\Products\Search\SearchViewModel.cs" />
+    <Compile Include="Modules\Products\StockManagement\IStockTransactionAppService.cs" />
+    <Compile Include="Modules\Products\StockManagement\ProcessProductStockOnProductMoved.cs" />
+    <Compile Include="Modules\Products\StockManagement\StockTransactionAppService.cs" />
+    <Compile Include="Modules\Products\Store\SingleFreightParameterViewModel.cs" />
+    <Compile Include="Modules\Products\Variants\IProductVariantAppService.cs" />
+    <Compile Include="Modules\Products\Variants\IProductVariantTypeAppService.cs" />
+    <Compile Include="Modules\Products\Variants\ProductStockVariantItemViewModel.cs" />
+    <Compile Include="Modules\Products\Variants\ProductVariantTypeAppService.cs" />
+    <Compile Include="Modules\Products\Variants\ProductVariantTypeViewModel.cs" />
+    <Compile Include="Modules\Products\Variants\ProductVariantViewModel.cs" />
+    <Compile Include="Modules\Products\Variants\ProductVariantListItemViewModel.cs" />
+    <Compile Include="Modules\Products\Variants\ProductVariantsSelector.cs" />
+    <Compile Include="Modules\Products\Variants\ProductVariantTypeAndItemSelector.cs" />
+    <Compile Include="Modules\Products\Variants\ProductVariantAppService.cs" />
+    <Compile Include="Modules\Products\Variants\ProductVariantComparer.cs" />
+    <Compile Include="Modules\Finance\ResendGatewayIds.cs" />
+    <Compile Include="Modules\Ratings\RatingAppService.cs" />
+    <Compile Include="Modules\Subscriptions\ISubscriptionGateway.cs" />
+    <Compile Include="Modules\Subscriptions\Moip\MoipPostback.cs" />
+    <Compile Include="Modules\Subscriptions\PagarMe\CardPostbackData.cs" />
+    <Compile Include="Modules\Subscriptions\PagarMe\CustomerPostbackData.cs" />
+    <Compile Include="Modules\Subscriptions\PagarMe\PagarMePostbackGateway.cs" />
+    <Compile Include="Modules\Subscriptions\PagarMe\PagarmePostbackHelper.cs" />
+    <Compile Include="Modules\Subscriptions\PagarMe\PagarMeSubscriptionGateway.cs" />
+    <Compile Include="Modules\Subscriptions\PagarMe\PagarMeSubscriptionPostback.cs" />
+    <Compile Include="Modules\Subscriptions\PagarMe\PlanPostbackData.cs" />
+    <Compile Include="Modules\Subscriptions\PagarMe\SubscriptionPostbackData.cs" />
+    <Compile Include="Modules\Subscriptions\PagarMe\TransactionPostbackData.cs" />
+    <Compile Include="Modules\Subscriptions\Stripe\StripeInvoiceWebhookObject.cs" />
+    <Compile Include="Modules\Subscriptions\Stripe\StripeSubscriptionGateway.cs" />
+    <Compile Include="Modules\Subscriptions\Stripe\StripePlanWebhookObject.cs" />
+    <Compile Include="Modules\Subscriptions\Stripe\StripeSubscriptionPostback.cs" />
+    <Compile Include="Modules\Subscriptions\Stripe\StripeSubscriptionPostbackData.cs" />
+    <Compile Include="Modules\Subscriptions\Stripe\StripeSubscriptionWebhookObject.cs" />
+    <Compile Include="Modules\Subscriptions\Stripe\StripeSubscriptionWebhookPostback.cs" />
+    <Compile Include="Modules\Subscriptions\Stripe\StripeWebhookData.cs" />
+    <Compile Include="Modules\Subscriptions\Stripe\StripeWebhookRoot.cs" />
+    <Compile Include="Modules\Subscriptions\SubscriptionGatewayBase.cs" />
+    <Compile Include="Modules\Subscriptions\Plans\IPlanAppService.cs" />
+    <Compile Include="Modules\Subscriptions\Plans\PlanAppService.cs" />
+    <Compile Include="Modules\Subscriptions\Plans\PlanViewModel.cs" />
+    <Compile Include="Modules\Subscriptions\SubscriptionPostbackBase.cs" />
+    <Compile Include="Modules\Subscriptions\SubscribeViewModel.cs" />
+    <Compile Include="Modules\Subscriptions\SubscriptionViewModel.cs" />
+    <Compile Include="Reports\IReportAppService.cs" />
+    <Compile Include="Reports\ReportAppService.cs" />
+    <Compile Include="Search\ISearchResult.cs" />
+    <Compile Include="Modules\Products\Store\IStoreAppService.cs" />
+    <Compile Include="Modules\Products\ProductsHelper.cs" />
+    <Compile Include="Modules\Products\ProductEditorViewModel.cs" />
+    <Compile Include="Modules\Products\Search\SearchResultViewModel.cs" />
+    <Compile Include="Modules\Products\Store\StoreAppService.cs" />
+    <Compile Include="Modules\Products\Store\StoreViewModel.cs" />
+    <Compile Include="Modules\Quotes\QuotesViewModel_DEPRECATED.cs" />
+    <Compile Include="Modules\Portfolio\PortfolioHelper.cs" />
+    <Compile Include="Search\SearchRequest.cs" />
+    <Compile Include="Sellers\Moip\MoipHelpers.cs" />
+    <Compile Include="Sellers\Moip\MoipModels.cs" />
+    <Compile Include="Sellers\Moip\MoipViewModels.cs" />
+    <Compile Include="Sellers\Pagarme\PagarmeHelpers.cs" />
+    <Compile Include="Sellers\Pagarme\PagarmeModels.cs" />
+    <Compile Include="Sellers\Pagarme\PagarmeViewModels.cs" />
+    <Compile Include="Sellers\SellerGatewayViewModel.cs" />
+    <Compile Include="Sellers\SellerProfileViewModel.cs" />
+    <Compile Include="Modules\Portfolio\IPortfolioAppService.cs" />
+    <Compile Include="Modules\Portfolio\PortfolioAppService.cs" />
+    <Compile Include="Modules\Portfolio\PortfolioItemViewModel.cs" />
+    <Compile Include="Sellers\SellerHelper.cs" />
+    <Compile Include="Modules\Portfolio\SubCategories\SubCategoryAppService.cs" />
+    <Compile Include="Modules\Portfolio\SubCategories\SubCategoriesSelector.cs" />
+    <Compile Include="Modules\Portfolio\SubCategories\ISubCategoryAppService.cs" />
+    <Compile Include="Helpers\ResourcesHelper.cs" />
+    <Compile Include="Home\HomeAppService.cs" />
+    <Compile Include="Home\HomeViewModel.cs" />
+    <Compile Include="Modules\Quotes\QuoteRequestViewModel_DEPRECATED.cs" />
+    <Compile Include="Modules\Quotes\QuoteViewModel_DEPRECATED.cs" />
+    <Compile Include="Sellers\SellerItemListViewModel.cs" />
+    <Compile Include="Modules\Portfolio\SubCategories\SubCategoryComparer.cs" />
+    <Compile Include="Modules\Portfolio\SubCategories\SubCategoryAndCategorySelector.cs" />
+    <Compile Include="Modules\Portfolio\PortfolioRequestViewModel.cs" />
+    <Compile Include="Modules\Portfolio\PortfolioSocialMediaViewModel.cs" />
+    <Compile Include="Modules\Portfolio\PortfolioViewModel.cs" />
+    <Compile Include="Sellers\PublicProfileViewModel.cs" />
+    <Compile Include="Sellers\SellerAppService.cs" />
+    <Compile Include="Sellers\SellerRegisterViewModel.cs" />
+    <Compile Include="Modules\Portfolio\Search\SearchRequestViewModel.cs" />
+    <Compile Include="Modules\Portfolio\Search\SearchResultViewModel.cs" />
+    <Compile Include="Modules\Portfolio\Search\SearchViewModel.cs" />
+    <Compile Include="Sellers\UpdateSellerGateway.cs" />
+    <Compile Include="StaticPages\IStaticPagesAppService.cs" />
+    <Compile Include="StaticPages\StaticPagesAppService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Modules\Portfolio\SocialMedias\ISocialMediaAppService.cs" />
+    <Compile Include="Modules\Portfolio\SocialMedias\Providers\ISocialMediaProvider.cs" />
+    <Compile Include="Modules\Portfolio\SocialMedias\Providers\SocialMediaInstagram.cs" />
+    <Compile Include="Modules\Portfolio\SocialMedias\Providers\SocialMediaTwitch.cs" />
+    <Compile Include="Modules\Portfolio\SocialMedias\Providers\SocialMediaTwitter.cs" />
+    <Compile Include="Modules\Portfolio\SocialMedias\Providers\SocialMediaYoutube.cs" />
+    <Compile Include="Modules\Portfolio\SocialMedias\SocialMediaAppService.cs" />
+    <Compile Include="Modules\Portfolio\SocialMedias\Providers\SocialMediaFacebook.cs" />
+    <Compile Include="Modules\Portfolio\SocialMedias\SocialMediaChannelViewModel.cs" />
+    <Compile Include="Modules\Subscriptions\SignModeViewModel.cs" />
+    <Compile Include="Modules\Subscriptions\SubscriptionAppService.cs" />
+    <Compile Include="Modules\Subscriptions\SubscriptionItemListViewModel.cs" />
+    <Compile Include="Modules\Portfolio\SubCategories\SubCategoryListItemViewModel.cs" />
+    <Compile Include="Modules\Portfolio\SubCategories\SubCategoryViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{C54C6F75-69C6-4AEF-ADCA-70C08BD1A02C}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{44a771e7-f5af-43a7-b1dc-efc36e3ac340}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infra.CrossCutting.Correios\Infra.Crosscutting.Correios.csproj">
+      <Project>{5b97a4b2-18dd-4089-93d7-daee57cc61f1}</Project>
+      <Name>Infra.Crosscutting.Correios</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infra.Crosscutting.Embed\Infra.Crosscutting.Embed.csproj">
+      <Project>{9963dc2a-b889-4dbd-be2d-49a0634e1af9}</Project>
+      <Name>Infra.Crosscutting.Embed</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infra.Crosscutting.Hangfire\Infra.Crosscutting.Hangfire.csproj">
+      <Project>{0c25d6f3-54e3-46f7-a025-6d6875393687}</Project>
+      <Name>Infra.Crosscutting.Hangfire</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infra.Crosscutting.Helpers\Infra.Crosscutting.Helpers.csproj">
+      <Project>{58b380e5-95a9-49f5-bb71-16383af0eea2}</Project>
+      <Name>Infra.Crosscutting.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{7E0FD87F-5CEA-4C6E-BF1F-32F4EA08A422}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NewIntegrator.Stripe\NewIntegrator.Stripe.csproj">
+      <Project>{3e99a5ba-642c-4c6d-babe-8ace5d5de897}</Project>
+      <Name>NewIntegrator.Stripe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaymentIntegrator.Core\PaymentIntegrator.Core.csproj">
+      <Project>{880230CF-FE0C-4943-ADE0-88575AEFC8A0}</Project>
+      <Name>PaymentIntegrator.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaymentIntegrator.Moip\PaymentIntegrator.Moip.csproj">
+      <Project>{18f8ac2a-3864-45d9-8109-49a7dfdbb6ab}</Project>
+      <Name>PaymentIntegrator.Moip</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaymentIntegrator.PagarMe\PaymentIntegrator.PagarMe.csproj">
+      <Project>{ed31755a-cbc9-4826-be6f-a1640d23ac9b}</Project>
+      <Name>PaymentIntegrator.PagarMe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\V2.Application\V2.Application.csproj">
+      <Project>{CB49EB5C-C4A0-47B2-8A1A-A31EFD36A0BA}</Project>
+      <Name>V2.Application</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\HelpMeToFind_en-us.html" />
+    <Content Include="Resources\HowItWorks_en-us.html" />
+    <Content Include="Resources\HelpMeToFind_pt-br.html" />
+    <Content Include="Resources\PrivacyPolicy_en-us.html" />
+    <Content Include="Resources\HowItWorks_pt-br.html" />
+    <Content Include="Resources\PrivacyPolicy_pt-br.html" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{18F8AC2A-3864-45D9-8109-49A7DFDBB6AB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PaymentIntegrator.Moip</RootNamespace>
+    <AssemblyName>PaymentIntegrator.Moip</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.7.4137.9688, Culture=neutral, PublicKeyToken=a4292a325f69b123, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.2.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.2.1\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\CreateMultiPaymentModels.cs" />
+    <Compile Include="Common\Models\Account.cs" />
+    <Compile Include="Common\Models\Address.cs" />
+    <Compile Include="Common\Models\BankAccount.cs" />
+    <Compile Include="Common\Models\BusinessSegment.cs" />
+    <Compile Include="Common\Models\BankAccountList.cs" />
+    <Compile Include="Common\Models\Company.cs" />
+    <Compile Include="Common\Models\Email.cs" />
+    <Compile Include="Common\Models\GetMultiPaymentModels.cs" />
+    <Compile Include="Common\Models\Holder.cs" />
+    <Compile Include="Common\Models\Person.cs" />
+    <Compile Include="Common\Models\Phone.cs" />
+    <Compile Include="Common\Models\TaxDocument.cs" />
+    <Compile Include="Common\MoipRequest.cs" />
+    <Compile Include="Common\MoipResponse.cs" />
+    <Compile Include="Common\CreateMultiOrderModels.cs" />
+    <Compile Include="Customers\MoipCustomer.cs" />
+    <Compile Include="Customers\MoipCustomerOperations.cs" />
+    <Compile Include="Helpers\DocumentHelper.cs" />
+    <Compile Include="Helpers\EncryptionHelper.cs" />
+    <Compile Include="Helpers\PaymentHelper.cs" />
+    <Compile Include="Helpers\PhoneHelper.cs" />
+    <Compile Include="Helpers\PlanHelper.cs" />
+    <Compile Include="MoipClient.cs" />
+    <Compile Include="MoipConfig.cs" />
+    <Compile Include="MoipErrorResponse.cs" />
+    <Compile Include="MoipInitializationModel.cs" />
+    <Compile Include="MoipInitializer.cs" />
+    <Compile Include="Orders\MoipOrder.cs" />
+    <Compile Include="Orders\MoipReceiver.cs" />
+    <Compile Include="Payments\MoipPayment.cs" />
+    <Compile Include="Payments\MoipPaymentMethodOperations.cs" />
+    <Compile Include="Payments\MoipPaymentMethods.cs" />
+    <Compile Include="Payments\MoipPaymentOperations.cs" />
+    <Compile Include="Payments\MoipTransaction.cs" />
+    <Compile Include="Plans\MoipPlanOperations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subscriptions\MoipSubscriber.cs" />
+    <Compile Include="Subscriptions\MoipSubscription.cs" />
+    <Compile Include="Subscriptions\MoipSubscriptionOperations.cs" />
+    <Compile Include="Suppliers\MoipAccountAndBankAccount.cs" />
+    <Compile Include="Suppliers\MoipBankAccount.cs" />
+    <Compile Include="Suppliers\MoipSupplier.cs" />
+    <Compile Include="Suppliers\MoipSupplierOperations.cs" />
+    <Compile Include="Utils\JsonHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{C54C6F75-69C6-4AEF-ADCA-70C08BD1A02C}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{44A771E7-F5AF-43A7-B1DC-EFC36E3AC340}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infra.Crosscutting.Helpers\Infra.Crosscutting.Helpers.csproj">
+      <Project>{58b380e5-95a9-49f5-bb71-16383af0eea2}</Project>
+      <Name>Infra.Crosscutting.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaymentIntegrator.Core\PaymentIntegrator.Core.csproj">
+      <Project>{880230cf-fe0c-4943-ade0-88575aefc8a0}</Project>
+      <Name>PaymentIntegrator.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

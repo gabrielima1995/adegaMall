@@ -1,0 +1,11 @@
+﻿@model Domain.Entities.IWithSubCategory
+@{ 
+    bool isMobile = Presentation.Helpers.BrowserHelper.IsMobileBrowser();
+}
+
+@Html.DropDownListFor(m => m.SubCategory,
+    new SelectList(Model.SubCategories, "Id", "Name", Model.SubCategory),
+    Request.GetLocalizedString("SUB_CATEGORIES_SELECT"),
+    new { @class = isMobile ? "form-control js-subCategory" : "form-control js-subCategory js-select" })
+
+@Html.ValidationMessageFor(model => model.SubCategory, "", new { @class = "text-danger" })

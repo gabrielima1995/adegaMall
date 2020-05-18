@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CONFIG_FACEBOOK_DEFAULT_APP_ID" xml:space="preserve">
+    <value>509619292495848</value>
+    <comment>ID do App padrão da config de Facebook</comment>
+  </data>
+  <data name="CONFIG_FACEBOOK_DEFAULT_APP_SECRET" xml:space="preserve">
+    <value>038401f8e93d6795562e637e01c1e33a</value>
+    <comment>Secret do App padrão da config do Facebook</comment>
+  </data>
+  <data name="CONFIG_FACEBOOK_DEFAULT_URL" xml:space="preserve">
+    <value>https://www.facebook.com/ideianoar.com.br</value>
+    <comment>URL Padrão da config de Facebook</comment>
+  </data>
+  <data name="CONFIG_GMAPS_DEFAULT_APIKEY" xml:space="preserve">
+    <value>AIzaSyButuetE7Z9DZ6S_b7MBMbaeejJ-ZflG5c</value>
+    <comment>Chave de API padrão da config do GoogleMapsAPI</comment>
+  </data>
+  <data name="CONFIG_GMAPS_DEFAULT_APIKEY_UNRESTRICTED" xml:space="preserve">
+    <value>AIzaSyButuetE7Z9DZ6S_b7MBMbaeejJ-ZflG5c</value>
+    <comment>Chave de API Irrestrita padrão da config do GoogleMapsAPI</comment>
+  </data>
+  <data name="CONFIG_SMTP_DEFAULT_FROM_ADDRESS" xml:space="preserve">
+    <value>hello@inamarketplace.com</value>
+    <comment>Endereço de envio padrão da config de SMTP</comment>
+  </data>
+  <data name="CONFIG_SMTP_DEFAULT_FROM_NAME" xml:space="preserve">
+    <value>INA Marketplace</value>
+    <comment>Nome do remetende padrão da config de SMTP</comment>
+  </data>
+  <data name="CONFIG_SMTP_DEFAULT_HOSTNAME" xml:space="preserve">
+    <value>smtp.sendgrid.net</value>
+    <comment>Endpoint do host padrão da config de SMTP</comment>
+  </data>
+  <data name="CONFIG_SMTP_DEFAULT_PASSWORD" xml:space="preserve">
+    <value>qce73vPK3bY5R7PX</value>
+    <comment>Senha do usuário padrão da config de SMTP</comment>
+  </data>
+  <data name="CONFIG_SMTP_DEFAULT_USERNAME" xml:space="preserve">
+    <value>azure_2a4e99845ef26e73a4dae8c6c9d04e51@azure.com</value>
+    <comment>Nome de usuário padrão da config de SMTP</comment>
+  </data>
+  <data name="CONFIG_SOCIALMEDIA_DEFAULT_ID" xml:space="preserve">
+    <value>5c0924b5a71f090011aea11d</value>
+    <comment>ID padrão do ShareThis</comment>
+  </data>
+  <data name="CONFIG_STORAGE_DEFAULT_ENDPOINT" xml:space="preserve">
+    <value>https://saasdemoprodutoprd2.blob.core.windows.net/</value>
+    <comment>Endpoint padrão na config Storage</comment>
+  </data>
+  <data name="CONFIG_STORAGE_DEFAULT_PASSWORD" xml:space="preserve">
+    <value>px5B7fdqxm7wmzLt+U7ulC900SFVoopPGAE7+Cd22guUKqJjyogi6u202KNWhR/eOAbYZWTEyhLyF5yRYI5otQ==</value>
+    <comment>Senha do usuário padrão da config do Storage</comment>
+  </data>
+  <data name="CONFIG_STORAGE_DEFAULT_USERNAME" xml:space="preserve">
+    <value>saasdemoprodutoprd2</value>
+    <comment>Usuário padrão na config do Storage</comment>
+  </data>
+  <data name="CONFIG_USERVOICE_DEFAULT_ADDRESS" xml:space="preserve">
+    <value>http://sugestoes.ideianoar.com.br/Login/SingleSignOn?token=</value>
+    <comment>Endereço padrão das URLs da central de sugestão</comment>
+  </data>
+  <data name="CONFIG_USERVOICE_DEFAULT_IV" xml:space="preserve">
+    <value>pemgail9uzpgzl88</value>
+    <comment>Vetor de inicialização padrão do TokenGenerator do UserVoice</comment>
+  </data>
+  <data name="CONFIG_USERVOICE_DEFAULT_TOKEN" xml:space="preserve">
+    <value>Uy43Aqr2KRwnkbmUj67syCp22gQNqRgsNhKgDur4zhbtpRcddCSQx4qBqHhQwWDkvfMtFvyhPcvzGqC9YDtUHsvecTm8LKUZ9xfhmaxFLh25Ynz9jVLu7YU7QwYqtwAbWgyEXkZQZKmEwHd8vwNMV5gLkJF3EHKBraV23HpcVKCph2CpZzWmNm4kbXMLsXvLRgzsQy3ghVy8StVH36Uexupw6Nc5LnNU2jPgTJT5s3bzKL34rEenj3TsRDMXYLxf</value>
+    <comment>Token de segurança padrão do TokenGenerator do UserVoice</comment>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="HelpMeToFind_en_us" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>helpmetofind_en-us.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="HelpMeToFind_pt_br" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>helpmetofind_pt-br.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="HowItWorks_en_us" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>howitworks_en-us.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="HowItWorks_pt_br" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>howitworks_pt-br.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MOIP_TEST_ACCOUNT_KEY" xml:space="preserve">
+    <value>CDRRSSKNNUOEIMBT6WMEXJWPPJE3RI0GWEI33AIZ</value>
+    <comment>Chave de API padrão de teste do Wirecard/Moip</comment>
+  </data>
+  <data name="MOIP_TEST_ACCOUNT_TOKEN" xml:space="preserve">
+    <value>BDAMJ4Y6A4F7QJU0ITISZUZ7WFY4XRKL</value>
+    <comment>Token de API padrão de teste do Wirecard/Moip</comment>
+  </data>
+  <data name="PAGARME_TEST_API_ENCRYPTION_KEY" xml:space="preserve">
+    <value>ek_test_5FaFg2sJfrDHygHjepY1wF7HizTXz2</value>
+    <comment>Chave de encriptação padrão de teste do Pagar.me</comment>
+  </data>
+  <data name="PAGARME_TEST_API_KEY" xml:space="preserve">
+    <value>ak_test_MvOMBESnM315BJMLZII8c40SMotxUG</value>
+    <comment>Chave de API padrão de teste do Pagar.me</comment>
+  </data>
+  <data name="PAGARME_TEST_API_RECEIVER" xml:space="preserve">
+    <value>re_cizfx3myz01qr7p6eeia2bxo4</value>
+    <comment>Recebedor padrão de teste do Pagar.me</comment>
+  </data>
+  <data name="PAGARME_TEST_VALIDATION_EMAIL" xml:space="preserve">
+    <value>suporte+pagarme@ideianoar.com.br</value>
+    <comment>Email padrão de validação do Pagar.me</comment>
+  </data>
+  <data name="PrivacyPolicy_en_us" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>privacypolicy_en-us.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PrivacyPolicy_pt_br" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>privacypolicy_pt-br.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="strings_create_update" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>strings_create_update.tsv;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SYSADM_EMAIL" xml:space="preserve">
+    <value>marketplace@ideianoar.com.br</value>
+    <comment>Endereço de email do usuário de gestão</comment>
+  </data>
+  <data name="SYSADM_PWD_HASH" xml:space="preserve">
+    <value>AGls2ZvVUcg6ztpZgjG9MNq9ZicfRhi8blY7oaiPKO2pN/7tbDXA5RnhoIAXvjz/vA==</value>
+    <comment>Hash do password do usuário de gestão</comment>
+  </data>
+  <data name="SYSADM_SEC_STAMP" xml:space="preserve">
+    <value>61244ba9-c166-4219-af5d-576eb077560a</value>
+    <comment>Security Stamp do usuário de gestão</comment>
+  </data>
+  <data name="SYS_ERROR_REPORT_FROM_ADDRESS" xml:space="preserve">
+    <value>noreply@saasmarketplace.com.br</value>
+    <comment>Endereço de email do qual são enviados reports de error</comment>
+  </data>
+  <data name="SYS_ERROR_REPORT_TO_ADDRESS" xml:space="preserve">
+    <value>errosaas@ideianoar.com.br</value>
+    <comment>Endereço de email para o qual são enviados de reports de erro</comment>
+  </data>
+  <data name="uf_cidade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>uf-cidade.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CONFIG_PUSH_FCM_APPKEY" xml:space="preserve">
+    <value>AAAATEKKzqo:APA91bHGVQmKI9ZL7FdrPT5R0He1i6Z8xvRbr-BUqjDHjtS1bqM5vfbe1Sj8mEeTwbZWGWjDKtSb6-oVh8ncLqm2wBsjnnAhVe_wtEQmlVOBWaB1GBRaFmSJt086oteC1fbbmZLVrJCg</value>
+    <comment>Chave de API FCM</comment>
+  </data>
+  <data name="CONFIG_PUSH_FCM_PRIVATEKEY" xml:space="preserve">
+    <value>y6dyF0RK33hIqB36KNXufqaavtvZTSH_hCmJkcEg0Hw</value>
+    <comment>Chave Privada da API FCM</comment>
+  </data>
+  <data name="CONFIG_PUSH_FCM_PUBLICKEY" xml:space="preserve">
+    <value>BBnfrbJKmrLJGaPVMVWuAKQhypdv3oGa-FKeouMPO0mC5aKJQ3FqKxRH0BRpdI73aRmjszvC5AYz2a_5N73tOWU</value>
+    <comment>Chave Pública da API FCM</comment>
+  </data>
+  <data name="CONFIG_PUSH_FCM_SENDER_ID" xml:space="preserve">
+    <value>327533907626</value>
+    <comment>Sender Id da API FCM</comment>
+  </data>
+  <data name="CONFIG_FCM_SENDER_ID" xml:space="preserve">
+    <value>327533907626</value>
+    <comment>Sender ID padrão para Firebase Cloud Messaging</comment>
+  </data>
+  <data name="CONFIG_FCM_SERVER_KEY" xml:space="preserve">
+    <value>AIzaSyA6Ny4PgPovpxKh2bqJx_-26U3ZzL3vMhg</value>
+    <comment>Chave de api padrão para Firebase Cloud Messaging</comment>
+  </data>
+</root>

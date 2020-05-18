@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNet.Identity
+@model Application.Modules.Subscriptions.SubscriptionViewModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("SUBSCRIPTION_TITLE");
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+            <div class="col-xs-12">
+                @Html.Localized("SUBSCRIPTION_TITLE", "h3")
+
+                <div class="membership-option">
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <p class="title">@Model.Title</p>
+                            @if (Model.CreditsPerMonth.HasValue && MaaSConfig.Current.Quote.LeadSales.Enabled)
+                            {
+                                Write(Html.Localized("CREDITS_PER_MONTH", "h4", null, Model.CreditsPerMonth.Value));
+                            }
+                        </div>
+
+                        <div class="col-xs-12 text-center">
+                            <p class="price">@MaaSConfig.Current.DefaultCurrency @Model.Amount.DisplayDecimal(2)</p>
+
+                            @if (Model.NextCreditsAddDate.HasValue && MaaSConfig.Current.Quote.LeadSales.Enabled)
+                            {
+                                <span class="description">@Request.GetLocalizedString("NEXT_CREDITS_DATE") : @Model.NextCreditsAddDate.Value.ToShortDateString()</span>
+                                <br />
+                            }
+                            <span class="description">@string.Format(Request.GetLocalizedString("SUBSCRIPTION_ENABLED_ON"), Model.EnabledAt.DisplayDate())</span>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                @using (Html.BeginForm("Unsubscribe", "Subscription", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { @class = "form-group margin-top-20", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.Localized("UNSUBSCRIBE_BUTTON", "button", new { type = "submit", @class = "btn btn-primary btn-block" })
+                    </div>
+                }
+
+                @if (Model.DateToFinishSubscription.HasValue)
+                {
+                    <div class="col-xs-12 text-center">
+                        <br />
+                        <span class="small">@Request.GetLocalizedString("SUBSCRIPTION_CANCEL_LABEL") @Request.GetLocalizedString("SUBSCRIPTION_END_DATE") : @Model.DateToFinishSubscription.Value.ToShortDateString()</span>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

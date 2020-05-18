@@ -1,0 +1,7 @@
+﻿[IF:IS_OFFLINE_PAYMENT]
+    <p>Providencie o envio do produto para o cliente, incluindo a Nota Fiscal e o boleto para pagamento.</p>
+[/IF:IS_OFFLINE_PAYMENT]
+
+[IFNOT:IS_OFFLINE_PAYMENT]
+    <p>O pagamento ainda está sendo processado, então você ainda não precisa fazer nada. Enviaremos um novo email assim que recebermos a confirmação do pagamento.</p>
+[/IFNOT:IS_OFFLINE_PAYMENT]

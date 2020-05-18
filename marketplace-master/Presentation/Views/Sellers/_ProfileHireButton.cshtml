@@ -1,0 +1,13 @@
+﻿@if (MaaSConfig.Current.Quote.Enabled && MaaSConfig.Current.Quote.SpecificQuote.Enabled)
+{
+    <div class="profile-hire m-b-md">
+        @if (Model.HasCategories)
+        {
+            @:@Html.Localized("SELLER_QUOTE_BUTTON", "a", new { href = Url.ActionLocalized("Request", "Quotes", new { sellerId = Model.Seller.Id, area = "" }), @class = "btn btn-primary btn-lg profile-hire-button" })
+        }
+        else
+        {
+            @:@Html.Localized("SELLER_PROFILE_INCOMPLETE_NO_QUOTE", "span", new { @class = "profile-hire-incomplete text-danger" })
+        }
+    </div>
+}

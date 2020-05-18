@@ -1,0 +1,101 @@
+﻿@model Application.Modules.Ratings.Models.UserRatingsOverviewModel
+@{
+    ViewBag.Title = $"Avaliações de {Model.SellerName}";
+    string sellerId = Request.QueryString.Get("sellerId");
+    int currentPage = 0;
+    if (!string.IsNullOrEmpty(Request.QueryString.Get("page")))
+    {
+        currentPage = int.Parse(Request.QueryString.Get("page"));
+    }
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <h4 class="text-center">@Model.SellerName</h4>
+                        <div class="text-center">
+                            <img class="border-radius avatar padding-bottom-15" src="@Model.SellerAvatarUrl" style="width:300px;height:300px" />
+                        </div>
+                        <br />
+                        <div class="text-center" title="Média : @Model.SellerAverageRating.ToString("0.00")">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (Model.SellerAverageRating - i >= 0.9)
+                                {
+                                    <i class="fas fa-star rating-star"></i>
+                                }
+                                else if (Model.SellerAverageRating - i >= 0.5)
+                                {
+                                    <i class="fas fa-star-half-alt rating-star"></i>
+                                }
+                                else
+                                {
+                                    <i class="far fa-star rating-star"></i>
+                                }
+                            }
+                            <br />
+                            <small>@Model.TotalRatingsCount avaliações</small>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-8">
+                        <h3 class="text-center">Últimas Avaliações</h3>
+                        @foreach (var rating in Model.LatestRatingsList)
+                        {
+                            <div class="well">
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <img class="img-circle" src="@rating.SenderAvatar" style="width:80px; height:80px" />
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <strong>
+                                            @rating.SenderName - <span class="text-center">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (rating.RatingValue >= i)
+                                                    {
+                                                        <i class="fas fa-star rating-star"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="far fa-star rating-star"></i>
+                                                    }
+                                                }
+                                            </span>
+                                        </strong>
+                                        <br />
+                                        <p>@rating.RatingMessage</p>
+                                        <small>@rating.CreatedAt.DisplayDate()</small>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (Model.LatestRatingsList.Count == 0)
+                        {
+                            <div class="well">
+                                <span><strong>Nenhuma avaliação disponível</strong></span>
+                                <br />
+                                <p class="dispute-message">Este vendedor não possui nenhuma avaliação disponível</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <hr />
+                <div class="text-center">
+                    <a href="@Url.ActionLocalized("Overview", "UserRating", new { sellerId, page = Math.Max(0, currentPage - 1)})" class="btn btn-default">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                    <button class="btn btn-default">@currentPage.ToString()</button>
+                    @if (Model.LatestRatingsList.Count > 0)
+                    {
+                        <a href="@Url.ActionLocalized("Overview", "UserRating", new { sellerId, page = currentPage + 1 })" class="btn btn-default">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

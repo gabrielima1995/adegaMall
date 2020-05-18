@@ -1,0 +1,38 @@
+﻿@using Application.Modules.Portfolio;
+
+@model Presentation.Models.PortfolioViewModels.PortfolioItemPageVM
+
+@{
+    var viewPathFmt = "~/Views/Sellers/PortfolioItem/{0}.cshtml";
+
+    ViewBag.Title = Model.Title;
+    ViewBag.Description = Model.Description?.Truncate(155);
+    ViewBag.Url = Url.ActionLocalized("PortfolioItemPublicProfile", "Sellers", new { id = Model.FriendlyUrl });
+    ViewBag.Image = Model.GetCoverImageUrl();
+}
+
+@section styles
+{
+    
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-0">
+    <div id="doubleFreightWarningContainer"></div>
+    <div class="container">
+        @Html.Partial(string.Format(viewPathFmt, "_ItemTopActions"), Model)
+        @Html.Partial(string.Format(viewPathFmt, "_ItemMainBoard"), Model)
+        @Html.Partial(string.Format(viewPathFmt, "_ItemInfos"), Model)
+        @Html.Partial(string.Format(viewPathFmt, "_RelatedOther"), Model)
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $('.video-wrapper').fitVids({
+                customSelector: ['iframe']
+            });
+        });
+    </script>
+}

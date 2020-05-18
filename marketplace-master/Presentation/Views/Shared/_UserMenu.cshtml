@@ -1,0 +1,77 @@
+﻿@using Application.Sellers
+@using Domain.Entities
+@model LoginProfile
+
+@{
+    var isSeller = User.Identity.GetLoginProfile().IsSellerOrSellerAssistant();
+    var accountUrl = isSeller ? Url.ActionLocalized("Seller", "Manage") : Url.ActionLocalized("Buyer", "Manage");
+}
+
+<div class="profile-menu">
+    <div class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header hidden-xs">
+                <img src="@Model.GetAvatarUrl()" alt="@Model.Name" class="avatar">
+                <div class="profile-menu-img-box"></div>
+            </div>
+            <ul class="nav navbar-nav">
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                        @Html.Localized("MY_ACCOUNT_LINK", "strong") <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href=@accountUrl class="@Css.DisabledForSellerAssistant(Model, SellerAssistantPermissions.ProfileView, SellerAssistantPresentation.DisabledClass)">
+                                <i class="far fa-fw fa-address-card" aria-hidden="true"></i>
+                                @Html.Localized("MY_ACCOUNT_LINK", "strong")
+                            </a>
+                        </li>
+
+                        @if (Model.LoginMode == LoginMode.Password)
+                        {
+                            <li>
+                                <a href="@Url.ActionLocalized("ChangePassword", "Manage")">
+                                    <i class="fas fa-fw fa-lock" aria-hidden="true"></i>
+                                    @Html.Localized("CHANGE_PASSWORD_TITLE", "strong")
+                                </a>
+                            </li>
+                        }
+
+                        @if (isSeller && (MaaSConfig.Current.Payment.Moip.SellerReceivesMoipPayment || MaaSConfig.Current.Payment.PagarMe.SellerReceivesPagarmePayment))
+                        {
+                            <li>
+                                <a href="@Url.ActionLocalized("Gateway", "Manage")" class="@Css.DisabledForSellerAssistant(Model, SellerAssistantPermissions.GatewayView)">
+                                    <i class="fas fa-money-check-alt" aria-hidden="true"></i>
+                                    @Html.Localized("GATEWAY_SELLER_PANEL_LINK", "strong")
+                                </a>
+                            </li>
+                        }
+
+                        @if (MaaSConfig.Current.SingleUserMultipleProfiles.Enabled)
+                        {
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="@Url.ActionLocalized("Profiles", "Manage")">
+                                    <i class="fas fa-users" aria-hidden="true"></i>
+                                    @Html.Localized("MANAGE_PROFILES_LINK", "strong")
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+
+                @if (User.Identity.GetLoginProfile().IsSellerOrSellerAssistant())
+                {
+                    @Html.Partial("_SellerMenuOptions")
+                }
+
+                @if (User.Identity.GetLoginProfile().IsBuyer())
+                {
+                    @Html.Partial("_BuyerMenuOptions")
+                }
+            </ul>
+        </div>
+    </div>
+</div>

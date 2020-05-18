@@ -1,0 +1,47 @@
+﻿@using Application.Modules.Ratings.Models
+
+@model PublicProfileVM
+
+@{
+    var ratings = Model.LatestRatings ?? new List<UserRatingViewModel>(0);
+}
+
+@if (ratings.Count > 0)
+{
+    <div class="profile-ratings container m-b-lg">
+        <h3 class="profile-ratings-title">@Html.Localized("SELLER_PROFILE_LATEST_RATINGS_TITLE")</h3>
+        <div class="row">
+            @foreach (var item in ratings)
+            {
+                <div class="profile-ratings-item col-xs-12 col-sm-4">
+                    <div class="panel panel-default" style="min-height:160px;">
+                        <div class="panel-body">
+                            <div class="profile-ratings-item-author row m-b-sm">
+                                <div class="col-xs-3">
+                                    <img src="@item.SenderAvatar" class="img-circle img-responsive" style="width:64px" />
+                                </div>
+                                <div class="col-xs-9">
+                                    <strong>@item.SenderName</strong>
+                                    <p>@Html.Partial("_RatingStars", (double)item.RatingValue)</p>
+                                </div>
+                                <hr />
+                            </div>
+                            <p class="profile-ratings-item-text">
+                                
+                                @if (item.RatingMessage.Length >= 200)
+                                {
+                                    var ratingMessage = item.RatingMessage.Truncate(200).ToString();@:@ratingMessage...
+                                }
+                                else
+                                {
+                                   var ratingMessage = item.RatingMessage.ToString();@:@ratingMessage
+                                }
+                            </p>
+                            <small class="profile-ratings-item-date text-muted">@item.CreatedAt.ToShortDateString()</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

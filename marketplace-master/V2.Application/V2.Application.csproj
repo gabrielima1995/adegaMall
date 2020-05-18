@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CB49EB5C-C4A0-47B2-8A1A-A31EFD36A0BA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>V2.Application</RootNamespace>
+    <AssemblyName>V2.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.7.5.0\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="MediatR, Version=8.0.1.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.8.0.1\lib\net461\MediatR.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.Primitives, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Primitives.4.3.0\lib\net45\System.ComponentModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.Abstractions, Version=5.11.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.6\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.6\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationStartup.cs" />
+    <Compile Include="AssemblyMarker.cs" />
+    <Compile Include="Modules\Admin\IAdminNotificationQueries.cs" />
+    <Compile Include="Modules\Buyers\EventHandlers\NotifyAdminForModerationWhenBuyerIsRegistered.cs" />
+    <Compile Include="Modules\Buyers\EventHandlers\SendEmailToBuyerWhenModerationApproved.cs" />
+    <Compile Include="Messages\MessageConditionalVariableAttribute.cs" />
+    <Compile Include="Modules\Cart\CartService.cs" />
+    <Compile Include="Modules\Customization\Queries\HtmlCustomization.cs" />
+    <Compile Include="Modules\Customization\Queries\IPlatformCustomizationQueries.cs" />
+    <Compile Include="Modules\Disputes\DisputeAppService.cs" />
+    <Compile Include="Modules\Disputes\IOrderAppServiceV2.cs" />
+    <Compile Include="Modules\Disputes\IDisputeAppService.cs" />
+    <Compile Include="Modules\Disputes\Messages\PaymentAuthorizedMessageModel.cs" />
+    <Compile Include="Modules\Disputes\Messages\DisputeMessageModel.cs" />
+    <Compile Include="Modules\Disputes\Messages\Specs\PaymentAuthorizedMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\Disputes\Messages\Specs\DisputeResolvedMessageSpecification.cs" />
+    <Compile Include="Modules\Disputes\Messages\Specs\DisputeOpenedMessageSpecification.cs" />
+    <Compile Include="Modules\Disputes\OrderAppServiceV2.cs" />
+    <Compile Include="Modules\Finance\InitGatewayRegistrationLogJob.cs" />
+    <Compile Include="Modules\Finance\RegisterLogFromSellerData.cs" />
+    <Compile Include="Modules\Finance\TransactionWarrantyTransferJobs.cs" />
+    <Compile Include="Modules\Finance\Queries\IResetGatewayIds.cs" />
+    <Compile Include="Modules\General\Cities\CityManager.cs" />
+    <Compile Include="Modules\General\Cities\ICityManager.cs" />
+    <Compile Include="Modules\General\Cities\ICityQueries.cs" />
+    <Compile Include="Common\TransientAddress.cs" />
+    <Compile Include="Common\TransientBuyer.cs" />
+    <Compile Include="Helpers\FileUploadHelper.cs" />
+    <Compile Include="Helpers\ReflectiveEnumerator.cs" />
+    <Compile Include="Messages\MessageTemplateSeeder.cs" />
+    <Compile Include="Messages\ITemplateEngine.cs" />
+    <Compile Include="Messages\MessageModel.cs" />
+    <Compile Include="Messages\MessagesContext.cs" />
+    <Compile Include="Messages\MessageSpecification.cs" />
+    <Compile Include="Messages\MessageVariableAttribute.cs" />
+    <Compile Include="Messages\VariableSpecification.cs" />
+    <Compile Include="Modules\General\CustomFields\CustomFieldAppService.cs" />
+    <Compile Include="Modules\General\CustomFields\CustomFieldValueDto.cs" />
+    <Compile Include="Modules\General\CustomFields\ICustomFieldAppService.cs" />
+    <Compile Include="Modules\General\CustomFields\ICustomFieldQueries.cs" />
+    <Compile Include="Modules\LeadSales\CheckSubscriptionCredits.cs" />
+    <Compile Include="Modules\LeadSales\CreditsPackPaymentItem.cs" />
+    <Compile Include="Modules\LeadSales\ILeadSalesAppService.cs" />
+    <Compile Include="Modules\LeadSales\ILeadSalesQueries.cs" />
+    <Compile Include="Modules\LeadSales\LeadSalesAppService.cs" />
+    <Compile Include="Modules\OrderModule\CallWebhooksOnOrderStatusChanged.cs" />
+    <Compile Include="Modules\OrderModule\OrderService.cs" />
+    <Compile Include="Modules\OrderModule\OrderService_CreateOrderWorkflow.cs" />
+    <Compile Include="Modules\ProductTemplateModule\DeleteProductsWhenTemplateIsDeleted.cs" />
+    <Compile Include="Modules\ProductTemplateModule\IProductTemplateAdminQueries.cs" />
+    <Compile Include="Modules\ProductTemplateModule\IProductTemplateRepository.cs" />
+    <Compile Include="Modules\ProductTemplateModule\IProductTemplateStoreQueries.cs" />
+    <Compile Include="Modules\ProductTemplateModule\ReplicateChangesToProductsWhenTemplateIsUpdated.cs" />
+    <Compile Include="Modules\ProductWishModule\MyWishesViewModel.cs" />
+    <Compile Include="Modules\ProductWishModule\ProductWishAppService.cs" />
+    <Compile Include="Modules\PushNotifications\IPushNotificationService.cs" />
+    <Compile Include="Modules\PushNotifications\PushNotification.cs" />
+    <Compile Include="Modules\QuoteBillingModule\EventHandlers\UpdateQuoteBillingWhenOrderStatusChanged.cs" />
+    <Compile Include="Modules\QuoteBillingModule\Queries\IQuoteBillingQueries.cs" />
+    <Compile Include="Modules\QuoteBillingModule\QuoteBillingAppService.cs" />
+    <Compile Include="Modules\QuoteBillingModule\EventHandlers\AutoGenerateBillingWhenBuyerAcceptsProposalEventHandler.cs" />
+    <Compile Include="Modules\QuoteRequests\AppCommands\ClonePublicQuoteForSellerCommand.cs" />
+    <Compile Include="Modules\QuoteRequests\EventHandlers\SendEmailToAdminsWhenQuoteWithoutSellerWasRegistered.cs" />
+    <Compile Include="Modules\QuoteRequests\EventHandlers\SendEmailToBuyerOnQuoteBillingCreatedEventHandler.cs" />
+    <Compile Include="Modules\QuoteRequests\EventHandlers\SendEmailToBuyerConfirmingQuoteGroupRequestSentEventHandler.cs" />
+    <Compile Include="Modules\QuoteRequests\EventHandlers\SendEmailToSellerOnQuoteClosedByBuyerEventHandler.cs" />
+    <Compile Include="Modules\QuoteRequests\EventHandlers\SendEmailToAdminsWhenQuoteAnswerFilteredEventHandler.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\QuoteBillingCreatedMessageModel.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\NewQuoteGroupMessageToBuyerModel.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\QuoteAnswerFilteredMessageModel.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\QuoteModeratorMessageModel.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\Specs\NewModeratorQuoteAnswerMessageToTargetSpecification.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\Specs\NewQuoteAnswerMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\Specs\QuoteAnswerFilteredMessageToAdminSpecification.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\Specs\NewQuoteAnswerMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\Specs\NewQuoteAcceptedMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\Specs\NewQuoteClosedMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\Specs\NewQuoteGroupMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\Specs\NewQuoteMessageToAdminSpecification.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\Specs\NewQuoteBillingMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\Specs\NewQuoteMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\QuoteMessageModel.cs" />
+    <Compile Include="Modules\QuoteRequests\Messages\Specs\NewQuoteMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\Finance\EventHandlers\CancelTransferToSellerOnOrderCancelled.cs" />
+    <Compile Include="Modules\Finance\DoTransfersRecurrentJob.cs" />
+    <Compile Include="Modules\Finance\Interfaces\IPaymentGateway.cs" />
+    <Compile Include="Modules\Finance\EventHandlers\ScheduleTransferToSellerOnPaymentCompleted.cs" />
+    <Compile Include="Modules\Finance\Model\ReceivableDto.cs" />
+    <Compile Include="Modules\Finance\Model\TransferDto.cs" />
+    <Compile Include="Modules\Finance\Model\TransferJournalReportResult.cs" />
+    <Compile Include="Modules\Finance\Model\TransferJournalReportResultItem.cs" />
+    <Compile Include="Modules\Finance\Queries\ITransferJournalQueries.cs" />
+    <Compile Include="Modules\Finance\Queries\TransferJournalReportParameters.cs" />
+    <Compile Include="Modules\Finance\TransferJournalAppService.cs" />
+    <Compile Include="Modules\QuoteRequests\Model\QuoteDetailsForAdminDto.cs" />
+    <Compile Include="Modules\QuoteRequests\Model\QuoteListForAdminDto.cs" />
+    <Compile Include="Modules\QuoteRequests\Model\QuoteWithoutSellerListDto.cs" />
+    <Compile Include="Modules\QuoteRequests\Model\SellerGeneralDataDto.cs" />
+    <Compile Include="Modules\QuoteRequests\Queries\QuoteGroupDetailsForBuyer.cs" />
+    <Compile Include="Modules\QuoteRequests\Queries\QuoteListForBuyer.cs" />
+    <Compile Include="Modules\Search\CommonSearchRequest.cs" />
+    <Compile Include="Modules\Search\CommonSearchResult.cs" />
+    <Compile Include="Modules\Search\Products\IProductSearchService.cs" />
+    <Compile Include="Modules\Search\Products\NearbyProductsRequest.cs" />
+    <Compile Include="Modules\Search\Products\ProductSearchRequest.cs" />
+    <Compile Include="Modules\Search\Products\ProductSearchResult.cs" />
+    <Compile Include="Modules\Search\Quotes\IQuoteSearchService.cs" />
+    <Compile Include="Modules\Search\Quotes\QuoteSearchRequest.cs" />
+    <Compile Include="Modules\Search\Quotes\QuoteSearchResult.cs" />
+    <Compile Include="Modules\Search\Quotes\QuoteSort.cs" />
+    <Compile Include="Modules\Search\SearchAppService.cs" />
+    <Compile Include="Modules\Search\SearchRequestBase.cs" />
+    <Compile Include="Modules\Search\SearchResultBase.cs" />
+    <Compile Include="Modules\Search\Sellers\ISellerSearchService.cs" />
+    <Compile Include="Modules\Search\Sellers\SellerSearchRequest.cs" />
+    <Compile Include="Modules\Search\Sellers\SellerSort.cs" />
+    <Compile Include="Modules\SellerAssistantModule\EnableOrDisableSellerAssistant.cs" />
+    <Compile Include="Modules\SellerAssistantModule\GetSellerAssistant.cs" />
+    <Compile Include="Modules\SellerAssistantModule\SellerAssistantPermissions.cs" />
+    <Compile Include="Modules\SellerAssistantModule\SellerAssistantRegisteredMessageSpecification.cs" />
+    <Compile Include="Modules\SellerAssistantModule\SendEmailWhenSellerAssistantRegistered.cs" />
+    <Compile Include="Modules\SellerAssistantModule\SetSellerAssistantPermissions.cs" />
+    <Compile Include="Modules\Sellers\EventHandlers\SendEmailToSellerWhenEnabled.cs" />
+    <Compile Include="Modules\Sellers\EventHandlers\NotifyAdminForModerationWhenSellerIsRegistered.cs" />
+    <Compile Include="Modules\Sellers\EventHandlers\SendEmailToSellerWhenModerationApproved.cs" />
+    <Compile Include="Modules\Sellers\EventHandlers\SendWelcomeEmailWhenSellerIsRegistered.cs" />
+    <Compile Include="Modules\Sellers\ISellerCompleteProfileQueries.cs" />
+    <Compile Include="Modules\Sellers\ISellerScheduledTransferQueries.cs" />
+    <Compile Include="Modules\SiteMap\SiteMapAppService.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\EditRecurringProductAvailabilityAppCommand.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\NewRecurringProductAvailabilityAppCommand.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\EditProductAvailabilityAppCommandHandler.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\EditProductAvailabilityAppCommand.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\DeleteProductAvailabilityAppCommandHandler.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\DeleteProductAvailabilityAppCommand.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\NewProductAvailabilityAppCommand.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\DeleteLockForProductAppComand.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\NewAvailabilityAppCommandHandler.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\DeleteLockAppCommand.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\DeleteLockAppCommandHandler.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\NewAvailabilityAppCommand.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\NewAvailabilityDayOfWeekAppCommand.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\NewLockAppCommand.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\NewLockAppCommandHandler.cs" />
+    <Compile Include="Modules\StoreModule\AppCommands\NewProductAvailabilityAppCommandHandler.cs" />
+    <Compile Include="Modules\StoreModule\CalculatePriceOfProductsJob.cs" />
+    <Compile Include="Modules\StoreModule\EventHandlers\CalculatePriceOfProductsWhenConfigUpdated.cs" />
+    <Compile Include="Modules\StoreModule\EventHandlers\EvaluateSellerCompletionWhenSellerProfileIsUpdated.cs" />
+    <Compile Include="Modules\StoreModule\Queries\IScheduleTimelineQueries.cs" />
+    <Compile Include="Modules\StoreModule\Queries\RentalScheduleTimelineResourceItem.cs" />
+    <Compile Include="Modules\StoreModule\Queries\IOrderQueries.cs" />
+    <Compile Include="Modules\StoreModule\Queries\IScheduleQueries.cs" />
+    <Compile Include="Modules\StoreModule\Queries\IStoreProductQueries.cs" />
+    <Compile Include="Modules\StoreModule\Queries\ProductWithScheduleDto.cs" />
+    <Compile Include="Modules\StoreModule\Queries\RentalForScheduleDto.cs" />
+    <Compile Include="Modules\StoreModule\Queries\RentalLockForScheduleDto.cs" />
+    <Compile Include="Modules\StoreModule\Queries\RentalScheduleItem.cs" />
+    <Compile Include="Modules\StoreModule\Queries\RentalScheduleTimelineProductDto.cs" />
+    <Compile Include="Modules\StoreModule\ReminderNotificationRentalRecurrentJob.cs" />
+    <Compile Include="Modules\StoreModule\SellerProfileValidationService.cs" />
+    <Compile Include="Modules\StoreRequest\EventHandlers\CallWebhooksOnRentalCreatedUpdatedOrCancelled.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\OrderAutoCompletionImminentMessageModel.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\OrderAwaitingDeliveryOrPickupMessageModel.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\OrderCanceledMessageModel.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\RentalPeriodChangedMessageModel.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\RentalStartReminderMessageModel.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\OrderProductMessageModel.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\OrderCompletedPaymentMessageModel.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\OrderDeliveredMessageModel.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\OrderDeliveryOnTheWayMessageModel.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\OrderProcessingPaymentMessageModel.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\OrderReturnedMessageModel.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\RentalEndReminderMessageModel.cs" />
+    <Compile Include="Modules\Disputes\Messages\Specs\DisputeMediationRequestMessageToAdminsSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderAwaitingPickupMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderAwaitingPickupMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderCompletedPaymentMessageToAdminSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderProcessingPaymentMessageToAdminSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\RentalEndReminderMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\RentalNewPeriodMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\RentalNewPeriodMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderAutoCompletionImminentMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderAwaitingDeliveryMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderAwaitingDeliveryMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderCanceledMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderCanceledMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderCompletedPaymentMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderCompletedPaymentMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderDeliveredMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderDeliveryOnTheWayMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderProcessingPaymentMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderProcessingPaymentMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\OrderReturnedMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\RentalEndReminderMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\RentalPeriodChangedMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\RentalPeriodChangedMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\RentalStartReminderMessageToBuyerSpecification.cs" />
+    <Compile Include="Modules\StoreRequest\Messages\Specs\RentalStartReminderMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\Subscriptions\EventHandlers\SendEmailToSellerOnSubscriptionAdded.cs" />
+    <Compile Include="Modules\Subscriptions\Messages\NewSubscriptionMessageModel.cs" />
+    <Compile Include="Modules\Subscriptions\Messages\Specs\NewSubscriptionMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\Subscriptions\Queries\ISubscriptionQueries.cs" />
+    <Compile Include="Modules\Subscriptions\Model\SubscriptionListItemForAdminDto.cs" />
+    <Compile Include="Modules\Subscriptions\SubscriptionV2AppService.cs" />
+    <Compile Include="Modules\UserAccounts\AccountService.cs" />
+    <Compile Include="Modules\UserAccounts\ListProfilesForUser.cs" />
+    <Compile Include="Modules\UserAccounts\Messages\Model\AwaitingModerationBuyerMessageModel.cs" />
+    <Compile Include="Modules\UserAccounts\Messages\Model\AwaitingModerationMessageModel.cs" />
+    <Compile Include="Modules\UserAccounts\Messages\Model\WelcomeMessageModel.cs" />
+    <Compile Include="Modules\UserAccounts\Messages\Model\ProfileActivatedMessageModel.cs" />
+    <Compile Include="Modules\UserAccounts\Messages\Model\ResetPasswordMessageModel.cs" />
+    <Compile Include="Modules\UserAccounts\Messages\Specs\AwaitingModerationBuyerMessageSpecification.cs" />
+    <Compile Include="Modules\UserAccounts\Messages\Specs\AwaitingModerationMessageSpecification.cs" />
+    <Compile Include="Modules\UserAccounts\Messages\Specs\BuyerProfileActivatedMessageSpecification.cs" />
+    <Compile Include="Modules\UserAccounts\Messages\Specs\WelcomeMessageSpecification.cs" />
+    <Compile Include="Modules\UserAccounts\Messages\Specs\ProfileActivatedMessageSpecification.cs" />
+    <Compile Include="Modules\UserAccounts\Messages\Specs\ResetPasswordMessageSpecification.cs" />
+    <Compile Include="Modules\StoreModule\CheckStatusForTransactionsPendingPaymentRecurrentJob.cs" />
+    <Compile Include="Modules\UserAccounts\Messages\Specs\WelcomeMessageToSellerSpecification.cs" />
+    <Compile Include="Modules\UserAccounts\RegisterAdditionalProfile.cs" />
+    <Compile Include="Modules\UserAccounts\RegisterBuyerUserAndProfile.cs" />
+    <Compile Include="Modules\UserAccounts\RegisterSellerAssistantUserAndProfile.cs" />
+    <Compile Include="Modules\UserAccounts\RegisterSellerUserAndProfile.cs" />
+    <Compile Include="Modules\UserAccounts\RegisterUserAndProfile.cs" />
+    <Compile Include="Modules\UserAccounts\SendWelcomeEmailWhenBuyerRegistered.cs" />
+    <Compile Include="Modules\UserRatings\CheckExpiredRatings.cs" />
+    <Compile Include="Modules\UserRatings\IUserRatingAppService.cs" />
+    <Compile Include="Modules\UserRatings\Messages\Model\RatingRequestMessageModel.cs" />
+    <Compile Include="Modules\UserRatings\Messages\Specs\RatingRequestedToBuyerMessageSpecification.cs" />
+    <Compile Include="Modules\UserRatings\Messages\Specs\RatingRequestedToSellerMessageSpecification.cs" />
+    <Compile Include="Modules\UserRatings\SendEmailToSenderOnRatingCreated.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Modules\QuoteRequests\AppCommands\AddQuoteAnswerAppCommand.cs" />
+    <Compile Include="Modules\QuoteRequests\AppCommands\RequestQuoteAppCommand.cs" />
+    <Compile Include="Modules\QuoteRequests\EventHandlers\SendEmailToBuyerConfirmingQuoteRequestSentEventHandler.cs" />
+    <Compile Include="Modules\QuoteRequests\EventHandlers\SendEmailToSellerOnNewQuoteRequestEventHandler.cs" />
+    <Compile Include="Modules\QuoteRequests\EventHandlers\SendEmailWhenQuoteAnswerIsAddedEventHandler.cs" />
+    <Compile Include="Modules\QuoteRequests\Queries\IQuoteQueries.cs" />
+    <Compile Include="Modules\QuoteRequests\QuoteAppService.cs" />
+    <Compile Include="Modules\StoreModule\Queries\ICartQueries.cs" />
+    <Compile Include="Modules\StoreRequest\EventHandlers\CallWebhooksOnNewOrderRequest.cs" />
+    <Compile Include="Modules\UserAccounts\IUserAccountQueries.cs" />
+    <Compile Include="Modules\StoreModule\CalculatePriceOfProductsVersionOutJob.cs" />
+    <Compile Include="StartupProcesses\ProductFriendlyUrlBuilder.cs" />
+    <Compile Include="Webhooks\IWebhookCallService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{c54c6f75-69c6-4aef-adca-70c08bd1a02c}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{44a771e7-f5af-43a7-b1dc-efc36e3ac340}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infra.Crosscutting.Hangfire\Infra.Crosscutting.Hangfire.csproj">
+      <Project>{0C25D6F3-54E3-46F7-A025-6D6875393687}</Project>
+      <Name>Infra.Crosscutting.Hangfire</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{7E0FD87F-5CEA-4C6E-BF1F-32F4EA08A422}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NewIntegrator.Stripe\NewIntegrator.Stripe.csproj">
+      <Project>{3e99a5ba-642c-4c6d-babe-8ace5d5de897}</Project>
+      <Name>NewIntegrator.Stripe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaymentIntegrator.Core\PaymentIntegrator.Core.csproj">
+      <Project>{880230CF-FE0C-4943-ADE0-88575AEFC8A0}</Project>
+      <Name>PaymentIntegrator.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\NewContext\NewContext.Core\NewContext.Core.csproj">
+      <Project>{5E6F0F44-E254-40A8-BD9F-83B3E68A784B}</Project>
+      <Name>NewContext.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteAnswerMessageToBuyer_en-us.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteAnswerMessageToBuyer_pt-br.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteAnswerMessageToSeller_en-us.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteAnswerMessageToSeller_pt-br.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteMessageToBuyer_en-us.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteMessageToBuyer_pt-br.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteMessageToSeller_en-us.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteMessageToSeller_pt-br.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\SellerAssistantModule\SellerAssistantRegisteredMessage_pt-br.html" />
+    <EmbeddedResource Include="Modules\SellerAssistantModule\SellerAssistantRegisteredMessage_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderCompletedPaymentMessageToAdmin_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderCompletedPaymentMessageToAdmin_en-us.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewModeratorQuoteAnswerMessageToTarget_pt-br.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewModeratorQuoteAnswerMessageToTarget_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalEndReminderMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalEndReminderMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalStartReminderMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalStartReminderMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\BuyerProfileActivatedMessage_en-us.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\BuyerProfileActivatedMessage_pt-br.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\AwaitingModerationBuyerMessage_en-us.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\AwaitingModerationBuyerMessage_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderProcessingPaymentMessageToAdmin_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderProcessingPaymentMessageToAdmin_pt-br.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\WelcomeMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\WelcomeMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderAwaitingPickupMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderAwaitingPickupMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderAwaitingPickupMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderAwaitingPickupMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderCompletedOfflineInstructions_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalNewPeriodMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalNewPeriodMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalNewPeriodMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalNewPeriodMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalPeriodChangedMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalPeriodChangedMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalPeriodChangedMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalPeriodChangedMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderCanceledMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderCanceledMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\QuoteAnswerFilteredMessageToAdmin_pt-br.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\QuoteAnswerFilteredMessageToAdmin_en-us.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteBillingMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteBillingMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteMessageToAdmin_en-us.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteMessageToAdmin_pt-br.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\AwaitingModerationMessage_pt-br.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\AwaitingModerationMessage_en-us.html" />
+    <EmbeddedResource Include="Modules\UserRatings\Messages\Templates\RatingRequestedToSellerMessage_pt-br.html" />
+    <EmbeddedResource Include="Modules\UserRatings\Messages\Templates\RatingRequestedToSellerMessage_en-us.html" />
+    <EmbeddedResource Include="Modules\UserRatings\Messages\Templates\RatingRequestedToBuyerMessage_pt-br.html" />
+    <EmbeddedResource Include="Modules\UserRatings\Messages\Templates\RatingRequestedToBuyerMessage_en-us.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\WelcomeMessage_en-us.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\WelcomeMessage_pt-br.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\ProfileActivatedMessage_en-us.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\ProfileActivatedMessage_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderAutoCompletionImminentMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderAutoCompletionImminentMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\Disputes\Messages\Templates\PaymentAuthorizedMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\Disputes\Messages\Templates\PaymentAuthorizedMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\Disputes\Messages\Templates\DisputeResolvedMessage_en-us.html" />
+    <EmbeddedResource Include="Modules\Disputes\Messages\Templates\DisputeResolvedMessage_pt-br.html" />
+    <EmbeddedResource Include="Modules\Disputes\Messages\Templates\DisputeOpenedMessage_pt-br.html" />
+    <EmbeddedResource Include="Modules\Disputes\Messages\Templates\DisputeOpenedMessage_en-us.html" />
+    <EmbeddedResource Include="Modules\Disputes\Messages\Templates\DisputeMediationRequestMessageToAdmins_pt-br.html" />
+    <EmbeddedResource Include="Modules\Disputes\Messages\Templates\DisputeMediationRequestMessageToAdmins_en-us.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteAcceptedMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteAcceptedMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteClosedMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteClosedMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalEndReminderMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalEndReminderMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalStartReminderMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\RentalStartReminderMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderReturnedMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderReturnedMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteGroupMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\QuoteRequests\Messages\Templates\NewQuoteGroupMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Messages\MasterTemplate_en-us.html" />
+    <EmbeddedResource Include="Messages\MasterTemplate_pt-br.html" />
+    <EmbeddedResource Include="Messages\MasterTemplate_es-es.html" />
+    <EmbeddedResource Include="Messages\MasterTemplate_ca-es.html" />
+    <Content Include="Messages\README.txt" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderOfflineInstructions_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderOfflineInstructions_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderProducts_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderProducts_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\ProductLinks_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\ProductLinks_en-us.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\ResetPasswordMessage_en-us.html" />
+    <EmbeddedResource Include="Modules\UserAccounts\Messages\Templates\ResetPasswordMessage_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderProcessingPaymentMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderProcessingPaymentMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderProcessingPaymentMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderProcessingPaymentMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderDeliveryOnTheWayMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderDeliveryOnTheWayMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderDeliveredMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderDeliveredMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderCanceledMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderCanceledMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderAwaitingDeliveryMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderAwaitingDeliveryMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderAwaitingDeliveryMessageToBuyer_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderAwaitingDeliveryMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderCompletedPaymentMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderCompletedPaymentMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\Subscriptions\Messages\Templates\NewSubscriptionMessageToSeller_en-us.html" />
+    <EmbeddedResource Include="Modules\Subscriptions\Messages\Templates\NewSubscriptionMessageToSeller_pt-br.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderCompletedPaymentMessageToBuyer_en-us.html" />
+    <EmbeddedResource Include="Modules\StoreRequest\Messages\Templates\OrderCompletedPaymentMessageToBuyer_pt-br.html" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+</Project>

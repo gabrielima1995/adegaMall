@@ -1,0 +1,150 @@
+﻿@using Newtonsoft.Json
+@model PublicProfileVM
+
+@{
+    var config = MaaSConfig.Current;
+    var replace = "_replace_";
+    var profileConfig = config.Product.BusinessModel.Rental.Seller.Schedule.Configuration.Profile;
+}
+
+<script>
+    $(document).ready(function() {
+        var sellerId = '@Model.Seller.Id';
+        var lang = '@Request.GetCurrentLang()';
+        var templateUrl = '@Url.ActionLocalized("PublicPage", "Products", new { id = replace })';
+
+        var calendarEl = document.getElementById('schedule-wrapper');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            schedulerLicenseKey: '@(config.Environment.FullCalendar.LicenseKey ?? string.Empty)',
+            plugins: ['resourceTimeline'],
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'resourceTimelineWeek,resourceTimelineDay'
+            },
+            views: {
+                day: {
+                    titleFormat: {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        weekday: 'long'
+                    }
+                },
+                week: {
+                    titleFormat: {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    },
+                    slotDuration: '@profileConfig.SlotDuration',
+                    slotLabelInterval: @(Html.Raw(string.IsNullOrEmpty(profileConfig.SlotLabelInterval) ? "undefined" : $"'{profileConfig.SlotLabelInterval}'")),
+                    hiddenDays: @JsonConvert.SerializeObject(profileConfig.HiddenDays)
+                }
+            },
+            defaultView: 'resourceTimelineWeek',
+            defaultDate: new Date(),
+            validRange: {
+                start: new Date()
+            },
+            aspectRatio: 1.5,
+            navLinks: true,
+            editable: true,
+            eventLimit: true,
+            locale: lang,
+            //businessHours: {
+            //    daysOfWeek: [1, 2, 3, 4, 5],
+            //    startTime: '08:00',
+            //    endTime: '18:00'
+            //},
+            eventTimeFormat: { // like '14:30'
+                hour: '2-digit',
+                minute: '2-digit',
+                meridiem: false
+            },
+            displayEventEnd: true,
+            height: 'auto',
+            minTime: '@profileConfig.MinTime',
+            maxTime: '@profileConfig.MaxTime',
+            timeGridEventMinHeight: 32,
+            resourceLabelText: '@Request.GetLocalizedString("SCHEDULE_TIMELINE_RESOURCE_TITLE")',
+            resourceAreaWidth : '30%',
+            refetchResourcesOnNavigate : true,
+            resources: {
+                url: '@Url.Action("TimelineResources")',
+                extraParams: {
+                    sellerId: sellerId,
+                    lang: lang
+                }
+            },
+            eventSources: [{
+                    url: '@Url.Action("TimelineEvents")',
+                    extraParams: {
+                        sellerId: sellerId,
+                        lang: lang
+                    }
+                }
+            ],
+            eventRender: function (info) {
+                var eventObj = info.event;
+                var $el = $(info.el);
+
+                $el.popover({
+                    content: eventObj.extendedProps.description,
+                    trigger: 'hover',
+                    placement: 'auto',
+                    container: '#schedule-wrapper',
+                    html: true
+                });
+            },
+            eventClick: function (info) {
+                var eventObj = info.event;
+
+                if (!eventObj.extendedProps.outOfStock) {
+                    var startTime = info.event.start;
+
+                    templateUrl = templateUrl.replace('@replace', eventObj.extendedProps.friendlyUrl);
+
+                    
+                    $.redirect(
+                        templateUrl, {
+                            start: formatDate(startTime),
+                            time: formatTime(startTime),
+                            productAvailability: eventObj.extendedProps.productAvailability
+                        },
+                        'GET');
+                }
+            }
+        });
+
+        calendar.render();
+
+        function formatDate(date) {
+            var d = date,
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) 
+                month = '0' + month;
+            if (day.length < 2) 
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+        function formatTime(date) {
+            var d = date,
+                hours = '' + d.getHours(),
+                minutes = '' + d.getMinutes();
+
+            if (hours.length < 2)
+                hours = '0' + hours;
+            if (minutes.length < 2)
+                minutes = '0' + minutes;
+
+            return [hours, minutes].join(':');
+        }
+    });
+</script>

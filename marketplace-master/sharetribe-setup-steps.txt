@@ -1,0 +1,7 @@
+- Create your marketplace
+- Add a slogan & description
+- Upload a cover photo
+- Add fields & filters
+- Set up online payments
+- Post a listing
+- Invite users

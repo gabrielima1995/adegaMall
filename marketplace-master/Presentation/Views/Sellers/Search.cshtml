@@ -1,0 +1,86 @@
+﻿@model Application.Modules.Portfolio.Search.SearchViewModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("SEARCH_TITLE");
+}
+
+<!-- BANNER -->
+<div class="bg-image-1 banner padding-top-60 padding-bottom-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                @Html.Localized("SEARCH_TITLE", "h4")
+                
+                <!-- SEARCH FIELD -->
+                @Html.Partial("_SearchFilters", Model)
+                <!-- /SEARCH FIELD -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /BANNER -->
+
+<!-- RESULTS -->
+<div class="main-content bg1">
+    <div class="container">
+        <div class="row results-number">
+            <div class="col-xs-12 text-center"><strong>@Model.Total</strong> @Html.Localized("SELLERS_FOUND_COUNT")</div>
+        </div>
+
+        <div id="js-result-wrapper" class="row">
+            @Html.Partial("_SearchResult", Model)
+        </div>
+
+        <div class="row">
+            <div id="js-loading" class="progress" style="display: none">
+                <div class="progress-bar progress-bar-striped progress-bar-success active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                    @Html.Localized("LOADING_TEXT", "span", new { @class = "sr-only" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /RESULTS -->
+
+@section scripts
+{
+    @Html.Partial("_SubCategoriesScript")
+    @Html.Partial("_CitiesScript")
+
+    <script>
+        $(function () {
+            $(document).ready(function () {
+                var $win = $(window);
+                var loading = false;
+                var noResults = false;
+
+                $win.scroll(function () {
+                    if (!noResults && !loading && $(document).height() - $win.height() <= ($win.scrollTop() + 500)) {
+                        var nextUrl = $('#js-result-wrapper .js-next-url:last').val();
+
+                        if (nextUrl) {
+                            loading = true;
+                            $('#js-loading').show();
+
+                            $.ajax({
+                                url: nextUrl,
+                                success: function (data) {
+                                    $('#js-result-wrapper').append(data);
+
+                                    loading = false;
+                                    $('#js-loading').hide();
+
+                                    if (!data) {
+                                        noResults = true;
+                                    }
+                                }
+                            });
+                        } else {
+                            noResults = true;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

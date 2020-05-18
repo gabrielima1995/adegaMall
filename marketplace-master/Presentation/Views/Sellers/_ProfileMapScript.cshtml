@@ -1,0 +1,30 @@
+﻿@using System.Globalization
+@model PublicProfileVM
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (((config.Seller.Address.ShowMap && config.Seller.Address.Enabled) || (config.Seller.CityAndState.ShowMap && config.Seller.CityAndState.Enabled)) && Model.Seller.HasAddress && Model.Seller.Address.HasLocation)
+{
+    <script>
+        function initMap() {
+            var location = {
+                lat: @(Model.Seller.Address.Location.Latitude.Value.ToString(CultureInfo.GetCultureInfo("en-us"))),
+                lng: @(Model.Seller.Address.Location.Longitude.Value.ToString(CultureInfo.GetCultureInfo("en-us")))
+            };
+
+            var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                zoom: 16,
+                scrollwheel: false,
+                center: location
+            });
+
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=@(config.Environment.GoogleServices.MapsApiKey)&callback=initMap"></script>
+}

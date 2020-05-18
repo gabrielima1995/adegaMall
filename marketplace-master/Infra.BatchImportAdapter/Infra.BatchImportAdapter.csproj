@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4EE4AB58-E674-4FDE-8AA9-B5A901954C07}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Infra.BatchImportAdapter</RootNamespace>
+    <AssemblyName>Infra.BatchImportAdapter</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetZip, Version=1.13.3.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.13.3\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BatchImportQueries.cs" />
+    <Compile Include="BatchImportService.cs" />
+    <Compile Include="Fields\DomainFieldAdapter.cs" />
+    <Compile Include="Internals\CustomFieldsAdapter.cs" />
+    <Compile Include="Fields\BrazilianBankAccountBranchField.cs" />
+    <Compile Include="Fields\BrazilianBankAccountNumberField.cs" />
+    <Compile Include="Fields\BrazilianBankAccountTypeField.cs" />
+    <Compile Include="Fields\BrazilianBankCodeField.cs" />
+    <Compile Include="Fields\BrazilianPhoneNumberField.cs" />
+    <Compile Include="Fields\BrazilianZipCodeField.cs" />
+    <Compile Include="Fields\CnpjField.cs" />
+    <Compile Include="Fields\CpfField.cs" />
+    <Compile Include="Fields\CpfOrCnpjField.cs" />
+    <Compile Include="Fields\FormattedRegexField.cs" />
+    <Compile Include="FacebookImageProvider.cs" />
+    <Compile Include="Internals\CustomFieldWrapper.cs" />
+    <Compile Include="Internals\MappingCache.cs" />
+    <Compile Include="Fields\GenreField.cs" />
+    <Compile Include="Fields\YesNoField.cs" />
+    <Compile Include="Internals\InternalImportService.cs" />
+    <Compile Include="Internals\InvalidRecord.cs" />
+    <Compile Include="Internals\Localization.cs" />
+    <Compile Include="Products\ProductImagesZipExtractor.cs" />
+    <Compile Include="Products\ProductImportRepository.cs" />
+    <Compile Include="Products\ProductModelAndParser.cs" />
+    <Compile Include="Products\ProductImportQueries.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Internals\DataModelAndParser.cs" />
+    <Compile Include="Internals\DbConnectionHelper.cs" />
+    <Compile Include="Sellers\SellerAvatarUpdater.cs" />
+    <Compile Include="Sellers\SellerModelAndParser.cs" />
+    <Compile Include="Internals\Factories.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj">
+      <Project>{e653d119-3abf-42c2-b3cd-f9127fc0b044}</Project>
+      <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BatchImport.Csv\BatchImport.Csv.csproj">
+      <Project>{669EF50C-377C-4F13-99B7-CFB50C81E753}</Project>
+      <Name>BatchImport.Csv</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BatchImport.Fields\BatchImport.Fields.csproj">
+      <Project>{379BAE15-4169-446B-8900-33513D9CBDCF}</Project>
+      <Name>BatchImport.Fields</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BatchImport.MicrosoftExcel\BatchImport.MicrosoftExcel.csproj">
+      <Project>{D1BD2745-D401-4D8D-AB27-8E553E74A21B}</Project>
+      <Name>BatchImport.MicrosoftExcel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BatchImport\BatchImport.csproj">
+      <Project>{53524A12-F8AA-462E-BDC0-D872E78EAD21}</Project>
+      <Name>BatchImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{c54c6f75-69c6-4aef-adca-70c08bd1a02c}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{44A771E7-F5AF-43A7-B1DC-EFC36E3AC340}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaymentIntegrator.Core\PaymentIntegrator.Core.csproj">
+      <Project>{880230CF-FE0C-4943-ADE0-88575AEFC8A0}</Project>
+      <Name>PaymentIntegrator.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ResourceFiles\BatchImportQueries_GetCustomFields.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

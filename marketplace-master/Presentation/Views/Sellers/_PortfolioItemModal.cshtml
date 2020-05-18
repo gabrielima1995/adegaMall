@@ -1,0 +1,89 @@
+﻿@using Presentation.Helpers
+@model Application.Modules.Portfolio.PortfolioItemVM
+
+@{
+    var modalId = "portfolio-modal-" + Model.Id;
+    var config = MaaSConfig.Current;
+    var hasDescription = !string.IsNullOrWhiteSpace(Model.Description);
+    var hasPrice = config.Portfolio.Price.Enabled && Model.Price.HasValue;
+    var hasCategories = Model.SubCategories.Any();
+    var showQuoteRequest = config.Quote.PortfolioItemQuote.Enabled;
+}
+
+<!-- MODAL -->
+<div id="@modalId" class="modal fade portfolio-modal" tabindex="-1" role="dialog" aria-labelledby="@modalId">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h3 class="modal-title">
+                    <i class="fa fa-address-card"></i>
+                    @Model.Title
+
+                    @if (hasPrice)
+                    {
+                        <span class="label label-primary portfolio-price">@config.DefaultCurrency @Model.Price</span>
+                    }
+                </h3>
+            </div>
+
+            <div class="modal-body max-height">
+                @if (Model.IsVideo)
+                {
+                    <div class="video-wrapper">
+                        @Html.Raw(Model.VideoUrl.CreateEmbed())
+                    </div>
+                }
+                else
+                {
+                    @Html.Partial("_PortfolioItemCarousel", Model)
+                }
+
+                @if (hasDescription)
+                {
+                    <p class="portfolio-description">@Html.Markdown(Model.Description)</p>
+                }
+
+                @if (MaaSConfig.Current.CustomFields.Portfolio.Enabled && Model.CustomFieldDefinitions?.Count > 0)
+                {
+                    foreach (var field in Model.CustomFieldDefinitions)
+                    {
+                        if (field.Value.IsPublic && !string.IsNullOrWhiteSpace(Model.CustomFields[field.Key.ToString()]))
+                        {
+                            var value = Model.CustomFields[field.Key.ToString()];
+                            <p>
+                                <strong>@field.Value.NameLocalized(Request.GetCurrentLang()): </strong>
+                                @if (CustomFieldHelper.IsLink(value))
+                                {
+                                    <a href="@value"><i class="fas fa-paperclip"></i> @Request.GetLocalizedString("CUSTOM_FIELD_VIEW_FILE")</a>
+                                }
+                                else
+                                {
+                                    <span>@CustomFieldHelper.LocalizeField(value, Request.GetCurrentLang())</span>
+                                }
+                            </p>
+                        }
+                    }
+                }
+
+                @if (hasCategories)
+                {
+                    <ul>
+                        @foreach (var item in Model.SubCategories)
+                        {
+                            <li>@item.Category.Name &#8231; @item.Name</li>
+                        }
+                    </ul>
+                }
+
+                @if (showQuoteRequest)
+                {
+                    <div class="text-center">
+                        @Html.Localized("PORTFOLIO_ITEM_QUOTE_REQUEST_BUTTON", "a", new { href = Url.ActionLocalized("Request", "Quotes", new { sellerId = Model.SellerId, portfolioItemId = Model.Id, area = "" }), @class = "btn btn-primary btn-lg box-shadow" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /MODAL -->

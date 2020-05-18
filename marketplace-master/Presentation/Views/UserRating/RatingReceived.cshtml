@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = Request.GetLocalizedString("USER_RATING_RECEIVED");
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+<div class="main-content bg-image-2 padding-top-120 padding-bottom-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
+                <div class="box-content">
+
+                    <div>
+                        @Html.Localized("USER_RATING_RECEIVED", "div", new { @class = "bg-secondary color-white block text-center padding-5 border-radius" })
+                    </div>
+                    <div class="text-center">
+                        <br />
+                        @Html.Localized("USER_RATING_THANKS", "p")
+                        <br />
+                        @if (MaaSConfig.Current.Ratings.DoubleBlindRatings && MaaSConfig.Current.Seller.UserRatings.Enabled && MaaSConfig.Current.Buyer.UserRatings.Enabled)
+                        {
+                            <i class="fas fa-info-circle"></i> @Html.Localized("USER_RATING_BLIND_PENDING_DESC", "small", new { @class = "text-muted" })
+                            <br />
+                        }
+                    </div>
+                    <hr />
+                    <div class="col-xs-12 text-center">
+                        <a href="@Url.ActionLocalized("Index", "Home")" class="btn btn-default"><i class="fas fa-home"></i> @Html.Localized("BACK_TO_HOME_LINK")</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

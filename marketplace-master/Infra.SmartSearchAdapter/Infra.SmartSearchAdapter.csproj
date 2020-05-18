@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A57A3FEB-5783-4FE5-85DD-C63457B6AACE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Infra.SmartSearchAdapter</RootNamespace>
+    <AssemblyName>Infra.SmartSearchAdapter</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.4.8.0-beta00005\lib\net45\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Analysis.Common, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Analysis.Common.4.8.0-beta00005\lib\net45\Lucene.Net.Analysis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Spatial, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Contrib.Spatial.3.0.3\lib\net40\Lucene.Net.Contrib.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Facet, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Facet.4.8.0-beta00005\lib\net45\Lucene.Net.Facet.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Grouping, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Grouping.4.8.0-beta00005\lib\net45\Lucene.Net.Grouping.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Join, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Join.4.8.0-beta00005\lib\net45\Lucene.Net.Join.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Queries, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Queries.4.8.0-beta00005\lib\net45\Lucene.Net.Queries.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.QueryParser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.QueryParser.4.8.0-beta00005\lib\net45\Lucene.Net.QueryParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Sandbox, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Sandbox.4.8.0-beta00005\lib\net45\Lucene.Net.Sandbox.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Spatial, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Spatial.4.8.0-beta00005\lib\net45\Lucene.Net.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartSearch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SmartSearch.1.0.5\lib\net461\SmartSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartSearch.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SmartSearch.Abstractions.1.0.3\lib\net461\SmartSearch.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartSearch.LuceneNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SmartSearch.LuceneNet.1.0.7-beta\lib\net461\SmartSearch.LuceneNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Spatial4n.Core, Version=0.4.1.0, Culture=neutral, PublicKeyToken=9f9456e1ca16d45e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spatial4n.Core.0.4.1-beta00007\lib\net40\Spatial4n.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.Abstractions, Version=5.11.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.5.11.5\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.11.7\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\BaseIndexContext.cs" />
+    <Compile Include="Common\SqlDocumentReader.cs" />
+    <Compile Include="IndexHelper.cs" />
+    <Compile Include="IndexUpdater.cs" />
+    <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="DefaultIndexOptions.cs" />
+    <Compile Include="EventHandlers\CreateOrUpdateIndexesWhenConfigUpdated.cs" />
+    <Compile Include="Products\AddOrUpdateProductIndexInfo.cs" />
+    <Compile Include="Products\IntDateHelper.cs" />
+    <Compile Include="Products\ProductSearchService.cs" />
+    <Compile Include="Products\ProductSearchDomain.cs" />
+    <Compile Include="Products\ProductIndexContext.cs" />
+    <Compile Include="Products\ProductDocumentProvider.cs" />
+    <Compile Include="Products\SearchResultMapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quotes\SearchResultMapper.cs" />
+    <Compile Include="Quotes\EventHandlers\AddQuoteToIndexWhenQuoteIsRequested.cs" />
+    <Compile Include="Quotes\EventHandlers\RemoveQuoteFromIndexWhenQuoteIsClosed.cs" />
+    <Compile Include="Quotes\QuoteDocumentProvider.cs" />
+    <Compile Include="Quotes\QuoteIndexContext.cs" />
+    <Compile Include="Quotes\QuoteSearchDomain.cs" />
+    <Compile Include="Quotes\QuoteSearchService.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Resources\QueryProductsForIndexing.sql" />
+    <Compile Include="Sellers\EventHandlers\AddOrUpdateSellerIndexInfo.cs" />
+    <Compile Include="Sellers\SearchResultMapper.cs" />
+    <Compile Include="Sellers\SellerDocumentProvider.cs" />
+    <Compile Include="Sellers\SellerFieldNames.cs" />
+    <Compile Include="Sellers\SellerIndexContext.cs" />
+    <Compile Include="Sellers\SellerSearchDomain.cs" />
+    <Compile Include="Sellers\SellerSearchHelper.cs" />
+    <Compile Include="Sellers\SellerSearchService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{C54C6F75-69C6-4AEF-ADCA-70C08BD1A02C}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{44A771E7-F5AF-43A7-B1DC-EFC36E3AC340}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\V2.Application\V2.Application.csproj">
+      <Project>{CB49EB5C-C4A0-47B2-8A1A-A31EFD36A0BA}</Project>
+      <Name>V2.Application</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\QueryQuotesForIndexing.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\QuerySellersForIndexing.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

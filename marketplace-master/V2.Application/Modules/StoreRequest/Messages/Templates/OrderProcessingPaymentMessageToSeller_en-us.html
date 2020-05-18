@@ -1,0 +1,52 @@
+﻿<p>Olá, [SELLER_NAME]</p>
+
+<br />
+
+<p>Você acaba de realizar uma nova venda.</p>
+
+[IF:IS_OFFLINE_PAYMENT]
+<p>Providencie o envio do produto para o cliente, incluindo a Nota Fiscal e o boleto para pagamento.</p>
+[/IF:IS_OFFLINE_PAYMENT]
+
+[IFNOT:IS_OFFLINE_PAYMENT]
+<p>O pagamento ainda está sendo processado, então você ainda não precisa fazer nada. Enviaremos um novo email assim que recebermos a confirmação do pagamento.</p>
+[/IFNOT:IS_OFFLINE_PAYMENT]
+
+<p>Veja as informações gerais:</p>
+
+<table width="100%">
+    <tbody>
+        <tr>
+            <td width="50%">Código</td>
+            <td>[ORDER_ID]</td>
+        </tr>
+        <tr>
+            <td>Status do pagamento</td>
+            <td>[ORDER_STATUS]</td>
+        </tr>
+        <tr>
+            <td>Cliente</td>
+            <td>[BUYER_NAME]</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td>[ORDER_AMOUNT]</td>
+        </tr>
+    </tbody>
+</table>
+
+[ORDER_PRODUCTS]
+
+[IF:HAS_EXTRA_INFO]
+<p><strong>Atenção!</strong> O comprador adicionou a seguinte informação no pedido:</p>
+<p>"[EXTRA_INFO]"</p>
+[/IF:HAS_EXTRA_INFO]
+
+<p>
+    Acompanhe o pedido pela plataforma neste link de
+    <a href="[ORDER_LINK]">acompanhamento de pedido</a>
+</p>
+
+<p>
+    Equipe [APP_NAME]
+</p>

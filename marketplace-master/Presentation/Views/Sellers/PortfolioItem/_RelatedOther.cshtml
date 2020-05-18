@@ -1,0 +1,52 @@
+﻿@using Application.Modules.Portfolio
+
+@model Presentation.Models.PortfolioViewModels.PortfolioItemPageVM
+
+@{
+    var items = Model.RelatedItems.Take(4).OrderBy(i => i.Order).ToList();
+}
+
+@if (items.Count > 0)
+{
+    <div class="row padding-bottom-15">
+        <div class="col-md-12">
+            <hr />
+            <h4 class="margin-bottom-15">@Html.Localized("PORTFOLIO_RELATED_OTHER")</h4>
+        </div>
+
+        @foreach (var item in items)
+        {
+            var itemUrl = Url.ActionLocalized("PortfolioItemPublicProfile", "Sellers", new { id = item.FriendlyUrl });
+
+            <div class="col-xs-12 col-sm-4 col-md-3">
+                <div class="card equal-height">
+                    <a href="@itemUrl" title="@item.Title" class="card-product-img-link">
+                        <img src="@item.GetCoverImageUrl()" alt="@item.Title" />
+                    </a>
+
+                    <h5>@item.Title</h5>
+
+                    <p>
+                        @item.Seller.PublicProfileName
+                    </p>
+
+                    <p>
+                        @if (item.HasPrice)
+                        {
+                            @item.FullPriceText
+                        }
+                        else
+                        {
+                            @:&nbsp;
+                        }
+                    </p>
+
+                    <a href="@itemUrl" class="btn btn-default">
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                        @Request.GetLocalizedString("PORTFOLIO_ITEM_PUBLIC_PAGE_BUTTON")
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+}

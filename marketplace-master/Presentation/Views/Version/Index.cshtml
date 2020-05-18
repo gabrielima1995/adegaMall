@@ -1,0 +1,42 @@
+﻿@using Domain
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Histórico de versões</title>
+</head>
+<body>
+    <div>
+        <h1>Histórico de versões</h1>
+
+        @foreach (var entry in VersionHistory.Entries)
+        {
+            <h3>@entry.VersionNumber - @entry.Title (@(entry.Date?.ToShortDateString()))</h3>
+
+            if (entry.Subject != null)
+            {
+                <p>@entry.Subject</p>
+            }
+
+            if (entry.Details.Any())
+            {
+                <ul>
+                    @foreach (var d in entry.Details)
+                    {
+                        <li>@d</li>
+                    }
+                </ul>
+            }
+
+            <hr/>
+        }
+
+    </div>
+</body>
+</html>

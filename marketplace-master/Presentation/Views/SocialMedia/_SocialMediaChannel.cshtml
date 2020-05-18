@@ -1,0 +1,34 @@
+﻿@model Application.Modules.Portfolio.SocialMedias.SocialMediaChannelViewModel
+
+<div class="col-xs-12 col-md-6 margin-bottom-20">
+    <div class="big-box text-center">
+        @using (Html.BeginForm("ChooseLink", "SocialMedia", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { @class = "margin-top-10 margin-bottom-5 text-left form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Provider)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.UserName)
+            @Html.HiddenFor(model => model.Link)
+            @Html.HiddenFor(model => model.Followers)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName)
+                <span style="display: block">@Model.UserName</span>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Link)
+                <a href="@Model.Link" target="_blank" style="display: block">@Model.Link.DisplayUrl()</a>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Followers)
+                <span style="display: block">@Model.Followers.DisplayShortNumber()</span>
+            </div>
+
+            <div class="form-group">
+                @Html.Localized("LINK_ACCOUNT_BUTTON", "button", new { type = "submit", @class = "btn btn-primary width100 text-center" })
+            </div>
+        }
+    </div>
+</div>

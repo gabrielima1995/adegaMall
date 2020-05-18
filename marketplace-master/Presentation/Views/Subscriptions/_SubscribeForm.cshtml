@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNet.Identity
+@using Presentation.Helpers
+@model Application.Modules.Subscriptions.SubscribeViewModel
+
+@{
+    var hasErrors = !ViewData.ModelState.IsValid;
+    var subscribeErros = CartHelper.GetCartErrors(ViewData.ModelState, true);
+    var isBuyer = User.Identity.GetLoginProfile().IsBuyer();
+}
+
+@using (Html.BeginForm("Subscribe", "Membership", new { id = Model.SignMode.Id, lang = Request.GetCurrentLang() }, FormMethod.Post, new { @class = "margin-top-10 margin-bottom-30", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    if (hasErrors)
+    {
+
+            <div class="alert alert-danger">
+                @Html.Localized("SUBSCRIBE_ERRORS_TO_PROCEED")
+                <a href="@Css.If(isBuyer, Url.ActionLocalized("Buyer", "Manage"), Url.ActionLocalized("Seller", "Manage"))" class="btn btn-default">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                    @Request.GetLocalizedString("SUBSCRIBE_COMPLETE_REGISTRATION")
+                </a>
+            </div>
+    }
+
+    <fieldset @(ViewData.ModelState.IsValid ? "" : "disabled") class="list-group">
+        @Html.Partial("_CreditCardFields", Model.CreditCard)
+
+        <div class="form-group">
+            @Html.Localized("CONFIRM_SIGN_BUTTON", "button", new { type = "submit", @class = "btn btn-primary btn-block box-shadow" })
+        </div>
+    </fieldset>
+}

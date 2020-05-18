@@ -1,0 +1,39 @@
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Data.Entity.Spatial;
+using System.Globalization;
+
+namespace Newtonsoft.Json.Converters
+{
+    public class DbGeographyEFConverter : JsonConverter
+    {
+        private const string LATITUDE_KEY = "lat";
+        private const string LONGITUDE_KEY = "lng";
+
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType.IsAssignableFrom(typeof(DbGeography));
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.Null)
+                return default(DbGeography);
+
+            var jObject = JObject.Load(reader);
+
+            if (!jObject.HasValues || (jObject.Property(LATITUDE_KEY) == null || jObject.Property(LONGITUDE_KEY) == null))
+                return default(DbGeography);
+
+            string wkt = string.Format(CultureInfo.InvariantCulture, "POINT({1} {0})", jObject[LATITUDE_KEY], jObject[LONGITUDE_KEY]);
+            return DbGeography.FromText(wkt, DbGeography.DefaultCoordinateSystemId);
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            var dbGeography = value as DbGeography;
+
+            serializer.Serialize(writer, dbGeography == null || dbGeography.IsEmpty ? null : new { lat = dbGeography.Latitude.Value, lng = dbGeography.Longitude.Value });
+        }
+    }
+}

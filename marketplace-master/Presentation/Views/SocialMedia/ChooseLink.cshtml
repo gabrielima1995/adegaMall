@@ -1,0 +1,24 @@
+﻿@model IList<Application.Modules.Portfolio.SocialMedias.SocialMediaChannelViewModel>
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("CHOOSE_LINK_TITLE");
+}
+
+<div class="fundo1 padding-bottom-110">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Localized("CHOOSE_LINK_TITLE", "h2", new { @class = "text-center bold text-white font-size-24 margin-top-150 margin-bottom-25" })
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="centralizar col-xs-12 col-lg-10">
+                @foreach (var item in Model)
+                {
+                    @Html.Partial("_SocialMediaChannel", item)
+                }
+            </div>
+        </div>
+    </div>
+</div>

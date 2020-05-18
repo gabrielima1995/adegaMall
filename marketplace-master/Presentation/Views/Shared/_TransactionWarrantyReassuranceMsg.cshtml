@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNet.Identity
+
+@if (!Request.IsAuthenticated || User.Identity.GetLoginProfile().IsBuyer())
+{
+    @Html.Localized("TRANSACTION_WARRANTY_REASSURANCE_BUYER_MSG", "div", new { @class = "alert alert-success" })
+}
+
+@if (User.Identity.GetLoginProfile().IsSellerOrSellerAssistant())
+{
+    @Html.Localized("TRANSACTION_WARRANTY_REASSURANCE_SELLER_MSG", "div", new { @class = "alert alert-success" })
+}

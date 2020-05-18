@@ -1,0 +1,156 @@
+﻿@using Application.Sellers
+@using Presentation.Helpers
+
+@model PublicProfileVM
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+<div class="container m-b-md">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <div class="foto-perfil">
+                        <img src="@Model.Seller.GetAvatarUrl()" alt="@Model.Seller.FullName" class="border-radius avatar m-b-md">
+                    </div>
+
+                    @if (config.Seller.UserRatings.Enabled)
+                    {
+                        <div class="text-center m-b-md" title="Média: @Model.AverageRating.ToString(" 0.00")">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (Model.AverageRating - i >= 0.9)
+                                {
+                                    <i class="fas fa-star rating-star"></i>
+                                }
+                                else if (Model.AverageRating - i >= 0.5)
+                                {
+                                    <i class="fas fa-star-half-alt rating-star"></i>
+                                }
+                                else
+                                {
+                                    <i class="far fa-star rating-star"></i>
+                                }
+                            }
+                            <br />
+                            <a href="@Url.ActionLocalized("Overview", "UserRating" , new { sellerId=Model.Seller.Id })"><small>@Model.RatingsCount avaliações</small></a>
+                        </div>
+                    }
+
+                    <div class="visible-md visible-lg">
+                        @Html.Partial("_ProfileHireButton")
+                        @Html.Partial("_ProfileShareButtons")
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-8">
+                    <h1 class="seller-title">@Model.Seller.PublicProfileName</h1>
+
+                    @if (config.Seller.AboutMe.ShowInPublicProfile && config.Seller.AboutMe.Enabled && !string.IsNullOrWhiteSpace(Model.Seller.AboutMe))
+                    {
+                        <div class="row m-b-md">
+                            <div class="col-xs-12">
+                                @Html.Markdown(Model.Seller.AboutMe)
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.Visualization.ShowSides)
+                    {
+                        <div class="row m-b-md">
+                            @if (Model.Visualization.ShowLeftSide)
+                            {
+                                <div class="col-xs-12 col-sm-6">
+                                    <dl class="profile-attributes">
+                                        @if (Model.Visualization.ShowBirthDate)
+                                        {
+                                            <dt>@Html.Localized("DATE_OF_BIRTH_LABEL")</dt>
+                                            <dd>@Model.Seller.DateOfBirth.Value.ToShortDateString()</dd>
+                                        }
+
+                                        @if (Model.Visualization.ShowAdditionalInfo1)
+                                        {
+                                            <dt>@Html.Localized("ADDITIONAL_INFO_1_LABEL")</dt>
+                                            <dd>@Model.Seller.AdditionalInfo1</dd>
+                                        }
+
+                                        @if (Model.Visualization.ShowAdditionalInfo2)
+                                        {
+                                            <dt>@Html.Localized("ADDITIONAL_INFO_2_LABEL")</dt>
+                                            <dd>@Model.Seller.AdditionalInfo2</dd>
+                                        }
+
+                                        @if (Model.Visualization.ShowGenre)
+                                        {
+                                            <dt>@Html.Localized("GENRE_LABEL")</dt>
+                                            <dd>@Html.Localized(Model.Seller.Genre.ToString().ToUpper() + "_GENRE_LABEL")</dd>
+                                        }
+
+                                        @if (config.CustomFields.Seller.Enabled && Model.CustomFieldDefinitions != null)
+                                        {
+                                            foreach (var customField in Model.CustomFieldDefinitions)
+                                            {
+                                                if (customField.Value.IsPublic && Model.CustomFields.ContainsKey(customField.Key.ToString()) && !string.IsNullOrWhiteSpace(Model.CustomFields[customField.Key.ToString()]))
+                                                {
+                                                    var value = Model.CustomFields[customField.Key.ToString()];
+                                                    <dt>@customField.Value.NameLocalized(Request.GetCurrentLang())</dt>
+                                                    if (CustomFieldHelper.IsLink(value))
+                                                    {
+                                                        <dd><a href="@value"><i class="fas fa-paperclip"></i> @Request.GetLocalizedString("CUSTOM_FIELD_VIEW_FILE")</a></dd>
+                                                    }
+                                                    else
+                                                    {
+                                                        <dd><span>@CustomFieldHelper.LocalizeField(value, Request.GetCurrentLang())</span></dd>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    </dl>
+                                </div>
+                            }
+
+                            @if (Model.Visualization.ShowRightSide)
+                            {
+                                <div class="col-xs-12 col-sm-6 profile-categories">
+                                    @if (Model.Visualization.ShowCategories)
+                                    {
+                                        @Html.Localized("SELLER_SUB_CATEGORIES_TITLE", "h4", new { @class = "profile-categories" })
+                                        foreach (var Category in Model.Categories)
+                                        {
+                                            <h5 class="profile-categories-parent">
+                                                <i class="fa fa-chevron-right"></i>
+                                                @Category.Key.Name
+                                            </h5>
+                                            <ul class="profile-categories-sub list-unstyled">
+                                                @foreach (var subCategory in Category.Value)
+                                                {
+                                                    <li>@subCategory.Name</li>
+                                                }
+                                            </ul>
+                                        }
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+
+                    <div class="visible-xs visible-sm">
+                        @Html.Partial("_ProfileHireButton")
+                        @Html.Partial("_ProfileShareButtons")
+                    </div>
+                </div>
+            </div>
+            
+            @if (Model.Visualization.ShowScheduleTimeline)
+            {
+                <div class="row m-b-md">
+                    <div class="col-xs-12">
+                        <div id="schedule-wrapper" class="schedule-wrapper"></div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1451 @@
+ABOUT_LABEL	About	Sobre
+ABOUT_ME_INPUT	About me	Sobre mim
+ABOUT_ME_LABEL	About me	Sobre mim
+ABOUT_TEXT	We are Marketplace, and our goal is to facilitate the connection between buyers who want to hand-pick their sellers, and those sellers who want to see the their customer base increased without deviating focus from what really matters: service quality.	Nós somos o Marketplace, e nosso objetivo é facilitar a conexão entre compradores que desejam escolher vendedores a dedo, e esses vendedores que desejam aumentar sua base de clientes sem perder o foco no que realmente importa: a qualidade do seu serviço.
+ACCEPTED_PAYMENT_METHODS_TEXT	We accept the following credit cards	Aceitamos as seguintes bandeiras
+ACCEPTED_PAYMENT_METHODS_TITLE	Payment Methods	Formas de Pagamento
+ACCOUNT_NOT_FOUND_MESSAGE	Account not found.	Conta não encontrada.
+ACCOUNTABLE_DOCUMENT_NUMBER_LABEL	Document number	CPF
+ACCOUNTABLE_INFO	If you run your business as a Legal Entity, you must inform the accountable person's data (administrative partner). Otherwise, repeat your pesonal data. This is important! If you inform incorrect data, the money of your transactions may be denied and retained by the bank or payment gateway.	Se você opera como Pessoa Física, informe seus próprios dados. Se opera como Pessoa Jurídica, informe os dados do sócio administrador, conforme Contrato Social da empresa. Mas atenção! Se você informar os dados incorretos, poderá não receber o valor das transações.
+ACCOUNTABLE_NAME_LABEL	Full name	Nome completo
+ACCOUNTABLE_TITLE	Accountable or administrative partner	Responsável legal ou sócio administrador
+ACTION_PLAN_INPUT	What is your action plan?	Qual é seu plano de ação?
+ACTION_PLAN_LABEL	Action plan	Plano de ação
+ADD_NEW_PORTFOLIO_ITEM_LINK	Click to add a new item	Clique para adicionar um novo item
+ADD_NEW_PRODUCT_LINK	Click to add a new product	Clique para adicionar um novo produto
+ADD_PORTFOLIO_ITEM_LINK	Add portfolio item	Adicionar item ao portfólio
+ADD_PRODUCT_LINK	Add product	Adicionar produto
+ADDITIONAL_INFO_1_INPUT	CRM/CRO/CRE/Other	CRM/CRO/CRE/Outro
+ADDITIONAL_INFO_1_LABEL	CRM/CRO/CRE/Other	CRM/CRO/CRE/Outro
+ADDITIONAL_INFO_2_INPUT	Experience	Tempo de experiência
+ADDITIONAL_INFO_2_LABEL	Experience	Tempo de experiência
+ADDITIONAL_INFO_TITLE	ADDITIONAL INFORMATION	INFORMAÇÕES ADICIONAIS
+ADDRESS_ADDITIONAL_INFO_INPUT	Complement	Complemento
+ADDRESS_ADDITIONAL_INFO_LABEL	Complement	Complemento
+ADDRESS_CANNOT_BE_GEOCODED	The address could not be found. Please, review your address information.	O endereço não pôde ser encontrado. Por favor, revise as informações.
+ADDRESS_INPUT	Address	Endereço
+ADDRESS_LABEL	Address	Endereço
+ADDRESS_NUMBER_INPUT	Number	Número
+ADDRESS_NUMBER_LABEL	Number	Número
+ADMIN_DASHBOARD_BUYERS_TOTAL	Total buyers count	Total de compradores
+ADMIN_DASHBOARD_ORDERS_AMOUNT	Orders amount	Montante transacionado
+ADMIN_DASHBOARD_ORDERS_FEE	Revenue	Faturamento
+ADMIN_DASHBOARD_ORDERS_TITLE	Orders	Pedidos
+ADMIN_DASHBOARD_ORDERS_TOTAL	Total orders count	Total de pedidos
+ADMIN_DASHBOARD_QUOTES_TITLE	Quotes	Orçamentos
+ADMIN_DASHBOARD_QUOTES_TOTAL	Total quotes sent	Total de pedidos de orçamento
+ADMIN_DASHBOARD_SELLERS_TOTAL	Total sellers count	Total de vendedores
+ADMIN_DASHBOARD_SUBSCRIPTIONS_AMOUNT	Subscriptions amount	Faturamento das assinaturas
+ADMIN_DASHBOARD_SUBSCRIPTIONS_TITLE	Subscriptions	Assinaturas
+ADMIN_DASHBOARD_SUBSCRIPTIONS_TOTAL	Total subscriptions count	Total de assinaturas
+ADMIN_DASHBOARD_USERS_TITLE	Users	Usuários
+ADMIN_MORE_INFO	More info	Mais informações
+AGREE_TERMS_USE_TEXT	By sending this form you agree with the	Ao enviar este formulário você concorda com os
+ALERT_CANCEL_BUTTON	Cancel	Cancelar
+ALERT_CONFIRM_BUTTON	Yes, I do!	Sim, confirmo!
+ALERT_WARNING_TITLE	Warning!	Atenção!
+ALL_RIGHT_TEXT	All right!	Pronto!
+ALTERNATIVE_INPUT	Name that appears on your public profile	Nome que aparece no seu perfil público
+ALTERNATIVE_LABEL	Commercial title	Nome comercial
+ANTIFRAUD_APPROVED	Analisys approved, awaiting payment	Aprovado na análise, aguardando pagamento
+ANTIFRAUD_AWAITING_ANALISYS	Order sent for analisys, awaiting result	Pedido enviado para análise, aguardando retorno
+ANTIFRAUD_DENIED	Analisys denied	Pedido cancelado na análise
+ANTIFRAUD_REQUEST_PENDING	Awaiting for order to be sent for analisys	Aguardando envio do pedido para análise
+APPLICATION_SLOGAN_1	Bringing Buyers and the Best Sellers together	Conectando Compradores aos Melhores Vendedores
+APPLICATION_SLOGAN_2	Find the right seller to get the job done, Right Now!	Encontre o vendedor ideal para realizar o trabalho agora mesmo!
+ARCHIVE_BUTTON	Archive	Arquivar
+ARCHIVED_REQUESTS_BUTTON	Archiveds Requests	Propostas Arquivadas
+ASSOCIATE_PROVIDER_TITLE	Associate your {0} account.	Associe sua conta {0}.
+BACK_BUTTON	Back	Voltar
+BACK_TO_HOME_LINK	Back to home	Voltar para a página inicial
+BANK_ACCOUNT_BRANCH_DV_INPUT	Digit branch	Dígito da agência
+BANK_ACCOUNT_BRANCH_DV_LABEL	Digit branch	Dígito da agência
+BANK_ACCOUNT_BRANCH_INPUT	Branch	Agência
+BANK_ACCOUNT_BRANCH_LABEL	Branch	Agência
+BANK_ACCOUNT_NUMBER_DV_INPUT	Account digit	Dígito da conta
+BANK_ACCOUNT_NUMBER_DV_LABEL	Account digit	Dígito da conta
+BANK_ACCOUNT_NUMBER_INPUT	Account number	Conta
+BANK_ACCOUNT_NUMBER_LABEL	Account number	Conta
+BANK_ACCOUNT_TYPE_INPUT	Account type	Tipo da conta
+BANK_ACCOUNT_TYPE_LABEL	Account type	Tipo da conta
+BANK_INPUT	Bank	Banco
+BANK_LABEL	Bank	Banco
+BANK_ACCOUNT_TITLE	Bank account for receiving transfers	Conta bancária para recebimento
+BANK_ACCOUNT_TEXT	The name and document number must match the ones supplied to the bank when creating the account.	Informe abaixo o mesmo Nome e Documento fornecidos ao banco na criação da conta. Seguindo esta lógica, informe Razão Social e CNPJ para contas bancárias de empresa; mas se a conta bancária for de pessoa física, então informe Nome Completo e CPF do dono da conta. Se você informar os dados incorretos, os recebimentos poderão ser bloqueados pelo banco.
+BANK_ACCOUNT_NAME_INPUT	As supplied to the bank	Como informado ao banco
+BANK_ACCOUNT_NAME_LABEL	Full name or Legal Name	Nome completo ou Razão Social
+BANK_ACCOUNT_DOCUMENT_INPUT	As supplied to the bank	Como informado ao banco
+BANK_ACCOUNT_DOCUMENT_LABEL	PIN or Legal Reg Number	CPF ou CNPJ
+BANNER_ACTION_URL_INPUT	http://www.example.com	http://www.exemplo.com.br
+BANNER_ACTION_URL_LABEL	Action Url	Url do clique
+BANNER_ACTION_URL_TEXT	This is the Url of the page the user will be sent to when they click the banner. You could copy into here the Url of a product or search result.	Esta é a Url da página para onde o usuário será levado ao clicar no banner. Você pode copiar aqui a Url de um produto ou resultado de busca, por exemplo.
+BANNER_DATES_TEXT	These optional dates configure the banner to be automatically shown and/or hidden from your home page.	Estas datas opcionais configuram o banner para que seja automaticamente mostrado e/ou removido do site.
+BANNER_EXPIRES_AT_LABEL	Expires at	Expira em
+BANNER_EXPIRES_BEFORE_START_ERROR	The banner cannot expire before it starts.	O banner não pode expirar antes de começar.
+BANNER_IMAGE_URL_LABEL	Image	Imagem
+BANNER_IMAGE_URL_TEXT	Image size should be 1920x530.	Tamanho ideal da imagem: 1920x530.
+BANNER_STARTS_AT_LABEL	Starts at	Inicia em
+BANNERS_CREATE_TITLE	New banner	Novo banner
+BANNERS_EDIT_TITLE	Edit banner	Editar banner
+BANNERS_TITLE	Banners	Banners
+BEST_SELLERS_TITLE	The best sellers	Os melhores vendedores
+BLOG_LINK	Blog	Blog
+BRAND_LABEL	Brand	Marca
+BUYER_JOIN_BUTTON_1	I'm a buyer	Sou comprador
+BUYER_JOIN_BUTTON_2	I want to join	Quero fazer parte
+BUYERS_LANG_UBIQUITOUS	Buyes	Compradores
+CALL_SELLERS_LINK	I want to increase my customer base!	Quero aumentar minha base de clientes!
+CALL_SELLERS_TITLE	Be a seller at Marketplace	Seja um vendedor no Marketplace
+CANCEL_LABEL	Cancel	Cancelar
+CART_BOLETO_INFO	Use the link(s) below to view and print. You can always check this information again in you account panel, in the "My Orders" section.	Use o(s) link(s) abaixo para abrir e imprimir. Você pode visualizar essa informação a qualquer momento no painel da sua conta, na seção "Meus Pedidos".
+CART_BOLETO_TITLE	Boleto for Payment	Boleto para Pagamento
+CART_BUTTON	Cart	Carrinho
+CART_CHECKOUT_BACK_TO_CORRECT	Turn back to cart to correct errors	Voltar para o carrinho para corrigir os erros
+CART_CHECKOUT_BUTTON	Checkout	Finalizar compra
+CART_CHECKOUT_TITLE	Checkout	Finalizar compra
+CART_COMPLETE_REGISTER_MESSAGE	Complete your registration data	Complete seus dados de cadastro
+CART_CORRECT_ERRORS_TO_PROCEED	There are some problems with your cart. Please correct them before proceeding.	Identificamos alguns problemas no seu carrinho. Por favor, corrija os erros antes de avançar.
+CART_EMPTY_MESSAGE	Empty cart	Seu carrinho está vazio
+CART_ITEM_ADDED_MESSAGE	Product added to cart	Produto adicionado ao carrinho
+CART_ITEM_CHANGE_QUANTITY_BUTTON	Change	Alterar
+CART_ITEM_NO_SHIPPING_URL_LABEL	Download	Baixar aqui
+CART_ITEM_PRODUCT_LABEL	Product	Produto
+CART_ITEM_QUANTITY_LABEL	Quantity	Quantidade
+CART_ITEM_REMOVE_BUTTON	Remove	Remover do carrinho
+CART_ITEM_SHIPPING_LABEL	Shipping	Frete
+CART_ITEM_SOLD_AND_DELIVERED_BY	Sold and delivered by	Vendido e entregue por
+CART_ITEM_RENTAL_PERIOD	Rental period	Período de
+CART_ITEM_RENTAL_PERIOD_UNTIL	until	até
+CART_ITEM_SUBTOTAL_LABEL	Subtotal	Subtotal
+CART_ITEM_TOTAL_LABEL	Total	Valor Total
+CART_ITEM_UNIT_PRICE_LABEL	Unit Price	Valor Unitário
+CART_ITEMS_TOTAL	Items total	Total dos itens
+CART_MORE_PRODUCTS_BUTTON	Add more products	Continuar comprando
+CART_NO_SHIPPING_ADDRESS	It looks like you haven't registered a shipping address. Please complete you profile to view shipping information.	Parece que você ainda não cadastrou um endereço de entrega. Por favor visite seu perfil e complete seu cadastro para visualizar as informações de envio ou frete.
+CART_NOSHIPPING_INFO	Upon completing your order, you'll receive an email with the download details of your digital goods, if any	Ao finalizar a compra, você receberá um email com as informações para download do seus produtos digitais, se houver
+CART_ONSITEPICKUP_ADDRESSES_INFO	These are the places where you'll be able to pickup your orders	Estes são os locais onde você deverá retirar seu pedido
+CART_ONSITEPICKUP_INSTRUCTIONS	Upon completing your purchase, you'll receive an email with instructions to arrange pickup directly with the seller.	Ao final da compra, você receberá um email com orientações para combinar a entrega diretamente com o vendedor.
+CART_PAYMENT_TITLE	Payment	Pagamento
+CART_PROCEED_TO_PAYMENT_OF_AMOUNT	Proceed to payment of	Prosseguir para o pagamento de
+CART_PRODUCT_OUT_OF_STOCK	Product is out of stock	Produto sem estoque para a quantidade informada
+CART_PRODUCTS_LABEL	Products	Total dos produtos
+CART_SHIPPING_ADDRESS_INFO	Choose where you would like your order to be delivered.	Informe o endereço para onde seu pedido deve ser enviado.
+CART_SHIPPING_INFO_TITLE	Shipping/pickup information	Informações de frete/coleta
+CART_SHIPPING_LABEL	Shipping	Total do frete
+CART_SHIPPING_METHOD_LABEL	Shipping method	Método de entrega
+CART_TITLE	Cart	Carrinho
+CART_TOTAL_LABEL	Total	Total do pedido
+CATEGORIES_PROFILE_INVISIBLE_BUTTON	Complete your profile	Complete seu perfil
+CATEGORIES_PROFILE_INVISIBLE_TEXT	Select at least one category for your profile. Without this selection, you'll not be listed in search results and you won't receive any quote requests.	Selecione pelo menos uma categoria que você atende. Sem isso, os clientes não encontrarão seu perfil nas buscas, e você não receberá pedidos de orçamento.
+CATEGORIES_PROFILE_INVISIBLE_TITLE	Your profile is NOT visible	Seu perfil está invisível
+CATEGORY_INPUT	Type	Tipo
+CATEGORY_LABEL	Type	Tipo
+CATEGORY_NAME_LABEL	Name	Nome
+CATEGORY_SELECT	Categories	Categorias
+CHANGE_BUTON	Change	Alterar
+CHANGE_PASSWORD_BUTTON	Change password	Alterar senha
+CHANGE_PASSWORD_LINK	Change password	Alterar senha
+CHANGE_PASSWORD_SUCCESS	Your password has been changed.	Senha alterada com sucesso.
+CHANGE_PASSWORD_TITLE	Change password	Alterar senha
+CHANGES_SAVED_MESSAGE	Changes successfully saved.	Alterações salvas com sucesso.
+CHECKOUT_CONFIRMATION_MESSAGE	Your order was successful.	Seu pedido foi realizado com sucesso.
+CHECKOUT_CONFIRMATION_OFFLINE_PAYMENT_INFO	You chose to pay the seller after you receive or pick-up your order. Use the contact information available in the order details to discuss the next steps with the seller.	Você optou por realizar o pagamento diretamente ao vendedor mediante recebmento ou retirada do produto. Use as informações de contato do vendedor, disponíveis no detalhe do pedido, para combinar os detalhes.
+CHECKOUT_CONFIRMATION_OFFLINE_PAYMENT_TITLE	Offline payment	Pagamento por fora da plataforma
+CHECKOUT_CONFIRMATION_TITLE	Order completed	Pedido concluído
+CHECKOUT_MULTIPLE_SELLERS_INFO	We have divided your order into sub-orders, one per seller involved, so you can track updates separately.	Nós dividimos seu pedido em sub-pedidos, um para cada vendedor envolvido, para que você possa acompanhar atualizações separadamente.
+CHECKOUT_PAY_OFFLINE_BUTTON	Submit order	Fechar o pedido
+CHECKOUT_PAY_OFFLINE_DESCRIPTION	Pay directly to the seller (e.g. in cash)	Pague diretamente para o vendedor (ex. em dinheiro)
+CHECKOUT_PAY_OFFLINE_LABEL	Pay offline	Pague por fora da plataforma
+CHECKOUT_PAY_WITH_BOLETO_BUTTON	Pay with boleto	Pagar com boleto
+CHECKOUT_PAY_WITH_CREDIT_CARD_BUTTON	Pay with credit card	Pagar com cartão de crédito
+CHECKOUT_UPDATES_INFO	You'll receive updates about your order in your email everytime status changes. You can also visit you account panel at any time to check progress.	Você receberá atualizações do seu pedido por email toda vez que houver uma novidade. Você também pode acessar sua conta a qualquer momento para verificar atualizações.
+CHOOSE_LINK_SUCCESS_MESSAGE	Account successfully linked!	Conta associada com sucesso!
+CHOOSE_LINK_TITLE	Pick the Page you would like to associate	Escolha a Página que deseja associar
+CITY_AND_STATE_INPUT	City/State	Cidade/UF
+CITY_AND_STATE_LABEL	City/State	Cidade/UF
+COMPLETE_NAME_INPUT	Full name	Nome completo
+COMPLETE_NAME_LABEL	Full name	Nome completo
+COMPLETE_REGISTER_TEXT	You're almost done. Fill the fields below to complete your registration.	Falta pouco, preencha o restante dos campos para se cadastrar.
+COMPLETE_REGISTER_TITLE	Complete the registration	Complete o registro
+CONFIRM_NEW_PASSWORD_COMPARE_ERROR	The new password and confirmation password do not match.	A nova senha e a confirmação de senha não coincidem.
+CONFIRM_NEW_PASSWORD_INPUT	Confirm new password	Confirme a senha
+CONFIRM_NEW_PASSWORD_LABEL	Confirm new password	Confirme a senha
+CONFIRM_PASSWORD_COMPARE_ERROR	The password and confirmation password do not match.	A senha e confirmação de senha não coincidem.
+CONFIRM_PASSWORD_INPUT	Confirm password	Confirme a senha
+CONFIRM_SIGN_BUTTON	Confirm	Confirmar
+CONFIRM_SIGN_SUCCESS_MESSAGE	Subscribe successfully	Assinatura realizada com sucesso
+CONTACT_TITLE	Contact	Contato
+CREDIT_CARD_CVV_INPUT	CVV	Código de segurança
+CREDIT_CARD_CVV_LABEL	CVV	Código de segurança
+CREDIT_CARD_FULLNAME_INPUT	Fullname	Nome impresso no cartão
+CREDIT_CARD_FULLNAME_LABEL	Fullname	Nome impresso no cartão
+CREDIT_CARD_MONTH_INPUT	Month	Mês
+CREDIT_CARD_MONTH_LABEL	Month	Mês
+CREDIT_CARD_NUMBER_INPUT_V2	Credit card number	Número do cartão
+CREDIT_CARD_NUMBER_LABEL	Credit card number	Número do cartão
+CREDIT_CARD_YEAR_INPUT	Year	Ano
+CREDIT_CARD_YEAR_LABEL	Year	Ano
+CURRENT_PASSWORD_INPUT	Current password	Senha atual
+CURRENT_PASSWORD_LABEL	Current password	Senha atual
+CUSTOMER_SERVICE_TEXT	Customer service	Atendimento ao cliente
+CUSTOMIZE_DOCS_HINT	Upload a PDF file for each document; they'll be open to the visitor in a new tab inside the browser. This is better because it doesn't require any additional software or app to view	Envie um arquivo PDF para cada documento; eles serão abertos para o visitante numa nova aba no próprio navegador; isto é melhor, porque não requer nenhum software ou app adicional do usuário
+CUSTOMIZE_DOCS_LINK	Terms and Policies	Termos e Políticas
+CUSTOMIZE_DOCS_TITLE	Terms and Policies Customization	Personalização de Termos e Políticas
+CUSTOMIZE_MESSAGE_TEMPLATES_LINK	Message templates	Templates de email
+CUSTOMIZE_MESSAGE_TEMPLATES_TITLE	Message templates	Templates de email
+CUSTOMIZE_HINT	Hint	Dica
+CUSTOMIZE_HOME_BENEFITS_HELP	They appear right below the first call to action, and aim to communicate the top 3 reasons why the Buyer should care about your service. Remember: now you're advertising it to the Buyer (not to the Seller profile).	Eles aparecem logo abaixo da primeira chamada na home, e visam comunicar os 3 principais benefícios que justificam porque o Comprador deve se interessar por seu marketplace. Lembre-se: neste momento você está falando com o Comprador (não com o perfil Vendedor).
+CUSTOMIZE_HOME_BENEFITS_HINT	Square images, optimal size is 300x300. Choose meaningful icons, they should clearly communicate the benefits they represent	Imagens quadradas, tamanho de 300x300. Escolha ícones que comuniquem claramente os benefícios que eles representam
+CUSTOMIZE_HOME_BENEFITS_ICON_1_LABEL	Icon 1	Ícone 1
+CUSTOMIZE_HOME_BENEFITS_ICON_2_LABEL	Icon 2	Ícone 2
+CUSTOMIZE_HOME_BENEFITS_ICON_3_LABEL	Icon 3	Ícone 3
+CUSTOMIZE_HOME_BENEFITS_LABEL	Benefits	Benefícios
+CUSTOMIZE_HOME_BG_HELP	Featured in the first section of the page, serving as background for the logo and slogan, as well as for the search form.	Aparece na primeira seção da página, servindo de fundo para a logo, slogan e formulário de busca.
+CUSTOMIZE_HOME_BG_HINT	Large image (1600x900), colorful and attractive, but with enough contrast from the logo and text. Overlaying the picture with transparent black or white is advised	Imagem grande (1600x900), colorida e chamativa, mas com contraste o bastante para boa leitura do slogan. Recomenda-se aplicar uma camada de preto ou branco transparente sobre a imagem
+CUSTOMIZE_HOME_BG_LABEL	Main background	Imagem de fundo principal
+CUSTOMIZE_HOME_LINK	Home	Home
+CUSTOMIZE_HOME_TITLE	Home customization	Personalização da home
+CUSTOMIZE_ICON_HELP	The icon featured in the browser tab, and also the mobile icon when the user marks you as favorite.	O ícone que aparece na aba do navegador, e também o ícone mobile quando o usuário marca seu site como favorito.
+CUSTOMIZE_ICON_HINT	Square image, allows transparent background, optimal size is 512x512	Imagem quadrada, permite fundo transparente, melhor tamanho = 512x512
+CUSTOMIZE_ICON_LABEL	Browser icon	Ícone do navegador
+CUSTOMIZE_IDENTITY_LINK	Identity	Identidade
+CUSTOMIZE_IDENTITY_TITLE	Identity customization	Personalização da identidade
+CUSTOMIZE_LOGO_HELP	You must upload two versions of the logo: one for the home and another for the internal pages. This lets you use a coloured one in the home and a single-color inside, for example. If you want them to be the same, upload the same file in both fields below.	Você deve enviar duas versões da logo: uma para a home e outra para as páginas internas. Isso permite que você use uma colorida na home e uma de cor única nas internas, por exemplo. Se quiser que elas sejam iguais, envie o mesmo arquivo em ambos os campos abaixo.
+CUSTOMIZE_LOGO_HINT	Rectangular image in landscape orientation, allows transparent background, optimal size is 500x150	Imagem retangular em modo paisagem, permite fundo transparente, melhor tamanho = 500x150
+CUSTOMIZE_LOGO_HOME_LABEL	Logo specific for home	Logo específica da home
+CUSTOMIZE_LOGO_INTERNAL_LABEL	Logo for internal pages	Logo das páginas internas
+CUSTOMIZE_LOGO_LABEL	Logo	Logo
+CUSTOMIZE_PRIVACY_POLICY_LABEL	Privacy Policy	Políticas de Privacidade
+CUSTOMIZE_SELLER_BENEFITS_HELP	They appear in the Seller registration page, and aim to reassure the visitor with the top 3 reasons why he should proceed with registration as Seller. Remember: now you're advertising it to the Seller (not to the Buyer profile).	Eles aparecem na página de cadastro do Vendedor, e visam reforçar os 3 principais motivos para o visitante se cadastrar como Vendedor. Lembre-se: agora você está falando com o Vendedor (não com o perfil Comprador).
+CUSTOMIZE_SELLER_BENEFITS_HINT	Square images, optimal size is 300x300. Choose meaningful icons, they should clearly communicate the benefits they represent	Imagens quadradas, tamanho de 300x300. Escolha ícones que comuniquem claramente os benefícios que eles representam
+CUSTOMIZE_SELLER_BENEFITS_ICON_1_LABEL	Icon 1	Ícone 1
+CUSTOMIZE_SELLER_BENEFITS_ICON_2_LABEL	Icon 2	Ícone 2
+CUSTOMIZE_SELLER_BENEFITS_ICON_3_LABEL	Icon 3	Ícone 3
+CUSTOMIZE_SELLER_BENEFITS_LABEL	Benefits	Benefícios
+CUSTOMIZE_SELLER_BENEFITS_TITLE	Seller registration	Cadastro do vendedor
+CUSTOMIZE_SELLER_REGISTRATION_LINK	Seller registration	Cadastro de vendedor
+CUSTOMIZE_SELLER_REGISTRATION_TITLE	Seller registration customization	Personalização do cadastro do Vendedor
+CUSTOMIZE_USE_TERMS_LABEL	Use Terms	Termos de Uso
+DATE_ADDED_LABEL	added	adicionado
+DATE_AT_LABEL	at	em
+DATE_LABEL	Date	Data
+DATE_OF_BIRTH_INPUT	Birth date	Data de nascimento
+DATE_OF_BIRTH_LABEL	Birth date	Data de nascimento
+DELETE	Delete	Excluir
+DELIVERY_TIME_LABEL	Delivery time	Prazo de entrega
+DESCRIPTION_LABEL	Description	Descrição
+DESCRIPTION_PORTFOLIO_ITEM_INPUT	Explain your needs, provide some examples and describe your expectations about the end result.	Explique sua necessidade, liste exemplos e fale sobre sua expectativa para o resultado final.
+DESCRIPTION_PORTFOLIO_ITEM_LABEL	Description	Descrição
+DOCUMENT_NUMBER_ERROR	Document number is invalid.	CPF/CNPJ inválido.
+DOCUMENT_NUMBER_INPUT	Document number	CPF/CNPJ
+DOCUMENT_NUMBER_LABEL	Document number	CPF/CNPJ
+DOCUMENT_NUMBER_INPUT_BUYER	Document number	CPF/CNPJ
+DOCUMENT_NUMBER_LABEL_BUYER	Document number	CPF/CNPJ
+ECOMMERCE_HOME_CATEGORY_ID_LABEL	Product category	Categoria de produtos
+ECOMMERCE_HOME_CATEGORY_ID_TEXT	You'll see a section dedicated to this category, showing some of its most relevant products.	Você verá uma seção na home dedicada a esta categoria, mostrando alguns dos seus produtos mais relevantes.
+ECOMMERCE_HOME_DUPLICATE_CATEGORY_ERROR	This category has already been added.	Esta categoria já foi adicionada.
+ECOMMERCE_HOME_MAX_CATEGORIES_MET	The limit of categories has been met.	Você atingiu o limite de categorias.
+ECOMMERCE_HOME_ORDER_LABEL	Order	Ordem
+ECOMMERCE_HOME_ORDER_TEXT	The order this category appears in relation to the other categories.	A ordem desta categoria em relação às outras.
+ECOMMERCE_HOME_TITLE	Ecommerce Home	Home do Ecommerce
+EDIT_PORTFOLIO_ITEM_LINK	Edit portfolio item	Editar item do portfólio
+EDIT_PRODUCT_LINK	Edit product	Editar produto
+EMAIL_ADDRESS_ERROR	The {0} field is not a valid email address.	O campo {0} não é um endereço de email válido.
+EMAIL_ALREADY_EXISTS_ERROR_MESSAGE	This email has already been used.	Este email já foi usado.
+EMAIL_INPUT	Email	Email
+EMAIL_LABEL	Email	Email
+EXTERNAL_LOGIN_FAILURE_ERROR	Failed to login in with provider	Falha ao fazer login com o provedor
+FACEBOOK_REGEX_ERROR	Facebook url invalid	Link do Facebook inválido
+FEMALE_GENRE_LABEL	Female	Feminino
+FILTER_ONLY_AVATAR_LABEL	Only sellers with a picture	Somente vendedores com foto
+FILTER_ONLY_ONSITE_PICKUP_LABEL	Only products with onsite pickup	Somente produtos com retirada no local
+FILTER_ONLY_SHIPPING_OUT_LABEL	Only products with shipping out	Somente produtos com entrega
+FIND_SELLER_BUTTON	Find the perfect seller	Encontre o vendedor ideal
+FOLLOWERS_LABEL	Followers	Seguidores
+FOOTER_LINKS_LABEL	Quick access	Acesso rápido
+FORGOT_PASSWORD_BOTTOM_TEXT	If you are logged in with Facebook, please recover your password in the social media website.	Se você estiver conectado com o Facebook, por favor, recupere sua senha no site da mídia social.
+FORGOT_PASSWORD_LINK	Forgot my password	Esqueci minha senha
+FORGOT_PASSWORD_SEND_BUTTON	Send	Enviar
+FORGOT_PASSWORD_SUCCESS_TEXT	Success! Check your inbox.	Sucesso! Verifique sua caixa de entrada.
+FORGOT_PASSWORD_TEXT	Don’t worry, we got you covered. Enter your email to recover the password.	Não se preocupe, podemos ajudá-lo. Digite seu email para recuperar a senha.
+FORGOT_PASSWORD_TITLE	Forgot your password?	Esqueceu sua senha?
+GENERAL_QUOTE_BUTTON	Or ask a quote from the entire base	Ou peça um orçamento para toda a base
+GENRE_INPUT	Genre	Gênero
+GENRE_LABEL	Genre	Gênero
+GOOGLEPLUS_REGEX_ERROR	Google+ url invalid	Link do Google+ inválido
+HELP_ME_SEARCH_LINK	Help me finding the best seller for my need	Ajude-me a escolher o melhor vendedor para minha necessidade
+HELP_QUESTION_1	Got questions about marketing your services here?	Tem dúvidas sobre anunciar seus serviços por aqui?
+HELP_QUESTION_2	Want to know more about increasing your customer base?	Quer saber mais sobre como aumentar sua base de clientes?
+HELP_QUESTION_3	Need help with pricing and closing deals?	Precisa de ajuda com precificação e negociação?
+HELP_QUESTION_TITLE	Benefits	Benefícios
+HELP_TITLE	Marketplace can help you!	O Marketplace pode te ajudar!
+HIRE_CONFIRMED_GENERAL_TEXT	Os vendedores compatíveis com seu pedido já foram notificados. Agora é só aguardar as respostas deles.	Os vendedores compatíveis com seu pedido já foram notificados. Agora é só aguardar as respostas deles.
+HIRE_CONFIRMED_SPECIFIC_TEXT	Já notificamos {0} do seu pedido. Agora é só aguardar a resposta.	Já notificamos {0} do seu pedido. Agora é só aguardar a resposta.
+HIRE_CONFIRMED_TITLE	Request sent	Orçamento enviado
+HOME_LINK	Home	Início
+HOME_TITLE	INA Marketplace	INA Marketplace
+HOW_IT_WORKS_LINK	How it works	Como funciona
+HOW_IT_WORKS_TEXT_1	Find the seller that best meets your needs, by filtering throught categories and checking portfolios to assert the quality.	Encontre o vendedor que melhor atende sua necessidade, filtrando pelas categorias e verificando portfólios para certificar a qualidade.
+HOW_IT_WORKS_TEXT_2	Specify exactly what you need, list references and inform the deadline. Request it to one or many sellers, and pick the best cost-benefit.	Especifique exatamente o que você precisa, dê referências e informe os prazos. Envie para um ou vários vendedores, e encontre o melhor custo-benefício.
+HOW_IT_WORKS_TEXT_3	Talk directly to your seller of choice to discuss the details of the arrangement.	Fale diretamente com o vendedor escolhido para acertar os detalhes da prestação do serviço.
+HOW_IT_WORKS_TITLE	Find the right seller in 3 easy steps	Encontre o vendedor certo em 3 passos
+HOW_IT_WORKS_TITLE_1	Prospect sellers	Prospecte os vendedores
+HOW_IT_WORKS_TITLE_2	Request a quote	Peça um orçamento
+HOW_IT_WORKS_TITLE_3	Close the deal	Feche o negócio
+I_M_SELLER_BUTTON	I'm a seller and I want to join Marketplace	Seu vendedor e quero fazer parte do Marketplace
+INSTAGRAM_REGEX_ERROR	Instagram url invalid	Link do Instagram inválido
+INSTALLMENT_OPTION_AMOUNT	{0}x of {1} {2}	{0}x de {1} {2}
+INSTALLMENTS_LABEL	Installments	Parcelamento
+INSTALLMENTS_ORDER_MIN_AMOUNT	You can pay in installments orders greater than {0} {1}.	Você pode parcelar compras a partir de {0} {1}.
+INTEGRATOR_PROFILE_INVISIBLE_BUTTON	Complete you profile	Complete os dados
+INTEGRATOR_PROFILE_INVISIBLE_TEXT_1	You need to complete your data to start selling.	Você precisa completar seus dados para começar a vender.
+INTEGRATOR_PROFILE_INVISIBLE_TITLE	Your profile is NOT visible	Seu perfil está invisível
+INVALID_PHONE_NUMBER	This phone number is invalid. Input the full number, with area code.	Este número de telefone é inválido. Informe o telefone completo, com DDD.
+ITEM_DELETED_MESSAGE	Item successfully deleted.	Item excluído com sucesso.
+JOIN_BUTTON	Register	Cadastrar
+JOIN_FACEBOOK_BUTTON	Login with Facebook	Login com Facebook
+JOIN_FORM_TEXT	Fill out the form below to continue	Preencha o formulário para continuar
+JOIN_TITLE	Join the Marketplace network today!	Junte-se ao Marketplace agora mesmo!
+LABEL	EN-US	PT-BR
+LINK_ACCOUNT_BUTTON	Link account	Associar conta
+LINK_LABEL	Link	Link
+LINKED_TEXT	Account linked	Conta associada
+LINKEDIN_REGEX_ERROR	LinkedIn url invalid	Link do LinkedIn inválido
+LOAD_MORE_TEXT	Load more	Carregar mais
+LOADING_TEXT	Please wait...	Aguarde...
+LOGIN_BUTTON	Login	Entrar
+LOGIN_FAILURE_EMAIL_MESSAGE	It seems that you have already registered with an email and password. Use this data to access your account.	Parece que você já se cadastrou com email e senha. Use estes dados para acessar sua conta.
+LOGIN_FAILURE_MESSAGE	Invalid login attempt.	Tentativa de login inválida.
+LOGIN_FAILURE_NOT_REGISTERED_MESSAGE	Before logging in with Facebook, you must register. Join us!	Antes de fazer login com o Facebook, você precisa se cadastrar. Junte-se a nós agora mesmo!
+LOGIN_FORM_TEXT	Log with your email and password	Acesse com seu email e senha
+LOGIN_INFO_TITLE	LOGIN INFORMATION	INFORMAÇÕES DE LOGIN
+LOGIN_LINK	Login	Login
+LOGIN_TITLE	Log in to your account	Acesse sua conta
+LOGIN_TO_SEARCH	You need to be logged in to view search results. If you don't have an account, create one now!	Você precisa estar logado para ver os resultados da busca. Se você ainda não tem um cadastro, crie um agora mesmo!
+LOGOUT_LINK	Logout	Sair
+MALE_GENRE_LABEL	Male	Masculino
+MISC_AREA_TITLE	They approve Marketplace	Eles usaram e aprovaram
+MONTHLY_TEXT	monthly	mensal
+MY_ACCOUNT_LINK	My account	Minha conta
+MY_ORDERS_BACK_INDEX	Back to my orders	Voltar para meus pedidos
+MY_ORDERS_BOLETO_BARCODE_LABEL	Bar Code	Código de Barras
+MY_ORDERS_BOLETO_INFO	Click on this link to view and print the boleto, or use the barcode below. Please allow up to 2 business days for the bank to clear the payment. If you already paid, you can ignore this message. But if it's been more than 2 business days, get in touch and we'll help you.	Clique no link para acessar e imprimir o boleto, ou use o código de barras abaixo. Lembre-se que o banco pode levar até 2 dias úteis para compensar o pagamento. Se você já pagou o boleto, ignore esta mensagem. Se pagou há mais de 2 dias úteis, entre em contato com a gente para te ajudarmos.
+MY_ORDERS_BOLETO_TITLE	Boleto for Payment	Boleto para Pagamento
+MY_ORDERS_EMPTY	You did not make any order.	Você ainda não fez nenhum pedido.
+MY_ORDERS_LINK	My orders	Meus pedidos
+MY_ORDERS_OFFLINE_PAYMENT_INFO	You chose to pay the seller after you receive or pick-up your order. Use the contact information below to discuss the next steps with the seller.	Você optou por realizar o pagamento diretamente ao vendedor mediante recebmento ou retirada do produto. Use as informações de contato abaixo para combinar os detalhes.
+MY_ORDERS_OFFLINE_PAYMENT_TITLE	Offline payment	Pagamento por fora da plataforma
+MY_ORDERS_ONSITEPICKUP_ADDRESS_INFO	You'll be able to pickup your order is the following address:	Você deverá retirar seu pedido no seeguinte endereço:
+MY_ORDERS_ONSITEPICKUP_ADDRESS_TITLE	Order Pickup	Retirada do Pedido
+MY_PORTFOLIO_TITLE	My portfolio	Meu portfólio
+MY_PROFILE	My profile	Meu perfil
+MY_SALES_BACK_INDEX	Back to my sales	Voltar para minhas vendas
+MY_SALES_EMPTY	You did not make any sale.	Você ainda não fez nenhuma venda.
+MY_SALES_LINK	My sales	Minhas vendas
+MY_SALES_OFFLINE_PAYMENT_INFO	The buyer will pay you upon receiving or picking-up the order. You can use the contact information below to discuss the next steps with the buyer.	O comprador fará o pagamento ao receber ou retirar o pedido. Use as informações de contato abaixo para combinar os detalhes.
+MY_SALES_OFFLINE_PAYMENT_TITLE	Offline payment	Pagamento por fora da plataforma
+MY_STORE_TITLE	My store	Minha loja
+NAME_INPUT	Name	Nome
+NAME_LABEL	Name	Nome
+NEIGHBORHOOD_INPUT	Neighborhood	Bairro
+NEIGHBORHOOD_LABEL	Neighborhood	Bairro
+NEW_HERE_TEXT	New here?	Novo por aqui?
+NEW_IMAGES_PORTFOLIO_ITEM_LABEL	Send images	Enviar imagens
+NEW_PASSWORD_INPUT	New password	Nova senha
+NEW_PASSWORD_LABEL	New password	Nova senha
+NEW_QUOTE_ANSWER_TO_BUYER_MESSAGE_TITLE	You have a new answer for your quote	Você tem uma nova resposta para seu pedido de orçamento
+NEW_QUOTE_ANSWER_TO_SELLER_MESSAGE_TITLE	You have a new answer for your quote	Você tem uma nova resposta para um orçamento
+NEW_QUOTE_EMAIL_BUYER_SUBJECT	Your request has been received	Seu pedido de orçamento foi recebido
+NEW_QUOTE_GROUP_EMAIL_BUYER_SUBJECT	Your request has been sent to the Sellers	Seu pedido de orçamento foi enviado aos Vendedores
+NEW_QUOTE_EMAIL_SUBJECT	You have a new quote request	Você tem um novo orçamento
+NEW_SHIPPING_ADDRESS_BUTTON	Add new shipping address	Adicionar novo endereço de entrega
+NEW_SHIPPING_ADDRESS_TITLE	Add new shipping address	Adicionar novo endereço de entrega
+NEW_SUBSCRIPTION_SUBJECT	Thank you for your purchase!	Obrigado por sua compra!
+NICKNAME_ALREADY_EXISTS_ERROR_MESSAGE	This username has already been used.	Este nome de usuário já foi usado.
+NICKNAME_ERROR	Invalid username.	Nome de usuário inválido.
+NICKNAME_INPUT	Username	Nome de usuário
+NICKNAME_LABEL	Nickname	Nome de usuário
+NO_SHIPPING_ADDRESS	No shipping address has been supplied.	O endereço de entrega não foi informado.
+NO_SHIPPING_DELIVERY_TIME	No shipping, immediate download after purchase	Sem envio, download imediato após a compra
+ON_SITE_PICKUP_DELIVERY_TIME	Must be discussed directly with the seller	Deve ser combinado diretamente com o vendedor
+ON_SITE_PICKUP_CAN_BE_REVIEWED	You'll be able to review the pickup address BEFORE you confirm your order	Você poderá revisar o endereço de retirada ANTES de confirmar o pedido
+OPEN	Open	Abrir
+OPEN_REQUESTS_BUTTON	Open Requests	Propostas Abertas
+OR_TEXT	or	ou
+ORDER_ADDITIONAL_INFO_INPUT	Type a comment	Escreva um comentário
+ORDER_ADDITIONAL_INFO_REQUIRED	Comments required	Comentário é obrigatório
+ORDER_ALREADY_REVIEWED	You have already reviewed this order	Você já avaliou esse pedido
+ORDER_AMOUNT_LABEL	Amount	Valor
+ORDER_AWAITING_DELIVERY_BUYER_SUBJECT	Seu pagamento foi aprovado!	Seu pagamento foi aprovado!
+ORDER_AWAITING_DELIVERY_SELLER_SUBJECT	Pagamento aprovado. Você já pode enviar o(s) produto(s)	Pagamento aprovado. Você já pode enviar o(s) produto(s)
+ORDER_BUYER_DOCUMENT_NUMBER_LABEL	Document number	CPF/CNPJ
+ORDER_BUYER_EMAIL_LABEL	Email	Email
+ORDER_BUYER_LABEL	Buyer	Comprador
+ORDER_BUYER_PHONE_LABEL	Phone	Telefone
+ORDER_BUYER_SHIPPING_ADDRESS_LABEL	Shipping address	Endereço de entrega
+ORDER_CANCELED_BUYER_SUBJECT	Seu pedido foi cancelado pelo vendedor	Seu pedido foi cancelado pelo vendedor
+ORDER_CHANGE_STATUS_CONFIRMATION_MESSAGE	Do you confirm status change for	Confirma mudança de situação para
+ORDER_CHANGE_STATUS_DENIED_MESSAGE	Can not change to this status	Não é possível alterar para essa situação
+ORDER_CHANGE_STATUS_MESSAGE	Successfully changed status	Situação alterada com sucesso
+ORDER_CHANGE_STATUS_TO_BUTTON	Change status to	Mudar situação para
+ORDER_COMPLETED_PAYMENT_BUYER_SUBJECT	Link do material	Link do material
+ORDER_COMPLETED_PAYMENT_SELLER_SUBJECT	Pagamento aprovado.	Pagamento aprovado.
+ORDER_DATE_LABEL	Date	Data
+ORDER_DELIVERED_BUYER_SUBJECT	Seu pedido foi entregue. Conte-nos o que você achou	Seu pedido foi entregue. Conte-nos o que você achou
+ORDER_RETURNED_BUYER_SUBJECT	Seu pedido foi devolvido. Conte-nos o que você achou	Seu pedido foi devolvido. Conte-nos o que você achou
+ORDER_DELIVERY_ON_THE_WAY_BUYER_SUBJECT	Seu pedido já foi enviado. Está quase!	Seu pedido já foi enviado. Está quase!
+ORDER_LABEL	Order	Pedido
+ORDER_MIN_AMOUNT_NOT_MET	The minimum order amount was not met ({0} {1}).	O valor mínimo da compra não foi atingido ({0} {1}).
+ORDER_MIN_BY_SELLER_NOT_MET	The minimum order amount was not met for seller "{0}" ({1} {2}). Add {1} {3} in products to meet the minimum.	O valor mínimo de compra não foi atingido para o vendedor "{0}" ({1} {2}). Adicione {1} {3} em produtos para alcançar o mínimo.
+ORDER_NOT_FOUND_MESSAGE	Order not found	Pedido não encontrado
+ORDER_PROCESSING_PAYMENT_BUYER_SUBJECT	Pedido registrado, processando pagamento	Pedido registrado, processando pagamento
+RENTAL_START_REMINDER_BUYER_SUBJECT	[APP_NAME]: lembrete de início da locação [ORDER_ID]	[APP_NAME]: lembrete de início da locação [ORDER_ID]
+RENTAL_END_REMINDER_BUYER_SUBJECT	[APP_NAME]: lembrete de fim da locação [ORDER_ID]	[APP_NAME]: lembrete de fim da locação [ORDER_ID]
+ORDER_PROCESSING_PAYMENT_SELLER_SUBJECT	Parabéns! Você tem uma nova venda	Parabéns! Você tem uma nova venda
+ORDER_REVIEW_BUYER_TITLE	Buyer review	Avaliação do comprador
+ORDER_REVIEW_DESCRIPTION_INPUT	Comment	Comentário
+ORDER_REVIEW_DESCRIPTION_LABEL	Comment	Comentário
+ORDER_REVIEW_INVALID	You can not review this order	Você não pode avaliar esse pedido
+ORDER_REVIEW_MESSAGE	Order reviewed successfully	Pedido avaliado com sucesso
+ORDER_REVIEW_RATE_INPUT	Rate	Nota
+ORDER_REVIEW_RATE_LABEL	Rate	Nota
+ORDER_REVIEW_SELLER_TITLE	Seller review	Avaliação do vendedor
+ORDER_REVIEW_TITLE	Review	Avaliação
+ORDER_REVIEW_YOUR_TITLE	Your review	Sua avaliação
+ORDER_SELLER_ADDRESS_LABEL	Onsite pickup address	Endereço para retirada
+ORDER_SELLER_EMAIL_LABEL	Email	Email
+ORDER_SELLER_LABEL	Seller	Vendedor
+ORDER_SELLER_PHONE_LABEL	Phone	Telefone
+ORDER_STATUS_AWAITING_DELIVERY	Awaiting delivery	Aguardando envio
+ORDER_STATUS_AWAITING_PICK_UP	Awaiting pick up	Aguardando retirada
+ORDER_STATUS_CANCELED	Canceled order	Pedido cancelado
+ORDER_STATUS_COMPLETED_PAYMENT	Completed payment	Pagamento realizado
+ORDER_STATUS_DELIVERED	Delivered order	Pedido entregue
+ORDER_STATUS_DELIVERY_ON_THE_WAY	Delivery on the way	A caminho (enviado)
+ORDER_STATUS_LABEL	Status	Situação
+ORDER_STATUS_PENDING_PAYMENT	Pending payment	Aguardando pagamento
+ORDER_STATUS_PROCESSED	Processed	Pedido processado
+ORDER_STATUS_PROCESSED_V2	Registrado	Pedido registrado
+ORDER_STATUS_REJECTED	Rejected order	Pedido rejeitado
+ORDER_STATUS_RETURNED	Returned order	Pedido devolvido
+ORDER_STATUS_FINISHED	Order Completed	Pedido concluído
+OTHER_GENRE_LABEL	Other	Outro
+PAGE_FACEBOOK_ERROR_MESSAGE	You must have a Facebook page that is managed by this account.	Você deve ter uma Página do Facebook gerenciada por esta conta.
+PASSWORD_INPUT	Password	Senha
+PASSWORD_LABEL	Password	Senha
+PASSWORD_LENGTH_ERROR	The {0} must be at least {2} characters long.	O campo {0} deve conter pelo menos {2} caracteres.
+PHONE_INPUT	Phone	Telefone (completo com DDD)
+PHONE_LABEL	Phone	Telefone
+PHOTO_UPLOAD_SQUARE_TEXT	Picture thumbnails are automatically cropped to a square format. For optimal results, please upload a square picture.	As miniaturas são automaticamente cortadas para um formato quadrado. Para obter melhores resultados, certifique-se de enviar fotos quadradas.
+PICTURE_LABEL	Avatar	Avatar
+PLAN_AMOUNT_INPUT	Amount	Valor
+PLAN_AMOUNT_LABEL	Amount	Valor
+PLAN_DAYS_INPUT	Days	Recorrência (dias)
+PLAN_DAYS_LABEL	Days	Recorrência (dias)
+PLAN_ENABLED_INPUT	Enabled	Habilitado
+PLAN_ENABLED_LABEL	Enabled	Habilitado
+PLAN_NAME_INPUT	Name	Nome
+PLAN_NAME_LABEL	Name	Nome
+PLAN_NOT_FOUND_MESSAGE	Plan not found	Plano de assinatura não encontrado.
+PLAN_TRIAL_DAYS_INPUT	Trial	Período trial (dias)
+PLAN_TRIAL_DAYS_LABEL	Trial	Período trial (dias)
+PLANS_TITLE	Plans	Planos de assinatura
+PORTFOLIO_ITEM_IMAGES_REQUIRED	Upload at least one picture	Envie ao menos uma imagem
+PORTFOLIO_ITEM_LIMIT_MESSAGE	Number of portfolio items exceeded	Número de itens de portfolio excedido
+PORTFOLIO_ITEM_VIDEO_URL_INVALID	Provide a valid video url. We suggest copying and pasting from your browser.	Informe uma url de vídeo válida. Sugerimos copiar e colar a url do navegador.
+PORTFOLIO_ITEM_VIDEO_URL_REQUIRED	The video url is required	Url do vídeo é obrigatória
+PORTFOLIO_LINK	Portfolio	Portfólio
+POSTAL_EXPRESS_DELIVERY_TIME	Up to 7 business days after payment confirmation	Até 7 dias úteis após confirmação do pagamento
+POSTAL_REGULAR_DELIVERY_TIME	Up to 15 business days after payment confirmation	Até 15 dias úteis após confirmação do pagamento
+PREF_PRICE_LABEL	Lower Price	Menor Preço
+PREF_QUALITY_LABEL	Higher Quality	Maior Qualidade
+PRICE_PORTFOLIO_ITEM_INPUT	Price	Preço
+PRICE_PORTFOLIO_ITEM_LABEL	Price	Preço
+PRIVACY_POLICY_LINK	Privacy policy	Política de privacidade
+PRIVACY_POLICY_TITLE	Privacy policy	Política de privacidade
+PRIVATE_FLEET_SHIPPING_DELIVERY_TIME	Must be discussed directly with the seller	Deve ser combinado diretamente com o vendedor
+PRODUCT_ADD_CART_BUTTON	Add to cart	Adicionar ao carrinho
+PRODUCT_CATEGORIES_SELECT	Category	Categoria
+PRODUCT_CATEGORIES_TITLE	Category	Categoria
+PRODUCT_CATEGORY_INPUT	Category	Categoria
+PRODUCT_CATEGORY_LABEL	Category	Categoria
+PRODUCT_CATEGORY_NAME_LABEL	Name	Nome
+PRODUCT_CHANGES_DALAY_SEARCH	Your changes may take up to 10 minutes to take effect in the search	Suas alterações podem levar até 10 minutos para serem refletidas na busca
+PRODUCT_CUSTOM_ID_LABEL	Custom ID	ID personalizado
+PRODUCT_CUSTOM_ID_TEXT	Use this if you want to track this product using your own Id (e.g. like when you already keep a database).	Use este campo para rastrear o produto com seu próprio código personalizado (ex. se você mantém outro banco de dados ou sistema).
+PRODUCT_DELETE_WHEN_STOCK_ZERO_LABEL	Delete this product automatically when stock reaches zero (the product will no longer exist, being removed even from your admin panel).	Excluir este produto automaticamente quando o estoque chegar a zero (o produto deixa de existir, sendo removido até mesmo do seu painel).
+PRODUCT_DELETED_ERROR_MESSAGE	Product not found	Produto não encontrado
+PRODUCT_DELETED_MESSAGE	Product successfully deleted.	Produto excluído com sucesso.
+PRODUCT_DELIVERY_RANGE_INPUT	Shipment range	Raio de entrega
+PRODUCT_DELIVERY_RANGE_LABEL	Shipment range	Raio de entrega
+PRODUCT_DESCRIPTION_INPUT	Product description	Descrição do produto
+PRODUCT_DESCRIPTION_LABEL	Product description	Descrição do produto
+PRODUCT_DIMENSIONS_LABEL	Dimensions	Dimensões
+PRODUCT_DIMENSIONS_REQUIRED	All product dimensions are required (width, height, length and weight)	Todas as dimensões do produto devem ser informadas (tamanho, altura, comprimento e peso)
+PRODUCT_DOUBLE_FREIGHT_WARNING	You already have a product from another seller in your cart. By adding this product, shipping costs could increase.	Você já tem produtos de outro vendedor no seu carrinho. Se você adicionar este produto, os custos de envio poderão aumentar.
+PRODUCT_FILTER_INPUT	Find a product	Encontre um produto
+PRODUCT_FIND_BUTTON	Find the perfect product	Encontre o produto ideal
+PRODUCT_HEIGHT_INPUT	Height	Altura
+PRODUCT_HEIGHT_LABEL	Height	Altura
+PRODUCT_IMAGES_LABEL	Images	Imagens
+PRODUCT_IMAGES_REQUIRED	Upload at least one picture	Envie ao menos uma imagem
+PRODUCT_LENGTH_INPUT	Length	Comprimento
+PRODUCT_LENGTH_LABEL	Length	Comprimento
+PRODUCT_LIMIT_MESSAGE	Number of products exceeded	Número de produtos excedido
+PRODUCT_NEW_IMAGES_LABEL	Send images	Enviar imagens
+PRODUCT_NO_SHIPPING_METHOD_INPUT	Digital product	Produto digital
+PRODUCT_NO_SHIPPING_METHOD_LABEL	Digital product	Produto digital
+PRODUCT_NO_SHIPPING_NOT_ENABLED	This product is not available for this shipping method	Esse produto não está disponível para este modo de entrega
+PRODUCT_NO_SHIPPING_URL_INPUT	Digital product url	Link do produto digital
+PRODUCT_NO_SHIPPING_URL_INVALID	Digital product url invalid	Link do produto digital é inválido
+PRODUCT_NO_SHIPPING_URL_LABEL	Digital product url	Link do produto digital
+PRODUCT_NO_SHIPPING_URL_REQUIRED	Digital product url required	Link do produto digital é obrigatório
+PRODUCT_ON_SITE_PICKUP_METHOD_INPUT	Onsite pickup	Retirada no local
+PRODUCT_ON_SITE_PICKUP_METHOD_LABEL	Onsite pickup	Retirada no local
+PRODUCT_ON_SITE_PICKUP_NOT_ENABLED	This product is not available for onsite pickup	Esse produto não está disponível para retirada no local
+PRODUCT_PAC_METHOD_INPUT	PAC	PAC
+PRODUCT_PAC_METHOD_LABEL	PAC	PAC
+STORE_PAC_METHOD_LABEL	PAC	PAC
+STORE_SEDEX_METHOD_LABEL	Sedex	Sedex
+PRODUCT_PAC_NOT_ENABLED	This product is not delivered by PAC	Esse produto não é entregue via PAC
+PRODUCT_PAYMENT_INFO_BOLETO_ENABLED	Payment with boleto is available.	Pagamento com boleto está disponível.
+PRODUCT_PAYMENT_INFO_INSTALLMENTS	Pay this product in up to {0} installments of {1} {2}.	Pague este produto em até {0}x de {1} {2}.
+PRODUCT_PRICE_INPUT	Price	Preço
+PRODUCT_PRICE_LABEL	Price	Preço
+PRODUCT_PRIVATE_FLEET_CANNOT_BE_FREE	Free shipping is not allowed.	Frete gratuito não é permitido.
+PRODUCT_PRIVATE_FLEET_METHOD_INPUT	Private fleet	Frota própria/privada
+PRODUCT_PRIVATE_FLEET_METHOD_LABEL	Private fleet	Frota própria/privada
+PRODUCT_PRIVATE_FLEET_NOT_ENABLED	This product is not delivered by private fleet	Esse produto não é entregue via frota privada
+PRODUCT_PRIVATE_FLEET_PARAM_ADD_BUTTON	Add range	Adicionar raio
+PRODUCT_PRIVATE_FLEET_PARAMS_REQUIRED	Enter at least one parameter	Informe ao menos um parâmetro
+PRODUCT_PUBLIC_PAGE_BUTTON	View product	Ver produto
+PRODUCT_SEARCH_FILTERED_BY_SELLER	Showing only products by this seller	Filtrando somente pelos produtos deste vendedor
+PRODUCT_SEARCH_TITLE	Find products	Encontrar produtos
+PRODUCT_SEDEX_METHOD_INPUT	Sedex	Sedex
+PRODUCT_SEDEX_METHOD_LABEL	Sedex	Sedex
+PRODUCT_SEDEX_NOT_ENABLED	This product is not delivered by Sedex	Esse produto não é entregue via Sedex
+PRODUCT_SELLER_NO_SHIPPING	The seller does not deliver this product to your region	O vendedor não entrega este produto na sua região
+PRODUCT_SHIPPING_INPUT	Shipment price	Preço do frete
+PRODUCT_SHIPPING_LABEL	Shipment price	Preço do frete
+PRODUCT_SHIPPING_METHOD_LABEL	Shipping method	Método de entrega
+PRODUCT_SHIPPING_REQUIRED	Check at least one shipping method	Marque pelo menos um método de entrega
+PRODUCT_SPECIFICATIONS_INPUT	Specifications	Especificações técnicas
+PRODUCT_SPECIFICATIONS_LABEL	Specifications	Especificações técnicas
+PRODUCT_STOCK_CURRENT_INPUT	Current stock	Estoque atual
+PRODUCT_STOCK_CURRENT_LABEL	Current stock	Estoque atual
+PRODUCT_RENTAL_STOCK_LABEL	Current stock in rental	Estoque atual em locação
+PRODUCT_STOCK_DESCRIPTION	The product must have at least one unit in stock to appear in the platform. Orders subtract from the stock automatically and, when stock reaches zero, the product will stop showing. You can update stock manually at any time.	O produto deve ter pelo menos uma unidade no estoque para aparecer na plataforma. As compras deduzem o estoque automaticamente e, quando o estoque chegar a zero, o produto deixará de aparecer. Você pode atualizar o estoque manualmente a qualquer momento.
+PRODUCT_STOCK_TITLE	Product stock	Estoque do produto
+PRODUCT_STOCK_UPDATED_INPUT	Amount	Quantidade
+PRODUCT_STOCK_UPDATED_LABEL	Manual update	Atualização manual
+PRODUCT_TITLE_INPUT	Product name	Nome do produto
+PRODUCT_TITLE_LABEL	Product name	Nome do produto
+PRODUCT_VARIANT_INPUT	Select an item	Selecione um item
+PRODUCT_VARIANT_LABEL	Characteristic	Característica
+PRODUCT_VARIANT_NAME_INPUT	E.g. The specific item from the characteristic type (like Green or Yellow for a Color characteristic type)	Ex. O item específico dentro do tipo (como Verde ou Amarelo para um tipo de característica "Cores")
+PRODUCT_VARIANT_NAME_LABEL	Characteristic	Característica
+PRODUCT_VARIANT_ORDER_INPUT	How this characteristic should be ordered in relation to other characteristic in filters	Ordem desta característica em relação a outras, quando em filtros
+PRODUCT_VARIANT_ORDER_LABEL	Order	Ordem
+PRODUCT_VARIANT_SELECT	Characteristic	Característica
+PRODUCT_VARIANT_TYPE_INPUT	Select a type	Selecione um tipo
+PRODUCT_VARIANT_TYPE_LABEL	Characteristic Type	Tipo de Característica
+PRODUCT_VARIANT_TYPE_NAME_INPUT	E.g. Color, Size, Weight, etc.	Ex. Cor, Tamanho, Peso, etc.
+PRODUCT_VARIANT_TYPE_NAME_LABEL	Characteristic Type	Tipo de Característica
+PRODUCT_VARIANT_TYPE_ORDER_INPUT	How this type should be ordered in relation to other types in filters	Ordem deste tipo em relação a outros, quando em filtros
+PRODUCT_VARIANT_TYPE_ORDER_LABEL	Order	Ordem
+PRODUCT_VARIANT_TYPE_SELECT	Type	Tipo
+PRODUCT_VARIANTS_DESCRIPTION	Grade your product according to its characteristics. These will be made available to the buyer as filters in the search form.	Classifique seu produto quanto às suas características específicas. Estas classificações serão disponibilizadas para os compradores como filtros na busca.
+PRODUCT_VARIANTS_LABEL	Product Characteristics	Características do produto
+PRODUCT_WEIGHT_INPUT	Weight	Peso
+PRODUCT_WEIGHT_LABEL	Weight	Peso
+PRODUCT_WIDTH_INPUT	Width	Largura
+PRODUCT_WIDTH_LABEL	Width	Largura
+PRODUCT_STOCK_VARIANT_TYPE_INPUT	Select a characteristic type	Selecione um tipo de característica
+PRODUCT_STOCK_VARIANT_TYPE_LABEL	Stock Characteristic Type	Tipo de Característica do Estoque
+PRODUCT_STOCK_VARIANT_INPUT	Select a characteristic	Selecione uma característica
+PRODUCT_STOCK_VARIANT_LABEL	Stock Characteristic	Característica do Estoque
+PRODUCT_STOCK_VARIANT_STOCK_CURRENT_LABEL	Current stock	Estoque atual
+PRODUCT_STOCK_VARIANT_STOCK_UPDATED_LABEL	Stock updated	Novo estoque
+PRODUCT_STOCK_VARIANT_STOCK_UPDATED_INPUT	Enter the updated amount	Informe a quantidade atualizada para alterar o estoque
+PRODUCT_STOCK_BY_VARIANT_TITLE	Stock Management Mode	Modo do Controle de Estoque
+PRODUCT_STOCK_BY_VARIANT_MESSAGE	Stock management mode by general or by characteristic	Gerencie o seu estoque por quantidades como um todo ou por características
+PRODUCT_GENERAL_STOCK_LABEL	General Stock Management	Controle de Estoque Geral
+PRODUCT_GENERAL_STOCK_DESCRIPTION	Stock with general management	Estoque gerenciado como um todo
+PRODUCT_STOCK_BY_VARIANT_LABEL	Stock By Characteristic Management	Controle de Estoque por Característica
+PRODUCT_STOCK_BY_VARIANT_DESCRIPTION	Stock by characteristic management	Estoque gerenciado por característica
+PRODUCTS_FOUND_COUNT	products found	produtos encontrados
+PRODUCTS_FROM_SELLER	Products from this seller	Produtos deste vendedor
+PRODUCTS_FROM_SELLER_EMPTY	This seller doesn't have any product available at this time.	Este vendedor não tem nenhum produto disponível no momento.
+PRODUCTS_LIMIT_REACHED	You have reached the limit of products for your store.	Você atingiu o limite de produtos da sua loja.
+PRODUCTS_RELATED_OTHER	Related products	Relacionados
+PRODUCTS_RELATED_SAME_SELLER	More from this seller	Mais deste vendedor
+PRODUCTS_TITLE	Products	Produtos
+PROFILE_DEFAULT_DESCRIPTION_TEXT	Acesse meu perfil na plataforma Marketplace. Veja meu portfólio e peça um orçamento agora mesmo!	Acesse meu perfil na plataforma Marketplace. Veja meu portfólio e peça um orçamento agora mesmo!
+PROFILE_INVISIBLE_BUTTON	Make your profile visible	Torne seu perfil visível
+PROFILE_INVISIBLE_TEXT	You can input your info and check out your public profile, but you do not appear on search results yet, and you are not able to share your page. Change this right now by making your profile visible.	Você pode cadastrar suas informações e verificar com ficaria seu perfil público, mas você ainda não aparece nos resultados da busca nem pode compartilhar sua página. Mude isso agora mesmo tornando seu perfil visível.
+PROFILE_INVISIBLE_TITLE	Your profile is NOT visible	Seu perfil está invisível
+PROFILE_URL_LABEL	Profile url	Perfil
+QUOTE_ADDRESS_LABEL	Your address (to get closer sellers)	Seu endereço (para conseguir vendedores próximos)
+QUOTE_ANSWER_POST_BUTTON	Send	Enviar
+QUOTE_ANSWER_PRICE_INPUT	Type the amount (optional)	Informe ou atualize o valor (opcional)
+QUOTE_ANSWER_PRICE_LABEL	Quote Price	Preço da Cotação
+QUOTE_ANSWER_TEXT_INPUT	Try to be specific.	Procure ser claro e específico.
+QUOTE_ANSWER_TEXT_LABEL	Your answer	Sua resposta
+QUOTE_BUYER_LABEL	Client	Cliente
+QUOTE_CONTINUE_BUDGED_BUTTON	Continue	Continuar
+QUOTE_DATE_INPUT	Max date when you need it done	Data máxima quando precisa do serviço pronto
+QUOTE_DATE_LABEL	Date	Data
+QUOTE_DESCRIPTION_INPUT	Be as specific as possible so the Seller can return you an accurate quote.	Seja o mais específico possível para que o vendedor possa lhe retornar um orçamento preciso.
+QUOTE_DESCRIPTION_LABEL	Description	Descrição
+QUOTE_INPUT	What is your budget?	Qual é seu orçamento disponível?
+QUOTE_LATEST_ANSWER_ACTION_ANSWER	Answer	Responder
+QUOTE_LATEST_ANSWER_ACTION_SEE_SELLERS	View sellers	Ver os vendedores
+QUOTE_LATEST_ANSWER_ACTION_SEE_ALL	See all	Ver todas
+QUOTE_LATEST_ANSWER_LABEL	Latest answer	Última resposta
+QUOTE_LATEST_ANSWER_NON_EXISTENT	No answer for this quote.	Nenhuma resposta para este orçamento.
+QUOTE_LINK	Quotes	Orçamentos
+QUOTE_MAX_BUDGET_LABEL	Available budget	Orçamento máximo disponível
+QUOTE_MAX_BUDGET_SIMPLE_LABEL	Max budget	Máximo disponível
+QUOTE_NO_SELLERS_ERROR_MESSAGE	Unfortunately, we do not have any sellers that can fulfill your request at the moment. Try changing the filters, or get in touch with us at hello@marketplace.com	Infelizmente, não temos nenhum vendedor que possa atender seu pedido no momento. Tente ajustar os filtros, ou entre em contato com a gente no contato@marketplace.com
+QUOTE_PREFERENCE_LABEL	Preference for quality or price	Preferência por qualidade ou preço
+QUOTE_PREFERENCE_SIMPLE_LABEL	Preference	Preferência
+QUOTE_SELLER_STEP_1_TEXT	Fill out the application below to complete your request.	Preencha os campos abaixo para concluir a solicitação.
+QUOTE_SELLER_TITLE	Get a quote	Solicitar orçamento
+QUOTE_SEND_BUTTON	Send	Enviar
+QUOTE_TITLE_INPUT	Quote title	Escolha um título que resuma bem o pedido
+QUOTE_TITLE_LABEL	Quote title	Título do pedido
+RANGE_ERROR	The {0} field must be between {1} and {2}.	O campo {0} deve ter valor entre {1} e {2}.
+REGISTER_FACEBOOK_BUTTON	Register with Facebook	Cadastre-se com Facebook
+REGISTER_LINK	Offer your services	Oferte seus serviços
+RELINK_ACCOUNT_BUTTON	Relink account?	Reassociar conta?
+REMOVE_BUTTON	Remove	Remover
+REMOVE_FILTER	Remove filter	Remover filtro
+REMOVE_LINK_ERROR_MESSAGE	Failed to unlink the account	Falha ao remover a conta associada
+REMOVE_LINK_SUCCESS_MESSAGE	Account link successfully removed!	Conta associada removida com sucesso!
+REOPEN_BUTTON	Reopen	Reabrir
+REQUIRED_ERROR	The {0} field is required.	O campo {0} é obrigatório.
+RESET_NOT_PASSWORD_ERROR_MESSAGE	This account does not login with a password.	Essa conta não faz login com senha.
+RESET_PASSWORD_BUTTON	Reset	Redefinir
+RESET_PASSWORD_PROCEED_LOGIN	Proceed to login page	Prossiga para a página de login.
+RESET_PASSWORD_SUBJECT	Reset your password	Redefina sua senha
+RESET_PASSWORD_SUCCESS_TEXT	Success!	Sucesso!
+RESET_PASSWORD_TITLE	Reset your password	Redefina sua senha
+SALE_LABEL	Sale	Venda
+SAVE_CHANGES_BUTTON	Save	Salvar
+SAVE_PORTFOLIO_ITEM_BUTTON	Save	Salvar
+SEARCH_RESULTS_NO_FACETS	No filters available for this search	Sem filtros para esta busca
+SEARCH_SELLER_PROFILE_BUTTON	view portfolio	ver portfólio
+SEARCH_TITLE	Find sellers	Encontrar vendedores
+SELLER_ADDRESS_NO_LOCATION	We were not able to calculate shipping costs for "{0}" because this seller does not have a shipping location defined.	Não conseguimos calcular os custos de envio para "{0}" porque este vendedor não definiu um local de origem para envio.
+SELLER_FILTER_INPUT	Find a seller	Encontre um vendedor
+SELLER_FOLLOWERS_COUNT	followers	seguidores
+SELLER_JOIN_BUTTON_1	I'm a seller	Sou vendedor
+SELLER_JOIN_BUTTON_2	I want to join	Quero fazer parte
+SELLER_NOT_VISIBLE_TEXT	The sellers's profile is not visible	O perfil deste vendedor não está visível
+SELLER_PRODUCTS_SEE_ALL	See all	Ver todos
+SELLER_QUOTE_BUTTON	Ask a quote	Peça um orçamento
+SELLER_SUB_CATEGORIES_TITLE	Categories	Categorias
+SELLER_TITLE	Seller	Vendedor
+SELLER_WANNA_SELL_TOO	I want to sell too	Também quero anunciar
+SELLER_SELECT	Seller	Vendedor
+SELLER_INPUT	Seller	Vendedor
+SELLERS_FOUND_COUNT	sellers found	vendedores encontrados
+SELLERS_LANG_UBIQUITOUS	Sellers	Vendedores
+SEND_REVIEW_BUTTON	Send review	Enviar avaliação
+SHIPPING_ADDRESS_NO_LOCATION	We were not able to calculate shipping costs because your address could not be geolocated (determine lat lng coordinates). Please update your address.	Não conseguimos calcular os custos de envio porque seu endereço não pode ser geolocalizado (encontrar coordenadas geográficas). Por favor, atualize seu endereço.
+SHIPPING_METHOD_NO_SHIPPING	Download	Download
+SHIPPING_METHOD_ON_SITE_PICKUP	Onsite pickup	Retirada no local
+SHIPPING_METHOD_POSTAL_EXPRESS	Postal Express	Sedex
+SHIPPING_METHOD_POSTAL_REGULAR	Postal Regular	PAC
+SHIPPING_METHOD_PRIVATE_FLEET	Private fleet	Frota própria/privada
+SIGN_BUTTON	Subscribe now	Assine agora
+SIGN_MODE_1_TEXT	{1}{0} charged to your Credit Card, once a year	Cobrança anual de {1} {0} no seu Cartão de Crédito
+SIGN_MODE_1_TITLE	ANNUAL MEMBERSHIP	ASSINATURA ANUAL
+SIGN_MODE_2_TEXT	{1}{0} charged to your Credit Card, every three months	Cobrança trimestral de {1} {0} no seu Cartão de Crédito
+SIGN_MODE_2_TITLE	QUATERLY MEMBERSHIP	ASSINATURA TRIMESTRAL
+SIGN_MODE_3_TEXT	{1}{0} charged to your Credit Card, per month	Cobrança mensal de {1} {0} no seu Cartão de Crédito
+SIGN_MODE_3_TITLE	MONTHLY MEMBERSHIP	ASSINATURAL MENSAL
+SIGN_TITLE	Make your profile visible!	Torne seu perfil visível!
+SOCIAL_MEDIA_TITLE	Social media	Mídias sociais
+STOCK	Stock	Estoque
+STORE_LINK	My store	Minha loja
+STORE_NO_SHIPPING	The seller does not deliver to your region	O vendedor não entrega na sua região
+STORE_NO_SHIPPING_NOT_SUPPORTED	Shipping method not supported in single freight per seller mode	Método de entrega não suportado no modo de frete único por vendedor
+STORE_ON_SITE_PICKUP_METHOD_INPUT	Orders are available for onsite pickup	As compras podem ser retiradas no local
+STORE_ON_SITE_PICKUP_METHOD_LABEL	Onsite pickup	Retirada no local
+STORE_ON_SITE_PICKUP_NOT_ENABLED	On-site pikcup is not available for this seller	Este vendedor não aceita retirada no local
+STORE_PAC_NOT_SUPPORTED	Brazilian PAC is not supported in single freight per seller mode	PAC não é suportado no modo de frete único por vendedor
+STORE_PRIVATE_FLEET_NOT_ENABLED	Private fleet not available for this seller	Este vendedor não realiza envio dos produtos por frota privada
+STORE_SEDEX_NOT_ENABLED	Sedex shipping not available for this seller	Este vendedor não realiza envio dos produtos por Sedex
+STORE_PAC_NOT_ENABLED	PAC shipping not available for this seller	Este vendedor não realiza envio dos produtos por PAC
+STORE_SEDEX_NOT_SUPPORTED	Brazilian Sedex is not supported for single freight per seller	Sedex não é suportado no modo de frete único por vendedor
+STORE_SETTINGS_TITLE	Store settings	Configurações da loja
+STORE_SINGLE_FREIGHT_METHOD_INPUT	For delivery, I charge a single freight amount for each order	Para entrega, cada compra gera um valor de frete unificado
+STORE_SINGLE_FREIGHT_METHOD_LABEL	Single freight	Frete único
+STORE_SINGLE_FREIGHT_PARAM_ADD_BUTTON	Add range	Adicionar raio
+STORE_SINGLE_FREIGHT_PARAMS_REQUIRED	Enter at least one parameter	Informe ao menos um parâmetro
+STRING_LENGTH_ERROR	The field {0} must be a string with a maximum length of {1}.	O campo {0} deve conter no máximo {1} caracteres.
+STRING_LENGTH_WITH_MIN_ERROR	The field {0} must be a string with a maximum length of {1} and minimun length of {2}.	O campo {0} deve conter de {2} a {1} caracteres.
+SUB_CATEGORIES_INPUT	Subcategory	Subcategoria
+SUB_CATEGORIES_LABEL	Subcategory	Subcategoria
+SUB_CATEGORIES_SELECT	Subcategories	Subcategorias
+SUB_CATEGORY_NAME_LABEL	Name	Nome
+SUBSCRIPTION_LINK	My subscription	Minha assinatura
+SUBSCRIPTION_SUCCESS_MESSAGE	Your subscription is being processed. We will send you a confirmation email as soon as the subscription process is complete.	Sua assinatura está sendo processada. Lhe enviaremos um email de confirmação assim que o processamento for concluído.
+SUBSCRIPTION_TITLE	My subscription	Minha assinatura
+SUBSCRIPTIONS_LANG_UBIQUITOUS	Subscriptions	Assinaturas
+SUFFIX_ADDITIONAL_INFO_2_TEXT	Experience:	Experiência:
+TERMS_USE_LINK	Terms of use	Termos de uso
+TITLE_PORTFOLIO_ITEM_INPUT	Title	Título
+TITLE_PORTFOLIO_ITEM_LABEL	Title	Título
+UNSUBSCRIBE_BUTTON	Unsubscribe	Cancelar assinatura
+UNSUBSCRIBE_SUCCESS_MESSAGE	Unsubscribe successfully	Assinatura cancelada com sucesso
+UPDATED_TEXT	updated in	atualizado em
+UPLOAD_ERROR	An error occurred while uploading!	Ocorreu um erro ao fazer o upload!
+VIDEO_URL_PORTFOLIO_ITEM_INPUT	Paste the video url here	Cole a url do vídeo aqui
+VIDEO_URL_PORTFOLIO_ITEM_LABEL	Use a video	Use um vídeo
+ZIPCODE_INPUT	Zip code	CEP
+ZIPCODE_LABEL	Zip code	CEP
+SELLER_PROFILE_INCOMPLETE_NO_QUOTE	This seller has not yet completed their profile and are not able to receive quote requests.	Este vendedor ainda não completou seu perfil e não pode receber pedidos de orçamento.
+CHECKOUT_BUYER_GATEWAY_NOT_REGISTERED	Your account is not yet fully registered. Go your "My Account" page and save your profile again.	O registro da sua conta ainda não foi concluído. Visite a página "Minha Conta" e salve novamente seu perfil.
+CHECKOUT_BUYER_NO_DOCUMENT	You didn't register your document number.	Você ainda não cadastrou seu CPF/CNPJ.
+CHECKOUT_BUYER_NOT_ENABLED	Your account is not enabled for some reason. Please, contact our support team.	Sua conta está desabilitada por alguma razão. Por favor, entre em contato com nosso suporte.
+CHECKOUT_BUYER_NO_FULL_NAME	You didn't register your full name.	Ainda não temos seu nome completo.
+CHECKOUT_BUYER_NO_PHONE	You didn't register your phone number, or supplied an invalid one.	Você ainda não cadastrou seu telefone, ou o telefone informado é inválido.
+PRODUCT_DETAILS_OUT_OF_STOCK	This product is out of stock.	Este produto está fora de estoque.
+PROFILE_CONTACT_VIEW_ON_MAP	View on map	Ver no mapa
+PROFILE_CONTACT_DIRECTIONS	Get directions	Direções
+SEARCH_SORT_MOST_RELEVANT	Most relevant	Mais relevantes
+SEARCH_SORT_LOWER_DISTANCE	Distance	Distância
+SEARCH_SORT_LOWER_PRICE	Lower price	Menor preço
+SEARCH_SORT_HIGHER_PRICE	Higher price	Maior preço
+SEARCH_SORT_ALPHABETICAL	A to Z	A a Z
+SEARCH_SORT_NEWER	Newer	Mais novos
+INSTALLMENTS_COUNT	Installment(s)	Parcela(s)
+CLOSE_QUOTE	Close quote request	Fechar pedido de orçamento
+CLOSE_QUOTE_DEAL_WON	Deal won	Ganho
+CLOSE_QUOTE_DEAL_LOST	Deal lost	Perdido
+QUOTE_CLOSED	Quote request closed	Pedido de orçamento fechado
+QUOTE_CLOSED_DEAL_WON	Deal won	Ganho
+QUOTE_CLOSED_DEAL_LOST	Deal lost	Perdido
+QUOTE_CLOSED_DEAL_UNKNOWN	Unknown	Desconhecido
+QUOTE_ATTACHMENT_LABEL	Attachment	Anexo
+QUOTE_ATTACHMENT_INFO	You can upload a file of up to 5MB	Você pode enviar um arquivo de até 5MB
+QUOTE_CATEGORY_LABEL	Category	Categoria
+QUOTE_CATEGORY_INFO	Select the category of Sellers to receive your request	Escolha a categoria de Vendedores que receberão seu pedido
+QUOTE_ATTACHMENT_CLICK_TO_OPEN	Click to open	Clique para abrir
+SELLER_PROFILE_INVISIBLE	This profile is not visible	Este perfil não está visível
+FIND_OTHER_SELLERS	Find other sellers	Encontre outros vendedores
+SELLER_JOIN_BUTTON_FULL	Seller registration	Cadastro de vendedor
+BUYER_JOIN_BUTTON_FULL	Buyer	Comprador
+PRODUCT_MIN_RENTAL_PERIOD	Minimum period	Período mínimo
+PRODUCT_MAX_RENTAL_PERIOD	Maximum period	Período máximo
+PRODUCT_MIN_NOTICE_PERIOD	Minimum notice	Mínimo aviso prévio
+PRODUCT_AVAILABILITY_WARNING_LABEL	Availability warning	Limite de disponibilidade
+PRODUCT_AVAILABILITY_WARNING_INPUT	Type a message (optional) that will be displayed in the product page as a warning. Use this if you want to tell customers about things like limited availability.	Digite uma mensagem (opcional) que será mostrada na página do produto como um aviso. Use isso caso queira informar consumidores sobre coisas como disponibilidade limitada.
+PRODUCT_CHARGE_DOUBLE_SHIPPING_LABEL	Charge double shipping	Cobrar frete de devolução
+RENTAL_PERIOD_HOURS_LABEL	Hours	Horas
+RENTAL_PERIOD_DAYS_LABEL	Days	Dias
+RENTAL_PERIOD_MONTHS_LABEL	Months	Meses
+PRODUCT_RENTAL_TITLE		Locação	Rental
+PRODUCT_RENTAL_DESCRIPTION	Define the settings for rental of this product.	Configure abaixo os parâmetros de locação do produto.
+PRODUCT_DIMENSIONS_TITLE	Product dimensions	Dimensões do produto
+PRODUCT_DIMENSIONS_DESCRIPTION	This information is specially important if you ship this product through postal services. Shipping is computed automatically at the moment of the purchase based on these values.	Estas definições são especialmente importantes se você envia o produto pelos Correios (PAC ou Sedex). O frete é calculado automaticamente pelos correios no momento da compra, e toma estes dados como base.
+PRODUCT_MIN_NOTICE_TEXT	Use this field if you need to be notified in anticipation about the rental request.	Use este campo se você precisa ser informado com alguma antecedência sobre o pedido de locação.
+PRODUCTS_IN_CART	product(s) in cart.	produto(s) no carrinho.
+PROCEED_TO_CHECKOUT	Proceed to checkout	Fechar compra
+CHECK_AVAILABILITY	Check availability	Validar disponibilidade
+CHECKING_AVAILABILITY	Checking availability...	Validando disponibilidade...
+RENTAL_FROM_DATE	Rent from	Alugar a partir de
+RENTAL_UNTIL_DATE	Rent until	Alugar até
+RENTAL_FOR_A_PERIOD_OF	For a period of	Por um período de
+CLICK_PICK_DATE	Click and pick a date	Clique e selecione
+WARNING	Warning	Atenção
+APP_NAME_VARIABLE_DESCRIPTION	Application name	Nome do seu site
+APP_URL_VARIABLE_DESCRIPTION	Application url	Url do seu site
+CUSTOMER_SERVICE_EMAIL_VARIABLE_DESCRIPTION	Customer service email	Email do seu SAC
+BUYER_NAME_VARIABLE_DESCRIPTION	Buyer name	Nome do comprador
+SELLER_NAME_VARIABLE_DESCRIPTION	Seller name	Nome do vendedor
+ORDER_ID_VARIABLE_DESCRIPTION	Order number	Número do pedido
+PRODUCT_LINKS_VARIABLE_DESCRIPTION	Product links	Links dos produtos
+SELLER_EMAIL_VARIABLE_DESCRIPTION	Seller email	Email do vendedor
+SHIPPING_METHOD_VARIABLE_DESCRIPTION	Shipping method	Tipo de frete
+SELLER_PHONE_VARIABLE_DESCRIPTION	Seller phone	Telefone do vendedor
+RENTAL_START_DATE_VARIABLE_DESCRIPTION	Rental start date	Date de início da locação
+RENTAL_END_DATE_VARIABLE_DESCRIPTION	Rental end date	Date final da locação
+ORDER_COMPLETED_PAYMENT_BUYER_MESSAGE_TITLE	Buyer, payment completed	Comprador, pagamento identificado
+ORDER_COMPLETED_PAYMENT_BUYER_MESSAGE_DESCRIPTION	Email to the Buyer notifying that the payment has been confirmed.	Email para o Comprador notificando que o pagamento foi confirmando.
+QUOTE_ID_VARIABLE_DESCRIPTION	Quote number	Número do orçamento
+QUOTE_TITLE_VARIABLE_DESCRIPTION	Quote title	Assunto do orçamento
+QUOTE_GROUP_ID_VARIABLE_DESCRIPTION	Quote group number	Número do grupo de orçamentos
+QUOTE_GROUP_URL_VARIABLE_DESCRIPTION	Quote group url	Link do grupo de orçamentos
+PASSWORD_URL_VARIABLE_DESCRIPTION	Set password url	Link para cadastro de senha
+QUOTE_URL_VARIABLE_DESCRIPTION	Quote url	Link do orçamento
+LOGIN_URL_VARIABLE_DESCRIPTION	Login url	Link para login
+NEW_QUOTE_ANSWER_BUYER_MESSAGE_TITLE	Buyer, new quote answer	Comprador, nova resposta no orçamento
+NEW_QUOTE_ANSWER_BUYER_MESSAGE_DESCRIPTION	Email to the Buyer notifying them that a new answer has been posted to the quote request.	Email para o Comprador notificando que uma nova resposta foi postada no pedido de orçamento.
+NEW_QUOTE_ANSWER_SELLER_MESSAGE_TITLE	Seller, new quote answer	Vendedor, nova resposta no orçamento
+NEW_QUOTE_ANSWER_SELLER_MESSAGE_DESCRIPTION	Email to the Seller notifying them that a new answer has been posted to the quote request.	Email para o Vendedor notificando que uma nova resposta foi postada no pedido de orçamento.
+NEW_QUOTE_BUYER_MESSAGE_TITLE	Buyer, quote request registered	Comprador, pedido de orçamento registrado
+NEW_QUOTE_BUYER_MESSAGE_DESCRIPTION	Email to the Buyer notifying them that their quote requested has been registered and sent to the Sellers.	Email para o Comprador notificando que o pedido de orçamento foi registrado e encaminhado ao Vendedor.
+NEW_QUOTE_GROUP_BUYER_MESSAGE_DESCRIPTION	Email to the Buyer notifying them that their quote requested has been registered and sent to all the Sellers in the database.	Email para o Comprador notificando que o pedido de orçamento foi registrado e encaminhado a todos os Vendedores da base.
+NEW_QUOTE_GROUP_BUYER_MESSAGE_TITLE	Buyer, quote group request registered	Comprador, grupo de pedidos de orçamento registrado
+NEW_QUOTE_SELLER_MESSAGE_TITLE	Seller, new quote request	Vendedor, novo pedido de orçamento
+NEW_QUOTE_SELLER_MESSAGE_DESCRIPTION	Email to the Seller notifying them of a new quote request.	Email para o Vendedor notificando de um novo pedido de orçamento.
+SHIPPING_ADDRESS_VARIABLE_DESCRIPTION	Buyer shipping address	Endereço de entrega do comprador
+ORDER_LINK_VARIABLE_DESCRIPTION	Order link	Link do pedido
+ORDER_AWAITING_DELIVERY_BUYER_MESSAGE_TITLE	Buyer, order awaiting delivery	Comprador, pedido aguardando entrega
+ORDER_AWAITING_DELIVERY_BUYER_MESSAGE_DESCRIPTION	Email to the Buyer notifying that the order is now awaiting delivery or pickup.	Email para o Comprador notificando que o pedido está aguardando envio ou retirada.
+ORDER_AWAITING_DELIVERY_SELLER_MESSAGE_TITLE	Seller, order awaiting delivery	Vendedor, pedido aguardando entrega
+ORDER_AWAITING_DELIVERY_SELLER_MESSAGE_DESCRIPTION	Email to the Seller notifying that the order should be delivered or readied for pickup.	Email para o Vendedor notificando que o pedido deve ser entregue ou preparado para retirada.
+ORDER_AMOUNT_VARIABLE_DESCRIPTION	Order amount	Valor total do pedido
+ORDER_PRODUCTS_VARIABLE_DESCRIPTION	Order products	Produtos do pedido
+ORDER_CANCEL_EXPLANATION_VARIABLE_DESCRIPTION	Order cancel explanation	Motivo do cancelamento do pedido
+ORDER_CANCELED_BUYER_MESSAGE_TITLE	Buyer, order canceled	Comprador, pedido cancelado
+ORDER_CANCELED_BUYER_MESSAGE_DESCRIPTION	Email to the Buyer notifying that the order has been cancelled for some reason.	Email para o Comprador notificando que o pedido foi cancelado por algum motivo.
+ORDER_COMPLETED_PAYMENT_SELLER_MESSAGE_TITLE	Seller, order payment completed	Vendedor, pagamento do pedido concluído
+ORDER_COMPLETED_PAYMENT_SELLER_MESSAGE_DESCRIPTION	Email to the Seller notifying that the payment has been confirmed for an order	Email para o Vendedor notificando que o pagamento de um pedido foi identificado.
+ORDER_DELIVERED_BUYER_MESSAGE_TITLE	Buyer, order delivered	Comprador, pedido entregue
+ORDER_DELIVERED_BUYER_MESSAGE_DESCRIPTION	Email to the buyer notifying that the order has been fully delivered.	Email para o Comprador notificando que o pedido foi entregue.
+ORDER_RETURNED_BUYER_MESSAGE_TITLE	Buyer, order returned	Comprador, pedido devolvido
+ORDER_RETURNED_BUYER_MESSAGE_DESCRIPTION	Email to the buyer notifying that the order has been fully returned.	Email para o Comprador notificando que o pedido foi devolvido.
+ORDER_DELIVERY_ON_THE_WAY_BUYER_MESSAGE_TITLE	Buyer, delivery on the way	Comprador, pedido a caminho
+ORDER_DELIVERY_ON_THE_WAY_BUYER_MESSAGE_DESCRIPTION	Email to the Buyer notifying that the order is on its way to the specified address.	Email para o Comprador notificando que o pedido está a caminho do endereço informado.
+ORDER_STATUS_VARIABLE_DESCRIPTION	Order status	Situação do pedido
+ORDER_PROCESSING_PAYMENT_BUYER_MESSAGE_TITLE	Buyer, order received	Comprador, pedido recebido
+ORDER_PROCESSING_PAYMENT_BUYER_MESSAGE_DESCRIPTION	Email to the Buyer notifying that the order has been received and is now being processed.	Email para o Comprador notificando que o pedido foi recebido e está sendo processado.
+RENTAL_START_REMINDER_BUYER_MESSAGE_TITLE	Buyer, rental start reminder	Comprador, lembrete de início de locação
+RENTAL_START_REMINDER_BUYER_MESSAGE_DESCRIPTION	Email to the Buyer notifying that the rental will start soon.	Email para o Comprador notificando que a locação irá iniciar em breve.
+RENTAL_END_REMINDER_BUYER_MESSAGE_TITLE	Buyer, rental end reminder	Comprador, lembrete de fim de locação
+RENTAL_END_REMINDER_BUYER_MESSAGE_DESCRIPTION	Email to the Buyer notifying that the rental will end soon.	Email para o Comprador notificando que a locação irá terminar em breve.
+ORDER_OFFLINE_INSTRUCTIONS_VARIABLE_DESCRIPTION	Sale offline instructions	Instruções para venda fora da plataforma
+ORDER_PROCESSING_PAYMENT_SELLER_MESSAGE_TITLE	Seller, new order	Vendedor, novo pedido
+ORDER_PROCESSING_PAYMENT_SELLER_MESSAGE_DESCRIPTION	Email to the Seller notifying that they have a new order and it is now being processed.	Email para o Vendedor notificando de um novo pedido, que está agora sendo processado pela plataforma.
+PROFILE_URL_VARIABLE_DESCRIPTION	Profile url	Link do perfil
+NEW_SUBSCRIPTION_SELLER_MESSAGE_TITLE	Seller, subscription started	Vendedor, assinatura iniciada
+NEW_SUBSCRIPTION_SELLER_MESSAGE_DESCRIPTION	Email to the Seller notifying that their subscription has started.	Email para o Vendedor notificando que sua assinatura teve início.
+USER_NAME_VARIABLE_DESCRIPTION	User name	Nome do usuário
+RESET_PASSWORD_URL_VARIABLE_DESCRIPTION	Reset password url	Link de redefinição de senha
+RESET_PASSWORD_MESSAGE_TITLE	User, reset password	Usuário, redefinição de senha
+RESET_PASSWORD_MESSAGE_DESCRIPTION	Email to a user (Buyer or Seller) with steps for resetting their password.	Email para o usuário (Comprador ou Vendedor) com instruções para redefinição da senha.
+FACEBOOK_PAGE_URL_VARIABLE_DESCRIPTION	Facebook page URL	URL da página no Facebook
+APP_LOGO_VARIABLE_DESCRIPTION	App logo image	Imagem da logo da plataforma
+GOOGLE_ADDRESS_INPUT_HELP	Start typing and pick from the suggestions by Google. If there are no suggestions, the address has not been recognized and you'll need to try different forms. This is necessary to ensure the correct geolocation of the address.	Comece a digitar e selecione uma sugestão dentre as oferecidas pelo Google. Se não houverem sugestões, o endereço não foi reconhecido e você deverá tentar de outras formas. Isso é necessário para garantir a correta geolocalização do endereço.
+QUOTE_GROUP_INTERACTIONS_SELLER_SAID	Said	Disse
+QUOTE_GROUP_INTERACTIONS_YOU_SAID	You said	Você disse
+QUOTE_GROUP_INTERACTIONS_HINT	These are the sellers you're interacting with in this request. Clique "Answer" next to a seller to open the chat with that seller.	Estes são os vendedores com quem você está interagindo neste orçamento. Clique em "Responder" para abrir a conversa com um vendedor.
+SELLERS_TITLE	Sellers	Vendedores
+ANSWERS_TITLE	Answers	Respostas
+PROFILE_IMAGE	Profile image	Imagem de perfil
+PROFILE_IMAGE_UPLOAD_HINT	Upload a square image or with centralized content, of at least 500x500 px. The image will be cropped square, and may appear circular in some pages.	Envie uma imagem quadrada ou com o conteúdo centralizado, de pelo menos 500x500 px. A imagem será cortada em formato quadrado, e em certas páginas poderá aparecer circular.
+SCHEDULE_LINK	Schedule	Agenda
+NEW_LOCK_SCHEDULE_LINK	New lock	Novo bloqueio
+NEW_LOCK_TYPE_LABEL	Type	Tipo
+NEW_LOCK_TYPE_SELECT	Types	Tipos
+NEW_LOCK_START_DATE_LABEL	Start date	Data inicial
+NEW_LOCK_END_DATE_LABEL	End date	Data final
+NEW_LOCK_DAY_OF_WEEK_LABEL	Day of week	Dia da semana
+NEW_LOCK_DAY_OF_WEEK_SELECT	Days of week	Dias da semana
+NEW_LOCK_START_TIME_LABEL	Start time	Hora inicial
+NEW_LOCK_END_TIME_LABEL	End time	Hora final
+NEW_LOCK_PRODUCT_LABEL	Product	Produto
+NEW_LOCK_PRODUCT_SELECT	Products	Produtos
+NEW_LOCK_DATES_INVALID_MESSAGE	Dates invalid	Datas inválidas
+SAVE_NEW_LOCK_BUTTON	Save lock	Salvar bloqueio
+ADD_NEW_LOCK_LINK	New lock	Novo bloqueio
+NEW_LOCK_TARGET_ALL_STORE	For all store	Para toda a loja
+NEW_LOCK_TARGET_SPECIFIC_PRODUCT	For specific product	Para um produto específico
+RENTAL_TRY_FROM_MESSAGE	Please try from {0}.	Tente a partir de {0}.
+RENTAL_TRY_UNTIL_MESSAGE	Please try until {0}.	Tente até {0}.
+RENTAL_UNITS_AVAILABLE_MESSAGE	Up to {0} units available.	Até {0} unidade(s) disponível(is).
+RENTAL_PERIOD_NOT_AVAILABLE_MESSAGE	Period not available.	Período indisponível.
+RENTAL_INVALID_PERIOD_MESSAGE	Period invalid.	Período inválido.
+RENTAL_MIN_PERIOD_NOT_REACHED_MESSAGE	Minimum rental period not reached.	Período mínimo de locação não atingido.
+RENTAL_MAX_PERIOD_EXCEEDED_MESSAGE	Maximum rental period exceeded.	Período máximo de locação ultrapassado.
+RENTAL_QUANTITY_GREATER_ZERO_MESSAGE	Quantity must be greater than zero.	Quantidade deve ser maior que zero.
+RENTAL_QUANTITY_NOT_AVAILABLE_MESSAGE	Quantity not available.	Quantidade indisponível.
+RENTAL_PRODUCT_DELETED_MESSAGE	Product deleted.	Produto excluído.
+RENTAL_ENTER_ALL_PARAMS_MESSAGE	Enter all parameters to check availability.	Informe todos os parâmetros para verificar a disponibilidade.
+SCHEDULE_ITEM_RENTAL_TITLE	Rental #{0}	Locação #{0}
+SCHEDULE_ITEM_RENTAL_DESCRIPTION	<b>Buyer:</b> {0}<br><b>Product:</b> {1}<br><b>Status:</b> {2}<br>{3}	<b>Cliente:</b> {0}<br><b>Produto:</b> {1}<br><b>Situação:</b> {2}<br>{3}
+SCHEDULE_ITEM_LOCK_TITLE	Unavailability	Indisponibilidade
+SCHEDULE_ITEM_LOCK_DESCRIPTION	Locked time for {0}<br>{1}	Horário bloqueado para {0}<br>{1}
+SCHEDULE_ITEM_LOCK_WHOLE_STORE	the whole store	toda a loja
+PROFILE_IMAGE_UPLOAD_HINT	Upload a square image or with centralized content, of at least 500x500 px. The image will be cropped square, and may appear circular in some pages.	Envie uma imagem quadrada ou com o conteúdo centralizado, de pelo menos 500x500 px. A imagem será cortada em formato quadrado, e em certas páginas poderá aparecer circular.
+PRODUCT_RENTAL_NULL_DATES_ERROR_MESSAGE	Enter the rental period	Informe o período de locação
+CLOSE_QUOTE_NO_SELLER_ANSWER	Register at least one answer to the Buyer in order to unlock the ability to close the quote request.	Registre pelo menos uma resposta ao Comprador para liberar os controles de fechamento do orçamento.
+SELLER_PRODUCT_DIMENSIONS_ABSENT	{0} has not properly configured all product dimensions; shipping cannot be calculated.	{0} não configurou as dimensões dos produtos; o frete não pôde ser calculado.
+DELETE_LOCK_MESSAGE_TITLE	Warning!	Atenção!
+DELETE_LOCK_MESSAGE_TEXT	Would you like to delete the lock?	Confirma a exclusão do bloqueio?
+DELETE_LOCK_MESSAGE_CONFIRM	Yes, I would	Sim, confirmo
+DELETE_LOCK_SUCCESS_MESSAGE	Lock successfully deleted	Bloqueio excluído com sucesso
+DELETE_LOCK_ERROR_MESSAGE	There was an error deleting the lock	Ocorreu um erro ao excluir o bloqueio
+CHARGE_DOUBLE_SHIPPING_MESSAGE	envio + devolução	envio + devolução
+NO_CHARGE_DOUBLE_SHIPPING_MESSAGE	somente envio	somente envio
+CHARGE_DOUBLE_SHIPPING_FULL_MESSAGE	Todos os itens do seu carrinho já incluem o frete de envio e de devolução para o vendedor	Todos os itens do seu carrinho já incluem o frete de envio e de devolução para o vendedor
+NO_CHARGE_DOUBLE_SHIPPING_FULL_MESSAGE	Um ou mais itens no seu carrinho não inclui o frete de devolução, o que significa que você está pagando somente o frete de envio destes produtos e deverá combinar a devolução diretamente com o vendedor	Um ou mais itens no seu carrinho não inclui o frete de devolução, o que significa que você está pagando somente o frete de envio destes produtos e deverá combinar a devolução diretamente com o vendedor
+PRODUCT_CHARGE_DOUBLE_SHIPPING_TEXT	This setting causes the shipping costs to be doubled for the buyer.	Esta configuração faz com que o valor do frete seja dobrado no momento da compra.
+TIME_ZONE_ID_LABEL	Select your time zone	Selecione seu fuso horário
+RENTAL_DIFFERENTS_DATES_FULL_MESSAGE	You have different rental schedules among your products (i.e. different start and end dates), which results in higher shipping costs. In case you would like lower shipping costs, schedule delivery and return of all products for the same start and end dates.	Você agendou a locação dos produtos em períodos diferentes (datas de início e/ou fim diferentes), o que resulta num custo maior de frete. Para reduzir os custos de frete, agende o envio e devolução de todos os produtos para as mesmas datas.
+RENTAL_SCHEDULE_DESCRIPTION	Below is your rental schedule, with a focus on rental orders. Rentals will appear as blocks in the calendar. You can create locks by clicking on the button below to prevent rentals of certain items in select periods. To delete a lock, click on the unavailability block in the calendar and answer Yes when prompted for confirmation.	Aqui você visualiza sua agenda de locações com foco em pedidos. As locações realizadas pelos clientes aparecerão como blocos neste agenda. Você pode criar bloqueios clicando no botão abaixo para impedir a locação de determinados itens por certos períodos. Para excluir um bloqueio, clique no período de indisponibilidade na agenda e responda Sim para a confirmação de exclusão.
+SCHEDULE_ADD_BLOCK_BY_DATE	Create a lock for a date range	Criar um bloqueio para um intervalo de datas
+SCHEDULE_ADD_BLOCK_BY_WEEKDAY	Create a recurrent lock for a day of the week	Criar um bloqueio recorrente para um dia da semana
+NEW_LOCK_ALL_STORE_DESCRIPTION	The lock will be applied to all your products, meaning no rentals whatsoever will be possible.	O bloqueio será criado para todos os seus produtos, o que significa que nenhuma locação será possível.
+SCHEDULE_PRODUCT_FILTER_HINT	Only products with recent past rentals and locks, or with upcoming rentals and locks are shown in this list. Products that do not fit these conditions are not listed.	Somente produtos com locações e bloqueios recentes, ou com locações e bloqueios futuros são mostrados nesta lista. Produtos que não se encaixam nestas condições não são listados.
+SCHEDULE_PRODUCT_FILTER_HELP	Only relevant products are listed	Somente produtos relevantes são listados
+VIEW_PRODUCT_SCHEDULE	View the rental schedule for this product	Visualize a agenda de locação deste produto
+NEW_LOCK_MODE_LABEL	Mode	Modalidade
+LOCK_TYPE_FULLY_UNAVAILABLE	Fully unavailable	Completamente indisponível
+LOCK_TYPE_FULLY_UNAVAILABLE_DESCRIPTION	Prevents rentals that start at the lock, end at the lock or intersect the lock. For instance, if you setup a lock for wednesdays and someone attempts to rent a product from monday to friday, it won't be possible. In that case, people won't be able to rent the product(s) if the attempted rental starts on wednesday, ends on wednesday or goes through wednesday. It's like the product is out of stock.	Não serão permitidas locações que comecem no bloqueio, que terminem no bloqueio, e nem que façam interceção com o bloqueio. Por exemplo, se você configurar um bloqueio para quarta-feira e alguém tentar locar o produto com início na segunda e fim na sexta, não será possível. Ou seja, neste caso, não serão possíveis locações que comecem na quarta, que terminem na quarta, nem que passem por quarta. É como se o produto estivesse fora de estoque.
+LOCK_TYPE_ONLY_FOR_SHIPPING	Only for shipping	Somente para frete (envio e devolução)
+LOCK_TYPE_ONLY_FOR_SHIPPING_DESCRIPTION	Prevents rentals that start or end within the lock period, but allows rentals going through that period. This mode is useful when you can't develiver or receive the product then, but it's OK if the person has already received the item.	Impede locações que comecem ou terminem no período, mas permite aquelas que passarem pelo bloqueio. Esta modalidade é útil quando você não tem disponibilidade para entregar ou receber o produto, mas está tudo bem se o cliente já estiver com o produto em mãos.
+NEW_LOCK_DESCRIPTION	Use locks to set a single product or all of your products as unavailable.	Use os bloqueios para configurar um produto ou toda a loja como indisponível.
+NEW_LOCK_MODE_LABEL	Mode	Modalidade
+LOCK_TYPE_FULLY_UNAVAILABLE	Fully unavailable	Completamente indisponível
+LOCK_TYPE_FULLY_UNAVAILABLE_DESCRIPTION	Prevents rentals that start at the lock, end at the lock or intersect the lock. For instance, if you setup a lock for wednesdays and someone attempts to rent a product from monday to friday, it won't be possible. In that case, people won't be able to rent the product(s) if the attempted rental starts on wednesday, ends on wednesday or goes through wednesday. It's like the product is out of stock.	Não serão permitidas locações que comecem no bloqueio, que terminem no bloqueio, e nem que façam interceção com o bloqueio. Por exemplo, se você configurar um bloqueio para quarta-feira e alguém tentar locar o produto com início na segunda e fim na sexta, não será possível. Ou seja, neste caso, não serão possíveis locações que comecem na quarta, que terminem na quarta, nem que passem por quarta. É como se o produto estivesse fora de estoque.
+LOCK_TYPE_ONLY_FOR_SHIPPING	Only for shipping	Somente para frete (envio e devolução)
+LOCK_TYPE_ONLY_FOR_SHIPPING_DESCRIPTION	Prevents rentals that start or end within the lock period, but allows rentals going through that period. This mode is useful when you can't develiver or receive the product then, but it's OK if the person has already received the item.	Impede locações que comecem ou terminem no período, mas permite aquelas que passarem pelo bloqueio. Esta modalidade é útil quando você não tem disponibilidade para entregar ou receber o produto, mas está tudo bem se o cliente já estiver com o produto em mãos.
+SCHEDULE_COLOR_RENTAL_OK	Rental OK	Locação em dia
+SCHEDULE_COLOR_DELIVERY_PENDING	Rental pending delivery	Locação com envio em atraso
+SCHEDULE_COLOR_RETURN_PENDING	Rental pending return	Locação com devolução em atraso
+SCHEDULE_COLOR_LOCK	Lock	Bloqueio de agenda
+SELLER_PRODUCT_DIMENSIONS_ABSENT	{0} has not properly configured all product dimensions; shipping cannot be calculated.	{0} não configurou as dimensões dos produtos; o frete não pôde ser calculado.
+BUYER_PHONE_VARIABLE_DESCRIPTION	The buyer's telephone number	Número de telefone do comprador
+MY_FEES_TITLE	My Transaction Fees	Minhas Taxas
+RENTAL_PERIOD_MUST_BE_WHOLE_HOUR	The rental period must be specified in whole hours (e.g. one hour is OK, two hours is OK, but one hour and a half is invalid).	O período de locação deve ser especificado em horas cheias (ex. uma hora é válido, duas horas é válido, mas uma hora e meia é inválido).
+RENTAL_PERIOD_MUST_BE_WHOLE_DAY	The rental period must be specified in whole days (e.g. one day is OK, two days is OK, but one day and a half is invalid).	O período de locação deve ser especificado em dias completos (ex. um dia é válido, dois dias é válido, mas um dia e meio é inválido).
+RENTAL_PERIOD_MUST_BE_WHOLE_MONTH	The rental period must be specified in whole months (e.g. one month is OK, two month is OK, but one month and a half is invalid).	O período de locação deve ser especificado em meses completos (ex. um mês é válido, dois meses é válido, mas um mês e meio é inválido).
+ADDITIONAL_LINK_LABEL_1	Label	Nome
+ADDITIONAL_LINK_LABEL_2	Label	Nome
+ADDITIONAL_LINK_LABEL_3	Label	Nome
+ANSWER_VARIABLE_DESCRIPTION	Last answer sent to this quote	Última resposta enviada
+SEARCH_RESULT_DESCRIPTION_MAX_LENGTH	The first {0} characters you input here will appear in search results feature you. Want to know how you appear in search results? Follow this link and locate your profile.	Os primeiros {0} caracteres informados aqui serão apresentados nos resultados de busca em que você aparecer. Quer saber como você aparece na busca? Acesse o link a seguir e localize seu perfil.
+MAKE_A_SEARCH	Make a search	Fazer uma busca
+CUSTOMIZE_HTML_LINK	HTML (Advanced)	HTML (Avançado)
+CUSTOMIZE_HTML_TITLE	Customize the HTML (Advanced)	Personalize o HTML (Avançado)
+CUSTOMIZE_HTML_PAGE_DISCLAIMER	On this page you can specify HTML tags that will be rendered on all pages of your marketplace. Through these tags, you can customize styles (CSS), include JavaScript code, and more. But before using this feature, please understand that this is an advanced feature that can impact the operation of your platform in unexpected ways, and may even interrupt the operation. By customizing the fields below, you do so under your sole responsibility and can not hold us (Ideia no Ar) for any consequences resulting from such customizations. Also, understand that, at any time, Ideia no Ar can perform platform upgrades that are not compatible with any CSS, JavaScript, or other code you may have inserted, which may cause these custom codes to stop working. In this case, Ideia no Ar can not be held responsible and has no obligation to make any kind of intervention or maintenance in order to support your customizations on this page. If you do not agree to these terms, we advise you not to use this feature.	Nesta página você pode especificar tags HTML que serão renderizadas em todas as páginas do seu marketplace. Através dessas tags, você consegue personalizar estilos (CSS), incluir código JavaScript, entre outros. Mas, antes de utilizar esta funcionalidade, entenda que este é um recurso avançado, que pode alterar o funcionamento da sua plataforma de maneiras inesperadas, podendo inclusive INTERROMPER O FUNCIONAMENTO. Ao personalizar os campos abaixo, você faz isso sob sua exclusiva responsabilidade, não podendo responsabilizar o Ideia no Ar por qualquer consequência que resulte dessas personalizações. Além disso, entenda que, a qualquer tempo, o Ideia no Ar pode realizar atualizações da plataforma que não sejam compatíveis com eventuais códigos CSS, JavaScript ou outros que você tenha inserido, o que pode fazer com que estes códigos personalizados deixem de funcionar. Neste caso, o Ideia no Ar não poderá ser responsabilizado e não tem a obrigação de realizar nenhum tipo de intervenção ou manutenção em prol do funcionamento de suas personalizações nesta página. Caso não esteja de acordo com estes termos, aconselhamos que não faça uso desta funcionalidade.
+CUSTOMIZE_HTML_PAGE_FORBIDDEN	It is not allowed to use the customization features of this page to hide the Ideia no Ar logo from your platform, to remove any references to Ideia no Ar from your platform, or to perform any kind of customization that goes against the terms set forth in the contract terms. By using this feature, you understand and agree that Ideia no Ar may at any time unilaterally decide to remove any customization made on this page should we believe these terms have been infringed in any way.	Não é permitido utilizar as funcionalidades de personalização desta página para ocultar o logotipo do Ideia no Ar da sua plataforma, para eliminar qualquer referência ao Ideia no Ar da sua plataforma, nem para realizar qualquer tipo de customização que vá contra os termos previstos em contrato. Ao utilizar esta funcionalidade, você entende e concorda que o Ideia no Ar pode, a qualquer tempo, decidir unilateralmente por remover qualquer personalização realizada nesta página, caso entenda estes termos tenham sido infringidos de qualquer maneira.
+CUSTOMIZE_HTML_HEAD_TITLE	HTML Head	HTML Head
+CUSTOMIZE_HTML_HEAD_DESCRIPTION	Content to be inserted between the <head> and </head> tags, just before closing.	Conteúdo a ser inserido entre as tags <head> e </head>, logo antes do fechamento.
+CUSTOMIZE_HTML_BODY_START_TITLE	HTML Body (start)	HTML Body (início)
+CUSTOMIZE_HTML_BODY_START_DESCRIPTION	Content to be inserted between the <body> and </body> tags, just after opening.	Conteúdo a ser inserido entre as tags <body> e </body>, logo no início.
+CUSTOMIZE_HTML_BODY_END_TITLE	HTML Body (end)	HTML Body (fim)
+CUSTOMIZE_HTML_BODY_END_DESCRIPTION	Content to be inserted between the <body> and </body> tags, just before closing.	Conteúdo a ser inserido entre as tags <body> e </body>, logo antes do fechamento.
+CUSTOMIZE_HTML_HEAD_INPUT	<style> .some-sample-class { color: black; } </style>	<style> .uma-classe-exemplo { color: black; } </style>
+CUSTOMIZE_HTML_BODY_START_INPUT	<script> alert('this is a sample') </script>	<script> alert('este é um exemplo') </script>
+CUSTOMIZE_HTML_BODY_END_INPUT	<script> alert('this is a sample') </script>	<script> alert('este é um exemplo') </script>
+CUSTOMIZE_HTML_AGREE_TO_TERMS_LABEL	I understand and agree to the terms described on this page to use the customization feature.	Entendo e concordo com os termos descritos nesta página para utilização da funcionalidade de personalização.
+CUSTOMIZE_HTML_AGREE_TO_TERMS_REQUIRED	You must agree to the terms to save customizations.	É necessário concordar com os termos para salvar as personalizações.
+VIDEO_SUPPORTED_EMBEDS_HELP	Supported Embeds	Fontes Aceitas
+MARKDOWN_HELP_TEXT	This field supports Markdown formatting, click here for more information	Este campo aceita formatação por Markdown. Clique aqui para mais informações
+RENTAL_TIMESPAN_MONTH	Month	Mês
+RENTAL_TIMESPAN_WEEK	Week	Semana
+RENTAL_TIMESPAN_DAY	Day	Dia
+RENTAL_TIMESPAN_HOUR	Hour	Hora
+CUSTOM_THUMB_UPLOAD_TEXT	Upload a Custom Thumbnail(optional)	Envie uma miniatura personalizada (opcional)
+ANSWER_VARIABLE_DESCRIPTION	Last answer sent to this quote	Última resposta enviada
+RENTAL_PERIOD_MUST_BE_WHOLE_MONTH	The rental period must be specified in whole months (e.g. one month is OK, two month is OK, but one month and a half is invalid).	O período de locação deve ser especificado em meses completos (ex. um mês é válido, dois meses é válido, mas um mês e meio é inválido).
+CANCEL_QUOTE	Reject Quote	Rejeitar Orçamento
+CANCEL_QUOTE_ALL	Cancel All	Cancelar Todos
+CANCEL_QUOTE_ALL_DISCLAIMER	Warning: this will cancel all quotes in this group! Click again to confirm.	Aviso: isto irá cancelar todos os orçamentos deste pedido! Clique novamente para confirmar
+ANSWER_QUOTE	Answer Quote	Enviar uma Resposta
+DELIVERY_DEADLINE_LABEL	Deadline	Prazo
+QUOTE_PROPOSAL_SENT_LABEL	Proposal Sent	Proposta Enviada
+QUOTE_PROPOSAL_HELP	To send a formal proposal, specify a price and delivery date	Para formalizar uma proposta, envie uma resposta com preço e data de conclusão
+ACCEPT_QUOTE_LABEL	Accept proposal	Aceitar proposta
+ACCEPT_QUOTE_DISCLAIMER	Accepting this proposal will conclude the deal and notify the vendor	Aceitar esta proposta irá concluir a negociação. O vendedor será notificado.
+ACCEPTED_QUOTE_PROPOSAL	Proposal Accepted	Proposta Aceita
+ONGOING_REQUESTS_BUTTON	Ongoing Requests	Pedidos em Andamento
+QUOTE_CLOSED_HELP	Cannot modify the price or date of an ongoing request	Não é possível alterar o preço nem prazo de um pedido em andamento
+QUOTE_CLOSED_BY_BUYER_MESSAGE_TITLE	Seller notified, buyer cancelled quote	Vendedor notificado, comprador cancelou orçamento
+QUOTE_CLOSED_BY_BUYER_MESSAGE_DESCRIPTION	Message sent to the seller when a buyer cancels a quote request	Mensagem enviada ao vendedor quando o comprador cancela o pedido de orçamento
+QUOTE_CLOSED_BY_BUYER_SUBJECT	Quote request cancelled by the buyer	Orçamento cancelado pelo comprador
+QUOTE_ACCEPTED_BY_BUYER_MESSAGE_TITLE	Seller notified, buyer accepted quote	Vendedor notificado, comprador aceitou proposta do orçamento
+QUOTE_ACCEPTED_BY_BUYER_MESSAGE_DESCRIPTION	Message sent to the seller when a buyer accepts a proposal in a quote request	Mensagem enviada ao vendedor quando o comprador aceita uma proposta no pedido de orçamento
+QUOTE_ACCEPTED_BY_BUYER_SUBJECT	Quote request accepted by the buyer	Orçamento aceito pelo comprador
+ADMIN_DASHBOARD_QUOTES_TOTAL_VALUE	Total Accepted Quotes Value	Valor Total de Orçamentos Aceitos
+SHIPPING_METHOD_ACTUAL_NO_SHIPPING	Delivery happens outside the platform	A entrega ocorre por fora da plataforma
+ACTUAL_NO_SHIPPING_DELIVERY_TIME	Details about delivery or service completion must be discussed directly with the seller.	Os detalhes da entrega ou prestação de serviço serão combinados diretamente com o vendedor
+PRODUCT_ACTUAL_NO_SHIPPING_METHOD_LABEL	Delivery happens outside the platform	A entrega ocorre por fora da plataforma
+CART_ACTUAL_NOSHIPPING_INFO	Delivery of products and/or services, if any, must be discussed directly with the seller.	A entrega dos produtos e/ou serviços contratados, se houver, deverá ser combinada diretamente com o vendedor.
+TRANSACTION_WARRANTY_CART_REASSURANCE	Rest easy! Your payment is directed to us and the seller does not receive the money right away. In case of any issues, you'll have the opportunity to request that the payment be withheld until the situation is resolved and you can even have our help if you need to cancel the purchase due to non-delivery.	Fique tranquilo! Seu pagamento é direcionado para nós e o vendedor não recebe o dinheiro imediatamente. Em caso de problemas, você terá a oportunidade de solicitar que o pagamento seja retido até que a situação seja resolvida, podendo ainda contar com nossa ajuda se precisar cancelar a compra devido a não-entrega.
+QUOTE_ANSWER_TEXT_INPUT_V2	Your answer	Sua resposta
+QUOTE_PROPOSAL_HELP_V2	To send a formal proposal that the buyer can accept through the platform, include a Price and Deadline in your answer.	Para formalizar uma proposta que o comprador possa aceitar pela plataforma, inclua Preço e Prazo na sua resposta.
+QUOTE_YOUR_PROPOSAL_TITLE	Your proposal	Sua proposta
+QUOTE_ANSWER_PRICE_INPUT_V2	Amount	Preço
+ACCEPT_QUOTE_DISCLAIMER_V2	By accepting this offer, the negotiation will be completed and the seller will be notified to proceed with providing the service. Are you sure you want to accept?	Ao aceitar esta proposta, a negociação será concluída e o vendedor será notificado para prosseguir com prestação do serviço. Tem certeza de que deseja aceitar?
+ACCEPT_QUOTE_LABEL_CONFIRM	Yes, I accept the proposal	Sim, aceito a proposta
+QUOTE_REJECT_ACTION_SELLER	Reject quote request	Rejeitar este pedido de orçamento
+QUOTE_CANCEL_BUYER	Cancel this quote request	Cancelar este pedido de orçamento
+PRODUCT_NAME_FOR_QUOTE_BILLING	Charges for service provision	Cobrança de prestação de serviço
+PRODUCT_DESCRIPTION_FOR_QUOTE_BILLING	Charges for service provision, refering to quote for "{0}"	Cobrança de prestação de serviço, referente ao pedido de orçamento "{0}"
+PRODUCT_SPECIFICATIONS_FOR_QUOTE_BILLING	N/A	N/A
+YOU_ACCEPTED_A_QUOTE_FROM_SELLER	You accepted a quote from {0}	Você aceitou uma proposta de {0}
+YOU_REJECTED_A_QUOTE_FROM_SELLER	You rejected a quote from {0}	Você rejeitou uma proposta de {0}
+YOUR_QUOTE_HAS_BEEN_ACCEPTED	Your proposal has been accepted	Sua proposta foi aceita
+YOUR_QUOTE_HAS_BEEN_REJECTED	Your proposal has not been accepted	Sua proposta não foi aceita
+PAYMENT_NUMBER	Payment #{0}	Pagamento #{0}
+CART_CANNOT_MIX_BILLING_WITH_COMMON_PRODUCTS	You cannot pay for a service and buy additional products in a single order.	Não é possível pagar por um serviço e adicionar outros produtos num único pedido.
+CLICK_TO_SEE_TRANSACTION_DETAILS	Click this link to open the transaction details	Clique neste link para abrir os detalhes da transação:
+BUYER_CANCELLED_QUOTE_REQUEST	The buyer cancelled this quote request	O comprador cancelou este pedido de orçamento
+SELLER_QUOTE_BILLING_URL_HELP	If the buyer contacted you about not having received the billing email, you can send them this link. Upon opening it, they'll be directed to the payment flow.	Se o comprador entrou em contato com você dizendo que não recebeu o email de cobrança, você pode copiar e enviar o link abaixo para ele. Ao acessar este link, o comprador será direcionado para o pagamento.
+BILLING_SENT_TO_BUYER	You already sent the billing to the buyer. We'll notify you when the payment is completed.	Você já enviou uma cobrança para o comprador. Notificaremos assim que o pagamento for realizado.
+ADMIN_DASHBOARD_QUOTES_TOTAL_VALUE	Total Accepted Quotes Value	Valor Total de Orçamentos Aceitos
+DISPUTE_ONGOING_LABEL	Check Dispute	Visualizar Disputa
+DISPUTE_BEGIN_LABEL	Open Dispute	Contestar Pedido
+DISPUTE_STATUS_LABEL	Dispute Status	Status da Disputa
+DISPUTE_TRANSFER_STATUS_LABEL	Payment Authorized	Pagamento Autorizado
+AFFIRMATIVE_LABEL	Yes	Sim
+NEGATIVE_LABEL	No	Não
+DISPUTE_OPENED_BY_SELLER	Opened by Seller	Aberta pelo vendedor
+DISPUTE_OPENED_BY_BUYER	Opened by Buyer	Aberta pelo comprador
+DISPUTE_MEDIATION_BY_SELLER	Mediation requested by Seller	Mediação solicitada pelo vendedor
+DISPUTE_MEDIATION_BY_BUYER	Mediation requested by Buyer	Mediação solicitada pelo comprador
+DISPUTE_CLOSED_SELLER	Closed by Seller	Encerrada pelo vendedor
+DISPUTE_CLOSED_BUYER	Closed by Buyer	Encerrada pelo comprador
+DISPUTE_CLOSED_ADMIN	Closed by Administrator	Encerrada pelo Administrador
+DISPUTE_CLOSED_IDLE	Closed for inactivity	Encerrada por inatividade
+DISPUTE_MESSAGE_INPUT	Write your message here	Escreva sua mensagem aqui
+DISPUTE_MESSAGE_SEND	Send message	Enviar mensagem
+DISPUTE_ADMIN_LABEL	Administrator	Administrador
+DISPUTE_AUTHORIZE_TRANSFER_LABEL	Authorize Payment	Liberar Pagamento
+DISPUTE_RETURN_PAYMENT_LABEL	Revert Payment	Estornar Pagamento
+MEDIATION_REQUESTED_MESSAGE_TITLE	Mediation Requested	Mediação Solicitada
+MEDIATION_REQUESTED_MESSAGE_DESCRIPTION	Message sent to administrators when a dispute mediation is requested	Mensagem enviada para os administradores quando mediação é solicitada para uma disputa
+DISPUTE_ID_VARIABLE_DESCRIPTION	ID of the Dispute	ID da Disputa
+DISPUTE_SYSMESSAGE_MEDIATION_REQUESTED	Mediation requested By {0}	Mediação solicitada por {0}
+DISPUTE_SYSMESSAGE_ORDER_CANCELED	Order has been cancelled. The amount paid by the buyer will be reimbursed.	Pedido foi cancelado. A quantia paga pelo comprador será reembolsada.
+DISPUTE_SYSMESSAGE_PAYMENT_AUTHORIZED	Order has been completed. Payment transfer has been authorized to seller.	Pedido concluído com sucesso. A liberação do pagamento foi autorizada para o vendedor.
+DISPUTE_SYSMESSAGE_LABEL	System	Sistema
+DISPUTES_LANG_UBIQUITOUS	Disputes	Disputas
+DISPUTE_URL_VARIABLE_DESCRIPTION	Url of the Dispute	Url da Disputa
+RECIPIENT_NAME_VARIABLE_DESCRIPTION	Email recipient name	Nome do recebedor do email
+DISPUTE_OPENED_MESSAGE_TITLE	Dispute Opened	Disputa Iniciada
+DISPUTE_OPENED_MESSAGE_DESCRIPTION	Message sent to the involved parts when a dispute opened	Mensagem enviada para as partes envolvidas quando uma disputa é iniciada
+DISPUTE_RESOLVED_MESSAGE_TITLE	Dispute closed	Disputa Encerrada
+DISPUTE_RESOLVED_MESSAGE_DESCRIPTION	Message sent to the involved parts when a dispute is resolved	Mensagem enviada para as partes envolvidas quando uma disputa é resolvida
+PAYMENT_AUTHORIZED_MESSAGE_TITLE	Payment transfer authorized	Transferência de pagamento autorizada
+PAYMENT_AUTHORIZED_MESSAGE_DESCRIPTION	Message sent to seller when payment transfer is authorized	Mensagem enviada para o vendedor quando a transferência do pagamento é autorizada
+ORDER_CLOSED_IDLE	Order completed automatically due to inactivity	Pedido concluído automaticamente por inatividade.
+DISPUTE_AUTO_TRANSFER_DATE_LABEL	Automatic Payment Authorization	Liberação Automática do Pagamento
+DISPUTE_OPEN_WARNING	You are about to initiate a dispute. The seller will be notified, and you will be able to talk directly to him to resolve any irregularities in your order. Click again to confirm.	Você está prestes a iniciar uma disputa, o vendedor será notificado. Você poderá conversar diretamente com o vendedor para resolver qualquer irregularidade em seu pedido ou entrega. Clique novamente para confirmar.
+ORDER_COMPLETION_DATE_VARIABLE_DESCRIPTION	Order automatic completion date	Data de conclusão automatica do pedido
+ORDER_AUTOCOMPLETE_WARNING_MESSAGE_TITLE	Your order will be completed soon	Seu pedido será concluído em breve
+ORDER_AUTOCOMPLETE_WARNING_MESSAGE_DESCRIPTION	Notification sent to buyer about upcoming automatic order completion	Notificação enviada para o comprador sobre conclusão automática de pedido iminente
+DISPUTE_AUTOMATIC_MESSAGE_LABEL	Automatic Message	Mensagem Automática
+ECOMMERCE_HOME_CATEGORY_ID_ERROR	Product Category Required	Selecione uma Categoria de Produto
+ECOMMERCE_HOME_CUSTOM_CATEGORY_ID_ERROR	Custom Category Required	Selecione uma Categoria Personalizada
+ECOMMERCE_HOME_CUSTOM_CATEGORY_NAME_LABEL	Custom Category Name	Nome da Categoria Personalizada
+PORTFOLIO_ITEMS_FOUND_COUNT	Items found	Itens encontrados
+PORTFOLIO_SEARCH_TITLE	Search Portfolios	Buscar serviços
+PORTFOLIO_FILTER_INPUT	Search Portfolios	Procurar serviços
+FIND_PORTFOLIO_BUTTON	Find in Portfolio	Encontrar serviços
+QUOTE_FILTER_INFO	The fields below will be used to narrow down the sellers that will receive your quote request.	Os campos abaixo serão usados para restringir os vendedores que receberão seu pedido de orçamento.
+QUOTE_DATA_LABEL	Profile Data	Seus Dados
+QUOTE_FILTER_SELLERS_TITLE	Filter Sellers	Filtrar Vendedores
+SELLER_METRICS_PANEL_TITLE	My metrics	Minhas métricas
+SELLER_METRICS_QUOTES_TOTAL	Accepted Quotes Total	Total em orçamentos aceitos
+SELLER_METRICS_QUOTES_RECEIVED	Quotes received	Orçamentos recebidos
+SELLER_METRICS_QUOTES_ACCEPTED	Quotes accepted	Orçamentos aceitos
+SELLER_METRICS_QUOTES_REJECTED	Quotes rejected	Orçamentos rejeitados
+SELLER_METRICS_QUOTES_OPEN	Open quotes	Orçamentos em aberto
+SELLER_METRICS_QUOTES_PROPOSALS	Proposals sent	Propostas enviadas
+SELLER_METRICS_QUOTES_UNIQUE	Unique quotes	Orçamentos únicos
+SELLER_METRICS_ORDERS_REVENUE	Order revenue	Faturamento
+SELLER_METRICS_ORDERS_RECEIVED	Orders received	Pedidos recebidos
+SELLER_METRICS_ORDERS_AVERAGE	Average Ticket	Ticket médio
+SELLER_METRICS_ORDERS_UNITS_SOLD	Units sold	Unidades vendidas
+SELLER_METRICS_ORDERS_IN_WARRANTY	Total in warranty	Total em garantia
+SELLER_METRICS_AVERAGE_QUOTE	Average quote	Orçamento médio
+SELLER_METRICS_BEST_SELLERS	Best sellers	Melhores vendedores
+SELLER_METRICS_BEST_QUOTE_CATEGORIES	Most quoted categories	Categorias mais orçadas
+SELLER_METRICS_BEST_PRODUCT_CATEGORIES	Best selling categories	Categorias com mais vendas
+SELLER_METRICS_BEST_SELLING_PRODUCTS	Best selling products	Produtos mais vendidos
+SELLER_METRICS_ABANDONED_CARTS	Abandoned carts	Carrinhos abandonados
+SELLER_METRICS_MENU_LABEL	My Metrics	Minhas métricas
+DATE_FILTER_LABEL	Filter by time period	Filtrar por período
+DATE_FILTER_INITIAL	Initial date	Data Inicial
+DATE_FILTER_FINAL	Final date	Data final
+PRODUCT_FIXED_RENTAL_PERIOD	Fixed period	Duração fixa
+PROFILE_ACTIVATED_MESSAGE_TITLE	Profile successfully activated	Perfil ativado com sucesso
+PROFILE_ACTIVATED_MESSAGE_DESCRIPTION	Message sent to seller when profile is activated by moderation	Mensagem enviada ao vendedor quando perfil é ativado pelo moderador
+QUOTE_REGISTER_PASSWORD	Register a password with at least 6 characters	Cadastre uma senha com pelo menos 6 caracteres
+QUOTE_REGISTER_PASSWORD_REPEAT	Confirm your password	Confirmar senha
+ADMIN_CUSTOMIZE_TITLE	Customize your platform	Customize sua plataforma
+ADMIN_CUSTOMIZE_MARKETPLACE_NAME_LABEL	Marketplace name	Nome da Marketplace
+ADMIN_CUSTOMIZE_MARKETPLACE_DOC_LABEL	Document number	CNPJ
+ADMIN_CUSTOMIZE_MARKETPLACE_EMAIL_LABEL	Service email	Email de contato
+ADMIN_CUSTOMIZE_MARKETPLACE_ABOUT_LABEL	About your marketplace	Sobre a marketplace
+ADMIN_CUSTOMIZE_MARKETPLACE_INFO	The following fields will be displayed in the footer that is shown in every page, as shown in the image below. The email address provided will also be used to send all transactional email messages sent by the system to your users.	Estas informações aparecem no rodapé de todas as páginas do site, como indicado na imagem. Além disso, o email de contato será exibido em todos os emails transacionais enviados automaticamente pela plataforma aos usuários.
+ADMIN_CUSTOMIZE_HOME_SLOGAN1_LABEL	Slogan 1	Slogan 1
+ADMIN_CUSTOMIZE_HOME_SLOGAN2_LABEL	Slogan 2	Slogan 2
+ADMIN_CUSTOMIZE_HOME_SEARCHTYPE_LABEL	Search Type	Tipo de Busca
+ADMIN_CUSTOMIZE_HOME_SEARCHCATEGORY_LABEL	Category Search	Busca por categoria
+ADMIN_CUSTOMIZE_HOME_SEARCHQUERY_LABEL	Search query	Busca por palavra-chave
+ADMIN_CUSTOMIZE_HOME_SEARCHLOCATION_LABEL	Search location	Busca por localização
+ADMIN_CUSTOMIZE_FIELD_PLACEHOLDER	Placeholder	Dica de preenchimento
+ADMIN_CUSTOMIZE_FIELD_TITLE	Field title	Título do campo
+ADMIN_CUSTOMIZE_FIELD_DISABLED	Field disabled	Campo desabilitado
+ADMIN_CUSTOMIZE_FIELD_ENABLED	Field enabled but optional	Campo habilitado, preenchimento opcional
+ADMIN_CUSTOMIZE_FIELD_ENABLED_MANDATORY	Field enabled and mandatory	Campo habilitado, preenchimento obrigatório
+ADMIN_CUSTOMIZE_HOME_SEARCHRANGE_LABEL	Search range(m)	Raio de busca (metros)
+ADMIN_CUSTOMIZE_SAVE_BUTTON	Save customization	Salvar customizações
+ADMIN_CUSTOMIZE_TITLE_LABEL	Title	Título
+ADMIN_CUSTOMIZE_DESCRIPTION	Description	Descrição
+ADMIN_CUSTOMIZE_ICON	Icon	Ícone
+PRODUCTS_LANG_UBIQUITOUS	Products	Produtos
+PORTFOLIO_LANG_UBIQUITOUS	Portfolio	Portfolio
+ADMIN_CUSTOMIZE_SECTION_ENABLED	Enable section	Habilitar esta seção
+PRODUCT_PRICE_RENTALPERIOD_INFO	Price per {0}. This value will be multiplied by the specified number of {1}.	Preço por {0}. Este valor será multiplicado pelo número de {1} selecionado.
+ADMIN_CUSTOMIZE_COPY_PALETTE	Copy palette	Copiar paleta
+ADMIN_CUSTOMIZE_APPLY_PALETTE	Apply palette	Aplicar paleta
+ADMIN_CUSTOMIZE_PALETTE_GALLERY_BUTTON	View galery	Visualizar galeria
+ADMIN_CUSTOMIZE_PALETTE_GALLERY_LABEL	Explore other color palettes	Explore outras paletas de cores
+ADMIN_CUSTOMIZE_ACCENT1_LABEL	Accent Color 1	Cor de acentuação 1
+ADMIN_CUSTOMIZE_ACCENT2_LABEL	Accent Color 2	Cor de acentuação 2
+ADMIN_CUSTOMIZE_CONTRAST_LABEL	Contrast Color	Cor de contraste
+ADMIN_CUSTOMIZE_HOME_MENUBG_LABEL	Home Menu Background Color	Cor de fundo do Menu
+ADMIN_CUSTOMIZE_HOME_MENUACC_LABEL	Home Menu Text Color	Cor de texto do Menu
+ADMIN_CUSTOMIZE_HOME_PRESETS_TITLE	Choose a color preset	Use uma paleta predefinida
+ADMIN_CUSTOMIZE_HOME_CUSTOM_PALETTE_TITLE	Edit your color palette	Edite sua paleta de cores
+ADMIN_CUSTOMIZE_SELLER_TITLE	Customize seller registration form	Customizar cadastro de vendedores
+ADMIN_CUSTOMIZE_SELLER_ABOUTME_LABEL	About me	Sobre mim
+ADMIN_CUSTOMIZE_SELLER_ALTERNATENAME_LABEL	Commercial name	Nome comercial
+ADMIN_CUSTOMIZE_SELLER_PHONE_LABEL	Phone number	Número de telefone
+ADMIN_CUSTOMIZE_SELLER_DOCUMENT_LABEL	Document number	Documento de identificação
+ADMIN_CUSTOMIZE_SELLER_DATEOFBIRTH_LABEL	Date of birth	Data de nascimento
+ADMIN_CUSTOMIZE_SELLER_GENDER_LABEL	Gender	Gênero
+ADMIN_CUSTOMIZE_SELLER_ADDITIONALINFO1_LABEL	Additional info 1	Informações adicionais 1
+ADMIN_CUSTOMIZE_SELLER_ADDITIONALINFO2_LABEL	Additional info 2	Informações adicionais 2
+ADMIN_CUSTOMIZE_SELLER_FACEBOOKPROFILE_LABEL	Facebook profile	Perfil do Facebook
+ADMIN_CUSTOMIZE_SELLER_INSTAGRAMPROFILE_LABEL	Instagram profile	Perfil do Instagram
+ADMIN_CUSTOMIZE_SELLER_LINKEDINPROFILE_LABEL	LinkedIn profile	Perfil do LinkedIn
+ADMIN_CUSTOMIZE_SELLER_GOOGLEPLUSPROFILE_LABEL	Google+ profile	Perfil do Google+
+ADMIN_CUSTOMIZE_SELLER_HELP_ICON_LABEL	Help Icon	Ícone de Ajuda
+ADMIN_CUSTOMIZE_MENU_MARKETPLACE	Marketplace	Marketplace
+ADMIN_CUSTOMIZE_MENU_HOME	Home	Home
+ADMIN_CUSTOMIZE_MENU_IDENTITY	Visual Identity	Identidade Visual
+ADMIN_CUSTOMIZE_MENU_SELLERS	Sellers	Cadastro Vendedores
+ADMIN_CUSTOMIZE_MENU_BUYERS	Buyers	Cadastro Compradores
+ADMIN_CUSTOMIZE_MENU_OTHERS	Other options	Outras opções
+ADMIN_CUSTOMIZE_BUYER_ADDRESS_LABEL	Address	Endereço
+ADMIN_CUSTOMIZE_BUYER_CITY_AND_STATE_LABEL	City and state	Cidade e estado
+ADMIN_CUSTOMIZE_BUYER_AVATAR_LABEL	Avatar	Imagem de perfil
+ADMIN_CUSTOMIZE_OTHERS_ICONS	Icon and Logos	Logo e Ícones
+ADMIN_CUSTOMIZE_PORTFOLIO_CATEGORIES	Portfolio categories	Categorias de portfólio
+ADMIN_CUSTOMIZE_PORTFOLIO_SUBCATEGORIES	Portfolio subcategorias	Subcategorias de portfólio
+ADMIN_CUSTOMIZE_PRODUCT_CATEGORIES	Product categories	Categorias de produto
+ADMIN_CUSTOMIZE_PRODUCT_VARIANTS	Product variants	Tipos de variantes
+ADMIN_CUSTOMIZE_PRODUCT_VARIANT_ITEMS	Variant items	Itens de variantes
+ADMIN_CUSTOMIZE_PRODUCT	Products	Produtos
+ADMIN_CUSTOMIZE_PORTFOLIO	Portfolio	Portfólios
+ADMIN_CUSTOMIZE_PLATFORM	Platform	Plataforma
+ADMIN_CUSTOMIZE_OTHERS_TITLE	Other configurations	Outras configurações
+ADMIN_CUSTOMIZE_SELLER_BENEFITS	Seller benefits	Benefícios do vendedor
+ADMIN_CUSTOMIZE_IDENTITY_TITLE	Visual Identity	Identidade Visual
+ADMIN_CUSTOMIZE_SELLER_MISC	Miscellaneous section	Seção miscelânea
+ADMIN_CUSTOMIZE_SELLER_SLOGANS	Slogans and search	Slogans e busca
+ADMIN_CUSTOMIZE_SELLER_ECOMMERCEHOME	Ecommerce Home Section	Seção Vitrine / Home do Ecommerce
+ADMIN_CUSTOMIZE_SELLER_GOTOPAGE	Go to page	Ir para a página
+ADMIN_CUSTOMIZE_SELLER_HOWITWORKS	"How it works" section	Seção "Como funciona"
+ADMIN_CUSTOMIZE_SELLER_ICON_LABEL	Icon	Ícone
+ADMIN_CUSTOMIZE_SELLER_BESTSELLERS	Best sellers	Seção "Melhores vendedores"
+ADMIN_CUSTOMIZE_SELLER_CALLSELLERS	Seller registration call	Chamada para cadastro de vendedores
+ADMIN_CUSTOMIZE_SELLER_TEXT	Text	Texto
+ADMIN_CUSTOMIZE_SELLER_BUTTONTEXT	Button text	Texto do botão
+PRODUCT_UNPAUSED	Product available	Produto disponível
+PRODUCT_PAUSED	Product hidden	Anúncio pausado
+PRODUCT_PAUSE_STATUS	Product Status	Status do Produto
+RATING_REQUEST_SELLER_MESSAGE_TITLE	Buyer Evaluation	Avaliação de Compradores
+RATING_REQUEST_SELLER_MESSAGE_DESC	Message sent to sellers asking to review a buyer	Mensagem enviada ao vendedor para avaliar para um comprador
+RATING_REQUEST_SELLER_MESSAGE_SUBJECT	Rate your experience with this buyer	Avalie sua experiência com este comprador
+RATING_REQUEST_BUYER_MESSAGE_TITLE	Seller Evaluation	Avaliação de Vendedores
+RATING_REQUEST_BUYER_MESSAGE_DESC	Message sent to buyers asking to review a seller	Mensagem enviada ao comprador para avaliar para um vendedor
+RATING_REQUEST_BUYER_MESSAGE_SUBJECT	Rate your experience with this seller	Avalie sua experiência com este vendedor
+RATING_URL_DESCRIPTION	Link to the rating page	Link para a página de avaliação
+RATING_SENDER_DESCRIPTION	Name of the user receiving this message	Nome do usuário que recebe esta mensagem
+RATING_TARGET_DESCRIPTION	Name of the user who will be rated	Nome do usuário que será avaliado
+RATINGS_COUNT	Ratings	Avaliações
+RATINGS_SEND_TITLE	Rate your experience	Avalie sua experiência
+CUSTOMIZE_PANEL_LINK	Customization panel	Painel de customização
+WELCOME_MESSAGE_TITLE	Welcome to our marketplace!	Seja bem-vindo a nossa plataforma!
+WELCOME_MESSAGE_DESCRIPTION	Message sent to users when account is created	Mensagem de boas-vindas enviada a usuários que se cadastram na plataforma
+SEARCH_EMPTY_HELP	We could not find any results for the selected query. Try broadening your search parameters	Nenhum resultado foi encontrado para os filtros selecionados
+CUSTOM_FIELD_LABEL_NAME	Field name (Portuguese)	Nome do Campo
+CUSTOM_FIELD_LABEL_NAME_EN	Field name (English)	Nome do campo (Inglês)
+CUSTOM_FIELD_LABEL_PLACEHOLDER	Placeholder text (Portuguese)	Dica de preenchimento
+CUSTOM_FIELD_LABEL_PLACEHOLDER_EN	Placeholder text (English)	Dica de preenchimento (Inglês)
+CUSTOM_FIELD_LABEL_ORDER	Display order	Ordem de exibição
+CUSTOM_FIELD_LABEL_DATATYPE	Data type	Tipo de dados
+CUSTOM_FIELD_LABEL_INPUTTYPE	Input type	Tipo de entrada
+CUSTOM_FIELD_LABEL_ISPUBLIC	Public field	Campo público
+CUSTOM_FIELD_LABEL_ISREQUIRED	Mandatory field	Campo obrigatório
+CUSTOM_FIELD_DELETE_WARNING	Caution! This action is irreversible, all data from this field will be lost.	Cuidado, esta ação é irreversível! Os dados deste campo serão perdidos.
+CUSTOM_FIELD_DATATYPE_DATE	Date	Data
+CUSTOM_FIELD_DATATYPE_DATETIME	Date and Time	Data e Hora
+CUSTOM_FIELD_DATATYPE_RAWTEXT	Raw Text	Texto
+CUSTOM_FIELD_DATATYPE_NUMBER	Number	Número
+CUSTOM_FIELD_DATATYPE_BOOL	True/False	Sim/Não
+CUSTOM_FIELD_DATATYPE_BOOLEAN	True/False	Sim/Não
+CUSTOM_FIELD_INPUTTYPE_TEXT	Text box	Caixa de Texto
+CUSTOM_FIELD_INPUTTYPE_MULTILINETEXT	Text area (resizable)	Texto multi-linha
+CUSTOM_FIELD_INPUTTYPE_OPTIONS	Options List	Lista de opções
+CUSTOM_FIELD_INPUTTYPE_CHECKBOX	Checkbox	Caixa de seleção
+CUSTOM_FIELD_INPUTTYPE_DATEPICKER	Date Picker	Calendário
+CUSTOMIZE_QUOTE_FIELDS_LINK	Custom quote fields	Campos de orçamento
+CUSTOMIZE_PRODUCT_FIELDS_LINK	Custom product fields	Campos de produto
+CUSTOMIZE_PORTFOLIO_FIELDS_LINK	Custom portfolio fields	Campos de portfólio
+CUSTOM_FIELD_TITLE_BUYER	Customize buyer profile fields	Customizar campos de cadastro de comprador
+CUSTOM_FIELD_TITLE_SELLER	Customize seller profile fields	Customizar campos de cadastro de vendedor
+CUSTOM_FIELD_TITLE_QUOTE	Customize quote request fields	Customizar campos de pedido de orçamento
+CUSTOM_FIELD_TITLE_PRODUCT	Customize product fields	Customizar campos de cadastro de produto
+CUSTOM_FIELD_TITLE_PORTFOLIO	Customize portfolio item fields	Customizar campos de itens de portfolio
+CUSTOM_FIELD_MAX_WARNING_1	Max number of custom fields for this object has been reached.	O limite máximo de campos customizados para este objeto foi atingido.
+CUSTOM_FIELD_MAX_WARNING_2	To add new fields, you must delete an existing one.	Para cadastrar mais campos, exclua um campo existente.
+SELLER_MODERATION_URL_VARIABLE_DESCRIPTION	URL of the Seller Profile	URL do Perfil do Vendedor
+AWAITING_MODERATION_TITLE	Seller awaiting moderation	Vendedor aguardando moderação
+AWAITING_MODERATION_DESCRIPTION	Message sent to Admin notifying of seller awaiting moderation	Mensagem enviada ao admin notificando de vendedor aguardando moderação
+AWAITING_MODERATION_SUBJECT	New seller registered - Awaiting Moderation	Novo vendedor cadastrado, aguardando moderação
+CUSTOM_FIELDS_AREA_LABEL	Additional information	Informações adicionais
+RENTAL_PERIOD_UNIT_LABEL	Rental Period Unit	Unidade de período de locação
+PRODUCT_MAX_INSTALLMENTS_LABEL	Max installments	Parcelamento máximo
+PRODUCT_CART_INSTALLMENTS_WARNING	Payment in up to {0} installments	Parcelamento em até {0} vezes
+PRODUCT_CHECKOUT_INSTALLMENTS_WARNING	Limited by the product payable in least installments	Limitado pelo produto que pode ser parcelado em menos vezes
+CALL_TO_ACTION_REQUEST_QUOTE	Request a quote	Peça um orçamento
+CALL_TO_ACTION_SEARCH_PRODUCT	Find a product	Encontre um produto
+CALL_TO_ACTION_SEARCH_QUOTE	Find a service provider	Encontre um prestador de serviço
+QUOTE_CONTENT_VARIABLE_DESCRIPTION	Quote request contents	Conteúdo do pedido de orçamento
+NEW_QUOTE_ADMIN_MESSAGE_TITLE	New quote request	Novo pedido de orçamento recebido
+NEW_QUOTE_ADMIN_MESSAGE_DESCRIPTION	Message sent to admin when new quote is requested	Mensagem enviada para o admin quando um novo pedido de orçamento é recebido
+NEW_QUOTE_ADMIN_SUBJECT	New quote request	Novo pedido de orçamento recebido
+RENTAL_MARGIN_LABEL	Margin between rentals	Margem entre agendamentos
+RENTAL_MARGIN_HELP_TEXT	Minimum margin period between two scheduled rentals for a same item	Período mínimo de intervalo que deve haver entre dois agendamentos para um mesmo item.
+CREDIT_CARD_DOCUMENT_LABEL	Card bearer document number	CPF do portador
+CREDIT_CARD_DATE_OF_BIRTH_LABEL	Card bearer birth date	Data de nascimento do portador
+MIN_MULTIPLIER_LABEL	Minimum number of people	Quantidade mínima de adicionais
+MAX_MULTIPLIER_LABEL	Maximum number of people	Quantidade máxima de adicionais
+MULTIPLIER_PRICE_LABEL	Additional price per item	Preço adicional por item
+CHECKOUT_MULTIPLIER_LABEL	Number of additional items	Número de itens adicionais
+CHECKOUT_MULTIPLIER_NOTE	Must be a number between {0} and {1}	Deve ser um número entre {0} e {1}
+CART_INVALID_MULTIPLIER_VALUES	Invalido number of additionals specified	Número de adicionais especificado é inválido
+CART_ITEM_ADDITIONAL_PRICE_LABEL	Additional Price	Preço adicional
+CART_ADDITIONAL_BASE_UNIT	Additional	Adicional
+NEW_QUOTE_ADMIN_SUBJECT	New quote request	Novo pedido de orçamento recebido
+IMPORT_SELLERS	Import sellers	Importar prestadores de serviço
+IMPORT_SELLERS_RESULT	Import results	Resultados da importação
+CITY	City	Cidade
+STATE	State	Estado
+ENABLED	Enabled	Habilitado
+BATCH_IMPORT_SAMPLE_SELLER_NAME	Full name	Nome completo
+BATCH_IMPORT_SAMPLE_SELLER_EMAIL	some.email@domain.com	exemplo@dominio.com.br
+BATCH_IMPORT_SAMPLE_SELLER_DOCUMENT_NUMBER	Brazilian PIN	999.999.999-99 ou 99.999.999/0001-99
+BATCH_IMPORT_SAMPLE_SELLER_DATE_OF_BIRTH	mm/dd/yyyy	dd/mm/aaaa
+BATCH_IMPORT_SAMPLE_SELLER_GENRE	M/F	M/F
+BATCH_IMPORT_SAMPLE_SELLER_ENABLED	Y/N	S/N
+BATCH_IMPORT_SAMPLE_SELLER_ABOUT_ME	About the seller	Sobre o vendedor
+BATCH_IMPORT_SAMPLE_SELLER_PHONE_NUMBER	+55 41 98888-5555	41 98888-5555
+BATCH_IMPORT_SAMPLE_SELLER_ADDRESS_STREET	Some St	R Exemplo
+BATCH_IMPORT_SAMPLE_SELLER_ADDRESS_NUMBER	1234	1234
+BATCH_IMPORT_SAMPLE_SELLER_ADDRESS_ADDITIONAL_INFO	Complement	Complemento
+BATCH_IMPORT_SAMPLE_SELLER_ADDRESS_NEIGHBORHOOD	Some Neighborhood	Bairro
+BATCH_IMPORT_SAMPLE_SELLER_ADDRESS_CITY	City	Cidade
+BATCH_IMPORT_SAMPLE_SELLER_ADDRESS_STATE	State acronym	UF
+BATCH_IMPORT_SAMPLE_SELLER_ADDRESS_ZIP_CODE	99999-555	99999-555
+BATCH_IMPORT_SAMPLE_SELLER_ACCOUNTABLE_NAME	Name of the company or account owner	Nome empresa (se CNPJ) ou responsável (se CPF)
+BATCH_IMPORT_SAMPLE_SELLER_ACCOUNTABLE_DOCUMENT_NUMBER	Document number for the company or account owner	99.999.999/0001-99 ou 999.999.999-99
+BATCH_IMPORT_SAMPLE_SELLER_BANK_BANK	Brazilian bank code	Código do banco
+BATCH_IMPORT_SAMPLE_SELLER_BANK_ACCOUNT_TYPE	Corrente ou Poupança	Corrente ou Poupança
+BATCH_IMPORT_SAMPLE_SELLER_BANK_ACCOUNT_BRANCH	0123	0123
+BATCH_IMPORT_SAMPLE_SELLER_BANK_ACCOUNT_NUMBER	000931354-9	000931354-9
+BATCH_IMPORT_SAMPLE_SELLER_ALTERNATIVE_NAME	Public profile name	Nome comercial (perfil público)
+BATCH_IMPORT_SAMPLE_SELLER_FACEBOOK_PROFILE	https://www.facebook.com/profileName	https://www.facebook.com/nomeDoPerfil
+BATCH_IMPORT_SAMPLE_SELLER_LINKEDIN_PROFILE	https://www.linkedin.com/in/profileName	https://www.linkedin.com/in/nomeDoPerfil
+BATCH_IMPORT_SAMPLE_SELLER_INSTAGRAM_PROFILE	https://www.instagram.com/profileName	https://www.instagram.com/nomeDoPerfil
+BATCH_IMPORT_SAMPLE_SELLER_GATEWAY_TRANSFER_ENABLED	Y/N	S/N
+BATCH_IMPORT_SAMPLE_SELLER_OVERRIDE_GLOBAL_FEES	Y/N	S/N
+BATCH_IMPORT_SAMPLE_SELLER_CUSTOM_IS_LIABLE	0.00	0,00
+FACEBOOK_PROFILE_URL	Facebook profiile	Perfil do Facebook
+LINKEDIN_PROFILE_URL	LinkedIn profile	Perfil do LinkedIn
+INSTAGRAM_PROFILE_URL	Instagram profile	Perfil do Instagram
+GOOGLEPLUS_PROFILE_URL	Google+ profile	Perfil do Google+
+MUST_BE_Y_OR_N	Must be Y (yes) or N (no)	Deve ser S (sim) ou N (não)
+MUST_BE_M_OR_F	Must be M (male) or F (female)	Deve ser M (masculino) ou F (feminino)
+SELLERS_IMPORT_TEXT	On this page you can batch-import service providers. Select a source format to begin.	Nesta página você pode realizar a importação em massa de prestadores de serviço. Selecione um formato de importação para começar.
+SELLERS_IMPORT_SELECT_FORMAT	Select the source format	Defina o formato de importação
+SELLERS_IMPORT_STEP_1	Step 1	Passo 1
+SELLERS_IMPORT_STEP_2	Step 2	Passo 2
+SELLERS_IMPORT_GENERATE_TEMPLATE	Generate a template	Gerar o template de importação
+SELLERS_IMPORT_GENERATE_TEMPLATE_TEXT	For the batch-import to work correctly, we expect information to be in a specific format; fields must appear in order and be well-formed. Use the button below to export a template that will help you provide valid data for the next step.	Para que a importação em massa funcione, esperamos que as informações estejam de acordo com os campos configurados, com tipo de dados e formato válidos. Use o botão abaixo para exportar um template para auxiliá-lo no fornecimento de dados corretos para o próximo passo.
+SELLERS_IMPORT_GENERATE_TEMPLATE_BUTTON	Download template	Baixar o template
+SELLERS_IMPORT_UPLOAD_SOURCE	Upload your data	Envie o template preenchido
+SELLERS_IMPORT_UPLOAD_SOURCE_TEXT	After filling the template with the data you want to import, select the file below.	Depois de preencher o template com os dados que deseja importar, selecione o arquivo abaixo.
+SELLERS_IMPORT_IMPORT_BUTTON	Import	Importar
+SELLERS_IMPORT_INVALID_FILE_FORMAT	The file is not in the correct format.	O arquivo enviado está em um formato inválido.
+SELLERS_IMPORT_DONT_LEAVE_PAGE	Please do not leave this page while the batch is processed.	Não saia desta página enquanto a importação é processada.
+SELLERS_IMPORT_OPEN_NEW_TAB	If you need, you can open a new tab by clicking here:	Se precisar, você pode abrir uma nova aba clicando aqui:
+SELLERS_IMPORT_OPEN_NEW_TAB_BUTTON	open another panel in a new tab	abrir uma nova aba com este painel
+SELLERS_IMPORT_TRY_AGAIN	Try again	Reenviar
+SELLERS_IMPORT_RESULT_ERROR_TEXT	Oops... something is not right. Please review the information below, correct the errors and try again.	Opa, alguma coisa não está certa. Revise as informações abaixo, corrija os erros e tente novamente.
+SELLERS_IMPORT_RESULT_ERROR_TITLE	Errors and invalid records	Erros e registros inválidos
+SELLERS_IMPORT_HOVER_OVER_ERROR	You can hover over the red boxes to learn about what's wrong.	Você pode passar o mouse sobre as caixas vermelhas para saber o que deu errado.
+SELLERS_IMPORT_SUCCESS_TITLE	Success!	Sucesso!
+SELLERS_IMPORT_SUCCESS_TEXT	The records have been imported successfully. You may leave this page now.	Os registros foram importados sem erro. Você já pode deixar esta tela.
+ADMIN_DASHBOARD	Dashboard	Dashboard
+SETTINGS	Settings	Configurações
+BATCH_IMPORT_WELCOME_EMAIL_NOTICE	The imported users will receive the standard welcome email. If you don't want that, you may turn off this email before importing (it's possible to turn it back on at any moment). Click here to review the welcome email settings:	Os usuários importados receberão o email padrão de boas vindas da plataforma. Se não quiser que isso aconteça, você pode desligar este email antes da importação (é possível religá-lo a qualquer momento). Clique aqui para acessar as configurações do email de boas vindas:
+BATCH_IMPORT_PASSWORD_RESET_NOTICE	The users will need to reset their passwords by navigating to Login > Forgot my password . Alternatively, you may want to customize the welcome email to include a direct link to the Password Reset page by using the [RESET_PASSWORD_URL] variable.	Os usuários deverão redefinir suas senhas acessando a plataforma e navegando para Login > Esqueci minha senha. Alternativamente, você pode customizar o email de boas vindas para incluir um link direto para a página de Redefinição de Senha, incluindo a variável [RESET_PASSWORD_URL].
+ADDITIONAL_INFO_2_PUBLIC_PROFILE	Experience	Tempo de experiência
+QUOTE_LOCKED_REPLACEMENT_TEXT	Unlock this quote to see this text	Desbloqueie este orçamento para visualizar
+SELLER_DASHBOARD_CREDITS	Available credits	Créditos disponíveis
+SELLER_DASHBOARD_TO_EXPIRE	Credits to expire	Créditos a expirar
+SELLER_DASHBOARD_EXPIRATION_DATE	Expiration date	Data de expiração
+SELLER_DASHBOARD_UNLOCKED_QUOTES	Quote requests unlocked	Orçamentos desbloqueados
+TITLE_UNLOCK_QUOTE	Unlock quote request	Desbloquear orçamento
+BACK_TO_QUOTE_LIST_LINK	Back to quotes list	Voltar para lista de orçamentos
+CONFIRM_UNLOCK_QUOTE_TEXT	Confirm to unlock quote	Confirmar desbloqueio
+CONFIRM_UNLOCK_DESCRIPTION_1	Unlock this quote request?	Confirmar o desbloqueio deste orçamento?
+CONFIRM_UNLOCK_DESCRIPTION_2	{0} credit will be deducted from your balance	{0} crédito será deduzido do seu saldo
+CONFIRM_UNLOCK_BACK	Back to list	Voltar para lista
+CONFIRM_UNLOCK_BUTTON_TEXT	Unlock	Desbloquear
+QUOTE_UNLOCK_DISCLAIMER_TITLE	Quote unlocked	Orçamento desbloqueado
+QUOTE_UNLOCK_DISCLAIMER	You have just unlocked the details for this quote request. They are now permanently available and can be accessed anytime through your quotes list.	Você acaba de desbloquear os detalhes para este pedido de orçamento. Eles ficarão permanentemente disponíveis sem qualquer custo adicional, e podem ser acessados a qualquer momento a partir da sua lista de orçamentos.
+CREDITS_PER_MONTH	{0} credits per month	{0} créditos por mês
+CREDITS_LABEL	Credits	Créditos
+CREDITS_EXPIRE_ON	Expire on {0}	Expiram em {0}
+NEXT_CREDITS_DATE	Credits renewal	Renovação de créditos
+SUBSCRIPTION_ENABLED_ON	Subscribed on {0}	Assinada em {0}
+INSUFFICIENT_CREDITS_TITLE	Insufficient credits	Créditos insuficientes
+INSUFFICIENT_CREDITS_DESC	You don't have enough credits to purchase this item.	Você não possui créditos suficientes para desbloquear este item.
+INSUFFICIENT_CREDITS_HELP	Acquire more credits and try again	Adquira mais créditos e tente novamente
+LOCKED_QUOTE_TITLE	Title	Título
+LOCKED_QUOTE_NAME	Name	Nome
+LOCKED_QUOTE_DESCRIPTION	Description	Descrição
+LOCKED_QUOTE_PHONE	Phone	Telefone
+LOCKED_QUOTE_DATE	Date	Data
+LOCKED_QUOTE_ADDRESS	Address	Endereço
+UNLOCK_QUOTE_BUTTON	Unlock quote	Desbloquear orçamento
+FACEBOOK_LABEL	Facebook	Facebook
+INSTAGRAM_LABEL	Instagram	Instagram
+LINKEDIN_LABEL	Linkedin	Linkedin
+GOOGLEPLUS_LABEL	Google+	Google+
+BTN_SKIP_TO_CONTENT	Skip to Content	Pular cadastro
+SKIP_TO_CONTENT	Skip to Content	Pular cadastro
+CONFIRM_SKIP_QUESTION	Are you sure you want to skip this registration step?	Você tem certeza que deseja pular essa etapa do cadastro?
+CONFIRM_SMALL_SKIP_QUESTION	Before completing the registration, you will not appear in the searches and will not be able to bid on the platform. You can complete your registration at any time by accessing the "My Account" link from any page. Do you wish to continue?	Antes de completar o cadastro, você não aparecerá nas buscas e não poderá ofertar na plataforma. Você poderá completar seu cadastro a qualquer momento acessando o link "Minha conta" a partir de qualquer página. Deseja continuar?
+BTN_SKIP_CANCEL	Cancel	Cancelar
+BTN_SKIP_CONFIRM	Confirm	Confirmar
+ACQUIRE_MORE_CREDITS_LINK	Acquire more credits	Adquira mais créditos
+CREDITS_PACK_DESCRIPTION_DAYS	Credits valid for {0} days	Créditos válidos por {0} dias
+CREDITS_PACK_COST_BENEFIT	{0} per credit	{0} por crédito
+CREDITS_PACK_BUY_BUTTON	Purchase now	Adquira agora
+CREDITS_PACK_TITLE	Credits packs	Pacotes de créditos
+CREDITS_PACK_PURCHASE_CONFIRMATION_TITLE	Credits purchase complete	Compra de créditos concluída
+CREDITS_PACK_PURCHASE_ADDED	{0} credits were added to your balance.	{0} créditos foram adicionados ao seu saldo.
+CREDITS_PACK_PURCHASE_VALIDITY	Credits valid until {0}	Créditos válidos até {0}
+CREDITS_PACK_PURCHASE_DATE	Purchased at {0}	Compra confirmada em {0}
+CREDITS_PACK_RETURN_BUTTON	Back to account	Voltar para conta
+ORDER_INSTALLMENT_FEES	Installment Fees	Juros de parcelamento
+SELLER_MENU_BALANCE_LABEL	My Balance	Meu saldo
+BALANCE_FUTURE_TITLE	Future entries	Lançamentos previstos
+BALANCE_BLOCKED_TITLE	Blocked amount	Saldo bloqueado
+BALANCE_AVAILABLE_TITLE	Available amount	Saldo disponível
+BALANCE_FUTURE_HELP	Future balance, referring to transactions that will still be liquidated	Saldo futuro referente a pagamentos que ainda não foram liquidados
+BALANCE_BLOCKED_HELP	Balance held due to contested transactions or security measures	Valores retidos por contestações recebidas ou para garantir contestações futuras
+BALANCE_AVAILABLE_HELP_1	A fee of R$ 2,00 may be charged when withdrawing values under R$150,00	Pode ser cobrada uma tarifa de R$ 2,00 para saques inferiores a R$ 150,00
+BALANCE_AVAILABLE_HELP_2	Withdrawals may take up to 4 days to be processed after being requested.	Saques podem levar até 4 dias úteis para ser processados.
+BALANCE_WITHDRAW_BTN	Request withdrawal	Solicitar saque
+MENU_GROUP_MY_ACCOUNT	My Account	Cadastro
+MENU_GROUP_SERVICES	Services	Serviços
+MENU_GROUP_PRODUCTS	Products	Produtos
+MENU_GROUP_BUSINESS	Business	Negócios
+MENU_GROUP_MANAGE	Management	Gestão
+QUOTE_SEARCH_MIN_PRICE	Minimum price	Preço mínimo
+QUOTE_SEARCH_MAX_PRICE	Maximum price	Preço máximo
+QUOTE_SEARCH_MIN_DATE	Create from	Data mínima
+QUOTE_SEARCH_MAX_DATE	To	Data máxima
+QUOTE_SEARCH_BTN_REPLY	Reply to quote	Responder orçamento
+QUOTE_SEARCH_MENU_LABEL	Search open quotes	Buscar orçamentos
+QUOTE_SEARCH_LOGIN_REPLACE	Log in to see details	Faça login para visualizar
+DOCUMENT_NUMBER_FOOTER	Document Number	CNPJ
+QUOTE_SEARCH_MIN_PRICE	Minimum price	Preço mínimo
+QUOTE_SEARCH_MAX_PRICE	Maximum price	Preço máximo
+QUOTE_SEARCH_MIN_DATE	Create from	Data mínima
+QUOTE_SEARCH_MAX_DATE	To	Data máxima
+QUOTE_SEARCH_BTN_REPLY	Reply to quote	Responder orçamento
+QUOTE_SEARCH_MENU_LABEL	Search open quotes	Buscar orçamentos
+QUOTE_SEARCH_LOGIN_REPLACE	Log in to see details	Faça login para visualizar
+ADMIN_USERCONFIGS_BTN	Other options	Outras opções
+USER_RATING_EXPIRED	User rating deadline expired	Prazo para avaliação expirado
+USER_RATING_BLIND_PENDING	Awaiting review from other user before publishing	Aguardando avaliação do outro usuário para publicação
+USER_RATING_TITLE	User Rating	Avaliação de Usuários
+USER_RATING_RECEIVED	User rating received	Avaliação de usuário concluída
+USER_RATING_THANKS	Thank you for taking the time to send this rating. Your opinion is very important to us.	Obrigado por enviar esta avaliação. Sua opinião é muito importante para nós!
+USER_RATING_BLIND_PENDING_DESC	Your answer will be made public as soon as the rated user submits his rating of you.	Sua resposta só se tornará pública após o usuário avaliado enviar uma avaliação sua.
+USER_MODERATING_TITLE	Awaiting moderation	Aguardando moderação
+USER_MODERATING_DESC	Your profile is pending moderation and will not be visible by other users until approved by an administrator	Seu perfil está aguardando moderação e ficará invisível na plataforma até seu cadastro ser revisado e aprovado por um administrador
+SELLERS_PENDING_MENU	Awaiting moderation	Aguardando moderação
+SELLERS_LIST_PENDING_WARN	This list only shows sellers that have been approved by moderation	Esta lista exibe apenas vendedores aprovados pela moderação
+SELLERS_LIST_PENDING_LINK	Sellers awaiting moderation	Vendedores aguardando moderação
+SOCIAL_SHARE_SELLER_LABEL	Recommend this seller	Indique este vendedor
+SOCIAL_SHARE_PRODUCT_LABEL	Share this product	Compartilhe esta página
+CUSTOM_FIELD_INPUTTYPE_FILE	File	Arquivo
+CUSTOM_FIELD_DATATYPE_FILE	File	Arquivo
+CUSTOM_FIELD_VIEW_FILE	View link	Visualizar link
+ADMIN_CUSTOMIZATION_PANEL_TITLE	Customization Panel	Painel de Customização
+QUOTE_SELLERS_FOUND	These {0} sellers will receive your quote request	Estes {0} vendedores receberão o seu pedido de orçamento
+QUOTE_SEARCH_SELLERS_BUTTON	Request a quote	Peça um orçamento
+CART_ADDITIONAL_PRICE_LABEL	Additional Price	Preço adicional
+ACQUIRE_SUBSCRIPTION_CARD_TITLE	Subscribe now	Adquirir assinatura
+ACQUIRE_SUBSCRIPTION_CARD_TEXT	Acquire a subscription and receive credits monthly	Adquira uma assinatura e receba créditos todo mês
+ADMIN_CUSTOMIZE_QUOTE_CITYANDSTATE	City and State	Cidade e Estado
+ADMIN_CUSTOMIZE_QUOTE_ADDRESS	Address	Endereço
+ADMIN_CUSTOMIZE_QUOTE_PHONE	Phone	Telefone
+ADMIN_CUSTOMIZE_QUOTE_DATE	Date	Data
+ADMIN_CUSTOMIZE_QUOTE_PREFERENCE	Preference	Preferência
+ADMIN_CUSTOMIZE_QUOTE_MAX	Max budget	Preço máximo
+SUBSCRIPTION_HAS_TRIAL	{0} days of free trial	Inclui {0} dias gratuitos
+NEW_QUOTE_BILLING_BUYER_MESSAGE_TITLE	Buyer, sending of quote billing	Comprador, envio de cobrança de orçamento
+NEW_QUOTE_BILLING_BUYER_MESSAGE_DESCRIPTION	Message sent to buyer when a quote billing is created	Mensagem enviada ao comprador quando uma cobrança de orçamento é gerada
+NEW_QUOTE_BILLING_EMAIL_BUYER_SUBJECT	New billing for your quote request	Cobrança gerada para o seu pedido de orçamento
+BILLING_URL_VARIABLE_DESCRIPTION	Quote billing URL for buyer	URL da cobrança de orçamento para o comprador
+QUOTE_ANSWER_FILTERED_MESSAGE_TITLE	Admin, quote answer filtered	Administrador, resposta de orçamento filtrada
+QUOTE_ANSWER_FILTERED_MESSAGE_DESCRIPTION	Message sent to admins when a quote answer is filtered for containing contact information	Mensagem enviada aos admins quando uma resposta é filtrada por conter dados de contato
+QUOTE_ANSWER_FILTERED_MESSAGE_SUBJECT	Blocked content detected in quote answer	Conteúdo bloqueado em resposta de orçamento
+WHATSAPP_LABEL	WhatsApp number	Número WhatsApp
+ADMIN_CUSTOMIZE_WHATSAPP_LABEL	WhatsApp Number	Número do WhatsApp
+NOTIFICATION_NEW_QUOTE_TITLE	New quote received	Novo pedido de orçamento
+NOTIFICATION_QUOTE_CANCELLED_TITLE	Quote cancelled	Orçamento cancelado
+NOTIFICATION_QUOTE_CANCELLED_DESC	{0} cancelled quote	{0} cancelou o orçamento
+NOTIFICATION_QUOTE_ACCEPTED_TITLE	Quote proposal accepted	Proposta de orçamento aceita
+NOTIFICATION_QUOTE_ACCEPTED_DESC	{0} accepted your quote proposal	{0} aceitou sua proposta no pedido de orçamento
+NOTIFICATION_NEW_ORDER_TITLE	New order received	Novo pedido recebido
+NOTIFICATION_ORDER_PAID_TITLE	Order payment received	Pagamento de pedido recebido
+NOTIFICATION_ORDER_PAID_DESC	Payment received for order {0}	Pagamento recebido para o pedido {0}
+NOTIFICATION_MODERATED_TITLE	Registration approved	Cadastro aprovado
+NOTIFICATION_MODERATED_DESC	A moderator has reviewed and approved your profile	Seu cadastro foi revisado e aprovado por um moderador
+NOTIFICATION_QUOTE_MESSAGE_TITLE	{0} replied in quote	{0} respondeu ao orçamento
+NOTIFICATION_QUOTE_BILLING_TITLE	Billing received for quote	Cobrança recebida para orçamento
+NOTIFICATION_DISPUTE_OPENED_TITLE	New dispute started	Nova disputa iniciada
+NOTIFICATION_DISPUTE_OPENED_DESC	{0} started a dispute on an order	{0} iniciou uma disputa
+NOTIFICATION_DISPUTE_RESOLVED_TITLE	Dispute resolved	Disputa solucionada
+NOTIFICATION_DISPUTE_RESOLVED_DESC	{0} has settled the dispute	{0} aceitou uma resolução para a disputa
+NOTIFICATION_ORDER_ONDELIVERY_TITLE	Your order has been shipped	Seu pedido foi enviado
+NOTIFICATION_ORDER_ONDELIVERY_DESC	Order has been sent and is awaiting delivery	Pedido aguardando entrega
+NOTIFICATION_ORDER_CANCELLED_TITLE	Order has been cancelled	Pedido cancelado
+NOTIFICATION_ORDER_CANCELLED_DESC	Seller has cancelled order number {0}	Pedido {0} foi cancelado pelo vendedor
+NOTIFICATION_ORDER_DELIVERED_TITLE	Your order has been delivered	Seu pedido foi entregue
+NOTIFICATION_ORDER_DELIVERED_DESC	Order number {0} has been successfully delivered	Pedido {0} foi entregue com sucesso
+NOT_VALID_FIELD_ERROR	The {0} field is not valid.	O campo {0} não é válido.
+GDPR_COOKIE_CONSENT_TITLE	This site uses Cookies	Este site utiliza Cookies
+GDPR_COOKIE_CONSENT_TEXT	We use cookies to personalise content, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you've provided to them or that they've collected from your use of their services. You consent to our cookies if you continue to use this website.	Utilizamos cookies para personalizar o conteúdo, fornecer recursos de mídia social e analisar nosso tráfego. Também compartilhamos informações sobre seu uso do nosso site com nossos parceiros de mídia social, publicidade e análise que podem combiná-las com outras informações que você forneceu a eles ou que eles coletaram por você ter usado seus serviços. Você concorda com nossos cookies se continuar a usar este site.
+GDPR_COOKIE_CONSENT_ACCEPT	I understand that the site stores cookies	Eu entendo que este site armazena Cookies
+GDPR_COOKIE_CONSENT_LEARN_MORE	Read our Privacy Policy to learn more	Leia nossa Política de Privacidade para saber mais
+TERMS_NOT_AGREED_ERROR	You must agree to the terms of use	Você deve concordar com os Termos de Uso
+MUST_BE_TRUE_ERROR	The {0} field must be checked.	O campo {0} deve ser marcado.
+PRODUCT_GENERAL_PANEL_TITLE	General info	Informações gerais
+PRODUCT_STOCK_AND_VARIANTS_PANEL_TITLE	Variants and stock	Características e estoque
+ORDER_SHIPPED_INSERT_TRACKING_CODE_INPUT	Tracking code	Código de rastreamento do pacote
+ORDER_TRACKING_CODE	Tracking code	Código de rastreamento
+DELIVERY_METHOD_DOES_NOT_SHIP	This delivery method does not support tracking	Este método de entrega não suporta rastreamento
+NO_TRACKING_CODE_SUPPLIED	No tracking code supplied	O código de rastreamento não foi informado
+TRACKING_LINK_VARIABLE_DESCRIPTION	A link for the buyer to track the product package	Um link para que o comprador rastreie o pacote

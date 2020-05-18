@@ -1,0 +1,117 @@
+﻿<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    $(document).ready(function() {
+        var stripe = Stripe('@MaaSConfig.Current.Payment.Stripe.PublishableKey');
+
+        var elements = stripe.elements();
+
+        var style = {
+            base: {
+                color: '#32325d',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+
+        var cardElement = elements.create('card', { style: style });
+        cardElement.mount('#card-element');
+
+        // Handle real-time validation errors from the card Element.
+        cardElement.addEventListener('change', function(event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        var cardForm = document.getElementById('card-form');
+        var $cardButton = $(cardForm).find('button[type="submit"]');
+
+        cardForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            $cardButton.button('loading');
+
+            var cardholderName = document.getElementById('cardholder-name');
+
+            stripe.createToken(cardElement).then(function(result) {
+                if (result.error) {
+                    // Show error in payment form
+                    toastr.error(result.error.message);
+                    resetButton();
+                } else {
+                    // Otherwise send paymentMethod.id to your server (see Step 2)
+                    fetch(cardForm.action, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            card_token: result.token.id
+                        })
+                    })
+                    .then(function (result) {
+                        // Handle server response (see Step 3)
+                        result.json().then(function(json) {
+                            handleServerResponse(json);
+                        });
+                    });
+                }
+            });
+        });
+
+        function resetButton() {
+            $cardButton.button('reset');
+        }
+
+        function handleServerResponse(response) {
+            if (response.error) {
+                // Show error from server on payment form
+                toastr.error(response.error);
+                resetButton();
+            } else if (response.requires_action) {
+                // Use Stripe.js to handle required card action
+                stripe.handleCardPayment(
+                    response.payment_intent_client_secret
+                ).then(function(result) {
+                    if (result.error) {
+                        // Show error in payment form
+                        toastr.error(result.error.message);
+                        resetButton();
+                    } else {
+                        // The card action has been handled
+                        // The PaymentIntent can be confirmed again on the server
+                        fetch(cardForm.action, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                payment_intent_id: response.payment_intent_id
+                            })
+                        })
+                        .then(function (confirmResult) {
+                            console.log(confirmResult);
+
+                            return confirmResult.json();
+                        })
+                        .then(handleServerResponse);
+                    }
+                });
+            } else {
+                resetButton();
+                $('.main-content').html(response.html);
+            }
+        }
+    });
+</script>

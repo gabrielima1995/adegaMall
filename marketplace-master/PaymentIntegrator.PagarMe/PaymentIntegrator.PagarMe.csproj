@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ED31755A-CBC9-4826-BE6F-A1640D23AC9B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PaymentIntegrator.PagarMe</RootNamespace>
+    <AssemblyName>PaymentIntegrator.PagarMe</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DemoOrcamento|AnyCPU'">
+    <OutputPath>bin\DemoOrcamento\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DemoProduto|AnyCPU'">
+    <OutputPath>bin\DemoProduto\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.7.4137.9688, Culture=neutral, PublicKeyToken=a4292a325f69b123, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.7.5.0\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagarMe, Version=2.0.6746.17849, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pagar.me.2.6.6\lib\net45\PagarMe.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.2.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.2.1\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.Primitives, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Primitives.4.3.0\lib\net45\System.ComponentModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\AddressHelper.cs" />
+    <Compile Include="Common\IValidatable.cs" />
+    <Compile Include="Common\PagarmeAccountType.cs" />
+    <Compile Include="Common\PagarmeBankAccount.cs" />
+    <Compile Include="Common\PagarmeBankCode.cs" />
+    <Compile Include="Common\PagarmeBranchOrAccount.cs" />
+    <Compile Include="Common\PagarmeDocumentNumber.cs" />
+    <Compile Include="Common\PagarMeHelper.cs" />
+    <Compile Include="Common\PagarmeLegalName.cs" />
+    <Compile Include="Common\PagarmeRecipient.cs" />
+    <Compile Include="Common\PagarmeRecipientTransferSettings.cs" />
+    <Compile Include="Common\PagarmeTransferInterval.cs" />
+    <Compile Include="Common\StringHelper.cs" />
+    <Compile Include="Customers\CustomerHelper.cs" />
+    <Compile Include="Customers\CustomerOperations.cs" />
+    <Compile Include="Customers\CustomerRequest.cs" />
+    <Compile Include="Customers\CustomerResponse.cs" />
+    <Compile Include="Custom\SplitRuleCustom.cs" />
+    <Compile Include="Custom\TransactionCustom.cs" />
+    <Compile Include="PagarMeClient.cs" />
+    <Compile Include="PagarMeConfig.cs" />
+    <Compile Include="PagarMeUtils.cs" />
+    <Compile Include="PaymentMethods\CreditCardHelper.cs" />
+    <Compile Include="PaymentMethods\CreditCardRequest.cs" />
+    <Compile Include="PaymentMethods\CreditCardResult.cs" />
+    <Compile Include="PaymentMethods\PaymentMethodOperations.cs" />
+    <Compile Include="Payments\CustomTransfer.cs" />
+    <Compile Include="Payments\OrderData.cs" />
+    <Compile Include="Payments\PayableHelper.cs" />
+    <Compile Include="Payments\PaymentHelper.cs" />
+    <Compile Include="Payments\PaymentMetadataRequest.cs" />
+    <Compile Include="Payments\PaymentOperations.cs" />
+    <Compile Include="Payments\TransactionRequest.cs" />
+    <Compile Include="Payments\TransactionResponse.cs" />
+    <Compile Include="Plans\PlanHelper.cs" />
+    <Compile Include="Plans\PlanOperations.cs" />
+    <Compile Include="Plans\PlanResponse.cs" />
+    <Compile Include="Postbacks\Postback.cs" />
+    <Compile Include="Postbacks\PostbackPayload.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleImpl\Client.cs" />
+    <Compile Include="SimpleImpl\Config.cs" />
+    <Compile Include="SimpleImpl\Helpers.cs" />
+    <Compile Include="SimpleImpl\Models.cs" />
+    <Compile Include="SimpleImpl\Requests.cs" />
+    <Compile Include="SimpleImpl\Response.cs" />
+    <Compile Include="Subscriptions\SubscriptionOperations.cs" />
+    <Compile Include="Subscriptions\SubscriptionRequest.cs" />
+    <Compile Include="Subscriptions\SubscriptionResponse.cs" />
+    <Compile Include="Suppliers\BankAccountRequest.cs" />
+    <Compile Include="Suppliers\PagarmeBankAccount.cs" />
+    <Compile Include="Suppliers\RecipientRequest.cs" />
+    <Compile Include="Suppliers\SupplierOperations.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{44A771E7-F5AF-43A7-B1DC-EFC36E3AC340}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaymentIntegrator.Core\PaymentIntegrator.Core.csproj">
+      <Project>{880230cf-fe0c-4943-ade0-88575aefc8a0}</Project>
+      <Name>PaymentIntegrator.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

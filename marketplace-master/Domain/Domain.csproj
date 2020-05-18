@@ -1,0 +1,799 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C54C6F75-69C6-4AEF-ADCA-70C08BD1A02C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Domain</RootNamespace>
+    <AssemblyName>Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DemoOrcamento|AnyCPU'">
+    <OutputPath>bin\DemoOrcamento\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DemoProduto|AnyCPU'">
+    <OutputPath>bin\DemoProduto\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExpressiveAnnotations, Version=2.7.1.0, Culture=neutral, PublicKeyToken=d3e372f3c1e83cec, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExpressiveAnnotations.2.9.2\lib\net45\ExpressiveAnnotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExpressiveAnnotations.MvcUnobtrusive, Version=2.5.2.0, Culture=neutral, PublicKeyToken=d3e372f3c1e83cec, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExpressiveAnnotations.2.9.2\lib\net45\ExpressiveAnnotations.MvcUnobtrusive.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.7.5.0\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="MediatR, Version=8.0.1.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.8.0.1\lib\net461\MediatR.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.Primitives, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Primitives.4.3.0\lib\net45\System.ComponentModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyMarker.cs" />
+    <Compile Include="Config\Common\DateOfBirthConfig.cs" />
+    <Compile Include="Config\Common\IConfigNode.cs" />
+    <Compile Include="Config\Common\PublicProfileConfig.cs" />
+    <Compile Include="Config\Common\PublicProfileRegisterConfig.cs" />
+    <Compile Include="Config\Common\PublicRegisterConfig.cs" />
+    <Compile Include="Config\Common\RegisterConfig.cs" />
+    <Compile Include="Config\Common\SellerDateOfBirthConfig.cs" />
+    <Compile Include="Config\Common\StatusConfig.cs" />
+    <Compile Include="Config\ConfigMigrations\_ConfigMigrationBase.cs" />
+    <Compile Include="Config\ConfigMigrations\_ConfigMigrator.cs" />
+    <Compile Include="Config\ConfigMigrations\_IConfigMigration.cs" />
+    <Compile Include="Config\ConfigMigrations\20171221_Migration_1_to_2.cs" />
+    <Compile Include="Config\ConfigValidator.cs" />
+    <Compile Include="Config\General\GdprConfig.cs" />
+    <Compile Include="Config\General\Integrator\MoipConfig.cs" />
+    <Compile Include="Config\General\Integrator\GatewayConfig.cs" />
+    <Compile Include="Config\General\Integrator\StripeConfig.cs" />
+    <Compile Include="Config\General\Layout\TransactionWarrantyDisplayConfig.cs" />
+    <Compile Include="Config\General\SingleUserMultipleProfilesConfig.cs" />
+    <Compile Include="Config\General\SocialNetworksConfig.cs" />
+    <Compile Include="Config\General\StatementDescriptor.cs" />
+    <Compile Include="Config\General\UserVoiceConfig.cs" />
+    <Compile Include="Config\General\WebAppConfig.cs" />
+    <Compile Include="Config\Modules\BatchImportConfig.cs" />
+    <Compile Include="Config\Modules\GeneralQuoteConfig.cs" />
+    <Compile Include="Config\Modules\PortfolioItemQuoteConfig.cs" />
+    <Compile Include="Config\Modules\Product\CorreiosContractConfig.cs" />
+    <Compile Include="Config\Modules\Product\RentalFixedPeriodForAllProductsConfig.cs" />
+    <Compile Include="Config\Modules\Product\ProductTemplatesConfig.cs" />
+    <Compile Include="Config\Modules\SpecificQuoteConfig.cs" />
+    <Compile Include="Config\Modules\StockConfig.cs" />
+    <Compile Include="Config\Registers\SellerAssistantConfig.cs" />
+    <Compile Include="Config\Sections\NearbyProductsConfig.cs" />
+    <Compile Include="DTO\CartCustomFieldsViewModel.cs" />
+    <Compile Include="DTO\CorreiosShippingDto.cs" />
+    <Compile Include="DTO\RentalCalendarViewModel.cs" />
+    <Compile Include="DTO\RentalDayGridView.cs" />
+    <Compile Include="DTO\RentalGridView.cs" />
+    <Compile Include="DTO\RentalPeriodGridView.cs" />
+    <Compile Include="DTO\SellerScheduledTransferViewModel.cs" />
+    <Compile Include="DTO\StoreProductVM.cs" />
+    <Compile Include="Events\BuyerRegisteredEvent.cs" />
+    <Compile Include="Events\BuyerUpdatedEvent.cs" />
+    <Compile Include="Events\BuyerModerationApprovedEvent.cs" />
+    <Compile Include="Events\ProductCurrentStockChanged.cs" />
+    <Compile Include="Events\SellerAssistantRegisteredEvent.cs" />
+    <Compile Include="Events\SellerCompleteProfileEvent\SellerProfileUpdated.cs" />
+    <Compile Include="Events\SellerEnabledEvent.cs" />
+    <Compile Include="Events\BuyerEnabledEvent.cs" />
+    <Compile Include="Events\StoreModule\RentalInfoCreated.cs" />
+    <Compile Include="Events\StoreModule\ProductPriceChangedEvent.cs" />
+    <Compile Include="Modules\BatchImport\DataType.cs" />
+    <Compile Include="Modules\BatchImport\Field.cs" />
+    <Compile Include="Modules\BatchImport\ImportExportMetadata.cs" />
+    <Compile Include="Modules\BatchImport\ProductMetadata.cs" />
+    <Compile Include="Modules\BatchImport\ProductData.cs" />
+    <Compile Include="Config\Modules\CustomFieldsConfig.cs" />
+    <Compile Include="Config\General\AdditionalLinksConfig.cs" />
+    <Compile Include="Config\General\AdminCustomizationConfig.cs" />
+    <Compile Include="Config\General\BlogConfig.cs" />
+    <Compile Include="Config\General\CdnConfig.cs" />
+    <Compile Include="Config\General\DashboardConfig.cs" />
+    <Compile Include="Config\General\EnterpriseConfig.cs" />
+    <Compile Include="Config\General\EnvironmentConfig.cs" />
+    <Compile Include="Config\General\FacebookConfig.cs" />
+    <Compile Include="Config\General\Integrator\PagarMeIntegrator.cs" />
+    <Compile Include="Config\General\PaymentCommonConfig.cs" />
+    <Compile Include="Config\General\PaymentConfig.cs" />
+    <Compile Include="Config\General\Integrator\IuguConfig.cs" />
+    <Compile Include="Config\General\Integrator\GatewayBankslipConfig.cs" />
+    <Compile Include="Config\General\Integrator\GatewayCreditCardConfig.cs" />
+    <Compile Include="Config\General\Integrator\GatewayInstallmentsConfig.cs" />
+    <Compile Include="Config\General\LayoutConfig.cs" />
+    <Compile Include="Config\General\Layout\ColorsConfig.cs" />
+    <Compile Include="Config\General\Layout\FontsConfig.cs" />
+    <Compile Include="Config\General\Layout\ImagesConfig.cs" />
+    <Compile Include="Config\General\Layout\PaymentMethodsDisplayConfig.cs" />
+    <Compile Include="Config\General\Layout\StylesConfig.cs" />
+    <Compile Include="Config\General\LocalizationConfig.cs" />
+    <Compile Include="Config\General\SearchConfig.cs" />
+    <Compile Include="Config\General\IntercomConfig.cs" />
+    <Compile Include="Config\MaaSConfig.cs" />
+    <Compile Include="Config\MaaSConfigHelper.cs" />
+    <Compile Include="Config\Modules\FinanceConfig.cs" />
+    <Compile Include="Config\Modules\LeadSalesConfig.cs" />
+    <Compile Include="Config\Modules\PortfolioConfig.cs" />
+    <Compile Include="Config\Modules\Portfolio\PortfolioSearchConfig.cs" />
+    <Compile Include="Config\Modules\ProductConfig.cs" />
+    <Compile Include="Config\Modules\Product\ActualNoShippingConfig.cs" />
+    <Compile Include="Config\Modules\Product\BusinessModelConfig.cs" />
+    <Compile Include="Config\Modules\Product\DeliveryTimeMessageConfig.cs" />
+    <Compile Include="Config\Modules\Product\NoShippingConfig.cs" />
+    <Compile Include="Config\Modules\Product\OnSitePickupShippingConfig.cs" />
+    <Compile Include="Config\Modules\Product\OrderConfig.cs" />
+    <Compile Include="Config\Modules\Product\OrderReviewConfig.cs" />
+    <Compile Include="Config\Modules\Product\PostalExpressShippingConfig.cs" />
+    <Compile Include="Config\Modules\Product\PostalRegularShippingConfig.cs" />
+    <Compile Include="Config\Modules\Product\PrivateFleetParameterConfig.cs" />
+    <Compile Include="Config\Modules\Product\PrivateFleetShippingConfig.cs" />
+    <Compile Include="Config\Modules\Product\ProductPageConfig.cs" />
+    <Compile Include="Config\Modules\Product\ProductSearchConfig.cs" />
+    <Compile Include="Config\Modules\QuoteBillingConfig.cs" />
+    <Compile Include="Config\Modules\QuoteConfig.cs" />
+    <Compile Include="Config\Modules\SubscriptionConfig.cs" />
+    <Compile Include="Config\Modules\Product\VariantsConfig.cs" />
+    <Compile Include="Config\Registers\BuyerConfig.cs" />
+    <Compile Include="Config\Registers\DocumentNumberConfig.cs" />
+    <Compile Include="Config\Registers\SellerAddressConfig.cs" />
+    <Compile Include="Config\Registers\SellerConfig.cs" />
+    <Compile Include="Config\Sections\RatingsConfig.cs" />
+    <Compile Include="Config\Sections\BannersConfig.cs" />
+    <Compile Include="Config\Sections\BestSellersConfig.cs" />
+    <Compile Include="Config\Sections\EcommerceProductsConfig.cs" />
+    <Compile Include="Config\Sections\EcommerceSearchConfig.cs" />
+    <Compile Include="Config\Sections\HelpQuestionsConfig.cs" />
+    <Compile Include="Config\Sections\HelpQuestionsItemConfig.cs" />
+    <Compile Include="Config\Sections\HeroUnitConfig.cs" />
+    <Compile Include="Config\Sections\HomeCallSellersConfig.cs" />
+    <Compile Include="Config\Sections\HowItWorksConfig.cs" />
+    <Compile Include="Config\Sections\HowItWorksItemConfig.cs" />
+    <Compile Include="Config\Sections\MiscAreaConfig.cs" />
+    <Compile Include="Config\Sections\MiscAreaItemConfig.cs" />
+    <Compile Include="Config\General\SocialMediaConfig.cs" />
+    <Compile Include="Core\Command.cs" />
+    <Compile Include="Core\Contract.cs" />
+    <Compile Include="Core\Exceptions\DomainEventHandlerFailedException.cs" />
+    <Compile Include="Core\Exceptions\OperationResultException.cs" />
+    <Compile Include="Core\Messaging\IDomainEventDispatcher.cs" />
+    <Compile Include="Core\Exceptions\InvalidEntityException.cs" />
+    <Compile Include="Core\Exceptions\InvalidCommandException.cs" />
+    <Compile Include="Core\ValueObject.cs" />
+    <Compile Include="Modules\Finance\GatewayRegistrationLog.cs" />
+    <Compile Include="Modules\Finance\Interfaces\IGatewayRegistrationLogQueries.cs" />
+    <Compile Include="Modules\Finance\Interfaces\IGatewayRegistrationLogRepository.cs" />
+    <Compile Include="Modules\LeadSales\CreditsBundle.cs" />
+    <Compile Include="Modules\LeadSales\CreditsPack.cs" />
+    <Compile Include="Modules\LeadSales\CreditsPackTransaction.cs" />
+    <Compile Include="Entities\IWithCustomFields.cs" />
+    <Compile Include="Modules\LeadSales\LeadSalesProfile.cs" />
+    <Compile Include="Entities\MarketplacePushSubscription.cs" />
+    <Compile Include="Modules\ProductTemplateModule\ProductTemplate.cs" />
+    <Compile Include="Modules\ProductTemplateModule\ProductTemplateAdded.cs" />
+    <Compile Include="Modules\ProductTemplateModule\ProductTemplateDeleted.cs" />
+    <Compile Include="Modules\ProductTemplateModule\ProductTemplateDimensions.cs" />
+    <Compile Include="Modules\ProductTemplateModule\ProductTemplateImage.cs" />
+    <Compile Include="Modules\ProductTemplateModule\ProductTemplateUpdated.cs" />
+    <Compile Include="Modules\Ratings\UserRating.cs" />
+    <Compile Include="Entities\CustomField.cs" />
+    <Compile Include="Modules\Dispute\Dispute.cs" />
+    <Compile Include="Modules\Ecommerce\CustomItem.cs" />
+    <Compile Include="Modules\Ecommerce\CustomItemCategory.cs" />
+    <Compile Include="Events\Config\ConfigUpdatedEvent.cs" />
+    <Compile Include="Events\Customization\PlatformCustomizationUpdatedEvent.cs" />
+    <Compile Include="Events\DisputeOpenedEvent.cs" />
+    <Compile Include="Events\DisputeStatusChangedEvent.cs" />
+    <Compile Include="Events\PendingRatingCreatedEvent.cs" />
+    <Compile Include="Events\PortfolioModule\PortfolioCreatedEvent.cs" />
+    <Compile Include="Events\PortfolioModule\PortfolioItemAddedEvent.cs" />
+    <Compile Include="Events\PortfolioModule\PortfolioItemRemovedEvent.cs" />
+    <Compile Include="Events\PortfolioModule\PortfolioItemUpdatedEvent.cs" />
+    <Compile Include="Events\PortfolioModule\PortfolioUpdatedEvent.cs" />
+    <Compile Include="Events\QuoteBillingModule\QuoteBillingCancelledEvent.cs" />
+    <Compile Include="Events\QuoteBillingModule\QuoteBillingCreatedEvent.cs" />
+    <Compile Include="Events\QuoteBillingModule\QuoteBillingPaidEvent.cs" />
+    <Compile Include="Events\QuoteBillingModule\QuoteBillingRefundedEvent.cs" />
+    <Compile Include="Events\QuoteRequests\QuoteAnswerFilteredEvent.cs" />
+    <Compile Include="Events\QuoteRequests\QuoteClosedByBuyerEvent.cs" />
+    <Compile Include="Events\SellerRegisteredEvent.cs" />
+    <Compile Include="Events\SellerModerationApprovedEvent.cs" />
+    <Compile Include="Events\SellerUpdatedEvent.cs" />
+    <Compile Include="Events\StoreModule\RentalShiftAddedEvent.cs" />
+    <Compile Include="Events\StoreModule\RentalShiftRemovedEvent.cs" />
+    <Compile Include="Events\StoreModule\RentalShiftUpdatedEvent.cs" />
+    <Compile Include="Globalization\DataAnnotations\EnsureMinimumElementsLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\Adapters\MustBeTrueIfLocalizedAttributeAdapter.cs" />
+    <Compile Include="Globalization\DataAnnotations\MustBeTrueIfLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\MustBeTrueLocalizedAttribute.cs" />
+    <Compile Include="Interfaces\Repositories\ICustomItemCategoryRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ICustomItemRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ICustomFieldRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ICreditsPackRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPushSubscriptionRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IScheduledTransferRepository.cs" />
+    <Compile Include="Helpers\GatewayValidationHelper.cs" />
+    <Compile Include="Interfaces\Repositories\IUserConfigRepository.cs" />
+    <Compile Include="Modules\Customization\CustomizationService.cs" />
+    <Compile Include="Modules\Customization\Entities\PlatformCustomization.cs" />
+    <Compile Include="DataAnnotations\TextAttribute.cs" />
+    <Compile Include="DTO\AccountModels.cs" />
+    <Compile Include="DTO\AddressListing.cs" />
+    <Compile Include="DTO\AddressRegisterModel.cs" />
+    <Compile Include="DTO\AntifraudAnalisysPostback.cs" />
+    <Compile Include="DTO\AntifraudOrderStatus.cs" />
+    <Compile Include="DTO\ApiTokenEditing.cs" />
+    <Compile Include="DTO\ApiTokenListing.cs" />
+    <Compile Include="DTO\Checkout.cs" />
+    <Compile Include="DTO\CloudFileType.cs" />
+    <Compile Include="DTO\EcommerceHomeProducts.cs" />
+    <Compile Include="DTO\ExternalProductUpdate.cs" />
+    <Compile Include="DTO\FileUpload.cs" />
+    <Compile Include="DTO\LockProductRentalDto.cs" />
+    <Compile Include="DTO\OrderBuyerListing.cs" />
+    <Compile Include="DTO\OrderDetails.cs" />
+    <Compile Include="DTO\OrderHistoryListing.cs" />
+    <Compile Include="DTO\OrderItemListing.cs" />
+    <Compile Include="DTO\OrderListing.cs" />
+    <Compile Include="DTO\OrderPaymentListing.cs" />
+    <Compile Include="DTO\OrderProductRentalDto.cs" />
+    <Compile Include="DTO\OrderSellerListing.cs" />
+    <Compile Include="DTO\ParcelInfo.cs" />
+    <Compile Include="DTO\PaymentModels.cs" />
+    <Compile Include="DTO\ProductDetailsForPublicPage.cs" />
+    <Compile Include="DTO\ProductEditing.cs" />
+    <Compile Include="DTO\QuoteRequest.cs" />
+    <Compile Include="DTO\SearchModels.cs" />
+    <Compile Include="DTO\SearchSortOptions.cs" />
+    <Compile Include="DTO\SellerPublicProfile.cs" />
+    <Compile Include="DTO\SellerSelectItem.cs" />
+    <Compile Include="DTO\MessageTemplateCreating.cs" />
+    <Compile Include="DTO\MessageTemplateEditing.cs" />
+    <Compile Include="DTO\TransactionPostback.cs" />
+    <Compile Include="DTO\UpdateFromExternalSourceResult.cs" />
+    <Compile Include="DTO\LoginProfile.cs" />
+    <Compile Include="DTO\WebhookCreating.cs" />
+    <Compile Include="DTO\WebhookEditing.cs" />
+    <Compile Include="DTO\WebhookListing.cs" />
+    <Compile Include="DTO\WebhookToNotify.cs" />
+    <Compile Include="Entities\AntifraudTransaction.cs" />
+    <Compile Include="Modules\Api\ApiToken.cs" />
+    <Compile Include="Entities\Banner.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Modules\Ecommerce\EcommerceHome.cs" />
+    <Compile Include="Modules\Ecommerce\EcommerceHomeCategory.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\IImage.cs" />
+    <Compile Include="Entities\IService.cs" />
+    <Compile Include="Entities\IWithAddress.cs" />
+    <Compile Include="Entities\IWithCategory.cs" />
+    <Compile Include="Entities\IWithCity.cs" />
+    <Compile Include="Entities\IWithLang.cs" />
+    <Compile Include="Entities\IWithPosition.cs" />
+    <Compile Include="Entities\IWithProductCategory.cs" />
+    <Compile Include="Entities\IWithProductVariant.cs" />
+    <Compile Include="Entities\IWithProductVariantType.cs" />
+    <Compile Include="Entities\IWithSubCategory.cs" />
+    <Compile Include="Entities\Lang.cs" />
+    <Compile Include="Modules\Finance\ScheduledTransfer.cs" />
+    <Compile Include="Modules\Api\RequestReceivedApiLog.cs" />
+    <Compile Include="Entities\MessageTemplate.cs" />
+    <Compile Include="Modules\Api\WebHook.cs" />
+    <Compile Include="Modules\Api\WebhookCalledApiLog.cs" />
+    <Compile Include="Modules\Api\WebhookEvent.cs" />
+    <Compile Include="Events\EcommerceHome\HomeCategoryAddedEvent.cs" />
+    <Compile Include="Events\EcommerceHome\HomeCategoryRemovedEvent.cs" />
+    <Compile Include="Events\EcommerceHome\HomeCategoryUpdatedEvent.cs" />
+    <Compile Include="Events\Finance\TransferJournalEntryAddedEvent.cs" />
+    <Compile Include="Events\NewOrderRegisteredEvent.cs" />
+    <Compile Include="Events\QuoteRequests\NewQuoteGroupRegisteredEvent.cs" />
+    <Compile Include="Events\QuoteRequests\NewQuoteRegisteredEvent.cs" />
+    <Compile Include="Events\QuoteRequests\QuoteClosedEvent.cs" />
+    <Compile Include="Events\StoreModule\ProductAddedEvent.cs" />
+    <Compile Include="Events\StoreModule\ProductDeletedEvent.cs" />
+    <Compile Include="Events\StoreModule\ProductRentedEvent.cs" />
+    <Compile Include="Events\StoreModule\ProductStockUpdatedEvent.cs" />
+    <Compile Include="Events\StoreModule\ProductUpdatedEvent.cs" />
+    <Compile Include="Events\StoreModule\RentalReturnedEvent.cs" />
+    <Compile Include="Events\StoreModule\StoreUpdatedEvent.cs" />
+    <Compile Include="Events\Subscriptions\SubscriptionAddedEvent.cs" />
+    <Compile Include="Events\Subscriptions\SubscriptionCancelledEvent.cs" />
+    <Compile Include="Events\Subscriptions\SubscriptionUpdatedEvent.cs" />
+    <Compile Include="Events\PersonUpdatedEvent.cs" />
+    <Compile Include="Interfaces\ITimeZoneProvider.cs" />
+    <Compile Include="Interfaces\IUserAuthProvider.cs" />
+    <Compile Include="Interfaces\ICache.cs" />
+    <Compile Include="Interfaces\IEmailSender.cs" />
+    <Compile Include="Interfaces\Repositories\IStockTransactionRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IMessageTemplateRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\Repositories\IRequestReceivedApiLogRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IWebhookCalledApiLogRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IWebhookRepository.cs" />
+    <Compile Include="Modules\Customization\Interfaces\ICustomizationRepository.cs" />
+    <Compile Include="Modules\Finance\Interfaces\ITransferJournalRepository.cs" />
+    <Compile Include="Modules\Finance\TransferJournalEntry.cs" />
+    <Compile Include="Modules\Finance\TransferJournalService.cs" />
+    <Compile Include="Modules\Finance\TransferJournalEntryType.cs" />
+    <Compile Include="Modules\ProductWishModule\IProductWishRepository.cs" />
+    <Compile Include="Modules\ProductWishModule\IProductWishService.cs" />
+    <Compile Include="Modules\ProductWishModule\ProductWish.cs" />
+    <Compile Include="Modules\ProductWishModule\ProductWishService.cs" />
+    <Compile Include="Modules\QuoteBillingModule\Entities\QuoteBilling.cs" />
+    <Compile Include="Modules\QuoteBillingModule\Interfaces\IQuoteBillingRepository.cs" />
+    <Compile Include="Modules\QuoteBillingModule\Interfaces\QuoteBillingIdOrderIdRelationDto.cs" />
+    <Compile Include="Modules\Ratings\IRatingsQueries.cs" />
+    <Compile Include="Modules\Ratings\IUserRatingsRepository.cs" />
+    <Compile Include="Modules\Ratings\Models\SellerRatingsViewModel.cs" />
+    <Compile Include="Modules\Ratings\UserRatingViewModel.cs" />
+    <Compile Include="Modules\QuoteRequests\Commands\AcceptQuoteCommand.cs" />
+    <Compile Include="Modules\QuoteRequests\Commands\CloseQuoteCommand.cs" />
+    <Compile Include="Modules\QuoteRequests\Commands\AddQuoteAnswerCommand.cs" />
+    <Compile Include="Modules\QuoteRequests\Commands\RequestQuoteCommand.cs" />
+    <Compile Include="Modules\QuoteRequests\Entities\QuoteAnswer.cs" />
+    <Compile Include="Entities\Str.cs" />
+    <Compile Include="Core\Messaging\DomainEvent.cs" />
+    <Compile Include="Events\CrudEventType.cs" />
+    <Compile Include="Core\Messaging\IDomainEventHandler.cs" />
+    <Compile Include="Core\Messaging\Message.cs" />
+    <Compile Include="Events\QuoteRequests\QuoteAnswerAddedEvent.cs" />
+    <Compile Include="Events\StoreUpdatedEventArgs.cs" />
+    <Compile Include="Events\ProductCrudEventArgs.cs" />
+    <Compile Include="Events\PersonUpdatedEventArgs.cs" />
+    <Compile Include="Globalization\Attributes\DescriptionLocalizedAttribute.cs" />
+    <Compile Include="Globalization\Attributes\DisplayNameLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\Adapters\CompareLocalizedAttributeAdapter.cs" />
+    <Compile Include="Globalization\DataAnnotations\Adapters\DocumentNumberLocalizedAttributeAdapter.cs" />
+    <Compile Include="Globalization\DataAnnotations\Adapters\EmailAddressLocalizedAttributeAdapter.cs" />
+    <Compile Include="Globalization\DataAnnotations\Adapters\GlobalizationDataAnnotationsAdaptersHelper.cs" />
+    <Compile Include="Globalization\DataAnnotations\Adapters\NicknameLocalizedAttributeAdapter.cs" />
+    <Compile Include="Globalization\DataAnnotations\Adapters\RangeLocalizedAttributeAdapter.cs" />
+    <Compile Include="Globalization\DataAnnotations\Adapters\RegularExpressionLocalizedAttributeAdapter.cs" />
+    <Compile Include="Globalization\DataAnnotations\Adapters\RequiredIfLocalizedAttributeAdapter.cs" />
+    <Compile Include="Globalization\DataAnnotations\Adapters\RequiredLocalizedAttributeAdapter.cs" />
+    <Compile Include="Globalization\DataAnnotations\Adapters\StringLengthLocalizedAttributeAdapter.cs" />
+    <Compile Include="Globalization\DataAnnotations\CompareLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\DocumentNumberLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\EmailAddressLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\NicknameLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\PhoneNumberLocalized.cs" />
+    <Compile Include="Globalization\DataAnnotations\RangeLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\RegularExpressionLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\RequiredIfLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\RequiredLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\SocialMedia\FacebookLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\SocialMedia\GooglePlusLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\SocialMedia\InstagramLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\SocialMedia\LinkedInLocalizedAttribute.cs" />
+    <Compile Include="Globalization\DataAnnotations\StringLengthLocalizedAttribute.cs" />
+    <Compile Include="Globalization\Helpers\ExpressiveHelper.cs" />
+    <Compile Include="Globalization\Helpers\FormatHelper.cs" />
+    <Compile Include="Globalization\Helpers\GlobalizationCultureHelper.cs" />
+    <Compile Include="Globalization\Helpers\GlobalizationDecimalHelper.cs" />
+    <Compile Include="Globalization\Helpers\GlobalizationEnumHelper.cs" />
+    <Compile Include="Globalization\Helpers\GlobalizationHelper.cs" />
+    <Compile Include="Globalization\Helpers\GlobalizationIntegerHelper.cs" />
+    <Compile Include="Globalization\Helpers\GlobalizationThreadHelper.cs" />
+    <Compile Include="Globalization\Helpers\GlobalizationUrlHelper.cs" />
+    <Compile Include="Helpers\CloudStorageHelper.cs" />
+    <Compile Include="Helpers\DbGeographyHelper.cs" />
+    <Compile Include="Helpers\EntityHelper.cs" />
+    <Compile Include="Helpers\WithPositionHelper.cs" />
+    <Compile Include="Interfaces\IAntifraudService.cs" />
+    <Compile Include="Interfaces\ICloudStorage.cs" />
+    <Compile Include="Interfaces\IBackgroundWorker.cs" />
+    <Compile Include="Interfaces\IGeocodingService.cs" />
+    <Compile Include="Interfaces\IIocContainer.cs" />
+    <Compile Include="Modules\QuoteRequests\RegisterQuoteWorkflow.cs" />
+    <Compile Include="Modules\Search\SearchSpecs.cs" />
+    <Compile Include="Modules\SellerAssistantModule\SellerAssistantPermissionsSet.cs" />
+    <Compile Include="Modules\StoreModule\Commands\EditRecurringProductAvailabilityCommand.cs" />
+    <Compile Include="Modules\StoreModule\Commands\NewRecurringProductAvailabilityCommand.cs" />
+    <Compile Include="Modules\StoreModule\CompleteProfile\GatewayProfile.cs" />
+    <Compile Include="Modules\StoreModule\CompleteProfile\MembershipPlan.cs" />
+    <Compile Include="Modules\StoreModule\CompleteProfile\Moderation.cs" />
+    <Compile Include="Modules\StoreModule\CompleteProfile\PendingCustomField.cs" />
+    <Compile Include="Modules\StoreModule\CompleteProfile\PortfolioCategoriesProfile.cs" />
+    <Compile Include="Modules\StoreModule\CompleteProfile\PortfolioProfile.cs" />
+    <Compile Include="Modules\StoreModule\CompleteProfile\ProductsProfile.cs" />
+    <Compile Include="Modules\StoreModule\CompleteProfile\Registration.cs" />
+    <Compile Include="Modules\StoreModule\CompleteProfile\Schedule.cs" />
+    <Compile Include="Modules\StoreModule\CompleteProfile\SellerCompleteProfile.cs" />
+    <Compile Include="Modules\StoreModule\Commands\EditProductAvailabilityCommand.cs" />
+    <Compile Include="Modules\StoreModule\Commands\DeleteProductAvailabilityCommand.cs" />
+    <Compile Include="Modules\StoreModule\Entities\DefaultShipping.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ScheduleViewMode.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductAvailabilityMode.cs" />
+    <Compile Include="Modules\StoreModule\Entities\RentalLockAdded.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductAvailabilityDeleted.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductAvailabilityUpdated.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductAvailabilityAdded.cs" />
+    <Compile Include="Modules\StoreModule\Entities\RecurringProductAvailabilityUnit.cs" />
+    <Compile Include="Modules\StoreModule\Entities\RentalLockDeleted.cs" />
+    <Compile Include="Modules\StoreModule\ProductAvailabilityService.cs" />
+    <Compile Include="Modules\StoreModule\Commands\NewProductAvailabilityCommand.cs" />
+    <Compile Include="Modules\StoreModule\Entities\CancelOrderPolicy.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ChangePeriodRentalPolicy.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductAvailability.cs" />
+    <Compile Include="Modules\StoreModule\Entities\CorreiosResultType.cs" />
+    <Compile Include="Modules\StoreModule\Entities\IOrderProductRentalInfo.cs" />
+    <Compile Include="Modules\StoreModule\Entities\OrderProductRentalsInfo.cs" />
+    <Compile Include="Events\StoreModule\RentalInfoUpdated.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductAvailabilityType.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductType.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IProductAvailabilityRepository.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IWishlistItem.cs" />
+    <Compile Include="Modules\StoreModule\Price\BasePrice.cs" />
+    <Compile Include="Modules\StoreModule\Price\DiscountPrice.cs" />
+    <Compile Include="Modules\StoreModule\Price\DisplayPrice.cs" />
+    <Compile Include="Modules\StoreModule\Price\DisplayShortPrice.cs" />
+    <Compile Include="Modules\StoreModule\Price\Price.cs" />
+    <Compile Include="Modules\StoreModule\Price\ProductPrice.cs" />
+    <Compile Include="Modules\StoreModule\Price\ProductPriceSpecs.cs" />
+    <Compile Include="Events\StoreModule\RentalCancelled.cs" />
+    <Compile Include="Modules\StoreModule\RentalSearchDocumentService.cs" />
+    <Compile Include="Modules\Users\SellerAssistant.cs" />
+    <Compile Include="Modules\Users\UserAndProfile.cs" />
+    <Compile Include="Resources\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\AlternativeNameGenerator.cs" />
+    <Compile Include="Services\FriendlyUrlGenerator.cs" />
+    <Compile Include="Services\MessageTemplateService.cs" />
+    <Compile Include="Services\NicknameGenerator.cs" />
+    <Compile Include="Specifications\ISpecification.cs" />
+    <Compile Include="Specifications\SellerShouldAppearInSearchSpecification.cs" />
+    <Compile Include="Modules\StoreModule\AvailabilityDates.cs" />
+    <Compile Include="Modules\StoreModule\Commands\DeleteLockCommand.cs" />
+    <Compile Include="Modules\StoreModule\Commands\MarkRentalAsReturnedCommand.cs" />
+    <Compile Include="Modules\StoreModule\Commands\NewLockByDateCommand.cs" />
+    <Compile Include="Modules\StoreModule\Commands\NewLockByDayOfWeekCommand.cs" />
+    <Compile Include="Modules\StoreModule\Commands\RemoveRentalShiftCommand.cs" />
+    <Compile Include="Modules\StoreModule\Commands\AddRentalShiftCommand.cs" />
+    <Compile Include="Modules\StoreModule\Commands\RentProductCommand.cs" />
+    <Compile Include="Modules\StoreModule\Commands\SetProductRentalShiftsCommand.cs" />
+    <Compile Include="Modules\StoreModule\Commands\UpdateRentalShiftCommand.cs" />
+    <Compile Include="Modules\StoreModule\Entities\CartItemRentalInfo.cs" />
+    <Compile Include="Modules\StoreModule\Entities\LockMode.cs" />
+    <Compile Include="Modules\StoreModule\Entities\LockType.cs" />
+    <Compile Include="Modules\StoreModule\Entities\OrderProductRentalInfo.cs" />
+    <Compile Include="Modules\StoreModule\Entities\OrderRentalInfo.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductBusinessModel.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductRentalShift.cs" />
+    <Compile Include="Modules\StoreModule\Entities\RentalPeriodMode.cs" />
+    <Compile Include="Modules\StoreModule\Entities\RentalSettings.cs" />
+    <Compile Include="Modules\StoreModule\Entities\RentalLock.cs" />
+    <Compile Include="Modules\StoreModule\Entities\RentalPeriodUnit.cs" />
+    <Compile Include="Modules\StoreModule\Entities\RentalShift.cs" />
+    <Compile Include="Modules\StoreModule\Entities\RentalShiftTime.cs" />
+    <Compile Include="Modules\StoreModule\Entities\RentalTransaction.cs" />
+    <Compile Include="Modules\StoreModule\Entities\RentalTransactionType.cs" />
+    <Compile Include="Modules\StoreModule\Entities\StockProductVariant.cs" />
+    <Compile Include="Modules\StoreModule\EventHandlers\AddStockTransactionOnProductAdded.cs" />
+    <Compile Include="Modules\StoreModule\EventHandlers\AddStockTransactionOnStockUpdated.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IDisputeRepository.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IPostalService.cs" />
+    <Compile Include="Interfaces\IProductUpdateService.cs" />
+    <Compile Include="Interfaces\Repositories\IApiTokenRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IApplicationConfigRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IBannerRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IBuyerRepository.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\ICartRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IEcommerceHomeCategoryRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IEcommerceHomeRepository.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IOrderRepository.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IOrderTransactionRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPersonRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPlanRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPortfolioCategoryRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPortfolioRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPortfolioSubCategoryRepository.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IProductCategoryRepository.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IProductRepository.cs" />
+    <Compile Include="Modules\QuoteRequests\Interfaces\IQuoteAnswerRepository.cs" />
+    <Compile Include="Modules\QuoteRequests\Interfaces\IQuoteRepository.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IProductVariantRepository.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IRentalLockQueries.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IRentalLockRepository.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IRentalShiftQueries.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IRentalShiftRepository.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IStoreRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IStringRepository.cs" />
+    <Compile Include="Interfaces\Repositories\_ICrudRepository.cs" />
+    <Compile Include="Interfaces\IPaymentService.cs" />
+    <Compile Include="Interfaces\Repositories\IAdminReportRepository.cs" />
+    <Compile Include="Interfaces\Repositories\_IRepository.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IShippingService.cs" />
+    <Compile Include="Messages\EmailMessage.cs" />
+    <Compile Include="Interfaces\Repositories\ISellerRepository.cs" />
+    <Compile Include="Services\ApiTokenService.cs" />
+    <Compile Include="Modules\QuoteRequests\Entities\QuoteAttachment.cs" />
+    <Compile Include="Modules\QuoteRequests\Entities\QuoteDealResult.cs" />
+    <Compile Include="Services\BannerService.cs" />
+    <Compile Include="Services\ApplicationConfigService.cs" />
+    <Compile Include="Services\EcommerceHomeService.cs" />
+    <Compile Include="Services\SearchService.cs" />
+    <Compile Include="Services\SellerService.cs" />
+    <Compile Include="Modules\StoreModule\OrderTransactionService.cs" />
+    <Compile Include="Modules\StoreModule\RentalService.cs" />
+    <Compile Include="Modules\StoreModule\ScheduleService.cs" />
+    <Compile Include="Modules\StoreModule\StoreService.cs" />
+    <Compile Include="Services\StrService.cs" />
+    <Compile Include="Services\AddressService.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ShippingAddress.cs" />
+    <Compile Include="Modules\StoreModule\Entities\BankAccount.cs" />
+    <Compile Include="Services\GlobalizationService.cs" />
+    <Compile Include="Services\PortfolioModule\CategoryService.cs" />
+    <Compile Include="Entities\City.cs" />
+    <Compile Include="Modules\StoreModule\Entities\CreditCard.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Modules\StoreModule\CreditCardService.cs" />
+    <Compile Include="Modules\StoreModule\Entities\Cart.cs" />
+    <Compile Include="Modules\StoreModule\Entities\CartItem.cs" />
+    <Compile Include="Modules\StoreModule\Entities\CartSeller.cs" />
+    <Compile Include="Modules\StoreModule\Entities\OrderReview.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ShippingMode.cs" />
+    <Compile Include="Events\ProductMovedEvent.cs" />
+    <Compile Include="Modules\StoreModule\Entities\StockTransaction.cs" />
+    <Compile Include="Modules\StoreModule\StockTransactionService.cs" />
+    <Compile Include="Modules\StoreModule\Entities\StockTransactionType.cs" />
+    <Compile Include="Modules\StoreModule\Entities\OrderHistory.cs" />
+    <Compile Include="Modules\StoreModule\Entities\OrderProduct.cs" />
+    <Compile Include="Modules\StoreModule\Entities\OrderStatus.cs" />
+    <Compile Include="Events\OrderStatusChangedEvent.cs" />
+    <Compile Include="Modules\StoreModule\Entities\OrderTransaction.cs" />
+    <Compile Include="Modules\StoreModule\Interfaces\IShippingMethodAdapter.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ShippingMethod.cs" />
+    <Compile Include="Modules\StoreModule\Entities\PrivateFleetParameter.cs" />
+    <Compile Include="Modules\StoreModule\Entities\Product.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductCategory.cs" />
+    <Compile Include="Modules\StoreModule\ProductCategoryService.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductImage.cs" />
+    <Compile Include="Modules\StoreModule\ProductService.cs" />
+    <Compile Include="Modules\StoreModule\Entities\SingleFreightParameter.cs" />
+    <Compile Include="Modules\StoreModule\Entities\Store.cs" />
+    <Compile Include="Modules\StoreModule\StoreService_Obsolete.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductVariant.cs" />
+    <Compile Include="Modules\StoreModule\ProductVariantTypeService.cs" />
+    <Compile Include="Modules\StoreModule\ProductVariantService.cs" />
+    <Compile Include="Modules\StoreModule\Entities\ProductVariantType.cs" />
+    <Compile Include="Modules\SubscriptionModule\Plan.cs" />
+    <Compile Include="Services\SubscriptionModule\PlanService.cs" />
+    <Compile Include="Services\PersonService.cs" />
+    <Compile Include="DTO\AdminDashboardReport.cs" />
+    <Compile Include="DTO\AdminDashboardReportRequest.cs" />
+    <Compile Include="Services\ReportService.cs" />
+    <Compile Include="Modules\Users\Genre.cs" />
+    <Compile Include="Modules\StoreModule\Entities\Order.cs" />
+    <Compile Include="Modules\Users\Person.cs" />
+    <Compile Include="Modules\PortfolioModule\Portfolio.cs" />
+    <Compile Include="Modules\PortfolioModule\PortfolioItem.cs" />
+    <Compile Include="Modules\PortfolioModule\PortfolioItemImage.cs" />
+    <Compile Include="Services\PortfolioModule\PortfolioItemService.cs" />
+    <Compile Include="Modules\QuoteRequests\Entities\QuotePreference.cs" />
+    <Compile Include="Entities\Address.cs" />
+    <Compile Include="Services\PortfolioModule\SubCategoryService_Obsolete.cs" />
+    <Compile Include="ApplicationConfig.cs" />
+    <Compile Include="Services\BuyerService.cs" />
+    <Compile Include="Services\PortfolioModule\PortfolioService.cs" />
+    <Compile Include="Modules\QuoteRequests\QuoteService.cs" />
+    <Compile Include="Modules\QuoteRequests\Entities\QuoteStatus.cs" />
+    <Compile Include="Modules\PortfolioModule\SubCategory.cs" />
+    <Compile Include="Modules\SubscriptionModule\SubscriptionMode.cs" />
+    <Compile Include="Services\SubscriptionModule\SubscriptionService.cs" />
+    <Compile Include="Modules\SubscriptionModule\SubscriptionTransaction.cs" />
+    <Compile Include="Services\SellerService_DEPRECATED.cs" />
+    <Compile Include="Services\SellerSocialMediaService.cs" />
+    <Compile Include="Modules\SubscriptionModule\Subscription.cs" />
+    <Compile Include="Modules\Users\Buyer.cs" />
+    <Compile Include="Modules\QuoteRequests\Entities\Quote.cs" />
+    <Compile Include="Modules\PortfolioModule\Category.cs" />
+    <Compile Include="Modules\Users\Seller.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Modules\Users\SellerSocialMedia.cs" />
+    <Compile Include="Modules\Users\SocialNetwork.cs" />
+    <Compile Include="Modules\Users\AdminPerson.cs" />
+    <Compile Include="Modules\Users\ApplicationUser.cs" />
+    <Compile Include="Entities\LoginMode.cs" />
+    <Compile Include="Services\UploadService.cs" />
+    <Compile Include="Services\WebhookService.cs" />
+    <Compile Include="UserConfig\UserConfiguration.cs" />
+    <Compile Include="Utils\ContactInfoFilter.cs" />
+    <Compile Include="Utils\DocumentNumberValidator.cs" />
+    <Compile Include="Validation\BuyerCheckoutValidation.cs" />
+    <Compile Include="Validation\Helpers\PhoneValidatorHelper.cs" />
+    <Compile Include="Validation\Specifications\CompleteBuyerSpecification.cs" />
+    <Compile Include="VersionHistory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{44a771e7-f5af-43a7-b1dc-efc36e3ac340}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infra.Crosscutting.Hangfire\Infra.Crosscutting.Hangfire.csproj">
+      <Project>{0C25D6F3-54E3-46F7-A025-6D6875393687}</Project>
+      <Name>Infra.Crosscutting.Hangfire</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infra.Crosscutting.Helpers\Infra.Crosscutting.Helpers.csproj">
+      <Project>{58b380e5-95a9-49f5-bb71-16383af0eea2}</Project>
+      <Name>Infra.Crosscutting.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaymentIntegrator.Core\PaymentIntegrator.Core.csproj">
+      <Project>{880230cf-fe0c-4943-ade0-88575aefc8a0}</Project>
+      <Name>PaymentIntegrator.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Messages\README.txt" />
+    <None Include="App.config" />
+    <None Include="Globalization\Scripts\jquery-1.10.2.min.map" />
+    <None Include="packages.config" />
+    <Content Include="Resources\uf-cidade.csv" />
+    <Content Include="Resources\strings_create_update.tsv" />
+    <None Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Config\Modules\Buyer\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Globalization\Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Globalization\Scripts\jquery-1.10.2.js" />
+    <Content Include="Globalization\Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Globalization\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Globalization\Scripts\jquery.validate.js" />
+    <Content Include="Globalization\Scripts\jquery.validate.min.js" />
+    <Content Include="Globalization\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Globalization\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Resources\HelpMeToFind_en-us.html" />
+    <Content Include="Resources\HelpMeToFind_pt-br.html" />
+    <Content Include="Resources\HowItWorks_en-us.html" />
+    <Content Include="Resources\HowItWorks_pt-br.html" />
+    <Content Include="Resources\PrivacyPolicy_en-us.html" />
+    <Content Include="Resources\PrivacyPolicy_pt-br.html" />
+    <Content Include="Scripts\expressive.annotations.validate.js" />
+    <Content Include="Scripts\expressive.annotations.validate.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

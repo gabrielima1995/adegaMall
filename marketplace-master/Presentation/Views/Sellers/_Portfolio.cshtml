@@ -1,0 +1,50 @@
+﻿@using Application.Modules.Portfolio
+@using Presentation.Helpers
+
+@model PublicProfileVM
+
+@{
+    var portfolioItems = Model.Portfolio?.Items ?? new List<PortfolioItemVM>(0);
+    var tooManyItems = portfolioItems.Count > 6;
+    var showModals = !MaaSConfig.Current.Portfolio.ShowOwnPage;
+}
+
+@if (portfolioItems.Count > 0)
+{
+    <div class="profile-portfolio container m-b-lg">
+        <h3 class="profile-portfolio-title">@Html.Localized("SELLER_PROFILE_PORTFOLIO_TITLE")</h3>
+        <div class="row">
+            @foreach (var item in portfolioItems)
+            {
+                <div class="profile-portfolio-item col-xs-12 col-sm-6 @Css.If(tooManyItems, "col-md-3", "col-md-4")">
+                    <div class="card equal-height">
+                        @if (showModals)
+                        {
+                            <a href="#portfolio-modal-@(item.Id)" data-toggle="modal" data-target="#portfolio-modal-@(item.Id)" class="card-product-img-link">
+                                <img src="@item.GetCoverImageUrl()" alt="@item.Title"/>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.ActionLocalized("PortfolioItemPublicProfile", "Sellers", new { id = item.FriendlyUrl })" class="card-product-img-link" title="@item.Title">
+                                <img src="@item.GetCoverImageUrl()" alt="@item.Title" />
+                            </a>
+                        }
+
+                        <h5>@item.Title</h5>
+
+                        @if (!string.IsNullOrWhiteSpace(item.Description))
+                        {
+                            <p>@Html.Markdown(item.Description.Truncate(200))</p>
+                        }
+                    </div>
+                    
+                    @if (showModals)
+                    {
+                        @Html.Partial("_PortfolioItemModal", item)
+                    }
+                </div>
+            }
+        </div>
+    </div>
+}
