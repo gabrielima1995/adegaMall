@@ -21,6 +21,8 @@ namespace V2.Application.Modules.Search.Products
         /// </summary>
         public int? Category { get; set; }
 
+        public string CategorySlug { get; set; }
+
         /// <summary>
         /// Filtro por somente retirada no local.
         /// </summary>
@@ -50,6 +52,8 @@ namespace V2.Application.Modules.Search.Products
         /// Lista de variantes selecionadas nos filtros.
         /// </summary>
         public int[] VariantIds { get; set; }
+
+        public string VariantSlug { get; set; }
 
         /// <summary>
         /// Limita apenas aos produtos do vendedor especificado.

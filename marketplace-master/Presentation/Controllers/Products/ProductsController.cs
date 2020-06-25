@@ -11,6 +11,7 @@ using Domain.Interfaces.Repositories;
 using Domain.Services;
 using Domain.Services.StoreModule;
 using Domain.StoreModule.Entities;
+using Framework;
 using Newtonsoft.Json;
 using Presentation.Globalization;
 using Presentation.Models;
@@ -41,6 +42,8 @@ namespace Presentation.Controllers.Products
         private readonly ICustomFieldAppService customFieldAppService;
         private readonly ProductSmartSearchAppService searchAppService;
         private readonly IPersonRepository personRepository;
+        private readonly IRepository<ProductCategory> productCategoryRepository;
+        private readonly IRepository<ProductVariant> productVariantRepository;
 
         public ProductsController(
             ITimeZoneProvider userTimeZoneProvider,
@@ -54,7 +57,9 @@ namespace Presentation.Controllers.Products
             IUserRatingAppService ratingAppService,
             ICustomFieldAppService customFieldAppService,
             ProductSmartSearchAppService searchAppService,
-            IPersonRepository personRepository)
+            IPersonRepository personRepository,
+            IRepository<ProductCategory> productCategoryRepository,
+            IRepository<ProductVariant> productVariantRepository)
         {
             this.userTimeZoneProvider = userTimeZoneProvider;
             this.cartService = cartService;
@@ -68,6 +73,37 @@ namespace Presentation.Controllers.Products
             this.customFieldAppService = customFieldAppService;
             this.searchAppService = searchAppService;
             this.personRepository = personRepository;
+            this.productCategoryRepository = productCategoryRepository;
+            this.productVariantRepository = productVariantRepository;
+        }
+
+        [DonutOutputCache(CacheProfile = "CategoryPage")]
+        [Route("categoria/{categorySlug}")]
+        [Route("categoria/{categorySlug}/pais/{variantSlug}")]
+        public ActionResult CategoryPage(SearchRequestViewModel request)
+        {
+            if (!string.IsNullOrEmpty(request.VariantSlug))
+            {
+                var variant = productVariantRepository.Get(i => i.Slug == request.VariantSlug);
+
+                if (variant != null)
+                {
+                    ViewBag.Title = $"Vinhos: {variant.Name}";
+                    ViewBag.Description = $"Descubra vinhos do país {variant.Name}";
+                }
+            }
+            else if (!string.IsNullOrEmpty(request.CategorySlug))
+            {
+                var category = productCategoryRepository.Get(i => i.Slug == request.CategorySlug);
+
+                if (category != null)
+                {
+                    ViewBag.Title = $"Categoria: {category.Name}";
+                    ViewBag.Description = $"Descubra bebidas da categoria {category.Name}";
+                }
+            }
+
+            return Search(request);
         }
 
         [DonutOutputCache(CacheProfile = "SearchResults")]
@@ -105,7 +141,7 @@ namespace Presentation.Controllers.Products
                 response.FilteredBySeller = sellerService.GetById(request.SellerId);
 
             SetNextResults(request, response);
-            return View(response);
+            return View("Search", response);
         }
 
         [DonutOutputCache(CacheProfile = "SearchResults")]
@@ -169,7 +205,7 @@ namespace Presentation.Controllers.Products
                 }
             }
             //SelectList(IEnumerable items, object selectedValue, IEnumerable disabledValues);
-            ViewBag.StockVariant = new SelectList(variantsDictonary, "Key", "Value",variantsDictonary,disabledValues: disableValues);
+            ViewBag.StockVariant = new SelectList(variantsDictonary, "Key", "Value", variantsDictonary, disabledValues: disableValues);
 
             ViewBag.StartDate = start;
             ViewBag.StartTime = time;

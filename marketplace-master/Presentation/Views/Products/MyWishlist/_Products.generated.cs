@@ -49,6 +49,12 @@ namespace ASP
     using Presentation.Globalization;
     using Presentation.Helpers;
     using Presentation.Models;
+    
+    #line 3 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+    using V2.Application.Modules.Search.Products;
+    
+    #line default
+    #line hidden
     using V2.Application.Modules.SellerAssistantModule;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -63,7 +69,7 @@ namespace ASP
 WriteLiteral("\r\n");
 
             
-            #line 6 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 7 "..\..\Views\Products\MyWishlist\_Products.cshtml"
   
     var config = MaaSConfig.Current;
     var isAuthenticated = Request.IsAuthenticated;
@@ -75,13 +81,14 @@ WriteLiteral("\r\n");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 12 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 13 "..\..\Views\Products\MyWishlist\_Products.cshtml"
  if (Model.Items.Count > 0)
 {
     foreach (var product in Model.Items)
     {
         var price = product.ProductPriceMapped;
         var productUrl = Url.ActionLocalized("PublicPage", "Products", new { id = product.FriendlyUrl });
+        var paisBadge = product.GetPaisBadge();
 
 
             
@@ -98,13 +105,13 @@ WriteLiteral(" class=\"card equal-height\"");
 WriteLiteral(">\r\n");
 
             
-            #line 21 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 23 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 21 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 23 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                  if (price.DisplayShortPrice.HasAnyPrice)
                 {
                     if (price.DisplayShortPrice.Discount.HasDiscount)
@@ -124,7 +131,7 @@ WriteLiteral(" class=\"label label-success\"");
 WriteLiteral(">");
 
             
-            #line 26 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 28 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                                                          Write(price.DisplayShortPrice.Discount.Formatted);
 
             
@@ -133,7 +140,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n                        </div>\r\n");
 
             
-            #line 28 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 30 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                     }
                 }
 
@@ -143,13 +150,13 @@ WriteLiteral("</span>\r\n                        </div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 31 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 33 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 31 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 33 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                  if (showProductWishButton)
                 {
                     
@@ -157,15 +164,58 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 33 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 35 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                Write(Html.Partial("_ProductWishButtonCard", product, new ViewDataDictionary { { "IsWished", true } }));
 
             
             #line default
             #line hidden
             
-            #line 33 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 35 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                                                                                                                      
+                }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 38 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+                
+            
+            #line default
+            #line hidden
+            
+            #line 38 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+                 if (!string.IsNullOrEmpty(paisBadge))
+                {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <div");
+
+WriteLiteral(" class=\"card-country-badge\"");
+
+WriteLiteral(">\r\n                        <img");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 1589), Tuple.Create("\"", 1643)
+, Tuple.Create(Tuple.Create("", 1595), Tuple.Create("/assets/images/paises/", 1595), true)
+            
+            #line 41 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 1617), Tuple.Create<System.Object, System.Int32>(paisBadge
+            
+            #line default
+            #line hidden
+, 1617), false)
+, Tuple.Create(Tuple.Create("", 1629), Tuple.Create(".png?w=25&h=25", 1629), true)
+);
+
+WriteLiteral(" />\r\n                    </div>\r\n");
+
+            
+            #line 43 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                 }
 
             
@@ -173,49 +223,57 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1354), Tuple.Create("\"", 1372)
+WriteAttribute("href", Tuple.Create(" href=\"", 1716), Tuple.Create("\"", 1734)
             
-            #line 36 "..\..\Views\Products\MyWishlist\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 1361), Tuple.Create<System.Object, System.Int32>(productUrl
+            #line 45 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 1723), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 1361), false)
+, 1723), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1373), Tuple.Create("\"", 1395)
+WriteAttribute("title", Tuple.Create(" title=\"", 1735), Tuple.Create("\"", 1757)
             
-            #line 36 "..\..\Views\Products\MyWishlist\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 1381), Tuple.Create<System.Object, System.Int32>(product.Title
+            #line 45 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 1743), Tuple.Create<System.Object, System.Int32>(product.Title
             
             #line default
             #line hidden
-, 1381), false)
+, 1743), false)
 );
 
 WriteLiteral(" class=\"card-product-img-link\"");
 
 WriteLiteral(">\r\n                    <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1453), Tuple.Create("\"", 1505)
-            
-            #line 37 "..\..\Views\Products\MyWishlist\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 1459), Tuple.Create<System.Object, System.Int32>(product.GetCoverImageUrl(ProductImageSize.SM)
-            
-            #line default
-            #line hidden
-, 1459), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 1815), Tuple.Create("\"", 1864)
+, Tuple.Create(Tuple.Create("", 1821), Tuple.Create<System.Object, System.Int32>(Href("~/assets/images/product-img-placeholder.jpg")
+, 1821), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 1506), Tuple.Create("\"", 1526)
+WriteLiteral(" data-src=\"");
+
             
-            #line 37 "..\..\Views\Products\MyWishlist\_Products.cshtml"
-   , Tuple.Create(Tuple.Create("", 1512), Tuple.Create<System.Object, System.Int32>(product.Title
+            #line 46 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+                                                                                Write(product.GetCoverImageUrl(ProductImageSize.SM));
+
             
             #line default
             #line hidden
-, 1512), false)
+WriteLiteral("\"");
+
+WriteAttribute("alt", Tuple.Create(" alt=\"", 1923), Tuple.Create("\"", 1943)
+            
+            #line 46 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+                                                          , Tuple.Create(Tuple.Create("", 1929), Tuple.Create<System.Object, System.Int32>(product.Title
+            
+            #line default
+            #line hidden
+, 1929), false)
 );
+
+WriteLiteral(" class=\"js-load-img\"");
 
 WriteLiteral(" />\r\n                </a>\r\n\r\n                <h5");
 
@@ -224,7 +282,7 @@ WriteLiteral(" class=\"card-product-title\"");
 WriteLiteral(">");
 
             
-            #line 40 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 49 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                                           Write(product.Title);
 
             
@@ -233,13 +291,13 @@ WriteLiteral(">");
 WriteLiteral("</h5>\r\n\r\n");
 
             
-            #line 42 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 51 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 42 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 51 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                  if (config.Product.Price.Enabled && price.DisplayShortPrice.HasAnyPrice)
                 {
                     if (price.DisplayShortPrice.Discount.HasDiscount)
@@ -259,7 +317,7 @@ WriteLiteral(" class=\"card-discount-price-amount\"");
 WriteLiteral(">");
 
             
-            #line 48 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 57 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                                                                        Write(price.DisplayShortPrice.Discount.Original.FullPriceText);
 
             
@@ -269,7 +327,7 @@ WriteLiteral("</span> por\r\n                            </small>\r\n           
 "");
 
             
-            #line 51 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 60 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                     }
 
                     else if (price.DisplayShortPrice.CanIncrease)
@@ -287,7 +345,7 @@ WriteLiteral(">\r\n                            <small>\r\n");
 WriteLiteral("                                ");
 
             
-            #line 57 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 66 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                            Write(Html.Localized("PRODUCT_PRICE_STARTING_FROM", "span", new { @class = "text-muted" }));
 
             
@@ -296,7 +354,7 @@ WriteLiteral("                                ");
 WriteLiteral("\r\n                            </small>\r\n                        </p>\r\n");
 
             
-            #line 60 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 69 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                     }
 
 
@@ -310,13 +368,13 @@ WriteLiteral(" class=\"card-product-price\"");
 WriteLiteral(">\r\n");
 
             
-            #line 63 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 72 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 63 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 72 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                          if (price.HasBasePrice)
                         {
 
@@ -328,7 +386,7 @@ WriteLiteral("                            <div>\r\n");
 WriteLiteral("                                ");
 
             
-            #line 66 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 75 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                            Write(price.DisplayShortPrice.FullPriceText);
 
             
@@ -337,13 +395,13 @@ WriteLiteral("                                ");
 WriteLiteral("\r\n");
 
             
-            #line 67 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 76 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 67 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 76 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                                  if (price.DisplayShortPrice.HasTextComplementLabel)
                                 {
 
@@ -357,7 +415,7 @@ WriteLiteral(" class=\"text-muted text-lowercase\"");
 WriteLiteral(">/ ");
 
             
-            #line 69 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 78 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                                                                           Write(string.Format(Request.GetLocalizedString(price.DisplayShortPrice.TextComplementLabel), price.DisplayShortPrice.TextComplementParam));
 
             
@@ -366,7 +424,7 @@ WriteLiteral(">/ ");
 WriteLiteral("</small>\r\n");
 
             
-            #line 70 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 79 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                                 }
 
             
@@ -375,7 +433,7 @@ WriteLiteral("</small>\r\n");
 WriteLiteral("                            </div>\r\n");
 
             
-            #line 72 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 81 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                         }
 
             
@@ -384,13 +442,13 @@ WriteLiteral("                            </div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 74 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 83 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 74 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 83 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                          if (price.DisplayShortPrice.HasAdditionalPrice)
                         {
 
@@ -408,7 +466,7 @@ WriteLiteral(" class=\"card-product-price-additional-amount\"");
 WriteLiteral(">");
 
             
-            #line 77 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 86 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                                                                               Write(price.DisplayShortPrice.AdditionalPriceText);
 
             
@@ -417,7 +475,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n                            </div>\r\n");
 
             
-            #line 79 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 88 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                         }
 
             
@@ -426,7 +484,7 @@ WriteLiteral("</span>\r\n                            </div>\r\n");
 WriteLiteral("                    </div>\r\n");
 
             
-            #line 81 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 90 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                 }
                 else
                 {
@@ -441,7 +499,7 @@ WriteLiteral(" class=\"card-product-price\"");
 WriteLiteral(">&nbsp;</p>\r\n");
 
             
-            #line 85 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 94 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                 }
 
             
@@ -449,14 +507,14 @@ WriteLiteral(">&nbsp;</p>\r\n");
             #line hidden
 WriteLiteral("\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3805), Tuple.Create("\"", 3823)
+WriteAttribute("href", Tuple.Create(" href=\"", 4242), Tuple.Create("\"", 4260)
             
-            #line 87 "..\..\Views\Products\MyWishlist\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 3812), Tuple.Create<System.Object, System.Int32>(productUrl
+            #line 96 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 4249), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 3812), false)
+, 4249), false)
 );
 
 WriteLiteral(" class=\"btn btn-default btn-round card-btn\"");
@@ -470,7 +528,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 89 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 98 "..\..\Views\Products\MyWishlist\_Products.cshtml"
                Write(Request.GetLocalizedString("PRODUCT_PUBLIC_PAGE_BUTTON"));
 
             
@@ -479,7 +537,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </a>\r\n            </div>\r\n        </div>\r\n");
 
             
-            #line 93 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 102 "..\..\Views\Products\MyWishlist\_Products.cshtml"
     }
 
 }
@@ -496,7 +554,7 @@ WriteLiteral(" class=\"col-md-12\"");
 WriteLiteral(">\r\n        <p>");
 
             
-            #line 99 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 108 "..\..\Views\Products\MyWishlist\_Products.cshtml"
       Write(Html.Localized("PRODUCTWISH_EMPTY"));
 
             
@@ -505,7 +563,7 @@ WriteLiteral(">\r\n        <p>");
 WriteLiteral("</p>\r\n    </div>\r\n");
 
             
-            #line 101 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+            #line 110 "..\..\Views\Products\MyWishlist\_Products.cshtml"
 }
 
             
@@ -519,14 +577,14 @@ WriteLiteral(" class=\"js-next-url\"");
 
 WriteLiteral(" style=\"display: none\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 4260), Tuple.Create("\"", 4294)
+WriteAttribute("value", Tuple.Create(" value=\"", 4697), Tuple.Create("\"", 4731)
             
-            #line 103 "..\..\Views\Products\MyWishlist\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 4268), Tuple.Create<System.Object, System.Int32>(Model.NextPageUrl ?? ""
+            #line 112 "..\..\Views\Products\MyWishlist\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 4705), Tuple.Create<System.Object, System.Int32>(Model.NextPageUrl ?? ""
             
             #line default
             #line hidden
-, 4268), false)
+, 4705), false)
 );
 
 WriteLiteral(" />\r\n");

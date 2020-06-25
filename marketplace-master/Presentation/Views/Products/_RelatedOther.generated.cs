@@ -49,6 +49,12 @@ namespace ASP
     using Presentation.Globalization;
     using Presentation.Helpers;
     using Presentation.Models;
+    
+    #line 3 "..\..\Views\Products\_RelatedOther.cshtml"
+    using V2.Application.Modules.Search.Products;
+    
+    #line default
+    #line hidden
     using V2.Application.Modules.SellerAssistantModule;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -63,7 +69,7 @@ namespace ASP
 WriteLiteral("\r\n");
 
             
-            #line 6 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 7 "..\..\Views\Products\_RelatedOther.cshtml"
   
     var products = Model.RelatedProducts?.Take(4).ToList() ?? new List<Product>(0);
     var config = MaaSConfig.Current;
@@ -76,7 +82,7 @@ WriteLiteral("\r\n");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 13 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 14 "..\..\Views\Products\_RelatedOther.cshtml"
  if (products.Count > 0)
 {
 
@@ -98,7 +104,7 @@ WriteLiteral(" class=\"margin-bottom-15\"");
 WriteLiteral(">");
 
             
-            #line 18 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 19 "..\..\Views\Products\_RelatedOther.cshtml"
                                     Write(Html.Localized("PRODUCTS_RELATED_OTHER"));
 
             
@@ -107,17 +113,18 @@ WriteLiteral(">");
 WriteLiteral("</h4>\r\n        </div>\r\n\r\n");
 
             
-            #line 21 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 22 "..\..\Views\Products\_RelatedOther.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 21 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 22 "..\..\Views\Products\_RelatedOther.cshtml"
          foreach (var product in products)
         {
             var price = product.ProductPriceMapped;
             var productUrl = Url.ActionLocalized("PublicPage", "Products", new { id = product.FriendlyUrl });
+            var paisBadge = product.GetPaisBadge();
 
 
             
@@ -134,13 +141,13 @@ WriteLiteral(" class=\"card equal-height\"");
 WriteLiteral(">\r\n");
 
             
-            #line 28 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 30 "..\..\Views\Products\_RelatedOther.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 28 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 30 "..\..\Views\Products\_RelatedOther.cshtml"
                      if (price.DisplayShortPrice.HasAnyPrice)
                     {
                         if (price.DisplayShortPrice.Discount.HasDiscount)
@@ -160,7 +167,7 @@ WriteLiteral(" class=\"label label-success\"");
 WriteLiteral(">");
 
             
-            #line 33 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 35 "..\..\Views\Products\_RelatedOther.cshtml"
                                                              Write(price.DisplayShortPrice.Discount.Formatted);
 
             
@@ -169,7 +176,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n                            </div>\r\n");
 
             
-            #line 35 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 37 "..\..\Views\Products\_RelatedOther.cshtml"
                         }
                     }
 
@@ -179,13 +186,13 @@ WriteLiteral("</span>\r\n                            </div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 38 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 40 "..\..\Views\Products\_RelatedOther.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 38 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 40 "..\..\Views\Products\_RelatedOther.cshtml"
                      if (showProductWishButton)
                     {
                         
@@ -193,15 +200,58 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 40 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 42 "..\..\Views\Products\_RelatedOther.cshtml"
                    Write(Html.Partial("_ProductWishButtonCard", product));
 
             
             #line default
             #line hidden
             
-            #line 40 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 42 "..\..\Views\Products\_RelatedOther.cshtml"
                                                                         
+                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                \r\n");
+
+            
+            #line 45 "..\..\Views\Products\_RelatedOther.cshtml"
+                    
+            
+            #line default
+            #line hidden
+            
+            #line 45 "..\..\Views\Products\_RelatedOther.cshtml"
+                     if (!string.IsNullOrEmpty(paisBadge))
+                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        <div");
+
+WriteLiteral(" class=\"card-country-badge\"");
+
+WriteLiteral(">\r\n                            <img");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 1888), Tuple.Create("\"", 1942)
+, Tuple.Create(Tuple.Create("", 1894), Tuple.Create("/assets/images/paises/", 1894), true)
+            
+            #line 48 "..\..\Views\Products\_RelatedOther.cshtml"
+, Tuple.Create(Tuple.Create("", 1916), Tuple.Create<System.Object, System.Int32>(paisBadge
+            
+            #line default
+            #line hidden
+, 1916), false)
+, Tuple.Create(Tuple.Create("", 1928), Tuple.Create(".png?w=25&h=25", 1928), true)
+);
+
+WriteLiteral("/>\r\n                        </div>\r\n");
+
+            
+            #line 50 "..\..\Views\Products\_RelatedOther.cshtml"
                     }
 
             
@@ -209,54 +259,62 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1621), Tuple.Create("\"", 1639)
+WriteAttribute("href", Tuple.Create(" href=\"", 2026), Tuple.Create("\"", 2044)
             
-            #line 43 "..\..\Views\Products\_RelatedOther.cshtml"
-, Tuple.Create(Tuple.Create("", 1628), Tuple.Create<System.Object, System.Int32>(productUrl
+            #line 52 "..\..\Views\Products\_RelatedOther.cshtml"
+, Tuple.Create(Tuple.Create("", 2033), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 1628), false)
+, 2033), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1640), Tuple.Create("\"", 1662)
+WriteAttribute("title", Tuple.Create(" title=\"", 2045), Tuple.Create("\"", 2067)
             
-            #line 43 "..\..\Views\Products\_RelatedOther.cshtml"
-, Tuple.Create(Tuple.Create("", 1648), Tuple.Create<System.Object, System.Int32>(product.Title
+            #line 52 "..\..\Views\Products\_RelatedOther.cshtml"
+, Tuple.Create(Tuple.Create("", 2053), Tuple.Create<System.Object, System.Int32>(product.Title
             
             #line default
             #line hidden
-, 1648), false)
+, 2053), false)
 );
 
 WriteLiteral(" class=\"card-product-img-link\"");
 
 WriteLiteral(">\r\n                        <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1724), Tuple.Create("\"", 1776)
-            
-            #line 44 "..\..\Views\Products\_RelatedOther.cshtml"
-, Tuple.Create(Tuple.Create("", 1730), Tuple.Create<System.Object, System.Int32>(product.GetCoverImageUrl(ProductImageSize.SM)
-            
-            #line default
-            #line hidden
-, 1730), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 2129), Tuple.Create("\"", 2178)
+, Tuple.Create(Tuple.Create("", 2135), Tuple.Create<System.Object, System.Int32>(Href("~/assets/images/product-img-placeholder.jpg")
+, 2135), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 1777), Tuple.Create("\"", 1797)
+WriteLiteral(" data-src=\"");
+
             
-            #line 44 "..\..\Views\Products\_RelatedOther.cshtml"
-       , Tuple.Create(Tuple.Create("", 1783), Tuple.Create<System.Object, System.Int32>(product.Title
+            #line 53 "..\..\Views\Products\_RelatedOther.cshtml"
+                                                                                    Write(product.GetCoverImageUrl(ProductImageSize.SM));
+
             
             #line default
             #line hidden
-, 1783), false)
+WriteLiteral("\"");
+
+WriteAttribute("alt", Tuple.Create(" alt=\"", 2237), Tuple.Create("\"", 2257)
+            
+            #line 53 "..\..\Views\Products\_RelatedOther.cshtml"
+                                                              , Tuple.Create(Tuple.Create("", 2243), Tuple.Create<System.Object, System.Int32>(product.Title
+            
+            #line default
+            #line hidden
+, 2243), false)
 );
+
+WriteLiteral(" class=\"js-load-img\"");
 
 WriteLiteral(" />\r\n                    </a>\r\n\r\n                    <h5>");
 
             
-            #line 47 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 56 "..\..\Views\Products\_RelatedOther.cshtml"
                    Write(product.Title);
 
             
@@ -267,7 +325,7 @@ WriteLiteral("</h5>\r\n\r\n                    <p>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 50 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 59 "..\..\Views\Products\_RelatedOther.cshtml"
                    Write(product.Store.Seller.PublicProfileName);
 
             
@@ -276,13 +334,13 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </p>\r\n\r\n");
 
             
-            #line 53 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 62 "..\..\Views\Products\_RelatedOther.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 53 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 62 "..\..\Views\Products\_RelatedOther.cshtml"
                      if (config.Product.Price.Enabled && price.DisplayShortPrice.HasAnyPrice)
                     {
                         if (price.DisplayShortPrice.Discount.HasDiscount)
@@ -303,7 +361,7 @@ WriteLiteral(" class=\"card-discount-price-amount\"");
 WriteLiteral(">");
 
             
-            #line 59 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 68 "..\..\Views\Products\_RelatedOther.cshtml"
                                                                            Write(price.DisplayShortPrice.Discount.Original.FullPriceText);
 
             
@@ -313,7 +371,7 @@ WriteLiteral("</span> por\r\n                                </small>\r\n       
 "  </p>\r\n");
 
             
-            #line 62 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 71 "..\..\Views\Products\_RelatedOther.cshtml"
                         }
 
                         else if (price.DisplayShortPrice.CanIncrease)
@@ -331,7 +389,7 @@ WriteLiteral(">\r\n                                <small>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 68 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 77 "..\..\Views\Products\_RelatedOther.cshtml"
                                Write(Html.Localized("PRODUCT_PRICE_STARTING_FROM", "span", new { @class = "text-muted" }));
 
             
@@ -340,7 +398,7 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n                                </small>\r\n                            </p>\r\n");
 
             
-            #line 71 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 80 "..\..\Views\Products\_RelatedOther.cshtml"
                         }
 
 
@@ -354,13 +412,13 @@ WriteLiteral(" class=\"card-product-price\"");
 WriteLiteral(">\r\n");
 
             
-            #line 74 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 83 "..\..\Views\Products\_RelatedOther.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 74 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 83 "..\..\Views\Products\_RelatedOther.cshtml"
                              if (price.HasBasePrice)
                             {
 
@@ -372,7 +430,7 @@ WriteLiteral("                                <div>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 77 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 86 "..\..\Views\Products\_RelatedOther.cshtml"
                                Write(price.DisplayShortPrice.FullPriceText);
 
             
@@ -381,13 +439,13 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n");
 
             
-            #line 78 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 87 "..\..\Views\Products\_RelatedOther.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 78 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 87 "..\..\Views\Products\_RelatedOther.cshtml"
                                      if (price.DisplayShortPrice.HasTextComplementLabel)
                                     {
 
@@ -401,7 +459,7 @@ WriteLiteral(" class=\"text-muted text-lowercase\"");
 WriteLiteral(">/ ");
 
             
-            #line 80 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 89 "..\..\Views\Products\_RelatedOther.cshtml"
                                                                               Write(string.Format(Request.GetLocalizedString(price.DisplayShortPrice.TextComplementLabel), price.DisplayShortPrice.TextComplementParam));
 
             
@@ -410,7 +468,7 @@ WriteLiteral(">/ ");
 WriteLiteral("</small>\r\n");
 
             
-            #line 81 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 90 "..\..\Views\Products\_RelatedOther.cshtml"
                                     }
 
             
@@ -419,7 +477,7 @@ WriteLiteral("</small>\r\n");
 WriteLiteral("                                </div>\r\n");
 
             
-            #line 83 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 92 "..\..\Views\Products\_RelatedOther.cshtml"
                             }
 
             
@@ -428,13 +486,13 @@ WriteLiteral("                                </div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 85 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 94 "..\..\Views\Products\_RelatedOther.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 85 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 94 "..\..\Views\Products\_RelatedOther.cshtml"
                              if (price.DisplayShortPrice.HasAdditionalPrice)
                             {
 
@@ -452,7 +510,7 @@ WriteLiteral(" class=\"card-product-price-additional-amount\"");
 WriteLiteral(">");
 
             
-            #line 88 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 97 "..\..\Views\Products\_RelatedOther.cshtml"
                                                                                   Write(price.DisplayShortPrice.AdditionalPriceText);
 
             
@@ -461,7 +519,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n                                </div>\r\n");
 
             
-            #line 90 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 99 "..\..\Views\Products\_RelatedOther.cshtml"
                             }
 
             
@@ -470,7 +528,7 @@ WriteLiteral("</span>\r\n                                </div>\r\n");
 WriteLiteral("                        </div>\r\n");
 
             
-            #line 92 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 101 "..\..\Views\Products\_RelatedOther.cshtml"
                     }
                     else
                     {
@@ -485,7 +543,7 @@ WriteLiteral(" class=\"card-product-price\"");
 WriteLiteral(">&nbsp;</p>\r\n");
 
             
-            #line 96 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 105 "..\..\Views\Products\_RelatedOther.cshtml"
                     }
 
             
@@ -493,14 +551,14 @@ WriteLiteral(">&nbsp;</p>\r\n");
             #line hidden
 WriteLiteral("\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4343), Tuple.Create("\"", 4361)
+WriteAttribute("href", Tuple.Create(" href=\"", 4823), Tuple.Create("\"", 4841)
             
-            #line 98 "..\..\Views\Products\_RelatedOther.cshtml"
-, Tuple.Create(Tuple.Create("", 4350), Tuple.Create<System.Object, System.Int32>(productUrl
+            #line 107 "..\..\Views\Products\_RelatedOther.cshtml"
+, Tuple.Create(Tuple.Create("", 4830), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 4350), false)
+, 4830), false)
 );
 
 WriteLiteral(" class=\"btn btn-default btn-round card-btn\"");
@@ -514,7 +572,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 100 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 109 "..\..\Views\Products\_RelatedOther.cshtml"
                    Write(Request.GetLocalizedString("PRODUCT_PUBLIC_PAGE_BUTTON"));
 
             
@@ -523,7 +581,7 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </a>\r\n                </div>\r\n            </div>\r\n");
 
             
-            #line 104 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 113 "..\..\Views\Products\_RelatedOther.cshtml"
         }
 
             
@@ -532,7 +590,7 @@ WriteLiteral("\r\n                    </a>\r\n                </div>\r\n        
 WriteLiteral("    </div>\r\n");
 
             
-            #line 106 "..\..\Views\Products\_RelatedOther.cshtml"
+            #line 115 "..\..\Views\Products\_RelatedOther.cshtml"
 }
             
             #line default

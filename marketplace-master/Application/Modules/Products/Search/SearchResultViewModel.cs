@@ -11,12 +11,12 @@ namespace Application.Modules.Products.Search
     {
         public SearchResultViewModel()
         {
-            ResultsOld = new List<ProductWithPrice>();
+            // ResultsOld = new List<ProductWithPrice>();
             Results = new List<ProductSearchResultItem>();
             Facets = new List<FacetGroup>();
         }
 
-        public IList<ProductWithPrice> ResultsOld { get; set; }
+        // public IList<ProductWithPrice> ResultsOld { get; set; }
         public IList<ProductSearchResultItem> Results { get; set; }
 
         public IList<FacetGroup> Facets { get; set; }

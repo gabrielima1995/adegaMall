@@ -3,6 +3,7 @@ using Domain.Modules.Products.Variants;
 using Framework;
 using System.Collections.Generic;
 using System.Linq;
+using V2.Application.Modules.Search.Products;
 
 namespace Application.Modules.Products.Variants
 {
@@ -10,13 +11,16 @@ namespace Application.Modules.Products.Variants
     {
         private readonly ProductVariantService _variantService;
         private readonly ProductVariantTypeService _variantTypeService;
+        private readonly IRepository<ProductVariant> _productVariantRepository;
 
         public ProductVariantAppService(
             ProductVariantService variantService,
-            ProductVariantTypeService variantTypeService)
+            ProductVariantTypeService variantTypeService,
+            IRepository<ProductVariant> productVariantRepository)
         {
             _variantService = variantService;
             _variantTypeService = variantTypeService;
+            _productVariantRepository = productVariantRepository;
         }
 
         public IList<ProductVariantListItemViewModel> GetList()
@@ -64,10 +68,14 @@ namespace Application.Modules.Products.Variants
         {
             var variantType = _variantTypeService.Get(i => i.Id == model.VariantType && !i.Deleted);
 
-            return _variantService.Save(
+            var operationResult = _variantService.Save(
                 i => i.Id == model.Id && !i.Deleted,
                 () => model.Create(variantType),
                 entity => model.Update(entity, variantType));
+
+            PaisBadgeExtension.LoadPaises(_productVariantRepository);
+
+            return operationResult;
         }
 
         public void DeleteProductVariant(int id)
@@ -76,6 +84,8 @@ namespace Application.Modules.Products.Variants
                i => i.Id == id && !i.Deleted,
                entity => { entity.Deleted = true; },
                i => i.Type);
+
+            PaisBadgeExtension.LoadPaises(_productVariantRepository);
         }
 
         public ProductVariantsSelector GetSelector(int? variantType)

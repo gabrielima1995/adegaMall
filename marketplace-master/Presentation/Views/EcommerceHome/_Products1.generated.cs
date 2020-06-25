@@ -43,6 +43,12 @@ namespace ASP
     using Presentation.Globalization;
     using Presentation.Helpers;
     using Presentation.Models;
+    
+    #line 2 "..\..\Views\EcommerceHome\_Products.cshtml"
+    using V2.Application.Modules.Search.Products;
+    
+    #line default
+    #line hidden
     using V2.Application.Modules.SellerAssistantModule;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -57,7 +63,7 @@ namespace ASP
 WriteLiteral("\r\n");
 
             
-            #line 5 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 6 "..\..\Views\EcommerceHome\_Products.cshtml"
   
     var config = MaaSConfig.Current;
     var isAuthenticated = Request.IsAuthenticated;
@@ -69,7 +75,7 @@ WriteLiteral("\r\n");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 11 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 12 "..\..\Views\EcommerceHome\_Products.cshtml"
  foreach (var category in Model.Categories)
 {
 
@@ -95,13 +101,13 @@ WriteLiteral(" class=\"col-xs-12\"");
 WriteLiteral(">\r\n");
 
             
-            #line 17 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 18 "..\..\Views\EcommerceHome\_Products.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 17 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 18 "..\..\Views\EcommerceHome\_Products.cshtml"
                      if (!string.IsNullOrEmpty(category.CustomItemCategory?.Name))
                     {
 
@@ -111,7 +117,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        <h2>");
 
             
-            #line 19 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 20 "..\..\Views\EcommerceHome\_Products.cshtml"
                        Write(category.CustomItemCategory.Name);
 
             
@@ -120,7 +126,7 @@ WriteLiteral("                        <h2>");
 WriteLiteral("</h2>\r\n");
 
             
-            #line 20 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 21 "..\..\Views\EcommerceHome\_Products.cshtml"
                     }
                     else
                     {
@@ -128,19 +134,46 @@ WriteLiteral("</h2>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("                        <h2>");
+WriteLiteral("                        <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 821), Tuple.Create("\"", 870)
+, Tuple.Create(Tuple.Create("", 828), Tuple.Create("/categoria/", 828), true)
+            
+            #line 24 "..\..\Views\EcommerceHome\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 839), Tuple.Create<System.Object, System.Int32>(category.ProductCategory.Slug
+            
+            #line default
+            #line hidden
+, 839), false)
+, Tuple.Create(Tuple.Create("", 869), Tuple.Create("/", 869), true)
+);
+
+WriteLiteral(" class=\"paises-link\"");
+
+WriteAttribute("title", Tuple.Create(" title=\"", 891), Tuple.Create("\"", 940)
+, Tuple.Create(Tuple.Create("", 899), Tuple.Create("Categoria:", 899), true)
+            
+            #line 24 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                   , Tuple.Create(Tuple.Create(" ", 909), Tuple.Create<System.Object, System.Int32>(category.ProductCategory.Name
+            
+            #line default
+            #line hidden
+, 910), false)
+);
+
+WriteLiteral(">\r\n                            <h2>");
 
             
-            #line 23 "..\..\Views\EcommerceHome\_Products.cshtml"
-                       Write(category.ProductCategory.Name);
+            #line 25 "..\..\Views\EcommerceHome\_Products.cshtml"
+                           Write(category.ProductCategory.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("</h2>\r\n");
+WriteLiteral("</h2>\r\n                        </a>\r\n");
 
             
-            #line 24 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 27 "..\..\Views\EcommerceHome\_Products.cshtml"
                     }
 
             
@@ -153,13 +186,13 @@ WriteLiteral(" class=\"row\"");
 WriteLiteral(">\r\n");
 
             
-            #line 29 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 32 "..\..\Views\EcommerceHome\_Products.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 29 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 32 "..\..\Views\EcommerceHome\_Products.cshtml"
                   
                     var homeItems = Model.GetProducts(category);
                 
@@ -169,13 +202,13 @@ WriteLiteral(">\r\n");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 33 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 36 "..\..\Views\EcommerceHome\_Products.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 33 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 36 "..\..\Views\EcommerceHome\_Products.cshtml"
                  if (((category.CustomItemCategory?.CarouselDisplay).GetValueOrDefault() || category.CustomItemCategory == null) && homeItems.Count >= 4)
                 {
 
@@ -197,16 +230,18 @@ WriteLiteral(" class=\"owl-carousel\"");
 WriteLiteral(">\r\n");
 
             
-            #line 38 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 41 "..\..\Views\EcommerceHome\_Products.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 38 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 41 "..\..\Views\EcommerceHome\_Products.cshtml"
                                  foreach (var viewModel in homeItems)
                                 {
                                     var productUrl = viewModel.LinkUrl;
+                                    var prodPrice = viewModel.ProductPrice;
+                                    var paisBadge = viewModel.Product?.GetPaisBadge();
 
                                     if (!viewModel.ShouldDisplay)
                                     {
@@ -224,13 +259,58 @@ WriteLiteral(" class=\"card equal-height\"");
 WriteLiteral(">\r\n");
 
             
-            #line 48 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 53 "..\..\Views\EcommerceHome\_Products.cshtml"
                                         
             
             #line default
             #line hidden
             
-            #line 48 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 53 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                         if (viewModel.IsProduct && prodPrice.DisplayShortPrice.HasAnyPrice)
+                                        {
+                                            if (prodPrice.DisplayShortPrice.Discount.HasDiscount)
+                                            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                                <div");
+
+WriteLiteral(" class=\"card-discount-badge\"");
+
+WriteLiteral(">\r\n                                                    <span");
+
+WriteLiteral(" class=\"label label-success\"");
+
+WriteLiteral(">");
+
+            
+            #line 58 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                                                 Write(prodPrice.DisplayShortPrice.Discount.Formatted);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n                                                </div>\r\n");
+
+            
+            #line 60 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                            }
+                                        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 63 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                        
+            
+            #line default
+            #line hidden
+            
+            #line 63 "..\..\Views\EcommerceHome\_Products.cshtml"
                                          if (viewModel.IsProduct && showProductWishButton)
                                         {
                                             
@@ -238,15 +318,58 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 50 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 65 "..\..\Views\EcommerceHome\_Products.cshtml"
                                        Write(Html.Partial("_ProductWishButtonCard", viewModel));
 
             
             #line default
             #line hidden
             
-            #line 50 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 65 "..\..\Views\EcommerceHome\_Products.cshtml"
                                                                                               
+                                        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                        \r\n");
+
+            
+            #line 68 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                        
+            
+            #line default
+            #line hidden
+            
+            #line 68 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                         if (!string.IsNullOrEmpty(paisBadge))
+                                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                            <div");
+
+WriteLiteral(" class=\"card-country-badge\"");
+
+WriteLiteral(">\r\n                                                <img");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3435), Tuple.Create("\"", 3489)
+, Tuple.Create(Tuple.Create("", 3441), Tuple.Create("/assets/images/paises/", 3441), true)
+            
+            #line 71 "..\..\Views\EcommerceHome\_Products.cshtml"
+ , Tuple.Create(Tuple.Create("", 3463), Tuple.Create<System.Object, System.Int32>(paisBadge
+            
+            #line default
+            #line hidden
+, 3463), false)
+, Tuple.Create(Tuple.Create("", 3475), Tuple.Create(".png?w=25&h=25", 3475), true)
+);
+
+WriteLiteral("/>\r\n                                            </div>\r\n");
+
+            
+            #line 73 "..\..\Views\EcommerceHome\_Products.cshtml"
                                         }
 
             
@@ -254,49 +377,57 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("\r\n                                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2117), Tuple.Create("\"", 2135)
+WriteAttribute("href", Tuple.Create(" href=\"", 3633), Tuple.Create("\"", 3651)
             
-            #line 53 "..\..\Views\EcommerceHome\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 2124), Tuple.Create<System.Object, System.Int32>(productUrl
+            #line 75 "..\..\Views\EcommerceHome\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 3640), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 2124), false)
+, 3640), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 2136), Tuple.Create("\"", 2160)
+WriteAttribute("title", Tuple.Create(" title=\"", 3652), Tuple.Create("\"", 3676)
             
-            #line 53 "..\..\Views\EcommerceHome\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 2144), Tuple.Create<System.Object, System.Int32>(viewModel.Title
+            #line 75 "..\..\Views\EcommerceHome\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 3660), Tuple.Create<System.Object, System.Int32>(viewModel.Title
             
             #line default
             #line hidden
-, 2144), false)
+, 3660), false)
 );
 
 WriteLiteral(" class=\"card-product-img-link\"");
 
 WriteLiteral(">\r\n                                            <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 2242), Tuple.Create("\"", 2278)
-            
-            #line 54 "..\..\Views\EcommerceHome\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 2248), Tuple.Create<System.Object, System.Int32>(viewModel.GetScaledImageUrl()
-            
-            #line default
-            #line hidden
-, 2248), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 3758), Tuple.Create("\"", 3807)
+, Tuple.Create(Tuple.Create("", 3764), Tuple.Create<System.Object, System.Int32>(Href("~/assets/images/product-img-placeholder.jpg")
+, 3764), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 2279), Tuple.Create("\"", 2301)
+WriteLiteral(" data-src=\"");
+
             
-            #line 54 "..\..\Views\EcommerceHome\_Products.cshtml"
-           , Tuple.Create(Tuple.Create("", 2285), Tuple.Create<System.Object, System.Int32>(viewModel.Title
+            #line 76 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                                                                        Write(viewModel.GetScaledImageUrl());
+
             
             #line default
             #line hidden
-, 2285), false)
+WriteLiteral("\"");
+
+WriteAttribute("alt", Tuple.Create(" alt=\"", 3850), Tuple.Create("\"", 3872)
+            
+            #line 76 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                                  , Tuple.Create(Tuple.Create("", 3856), Tuple.Create<System.Object, System.Int32>(viewModel.Title
+            
+            #line default
+            #line hidden
+, 3856), false)
 );
+
+WriteLiteral(" class=\"js-load-img\"");
 
 WriteLiteral(" />\r\n                                        </a>\r\n\r\n                            " +
 "            <h5");
@@ -306,7 +437,7 @@ WriteLiteral(" class=\"card-product-title\"");
 WriteLiteral(">");
 
             
-            #line 57 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 79 "..\..\Views\EcommerceHome\_Products.cshtml"
                                                                   Write(viewModel.Title);
 
             
@@ -315,13 +446,13 @@ WriteLiteral(">");
 WriteLiteral("</h5>\r\n\r\n");
 
             
-            #line 59 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 81 "..\..\Views\EcommerceHome\_Products.cshtml"
                                         
             
             #line default
             #line hidden
             
-            #line 59 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 81 "..\..\Views\EcommerceHome\_Products.cshtml"
                                          if (viewModel.IsProduct)
                                         {
 
@@ -332,14 +463,14 @@ WriteLiteral("                                            <small");
 
 WriteLiteral(" class=\"text-muted\"");
 
-WriteLiteral(" style=\"display:block\"");
+WriteLiteral(" style=\"display: block\"");
 
 WriteLiteral(">\r\n");
 
 WriteLiteral("                                                ");
 
             
-            #line 62 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 84 "..\..\Views\EcommerceHome\_Products.cshtml"
                                            Write(viewModel.Seller);
 
             
@@ -348,194 +479,213 @@ WriteLiteral("                                                ");
 WriteLiteral("\r\n                                            </small>\r\n");
 
             
-            #line 64 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 86 "..\..\Views\EcommerceHome\_Products.cshtml"
+
+                                            if (config.Product.Price.Enabled && prodPrice.DisplayShortPrice.HasAnyPrice)
+                                            {
+                                                if (prodPrice.DisplayShortPrice.Discount.HasDiscount)
+                                                {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                                    <p");
+
+WriteLiteral(" class=\"card-discount-price\"");
+
+WriteLiteral(">\r\n                                                        <small>\r\n             " +
+"                                               de <span");
+
+WriteLiteral(" class=\"card-discount-price-amount\"");
+
+WriteLiteral(">");
+
+            
+            #line 93 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                                                                   Write(prodPrice.DisplayShortPrice.Discount.Original.FullPriceText);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span> por\r\n                                                        </small>\r\n  " +
+"                                                  </p>\r\n");
+
+            
+            #line 96 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                }
+
+                                                else if (prodPrice.DisplayShortPrice.CanIncrease)
+                                                {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                                    <p");
+
+WriteLiteral(" class=\"card-price-starting-from\"");
+
+WriteLiteral(">\r\n                                                        <small>\r\n");
+
+WriteLiteral("                                                            ");
+
+            
+            #line 102 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                       Write(Html.Localized("PRODUCT_PRICE_STARTING_FROM", "span", new { @class = "text-muted" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                                        </small>\r\n             " +
+"                                       </p>\r\n");
+
+            
+            #line 105 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                }
 
 
             
             #line default
             #line hidden
-WriteLiteral("                                            <p");
+WriteLiteral("                                                <div");
 
 WriteLiteral(" class=\"card-product-price\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 66 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                
+            #line 108 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                    
             
             #line default
             #line hidden
             
-            #line 66 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                 if (config.Product.Price.Enabled && (viewModel.Price != null && !viewModel.Price.Equals("0,00")))
-                                                {
-                                                    double localprice;
-                                                    if (Double.TryParse(viewModel.Price, out localprice) && localprice > 0.0)
-                                                    {
-                                                        
-            
-            #line default
-            #line hidden
-            
-            #line 71 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                   Write(config.DefaultCurrency);
-
-            
-            #line default
-            #line hidden
-            
-            #line 71 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                                               
-                                                        
-            
-            #line default
-            #line hidden
-            
-            #line 72 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                   Write(viewModel.Price);
-
-            
-            #line default
-            #line hidden
-            
-            #line 72 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                                        
-                                                    }
-                                                    else
-                                                    {
-                                                        
-            
-            #line default
-            #line hidden
-            
-            #line 76 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                   Write(config.DefaultCurrency);
-
-            
-            #line default
-            #line hidden
-            
-            #line 76 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                                               
-                                                        
-            
-            #line default
-            #line hidden
-            
-            #line 77 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                   Write(viewModel.MultiplierPrice);
-
-            
-            #line default
-            #line hidden
-            
-            #line 77 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                                                  
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                                        <small>\r\n                " +
-"                                            / ");
-
-            
-            #line 79 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                         Write(Html.Localized("CART_ADDITIONAL_BASE_UNIT"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                                        </small>\r\n");
-
-            
-            #line 81 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                    }
-                                                }
-                                                else
-                                                {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                                    ");
-
-WriteLiteral("&nbsp;\r\n");
-
-            
-            #line 86 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-            
-            #line 88 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                
-            
-            #line default
-            #line hidden
-            
-            #line 88 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                  
-                                                    double mprice = 0;
-                                                    double price = 0;
-
-                                                    if (Double.TryParse(viewModel.MultiplierPrice, out mprice) && Double.TryParse(viewModel.Price, out price) && mprice > 0 && price > 0)
+            #line 108 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                     if (prodPrice.HasBasePrice)
                                                     {
 
             
             #line default
             #line hidden
-WriteLiteral("                                                        <br />\r\n");
-
-WriteLiteral("                                                        <small>\r\n                " +
-"                                            + ");
-
-            
-            #line 96 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                         Write(config.DefaultCurrency);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("                                                        <div>\r\n");
 
 WriteLiteral("                                                            ");
 
             
-            #line 97 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                       Write(viewModel.MultiplierPrice);
+            #line 111 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                       Write(prodPrice.DisplayShortPrice.FullPriceText);
 
             
             #line default
             #line hidden
-WriteLiteral(" / ");
+WriteLiteral("\r\n");
 
             
-            #line 97 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                                                    Write(Html.Localized("CART_ADDITIONAL_BASE_UNIT"));
+            #line 112 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                            
+            
+            #line default
+            #line hidden
+            
+            #line 112 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                             if (prodPrice.DisplayShortPrice.HasTextComplementLabel)
+                                                            {
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                                        </small>\r\n");
+WriteLiteral("                                                                <small");
 
-WriteLiteral("                                                        <br />\r\n");
+WriteLiteral(" class=\"text-muted text-lowercase\"");
+
+WriteLiteral(">/ ");
 
             
-            #line 100 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 114 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                                                                      Write(string.Format(Request.GetLocalizedString(prodPrice.DisplayShortPrice.TextComplementLabel), prodPrice.DisplayShortPrice.TextComplementParam));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</small>\r\n");
+
+            
+            #line 115 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                                        </div>\r\n");
+
+            
+            #line 117 "..\..\Views\EcommerceHome\_Products.cshtml"
                                                     }
-                                                
+
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                            </p>\r\n");
+WriteLiteral("\r\n");
 
             
-            #line 103 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 119 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                    
+            
+            #line default
+            #line hidden
+            
+            #line 119 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                     if (prodPrice.DisplayShortPrice.HasAdditionalPrice)
+                                                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                                        <div");
+
+WriteLiteral(" class=\"card-product-price-additional\"");
+
+WriteLiteral(">\r\n                                                            <span");
+
+WriteLiteral(" class=\"card-product-price-additional-amount\"");
+
+WriteLiteral(">");
+
+            
+            #line 122 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                                                                          Write(prodPrice.DisplayShortPrice.AdditionalPriceText);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n                                                        </div>\r\n");
+
+            
+            #line 124 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                                </div>\r\n");
+
+            
+            #line 126 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                            }
+                                            else
+                                            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                                <p");
+
+WriteLiteral(" class=\"card-product-price\"");
+
+WriteLiteral(">&nbsp;</p>\r\n");
+
+            
+            #line 130 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                            }
 
 
             
@@ -543,14 +693,14 @@ WriteLiteral("\r\n                                            </p>\r\n");
             #line hidden
 WriteLiteral("                                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5484), Tuple.Create("\"", 5502)
+WriteAttribute("href", Tuple.Create(" href=\"", 7768), Tuple.Create("\"", 7786)
             
-            #line 104 "..\..\Views\EcommerceHome\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 5491), Tuple.Create<System.Object, System.Int32>(productUrl
+            #line 132 "..\..\Views\EcommerceHome\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 7775), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 5491), false)
+, 7775), false)
 );
 
 WriteLiteral(" class=\"btn btn-default btn-round card-btn\"");
@@ -564,7 +714,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                                                ");
 
             
-            #line 106 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 134 "..\..\Views\EcommerceHome\_Products.cshtml"
                                            Write(Request.GetLocalizedString("PRODUCT_PUBLIC_PAGE_BUTTON"));
 
             
@@ -573,7 +723,7 @@ WriteLiteral("                                                ");
 WriteLiteral("\r\n                                            </a>\r\n");
 
             
-            #line 108 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 136 "..\..\Views\EcommerceHome\_Products.cshtml"
                                         }
 
             
@@ -582,7 +732,7 @@ WriteLiteral("\r\n                                            </a>\r\n");
 WriteLiteral("                                    </div>\r\n");
 
             
-            #line 110 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 138 "..\..\Views\EcommerceHome\_Products.cshtml"
                                 }
 
             
@@ -592,13 +742,15 @@ WriteLiteral("                            </div>\r\n                        </di
 "       </div>\r\n");
 
             
-            #line 114 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 142 "..\..\Views\EcommerceHome\_Products.cshtml"
                 }
                 else
                 {
                     foreach (var viewModel in homeItems)
                     {
                         var productUrl = viewModel.LinkUrl;
+                        var prodPrice = viewModel.ProductPrice;
+                        var paisBadge = viewModel.Product?.GetPaisBadge();
 
                         if (!viewModel.ShouldDisplay)
                         {
@@ -620,13 +772,58 @@ WriteLiteral(" class=\"card equal-height\"");
 WriteLiteral(">\r\n");
 
             
-            #line 128 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 158 "..\..\Views\EcommerceHome\_Products.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 128 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 158 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                 if (viewModel.IsProduct && prodPrice.DisplayShortPrice.HasAnyPrice)
+                                {
+                                    if (prodPrice.DisplayShortPrice.Discount.HasDiscount)
+                                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                        <div");
+
+WriteLiteral(" class=\"card-discount-badge\"");
+
+WriteLiteral(">\r\n                                            <span");
+
+WriteLiteral(" class=\"label label-success\"");
+
+WriteLiteral(">");
+
+            
+            #line 163 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                                         Write(prodPrice.DisplayShortPrice.Discount.Formatted);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n                                        </div>\r\n");
+
+            
+            #line 165 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                    }
+                                }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 168 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                
+            
+            #line default
+            #line hidden
+            
+            #line 168 "..\..\Views\EcommerceHome\_Products.cshtml"
                                  if (viewModel.IsProduct && showProductWishButton)
                                 {
                                     
@@ -634,15 +831,58 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 130 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 170 "..\..\Views\EcommerceHome\_Products.cshtml"
                                Write(Html.Partial("_ProductWishButtonCard", viewModel));
 
             
             #line default
             #line hidden
             
-            #line 130 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 170 "..\..\Views\EcommerceHome\_Products.cshtml"
                                                                                       
+                                }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                        \r\n");
+
+            
+            #line 173 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                
+            
+            #line default
+            #line hidden
+            
+            #line 173 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                 if (!string.IsNullOrEmpty(paisBadge))
+                                {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                    <div");
+
+WriteLiteral(" class=\"card-country-badge\"");
+
+WriteLiteral(">\r\n                                        <img");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 10035), Tuple.Create("\"", 10089)
+, Tuple.Create(Tuple.Create("", 10041), Tuple.Create("/assets/images/paises/", 10041), true)
+            
+            #line 176 "..\..\Views\EcommerceHome\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 10063), Tuple.Create<System.Object, System.Int32>(paisBadge
+            
+            #line default
+            #line hidden
+, 10063), false)
+, Tuple.Create(Tuple.Create("", 10075), Tuple.Create(".png?w=25&h=25", 10075), true)
+);
+
+WriteLiteral("/>\r\n                                    </div>\r\n");
+
+            
+            #line 178 "..\..\Views\EcommerceHome\_Products.cshtml"
                                 }
 
             
@@ -650,49 +890,57 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("\r\n                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6783), Tuple.Create("\"", 6801)
+WriteAttribute("href", Tuple.Create(" href=\"", 10209), Tuple.Create("\"", 10227)
             
-            #line 133 "..\..\Views\EcommerceHome\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 6790), Tuple.Create<System.Object, System.Int32>(productUrl
+            #line 180 "..\..\Views\EcommerceHome\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 10216), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 6790), false)
+, 10216), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 6802), Tuple.Create("\"", 6826)
+WriteAttribute("title", Tuple.Create(" title=\"", 10228), Tuple.Create("\"", 10252)
             
-            #line 133 "..\..\Views\EcommerceHome\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 6810), Tuple.Create<System.Object, System.Int32>(viewModel.Title
+            #line 180 "..\..\Views\EcommerceHome\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 10236), Tuple.Create<System.Object, System.Int32>(viewModel.Title
             
             #line default
             #line hidden
-, 6810), false)
+, 10236), false)
 );
 
 WriteLiteral(" class=\"card-product-img-link\"");
 
 WriteLiteral(">\r\n                                    <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 6900), Tuple.Create("\"", 6936)
-            
-            #line 134 "..\..\Views\EcommerceHome\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 6906), Tuple.Create<System.Object, System.Int32>(viewModel.GetScaledImageUrl()
-            
-            #line default
-            #line hidden
-, 6906), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 10326), Tuple.Create("\"", 10375)
+, Tuple.Create(Tuple.Create("", 10332), Tuple.Create<System.Object, System.Int32>(Href("~/assets/images/product-img-placeholder.jpg")
+, 10332), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 6937), Tuple.Create("\"", 6959)
+WriteLiteral(" data-src=\"");
+
             
-            #line 134 "..\..\Views\EcommerceHome\_Products.cshtml"
-   , Tuple.Create(Tuple.Create("", 6943), Tuple.Create<System.Object, System.Int32>(viewModel.Title
+            #line 181 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                                                                Write(viewModel.GetScaledImageUrl());
+
             
             #line default
             #line hidden
-, 6943), false)
+WriteLiteral("\"");
+
+WriteAttribute("alt", Tuple.Create(" alt=\"", 10418), Tuple.Create("\"", 10440)
+            
+            #line 181 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                         , Tuple.Create(Tuple.Create("", 10424), Tuple.Create<System.Object, System.Int32>(viewModel.Title
+            
+            #line default
+            #line hidden
+, 10424), false)
 );
+
+WriteLiteral(" class=\"js-load-img\"");
 
 WriteLiteral(" />\r\n                                </a>\r\n\r\n                                <h5");
 
@@ -701,7 +949,7 @@ WriteLiteral(" class=\"card-product-title\"");
 WriteLiteral(">");
 
             
-            #line 137 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 184 "..\..\Views\EcommerceHome\_Products.cshtml"
                                                           Write(viewModel.Title);
 
             
@@ -710,13 +958,13 @@ WriteLiteral(">");
 WriteLiteral("</h5>\r\n\r\n");
 
             
-            #line 139 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 186 "..\..\Views\EcommerceHome\_Products.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 139 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 186 "..\..\Views\EcommerceHome\_Products.cshtml"
                                  if (viewModel.IsProduct)
                                 {
 
@@ -727,14 +975,14 @@ WriteLiteral("                                    <small");
 
 WriteLiteral(" class=\"text-muted\"");
 
-WriteLiteral(" style=\"display:block\"");
+WriteLiteral(" style=\"display: block\"");
 
 WriteLiteral(">\r\n");
 
 WriteLiteral("                                        ");
 
             
-            #line 142 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 189 "..\..\Views\EcommerceHome\_Products.cshtml"
                                    Write(viewModel.Seller);
 
             
@@ -743,176 +991,212 @@ WriteLiteral("                                        ");
 WriteLiteral("\r\n                                    </small>\r\n");
 
             
-            #line 144 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 191 "..\..\Views\EcommerceHome\_Products.cshtml"
 
+                                    if (config.Product.Price.Enabled && prodPrice.DisplayShortPrice.HasAnyPrice)
+                                    {
+                                        if (prodPrice.DisplayShortPrice.Discount.HasDiscount)
+                                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                            <p");
+
+WriteLiteral(" class=\"card-discount-price\"");
+
+WriteLiteral(">\r\n                                                <small>\r\n                     " +
+"                               de <span");
+
+WriteLiteral(" class=\"card-discount-price-amount\"");
+
+WriteLiteral(">");
+
+            
+            #line 198 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                                                           Write(prodPrice.DisplayShortPrice.Discount.Original.FullPriceText);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span> por\r\n                                                </small>\r\n          " +
+"                                  </p>\r\n");
+
+            
+            #line 201 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                        }
+
+                                        else if (prodPrice.DisplayShortPrice.CanIncrease)
+                                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                            <p");
+
+WriteLiteral(" class=\"card-price-starting-from\"");
+
+WriteLiteral(">\r\n                                                <small>\r\n");
+
+WriteLiteral("                                                    ");
+
+            
+            #line 207 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                               Write(Html.Localized("PRODUCT_PRICE_STARTING_FROM", "span", new { @class = "text-muted" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                                </small>\r\n                     " +
+"                       </p>\r\n");
+
+            
+            #line 210 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                        }
 
 
             
             #line default
             #line hidden
-WriteLiteral("                                    <p");
+WriteLiteral("                                        <div");
 
 WriteLiteral(" class=\"card-product-price\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 147 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                        
+            #line 213 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                            
             
             #line default
             #line hidden
             
-            #line 147 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                         if (config.Product.Price.Enabled && viewModel.Price != null)
-                                        {
-                                            if (Double.Parse(viewModel.Price) > 0.0)
+            #line 213 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                             if (prodPrice.HasBasePrice)
                                             {
-                                                
-            
-            #line default
-            #line hidden
-            
-            #line 151 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                           Write(config.DefaultCurrency);
 
             
             #line default
             #line hidden
-            
-            #line 151 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                                       
-                                                
-            
-            #line default
-            #line hidden
-            
-            #line 152 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                           Write(viewModel.Price);
+WriteLiteral("                                                <div>\r\n");
+
+WriteLiteral("                                                    ");
 
             
-            #line default
-            #line hidden
-            
-            #line 152 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                                
-                                            }
-                                            else
-                                            {
-                                                
-            
-            #line default
-            #line hidden
-            
-            #line 156 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                           Write(config.DefaultCurrency);
-
-            
-            #line default
-            #line hidden
-            
-            #line 156 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                                       
-                                                
-            
-            #line default
-            #line hidden
-            
-            #line 157 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                           Write(viewModel.MultiplierPrice);
-
-            
-            #line default
-            #line hidden
-            
-            #line 157 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                                          
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                                <small>\r\n                        " +
-"                            / ");
-
-            
-            #line 159 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                 Write(Html.Localized("CART_ADDITIONAL_BASE_UNIT"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                                </small>\r\n");
-
-            
-            #line 161 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                            }
-                                        }
-                                        else
-                                        {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                            ");
-
-WriteLiteral("&nbsp;\r\n");
-
-            
-            #line 166 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                    </p>\r\n");
-
-            
-            #line 168 "..\..\Views\EcommerceHome\_Products.cshtml"
-
-                                    double mprice;
-                                    double price;
-                                    if (Double.TryParse(viewModel.MultiplierPrice, out mprice) && mprice > 0 && Double.TryParse(viewModel.Price, out price) && price > 0.0)
-                                    {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                        <small>\r\n                                " +
-"            + ");
-
-            
-            #line 174 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                         Write(config.DefaultCurrency);
+            #line 216 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                               Write(prodPrice.DisplayShortPrice.FullPriceText);
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n");
 
-WriteLiteral("                                            ");
-
             
-            #line 175 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                       Write(viewModel.MultiplierPrice);
+            #line 217 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                    
+            
+            #line default
+            #line hidden
+            
+            #line 217 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                     if (prodPrice.DisplayShortPrice.HasTextComplementLabel)
+                                                    {
 
             
             #line default
             #line hidden
-WriteLiteral(" / ");
+WriteLiteral("                                                        <small");
+
+WriteLiteral(" class=\"text-muted text-lowercase\"");
+
+WriteLiteral(">/ ");
 
             
-            #line 175 "..\..\Views\EcommerceHome\_Products.cshtml"
-                                                                    Write(Html.Localized("CART_ADDITIONAL_BASE_UNIT"));
+            #line 219 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                                                              Write(string.Format(Request.GetLocalizedString(prodPrice.DisplayShortPrice.TextComplementLabel), prodPrice.DisplayShortPrice.TextComplementParam));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                        </small>\r\n");
-
-WriteLiteral("                                        <br />\r\n");
+WriteLiteral("</small>\r\n");
 
             
-            #line 178 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 220 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                                </div>\r\n");
+
+            
+            #line 222 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 224 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                            
+            
+            #line default
+            #line hidden
+            
+            #line 224 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                             if (prodPrice.DisplayShortPrice.HasAdditionalPrice)
+                                            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                                <div");
+
+WriteLiteral(" class=\"card-product-price-additional\"");
+
+WriteLiteral(">\r\n                                                    <span");
+
+WriteLiteral(" class=\"card-product-price-additional-amount\"");
+
+WriteLiteral(">");
+
+            
+            #line 227 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                                                                                  Write(prodPrice.DisplayShortPrice.AdditionalPriceText);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n                                                </div>\r\n");
+
+            
+            #line 229 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                        </div>\r\n");
+
+            
+            #line 231 "..\..\Views\EcommerceHome\_Products.cshtml"
+                                    }
+                                    else
+                                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                        <p");
+
+WriteLiteral(" class=\"card-product-price\"");
+
+WriteLiteral(">&nbsp;</p>\r\n");
+
+            
+            #line 235 "..\..\Views\EcommerceHome\_Products.cshtml"
                                     }
 
 
@@ -921,14 +1205,14 @@ WriteLiteral("                                        <br />\r\n");
             #line hidden
 WriteLiteral("                                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 9427), Tuple.Create("\"", 9445)
+WriteAttribute("href", Tuple.Create(" href=\"", 13944), Tuple.Create("\"", 13962)
             
-            #line 180 "..\..\Views\EcommerceHome\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 9434), Tuple.Create<System.Object, System.Int32>(productUrl
+            #line 237 "..\..\Views\EcommerceHome\_Products.cshtml"
+, Tuple.Create(Tuple.Create("", 13951), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 9434), false)
+, 13951), false)
 );
 
 WriteLiteral(" class=\"btn btn-default btn-round card-btn\"");
@@ -942,7 +1226,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 182 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 239 "..\..\Views\EcommerceHome\_Products.cshtml"
                                    Write(Request.GetLocalizedString("PRODUCT_PUBLIC_PAGE_BUTTON"));
 
             
@@ -951,7 +1235,7 @@ WriteLiteral("                                        ");
 WriteLiteral("\r\n                                    </a>\r\n");
 
             
-            #line 184 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 241 "..\..\Views\EcommerceHome\_Products.cshtml"
                                 }
 
             
@@ -960,7 +1244,7 @@ WriteLiteral("\r\n                                    </a>\r\n");
 WriteLiteral("                            </div>\r\n                        </div>\r\n");
 
             
-            #line 187 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 244 "..\..\Views\EcommerceHome\_Products.cshtml"
                     }
                 }
 
@@ -970,7 +1254,7 @@ WriteLiteral("                            </div>\r\n                        </di
 WriteLiteral("            </div>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 192 "..\..\Views\EcommerceHome\_Products.cshtml"
+            #line 249 "..\..\Views\EcommerceHome\_Products.cshtml"
 }
 
             

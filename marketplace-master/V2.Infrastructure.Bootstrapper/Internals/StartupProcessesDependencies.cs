@@ -8,7 +8,8 @@ namespace V2.Infrastructure.Bootstrapper.Internals
         public void Register(IUnityContainer container)
         {
             container
-                .RegisterType<FriendlyUrlBuilder>();
+                .RegisterType<FriendlyUrlBuilder>()
+                .RegisterType<SlugifyProductsBuilder>();
         }
     }
 }

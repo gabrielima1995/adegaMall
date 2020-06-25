@@ -33,8 +33,9 @@ namespace Infra.SmartSearchAdapter.Products
             new Field("PACEnabled", FieldType.Bool),
             new Field("PrivateFleetEnabled", FieldType.Bool),
 
-            new Field("CategoryId", FieldType.Int, FieldRelevance.Normal),
+            new Field("CategoryId", FieldType.Int, FieldRelevance.Normal, enableSearching: true),
             new Field("CategoryName", FieldType.Text, FieldRelevance.High, enableSearching: true),
+            new Field("CategorySlug", FieldType.Text, FieldRelevance.Normal, enableSearching: true),
 
             new Field("SellerId", FieldType.Literal),
             new Field("SellerNickname", FieldType.Literal),
@@ -46,6 +47,7 @@ namespace Infra.SmartSearchAdapter.Products
             new Field("DeliveryRanges", FieldType.IntArray, FieldRelevance.Normal, enableSearching: true),
             new Field("VariantIds", FieldType.IntArray, FieldRelevance.Normal, enableFaceting: true, enableSearching: true),
             new Field("VariantNames", FieldType.LiteralArray, FieldRelevance.Normal, enableFaceting: true, enableSearching: true),
+            new Field("VariantSlugs", FieldType.LiteralArray, FieldRelevance.Normal, enableFaceting: true, enableSearching: true),
 
             new Field("AddressCityAndState", FieldType.Text),
             new Field("AddressLatLng", FieldType.LatLng, FieldRelevance.Normal, enableSorting: true),

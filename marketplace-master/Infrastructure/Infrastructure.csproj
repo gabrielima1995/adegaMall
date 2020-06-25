@@ -573,6 +573,10 @@
     <Compile Include="Migrations\202005051947451_PortfolioItem_SoftDeletableEntity.Designer.cs">
       <DependentUpon>202005051947451_PortfolioItem_SoftDeletableEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006250527125_ChangeProductVariant.cs" />
+    <Compile Include="Migrations\202006250527125_ChangeProductVariant.Designer.cs">
+      <DependentUpon>202006250527125_ChangeProductVariant.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Data\MyDbConnection.cs" />
     <Compile Include="Data\Repositories\AdminReportRepository.cs" />
@@ -843,6 +847,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005051947451_PortfolioItem_SoftDeletableEntity.resx">
       <DependentUpon>202005051947451_PortfolioItem_SoftDeletableEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006250527125_ChangeProductVariant.resx">
+      <DependentUpon>202006250527125_ChangeProductVariant.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
