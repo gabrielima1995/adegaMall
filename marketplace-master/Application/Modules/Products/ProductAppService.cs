@@ -217,10 +217,10 @@ namespace Application.Modules.Products
 
             total = allProducts.Count;
 
-            response.ResultsOld = allProducts
-                .Skip((request.Page - 1) * request.Limit)
-                .Take(request.Limit)
-                .ToList();
+            //response.ResultsOld = allProducts
+            //    .Skip((request.Page - 1) * request.Limit)
+            //    .Take(request.Limit)
+            //    .ToList();
         }
 
         private IList<FacetGroup> BuildFacetResults(IList<ProductWithPrice> productsWithPrice, SearchRequestViewModel request)

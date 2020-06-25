@@ -54,6 +54,12 @@ namespace ASP
     using Presentation.Globalization;
     using Presentation.Helpers;
     using Presentation.Models;
+    
+    #line 4 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+    using V2.Application.Modules.Search.Products;
+    
+    #line default
+    #line hidden
     using V2.Application.Modules.SellerAssistantModule;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -68,7 +74,7 @@ namespace ASP
 WriteLiteral("\r\n");
 
             
-            #line 7 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 8 "..\..\Views\Products\_RelatedSameSeller.cshtml"
   
     var products = Model.SellerProducts?.Take(4).ToList() ?? new List<Product>(0);
     var config = MaaSConfig.Current;
@@ -81,7 +87,7 @@ WriteLiteral("\r\n");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 14 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 15 "..\..\Views\Products\_RelatedSameSeller.cshtml"
  if (products.Count > 0)
 {
 
@@ -103,7 +109,7 @@ WriteLiteral(" class=\"margin-bottom-15\"");
 WriteLiteral(">");
 
             
-            #line 19 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 20 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                                     Write(Html.Localized("PRODUCTS_RELATED_SAME_SELLER"));
 
             
@@ -112,17 +118,18 @@ WriteLiteral(">");
 WriteLiteral("</h4>\r\n        </div>\r\n\r\n");
 
             
-            #line 22 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 23 "..\..\Views\Products\_RelatedSameSeller.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 22 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 23 "..\..\Views\Products\_RelatedSameSeller.cshtml"
          foreach (var product in products)
         {
             var price = product.ProductPriceMapped;
             var productUrl = Url.ActionLocalized("PublicPage", "Products", new { id = product.FriendlyUrl });
+            var paisBadge = product.GetPaisBadge();
 
 
             
@@ -139,13 +146,13 @@ WriteLiteral(" class=\"card equal-height\"");
 WriteLiteral(">\r\n");
 
             
-            #line 29 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 31 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 29 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 31 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                      if (price.DisplayShortPrice.HasAnyPrice)
                     {
                         if (price.DisplayShortPrice.Discount.HasDiscount)
@@ -165,7 +172,7 @@ WriteLiteral(" class=\"label label-success\"");
 WriteLiteral(">");
 
             
-            #line 34 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 36 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                                                              Write(price.DisplayShortPrice.Discount.Formatted);
 
             
@@ -174,7 +181,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n                            </div>\r\n");
 
             
-            #line 36 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 38 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                         }
                     }
 
@@ -184,13 +191,13 @@ WriteLiteral("</span>\r\n                            </div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 39 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 41 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 39 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 41 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                      if (showProductWishButton)
                     {
                         
@@ -198,15 +205,58 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 41 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 43 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                    Write(Html.Partial("_ProductWishButtonCard", product));
 
             
             #line default
             #line hidden
             
-            #line 41 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 43 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                                                                         
+                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                \r\n");
+
+            
+            #line 46 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+                    
+            
+            #line default
+            #line hidden
+            
+            #line 46 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+                     if (!string.IsNullOrEmpty(paisBadge))
+                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        <div");
+
+WriteLiteral(" class=\"card-country-badge\"");
+
+WriteLiteral(">\r\n                            <img");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 1927), Tuple.Create("\"", 1981)
+, Tuple.Create(Tuple.Create("", 1933), Tuple.Create("/assets/images/paises/", 1933), true)
+            
+            #line 49 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+, Tuple.Create(Tuple.Create("", 1955), Tuple.Create<System.Object, System.Int32>(paisBadge
+            
+            #line default
+            #line hidden
+, 1955), false)
+, Tuple.Create(Tuple.Create("", 1967), Tuple.Create(".png?w=25&h=25", 1967), true)
+);
+
+WriteLiteral("/>\r\n                        </div>\r\n");
+
+            
+            #line 51 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                     }
 
             
@@ -214,54 +264,62 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1660), Tuple.Create("\"", 1678)
+WriteAttribute("href", Tuple.Create(" href=\"", 2065), Tuple.Create("\"", 2083)
             
-            #line 44 "..\..\Views\Products\_RelatedSameSeller.cshtml"
-, Tuple.Create(Tuple.Create("", 1667), Tuple.Create<System.Object, System.Int32>(productUrl
+            #line 53 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+, Tuple.Create(Tuple.Create("", 2072), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 1667), false)
+, 2072), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1679), Tuple.Create("\"", 1701)
+WriteAttribute("title", Tuple.Create(" title=\"", 2084), Tuple.Create("\"", 2106)
             
-            #line 44 "..\..\Views\Products\_RelatedSameSeller.cshtml"
-, Tuple.Create(Tuple.Create("", 1687), Tuple.Create<System.Object, System.Int32>(product.Title
+            #line 53 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+, Tuple.Create(Tuple.Create("", 2092), Tuple.Create<System.Object, System.Int32>(product.Title
             
             #line default
             #line hidden
-, 1687), false)
+, 2092), false)
 );
 
 WriteLiteral(" class=\"card-product-img-link\"");
 
 WriteLiteral(">\r\n                        <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1763), Tuple.Create("\"", 1815)
-            
-            #line 45 "..\..\Views\Products\_RelatedSameSeller.cshtml"
-, Tuple.Create(Tuple.Create("", 1769), Tuple.Create<System.Object, System.Int32>(product.GetCoverImageUrl(ProductImageSize.SM)
-            
-            #line default
-            #line hidden
-, 1769), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 2168), Tuple.Create("\"", 2217)
+, Tuple.Create(Tuple.Create("", 2174), Tuple.Create<System.Object, System.Int32>(Href("~/assets/images/product-img-placeholder.jpg")
+, 2174), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 1816), Tuple.Create("\"", 1836)
+WriteLiteral(" data-src=\"");
+
             
-            #line 45 "..\..\Views\Products\_RelatedSameSeller.cshtml"
-       , Tuple.Create(Tuple.Create("", 1822), Tuple.Create<System.Object, System.Int32>(product.Title
+            #line 54 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+                                                                                    Write(product.GetCoverImageUrl(ProductImageSize.SM));
+
             
             #line default
             #line hidden
-, 1822), false)
+WriteLiteral("\"");
+
+WriteAttribute("alt", Tuple.Create(" alt=\"", 2276), Tuple.Create("\"", 2296)
+            
+            #line 54 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+                                                              , Tuple.Create(Tuple.Create("", 2282), Tuple.Create<System.Object, System.Int32>(product.Title
+            
+            #line default
+            #line hidden
+, 2282), false)
 );
+
+WriteLiteral(" class=\"js-load-img\"");
 
 WriteLiteral(" />\r\n                    </a>\r\n\r\n                    <h5>");
 
             
-            #line 48 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 57 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                    Write(product.Title);
 
             
@@ -270,13 +328,13 @@ WriteLiteral(" />\r\n                    </a>\r\n\r\n                    <h5>");
 WriteLiteral("</h5>\r\n\r\n");
 
             
-            #line 50 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 59 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 50 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 59 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                      if (config.Product.Price.Enabled && price.DisplayShortPrice.HasAnyPrice)
                     {
                         if (price.DisplayShortPrice.Discount.HasDiscount)
@@ -297,7 +355,7 @@ WriteLiteral(" class=\"card-discount-price-amount\"");
 WriteLiteral(">");
 
             
-            #line 56 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 65 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                                                                            Write(price.DisplayShortPrice.Discount.Original.FullPriceText);
 
             
@@ -307,7 +365,7 @@ WriteLiteral("</span> por\r\n                                </small>\r\n       
 "  </p>\r\n");
 
             
-            #line 59 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 68 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                         }
 
                         else if (price.DisplayShortPrice.CanIncrease)
@@ -325,7 +383,7 @@ WriteLiteral(">\r\n                                <small>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 65 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 74 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                                Write(Html.Localized("PRODUCT_PRICE_STARTING_FROM", "span", new { @class = "text-muted" }));
 
             
@@ -334,7 +392,7 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n                                </small>\r\n                            </p>\r\n");
 
             
-            #line 68 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 77 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                         }
 
 
@@ -348,13 +406,13 @@ WriteLiteral(" class=\"card-product-price\"");
 WriteLiteral(">\r\n");
 
             
-            #line 71 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 80 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 71 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 80 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                              if (price.HasBasePrice)
                             {
 
@@ -366,7 +424,7 @@ WriteLiteral("                                <div>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 74 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 83 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                                Write(price.DisplayShortPrice.FullPriceText);
 
             
@@ -375,13 +433,13 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n");
 
             
-            #line 75 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 84 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 75 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 84 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                                      if (price.DisplayShortPrice.HasTextComplementLabel)
                                     {
 
@@ -395,7 +453,7 @@ WriteLiteral(" class=\"text-muted text-lowercase\"");
 WriteLiteral(">/ ");
 
             
-            #line 77 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 86 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                                                                               Write(string.Format(Request.GetLocalizedString(price.DisplayShortPrice.TextComplementLabel), price.DisplayShortPrice.TextComplementParam));
 
             
@@ -404,7 +462,7 @@ WriteLiteral(">/ ");
 WriteLiteral("</small>\r\n");
 
             
-            #line 78 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 87 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                                     }
 
             
@@ -413,7 +471,7 @@ WriteLiteral("</small>\r\n");
 WriteLiteral("                                </div>\r\n");
 
             
-            #line 80 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 89 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                             }
 
             
@@ -422,13 +480,13 @@ WriteLiteral("                                </div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 82 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 91 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 82 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 91 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                              if (price.DisplayShortPrice.HasAdditionalPrice)
                             {
 
@@ -446,7 +504,7 @@ WriteLiteral(" class=\"card-product-price-additional-amount\"");
 WriteLiteral(">");
 
             
-            #line 85 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 94 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                                                                                   Write(price.DisplayShortPrice.AdditionalPriceText);
 
             
@@ -455,7 +513,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n                                </div>\r\n");
 
             
-            #line 87 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 96 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                             }
 
             
@@ -464,7 +522,7 @@ WriteLiteral("</span>\r\n                                </div>\r\n");
 WriteLiteral("                        </div>\r\n");
 
             
-            #line 89 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 98 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                     }
                     else
                     {
@@ -479,7 +537,7 @@ WriteLiteral(" class=\"card-product-price\"");
 WriteLiteral(">&nbsp;</p>\r\n");
 
             
-            #line 93 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 102 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                     }
 
             
@@ -487,14 +545,14 @@ WriteLiteral(">&nbsp;</p>\r\n");
             #line hidden
 WriteLiteral("\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4264), Tuple.Create("\"", 4282)
+WriteAttribute("href", Tuple.Create(" href=\"", 4744), Tuple.Create("\"", 4762)
             
-            #line 95 "..\..\Views\Products\_RelatedSameSeller.cshtml"
-, Tuple.Create(Tuple.Create("", 4271), Tuple.Create<System.Object, System.Int32>(productUrl
+            #line 104 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+, Tuple.Create(Tuple.Create("", 4751), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 4271), false)
+, 4751), false)
 );
 
 WriteLiteral(" class=\"btn btn-default btn-round card-btn\"");
@@ -508,7 +566,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 97 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 106 "..\..\Views\Products\_RelatedSameSeller.cshtml"
                    Write(Request.GetLocalizedString("PRODUCT_PUBLIC_PAGE_BUTTON"));
 
             
@@ -517,7 +575,7 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </a>\r\n                </div>\r\n            </div>\r\n");
 
             
-            #line 101 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 110 "..\..\Views\Products\_RelatedSameSeller.cshtml"
         }
 
             
@@ -526,7 +584,7 @@ WriteLiteral("\r\n                    </a>\r\n                </div>\r\n        
 WriteLiteral("    </div>\r\n");
 
             
-            #line 103 "..\..\Views\Products\_RelatedSameSeller.cshtml"
+            #line 112 "..\..\Views\Products\_RelatedSameSeller.cshtml"
 }
 
             

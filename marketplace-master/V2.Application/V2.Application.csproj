@@ -211,6 +211,7 @@
     <Compile Include="Modules\QuoteRequests\Queries\QuoteListForBuyer.cs" />
     <Compile Include="Modules\Search\CommonSearchRequest.cs" />
     <Compile Include="Modules\Search\CommonSearchResult.cs" />
+    <Compile Include="Modules\Search\Products\PaisBadgeExtension.cs" />
     <Compile Include="Modules\Search\Products\IProductSearchService.cs" />
     <Compile Include="Modules\Search\Products\NearbyProductsRequest.cs" />
     <Compile Include="Modules\Search\Products\ProductSearchRequest.cs" />

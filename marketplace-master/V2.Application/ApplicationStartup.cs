@@ -1,6 +1,7 @@
 ﻿using Application.Config;
 using Domain;
 using Domain.Config.ConfigMigrations;
+using Domain.Entities.StoreModule;
 using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
 using Domain.UserConfig;
@@ -13,6 +14,7 @@ using V2.Application.Cities;
 using V2.Application.Messages;
 using V2.Application.Modules.Finance;
 using V2.Application.Modules.LeadSales;
+using V2.Application.Modules.Search.Products;
 using V2.Application.Modules.StoreModule;
 using V2.Application.Modules.UserRatings;
 using V2.Application.StartupProcesses;
@@ -35,6 +37,7 @@ namespace V2.Application
         private readonly ITemplateEngine templateEngine;
         private readonly IEmailSender emailSender;
         private readonly IUserConfigRepository userConfigRepository;
+        private readonly IRepository<ProductVariant> productVariantRepository;
 
         public static bool DependenciesLoaded { get; set; }
 
@@ -46,7 +49,8 @@ namespace V2.Application
             IMessageTemplateRepository messageTemplateRepository,
             ITemplateEngine templateEngine,
             IEmailSender emailSender,
-            IUserConfigRepository userConfigRepository)
+            IUserConfigRepository userConfigRepository,
+            IRepository<ProductVariant> productVariantRepository)
         {
             this.configMigrator = configMigrator;
             this.cloudStorage = cloudStorage;
@@ -56,6 +60,7 @@ namespace V2.Application
             this.templateEngine = templateEngine;
             this.emailSender = emailSender;
             this.userConfigRepository = userConfigRepository;
+            this.productVariantRepository = productVariantRepository;
         }
 
         public void Startup(Action registerHangfireAction)
@@ -70,6 +75,8 @@ namespace V2.Application
             UserConfiguration.Current = userConfigRepository.ReadConfig() ?? new UserConfiguration();
 
             MessagesContext.Load(messageTemplateRepository, templateEngine, emailSender);
+
+            PaisBadgeExtension.LoadPaises(productVariantRepository);
 
             backgroundWorker.Enqueue<FriendlyUrlBuilder>(i => i.Run());
             backgroundWorker.Enqueue<SlugifyProductsBuilder>(i => i.Run());

@@ -1,4 +1,5 @@
 ﻿@using Application.Modules.Products
+@using V2.Application.Modules.Search.Products
 
 @model Application.Modules.Products.Search.NearbyProductsViewModel
 
@@ -21,6 +22,7 @@
         {
             var price = product.Price;
             var productUrl = Url.ActionLocalized("PublicPage", "Products", new { id = product.FriendlyUrl });
+            var paisBadge = product.GetPaisBadge();
 
             <div class="col-xs-12 col-sm-6 col-md-3">
                 <div class="card equal-height" data-mh="nearby-product">
@@ -37,6 +39,13 @@
                     @if (showProductWishButton)
                     {
                         @Html.Partial("_ProductWishButtonCard", product)
+                    }
+                
+                    @if (!string.IsNullOrEmpty(paisBadge))
+                    {
+                        <div class="card-country-badge">
+                            <img src="/assets/images/paises/@(paisBadge).png?w=25&h=25"/>
+                        </div>
                     }
 
                     <a href="@productUrl" title="@product.Title" class="card-product-img-link">

@@ -49,6 +49,7 @@ namespace Infra.SmartSearchAdapter.Products
                 CategoryName = (string)document.Fields["CategoryName"],
                 AddressCityAndState = (string)document.Fields["AddressCityAndState"],
                 VariantIds = (document.Fields["VariantIds"] as object[])?.Cast<long>().ToArray(),
+                VariantSlugs = (document.Fields["VariantSlugs"] as object[])?.Cast<string>().ToArray(),
                 Distance = GetDistance(document, location)
             };
 

@@ -1,5 +1,6 @@
 ﻿@using Application.Modules.Products
 @using Domain.Entities.StoreModule
+@using V2.Application.Modules.Search.Products
 
 @model ProductPageVM
 
@@ -22,6 +23,7 @@
         {
             var price = product.ProductPriceMapped;
             var productUrl = Url.ActionLocalized("PublicPage", "Products", new { id = product.FriendlyUrl });
+            var paisBadge = product.GetPaisBadge();
 
             <div class="col-xs-12 col-sm-4 col-md-3">
                 <div class="card equal-height">
@@ -39,9 +41,16 @@
                     {
                         @Html.Partial("_ProductWishButtonCard", product)
                     }
+                
+                    @if (!string.IsNullOrEmpty(paisBadge))
+                    {
+                        <div class="card-country-badge">
+                            <img src="/assets/images/paises/@(paisBadge).png?w=25&h=25"/>
+                        </div>
+                    }
 
                     <a href="@productUrl" title="@product.Title" class="card-product-img-link">
-                        <img src="@product.GetCoverImageUrl(ProductImageSize.SM)" alt="@product.Title" />
+                        <img src="~/assets/images/product-img-placeholder.jpg" data-src="@product.GetCoverImageUrl(ProductImageSize.SM)" alt="@product.Title" class="js-load-img" />
                     </a>
 
                     <h5>@product.Title</h5>

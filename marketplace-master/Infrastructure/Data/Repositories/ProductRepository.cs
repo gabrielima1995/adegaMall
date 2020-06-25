@@ -131,6 +131,7 @@ namespace Infrastructure.Data.Repositories
             return CacheHelper.List(Context.Set<Product>()
                 .Include(x => x.Store)
                 .Include(x => x.Store.Seller)
+                .Include(x => x.Variants)
                 .Where(x =>
                     x.Category_Id == productCategoryId
                     && x.CurrentStock > 0

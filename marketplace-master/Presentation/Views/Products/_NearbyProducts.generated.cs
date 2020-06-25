@@ -43,6 +43,12 @@ namespace ASP
     using Presentation.Globalization;
     using Presentation.Helpers;
     using Presentation.Models;
+    
+    #line 2 "..\..\Views\Products\_NearbyProducts.cshtml"
+    using V2.Application.Modules.Search.Products;
+    
+    #line default
+    #line hidden
     using V2.Application.Modules.SellerAssistantModule;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -57,7 +63,7 @@ namespace ASP
 WriteLiteral("\r\n");
 
             
-            #line 5 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 6 "..\..\Views\Products\_NearbyProducts.cshtml"
   
     var config = MaaSConfig.Current;
     var isAuthenticated = Request.IsAuthenticated;
@@ -77,13 +83,13 @@ WriteLiteral(" class=\"row\"");
 WriteLiteral(">\r\n");
 
             
-            #line 13 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 14 "..\..\Views\Products\_NearbyProducts.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 13 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 14 "..\..\Views\Products\_NearbyProducts.cshtml"
          if (Model.Results.Count == 0)
         {
 
@@ -99,7 +105,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 16 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 17 "..\..\Views\Products\_NearbyProducts.cshtml"
            Write(Html.Localized("PRODUCT_NEARBY_WITHOUT_ITEMS", "p"));
 
             
@@ -108,7 +114,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n");
 
             
-            #line 18 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 19 "..\..\Views\Products\_NearbyProducts.cshtml"
         }
 
             
@@ -117,17 +123,18 @@ WriteLiteral("\r\n            </div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 20 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 21 "..\..\Views\Products\_NearbyProducts.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 20 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 21 "..\..\Views\Products\_NearbyProducts.cshtml"
          foreach (var product in Model.Results)
         {
             var price = product.Price;
             var productUrl = Url.ActionLocalized("PublicPage", "Products", new { id = product.FriendlyUrl });
+            var paisBadge = product.GetPaisBadge();
 
 
             
@@ -146,13 +153,13 @@ WriteLiteral(" data-mh=\"nearby-product\"");
 WriteLiteral(">\r\n");
 
             
-            #line 27 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 29 "..\..\Views\Products\_NearbyProducts.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 27 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 29 "..\..\Views\Products\_NearbyProducts.cshtml"
                      if (price.DisplayShortPrice.HasAnyPrice)
                     {
                         if (price.DisplayShortPrice.Discount.HasDiscount)
@@ -172,7 +179,7 @@ WriteLiteral(" class=\"label label-success\"");
 WriteLiteral(">");
 
             
-            #line 32 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 34 "..\..\Views\Products\_NearbyProducts.cshtml"
                                                              Write(price.DisplayShortPrice.Discount.Formatted);
 
             
@@ -181,7 +188,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n                            </div>\r\n");
 
             
-            #line 34 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 36 "..\..\Views\Products\_NearbyProducts.cshtml"
                         }
                     }
 
@@ -191,13 +198,13 @@ WriteLiteral("</span>\r\n                            </div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 37 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 39 "..\..\Views\Products\_NearbyProducts.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 37 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 39 "..\..\Views\Products\_NearbyProducts.cshtml"
                      if (showProductWishButton)
                     {
                         
@@ -205,15 +212,58 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 39 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 41 "..\..\Views\Products\_NearbyProducts.cshtml"
                    Write(Html.Partial("_ProductWishButtonCard", product));
 
             
             #line default
             #line hidden
             
-            #line 39 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 41 "..\..\Views\Products\_NearbyProducts.cshtml"
                                                                         
+                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                \r\n");
+
+            
+            #line 44 "..\..\Views\Products\_NearbyProducts.cshtml"
+                    
+            
+            #line default
+            #line hidden
+            
+            #line 44 "..\..\Views\Products\_NearbyProducts.cshtml"
+                     if (!string.IsNullOrEmpty(paisBadge))
+                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        <div");
+
+WriteLiteral(" class=\"card-country-badge\"");
+
+WriteLiteral(">\r\n                            <img");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 1851), Tuple.Create("\"", 1905)
+, Tuple.Create(Tuple.Create("", 1857), Tuple.Create("/assets/images/paises/", 1857), true)
+            
+            #line 47 "..\..\Views\Products\_NearbyProducts.cshtml"
+, Tuple.Create(Tuple.Create("", 1879), Tuple.Create<System.Object, System.Int32>(paisBadge
+            
+            #line default
+            #line hidden
+, 1879), false)
+, Tuple.Create(Tuple.Create("", 1891), Tuple.Create(".png?w=25&h=25", 1891), true)
+);
+
+WriteLiteral("/>\r\n                        </div>\r\n");
+
+            
+            #line 49 "..\..\Views\Products\_NearbyProducts.cshtml"
                     }
 
             
@@ -221,39 +271,39 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1584), Tuple.Create("\"", 1602)
+WriteAttribute("href", Tuple.Create(" href=\"", 1989), Tuple.Create("\"", 2007)
             
-            #line 42 "..\..\Views\Products\_NearbyProducts.cshtml"
-, Tuple.Create(Tuple.Create("", 1591), Tuple.Create<System.Object, System.Int32>(productUrl
+            #line 51 "..\..\Views\Products\_NearbyProducts.cshtml"
+, Tuple.Create(Tuple.Create("", 1996), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 1591), false)
+, 1996), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1603), Tuple.Create("\"", 1625)
+WriteAttribute("title", Tuple.Create(" title=\"", 2008), Tuple.Create("\"", 2030)
             
-            #line 42 "..\..\Views\Products\_NearbyProducts.cshtml"
-, Tuple.Create(Tuple.Create("", 1611), Tuple.Create<System.Object, System.Int32>(product.Title
+            #line 51 "..\..\Views\Products\_NearbyProducts.cshtml"
+, Tuple.Create(Tuple.Create("", 2016), Tuple.Create<System.Object, System.Int32>(product.Title
             
             #line default
             #line hidden
-, 1611), false)
+, 2016), false)
 );
 
 WriteLiteral(" class=\"card-product-img-link\"");
 
 WriteLiteral(">\r\n                        <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1687), Tuple.Create("\"", 1736)
-, Tuple.Create(Tuple.Create("", 1693), Tuple.Create<System.Object, System.Int32>(Href("~/assets/images/product-img-placeholder.jpg")
-, 1693), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 2092), Tuple.Create("\"", 2141)
+, Tuple.Create(Tuple.Create("", 2098), Tuple.Create<System.Object, System.Int32>(Href("~/assets/images/product-img-placeholder.jpg")
+, 2098), false)
 );
 
 WriteLiteral(" data-src=\"");
 
             
-            #line 43 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 52 "..\..\Views\Products\_NearbyProducts.cshtml"
                                                                                     Write(product.GetCoverImageUrl(ProductImageSize.SM));
 
             
@@ -261,14 +311,14 @@ WriteLiteral(" data-src=\"");
             #line hidden
 WriteLiteral("\"");
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 1795), Tuple.Create("\"", 1815)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 2200), Tuple.Create("\"", 2220)
             
-            #line 43 "..\..\Views\Products\_NearbyProducts.cshtml"
-                                                              , Tuple.Create(Tuple.Create("", 1801), Tuple.Create<System.Object, System.Int32>(product.Title
+            #line 52 "..\..\Views\Products\_NearbyProducts.cshtml"
+                                                              , Tuple.Create(Tuple.Create("", 2206), Tuple.Create<System.Object, System.Int32>(product.Title
             
             #line default
             #line hidden
-, 1801), false)
+, 2206), false)
 );
 
 WriteLiteral(" class=\"js-load-img\"");
@@ -280,7 +330,7 @@ WriteLiteral(" class=\"card-product-title\"");
 WriteLiteral(">");
 
             
-            #line 46 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 55 "..\..\Views\Products\_NearbyProducts.cshtml"
                                               Write(product.Title);
 
             
@@ -297,7 +347,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 49 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 58 "..\..\Views\Products\_NearbyProducts.cshtml"
                    Write(product.SellerProfileName);
 
             
@@ -314,7 +364,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 53 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 62 "..\..\Views\Products\_NearbyProducts.cshtml"
                    Write(product.Distance);
 
             
@@ -323,13 +373,13 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </small>\r\n\r\n");
 
             
-            #line 56 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 65 "..\..\Views\Products\_NearbyProducts.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 56 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 65 "..\..\Views\Products\_NearbyProducts.cshtml"
                      if (config.Product.Price.Enabled && price.DisplayShortPrice.HasAnyPrice)
                     {
                         if (price.DisplayShortPrice.Discount.HasDiscount)
@@ -350,7 +400,7 @@ WriteLiteral(" class=\"card-discount-price-amount\"");
 WriteLiteral(">");
 
             
-            #line 62 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 71 "..\..\Views\Products\_NearbyProducts.cshtml"
                                                                            Write(price.DisplayShortPrice.Discount.Original.FullPriceText);
 
             
@@ -360,7 +410,7 @@ WriteLiteral("</span> por\r\n                                </small>\r\n       
 "  </p>\r\n");
 
             
-            #line 65 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 74 "..\..\Views\Products\_NearbyProducts.cshtml"
                         }
 
                         else if (price.DisplayShortPrice.CanIncrease)
@@ -378,7 +428,7 @@ WriteLiteral(">\r\n                                <small>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 71 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 80 "..\..\Views\Products\_NearbyProducts.cshtml"
                                Write(Html.Localized("PRODUCT_PRICE_STARTING_FROM", "span", new { @class = "text-muted" }));
 
             
@@ -387,7 +437,7 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n                                </small>\r\n                            </p>\r\n");
 
             
-            #line 74 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 83 "..\..\Views\Products\_NearbyProducts.cshtml"
                         }
 
 
@@ -401,13 +451,13 @@ WriteLiteral(" class=\"card-product-price\"");
 WriteLiteral(">\r\n");
 
             
-            #line 77 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 86 "..\..\Views\Products\_NearbyProducts.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 77 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 86 "..\..\Views\Products\_NearbyProducts.cshtml"
                              if (price.HasBasePrice)
                             {
 
@@ -419,7 +469,7 @@ WriteLiteral("                                <div>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 80 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 89 "..\..\Views\Products\_NearbyProducts.cshtml"
                                Write(price.DisplayShortPrice.FullPriceText);
 
             
@@ -428,13 +478,13 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n");
 
             
-            #line 81 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 90 "..\..\Views\Products\_NearbyProducts.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 81 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 90 "..\..\Views\Products\_NearbyProducts.cshtml"
                                      if (price.DisplayShortPrice.HasTextComplementLabel)
                                     {
 
@@ -448,7 +498,7 @@ WriteLiteral(" class=\"text-muted text-lowercase\"");
 WriteLiteral(">/ ");
 
             
-            #line 83 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 92 "..\..\Views\Products\_NearbyProducts.cshtml"
                                                                               Write(string.Format(Request.GetLocalizedString(price.DisplayShortPrice.TextComplementLabel), price.DisplayShortPrice.TextComplementParam));
 
             
@@ -457,7 +507,7 @@ WriteLiteral(">/ ");
 WriteLiteral("</small>\r\n");
 
             
-            #line 84 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 93 "..\..\Views\Products\_NearbyProducts.cshtml"
                                     }
 
             
@@ -466,7 +516,7 @@ WriteLiteral("</small>\r\n");
 WriteLiteral("                                </div>\r\n");
 
             
-            #line 86 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 95 "..\..\Views\Products\_NearbyProducts.cshtml"
                             }
 
             
@@ -475,13 +525,13 @@ WriteLiteral("                                </div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 88 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 97 "..\..\Views\Products\_NearbyProducts.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 88 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 97 "..\..\Views\Products\_NearbyProducts.cshtml"
                              if (price.DisplayShortPrice.HasAdditionalPrice)
                             {
 
@@ -499,7 +549,7 @@ WriteLiteral(" class=\"card-product-price-additional-amount\"");
 WriteLiteral(">");
 
             
-            #line 91 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 100 "..\..\Views\Products\_NearbyProducts.cshtml"
                                                                                   Write(price.DisplayShortPrice.AdditionalPriceText);
 
             
@@ -508,7 +558,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n                                </div>\r\n");
 
             
-            #line 93 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 102 "..\..\Views\Products\_NearbyProducts.cshtml"
                             }
 
             
@@ -517,7 +567,7 @@ WriteLiteral("</span>\r\n                                </div>\r\n");
 WriteLiteral("                        </div>\r\n");
 
             
-            #line 95 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 104 "..\..\Views\Products\_NearbyProducts.cshtml"
                     }
                     else
                     {
@@ -532,7 +582,7 @@ WriteLiteral(" class=\"card-product-price\"");
 WriteLiteral(">&nbsp;</p>\r\n");
 
             
-            #line 99 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 108 "..\..\Views\Products\_NearbyProducts.cshtml"
                     }
 
             
@@ -540,14 +590,14 @@ WriteLiteral(">&nbsp;</p>\r\n");
             #line hidden
 WriteLiteral("\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4591), Tuple.Create("\"", 4609)
+WriteAttribute("href", Tuple.Create(" href=\"", 4996), Tuple.Create("\"", 5014)
             
-            #line 101 "..\..\Views\Products\_NearbyProducts.cshtml"
-, Tuple.Create(Tuple.Create("", 4598), Tuple.Create<System.Object, System.Int32>(productUrl
+            #line 110 "..\..\Views\Products\_NearbyProducts.cshtml"
+, Tuple.Create(Tuple.Create("", 5003), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 4598), false)
+, 5003), false)
 );
 
 WriteLiteral(" class=\"btn btn-default btn-round card-btn\"");
@@ -561,7 +611,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 103 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 112 "..\..\Views\Products\_NearbyProducts.cshtml"
                    Write(Request.GetLocalizedString("PRODUCT_PUBLIC_PAGE_BUTTON"));
 
             
@@ -570,7 +620,7 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </a>\r\n                </div>\r\n            </div>\r\n");
 
             
-            #line 107 "..\..\Views\Products\_NearbyProducts.cshtml"
+            #line 116 "..\..\Views\Products\_NearbyProducts.cshtml"
         }
 
             

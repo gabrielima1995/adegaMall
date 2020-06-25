@@ -1,4 +1,5 @@
 ﻿@using Application.Modules.Products
+@using V2.Application.Modules.Search.Products
 
 @model EcommerceHomeProductsVM
 
@@ -41,6 +42,7 @@
                                 {
                                     var productUrl = viewModel.LinkUrl;
                                     var prodPrice = viewModel.ProductPrice;
+                                    var paisBadge = viewModel.Product?.GetPaisBadge();
 
                                     if (!viewModel.ShouldDisplay)
                                     {
@@ -61,6 +63,13 @@
                                         @if (viewModel.IsProduct && showProductWishButton)
                                         {
                                             @Html.Partial("_ProductWishButtonCard", viewModel)
+                                        }
+                                        
+                                        @if (!string.IsNullOrEmpty(paisBadge))
+                                        {
+                                            <div class="card-country-badge">
+                                                <img src="/assets/images/paises/@(paisBadge).png?w=25&h=25"/>
+                                            </div>
                                         }
 
                                         <a href="@productUrl" title="@viewModel.Title" class="card-product-img-link">
@@ -137,6 +146,7 @@
                     {
                         var productUrl = viewModel.LinkUrl;
                         var prodPrice = viewModel.ProductPrice;
+                        var paisBadge = viewModel.Product?.GetPaisBadge();
 
                         if (!viewModel.ShouldDisplay)
                         {
@@ -158,6 +168,13 @@
                                 @if (viewModel.IsProduct && showProductWishButton)
                                 {
                                     @Html.Partial("_ProductWishButtonCard", viewModel)
+                                }
+                                        
+                                @if (!string.IsNullOrEmpty(paisBadge))
+                                {
+                                    <div class="card-country-badge">
+                                        <img src="/assets/images/paises/@(paisBadge).png?w=25&h=25"/>
+                                    </div>
                                 }
 
                                 <a href="@productUrl" title="@viewModel.Title" class="card-product-img-link">

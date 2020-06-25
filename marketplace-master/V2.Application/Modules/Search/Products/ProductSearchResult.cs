@@ -51,5 +51,7 @@ namespace V2.Application.Modules.Search.Products
         public string AddressCityAndState { get; set; }
 
         public long[] VariantIds { get; set; }
+
+        public string[] VariantSlugs { get; set; }
     }
 }
