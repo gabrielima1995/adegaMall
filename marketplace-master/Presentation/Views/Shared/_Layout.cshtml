@@ -12,6 +12,11 @@
     ViewBag.HasCustomFileField = false;
 
     var notificationToken = Session["NotificationToken"] ?? "";
+
+    if (string.IsNullOrWhiteSpace(ViewBag.Canonical ?? string.Empty))
+    {
+        ViewBag.Canonical = Request.Canonical();
+    }
 }
 
 <!DOCTYPE html>
@@ -21,6 +26,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="shortcut icon" href="@config.Layout.Images.Favicon" />
+    <link rel="canonical" href="@ViewBag.Canonical" />
     @if (MaaSConfig.Current.WebApp.IsEnabled)
     {
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -30,6 +36,8 @@
         <link rel="manifest" href="~/manifest.json" />
     }
     <title>@title</title>
+
+    @RenderSection("structuredData", required: false)
 
     @Html.Partial("_MetaTags")
     @Html.Partial("_GoogleTagManagerHead")

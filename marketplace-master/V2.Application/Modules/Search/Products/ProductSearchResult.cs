@@ -46,6 +46,8 @@ namespace V2.Application.Modules.Search.Products
 
         public string CategoryName { get; set; }
 
+        public string CategorySlug { get; set; }
+
         public string AddressCityAndState { get; set; }
 
         public long[] VariantIds { get; set; }

@@ -126,11 +126,17 @@ namespace Infra.SmartSearchAdapter.Products
             if (request.Category.HasValue)
                 filters.Add(new ValueFilter("CategoryId", request.Category.Value));
 
+            if (!string.IsNullOrEmpty(request.CategorySlug))
+                filters.Add(new ValueFilter("CategorySlug", request.CategorySlug));
+
             if (request.VariantIds != null && request.VariantIds.Any())
             {
                 filters.AddRange(request.VariantIds
                     .Select(variantId => new ValueFilter("VariantIds", variantId)));
             }
+
+            if (!string.IsNullOrEmpty(request.VariantSlug))
+                filters.Add(new ValueFilter("VariantSlugs", request.VariantSlug));
 
             // apenas produtos com retirada no local
             if (request.OnlyOnsitePickup && onSitePickupShippingEnabled)

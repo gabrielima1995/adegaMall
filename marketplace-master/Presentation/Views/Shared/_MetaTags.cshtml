@@ -25,9 +25,9 @@
     metaTags.Add("description", ViewBag.Description);
     metaTags.Add("og:description", ViewBag.Description);
 
-    if (ViewBag.Canonical == null)
+    if (string.IsNullOrWhiteSpace(ViewBag.Canonical ?? string.Empty))
     {
-        ViewBag.Canonical = Request.Url.ToString();
+        ViewBag.Canonical = Request.Canonical();
     }
 
     metaTags.Add("og:url", ViewBag.Canonical);

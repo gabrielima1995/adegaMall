@@ -77,9 +77,9 @@ namespace ASP
     metaTags.Add("description", ViewBag.Description);
     metaTags.Add("og:description", ViewBag.Description);
 
-    if (ViewBag.Canonical == null)
+    if (string.IsNullOrWhiteSpace(ViewBag.Canonical ?? string.Empty))
     {
-        ViewBag.Canonical = Request.Url.ToString();
+        ViewBag.Canonical = Request.Canonical();
     }
 
     metaTags.Add("og:url", ViewBag.Canonical);
@@ -147,24 +147,24 @@ namespace ASP
             #line hidden
 WriteLiteral("            <meta");
 
-WriteAttribute("property", Tuple.Create(" property=\"", 2727), Tuple.Create("\"", 2747)
+WriteAttribute("property", Tuple.Create(" property=\"", 2759), Tuple.Create("\"", 2779)
             
             #line 92 "..\..\Views\Shared\_MetaTags.cshtml"
-, Tuple.Create(Tuple.Create("", 2738), Tuple.Create<System.Object, System.Int32>(item.Key
+, Tuple.Create(Tuple.Create("", 2770), Tuple.Create<System.Object, System.Int32>(item.Key
             
             #line default
             #line hidden
-, 2738), false)
+, 2770), false)
 );
 
-WriteAttribute("content", Tuple.Create(" content=\"", 2748), Tuple.Create("\"", 2769)
+WriteAttribute("content", Tuple.Create(" content=\"", 2780), Tuple.Create("\"", 2801)
             
             #line 92 "..\..\Views\Shared\_MetaTags.cshtml"
-, Tuple.Create(Tuple.Create("", 2758), Tuple.Create<System.Object, System.Int32>(item.Value
+, Tuple.Create(Tuple.Create("", 2790), Tuple.Create<System.Object, System.Int32>(item.Value
             
             #line default
             #line hidden
-, 2758), false)
+, 2790), false)
 );
 
 WriteLiteral(" />\r\n");
@@ -180,24 +180,24 @@ WriteLiteral(" />\r\n");
             #line hidden
 WriteLiteral("            <meta");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 2828), Tuple.Create("\"", 2844)
+WriteAttribute("name", Tuple.Create(" name=\"", 2860), Tuple.Create("\"", 2876)
             
             #line 96 "..\..\Views\Shared\_MetaTags.cshtml"
-, Tuple.Create(Tuple.Create("", 2835), Tuple.Create<System.Object, System.Int32>(item.Key
+, Tuple.Create(Tuple.Create("", 2867), Tuple.Create<System.Object, System.Int32>(item.Key
             
             #line default
             #line hidden
-, 2835), false)
+, 2867), false)
 );
 
-WriteAttribute("content", Tuple.Create(" content=\"", 2845), Tuple.Create("\"", 2866)
+WriteAttribute("content", Tuple.Create(" content=\"", 2877), Tuple.Create("\"", 2898)
             
             #line 96 "..\..\Views\Shared\_MetaTags.cshtml"
-, Tuple.Create(Tuple.Create("", 2855), Tuple.Create<System.Object, System.Int32>(item.Value
+, Tuple.Create(Tuple.Create("", 2887), Tuple.Create<System.Object, System.Int32>(item.Value
             
             #line default
             #line hidden
-, 2855), false)
+, 2887), false)
 );
 
 WriteLiteral(" />\r\n");

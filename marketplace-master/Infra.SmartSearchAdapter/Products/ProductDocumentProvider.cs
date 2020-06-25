@@ -137,6 +137,7 @@ namespace Infra.SmartSearchAdapter.Products
 
                     { "CategoryId", (int?)doc.CategoryId },
                     { "CategoryName", (string)doc.CategoryName },
+                    { "CategorySlug", (string)doc.CategorySlug },
 
                     { "SellerId", (string)doc.SellerId },
                     { "SellerNickname", (string)doc.SellerNickname },
@@ -148,6 +149,7 @@ namespace Infra.SmartSearchAdapter.Products
                     { "DeliveryRanges", SplitValues((string)doc.DeliveryRanges, true) },
                     { "VariantIds", SplitValues((string)doc.VariantIds, true) },
                     { "VariantNames", SplitValues((string)doc.VariantNames) },
+                    { "VariantSlugs", SplitValues((string)doc.VariantSlugs) },
 
                     { "AddressStreet", (string)doc.AddressStreet },
                     { "AddressNumber", (string)doc.AddressNumber },

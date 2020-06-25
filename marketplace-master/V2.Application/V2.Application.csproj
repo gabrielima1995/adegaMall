@@ -353,6 +353,7 @@
     <Compile Include="Modules\UserAccounts\IUserAccountQueries.cs" />
     <Compile Include="Modules\StoreModule\CalculatePriceOfProductsVersionOutJob.cs" />
     <Compile Include="StartupProcesses\ProductFriendlyUrlBuilder.cs" />
+    <Compile Include="StartupProcesses\SlugifyProductsBuilder.cs" />
     <Compile Include="Webhooks\IWebhookCallService.cs" />
   </ItemGroup>
   <ItemGroup>

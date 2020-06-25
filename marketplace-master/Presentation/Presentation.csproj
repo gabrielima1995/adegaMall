@@ -359,6 +359,9 @@
     <Reference Include="Unity.Mvc, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Mvc.5.11.1\lib\net47\Unity.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="UrlBuilder, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UrlBuilder.1.0.2\lib\UrlBuilder.dll</HintPath>
+    </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
@@ -1220,6 +1223,7 @@
     <Compile Include="HttpsRedirectModule.cs" />
     <Compile Include="Models\AdditionalProfileViewModels.cs" />
     <Compile Include="Models\ApiResultEnvelope.cs" />
+    <Compile Include="Models\CanonicalUrlHelper.cs" />
     <Compile Include="Models\CartViewModel.cs" />
     <Compile Include="Models\ManageProfileViewModels.cs" />
     <Compile Include="Models\OrderProductRentalInfoViewModel.cs" />
@@ -1360,6 +1364,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_DisputeCommentForm.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EcommerceHome\_Paises.generated.cs">
+      <DependentUpon>_Paises.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\EcommerceHome\_Products1.generated.cs">
       <AutoGen>True</AutoGen>
@@ -3702,6 +3711,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_DisputeCommentForm.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\EcommerceHome\_Paises.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Paises.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Views\Error\Index.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
@@ -4823,6 +4836,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="assets\images\paises\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Billing\" />
     <Folder Include="Views\CookieConsent\" />

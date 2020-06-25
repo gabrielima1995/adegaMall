@@ -4,7 +4,7 @@
 @model Application.Modules.Products.Search.SearchViewModel
 
 @{
-    ViewBag.Title = Request.GetLocalizedString("PRODUCT_SEARCH_TITLE");
+    ViewBag.Title = ViewBag.Title ??  Request.GetLocalizedString("PRODUCT_SEARCH_TITLE");
 }
 
 @section styles
@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-8 col-md-offset-2">
-                @Html.Localized("PRODUCT_SEARCH_TITLE", "h4", new { @class = "highlight text-center" })
+                <h1 class="highlight text-center h2">@ViewBag.Title</h1>
                 @Html.Partial("_SearchFilters", Model)
             </div>
         </div>

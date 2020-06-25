@@ -111,7 +111,7 @@ WriteLiteral("\r\n");
             
             #line 6 "..\..\Views\Products\Search.cshtml"
   
-    ViewBag.Title = Request.GetLocalizedString("PRODUCT_SEARCH_TITLE");
+    ViewBag.Title = ViewBag.Title ??  Request.GetLocalizedString("PRODUCT_SEARCH_TITLE");
 
             
             #line default
@@ -151,18 +151,20 @@ WriteLiteral(">\r\n            <div");
 
 WriteLiteral(" class=\"col-xs-12 col-md-8 col-md-offset-2\"");
 
-WriteLiteral(">\r\n");
+WriteLiteral(">\r\n                <h1");
 
-WriteLiteral("                ");
+WriteLiteral(" class=\"highlight text-center h2\"");
+
+WriteLiteral(">");
 
             
             #line 20 "..\..\Views\Products\Search.cshtml"
-           Write(Html.Localized("PRODUCT_SEARCH_TITLE", "h4", new { @class = "highlight text-center" }));
+                                                Write(ViewBag.Title);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("</h1>\r\n");
 
 WriteLiteral("                ");
 
@@ -215,26 +217,26 @@ WriteLiteral(" class=\"panel-body\"");
 
 WriteLiteral(">\r\n                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 999), Tuple.Create("\"", 1109)
+WriteAttribute("href", Tuple.Create(" href=\"", 986), Tuple.Create("\"", 1096)
             
             #line 35 "..\..\Views\Products\Search.cshtml"
-, Tuple.Create(Tuple.Create("", 1006), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.FilteredBySeller.FriendlyUrl })
+, Tuple.Create(Tuple.Create("", 993), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.FilteredBySeller.FriendlyUrl })
             
             #line default
             #line hidden
-, 1006), false)
+, 993), false)
 );
 
 WriteLiteral(">\r\n                                <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1149), Tuple.Create("\"", 1207)
+WriteAttribute("src", Tuple.Create(" src=\"", 1136), Tuple.Create("\"", 1194)
             
             #line 36 "..\..\Views\Products\Search.cshtml"
-, Tuple.Create(Tuple.Create("", 1155), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.FilteredBySeller.Avatar, 80)
+, Tuple.Create(Tuple.Create("", 1142), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.FilteredBySeller.Avatar, 80)
             
             #line default
             #line hidden
-, 1155), false)
+, 1142), false)
 );
 
 WriteLiteral(" alt=\"\"");
@@ -268,14 +270,14 @@ WriteLiteral("                                ");
             #line hidden
 WriteLiteral("\r\n                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1584), Tuple.Create("\"", 1633)
+WriteAttribute("href", Tuple.Create(" href=\"", 1571), Tuple.Create("\"", 1620)
             
             #line 41 "..\..\Views\Products\Search.cshtml"
-, Tuple.Create(Tuple.Create("", 1591), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Search", "Products")
+, Tuple.Create(Tuple.Create("", 1578), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Search", "Products")
             
             #line default
             #line hidden
-, 1591), false)
+, 1578), false)
 );
 
 WriteLiteral(">\r\n                                    <i");

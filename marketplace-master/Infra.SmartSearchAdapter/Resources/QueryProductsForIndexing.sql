@@ -38,7 +38,8 @@
         SELECT 
             ProductVariantProduct.Product_Id [ProductId],
             ProductVariant.Id [VariantId],
-            ProductVariant.Name [VariantName]
+            ProductVariant.Name [VariantName],
+            ProductVariant.Slug [VariantSlug]
         FROM ProductVariantProduct
             INNER JOIN ProductVariant ON ProductVariant.Id = ProductVariantProduct.ProductVariant_Id
         WHERE (@productId IS NULL OR Product_Id = @productId) AND ProductVariant.Deleted = 0
@@ -71,7 +72,7 @@
             Products.UpdatedAt,
             Products.ProductPrice,
             Products.BasePrice,
-			Products.IsDisabled,
+            Products.IsDisabled,
 
             CONVERT(BIT, (CASE
                 WHEN Products.CurrentStock > 0 OR Products.NoShippingEnabled = 1 THEN 1 ELSE 0
@@ -96,7 +97,8 @@
                 ELSE Products.PrivateFleetEnabled END) PrivateFleetEnabled,
 
             Categ.Id [CategoryId],
-            Categ.Name [CategoryName],			
+            Categ.Name [CategoryName],				
+            Categ.Slug [CategorySlug],		
 
             Seller.Id [SellerId],
             Seller.Nickname [SellerNickname],
@@ -131,6 +133,10 @@
             (SELECT STRING_AGG(VariantName, '||')
                 FROM cteVariants
                 WHERE ProductId = Products.Id) AS VariantNames,
+
+            (SELECT STRING_AGG(VariantSlug, '||')
+                FROM cteVariants
+                WHERE ProductId = Products.Id) AS VariantSlugs,
 
             ISNULL(
                 (SELECT COUNT(1)
@@ -172,7 +178,7 @@
             CASE WHEN 
                     Seller.[Enabled] = 1 AND 
                     Products.Deleted = 0 AND
-					Products.IsDisabled = 0 AND
+                    Products.IsDisabled = 0 AND
                     (Products.IsBillingProduct IS NULL OR Products.IsBillingProduct = 0)
                 THEN 'add' ELSE 'del' END operation
         FROM Product Products 
@@ -199,7 +205,7 @@ SELECT
     BasePrice,
 
     HasStock,
-	IsDisabled,
+    IsDisabled,
     HasTemplate,
     NoShippingEnabled,
     ActualNoShippingEnabled,
@@ -210,6 +216,7 @@ SELECT
 
     [CategoryId],
     [CategoryName],
+    [CategorySlug],
 
     [SellerId],
     [SellerNickname],
@@ -225,6 +232,7 @@ SELECT
     VariantTypeNames,
     VariantIds,
     VariantNames,
+    VariantSlugs,
     VariantsCount,
 
     AddressId,

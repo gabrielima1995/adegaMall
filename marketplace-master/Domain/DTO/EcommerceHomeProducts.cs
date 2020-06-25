@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Domain.Modules.StoreModule.Price;
 
 namespace Domain.DTO
 {
@@ -46,6 +47,7 @@ namespace Domain.DTO
         public string Title { get; set; }
         public string Seller { get; set; }
         public string Price { get; set; }
+        public ProductPrice ProductPrice { get; set; }
         public string MultiplierPrice { get; set; }
 
         public bool IsProduct { get; set; }
@@ -78,6 +80,7 @@ namespace Domain.DTO
             Title = product.Title;
             Seller = product.Store.Seller.AlternativeName ?? product.Store.Seller.Name;
             Price = product.Price.HasValue ? product.ProductPriceMapped.DisplayPrice.Value.DisplayDecimal(2): null;
+            ProductPrice = product.ProductPriceMapped;
             MultiplierPrice = product.MultiplierPrice?.ToString("0.00");
             IsProduct = true;
             ShouldDisplay = true;

@@ -213,7 +213,8 @@ namespace Presentation.Helpers.Modules
                 .Split(new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries)
                 .FirstOrDefault();
 
-            if (!prefix.Equals(ConfigHelper.GetSetting("ImageInterceptor:Prefix", "cloudimage"), StringComparison.OrdinalIgnoreCase))
+            if (!prefix.Equals(ConfigHelper.GetSetting("ImageInterceptor:Prefix", "cloudimage"), StringComparison.OrdinalIgnoreCase) &&
+                prefix != "assets")
                 return false;
 
             var extension = Path.GetExtension(_context.Request.Url.LocalPath).ToLower();

@@ -64,6 +64,8 @@ namespace Application.Modules.Products.Search
         /// </summary>
         public int? Category { get; set; }
 
+        public string CategorySlug { get; set; }
+
         /// <summary>
         /// Filtro por somente retirada no local.
         /// </summary>
@@ -83,6 +85,8 @@ namespace Application.Modules.Products.Search
         /// Lista de variantes selecionadas nos filtros.
         /// </summary>
         public IList<int> VariantIds { get; set; }
+
+        public string VariantSlug { get; set; }
 
         /// <summary>
         /// Limita apenas aos produtos do vendedor especificado.
@@ -122,6 +126,7 @@ namespace Application.Modules.Products.Search
                 { "Lng", Lng },
                 { "LocationRange", LocationRange },
                 { "Category", Category },
+                { "CategorySlug", CategorySlug },
                 { "OnlyOnsitePickup", OnlyOnsitePickup },
                 { "OnlyShippingOut", OnlyShippingOut },
                 { "Limit", Limit },
@@ -139,6 +144,7 @@ namespace Application.Modules.Products.Search
                 { "OnlyMorning", OnlyMorning },
                 { "OnlyAfternoon", OnlyAfternoon },
                 { "OnlyNight", OnlyNight },
+                { "VariantSlug", VariantSlug }
             };
 
             foreach (var item in VariantIds)
@@ -178,9 +184,11 @@ namespace Application.Modules.Products.Search
                 LocationRange = LocationRange,
                 Bounds = bounds,
                 Category = Category,
+                CategorySlug = CategorySlug,
                 OnlyOnsitePickup = OnlyOnsitePickup,
                 Sorting = SortType,
                 VariantIds = VariantIds?.ToArray(),
+                VariantSlug = VariantSlug,
                 SellerId = SellerId,
                 StartDate = StartDate,
                 EndDate = EndDate,

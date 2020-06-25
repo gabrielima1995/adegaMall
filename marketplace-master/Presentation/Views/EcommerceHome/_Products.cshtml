@@ -20,7 +20,9 @@
                     }
                     else
                     {
-                        <h2>@category.ProductCategory.Name</h2>
+                        <a href="/categoria/@category.ProductCategory.Slug/" class="paises-link" title="Categoria: @category.ProductCategory.Name">
+                            <h2>@category.ProductCategory.Name</h2>
+                        </a>
                     }
                 </div>
             </div>
@@ -38,6 +40,7 @@
                                 @foreach (var viewModel in homeItems)
                                 {
                                     var productUrl = viewModel.LinkUrl;
+                                    var prodPrice = viewModel.ProductPrice;
 
                                     if (!viewModel.ShouldDisplay)
                                     {
@@ -45,61 +48,77 @@
                                     }
 
                                     <div class="card equal-height">
+                                        @if (viewModel.IsProduct && prodPrice.DisplayShortPrice.HasAnyPrice)
+                                        {
+                                            if (prodPrice.DisplayShortPrice.Discount.HasDiscount)
+                                            {
+                                                <div class="card-discount-badge">
+                                                    <span class="label label-success">@prodPrice.DisplayShortPrice.Discount.Formatted</span>
+                                                </div>
+                                            }
+                                        }
+
                                         @if (viewModel.IsProduct && showProductWishButton)
                                         {
                                             @Html.Partial("_ProductWishButtonCard", viewModel)
                                         }
 
                                         <a href="@productUrl" title="@viewModel.Title" class="card-product-img-link">
-                                            <img src="@viewModel.GetScaledImageUrl()" alt="@viewModel.Title" />
+                                            <img src="~/assets/images/product-img-placeholder.jpg" data-src="@viewModel.GetScaledImageUrl()" alt="@viewModel.Title" class="js-load-img" />
                                         </a>
 
                                         <h5 class="card-product-title">@viewModel.Title</h5>
 
                                         @if (viewModel.IsProduct)
                                         {
-                                            <small class="text-muted" style="display:block">
+                                            <small class="text-muted" style="display: block">
                                                 @viewModel.Seller
                                             </small>
 
-                                            <p class="card-product-price">
-                                                @if (config.Product.Price.Enabled && (viewModel.Price != null && !viewModel.Price.Equals("0,00")))
+                                            if (config.Product.Price.Enabled && prodPrice.DisplayShortPrice.HasAnyPrice)
+                                            {
+                                                if (prodPrice.DisplayShortPrice.Discount.HasDiscount)
                                                 {
-                                                    double localprice;
-                                                    if (Double.TryParse(viewModel.Price, out localprice) && localprice > 0.0)
-                                                    {
-                                                        @config.DefaultCurrency
-                                                        @viewModel.Price
-                                                    }
-                                                    else
-                                                    {
-                                                        @config.DefaultCurrency
-                                                        @viewModel.MultiplierPrice
+                                                    <p class="card-discount-price">
                                                         <small>
-                                                            / @Html.Localized("CART_ADDITIONAL_BASE_UNIT")
+                                                            de <span class="card-discount-price-amount">@prodPrice.DisplayShortPrice.Discount.Original.FullPriceText</span> por
                                                         </small>
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    @:&nbsp;
+                                                    </p>
                                                 }
 
-                                                @{
-                                                    double mprice = 0;
-                                                    double price = 0;
-
-                                                    if (Double.TryParse(viewModel.MultiplierPrice, out mprice) && Double.TryParse(viewModel.Price, out price) && mprice > 0 && price > 0)
-                                                    {
-                                                        <br />
+                                                else if (prodPrice.DisplayShortPrice.CanIncrease)
+                                                {
+                                                    <p class="card-price-starting-from">
                                                         <small>
-                                                            + @config.DefaultCurrency
-                                                            @viewModel.MultiplierPrice / @Html.Localized("CART_ADDITIONAL_BASE_UNIT")
+                                                            @Html.Localized("PRODUCT_PRICE_STARTING_FROM", "span", new { @class = "text-muted" })
                                                         </small>
-                                                        <br />
-                                                    }
+                                                    </p>
                                                 }
-                                            </p>
+
+                                                <div class="card-product-price">
+                                                    @if (prodPrice.HasBasePrice)
+                                                    {
+                                                        <div>
+                                                            @prodPrice.DisplayShortPrice.FullPriceText
+                                                            @if (prodPrice.DisplayShortPrice.HasTextComplementLabel)
+                                                            {
+                                                                <small class="text-muted text-lowercase">/ @string.Format(Request.GetLocalizedString(prodPrice.DisplayShortPrice.TextComplementLabel), prodPrice.DisplayShortPrice.TextComplementParam)</small>
+                                                            }
+                                                        </div>
+                                                    }
+
+                                                    @if (prodPrice.DisplayShortPrice.HasAdditionalPrice)
+                                                    {
+                                                        <div class="card-product-price-additional">
+                                                            <span class="card-product-price-additional-amount">@prodPrice.DisplayShortPrice.AdditionalPriceText</span>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <p class="card-product-price">&nbsp;</p>
+                                            }
 
                                             <a href="@productUrl" class="btn btn-default btn-round card-btn">
                                                 <i class="glyphicon glyphicon-chevron-right"></i>
@@ -117,6 +136,7 @@
                     foreach (var viewModel in homeItems)
                     {
                         var productUrl = viewModel.LinkUrl;
+                        var prodPrice = viewModel.ProductPrice;
 
                         if (!viewModel.ShouldDisplay)
                         {
@@ -125,56 +145,76 @@
 
                         <div class="col-xs-12 col-sm-6 col-md-3">
                             <div class="card equal-height">
+                                @if (viewModel.IsProduct && prodPrice.DisplayShortPrice.HasAnyPrice)
+                                {
+                                    if (prodPrice.DisplayShortPrice.Discount.HasDiscount)
+                                    {
+                                        <div class="card-discount-badge">
+                                            <span class="label label-success">@prodPrice.DisplayShortPrice.Discount.Formatted</span>
+                                        </div>
+                                    }
+                                }
+
                                 @if (viewModel.IsProduct && showProductWishButton)
                                 {
                                     @Html.Partial("_ProductWishButtonCard", viewModel)
                                 }
 
                                 <a href="@productUrl" title="@viewModel.Title" class="card-product-img-link">
-                                    <img src="@viewModel.GetScaledImageUrl()" alt="@viewModel.Title" />
+                                    <img src="~/assets/images/product-img-placeholder.jpg" data-src="@viewModel.GetScaledImageUrl()" alt="@viewModel.Title" class="js-load-img" />
                                 </a>
 
                                 <h5 class="card-product-title">@viewModel.Title</h5>
 
                                 @if (viewModel.IsProduct)
                                 {
-                                    <small class="text-muted" style="display:block">
+                                    <small class="text-muted" style="display: block">
                                         @viewModel.Seller
                                     </small>
 
-
-                                    <p class="card-product-price">
-                                        @if (config.Product.Price.Enabled && viewModel.Price != null)
-                                        {
-                                            if (Double.Parse(viewModel.Price) > 0.0)
-                                            {
-                                                @config.DefaultCurrency
-                                                @viewModel.Price
-                                            }
-                                            else
-                                            {
-                                                @config.DefaultCurrency
-                                                @viewModel.MultiplierPrice
-                                                <small>
-                                                    / @Html.Localized("CART_ADDITIONAL_BASE_UNIT")
-                                                </small>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            @:&nbsp;
-                                        }
-                                    </p>
-
-                                    double mprice;
-                                    double price;
-                                    if (Double.TryParse(viewModel.MultiplierPrice, out mprice) && mprice > 0 && Double.TryParse(viewModel.Price, out price) && price > 0.0)
+                                    if (config.Product.Price.Enabled && prodPrice.DisplayShortPrice.HasAnyPrice)
                                     {
-                                        <small>
-                                            + @config.DefaultCurrency
-                                            @viewModel.MultiplierPrice / @Html.Localized("CART_ADDITIONAL_BASE_UNIT")
-                                        </small>
-                                        <br />
+                                        if (prodPrice.DisplayShortPrice.Discount.HasDiscount)
+                                        {
+                                            <p class="card-discount-price">
+                                                <small>
+                                                    de <span class="card-discount-price-amount">@prodPrice.DisplayShortPrice.Discount.Original.FullPriceText</span> por
+                                                </small>
+                                            </p>
+                                        }
+
+                                        else if (prodPrice.DisplayShortPrice.CanIncrease)
+                                        {
+                                            <p class="card-price-starting-from">
+                                                <small>
+                                                    @Html.Localized("PRODUCT_PRICE_STARTING_FROM", "span", new { @class = "text-muted" })
+                                                </small>
+                                            </p>
+                                        }
+
+                                        <div class="card-product-price">
+                                            @if (prodPrice.HasBasePrice)
+                                            {
+                                                <div>
+                                                    @prodPrice.DisplayShortPrice.FullPriceText
+                                                    @if (prodPrice.DisplayShortPrice.HasTextComplementLabel)
+                                                    {
+                                                        <small class="text-muted text-lowercase">/ @string.Format(Request.GetLocalizedString(prodPrice.DisplayShortPrice.TextComplementLabel), prodPrice.DisplayShortPrice.TextComplementParam)</small>
+                                                    }
+                                                </div>
+                                            }
+
+                                            @if (prodPrice.DisplayShortPrice.HasAdditionalPrice)
+                                            {
+                                                <div class="card-product-price-additional">
+                                                    <span class="card-product-price-additional-amount">@prodPrice.DisplayShortPrice.AdditionalPriceText</span>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <p class="card-product-price">&nbsp;</p>
                                     }
 
                                     <a href="@productUrl" class="btn btn-default btn-round card-btn">

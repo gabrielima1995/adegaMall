@@ -84,6 +84,15 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 10 "..\..\Views\Home\_EcommerceHome_Products.cshtml"
+Write(Html.Action("Paises", "EcommerceHome"));
+
+            
+            #line default
+            #line hidden
         }
     }
 }

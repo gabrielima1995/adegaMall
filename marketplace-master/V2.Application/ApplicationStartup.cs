@@ -72,6 +72,7 @@ namespace V2.Application
             MessagesContext.Load(messageTemplateRepository, templateEngine, emailSender);
 
             backgroundWorker.Enqueue<FriendlyUrlBuilder>(i => i.Run());
+            backgroundWorker.Enqueue<SlugifyProductsBuilder>(i => i.Run());
             backgroundWorker.Enqueue<ICityManager>(i => i.PopulateDatabase());
             backgroundWorker.Enqueue<InitGatewayRegistrationLogJob>(i => i.RunIfNeeded());
             backgroundWorker.Schedule<CalculatePriceOfProductsVersionOutJob>(i => i.RunIfNeeded(), TimeSpan.FromMinutes(10));
