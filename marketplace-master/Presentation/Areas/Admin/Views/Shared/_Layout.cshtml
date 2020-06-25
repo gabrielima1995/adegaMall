@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    var config = MaaSConfig.Current;
+    var loginProfile = User.Identity.GetLoginProfile();
+    var url = Request.Url.ToString();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title - @config.ApplicationName Admin</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    @Styles.Render("~/bundles/admin/css")
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    @RenderSection("styles", false)
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse admin-panel">
+    <div class="wrapper">
+
+        <header class="main-header">
+
+            <!-- Logo -->
+            <a href="/admin" class="logo">
+                <span class="logo-mini">Adm</span>
+                <span class="logo-lg">@config.ApplicationName Admin</span>
+            </a>
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                @Html.Partial("_AdminHeader")
+            </nav>
+        </header>
+
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                @Html.Partial("_Menu")
+            </section>
+        </aside>
+
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                Painel Administrativo
+            </div>
+            <strong><a href="http://www.ideianoar.com.br">Ideia no Ar</a> Marketplace</strong>
+            @if (config.UserVoice.ShowLink && !string.IsNullOrWhiteSpace(config.UserVoice.LoginUrl))
+            {
+                <span>&ensp;|&ensp;Deixe sua sugestão de melhoria clicando <a href="@config.UserVoice.LoginUrl">aqui</a></span>
+            }
+            
+        </footer>
+    </div>
+
+    <script>(function () { window.MaaS = window.MaaS || { lang: '@Request.GetCurrentLang()'} })()</script>
+
+    @Scripts.Render("~/bundles/admin/js")
+    @Html.Partial("_JavaScriptMessages")
+    @RenderSection("scripts", false)
+
+    <script>Main.init()</script>
+    <script>Components.init()</script>
+
+    @Html.Partial("_IntercomScript")
+    @Html.Partial("_Messages")
+</body>
+</html>

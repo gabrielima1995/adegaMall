@@ -1,0 +1,19 @@
+﻿@using Domain.Entities.StoreModule
+
+@model Domain.Entities.StoreModule.Cart
+    
+@{
+    var config = MaaSConfig.Current;
+}
+    
+@if (config.Product.BusinessModel.Rental.Enabled && 
+     Model.Shipping != 0)
+{
+    if (Model.IsRentalWithDifferentsDates())
+    {
+        <div class="alert alert-warning" role="alert">
+            <i class="fa fa-check-circle"></i>
+            @Html.Localized("RENTAL_DIFFERENTS_DATES_FULL_MESSAGE")
+        </div>
+    }
+}

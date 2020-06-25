@@ -1,0 +1,287 @@
+﻿@using Domain.Entities.StoreModule
+@using Application.Modules.Products
+@model Application.Modules.Products.ProductEditorViewModel
+
+@{
+    var viewPathFmt = "~/Views/Products/Store/{0}.cshtml";
+    var config = MaaSConfig.Current;
+
+    var shippingMethods = config.Product.GetShippingMethodsEnabled();
+    var showPanel = shippingMethods.HasAnyBesides(ShippingMethod.NoShipping, ShippingMethod.ActualNoShipping) || config.Product.AnyDimensionsEnabled;
+
+    var isTemplate = Model.TemplateId.HasValue;
+}
+
+@if (shippingMethods.HasOnly(ShippingMethod.ActualNoShipping))
+{
+    @Html.Hidden(nameof(Model.ShippingType), ProductEditorShippingType.Physical)
+    @Html.Hidden(nameof(Model.ActualNoShippingEnabled), true);
+    @Html.Hidden(nameof(Model.ChargeDoubleShipping), false);
+}
+else
+{
+    if (shippingMethods.Has(ShippingMethod.NoShipping))
+    {
+        <div class="product-editor-digital">
+            @if (shippingMethods.HasAnyBesides(ShippingMethod.NoShipping))
+            {
+                <div class="radio">
+                    <label>
+                        @Html.RadioButtonFor(model => model.ShippingType, ProductEditorShippingType.Digital)
+                        @Html.Localized(ProductEditorShippingType.Digital, "strong")
+                    </label>
+                    @Html.Localized("PRODUCT_SHIPPING_TYPE_DIGITAL_HINT", "small", new { @class = "product-editor-digital-hint text-muted clearfix" })
+                </div>
+            }
+            <div class="product-editor-digital-content">
+                @Html.HiddenFor(model => model.NoShippingEnabled)
+                @Html.TextBoxFor(i => i.NoShippingUrl, new { @class = "form-control", placeholder = Html.LocalizedString("PRODUCT_NO_SHIPPING_URL_INPUT") })
+                @Html.ValidationMessageFor(model => model.NoShippingUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+
+    if (shippingMethods.HasAnyBesides(ShippingMethod.NoShipping))
+    {
+        <div class="product-editor-shipping m-t-md">
+            <div class="radio">
+                <label>
+                    @Html.RadioButtonFor(model => model.ShippingType, ProductEditorShippingType.Physical)
+                    @Html.Localized(ProductEditorShippingType.Physical, "strong")
+                </label>
+            </div>
+
+            <div class="product-editor-physical-content">
+                @if (shippingMethods.Has(ShippingMethod.ActualNoShipping))
+                {
+                    <div class="product-editor-shipping-noshipping checkbox">
+                        <label>
+                            @Html.CheckBoxFor(i => i.ActualNoShippingEnabled)
+                            @Html.DisplayNameFor(model => model.ActualNoShippingEnabled)
+                        </label>
+                        @Html.ValidationMessageFor(model => model.ActualNoShippingEnabled, "", new { @class = "text-danger" })
+                    </div>
+                }
+
+                @if (shippingMethods.Has(ShippingMethod.OnSitePickup))
+                {
+                    <div class="product-editor-shipping-onsitepickup checkbox">
+                        <label>
+                            @Html.CheckBoxFor(i => i.OnSitePickupEnabled)
+                            @Html.DisplayNameFor(model => model.OnSitePickupEnabled)
+                        </label>
+                        @Html.ValidationMessageFor(model => model.OnSitePickupEnabled, "", new { @class = "text-danger" })
+                    </div>
+                }
+
+                <div class="clearfix">
+                    @if (shippingMethods.HasAny(ShippingMethod.PostalRegular, ShippingMethod.PostalExpress))
+                    {
+                        <div class="product-editor-correios col-xs-12 col-sm-6">
+                            @if (shippingMethods.Has(ShippingMethod.PostalRegular))
+                            {
+                                <div class="product-editor-shipping-pac checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(i => i.PACEnabled)
+                                        @Html.DisplayNameFor(model => model.PACEnabled)
+                                    </label>
+                                    @Html.ValidationMessageFor(model => model.PACEnabled, "", new { @class = "text-danger" })
+                                </div>
+                            }
+
+                            @if (shippingMethods.Has(ShippingMethod.PostalExpress))
+                            {
+                                <div class="product-editor-shipping-sedex checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(i => i.SedexEnabled)
+                                        @Html.DisplayNameFor(model => model.SedexEnabled)
+                                    </label>
+                                    @Html.ValidationMessageFor(model => model.SedexEnabled, "", new { @class = "text-danger" })
+                                </div>
+                            }
+
+                            <div class="product-editor-shipping-default row">
+                                <div class="col-xs-12 m-b-xs">
+                                    @Html.Localized("PRODUCT_DEFAULT_SHIPPING_LABEL", "strong")
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-4">
+                                    <div class="input-group form-group">
+                                        <span class="input-group-addon">@config.DefaultCurrency</span>
+                                        @Html.TextBoxFor(model => model.DefaultShippingAmount, new { @class = "form-control js-decimal", data_places = 2, placeholder = Html.LocalizedString("PRODUCT_DEFAULT_SHIPPING_AMOUNT_INPUT") })
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-5">
+                                    <div class="input-group form-group">
+                                        @Html.Localized("PRODUCT_DEFAULT_SHIPPING_DELIVERY_DAYS_LABEL", "span", new { @class = "input-group-addon" })
+                                        @Html.TextBoxFor(model => model.DefaultShippingDeliveryDays, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.DefaultShippingAmount, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.DefaultShippingDeliveryDays, "", new { @class = "text-danger" })
+                            @Html.Localized("PRODUCT_DEFAULT_SHIPPING_TEXT", "p", new { @class = "small text-muted" })
+                        </div>
+                    }
+                    @if (shippingMethods.Has(ShippingMethod.PrivateFleet))
+                    {
+                        <div class="col-xs-12 col-md-6">
+                            <div class="product-editor-shipping-privatefleet checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(i => i.PrivateFleetEnabled)
+                                    @Html.DisplayNameFor(model => model.PrivateFleetEnabled)
+                                </label>
+                                @Html.ValidationMessageFor(model => model.PrivateFleetEnabled, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="js-private-fleet" style="display: @(Model.PrivateFleetEnabled ? "block" : "none")">
+                                <div class="js-private-fleet-params-container">
+                                    @foreach (var pfp in Model.PrivateFleetParams)
+                                    {
+                                        @Html.Partial(string.Format(viewPathFmt, "_ProductPrivateFleetParameter"), pfp)
+                                    }
+                                </div>
+
+                                @Html.ValidationMessageFor(model => model.PrivateFleetParams, "", new { @class = "text-danger", style = "display:block" }, "p")
+                                @Html.Localized("PRODUCT_PRIVATE_FLEET_PARAM_ADD_BUTTON", "button", new { type = "button", @class = "btn btn-default btn-sm btn-round js-private-fleet-param-add-button" })
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                @if (config.Product.BusinessModel.Rental.Enabled && config.Product.BusinessModel.Rental.ChargeDoubleShipping.Enabled)
+                {
+                    <div class="product-editor-shipping-doubleshipping row m-t-sm">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(i => i.ChargeDoubleShipping)
+                                    @Html.DisplayNameFor(model => model.ChargeDoubleShipping)
+                                </label>
+                                <br />
+                                @Html.Localized("PRODUCT_CHARGE_DOUBLE_SHIPPING_TEXT", "small", new { @class = "text-muted" })
+                                @Html.ValidationMessageFor(model => model.ChargeDoubleShipping, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (config.Product.AnyDimensionsEnabled)
+                {
+                    if (shippingMethods.HasAnyBesides(ShippingMethod.NoShipping, ShippingMethod.ActualNoShipping))
+                    {
+                        <hr />
+                        @Html.Localized("PRODUCT_DIMENSIONS_TITLE", "h3")
+                    }
+                    @Html.Localized("PRODUCT_DIMENSIONS_DESCRIPTION", "p")
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-8">
+                            <div class="row">
+                                @if (isTemplate && !Model.DimensionsIsEditable)
+                                {
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Length)
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(i => i.Length, new { @class = "form-control js-decimal", data_places = 2, disabled = "disabled" })
+                                                <span class="input-group-addon">cm</span>
+                                            </div>
+                                            @Html.HiddenFor(i => i.Length)
+                                            @Html.HiddenFor(i => i.LengthRequired)
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Width)
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(i => i.Width, new { @class = "form-control js-decimal", data_places = 2, disabled = "disabled" })
+                                                <span class="input-group-addon">cm</span>
+                                            </div>
+                                            @Html.HiddenFor(i => i.Width)
+                                            @Html.HiddenFor(i => i.WidthRequired)
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Height)
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(i => i.Height, new { @class = "form-control js-decimal", data_places = 2, disabled = "disabled" })
+                                                <span class="input-group-addon">cm</span>
+                                            </div>
+                                            @Html.HiddenFor(i => i.Height)
+                                            @Html.HiddenFor(i => i.HeightRequired)
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Weight)
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(i => i.Weight, new { @class = "form-control js-decimal", data_places = 3, disabled = "disabled" })
+                                                <span class="input-group-addon">kg</span>
+                                            </div>
+                                            @Html.HiddenFor(i => i.Weight)
+                                            @Html.HiddenFor(i => i.WeightRequired)
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Length)
+                                            <div class="input-group">
+                                                @Html.EditorFor(i => i.Length, new { htmlAttributes = new { @class = "form-control js-decimal", data_places = 2, placeholder = "0,00" } })
+                                                <span class="input-group-addon">cm</span>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.Length, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(i => i.LengthRequired)
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Width)
+                                            <div class="input-group">
+                                                @Html.EditorFor(i => i.Width, new { htmlAttributes = new { @class = "form-control js-decimal", data_places = 2, placeholder = "0,00" } })
+                                                <span class="input-group-addon">cm</span>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.Width, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(i => i.WidthRequired)
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Height)
+                                            <div class="input-group">
+                                                @Html.EditorFor(i => i.Height, new { htmlAttributes = new { @class = "form-control js-decimal", data_places = 2, placeholder = "0,00" } })
+                                                <span class="input-group-addon">cm</span>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(i => i.HeightRequired)
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Weight)
+                                            <div class="input-group">
+                                                @Html.EditorFor(i => i.Weight, new { htmlAttributes = new { @class = "form-control js-decimal", data_places = 3, placeholder = "0,000" } })
+                                                <span class="input-group-addon">kg</span>
+                                            </div>
+
+                                            @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(i => i.WeightRequired)
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="form-group">
+                                <img src="~/assets/images/width-height-length-ptbr.png" alt="Caixa ilustrando dimensões." />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}

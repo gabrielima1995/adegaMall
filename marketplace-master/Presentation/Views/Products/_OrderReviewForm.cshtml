@@ -1,0 +1,59 @@
+﻿@model Application.Modules.Products.Orders.OrderReviewViewModel
+
+@{
+    var config = MaaSConfig.Current;
+    var controller = ViewContext.RouteData.Values["controller"].ToString();
+
+    var ratingValues = new Dictionary<int, int>();
+
+    for (int rating = 1, value = config.Product.OrderReview.StarFactor; value <= 100; rating++, value += config.Product.OrderReview.StarFactor)
+    {
+        ratingValues.Add(rating, value);
+    }
+}
+
+@using (Html.BeginForm("Review", controller, new { lang = Request.GetCurrentLang() }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.OrderId)
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Rate)
+
+                <div class="btn-group" data-toggle="buttons">
+                    @foreach (var rating in ratingValues)
+                    {
+                        <label class="btn btn-primary">
+                            @Html.RadioButtonFor(model => model.Rate, rating.Value)
+                            @rating.Key
+                        </label>
+                    }
+                </div>
+
+                @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = Request.GetLocalizedString("ORDER_REVIEW_DESCRIPTION_INPUT"), cols = "30", rows = "2" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.Localized("SEND_REVIEW_BUTTON", "button", new { id = "js-submit", type = "submit", @class = "btn btn-primary btn-block box-shadow" })
+            </div>
+        </div>
+    </div>
+}

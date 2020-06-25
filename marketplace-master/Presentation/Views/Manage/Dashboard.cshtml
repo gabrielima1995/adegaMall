@@ -1,0 +1,313 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model V2.Infrastructure.Modules.Metrics.MetricsQueriesSellerResultVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("MY_ACCOUNT_LINK");
+    var loginProfile = User.Identity.GetLoginProfile();
+    var config = MaaSConfig.Current;
+    string columnDiv = "col-xs-12";
+    string columnSmall = "col-xs-6 col-sm-3";
+    string columnBig = "col-xs-12 col-sm-6";
+
+}
+
+<!-- CONTENTS -->
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+                @Html.Partial("_UserCallToAction")
+            </div>
+
+            @if (MaaSConfig.Current.Layout.TransactionWarrantyDisplay.ShowReassuringMessages)
+            {
+                <div class="col-xs-12">
+                    @Html.Partial("_TransactionWarrantyReassuranceMsg")
+                </div>
+            }
+
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <br />
+                                <h2 class="text-center"><i class="fas fa-tachometer-alt" aria-hidden="true"></i> @Request.GetLocalizedString("SELLER_METRICS_PANEL_TITLE")</h2>
+                            </div>
+                            @if (config.Dashboard.SellerDashboard.DateFilter.Enabled)
+                            {
+                                <div class="col-xs-12 col-sm-6">
+                                    @using (Html.BeginForm("Dashboard", "Manage", FormMethod.Get, new { @class = "form-inline" }))
+                                    {
+                                        <div class="row">
+                                            <div class="col-xs-1"></div>
+                                            <div class="form-group col-xs-4">
+                                                @Html.Localized("DATE_FILTER_INITIAL", "label")
+                                                @Html.TextBox("startDate", "", new { @class = "form-control datepicker datemask" })
+                                            </div>
+                                            <div class="form-group col-xs-4">
+                                                @Html.Localized("DATE_FILTER_FINAL", "label")
+                                                @Html.TextBox("endDate", "", new { @class = "form-control datepicker datemask" })
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <label>Atualizar</label>
+                                                <button class="btn btn-success" type="submit" @*style="margin-top: 23px"*@>
+                                                    <i class="fas fa-sync"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+
+                            @if (config.Quote.Enabled)
+                            {
+                                if (config.Quote.LeadSales.Enabled)
+                                {
+                                    <div class="@columnDiv">
+                                        <div class="row">
+                                            <div class="@columnSmall">
+                                                <div class="card equal-height credits-dashcard">
+                                                    <div class="text-center credits-display-box">
+                                                        <h1 class="js-fit-text"><i class="fas fa-coins text-success"></i>  @Model.TotalCredits</h1>
+                                                        @Html.Localized("SELLER_DASHBOARD_CREDITS", "h5")
+                                                        @if (MaaSConfig.Current.Quote.LeadSales.IndividualPacks.Enabled)
+                                                        {
+                                                            <a href="@Url.ActionLocalized("ViewPacks", "LeadSales")"><i class="far fa-plus-square"></i> @Html.Localized("ACQUIRE_MORE_CREDITS_LINK", "small")</a>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="@columnSmall">
+                                                <div class="card equal-height credits-dashcard">
+                                                    <div class="text-center credits-display-box">
+
+                                                        <h1 class="js-fit-text"><i class="fas fa-unlock-alt text-success"></i>  @Model.UnlockedQuotes</h1>
+                                                        @Html.Localized("SELLER_DASHBOARD_UNLOCKED_QUOTES", "h5")
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if (Model.NextCreditsAddDate.HasValue)
+                                            {
+                                                <div class="@columnSmall">
+                                                    <div class="card equal-height credits-dashcard">
+                                                        <div class="text-center credits-display-box">
+
+                                                            <h1 class="js-fit-text"><i class="fas fa-calendar text-success"></i>  @Model.NextCreditsAddDate.Value.ToShortDateString()</h1>
+                                                            @Html.Localized("NEXT_CREDITS_DATE", "h5")
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else if (config.Subscription.Enabled)
+                                            {
+                                                <div class="@columnSmall">
+                                                    <div class="card equal-height credits-dashcard">
+                                                        <div class="text-center credits-display-box">
+                                                            @Html.Localized("ACQUIRE_SUBSCRIPTION_CARD_TEXT", "h5")
+                                                            <a class="btn btn-success btn-sm" href="@Url.ActionLocalized("Index", "Membership")"><i class="fas fa-external-link-square-alt"></i> @Request.GetLocalizedString("ACQUIRE_SUBSCRIPTION_CARD_TITLE")</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (MaaSConfig.Current.Quote.LeadSales.CreditsExpire && Model.NextCreditsExpirationDate.HasValue)
+                                            {
+                                                <div class="@columnSmall">
+                                                    <div class="card equal-height credits-dashcard">
+                                                        <div class="text-center credits-display-box">
+
+                                                            <h1 class="js-fit-text"><i class="fas fa-coins text-danger"></i>  @Model.NextExpirationCredits <small>@Request.GetLocalizedString("CREDITS_LABEL")</small></h1>
+                                                            @Html.Localized("CREDITS_EXPIRE_ON", "h5", null, @Model.NextCreditsExpirationDate.Value.ToShortDateString())
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+
+                                <div class="@columnDiv">
+                                    <div class="row">
+
+                                        @if (config.Dashboard.SellerDashboard.QuotesTotal.Enabled)
+                                        {
+                                            <div class="@columnBig">
+                                                <div class="card card-metrics-big text-center">
+                                                    <div class="text-center" style="width:90%;">
+                                                        <h1 class="js-fit-text">@MaaSConfig.Current.DefaultCurrency@Model.AcceptedQuotesTotal</h1>
+                                                        @Html.Localized("SELLER_METRICS_QUOTES_TOTAL", "h5")
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @if (config.Dashboard.SellerDashboard.QuotesReceivedCount.Enabled)
+                                        {
+                                            <div class="@columnSmall">
+                                                <div class="card equal-height" style="height: 120px;">
+                                                    <br />
+                                                    <h1 class="js-fit-text">@Model.QuotesCount</h1>
+
+                                                    @Html.Localized("SELLER_METRICS_QUOTES_RECEIVED", "h5")
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (config.Dashboard.SellerDashboard.QuotesWonCount.Enabled)
+                                        {
+                                            <div class="@columnSmall">
+                                                <div class="card equal-height" style="height: 120px;">
+                                                    <br />
+                                                    <h1 class="js-fit-text">@Model.AcceptedQuotes</h1>
+
+                                                    @Html.Localized("SELLER_METRICS_QUOTES_ACCEPTED", "h5")
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (config.Dashboard.SellerDashboard.QuotesLostCount.Enabled)
+                                        {
+                                            <div class="@columnSmall">
+                                                <div class="card equal-height" style="height: 120px;">
+                                                    <br />
+                                                    <h1 class="js-fit-text">@Model.RejectedQuotes</h1>
+
+                                                    @Html.Localized("SELLER_METRICS_QUOTES_REJECTED", "h5")
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (config.Dashboard.SellerDashboard.QuotesOpenCount.Enabled)
+                                        {
+                                            <div class="@columnSmall">
+                                                <div class="card equal-height" style="height: 120px;">
+                                                    <br />
+                                                    <h1 class="js-fit-text">@(Model.QuotesCount - Model.AcceptedQuotes - Model.RejectedQuotes) </h1>
+
+                                                    @Html.Localized("SELLER_METRICS_QUOTES_OPEN", "h5")
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @if (config.Quote.BuyerDecision.Enabled && config.Dashboard.SellerDashboard.ProposalCount.Enabled)
+                                        {
+                                            <div class="@columnSmall">
+                                                <div class="card equal-height" style="height: 120px;">
+                                                    <br />
+                                                    <h1 class="js-fit-text">@Model.ProposalsSent</h1>
+
+                                                    @Html.Localized("SELLER_METRICS_QUOTES_PROPOSALS", "h5")
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                            @if (config.Product.Enabled)
+                            {
+                                <div class="@columnDiv">
+                                    <div class="row">
+
+                                        @if (config.Dashboard.SellerDashboard.OrdersTotal.Enabled)
+                                        {
+                                            <div class="@columnBig">
+                                                <div class="card card-metrics-big">
+                                                    <div class="text-center" style="width:90%;">
+                                                        <h1 class="js-fit-text">@config.DefaultCurrency@Model.TotalOrderLiquidRevenue.RoundTo2Places()<br></h1>
+                                                        @Html.Localized("SELLER_METRICS_ORDERS_LIQUID_REVENUE", "h5")
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            if (Model.TotalOrderRevenue != Model.TotalOrderLiquidRevenue)
+                                            {
+                                                <div class="@columnSmall">
+                                                    <div class="card equal-height" style="height: 120px;">
+                                                        <br />
+                                                        <h1 class="js-fit-text">@config.DefaultCurrency@Model.TotalOrderRevenue.RoundTo2Places()<br></h1>
+                                                        @Html.Localized("SELLER_METRICS_ORDERS_REVENUE", "h5")
+                                                        <br />
+                                                        @Html.Localized("SELLER_METRICS_ORDERS_REVENUE_MESSAGE","h6")
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+
+                                        @if (config.Dashboard.SellerDashboard.OrdersCount.Enabled)
+                                        {
+
+                                            <div class="@columnSmall">
+                                                <div class="card equal-height" style="height: 120px;">
+                                                    <br />
+                                                    <h1 class="js-fit-text">@Model.OrdersCompleted</h1>
+
+                                                    @Html.Localized("SELLER_METRICS_ORDERS_RECEIVED", "h5")
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (config.Dashboard.SellerDashboard.OrdersAverage.Enabled)
+                                        {
+                                            <div class="@columnSmall">
+                                                <div class="card equal-height" style="height: 120px;">
+                                                    <br />
+                                                    @if (Model.OrdersCompleted > 0)
+                                                    {
+                                                        <h1 class="js-fit-text">@config.DefaultCurrency@((Model.TotalOrderRevenue / Model.OrdersCompleted).RoundTo2Places())</h1>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h1 class="js-fit-text">@config.DefaultCurrency 0,00</h1>
+                                                    }
+                                                    @Html.Localized("SELLER_METRICS_ORDERS_AVERAGE", "h5")
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @if (config.Dashboard.SellerDashboard.UnitsSoldCount.Enabled)
+                                        {
+                                            <div class="@columnSmall">
+                                                <div class="card equal-height" style="height: 120px;">
+                                                    <br />
+                                                    <h1 class="js-fit-text">@Model.ProductsSold</h1>
+
+                                                    @Html.Localized("SELLER_METRICS_ORDERS_UNITS_SOLD", "h5")
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @if (config.Payment.Enabled && config.Payment.Common.EnableTransactionWarranty && config.Dashboard.SellerDashboard.AmountInWarranty.Enabled)
+                                        {
+                                            <div class="@columnSmall">
+                                                <div class="card equal-height" style="height: 120px;">
+                                                    <br />
+                                                    <h1 class="js-fit-text">@config.DefaultCurrency@Model.AmountInWarranty.RoundTo2Places()</h1>
+
+                                                    @Html.Localized("SELLER_METRICS_ORDERS_IN_WARRANTY", "h5")
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $('.datemask').mask('00/00/0000', { placeholder: '__/__/____' });
+        $('.datepicker').datepicker({ format: "dd/mm/yyyy", language: 'pt-BR', autoclose: true });
+        $('.js-fit-text').fitText(1.2, { minFontSize: '20px', maxFontSize: '48px' });
+    </script>
+}

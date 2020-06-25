@@ -1,0 +1,250 @@
+﻿@using Domain.Entities.StoreModule
+@model Presentation.Models.OrderDetailsVM
+
+@{
+    var viewPathFmt = "~/Views/Products/MySales/{0}.cshtml";
+    var config = MaaSConfig.Current;
+    var customFields = new Dictionary<string, string>();
+    var profile = User.Identity.GetLoginProfile();
+    foreach (var item in Model.BuyerVM.CustomFieldDefinitions)
+    {
+        if (item.Value.IsPublic)
+        {
+            customFields[item.Value.Name] = Model.BuyerVM.CustomFields.First(x => x.Key == item.Value.Id.ToString()).Value;
+        }
+    }
+}
+
+<div class="panel with-nav-tabs panel-default">
+    <div class="panel-heading">
+        <ul id="orderDetailsTabs" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#tabMain" aria-controls="home" role="tab" data-toggle="tab">Principal</a></li>
+            <li role="presentation"><a href="#tabHistory" aria-controls="profile" role="tab" data-toggle="tab">Histórico</a></li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="tabMain">
+                @if (Model.ShowOfflinePaymentInfo)
+                {
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="alert alert-warning">
+                                @Html.Localized("MY_SALES_OFFLINE_PAYMENT_TITLE", "h5")
+                                @Html.Localized("MY_SALES_OFFLINE_PAYMENT_INFO", "p")
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="row m-b-md">
+                    <div class="col-xs-12 col-md-6 sale-details-payment">
+                        <ul class="list-group m-b-0">
+                            <li class="list-group-item list-group-item-split">
+                                <strong>@Request.GetLocalizedString("ORDER_DATE_LABEL")</strong>
+                                <span class="text-right">@Model.Order.CreatedAt.DisplayDate()</span>
+                            </li>
+                            @if (config.Payment.Common.EnableTransactionWarranty && Model.Order.AutoCompletionDate.HasValue)
+                            {
+                                <li class="list-group-item list-group-item-split">
+                                    <strong>@Request.GetLocalizedString("DISPUTE_TRANSFER_STATUS_LABEL")</strong>
+                                    <span class="text-right">@((bool)(ViewBag.TransferAuthorized) ? Request.GetLocalizedString("AFFIRMATIVE_LABEL") : Request.GetLocalizedString("NEGATIVE_LABEL"))</span>
+                                </li>
+
+                                @Html.Partial("_OrderTransactionWarrantyInfo")
+                            }
+                            <li class="list-group-item list-group-item-split">
+                                <strong>@Request.GetLocalizedString("PAYMENT_METHOD")</strong>
+                                <span class="text-right">@Model.Order.PaymentMethod.DisplayDescription()</span>
+                            </li>
+                            @if (Model.ShowInstallmentsCount)
+                            {
+                                <li class="list-group-item list-group-item-split">
+                                    <strong>@Request.GetLocalizedString("INSTALLMENTS_COUNT")</strong>
+                                    <span class="text-right">@Model.Order.Transaction.Installments</span>
+                                </li>
+                            }
+                            @if (Model.SellerNetAmount.HasValue)
+                            {
+                                <li class="list-group-item list-group-item-split">
+                                    <strong>
+                                        Valor a receber
+                                    </strong>
+                                    <span class="text-right">
+                                        @(Model.SellerNetAmount.Value.DisplayCurrency())
+                                        <i class="fas fa-info-circle" data-toggle="tooltip" title="Já descontada a taxa do Marketplace no valor de @(Model.Order.Transaction.StartupFee.DisplayCurrency())"></i>
+                                    </span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-md-6 sale-details-general">
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-split">
+                                <strong>@Request.GetLocalizedString("ORDER_BUYER_LABEL")</strong>
+                                <span class="text-right">@Model.Order.Buyer.Name (@Html.DisplayFor(model => model.Order.Buyer.Email))</span>
+                            </li>
+                            @if (config.Buyer.Phone.Enabled)
+                            {
+                                <li class="list-group-item list-group-item-split">
+                                    <strong>@Request.GetLocalizedString("ORDER_BUYER_PHONE_LABEL")</strong>
+                                    <span class="text-right">@Model.Order.Buyer.PhoneNumber</span>
+                                </li>
+                            }
+                            @if (config.Buyer.DocumentNumber.Enabled)
+                            {
+                                <li class="list-group-item list-group-item-split">
+                                    <strong>@Request.GetLocalizedString("ORDER_BUYER_DOCUMENT_NUMBER_LABEL")</strong>
+                                    <span class="text-right">@Model.Order.Buyer.DocumentNumber</span>
+                                </li>
+                            }
+                            @if (Model.ShowShipping)
+                            {
+                                <li class="list-group-item list-group-item-split">
+                                    <strong>@Request.GetLocalizedString("CART_SHIPPING_METHOD_LABEL")</strong>
+                                    <span class="text-right">
+                                        @Model.ShippingMethod.DisplayDescription()
+                                        <br />
+                                        @if (Model.TrackingLink.OK)
+                                        {
+                                            @:@Html.Localized("ORDER_TRACKING_CODE", "a", new { href = Model.TrackingLink.Result.ToString(), target = "_blank" })
+                                        }
+                                        else
+                                        {
+                                            <small>@Model.TrackingLink.Errors.ToSimpleString()</small>
+                                        }
+                                    </span>
+                                </li>
+                                if (Model.IsShippingOut)
+                                {
+                                    <li class="list-group-item list-group-item-split">
+                                        <strong>@Request.GetLocalizedString("ORDER_BUYER_SHIPPING_ADDRESS_LABEL")</strong>
+                                        <span class="text-right">@Model.Order.ShippingAddress.ToString()</span>
+                                    </li>
+                                }
+                                if (Model.ShowDeliveryDate)
+                                {
+                                    <li class="list-group-item list-group-item-split">
+                                        <strong>@Request.GetLocalizedString("CART_SHIPPING_DAYS_LABEL")</strong>
+                                        <span class="text-right">
+                                            @Model.DeliveryDate
+                                        </span>
+                                    </li>
+                                }
+                            }
+                            @foreach (var customField in customFields)
+                            {
+                                if (!string.IsNullOrEmpty(customField.Value))
+                                {
+                                    <li class="list-group-item list-group-item-split">
+                                        <strong>@customField.Key</strong>
+                                        @if (customField.Value.Contains("http"))
+                                        {
+                                            <a href="@customField.Value">@Request.GetLocalizedString("SELLER_DETAILS_LINK_PICTURE")</a>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-right">@customField.Value</span>
+                                        }
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="list-group-item list-group-item-split">
+                                        <strong>@customField.Key</strong>
+                                        <span class="text-right">@Request.GetLocalizedString("BUYER_DETAILS_NOT_FILLED")</span>
+                                    </li>
+                                }
+                            }
+                        </ul>
+
+                        @if (Model.RelatedQuote != null)
+                        {
+                            <div>
+                                @Html.Localized("ORDER_DETAILS_RELATED_QUOTE")
+                                <a href="@Url.ActionLocalized("Details", "Quotes", new { id = Model.RelatedQuote.Id })">@Model.RelatedQuote.Title</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                @Html.Localized("ORDER_STATUS_LABEL", "h4")
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        @if (Model.AvailableStatuses.Any())
+                        {
+                            <div class="input-group">
+                                <span class="order-details-status input-group-addon">@Model.Order.Status.DisplayDescription()</span>
+                                <div class="order-details-status-change input-group-btn">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @Request.GetLocalizedString("ORDER_CHANGE_STATUS_TO_BUTTON")
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        @foreach (var item in Model.AvailableStatuses)
+                                        {
+                                            var orderShipped = item == OrderStatus.DeliveryOnTheWay;
+                                            var cancelledOrRejected = item == OrderStatus.Canceled || item == OrderStatus.Rejected;
+                                            var showInput = cancelledOrRejected || orderShipped;
+                                            var requireInput = cancelledOrRejected ? "true" : "false";
+                                            var inputPlaceholder = Request.GetLocalizedString(orderShipped ? "ORDER_SHIPPED_INSERT_TRACKING_CODE_INPUT" : "ORDER_ADDITIONAL_INFO_INPUT");
+                                            <li>
+                                                <a href="#" class="js-change-status @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.SalesEdit)" data-status="@item" data-type="@(showInput ? "input" : "warning")" data-inputplaceholder="@inputPlaceholder" data-inputrequired="@requireInput">
+                                                    @item.DisplayDescription()
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="order-details-status order-details-status-final">@Model.Order.Status.DisplayDescription()</span>
+                        }
+                    </div>
+                </div>
+
+                @if (Model.AvailableStatuses.Any() && Model.BuyerInControlOfOrderCompletion)
+                {
+                    <div class="text-muted m-t-sm">
+                        @Html.Localized("SERVICE_BUYER_IN_CONTROL_OF_ORDER_COMPLETION_NOTE_V2", "p")
+                        <span class="text-muted label label-default label-product-url">
+                            <i class="fa fa-link"></i>
+                            @Url.ActionLocalized("Details", "MyOrders", new { id = Model.Order.Id })
+                        </span>
+                    </div>
+                }
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tabHistory">
+                <ul class="list-group m-b-0">
+                    @foreach (var item in Model.Order.Histories)
+                    {
+                        <li class="list-group-item list-group-item-split">
+                            <strong>@item.Status.DisplayDescription()</strong>
+                            <span class="text-right">@item.OccurredOn.ToString("g")</span>
+                            @*<em class="text-muted">Alterado automaticamente pelo sistema</em>*@
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (MaaSConfig.Current.Product.Order.ExtraInfoField.Enabled && Model.Order.ExtraInfo != null)
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @Html.Localized("ORDER_EXTRA_INFO_TITLE", "label")
+            @Html.Markdown(Model.Order.ExtraInfo)
+        </div>
+    </div>
+}
+
+@Html.Partial(string.Format(viewPathFmt, "_SaleDetailsProducts"), Model)
+
+@if (config.Buyer.UserRatings.Enabled && Model.UserRating != null)
+{
+    @Html.Partial("~/Views/Products/_OrderReview.cshtml", Model.UserRating)
+}

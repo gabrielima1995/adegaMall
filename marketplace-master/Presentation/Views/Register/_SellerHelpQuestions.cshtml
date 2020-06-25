@@ -1,0 +1,29 @@
+﻿@using Presentation.Helpers
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (config.HelpQuestions.IsVisible)
+{
+    <div class="col-xs-12 col-sm-6 col-md-offset-1 col-md-5">
+        <div class="box-content text-center equal-height">
+            @Html.Localized("HELP_QUESTION_TITLE", "h2")
+
+            <ul class="icon-list">
+                <li>
+                    <img src="@CustomAssetsHelper.SellerBenefitsIcon(0)">
+                    @Html.Localized("HELP_QUESTION_1")
+                </li>
+                <li>
+                    <img src="@CustomAssetsHelper.SellerBenefitsIcon(1)">
+                    @Html.Localized("HELP_QUESTION_2")
+                </li>
+                <li>
+                    <img src="@CustomAssetsHelper.SellerBenefitsIcon(2)">
+                    @Html.Localized("HELP_QUESTION_3")
+                </li>
+            </ul>
+        </div>
+    </div>
+}

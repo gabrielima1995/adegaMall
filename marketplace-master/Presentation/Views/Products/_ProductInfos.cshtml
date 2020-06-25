@@ -1,0 +1,196 @@
+﻿@using System.Globalization
+@using Domain.StoreModule.Entities;
+@using Application.Modules.Products
+@using Presentation.Helpers
+
+@model ProductPageVM
+
+@{
+    if (ViewBag.ForceSelectPeriod == null)
+    {
+        ViewBag.ForceSelectPeriod = false;
+    }
+
+    var config = MaaSConfig.Current;
+
+    var showDimensions = (config.Product.Length.Enabled && Model.Product.Length.HasValue) ||
+        (config.Product.Width.Enabled && Model.Product.Width.HasValue) ||
+        (config.Product.Height.Enabled && Model.Product.Height.HasValue);
+
+    var showWeight = config.Product.Weight.Enabled && Model.Product.Weight.HasValue;
+
+    var bmIsRental = config.Product.BusinessModel.Rental.Enabled;
+    var bmRentalIsShift = bmIsRental && config.Product.BusinessModel.Rental.RentalPeriodMode == RentalPeriodMode.Shifts;
+    var bmRentalIsGridView = bmIsRental && !bmRentalIsShift && config.Product.BusinessModel.Rental.GridView.Enabled && (Model.RentalPeriodUnit == RentalPeriodUnit.Hour || Model.RentalPeriodUnit == RentalPeriodUnit.Minute);
+    var showAdditionalDescription = Model.Product.IsPackageType && (bmRentalIsShift || bmRentalIsGridView) && !ViewBag.ForceSelectPeriod;
+}
+
+<div class="row m-b-md">
+    @if (Model.Product.Variants.Any())
+    {
+        <div class="product-infos-variants col-xs-12 m-b-md">
+            <h4>
+                <i class="fa fa-tags product-section-icon" aria-hidden="true"></i>
+                @Html.Localized("PRODUCT_VARIANTS_LABEL")
+            </h4>
+            <p>
+                @foreach (var type in Model.VariantTypes)
+                {
+                    <strong>@type.Name:</strong>
+                    <span>@string.Join(", ", Model.GetVariants(type).Select(x => x.Name))</span>
+                    <br />
+                }
+            </p>
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.Product.Description) || !string.IsNullOrEmpty(Model.Product.CustomId))
+    {
+        <div class="product-infos-description col-xs-12 m-b-md">
+            <h4>
+                <i class="far fa-sticky-note product-section-icon" aria-hidden="true"></i>
+                @Html.Localized("PRODUCT_DESCRIPTION_LABEL")
+            </h4>
+            @Html.Markdown(Model.Product.Description)
+
+            @if (!string.IsNullOrEmpty(Model.Product.CustomId))
+            {
+                <p>@Html.Localized("PRODUCT_CUSTOM_ID_LABEL"): @Model.Product.CustomId</p>
+            }
+        </div>
+    }
+
+    @if (config.Product.Specifications.Enabled && !string.IsNullOrWhiteSpace(Model.Product.Specifications))
+    {
+        <div class="product-infos-specifications col-xs-12 m-b-md">
+            <h4>
+                <i class="fa fa-sliders-h product-section-icon" aria-hidden="true"></i>
+                @Html.Localized("PRODUCT_SPECIFICATIONS_LABEL")
+            </h4>
+            @Html.Markdown(Model.Product.Specifications)
+        </div>
+    }
+
+    @if (showDimensions || showWeight)
+    {
+        <div class="m-b-md">
+            @if (showDimensions)
+            {
+                <div class="product-infos-dimensions col-xs-12 col-md-6">
+                    <h4>
+                        <i class="fa fa-arrows-alt product-section-icon" aria-hidden="true"></i>
+                        @Html.Localized("PRODUCT_DIMENSIONS_LABEL")
+                    </h4>
+                    <p>
+                        @Model.Product.GetDimensions()
+                    </p>
+                </div>
+            }
+
+            @if (showWeight)
+            {
+                <div class="product-infos-weight col-xs-12 col-md-6">
+                    <h4>
+                        <i class="fa fa-weight-hanging product-section-icon" aria-hidden="true"></i>
+                        @Html.Localized("PRODUCT_WEIGHT_LABEL")
+                    </h4>
+                    <p>
+                        @Model.Product.Weight.Value.DisplayDecimal(3) kg
+                    </p>
+                </div>
+            }
+        </div>
+    }
+
+    @if (config.CustomFields.Product.Enabled && Model.CustomFieldDefinitions?.Count > 0 && Model.CustomFields?.Count > 0)
+    {
+        <div class="product-infos-custom-fields col-xs-12 m-b-md">
+            <h4>
+                <i class="fas fa-info-circle product-section-icon"></i>
+                @Html.Localized("CUSTOM_FIELDS_AREA_LABEL")
+            </h4>
+            <ul class="list-unstyled">
+                @foreach (var field in Model.CustomFields)
+                {
+                    if (Model.CustomFieldDefinitions[new Guid(field.Key)].IsPublic)
+                    {
+                        var value = Model.CustomFields[field.Key.ToString()];
+                        <li>
+                            <strong>@Model.CustomFieldDefinitions[new Guid(field.Key)].NameLocalized(Request.GetCurrentLang()):</strong>
+                            @if (CustomFieldHelper.IsLink(value))
+                            {
+                                <a href="@value"><i class="fas fa-paperclip"></i> @Request.GetLocalizedString("CUSTOM_FIELD_VIEW_FILE")</a>
+                            }
+                            else
+                            {
+                                <span>@CustomFieldHelper.LocalizeField(value, Request.GetCurrentLang())</span>
+                            }
+                            <br />
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    }
+
+    @if (bmIsRental && Model.IsPackageProduct)
+    {
+        <div class="product-infos-rental-policies col-xs-12 m-b-md">
+            <h4>
+                <i class="far fa-check-circle product-section-icon" aria-hidden="true"></i>
+                @Html.Localized("RENTAL_POLICIES_TITLE")
+            </h4>
+            <ul>
+                <li>@Html.Localized("PRODUCT_PACKAGE_CREDIT_PRICE_DETAILS", "span", null, Model.PriceModel.DisplayPrice.Currency, Model.PriceModel.DisplayPrice.CreditPrice)</li>
+                <li>@Html.Localized("PRODUCT_PACKAGE_TOTAL_CREDITS_UNIT_LABEL", "span", null, Model.PriceModel.DisplayPrice.PackageCredits, Request.GetLocalizedString("PRODUCT_PACKAGE_CREDITS_UNIT_PLURAL"))</li>
+                <li>@Html.Localized("PRODUCT_PACKAGE_DESCRIPTION")</li>
+                <li>@Html.Localized("PRODUCT_PACKAGE_DESCRIPTION_2", "span", null, Model.RentalSettings.MinRentalPeriod, Request.GetLocalizedString(Model.RentalPeriodLabel).ToLower())</li>
+                @if (Model.RentalSettings.MinRentalNotice.HasValue)
+                {
+                    <li>@Html.Localized("PRODUCT_PACKAGE_DESCRIPTION_3", "span", null, Model.RentalSettings.MinRentalNotice, Request.GetLocalizedString(Model.MinRentalNoticeLabel).ToLower())</li>
+                }
+                <li>@Html.Localized("PRODUCT_PACKAGE_DESCRIPTION_4")</li>
+                @if (showAdditionalDescription)
+                {
+                    <li>@Html.Localized("PRODUCT_PACKAGE_DESCRIPTION_5")</li>
+                    <li>@Html.Localized("PRODUCT_PACKAGE_DESCRIPTION_6")</li>
+                }
+            </ul>
+        </div>
+    }
+
+    @if (bmIsRental)
+    {
+        if (config.Product.BusinessModel.Rental.Buyer.Cancel.Enabled)
+        {
+            var textCancel = Model.Product.CancelOrderPolicy.GetDescriptionLocalized();
+            var cancelBefore = config.Product.BusinessModel.Rental.Buyer.Cancel.BeforeInHours;
+
+            <div class="product-infos-rental-policies col-xs-12 m-b-md">
+                <h4>
+                    <i class="far fa-check-circle product-section-icon" aria-hidden="true"></i>
+                    @Html.Localized("CANCEL_ORDER_POLICY_LABEL")
+                </h4>
+                <p>
+                    @string.Format(textCancel, cancelBefore)
+                </p>
+            </div>
+        }
+
+        if (config.Product.BusinessModel.Rental.Buyer.ChangePeriod.Enabled)
+        {
+            var textChangePeriod = Model.Product.ChangePeriodRentalPolicy.GetDescriptionLocalized();
+            var changePeriodBefore = config.Product.BusinessModel.Rental.Buyer.ChangePeriod.BeforeInHours;
+
+            <div class="product-infos-rental-policies col-xs-12 m-b-md">
+                <h4>
+                    <i class="far fa-check-circle product-section-icon" aria-hidden="true"></i>
+                    @Html.Localized("CHANGE_PERIOD_RENTAL_POLICY_LABEL")
+                </h4>
+                <p>
+                    @string.Format(textChangePeriod, changePeriodBefore)
+                </p>
+            </div>
+        }
+    }
+</div>

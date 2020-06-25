@@ -1,0 +1,25 @@
+﻿using System.Text;
+
+namespace System
+{
+    public static class StringExtensions
+    {
+        public static string ToBase64(this string input)
+        {
+            if (input == null)
+                return null;
+
+            var bytes = Encoding.UTF8.GetBytes(input);
+            return Convert.ToBase64String(bytes);
+        }
+
+        public static string FromBase64(this string input)
+        {
+            if (input == null)
+                return null;
+
+            var bytes = Convert.FromBase64String(input);
+            return Encoding.UTF8.GetString(bytes);
+        }
+    }
+}

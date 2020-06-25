@@ -1,0 +1,86 @@
+﻿@using Presentation.Helpers
+@model IEnumerable<Presentation.Areas.Admin.Models.OrderListItemVM>
+
+@{
+    ViewBag.Title = "Pedidos";
+    var config = MaaSConfig.Current;
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-cubes" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-body table-responsive">
+            <table class="table table-bordered table-hover" id="orderList">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Comprador</th>
+                        <th style="display:none">Doc. Comprador</th>
+                        <th style="display:none">Email Comprador</th>
+                        <th style="display:none">Telefone Comprador</th>
+                        <th>Vendedor</th>
+                        <th>Produtos Únicos</th>
+                        <th>Total</th>
+                        <th data-sort="desc">Data</th>
+                        <th>Pagamento</th>
+                        <th>Situação</th>
+                        <th>Localidade</th>
+                        <th>Frete</th>
+                        <th>Envio</th>
+                        <th>Taxa Marketplace</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td data-order="@Dt.Order(item.ShortId)">
+                                <a href="@Url.ActionLocalized("Details", "Orders", new { id = item.Id })">@item.ShortId</a>
+                            </td>
+                            <td data-order="@Dt.Order(item.BuyerName)">
+                                <a href="@Url.ActionLocalized("Details", "Buyers", new { id = item.Buyer.Id })">@item.BuyerName</a>
+                            </td>
+                            <td style="display:none">
+                                @item.Buyer.DocumentNumber
+                            </td>
+                            <td style="display:none">
+                                @item.Buyer.Email
+                            </td>
+                            <td style="display:none">
+                                @item.Buyer.Phone
+                            </td>
+                            <td data-order="@Dt.Order(item.SellerName)">
+                                <a href="@Url.ActionLocalized("Details", "Sellers", new { id = item.Seller.Id })">@item.SellerName</a>
+                            </td>
+                            <td data-order="@Dt.Order(item.ProductsCount)">@Html.DisplayFor(model => item.ProductsCount)</td>
+                            <td data-order="@Dt.Order(item.Amount)">@Html.DisplayFor(model => item.Amount)</td>
+                            <td data-order="@Dt.Order(item.CreatedAt)">@Html.DisplayFor(model => item.CreatedAt)</td>
+                            <td data-order="@Dt.Order(item.PaymentMethod)">@Html.DisplayFor(model => item.PaymentMethod)</td>
+                            <td data-order="@Dt.Order(item.Status.DisplayDescription())">@item.Status.DisplayDescription()</td>
+                            <td data-order="@Dt.Order(item.Location)">@Html.DisplayFor(model => item.Location)</td>
+                            <td data-order="@Dt.Order(item.ShippingAmount)">@Html.DisplayFor(model => item.ShippingAmount)</td>
+                            <td data-order="@Dt.Order(item.ShippingMethod.DisplayDescription())">@item.ShippingMethod.DisplayDescription()</td>
+                            <td data-order="@Dt.Order(item.StartupFee)">@Html.DisplayFor(model => item.StartupFee)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        var sortColumn = $("#orderList th[data-sort]");
+        DataTableCustom.create("#orderList", {
+            "order": [[sortColumn.index(), sortColumn.data("sort")]]
+        });
+    </script>
+}

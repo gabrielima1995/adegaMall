@@ -1,0 +1,88 @@
+﻿@model CustomizeFileInfoVM
+
+@using (Html.BeginForm("Upload", "Customize", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", @class = "js-customize-file-form" }))
+{
+    @Html.HiddenFor(model => model.FileType)
+    @Html.HiddenFor(model => model.Option)
+    @Html.HiddenFor(model => model.RedirectUrl)
+
+    if (!Model.UiNoBox)
+    {
+        @:<div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">@Model.Label</h3>
+            </div>
+            @:<div class="box-body">
+    }
+
+    <div class="row">
+        @if (Model.HelpText != null)
+        {
+            <div class="col-xs-12">
+                <p><small class="text-muted">@Model.HelpText</small></p>
+            </div>
+        }
+        <div class="col-sm-2">
+            @ShowCurrentResource()
+        </div>
+        <div class="col-sm-8">
+            <div class="form-group">
+                @if (Model.UiNoBox)
+                {
+                    <label>@Model.Label</label>
+                }
+                <input type="file" name="file" class="js-customize-file-input" />
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-default btn-xs js-customize-file-upload-btn" data-loading-text="@Request.GetLocalizedString("LOADING_TEXT")">
+                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                @Request.GetLocalizedString("SAVE_CHANGES_BUTTON")
+            </button>
+            <i class="fa fa-spinner fa-spin" style="display:none" aria-hidden="true"></i>
+        </div>
+        @if (Model.HelpText != null || Model.TemplateUrl != null)
+        {
+            <div class="col-xs-12">
+                <p>
+                    <small class="text-muted">
+                        <strong>@Request.GetLocalizedString("CUSTOMIZE_HINT"):</strong>
+                        @Model.Hint
+                        @if (Model.TemplateUrl != null)
+                        {
+                            <a href="@Model.TemplateUrl" target="_blank">Template</a>
+                        }
+                    </small>
+                </p>
+            </div>
+        }
+    </div>
+
+    if (!Model.UiNoBox)
+    {
+            @:</div><!--/BOX BODY-->
+        @:</div><!--/BOX-->
+    }
+}
+
+@helper ShowCurrentResource()
+{
+    if (Model.CurrentUrl != null)
+    {
+        if (Model.CurrentUrlIsImage)
+        {
+            <img src="@Model.CurrentUrl" style="max-width: 100%" />
+        }
+        else
+        {
+            <a href="@Model.CurrentUrl" target="_blank">
+                <i class="fa fa-file-text-o" style="font-size: 50px"></i>
+                @Request.GetLocalizedString("OPEN")
+            </a>
+        }
+    }
+    else
+    {
+        <i class="fa fa-times" style="font-size: 50px"></i>
+    }
+}

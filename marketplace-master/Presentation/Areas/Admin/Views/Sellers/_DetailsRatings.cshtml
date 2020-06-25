@@ -1,0 +1,65 @@
+﻿@using Presentation.Helpers
+@model List<Domain.Modules.Ratings.UserRatingModel>
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (config.Seller.UserRatings.Enabled)
+{
+    <div class="tab-pane" id="ratings">
+        @if (Model.Any())
+        {
+            <div class="table-responsive">
+                <table id="ratingList" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Avaliador</th>
+                            <th>Nota</th>
+                            <th>Comentário</th>
+                            <th data-sort="desc">Data</th>
+                            <th>Status</th>
+                            <th>Moderar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td data-order="@Dt.Order(item.Id)"><a href="@Url.ActionLocalized("Details", "Ratings", new { id = item.Id.ToString() })">@item.Id.ToString().Truncate(8)</a></td>
+                                <td data-order="@Dt.Order(item.SenderName)"><a href="~/admin/buyers/details/@item.RatingSenderId">@item.SenderName</a></td>
+                                <td data-order="@Dt.Order(item.Rating)" style="width:100px;">
+                                    @Html.Partial("_RatingStars", (double)item.Rating.Value)
+                                </td>
+                                <td data-order="@Dt.Order(item.Comment)">@(item.Comment == null ? "-" : item.Comment.Truncate(30))</td>
+                                <td data-order="@Dt.Order(item.CreatedAt)">@item.CreatedAt.ToShortDateString()  @item.CreatedAt.ToShortTimeString()</td>
+                                <td data-order="@Dt.Order(item.Hidden)">@(item.Hidden ? "Oculto" : "Visível")</td>
+                                <td data-order="@Dt.Order(item.Hidden)">
+                                    @if (item.Hidden)
+                                    {
+                                        <a class="btn btn-sm btn-success" href="@Url.ActionLocalized("ModerateRating","Ratings", new { id = item.Id.ToString(), hidden = false})">
+                                            <i class="fa fa-undo"></i>
+                                            Exibir
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-sm btn-danger" href="@Url.ActionLocalized("ModerateRating","Ratings", new { id = item.Id.ToString(), hidden = true})">
+                                            <i class="fa fa-ban"></i>
+                                            Ocultar
+                                        </a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>Nenhuma avaliação recebida.</p>
+        }
+    </div>
+}

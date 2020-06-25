@@ -1,0 +1,13 @@
+﻿@{
+    var config = MaaSConfig.Current;
+}
+
+@if (config.EcommerceSearch.Enabled)
+{
+    @:@Html.Action("Search", "EcommerceHome")
+
+    @section scripts
+    { 
+        <script>MainProductSearch.init()</script>
+    }
+}

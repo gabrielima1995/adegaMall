@@ -1,0 +1,14 @@
+﻿@using Presentation.Models.DisputeViewModels
+@model DisputeCommentViewModel
+
+@using (Html.BeginForm("AddComment", "Dispute", FormMethod.Post, new { id = "commentVM" }))
+{
+    <div class="form-group">
+        @Html.HiddenFor(model => model.DisputeId)
+        @Html.TextAreaFor(model => model.Message, new { @class = "form-control", placeholder = Request.GetLocalizedString("DISPUTE_MESSAGE_INPUT") })
+    </div>
+
+    <div class="form-group text-right">
+        <button class="btn btn-default" type="submit">@Request.GetLocalizedString("DISPUTE_MESSAGE_SEND")</button>
+    </div>
+}

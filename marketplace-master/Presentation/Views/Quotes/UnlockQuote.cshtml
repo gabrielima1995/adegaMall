@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model Presentation.Models.QuoteViewModels.UnlockQuoteVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("TITLE_UNLOCK_QUOTE");
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+<div class="main-content bg-image-2 padding-top-120 padding-bottom-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
+                <div class="box-content">
+                    @if (Model.CurrentCredits < Model.UnlockCost)
+                    {
+                        <div>
+                            @Html.Localized("INSUFFICIENT_CREDITS_TITLE", "div", new { @class = "bg-secondary color-white block text-center padding-5 border-radius" })
+                        </div>
+                        <div class="text-center">
+                            <br />
+                            @Html.Localized("INSUFFICIENT_CREDITS_DESC", "p")
+                            <h2><i class="fas fa-coins text-danger"></i> @Model.CurrentCredits</h2>
+                            <br />
+                            @Html.Localized("INSUFFICIENT_CREDITS_HELP", "p")
+                            @if (MaaSConfig.Current.Quote.LeadSales.IndividualPacks.Enabled)
+                            {
+                                <a href="@Url.ActionLocalized("ViewPacks", "LeadSales")"><i class="far fa-plus-square"></i> @Html.Localized("ACQUIRE_MORE_CREDITS_LINK", "small")</a>
+                            }
+                        </div>
+                        <br />
+                        <div class="col-xs-12 text-center">
+                            <a href="@Url.ActionLocalized("Index", "Quotes")" class="btn btn-default"><i class="fas fa-arrow-left"></i> @Html.Localized("CONFIRM_UNLOCK_BACK")</a>
+                        </div>
+                    }
+                    else
+                    {
+
+                        <div>
+                            @Html.Localized("CONFIRM_UNLOCK_QUOTE_TEXT", "div", new { @class = "bg-secondary color-white block text-center padding-5 border-radius" })
+                        </div>
+                        <div class="text-center">
+                            <br />
+                            @Html.Localized("CONFIRM_UNLOCK_DESCRIPTION_1", "p")
+                            @Html.Localized("CONFIRM_UNLOCK_DESCRIPTION_2", "p", null, Model.UnlockCost)
+                            <br />
+                            <h2><i class="fas fa-coins"></i>  @Model.CurrentCredits <i class="fas fa-arrow-right"></i> <i class="fas fa-coins"></i> @(Model.CurrentCredits - Model.UnlockCost)</h2>
+                            <br />
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <a href="@Url.ActionLocalized("Index", "Quotes")" class="btn btn-default"><i class="fas fa-arrow-left"></i> @Html.Localized("CONFIRM_UNLOCK_BACK")</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    @using (Html.BeginForm("UnlockQuote", "LeadSales", FormMethod.Post))
+                                    {
+                                        <div class="pull-right">
+                                            @Html.Hidden("quoteId", Model.QuoteId.ToString())
+                                            <button type="submit" class="btn btn-success">@Model.UnlockCost <i class="fas fa-coins"></i>  @Html.Localized("CONFIRM_UNLOCK_BUTTON_TEXT")</button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

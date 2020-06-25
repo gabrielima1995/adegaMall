@@ -1,0 +1,122 @@
+﻿@using Presentation.Helpers
+@using Domain.Validation.Specifications
+@model LoginProfile
+
+@{
+    var buyerSpecification = new CompleteBuyerSpecification();
+
+    var showMessages =
+        (Model.IsSeller() && Model.SellerCompleteProfile != null && !Model.SellerCompleteProfile.IsComplete) ||
+        (Model.IsBuyer() && !buyerSpecification.IsSatisfiedBy(Model));
+
+    var moderate = !Model.SellerCompleteProfile?.Moderation?.IsComplete ?? false;
+    var basic = Model.SellerCompleteProfile?.Registration?.IsComplete ?? false;
+    var gateway = Model.SellerCompleteProfile?.Gateway?.IsComplete ?? false;
+    var portfolio = Model.SellerCompleteProfile?.PortfolioItems?.IsComplete ?? false;
+    var categories = Model.SellerCompleteProfile?.PortfolioCategories?.IsComplete ?? false;
+    var products = Model.SellerCompleteProfile?.Products?.IsComplete ?? false;
+    var membership = Model.SellerCompleteProfile?.MembershipPlan?.IsComplete ?? false;
+}
+
+@if (showMessages || moderate)
+{
+    if (Model.IsSeller())
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="seller-registration-steps">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            @Html.Localized("SELLER_COMPLETE_REGISTRATION", "h3", new { @class = "panel-title" })
+                        </div>
+                        <div class="panel-body">
+                            <div class="seller-registration-steps-buttons" role="group" aria-label="...">
+                                @if (!Model.SellerCompleteProfile.IsComplete)
+                                {
+                                    <a href="@Url.ActionLocalized("Seller", "Manage")" class="seller-registration-steps-basic seller-registration-button @Css.If(basic, "step-completed")">
+                                        <i class="fas @Css.If(basic, "fa-check-square", "fa-edit")"></i>
+                                        @Html.Localized("SELLER_COMPLETE_BASIC_PROFILE")
+                                    </a>
+                                    if (Model.SellerCompleteProfile.Gateway.NeedsRegistration)
+                                    {
+                                        <a href="@Url.ActionLocalized("Gateway", "Manage")" class="seller-registration-steps-gateway seller-registration-button @Css.If(gateway, "step-completed")">
+                                            <i class="fas @Css.If(gateway, "fa-check-square", "fa-edit")"></i>
+                                            @Html.Localized("SELLER_COMPLETE_GATEWAY_REGISTRATION")
+                                        </a>
+                                    }
+
+                                    if (Model.SellerCompleteProfile.PortfolioItems.NeedsRegistration)
+                                    {
+                                        <a href="@Url.ActionLocalized("CreateItem", "Portfolio")" class="seller-registration-steps-portfolio seller-registration-button @Css.If(portfolio, "step-completed")">
+                                            <i class="fas @Css.If(portfolio, "fa-check-square", "fa-edit")"></i>
+                                            @Html.Localized("SELLER_COMPLETE_PORTFOLIO_REGISTRATION")
+                                        </a>
+                                    }
+
+                                    if (Model.SellerCompleteProfile.PortfolioCategories.NeedsRegistration)
+                                    {
+                                        <a href="@Url.ActionLocalized("Index", "Portfolio")" class="seller-registration-steps-categories seller-registration-button @Css.If(categories, "step-completed")">
+                                            <i class="fas @Css.If(categories, "fa-check-square", "fa-edit")"></i>
+                                            @Html.Localized("SELLER_COMPLETE_PORTFOLIO_CATEGORIES_REGISTRATION")
+                                        </a>
+                                    }
+
+                                    if (Model.SellerCompleteProfile.Products.NeedsRegistration)
+                                    {
+                                        <a href="@Url.ActionLocalized("CreateProduct", "Store")" class="seller-registration-steps-products seller-registration-button @Css.If(products, "step-completed")">
+                                            <i class="fas @Css.If(products, "fa-check-square", "fa-edit")"></i>
+                                            @Html.Localized("SELLER_COMPLETE_PRODUCT_REGISTRATION")
+                                        </a>
+                                    }
+
+                                    if (Model.SellerCompleteProfile.MembershipPlan.NeedsRegistration)
+                                    {
+                                        var urlMemberShip = Model.SellerCompleteProfile.MembershipPlan.IsComplete ? Url.ActionLocalized("Index", "Subscription") : Url.ActionLocalized("Index", "MemberShip");
+
+                                        <a href="@urlMemberShip" class="seller-registration-steps-memberships seller-registration-button @Css.If(membership, "step-completed")">
+                                            <i class="far @Css.If(membership, "far fa-check-square", "fas fa-pen-square")"></i>
+                                            @Html.Localized("SELLER_COMPLETE_MEMBERSHIP_REGISTRATION")
+                                        </a>
+                                    }
+                                }
+                            </div>
+                            @if (!Model.SellerCompleteProfile.Moderation.IsComplete && Model.SellerCompleteProfile.IsComplete)
+                            {
+                                @Html.Localized("SELLER_COMPLETE_MODERATION_MESSAGE", "h4", new { @class = "m-b-0" })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@if (showMessages)
+{
+    if (Model.IsBuyer())
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-danger margin-bottom-30">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-eye-close"></span>
+                            @Html.Localized("PROFILE_INVISIBLE_TITLE")
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-unstyled">
+                            @if (!buyerSpecification.HasModeration(Model))
+                            {
+                                <li class="m-b-sm">
+                                    @Html.Localized("USER_BUYER_MODERATING_DESC", "p", new { @class = "m-b-0" })
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

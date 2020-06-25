@@ -1,0 +1,22 @@
+﻿@model Presentation.Models.CartViewModel
+
+@if (Model != null)
+{
+    <div class="modal" tabindex="-1" role="dialog" id="modalShippingWarning">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:red">@Html.Localized("CART_SHIPPING_WARNING_TITLE")</h5>
+                </div>
+
+                <div class="modal-body" data-modal-message="@Model.ShippingWarningMessage">
+                    @Html.Localized("CART_SHIPPING_WARNING_BODY", "p")
+                    <p>@Model.ShippingWarningMessage</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Localized("CART_SHIPPING_WARNING_ACCEPT_LABEL")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

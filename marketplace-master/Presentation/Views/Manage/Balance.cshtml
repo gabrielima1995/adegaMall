@@ -1,0 +1,136 @@
+﻿@using Microsoft.AspNet.Identity
+@model PaymentIntegrator.Core.Common.AccountBalance
+@{
+    ViewBag.Title = Request.GetLocalizedString("SELLER_MENU_BALANCE_LABEL");
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+            <div class="col-xs-12">
+                @Html.Localized("SELLER_MENU_BALANCE_LABEL", "h3")
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="panel panel-default equal-height">
+                    <div class="panel-body">
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                @Html.Localized("BALANCE_FUTURE_TITLE", "h3")
+                                <h3 class="text-muted">@MaaSConfig.Current.DefaultCurrency @((Model.FutureBalance / 100M).DisplayDecimal(2))</h3>
+                                <hr />
+                            </div>
+                        </div>
+                        <p class="m-b-0">@Html.Localized("BALANCE_FUTURE_HELP", "small")</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="panel panel-default equal-height">
+                    <div class="panel-body">
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                @Html.Localized("BALANCE_BLOCKED_TITLE", "h3")
+                                <h3 class="text-muted">@MaaSConfig.Current.DefaultCurrency @((Model.UnavailableBalance / 100M).DisplayDecimal(2))</h3>
+                                <hr />
+                            </div>
+                        </div>
+                        <p class="m-b-0">@Html.Localized("BALANCE_BLOCKED_HELP", "small")</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="panel panel-default equal-height">
+                    <div class="panel-body">
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                @Html.Localized("BALANCE_AVAILABLE_TITLE", "h3")
+                                <h3 class="text-success">@MaaSConfig.Current.DefaultCurrency @((Model.AvailableBalance / 100M).DisplayDecimal(2))</h3>
+                                <hr />
+                            </div>
+                        </div>
+                        <p>@Html.Localized("BALANCE_AVAILABLE_HELP_1", "small")</p>
+                        <p>@Html.Localized("BALANCE_AVAILABLE_HELP_2", "small")</p>
+
+                        @if (MaaSConfig.Current.Payment.GatewayIsPagarme())
+                        {
+                            <p>@Html.Localized("BALANCE_AVAILABLE_HELP_PAGARME", "small")</p>
+                        }
+
+                        @if (MaaSConfig.Current.Payment.GatewayIsWirecard()/*No caso do pagarme, o saque é gerenciado pela plataforma via ScheduledTransfers*/)
+                        {
+                            using (Html.BeginForm("WithdrawBalance", "Manage", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                if (TempData.ContainsKey("ErrorLog"))
+                                {
+                                    <p class="text-center text-danger">Error: @TempData["ErrorLog"]</p>
+                                }
+
+                                <div class="form-group text-center">
+                                    @if (Model.AvailableBalance > 0)
+                                    {
+                                        <button type="submit" class="btn btn-primary"><i class="fas fa-angle-double-down"></i> @Request.GetLocalizedString("BALANCE_WITHDRAW_BTN")</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-primary" disabled="disabled"><i class="fas fa-angle-double-down"></i> @Request.GetLocalizedString("BALANCE_WITHDRAW_BTN")</button>
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (MaaSConfig.Current.Payment.GatewayIsWirecard())
+        {
+            <div class="row seller-withdraws">
+                <div class="col-xs-12">
+                    <h4>Saques</h4>
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p class="seller-withdraws-empty" style="display: none">Não há registro de saques para sua conta</p>
+                    <p class="seller-withdraws-message" style="display: none">@Html.Localized("SELLER_WITHDRAW_MESSAGE")</p>
+                    <ul class="seller-withdraws-list list-group" style="display: none">
+                        <li class="seller-withdraws-total list-group-item" style="display:none">
+                            <p>
+                                Total dos saques realizados com sucesso:
+                                <br />
+                                <strong></strong>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.min.js"></script>
+    <script type="text/html" id="withdrawItemTemplate">
+        <li class="list-group-item">
+            <strong>{{Status}}: {{Amount}}</strong><br />
+            {{#if ErrorMessage}}
+            <span class="text-danger">{{ErrorMessage}}</span><br />
+            {{/if}}
+            <span>
+                Banco {{BankAccount.BankCode}},
+                Ag {{BankAccount.Branch}}-{{BankAccount.BranchCheckNumber}},
+                Cc {{BankAccount.Account}}-{{BankAccount.AccountCheckNumber}}
+            </span><br />
+            <span>{{BankAccount.AccountableName}} ({{BankAccount.AccountableDocumentType}} {{BankAccount.AccountableDocumentNumber}})</span><br />
+            <small class="text-muted">{{DateCreated}}</small>
+        </li>
+    </script>
+    <script>ManageBalance.init()</script>
+}

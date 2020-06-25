@@ -1,0 +1,73 @@
+﻿@using System.Globalization
+@using Application.Modules.Products
+@using Domain.Modules.StoreModule.Entities
+@using Presentation.Helpers
+@model Application.Modules.Products.ProductEditorViewModel
+
+@{
+    var viewPathFmt = "~/Views/Products/Store/{0}.cshtml";
+    var config = MaaSConfig.Current;
+
+    var availabilities = Model.Availabilities;
+}
+
+@if (availabilities.Count > 0)
+{
+    <div class="table-responsive m-t-md">
+        <table class="table table-striped">
+            <tbody>
+                @foreach (var item in availabilities)
+                {
+                    string title;
+                    string url;
+
+                    if (item.Type == ProductAvailabilityType.Default)
+                    {
+                        var dayOfWeekLabel = item.DayOfWeek.ToString().ToUpper() + "_LABEL";
+                        title = $"{Request.GetLocalizedString(dayOfWeekLabel)}, {item.StartTime:hh\\:mm} - {item.EndTime:hh\\:mm}";
+                        url = Url.ActionLocalized("EditAvailability", "ProductAvailability", new { id = item.Id, productId = item.Product_Id });
+                    }
+                    else
+                    {
+                        var unitDescription = item.Recurring_Unit.GetDescriptionLocalized();
+                        var daysOfWeekDescription = string.Empty;
+
+                        if (item.Recurring_Unit == RecurringProductAvailabilityUnit.Weeks)
+                        {
+                            var daysOfWeekLabels = item.Recurring_DaysOfWeek.Select(i => i.ToString().ToUpper() + "_LABEL");
+                            daysOfWeekDescription = " (" + string.Join(", ", daysOfWeekLabels.Select(i => Request.GetLocalizedString(i).Substring(0, 3))) + ") ";
+                        }
+
+                        title = $"{Request.GetLocalizedString("RECURRING_PRODUCT_AVAILABILITY_UNIT_PREFIX_LABEL")} {item.Recurring_UnitValue} {unitDescription}{daysOfWeekDescription}, {item.StartTime:hh\\:mm} - {item.EndTime:hh\\:mm}";
+                        url = Url.ActionLocalized("EditRecurring", "ProductAvailability", new { id = item.Id, productId = item.Product_Id });
+                    }
+
+                    <tr>
+                        <td>
+                            <a href="@url" title="@title">
+                                <b>@title</b>
+                            </a>
+                            <br />
+                            <span>@item.CurrentStock @Request.GetLocalizedString("PRODUCT_AVAILABILITY_STOCK_UNIT_LABEL"), </span>
+                            <span>
+                                @if (!item.HasDiscount)
+                                {
+                                    @:@Request.GetLocalizedString("PRODUCT_AVAILABILITY_WITHOUT_DISCOUNT_LABEL")
+                                }
+                                else
+                                {
+                                    @:@Request.GetLocalizedString("PRODUCT_AVAILABILITY_WITH_DISCOUNT_LABEL") @item.DiscountPercentage%
+                                }
+                            </span>
+                        </td>
+                        <td width="30">
+                            <a data-delete-url="@Url.ActionLocalized("Delete", "ProductAvailability", new {id = item.Id, productId = Model.Id})" href="javascript:void(0);" class="text-danger js-delete-availability-button">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

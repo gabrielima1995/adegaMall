@@ -1,0 +1,239 @@
+﻿@{
+    ViewBag.Title = Request.GetLocalizedString("SCHEDULE_LINK");
+
+    var config = MaaSConfig.Current;
+    var loginProfile = User.Identity.GetLoginProfile();
+
+    var singleLocksEnabled =
+        config.Product.BusinessModel.Rental.Seller.Schedule.Configuration.SingleLocks.Enabled;
+
+    var newAvailabilityEnabled =
+        config.Product.BusinessModel.Rental.Seller.Schedule.Configuration.Availability.Enabled &&
+        !config.Product.BusinessModel.Rental.ProductAvailability.Enabled;
+
+    var batchBlocksEnabled =
+        config.Product.BusinessModel.Rental.Seller.Schedule.Configuration.BatchLocks.Enabled;
+
+    var timelineEnabled =
+        config.Environment.FullCalendar.HasPremiumLicense &&
+        config.Product.BusinessModel.Rental.Seller.Schedule.Configuration.TimelineViewModeEnabled();
+}
+
+@section styles
+{
+    @if (!timelineEnabled)
+    {
+        @Styles.Render("~/Content/fullcalendar")
+    }
+    else
+    {
+        @Styles.Render("~/Content/fullcalendar-scheduler")
+    }
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+            <div class="col-xs-12">
+                <h3>@ViewBag.Title</h3>
+                @Html.Localized("RENTAL_SCHEDULE_DESCRIPTION", "p")
+            </div>
+
+            @if (singleLocksEnabled)
+            {
+                <div class="col-xs-12 col-sm-3">
+                    <a href="@Url.ActionLocalized("NewLock", "Schedule")" class="btn btn-primary btn-block @Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.ScheduleEdit)">
+                        <span class="fa fa-plus"></span>&nbsp;
+                        @Html.Localized("ADD_NEW_LOCK_LINK")
+                    </a>
+                </div>
+            }
+
+            @if (newAvailabilityEnabled)
+            {
+                <div class="col-xs-12 col-sm-3">
+                    <a href="@Url.ActionLocalized("NewAvailability", "Schedule")" class="btn btn-default btn-block @Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.ScheduleEdit)">
+                        <span class="fa fa-list-ul"></span>&nbsp;
+                        @Html.Localized("ADD_NEW_AVAILABILITY_LINK")
+                    </a>
+                </div>
+            }
+
+            @if (batchBlocksEnabled)
+            {
+                <div class="col-xs-12 col-sm-3">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle @Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.ScheduleEdit)" type="button" id="dropdownMenuLock" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="fa fa-lock"></span>&nbsp;
+                            @Request.GetLocalizedString("LOCK_BATCH_OPTIONS_LABEL")
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLock">
+                            <li>
+                                <a href="javascript:void(0);" class="js-lock-batch-button @Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.ScheduleEdit)" data-action="@Url.ActionLocalized("LockNightBeforeMidnight", "Schedule")">
+                                    <span class="fa fa-lock"></span>&nbsp;
+                                    @Html.Localized("LOCK_NIGHT_BEFORE_MIDNIGHT_BUTTON")
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="js-lock-batch-button @Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.ScheduleEdit)" data-action="@Url.ActionLocalized("LockNightAfterMidnight", "Schedule")">
+                                    <span class="fa fa-lock"></span>&nbsp;
+                                    @Html.Localized("LOCK_NIGHT_AFTER_MIDNIGHT_BUTTON")
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="js-lock-batch-button @Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.ScheduleEdit)" data-action="@Url.ActionLocalized("LockWeekend", "Schedule")">
+                                    <span class="fa fa-lock"></span>&nbsp;
+                                    @Html.Localized("LOCK_WEEKEND_BUTTON")
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <hr />
+            </div>
+        </div>
+
+        @using (Html.BeginForm("Index", "Schedule", FormMethod.Get, new { id = "frmFilters" }))
+        {
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.DropDownList("ProductId", null, "Selecione um produto para filtro", new { @class = "form-control" })
+                        <small class="help-block">
+                            @Request.GetLocalizedString("SCHEDULE_PRODUCT_FILTER_HELP")
+                            <i class="fa fa-info-circle" data-toggle="tooltip" title="@Request.GetLocalizedString("SCHEDULE_PRODUCT_FILTER_HINT")"></i>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="row m-b-md">
+            <div class="col-xs-12">
+                <div id="schedule-wrapper" class="schedule-wrapper"></div>
+            </div>
+        </div>
+
+        @if (!timelineEnabled)
+        {
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="list-unstyled schedule-caption-list">
+                        <li class="schedule-caption-list-item schedule-caption-ok">
+                            <i class="fa fa-circle" style="color: #398439"></i>
+                            @Html.Localized("SCHEDULE_COLOR_RENTAL_OK")
+                        </li>
+                        <li class="schedule-caption-list-item schedule-caption-delivery-pending">
+                            <i class="fa fa-circle" style="color: #d58512"></i>
+                            @Html.Localized("SCHEDULE_COLOR_DELIVERY_PENDING")
+                        </li>
+                        <li class="schedule-caption-list-item schedule-caption-return-pending">
+                            <i class="fa fa-circle" style="color: #ac2925"></i>
+                            @Html.Localized("SCHEDULE_COLOR_RETURN_PENDING")
+                        </li>
+                        <li class="schedule-caption-list-item schedule-caption-lock">
+                            <i class="fa fa-circle" style="color: #888888"></i>
+                            @Html.Localized("SCHEDULE_COLOR_LOCK")
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="list-unstyled schedule-caption-list">
+                        <li class="schedule-caption-list-item schedule-caption-ok">
+                            <i class="fa fa-circle" style="color: #398439"></i>
+                            @Html.Localized("SCHEDULE_TIMELINE_COLOR_AVAILABLE_UNITS")
+                        </li>
+                        <li class="schedule-caption-list-item schedule-caption-delivery-pending">
+                            <i class="fa fa-circle" style="color: #d58512"></i>
+                            @Html.Localized("SCHEDULE_TIMELINE_COLOR_UNAVAILABLE_UNITS")
+                        </li>
+                        <li class="schedule-caption-list-item schedule-caption-return-pending">
+                            <i class="fa fa-circle" style="color: #3788d8"></i>
+                            @Html.Localized("SCHEDULE_TIMELINE_COLOR_ALL_AVAILABLE_UNITS")
+                        </li>
+                        <li class="schedule-caption-list-item schedule-caption-lock">
+                            <i class="fa fa-circle" style="color: #888888"></i>
+                            @Html.Localized("SCHEDULE_COLOR_LOCK")
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section plugins
+{
+    @if (!timelineEnabled)
+    {
+        @Scripts.Render("~/bundles/scripts/fullcalendar")
+    }
+    else
+    {
+        @Scripts.Render("~/bundles/scripts/fullcalendar-scheduler")
+    }
+}
+
+@section scripts
+{
+    @if (!timelineEnabled)
+    {
+        @Html.Partial("_ScheduleScript")
+    }
+    else
+    {
+        @Html.Partial("_ScheduleTimelineScript")
+    }
+
+    <script>
+        $(document).ready(function() {
+            $('.js-lock-batch-button').click(function(e) {
+                e.preventDefault();
+
+                var $this = $(this);
+
+                swal({
+                        title: "@Html.Raw(Request.GetLocalizedString("ALERT_WARNING_TITLE"))",
+                        text: "@Html.Raw(Request.GetLocalizedString("LOCK_BATCH_CONFIRMATION_MESSAGE"))",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: "@Html.Raw(Request.GetLocalizedString("ALERT_CONFIRM_BUTTON"))",
+                        cancelButtonText: "@Html.Raw(Request.GetLocalizedString("ALERT_CANCEL_BUTTON"))",
+                        closeOnConfirm: false
+                    },
+                    function() {
+                        $.redirect($this.data('action'));
+                        return true;
+                    });
+
+                return false;
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('#ProductId').change(function (e) {
+                $('#frmFilters').submit();
+            });
+        });
+    </script>
+}

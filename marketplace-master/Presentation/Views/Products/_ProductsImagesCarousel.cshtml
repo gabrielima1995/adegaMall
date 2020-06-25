@@ -1,0 +1,48 @@
+﻿@using Application.Modules.Products
+@model Domain.Entities.StoreModule.Product
+
+@{
+    var carouselId = "product-images-carousel-" + Model.Id;
+    var total = Model.Images.Count;
+}
+
+<div id="@carouselId" class="carousel slide" data-ride="carousel" data-interval="false">
+    @if (total > 1)
+    {
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            @for (int i = 0; i < total; i++)
+            {
+                <li data-target="#@carouselId" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+            }
+        </ol>
+    }
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        @for (int i = 0; i < total; i++)
+        {
+            <div class="item @(i == 0 ? "active" : "")">
+                <img class="img-responsive center-block border-radius" src="@ProductsHelper.GetImageUrl(Model.Images[i].Url, ProductImageSize.MD)" alt="@Model.Title">
+            </div>
+        }
+
+        @if (total == 0 && Model.CoverImageUrl != null)
+        {
+            <div class="item active">
+                <img class="img-responsive center-block border-radius" src="@ProductsHelper.GetImageUrl(Model.CoverImageUrl, ProductImageSize.MD)" alt="@Model.Title" width="600" height="600">
+            </div>
+        }
+    </div>
+
+    @if (total > 1)
+    {
+        <a class="left carousel-control" href="#@carouselId" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#@carouselId" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    }
+</div>

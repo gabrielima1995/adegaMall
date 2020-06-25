@@ -1,0 +1,38 @@
+﻿@model Presentation.Models.PurchaseCreditsPackVM
+
+@using (Html.BeginForm("PurchaseCreditsStripe", "LeadSales", FormMethod.Post, new { id = "card-form" }))
+{
+    @Html.HiddenFor(model => model.CreditsPackId)
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(i => i.Payment.CreditCard.FullName)
+                @Html.TextBoxFor(i => i.Payment.CreditCard.FullName, new { id = "cardholder-name", @class = "form-control", placeholder = Request.GetLocalizedString("CREDIT_CARD_FULLNAME_INPUT") })
+                @Html.ValidationMessageFor(model => model.Payment.CreditCard.FullName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="card-element">
+                    @Request.GetLocalizedString("CREDIT_CARD_LABEL")
+                </label>
+                <div id="card-element">
+                    <!-- A Stripe Element will be inserted here. -->
+                </div>
+
+                <!-- Used to display form errors. -->
+                <div id="card-errors" role="alert" class="text-danger"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button id="card-button" type="submit" class="btn btn-primary"><i class="fas fa-credit-card"></i> @Request.GetLocalizedString("CREDITS_PACK_PAYMENT_BUTTON")</button>
+        </div>
+    </div>
+}

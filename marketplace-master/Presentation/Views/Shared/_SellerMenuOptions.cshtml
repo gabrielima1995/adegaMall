@@ -1,0 +1,152 @@
+﻿@{
+    var config = MaaSConfig.Current;
+    var loginProfile = User.Identity.GetLoginProfile();
+    var serviceLabel = MaaSConfig.Current.Quote.Enabled ? Request.GetLocalizedString("MENU_GROUP_SERVICES") : Request.GetLocalizedString("MENU_GROUP_PRODUCTS");
+    var isAssistant = loginProfile.IsSellerAssistant();
+    var showManage =
+        (config.Payment.GatewayIsWirecard() && !string.IsNullOrEmpty(loginProfile.SupplierGatewayId)) ||
+        (config.Seller.Assistant.Enabled && !isAssistant) ||
+        (config.Subscription.Enabled && !isAssistant) ||
+        config.Dashboard.SellerDashboard.Enabled;
+}
+
+<li class="dropdown">
+    <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+        <strong>@serviceLabel</strong> <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        @if (config.Portfolio.Enabled)
+        {
+            <li>
+                <a href="@Url.ActionLocalized("Index", "Portfolio")" class="@Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.PortfolioView)">
+                    <i class="far fa-fw fa-image" aria-hidden="true"></i>
+                    @Html.Localized("PORTFOLIO_LINK", "strong")
+                </a>
+            </li>
+        }
+        @if (config.Product.Enabled && config.Product.BusinessModel.Rental.Enabled)
+        {
+            <li>
+                <a href="@Url.ActionLocalized("Index", "Schedule")" class="@Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.ScheduleView)">
+                    <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+                    @Html.Localized("SCHEDULE_LINK", "strong")
+                </a>
+            </li>
+        }
+        @if (config.Product.Enabled && !config.Product.HideStoreMenusFromSeller)
+        {
+            <li>
+                @if (config.Product.Templates.Enabled && config.Product.Templates.ForceSellerToUseTemplates)
+                {
+                    <a href="@Url.ActionLocalized("Templates", "Store")" class="@Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreView, SellerAssistantPermissions.ProductsView)">
+                        <i class="fas fa-fw fa-cubes" aria-hidden="true"></i>
+                        @Html.Localized("STORE_LINK", "strong")
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.ActionLocalized("Index", "Store")" class="@Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreView, SellerAssistantPermissions.ProductsView)">
+                        <i class="fas fa-fw fa-cubes" aria-hidden="true"></i>
+                        @Html.Localized("STORE_LINK", "strong")
+                    </a>
+                }
+
+            </li>
+        }
+    </ul>
+</li>
+<li class="dropdown">
+    <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+        <strong>@Request.GetLocalizedString("MENU_GROUP_BUSINESS")</strong> <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        @if (config.Quote.Enabled)
+        {
+            var totalOpenedRequest = User.Identity.GetTotalOpenedQuotes();
+
+            <li>
+                <a href="@Url.ActionLocalized("Index", "Quotes")" class="@Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.QuotesView, SellerAssistantPresentation.DisabledClass)">
+                    <i class="far fa-fw fa-folder-open" aria-hidden="true"></i>
+                    <strong>
+                        @Html.Localized("QUOTE_LINK")
+                        @if (totalOpenedRequest > 0)
+                        {
+                            <span class="badge js-open-requests-badge">@totalOpenedRequest</span>
+                        }
+                    </strong>
+                </a>
+            </li>
+        }
+        @if (config.Product.Enabled && (config.Product.BusinessModel.Sale.Enabled || config.Product.BusinessModel.Rental.Enabled))
+        {
+            <li>
+                <a href="@Url.ActionLocalized("Index", "MySales")" class="@Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.SalesView, SellerAssistantPresentation.DisabledClass)">
+                    <i class="far fa-fw fa-credit-card" aria-hidden="true"></i>
+                    @Html.Localized("MY_SALES_LINK", "strong")
+                </a>
+            </li>
+        }
+    </ul>
+</li>
+
+@if (showManage)
+{
+    <li class="dropdown">
+        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <strong>@Request.GetLocalizedString("MENU_GROUP_MANAGE")</strong> <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            @if (config.Subscription.Enabled && loginProfile.IsSeller())
+            {
+                if (loginProfile.HasActiveSubscription && Domain.Helpers.GatewayValidationHelper.ShowSubscriptionMenu(loginProfile))
+                {
+                    <li>
+                        <a href="@Url.ActionLocalized("Index", "Subscription")">
+                            <i class="fas fa-fw fa-sync-alt" aria-hidden="true"></i>
+                            @Html.Localized("SUBSCRIPTION_LINK", "strong")
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a href="@Url.ActionLocalized("Index","Membership")">
+                            <i class="fas fa-fw fa-sync-alt"></i>
+                            @Html.Localized("SUBSCRIPTION_LINK", "strong")
+                        </a>
+                    </li>
+                }
+            }
+
+            @if (config.Seller.Assistant.Enabled && loginProfile.IsSeller())
+            {
+                <li>
+                    <a href="@Url.ActionLocalized("Index", "ManageAssistant")">
+                        <i class="fas fa-user-cog" aria-hidden="true"></i>
+                        @Html.Localized("Assistente", "strong")
+                    </a>
+                </li>
+            }
+
+            @if (config.Dashboard.SellerDashboard.Enabled)
+            {
+                <li>
+                    <a href="@Url.ActionLocalized("Dashboard", "Manage")" class="@Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.DashboardView, SellerAssistantPresentation.DisabledClass)">
+                        <i class="fas fa-fw fa-tachometer-alt" aria-hidden="true"></i>
+                        @Html.Localized("SELLER_METRICS_MENU_LABEL", "strong")
+                    </a>
+                </li>
+            }
+
+            @if (!string.IsNullOrEmpty(loginProfile.SupplierGatewayId))
+            {
+                <li>
+                    <a href="@Url.ActionLocalized("Balance", "Manage")" class="@Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.BalanceView)">
+                        <i class="fas fa-fw fa-hand-holding-usd"></i>
+                        @Html.Localized("SELLER_MENU_BALANCE_LABEL", "strong")
+                    </a>
+                </li>
+            }
+        </ul>
+    </li>
+}

@@ -1,0 +1,130 @@
+﻿@using Domain.Entities.StoreModule
+@using Presentation.Models.ProductViewModels
+
+@model Presentation.Models.CartViewModel
+
+@{
+    Layout = "";
+    ViewBag.Title = Request.GetLocalizedString("CART_TITLE");
+    var viewPathFmt = "~/Views/Products/Cart/{0}.cshtml";
+    var config = MaaSConfig.Current;
+
+    if (ViewBag.OpenNewShippingAddressModal == null)
+    {
+        ViewBag.OpenNewShippingAddressModal = false;
+    }
+}
+
+<!-- CONTENTS -->
+<div class="main-content bg-1 padding-top-30 padding-bottom-0">
+    <div class="container">
+        <div class="margin-bottom-30">
+            <div class="row">
+                <div class="col-xs-12">
+                    @Html.Localized("CART_TITLE", "h2", new { @class = "margin-bottom-30" })
+
+                    <div class="margin-bottom-15">
+                        @MainCartActions()
+                    </div>
+                    <hr />
+
+                    @if (Model.HasValidationErrors)
+                    {
+                        <div class="alert alert-danger">
+                            @Html.Localized("CART_CORRECT_ERRORS_TO_PROCEED", "p")
+                            @if (Model.HasCartErrors)
+                            {
+                                <ul>
+                                    @foreach (var error in Model.CartErrors)
+                                    {
+                                        <li>@error</li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                    }
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @if (Model.IsShippingOut || Model.SelectedShippingMethod.IsPhysicalDelivery())
+                            {
+                                @Html.Partial("~/Views/Products/Cart/_ShippingAddress.cshtml", Model)
+                            }
+                        </div>
+                    </div>
+                    @Html.Partial(string.Format(viewPathFmt, "_CartItems"))
+                </div>
+            </div>
+            <div class="row">
+                @if (Model.HasProducts)
+                {
+                    <div class="col-sm-4" style="float: right">
+                        <div class="panel panel-default">
+                            <table class="table">
+                                @if (Model.Visualization.ShowShippingAmount)
+                                {
+                                    <tr class="cart-items-total">
+                                        <td>@Html.Localized("CART_ITEMS_TOTAL")</td>
+                                        <td class="text-right">@Model.FormattedCartItemsTotal</td>
+                                    </tr>
+
+                                    <tr class="cart-shipping">
+                                        <td>@Html.Localized("CART_SHIPPING_LABEL")</td>
+                                        <td class="text-right">@Model.FormattedCartShipping</td>
+                                    </tr>
+                                    if (Model.SelectedShippingMethod == ShippingMethod.PostalRegular || Model.SelectedShippingMethod == ShippingMethod.PostalExpress)
+                                    {
+                                        <tr class="cart-shipping-days">
+                                            <td>@Html.Localized("CART_SHIPPING_DAYS_LABEL")</td>
+                                            <td class="text-right">@Model.CartDeliveryDays</td>
+                                        </tr>
+                                    }
+                                }
+                                <tr class="cart-grand-total">
+                                    <td>@Html.Localized("CART_TOTAL_LABEL")</td>
+                                    <td class="text-right"><strong>@Model.FormattedCartTotal</strong></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @Html.Partial(string.Format(viewPathFmt, "_ExtraInfoField"), new CartWithExtraInfo(Model.GetCart().ExtraInfo))
+
+            @if (Model.HasProducts)
+            {
+                <div class="row">
+                    <div class="col-xs-12">
+                        <hr />
+                        @MainCartActions()
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    @helper MainCartActions()
+    {
+        var config = MaaSConfig.Current;
+        var searchUrl = !MaaSConfig.Current.Search.Enabled ? Url.ActionLocalized("Index", "Home") :
+            config.Search.SearchType == Domain.Config.General.SearchType.Product
+                ? Url.ActionLocalized("Search", "Products")
+                : Url.ActionLocalized("Index", "Search");
+
+        <a href="@searchUrl" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            @Request.GetLocalizedString("CART_MORE_PRODUCTS_BUTTON")
+        </a>
+
+        if (Model.HasProducts && !Model.HasCartErrors)
+        {
+            <a href="@Url.ActionLocalized("Checkout", "Cart")" class="btn btn-primary pull-right btn-cart-proceed-to-checkout" id="checkout">
+                <i class="glyphicon glyphicon-ok"></i>
+                @Request.GetLocalizedString("CART_PROCEED_TO_PAYMENT_OF_AMOUNT")
+                @Model.FormattedCartTotal
+            </a>
+        }
+    }
+</div>
+
+@Html.Partial(string.Format(viewPathFmt, "_NewShippingAddressModal"), Model.NewShippingAddress)

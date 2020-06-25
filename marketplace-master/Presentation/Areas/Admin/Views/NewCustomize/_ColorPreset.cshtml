@@ -1,0 +1,31 @@
+﻿@model CustomizeIdentityColorPresetVM
+
+<div class="col-xs-6 col-md-6 border rounded equal-height">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12" style="height:64px">
+                    <div class="bordered-div" style="float:left;width:20%;height:100%;background-color:@Model.Accent1"></div>
+                    @Html.HiddenFor(Model => Model.Accent1, new { @class = "model_acc1" })
+
+                    <div class="bordered-div" style="float:left;width:20%;height:100%;background-color:@Model.Accent2"></div>
+                    @Html.HiddenFor(Model => Model.Accent2, new { @class = "model_acc2" })
+
+                    <div class="bordered-div" style="float:left;width:20%;height:100%;background-color:@Model.Contrast"></div>
+                    @Html.HiddenFor(Model => Model.Contrast, new { @class = "model_contrast" })
+
+                    <div class="bordered-div" style="float:left;width:20%;height:100%;background-color:@Model.MenuHomeBG"></div>
+                    @Html.HiddenFor(Model => Model.MenuHomeBG, new { @class = "model_menuhomebg" })
+
+                    <div class="bordered-div-r" style="float:left;width:20%;height:100%;background-color:@Model.MenuHomeColorAccent"></div>
+                    @Html.HiddenFor(Model => Model.MenuHomeColorAccent, new { @class = "model_menuhomeacc" })
+                </div>
+                
+                <div class="col-xs-12 text-center">
+                    <br />
+                    <button class="btn btn-primary btn-outline js-apply-preset">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_COPY_PALETTE")  <i class="fa fa-arrow-circle-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@model BannerListVM
+
+@if (Model.HasBanners)
+{
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        @if (Model.ShowNavControls)
+        {
+            <ol class="carousel-indicators">
+                @for (var i = 0; i < Model.Items.Count; i++)
+                {
+                    <li data-target="#myCarousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                }
+            </ol>
+        }
+
+        @*<div class="carousel-inner" role="listbox">
+            @for (var i = 0; i < Model.Items.Count; i++)
+            {
+                var banner = Model.Items[i];
+                <a href="@banner.ActionUrl" class="item main-banner-item @(i == 0 ? "active" : "")" style="background-image: url(@banner.OptimizedImgUrl)"></a>
+            }
+        </div>*@
+
+
+        <div class="carousel-inner" role="listbox">
+            @for (var i = 0; i < Model.Items.Count; i++)
+            {
+                var banner = Model.Items[i];
+                <div class="item@(i == 0 ? " active" : "")">
+                    <a href="@banner.ActionUrl">
+                        <img src="@banner.OptimizedImgUrl" style="width:100%; height: 100%;" />
+                    </a>
+                </div>
+            }
+        </div>
+
+        @if (Model.ShowNavControls)
+        {
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Voltar</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Próximo</span>
+            </a>
+        }
+    </div>
+}

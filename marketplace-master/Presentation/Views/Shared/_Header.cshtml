@@ -1,0 +1,164 @@
+﻿@using Domain.DTO
+@using Microsoft.AspNet.Identity
+@using Presentation.Helpers
+
+@{
+    var isAuthenticated = Request.IsAuthenticated;
+    var loginProfile = User.Identity.GetLoginProfile() ?? new LoginProfile();
+    var isUser = isAuthenticated && loginProfile.IsBuyerOrSellerOrSellerAssistant();
+    var isAdmin = isAuthenticated && loginProfile.IsAdminOrGestao();
+
+    var currentUrl = Request.Url;
+    var config = MaaSConfig.Current;
+
+    var isHome = Request.Url.LocalPath == "/";
+    var userConfig = Domain.UserConfig.UserConfiguration.Current;
+    var blogUrl = userConfig.BlogConfig.GetBlogAddress();
+}
+
+<!-- MENU -->
+<div class="menu">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10 col-sm-3">
+                <a href="@Url.ActionLocalized("Index", "Home")" title="@config.ApplicationName">
+                    @if (isHome)
+                    {
+                        <img src="@CustomAssetsHelper.LogoHome()" class="logo" alt="@config.ApplicationName">
+                    }
+                    else
+                    {
+                        <img src="@CustomAssetsHelper.Logo()" class="logo" alt="@config.ApplicationName">
+                    }
+                </a>
+            </div>
+
+            <div class="col-xs-2 col-sm-9 text-right">
+                <ul class="links hidden-xs">
+                    <li class="top-menu-home">
+                        <a href="@Url.ActionLocalized("Index", "Home")" class="item-menu">
+                            @Html.Localized("HOME_LINK", "strong")
+                        </a>
+                    </li>
+                    @if (blogUrl != null || (userConfig.BlogConfig.Enabled && !string.IsNullOrWhiteSpace(userConfig.BlogConfig.Address)))
+                    {
+                        <li class="top-menu-blog">
+                            <a href="@blogUrl" class="item-menu">
+                                @Html.Localized("BLOG_LINK", "strong")
+                            </a>
+                        </li>
+                    }
+                    @foreach (var link in config.AdditionalLinks)
+                    {
+                        if ((link?.Enabled).GetValueOrDefault())
+                        {
+                            <li class="top-menu-extra">
+                                <a href="@link.Url" class="item-menu">
+                                    @Html.Localized(link.Label, "strong")
+                                </a>
+                            </li>
+                        }
+                    }
+                    @if (!User.Identity.GetLoginProfile().IsBuyer() && config.Search.QuotesSearch.Enabled)
+                    {
+                        <li class="top-menu-quotesearch">
+                            <a href="@Url.ActionLocalized("Search","Quotes")" class="item-menu">
+                                @Html.Localized("QUOTE_SEARCH_MENU_LABEL", "strong")
+                            </a>
+                        </li>
+                    }
+                    @if (isAuthenticated)
+                    {
+                        if (isUser)
+                        {
+                            <li class="top-menu-account">
+                                <a href="@(loginProfile.IsBuyer() ? Url.AddLang(config.Buyer.MainPageUrl) : Url.AddLang(config.Seller.MainPageUrl))" class="item-menu">
+                                    @Html.Localized("MY_ACCOUNT_LINK", "strong")
+                                    <span class="my-account-handler">@User.Identity.GetMyAccountHandler()</span>
+                                </a>
+                                <input type="hidden" id="loginProfileName" value="@loginProfile.Name" />
+                                <input type="hidden" id="loginProfileEmail" value="@loginProfile.Email" />
+                                <input type="hidden" id="loginProfilePhone" value="@loginProfile.PhoneNumber" />
+                            </li>
+                        }
+                        else if (isAdmin)
+                        {
+                            <li class="top-menu-admin">
+                                <a class="item-menu" href="@Url.ActionLocalized("Index", "Sellers", new { area = "Admin" })">
+                                    <strong>Painel Admin</strong>
+                                </a>
+                            </li>
+                        }
+
+                        <li class="top-menu-logout">
+                            @using (Html.BeginForm("LogOff", "Account", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="item-menu">
+                                    @Html.Localized("LOGOUT_LINK", "strong")
+                                </a>
+                            }
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="top-menu-login">
+                            <a href="@Url.ActionLocalized("Login", "Account")" class="item-menu">
+                                @Html.Localized("LOGIN_LINK", "strong")
+                            </a>
+                        </li>
+                        <li class="top-menu-register-seller">
+                            <a href="@Url.ActionLocalized("Seller", "Register")" class="menu-btn menu-btn-register">
+                                @Html.Localized("SELLER_JOIN_BUTTON_1")
+                                @Html.Localized("SELLER_JOIN_BUTTON_2", "small", new { style = "text-transform: uppercase;" })
+                            </a>
+                        </li>
+
+                        if (config.Buyer.Enabled)
+                        {
+                            <li class="top-menu-register-buyer">
+                                <a href="@Url.ActionLocalized("Buyer", "Register")" class="menu-btn menu-btn-register">
+                                    @Html.Localized("BUYER_JOIN_BUTTON_1")
+                                    @Html.Localized("BUYER_JOIN_BUTTON_2", "small", new { style = "text-transform: uppercase;" })
+                                </a>
+                            </li>
+                        }
+                    }
+
+                    @if (config.Product.Enabled && isAuthenticated && loginProfile.IsBuyer())
+                    {
+                        <li id="btnCart" style="display: none" class="top-menu-cart">
+                            <a href="@Url.ActionLocalized("Index", "Cart")" class="menu-btn">
+                                <i class="fa fa-shopping-cart"></i>
+                                @Html.Localized("CART_BUTTON")
+                                <span class="badge js-cart-qty">1</span>
+                            </a>
+                        </li>
+                    }
+
+                    <li id="btn-addtohome" style="display:none">
+                        <button class="btn btn-primary">Instalar</button>
+                    </li>
+
+                    @if (LanguagesHelper.ActiveLanguages.Count > 1)
+                    {
+                        <li class="top-menu-lang">
+                            <div class="lang-flags hidden-xs">
+                                @foreach (var lang in LanguagesHelper.ActiveLanguages)
+                                {
+                                    <a href="@currentUrl.GetNewUrlLocalized(lang.Specifier)" title="@lang.NativeName" class="lang-@lang.Specifier">
+                                        <img width="30" height="20" alt="@lang.NativeName" src="@lang.FlagImage" />
+                                    </a>
+                                }
+                            </div>
+                        </li>
+                    }
+                </ul>
+
+                <a href="#" class="abre-menu"><span class="glyphicon glyphicon-menu-hamburger visible-xs" aria-hidden="true"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /MENU -->

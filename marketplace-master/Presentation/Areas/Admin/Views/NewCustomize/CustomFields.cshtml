@@ -1,0 +1,128 @@
+﻿@using Domain.Entities
+@model CustomizeCustomFieldsVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("ADMIN_CUSTOMIZATION_PANEL_TITLE");
+    int activeTab = 0;
+}
+
+<section class="content-header">
+    <h1><i class="fa fa-pencil-square-o"></i>  @Request.GetLocalizedString($"CUSTOM_FIELD_TITLE_{ Model.EntityType.ToString().ToUpperInvariant()}")</h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Campos existentes</h4>
+                </div>
+                <div class="panel-body">
+                    @if (Model.FieldDefinitions.Count > 0)
+                    {
+                        <ul class="nav nav-tabs">
+                            @for (int i = 0; i < Model.FieldDefinitions.Count; i++)
+                            {
+                                <li class="@(activeTab == i ? "active" : "")"><a data-toggle="tab" href="@($"#item{i}")">@Model.FieldDefinitions[i].Order</a></li>
+                            }
+                        </ul>
+                    }
+                    <br />
+                    <div class="tab-content">
+                        @for (int i = 0; i < Model.FieldDefinitions.Count; i++)
+                        {
+                            <div id="@($"item{i}")" class="@(activeTab == i ? "tab-pane fade in active" : "tab-pane fade")">
+                                @Html.Partial("_CustomFieldEditForm", Model.FieldDefinitions[i])
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-6">
+            @if (Model.FieldDefinitions.Count >= MaaSConfig.Current.CustomFields.ForEntity(Model.EntityType).MaxCustomFields)
+            {
+                <div class="panel panel-warning">
+                    <div class="panel-heading"><h4 class="panel-title"><i class="fa fa-exclamation-triangle margin-r-5"></i>Aviso</h4></div>
+                    <div class="panel-body">
+                        @Html.Localized("CUSTOM_FIELD_MAX_WARNING_1", "p")
+                        @Html.Localized("CUSTOM_FIELD_MAX_WARNING_2", "p")
+                    </div>
+                </div>
+            }
+            else
+            {
+                @Html.Partial("_CustomFieldForm", new CustomFieldVM(Model.EntityType))
+            }
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script>
+        (function ($, MaaS) {
+
+            var dataDropdown = $('#js-data-dropdown');
+            var inputDropdown = $('#js-input-dropdown');
+
+            function reload(id, data) {
+                $(id).html(data);
+                $('.datemask').mask('00/00/0000', { placeholder: '__/__/____' });
+                $('.datepicker').datepicker({ format: "dd/mm/yyyy", language: 'pt-BR', autoclose: true });
+            }
+
+            dataDropdown.on('change', function (e) {
+
+                var value = dataDropdown.val();
+                var url = '/newcustomize/getinputoptions/?fieldType=' + value;
+                jQuery.ajax(url, {
+                    success: function (data) {
+                        inputDropdown.html(data);
+                    }
+                });
+            });
+
+            $(document.body).on('click', '.js-add-option', function (e) {
+
+                let modelId = $(this).attr('data-model-id');
+                let value = $('#js-add-option-' + modelId).val();
+                let eType = $('.entity-type').val();
+                let url = '/newcustomize/addoptiontofield/';
+
+                jQuery.ajax(url, {
+                    method: 'POST',
+                    data: {
+                        fieldId: modelId,
+                        option: value,
+                        entityType: eType,
+                    },
+                    success: function (data) {
+                        reload('#options-' + modelId, data);
+                    }
+                });
+
+            });
+
+            $(document.body).on('click', '.js-remove-option', function (e) {
+
+                let modelId = $(this).attr('data-model-id');
+                let optId = $(this).attr('data-model-opt-id');
+                let eType = $('.entity-type').val();
+                let url = '/newcustomize/removeoptionfromfield/';
+
+                jQuery.ajax(url, {
+                    method: 'POST',
+                    data: {
+                        fieldId: modelId,
+                        optionId: optId,
+                        entityType: eType,
+                    },
+                    success: function (data) {
+                        reload('#options-' + modelId, data);
+                    }
+                });
+            });
+
+        })(window.jQuery, window.MaaS);
+    </script>
+}

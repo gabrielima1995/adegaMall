@@ -1,0 +1,12 @@
+﻿@{
+    var config = MaaSConfig.Current;
+}
+
+@if (!string.IsNullOrWhiteSpace(config.Environment.GoogleServices.TagManagerId))
+{
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=@config.Environment.GoogleServices.TagManagerId" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+}

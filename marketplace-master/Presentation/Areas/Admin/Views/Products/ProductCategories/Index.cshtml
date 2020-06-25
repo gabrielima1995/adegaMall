@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Application.Modules.Products.Categories.ProductCategoryViewModel>
+
+@{
+    ViewBag.Title = "Categorias de produto";
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-folder"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <p>
+        @Html.ActionLink("Nova categoria", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+    <div class="box">
+        <div class="box-body  table-responsive">
+            <table class="table table-bordered table-hover js-items-list">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            Ações
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "js-delete-item", data_item = item.Name })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-center">
+                <small>
+                    <a href="http://suporte.ideianoar.com.br/pt-BR/articles/3613310-cadastro-de-categoria-e-variantes">
+                        <i class="fa fa-question-circle"></i>
+                        Aprenda a usar a categoria do produto clicando aqui
+                    </a>
+                </small>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    @Html.Partial("_DataTableScript")
+
+    <script>
+        $(document).ready(function () {
+            $('.js-items-list .js-delete-item').click(function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+
+                swal({
+                    title: "Atenção",
+                    text: "Confirma a exclusão do item '" + $this.data('item').trim() + "'?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Sim, confirmo",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false
+                },
+                    function () {
+                        $.redirect($this.attr('href'));
+                    });
+            });
+        });
+    </script>
+}

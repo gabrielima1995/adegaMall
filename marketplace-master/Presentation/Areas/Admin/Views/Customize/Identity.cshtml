@@ -1,0 +1,92 @@
+﻿@using Domain.DTO
+@model BannerCreateEditVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("CUSTOMIZE_IDENTITY_TITLE");
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-paint-brush" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@Request.GetLocalizedString("CUSTOMIZE_LOGO_LABEL")</h3>
+                </div>
+                <div class="box-body">
+
+                    <p><small class="text-muted">@Request.GetLocalizedString("CUSTOMIZE_LOGO_HELP")</small></p>
+
+                    <p>
+                        <small class="text-muted">
+                            <strong>@Request.GetLocalizedString("CUSTOMIZE_HINT"):</strong>
+                            @Request.GetLocalizedString("CUSTOMIZE_LOGO_HINT")
+                            <a href="/assets/images/template-logo-500x150.png" target="_blank">Template</a>
+                        </small>
+                    </p>
+
+                    <hr class="thin" />
+
+                    @Html.Partial("_File", new CustomizeFileInfoVM
+                    {
+                        FileType = CloudFileType.PlatformImage,
+                        Option = CustomizeOption.LogoHome,
+                        RedirectUrl = Url.ActionLocalized("Identity", "Customize", new { area = "Admin" }),
+                        CurrentUrl = MaaSConfig.Current.Layout.Images.LogoHome,
+                        Label = Request.GetLocalizedString("CUSTOMIZE_LOGO_HOME_LABEL"),
+                        UiNoBox = true
+                    })
+
+                    <hr class="thin" />
+
+                    @Html.Partial("_File", new CustomizeFileInfoVM
+                    {
+                        FileType = CloudFileType.PlatformImage,
+                        Option = CustomizeOption.LogoInternal,
+                        RedirectUrl = Url.ActionLocalized("Identity", "Customize", new { area = "Admin" }),
+                        CurrentUrl = MaaSConfig.Current.Layout.Images.Logo,
+                        Label = Request.GetLocalizedString("CUSTOMIZE_LOGO_INTERNAL_LABEL"),
+                        UiNoBox = true
+                    })
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            @Html.Partial("_File", new CustomizeFileInfoVM
+            {
+                FileType = CloudFileType.PlatformImage,
+                Option = CustomizeOption.FavIcon,
+                RedirectUrl = Url.ActionLocalized("Identity", "Customize", new { area = "Admin" }),
+                CurrentUrl = MaaSConfig.Current.Layout.Images.Favicon,
+                Label = Request.GetLocalizedString("CUSTOMIZE_ICON_LABEL"),
+                HelpText = Request.GetLocalizedString("CUSTOMIZE_ICON_HELP"),
+                Hint = Request.GetLocalizedString("CUSTOMIZE_ICON_HINT"),
+                TemplateUrl = "/assets/images/template-favicon-512x512.png"
+            })
+        </div>
+        <div class="col-xs-12 col-md-6">
+            @Html.Partial("_File", new CustomizeFileInfoVM
+            {
+                FileType = CloudFileType.PlatformImage,
+                Option = CustomizeOption.Background2,
+                RedirectUrl = Url.ActionLocalized("Identity", "Customize", new { area = "Admin" }),
+                CurrentUrl = MaaSConfig.Current.Layout.Images.Background2,
+                Label = "Imagem de Fundo Secundária",//Request.GetLocalizedString("CUSTOMIZE_ICON_LABEL"),
+                HelpText = "Imagem de plano de fundo que será usada em diversas telas secundárias da plataforma, como: telas de login, cadastro, assinatura, entre outras.",// Request.GetLocalizedString("CUSTOMIZE_ICON_HELP"),
+                Hint = "Utilize uma imagem em alta resolução (pelo menos 1600x900) e de preferência em formato .jpg.",
+                TemplateUrl = "https://via.placeholder.com/1600x900.jpg",
+            })
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>Customize.init()</script>
+}

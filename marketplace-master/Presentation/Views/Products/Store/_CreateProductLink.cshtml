@@ -1,0 +1,42 @@
+﻿@{ 
+    var config = MaaSConfig.Current;
+    var profile = User.Identity.GetLoginProfile();
+}
+
+@if (config.Product.Templates.Enabled)
+{
+    if (config.Product.Templates.ForceSellerToUseTemplates)
+    {
+        <div class="seller-store-add-product col-xs-12 col-sm-4 m-b-md">
+            <a href="@Url.ActionLocalized("Templates", "Store")" class="btn btn-primary @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)">
+                <span class="far fa-clone"></span>
+                @Html.Localized("STORE_ADD_FROM_TEMPLATES_LINK")
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="seller-store-add-product col-xs-12 col-sm-4 m-b-md">
+            <div class="btn-group" role="group" aria-label="...">
+                <a href="@Url.ActionLocalized("CreateProduct", "Store")" class="btn btn-default @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)">
+                    <span class="fa fa-plus"></span>
+                    @Html.Localized("ADD_BLANK_PRODUCT_LINK")
+                </a>
+                <a href="@Url.ActionLocalized("Templates", "Store")" class="btn btn-default @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)">
+                    <span class="far fa-clone"></span>
+                    @Html.Localized("STORE_ADD_FROM_TEMPLATES_ALT_LINK")
+                </a>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="seller-store-add-product col-xs-12 col-sm-4 m-b-md">
+        <a href="@Url.ActionLocalized("CreateProduct", "Store")" class="btn btn-primary @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)">
+            <span class="fa fa-plus"></span>
+            @Html.Localized("ADD_NEW_PRODUCT_LINK")
+        </a>
+    </div>
+}
+

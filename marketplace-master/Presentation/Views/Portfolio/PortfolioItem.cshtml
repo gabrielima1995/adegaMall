@@ -1,0 +1,153 @@
+﻿@using Microsoft.AspNet.Identity
+@model Application.Modules.Portfolio.PortfolioItemViewModel
+
+@{
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+            <div class="col-xs-12">
+                <h3>@ViewBag.Title</h3>
+                @Html.Partial("_PortfolioItemForm")
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>SubCategoriesScript.init()</script>
+
+    <script>
+        (function ($, MaaS) {
+            var $body = $('body');
+
+            $body.on('click', '.js-add-category', function (e) {
+                e.preventDefault();
+
+                if ($('.categoria').length < 10) {
+                    var $this = $(this);
+
+                    $.ajax({
+                        url: '@Url.ActionLocalized("AddSubCategory", "Portfolio")',
+                        success: function (data) {
+
+                            var $categoria = $this.parents('.categoria');
+
+                            $(data).insertAfter($categoria).slideDown();
+                        }
+                    });
+                }
+            });
+
+            $body.on('click', '.js-remove-category', function (e) {
+                e.preventDefault();
+                var $this = $(this);
+
+                if ($('.categoria').length !== 1) {
+                    $this.parents('.categoria').remove();
+                }
+            });
+        })(window.jQuery, window.MaaS);
+    </script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
+
+    <script>
+        (function ($, MaaS) {
+            $(document).on('click', '.trash', function (e) {
+                e.preventDefault();
+
+                $(this).parent().parent().remove();
+            });
+
+            var $customThumb = $('#custom-thumb');
+            var $newImagesInput = $('#new-images');
+            var $submitButton = $('#js-submit');
+            var $customThumbnaill = $('#custom-thumb');
+
+            $customThumb.uploadfy({
+                fileType: 'portfolio',
+                started: function () {
+                    submitToggle(false);
+                },
+                error: function () {
+                    toast.error(MaaS.messages.upload_error);
+                },
+                completed: function(file){
+                    displayThumb(file)
+                },
+                finaly: function () {
+                    submitToggle(true);
+                }
+            });
+
+            function displayThumb(file) {
+                $.post('@Url.Action("NewCustomThumbHtml")', {
+                    image: file
+                })
+                .done(function (html) {
+                    $('.js-thumb-container').append(html);
+                })
+                .fail(function () {
+                    toastr.error(MaaS.messages.upload_error);
+                })
+            };
+
+            $newImagesInput.uploadfy({
+                fileType: 'portfolio',
+                started: function () {
+                    submitToggle(false);
+                },
+                progress: function (percentage) {
+                    console.log(percentage);
+                },
+                completed: function (files) {
+                    displayImages(files);
+                },
+                error: function () {
+                    toastr.error(MaaS.messages.upload_error);
+                },
+                finaly: function () {
+                    $newImagesInput.val('');
+                    submitToggle(true);
+                }
+            });
+
+            function submitToggle(enable) {
+                if (enable === false) {
+                    $submitButton.button('loading');
+                } else {
+                    $submitButton.button('reset');
+                }
+            }
+
+            function displayImages(files) {
+                $.post('@Url.Action("NewImagesHtml")', {
+                    images: files
+                })
+                .done(function (html) {
+                    $('.js-images-container').append(html);
+                })
+                .fail(function () {
+                    toastr.error(MaaS.messages.upload_error);
+                })
+                .always(function () {
+                    $newImagesInput.val('');
+
+                    submitToggle(true);
+                });
+            }
+        })(window.jQuery, window.MaaS);
+    </script>
+}

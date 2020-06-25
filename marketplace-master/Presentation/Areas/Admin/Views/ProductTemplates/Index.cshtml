@@ -1,0 +1,134 @@
+﻿@using Presentation.Helpers
+@model ProductTemplateIndexViewModel
+@{
+    var config = MaaSConfig.Current;
+    ViewBag.Title = "Modelos de produtos";
+}
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    @*<ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Tables</a></li>
+            <li class="active">Data tables</li>
+        </ol>*@
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+                    @if (Model.Items.Any())
+                    {
+                        <p class="m-b-md">@NewTemplateButton()</p>
+
+                        <div class="table-responsive">
+                            <table id="productTemplates" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th data-sort="asc">Modelo</th>
+                                        <th>Categoria</th>
+                                        @if (config.Product.Variants.Enabled)
+                                        {
+                                            <th>Características</th>
+                                        }
+                                        @if (config.Product.AnyDimensionsEnabled)
+                                        {
+                                            <th>Dimensões (comp x larg x alt | peso)</th>
+                                        }
+                                        <th>Habilitado</th>
+                                        <th>Produtos</th>
+                                        <th>Faturamento bruto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Items)
+                                    {
+                                        <tr>
+                                            <td data-order="@Dt.Order(item.Title)">
+                                                <img src="@item.CoverImageUrl" width="50" height="50" class="m-r-sm" />
+                                                @Html.ActionLink(item.Title ?? "<Sem título>", "Edit", new { id = item.Id, Area = "Admin" })
+                                            </td>
+                                            <td data-order="@Dt.Order(item.Category)">
+                                                @item.Category
+                                            </td>
+                                            @if (config.Product.Variants.Enabled)
+                                            {
+                                                <td data-order="@Dt.Order(item.Variants.Count)">
+                                                    @string.Join(", ", item.Variants)
+                                                </td>
+                                            }
+                                            @if (config.Product.AnyDimensionsEnabled)
+                                            {
+                                                <td data-order="@Dt.Order(item.GetArea())">
+                                                    @item.DisplayDimensions()
+                                                </td>
+                                            }
+                                            <td data-order="@Dt.Order(item.IsEnabled)">
+                                                @if (item.IsEnabled)
+                                                {
+                                                    <span class="label label-success label-success-outline">sim</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="label label-danger label-danger-outline">não</span>
+                                                }
+                                            </td>
+                                            <td data-order="@Dt.Order(item.ProductsCount)">
+                                                @item.ProductsCount
+                                            </td>
+                                            <td data-order="@Dt.Order(item.GrossRevenue)">
+                                                @item.GrossRevenue.DisplayCurrency()
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <text>
+                            @Html.Localized("PRODUCT_TEMPLATE_LEAD_TEXT", "p", new { @class = "lead" })
+                            @Html.Localized("PRODUCT_TEMPLATE_ABOUT_TEXT", "p")
+                            @NewTemplateButton()
+                        </text>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@helper NewTemplateButton()
+{
+    <a class="btn btn-primary" href="@Url.Action("Create", "ProductTemplates", new { Area = "Admin" })">
+        <i class="fa fa-fw fa-plus"></i>
+        Cadastrar um modelo
+    </a>
+}
+
+@section scripts {
+    <script>
+        var ProductTemplatesIndex = (function () {
+
+            function init() {
+                configureDataTables();
+            }
+
+            function configureDataTables() {
+                var sortColumn = $("#productTemplates th[data-sort]");
+                DataTableCustom.create("#productTemplates", {
+                    "order": [[sortColumn.index(), sortColumn.data("sort")]]
+                });
+            }
+
+            return { init };
+
+        })();
+    </script>
+    <script>ProductTemplatesIndex.init()</script>
+}

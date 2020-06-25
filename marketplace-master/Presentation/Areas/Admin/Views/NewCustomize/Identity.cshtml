@@ -1,0 +1,162 @@
+﻿@model Presentation.Areas.Admin.Models.CustomizeIdentityVM
+@{
+    ViewBag.Title = Request.GetLocalizedString("ADMIN_CUSTOMIZE_IDENTITY_TITLE");
+}
+
+<section class="content-header">
+    @Html.Partial("_CustomizeMenu", 2)
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_HOME_PRESETS_TITLE")</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.Partial("_ColorPreset", Model.Preset1)
+                        @Html.Partial("_ColorPreset", Model.Preset2)
+                        @Html.Partial("_ColorPreset", Model.Preset3)
+                        @Html.Partial("_ColorPreset", Model.Preset4)
+                        @Html.Partial("_ColorPreset", Model.Preset5)
+                        <div class="col-xs-6 col-md-6 equal-height text-center">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_PALETTE_GALLERY_LABEL", "h4")
+                                    <br />
+                                    <a class="btn btn-primary" target="_blank" href="https://color.adobe.com/explore/?filter=most-popular&time=month">
+                                        @Request.GetLocalizedString("ADMIN_CUSTOMIZE_PALETTE_GALLERY_BUTTON")
+                                        <i class="fa fa-external-link-square"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_HOME_CUSTOM_PALETTE_TITLE")</h3>
+                </div>
+                <div class="panel-body">
+                    <img class="img-bordered img-responsive" src="~/Areas/Admin/assets/img/customize/identity.jpg" />
+                    <br />
+                    @using (Html.BeginForm("Identity", "NewCustomize", FormMethod.Post))
+                    {
+                        <div class="row">
+                            <div class="col-xs-6 equal-height text-center">
+                                <strong class="text-center">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_ACCENT1_LABEL")</strong>
+                                <br />
+                                <div class="input-group colorpicker-component">
+                                    <span class="input-group-addon"><i id="Model_Accent1_Color" class="bordered-div-r"></i></span>
+                                    <input id="Model_Accent1" class="js-color-picker form-control" name="CurrentPreset.Accent1" type="text" value="@Model.CurrentPreset.Accent1" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 equal-height text-center">
+                                <strong class="text-center">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_ACCENT2_LABEL")</strong>
+                                <br />
+                                <div class="input-group colorpicker-component">
+                                    <span class="input-group-addon"><i id="Model_Accent2_Color" class="bordered-div-r"></i></span>
+                                    <input id="Model_Accent2" class="js-color-picker form-control" name="CurrentPreset.Accent2" type="text" value="@Model.CurrentPreset.Accent2" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 equal-height text-center">
+                                <strong class="text-center">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_CONTRAST_LABEL")</strong>
+                                <br />
+                                <div class="input-group colorpicker-component">
+                                    <span class="input-group-addon"><i id="Model_Contrast_Color" class="bordered-div-r"></i></span>
+                                    <input id="Model_Contrast" class="js-color-picker form-control" name="CurrentPreset.Contrast" type="text" value="@Model.CurrentPreset.Contrast" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 equal-height text-center">
+                                <strong class="text-center">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_HOME_MENUBG_LABEL")</strong>
+                                <br />
+                                <div class="input-group colorpicker-component">
+                                    <span class="input-group-addon"><i id="Model_MenuHomeBg_Color" class="bordered-div-r"></i></span>
+                                    <input id="Model_MenuHomeBg" class="js-color-picker form-control" name="CurrentPreset.MenuHomeBG" type="text" value="@Model.CurrentPreset.MenuHomeBG" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 equal-height text-center">
+                                <strong class="text-center">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_HOME_MENUACC_LABEL")</strong>
+                                <br />
+                                <div class="input-group colorpicker-component">
+                                    <span class="input-group-addon"><i id="Model_MenuHomeAcc_Color" class="bordered-div-r"></i></span>
+                                    <input id="Model_MenuHomeAcc" class="js-color-picker form-control" name="CurrentPreset.MenuHomeColorAccent" type="text" value="@Model.CurrentPreset.MenuHomeColorAccent" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 equal-height text-center">
+                                <br />
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-check-circle-o"></i>
+                                    @Request.GetLocalizedString("ADMIN_CUSTOMIZE_APPLY_PALETTE")
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+@section scripts
+{
+    <script>
+        (function ($, MaaS) {
+
+            var applyButtons = $('.js-apply-preset');
+            var colorPickers = $('.js-color-picker')
+
+            $('.colorpicker-component').colorpicker();
+
+            applyButtons.on('click', function (e) {
+
+                let acc1 = $(this).parent().parent().find('.model_acc1').val();
+                let acc2 = $(this).parent().parent().find('.model_acc2').val();
+                let contr = $(this).parent().parent().find('.model_contrast').val();
+                let menuhomebg = $(this).parent().parent().find('.model_menuhomebg').val();
+                let menuhomeacc = $(this).parent().parent().find('.model_menuhomeacc').val();
+
+                $('#Model_Accent1').val(acc1);
+                $('#Model_Accent2').val(acc2);
+                $('#Model_Contrast').val(contr);
+                $('#Model_MenuHomeBg').val(menuhomebg);
+                $('#Model_MenuHomeAcc').val(menuhomeacc);
+
+                $('#Model_Accent1_Color').css('background-color', acc1);
+                $('#Model_Accent2_Color').css('background-color', acc2);
+                $('#Model_Contrast_Color').css('background-color', contr);
+                $('#Model_MenuHomeBg_Color').css('background-color', menuhomebg);
+                $('#Model_MenuHomeAcc_Color').css('background-color', menuhomeacc);
+
+            });
+
+            //colorText.change(function (e) {
+
+            //    let hexRegex = /^#[a-fA-F0-9]{6}$/;
+            //    let rgbaRegex = /^rgba\((\d{1,3}),(\s?\d{1,3}),(\s?\d{1,3}),((0|1)(.\d+)?)\)$/;
+
+            //    let isColor = (regex.exec($(this).val()) != null) || (rgbaRegex.exec($(this).val()));
+
+            //    if (isColor) {
+            //        $(this).parent().parent().find('.js-color-picker').val($(this).val().toUpperCase());
+            //        $(this).val($(this).val().toUpperCase());
+            //    }
+            //    else
+            //        $(this).val($(this).parent().parent().find('.js-color-picker').val().toUpperCase());
+            //});
+
+        })(window.jQuery, window.MaaS);
+    </script>
+}

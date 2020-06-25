@@ -1,0 +1,14 @@
+﻿@model IEnumerable<ProductTemplateImageViewModel>
+
+@foreach (var image in Model)
+{
+    var index = Guid.NewGuid();
+    <div class="col-xs-12 col-sm-6 col-md-2 template-image">
+        @Html.Hidden("Images.Index", index)
+        @Html.Hidden($"Images[{index}].Url", image.Url)
+        <img src="@image.DisplayUrl" alt="">
+        <a href="javascript:void(0)" class="action trash">
+            <span class="glyphicon glyphicon-trash"></span>
+        </a>
+    </div>
+}

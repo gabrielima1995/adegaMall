@@ -1,0 +1,78 @@
+﻿<script>
+    $(document).ready(function() {
+        var productId = $('#ProductId').val();
+
+        $('.schedule-wrapper').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'addEventButton month,agendaWeek,agendaDay'
+            },
+            defaultView: 'agendaWeek',
+            navLinks: true, // can click day/week names to navigate views
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            locale: 'pt-br',
+            businessHours: {
+                dow: [1, 2, 3, 4, 5],
+                start: '08:00',
+                end: '18:00'
+            },
+            timeFormat: 'HH:mm',
+            displayEventEnd: true,
+            height: 'auto',
+            minTime: '@MaaSConfig.Current.Product.BusinessModel.Rental.Seller.Schedule.Configuration.MinTime',
+            maxTime: '@MaaSConfig.Current.Product.BusinessModel.Rental.Seller.Schedule.Configuration.MaxTime',
+            agendaEventMinHeight: 32,
+            events: function(start, end, timezone, callback) {
+                $.ajax({
+                    url: '@Url.Action("Events")',
+                    dataType: 'json',
+                    data: {
+                        start: start.format(),
+                        end: end.format(),
+                        productId: productId,
+                        lang: '@Request.GetCurrentLang()'
+                    },
+                    success: function(events) {
+                        callback(events);
+                    }
+                });
+            },
+            eventRender: function(eventObj, $el) {
+                $el.popover({
+                    title: eventObj.title,
+                    content: eventObj.description,
+                    trigger: 'hover',
+                    placement: 'auto right',
+                    container: 'body',
+                    html: true
+                });
+            },
+            eventClick: function(calEvent, jsEvent, view) {
+                if (calEvent.block == true) {
+                    swal({
+                            title: "@(Html.Raw(Request.GetLocalizedString("DELETE_LOCK_MESSAGE_TITLE")))",
+                            text: "@(Html.Raw(Request.GetLocalizedString("DELETE_LOCK_MESSAGE_TEXT")))",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText:
+                                "@(Html.Raw(Request.GetLocalizedString("DELETE_LOCK_MESSAGE_CONFIRM")))",
+                            closeOnConfirm: false,
+                            html: false
+                        },
+                        function() {
+                            $.redirect('@Url.Action("DeleteLock")' + calEvent.id + '?lang=@(Request.GetCurrentLang())',
+                                null,
+                                'POST');
+                        });
+                } else {
+                    var url = '@Url.Action("Details", "MySales")' + calEvent.id;
+
+                    $('<a />', { 'href': url, 'target': '_blank' }).get(0).click();
+                }
+            }
+        });
+    });
+</script>

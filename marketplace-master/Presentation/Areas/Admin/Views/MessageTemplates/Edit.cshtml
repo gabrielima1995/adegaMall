@@ -1,0 +1,165 @@
+﻿@model MessageTemplateEditingViewModel
+
+@{
+    ViewBag.Title = "Editar template de email";
+}
+
+@section styles
+{
+    <link href="~/Areas/Admin/assets/css/medium-editor/medium-editor.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/assets/css/medium-editor/themes/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .editor {
+            height: auto !important;
+        }
+    </style>
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="box">
+                @using (Html.BeginForm())
+                {
+                    <div class="box-header">
+                        <h3 class="box-title">@Request.GetLocalizedString(Model.TitleLabel) <small>(@Model.Lang)</small></h3>
+                    </div>
+
+                    <div class="box-body">
+                        <p>@Request.GetLocalizedString(Model.DescriptionLabel)</p>
+                        <hr />
+
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Key)
+                        @Html.HiddenFor(model => model.Lang)
+
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(model => model.Enabled) @Html.DisplayNameFor(model => model.Enabled)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SubjectTemplate)
+                            @Html.EditorFor(model => model.SubjectTemplate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SubjectTemplate, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BodyTemplate)
+                            @Html.TextAreaFor(model => model.BodyTemplate, new { @class = "form-control editor" })
+                            @Html.ValidationMessageFor(model => model.BodyTemplate, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group visible-xs hidden-md">
+                            @foreach (var variable in Model.BodyVariables)
+                            {
+                                <p>
+                                    <strong>@variable.Key</strong><br />
+                                    <small class="text-muted">@Request.GetLocalizedString(variable.Value)</small>
+                                </p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-check"></i>
+                            @Request.GetLocalizedString("SAVE_CHANGES_BUTTON")
+                        </button>
+                        <a href="@Url.ActionLocalized("Index", "MessageTemplates")" class="btn btn-link">
+                            Voltar para a lista
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Variáveis do email</h3>
+                </div>
+                <div class="box-body">
+                    <p>
+                        Estas são as variáveis que você pode utilizar no email. No momento do envio, elas serão substituídas por seus respectivos valores caso-a-caso, conforme descrição.
+                        <a href="javascript:void(0)" id="variables-see-more">Veja mais</a>
+                    </p>
+                    <div id="variables-extra-info" style="display:none">
+                        <p><strong>Importante!</strong> A variável precisa ser inclusa por completo, contendo o colchete de abertura, o nome da variavel completamente em maiúsculo, e o colchete de fechamento. Ou seja:</p>
+                        <p><span class="label label-success label-success-outline">[APP_NAME]</span> funciona, mas <span class="label label-danger label-danger-outline">APP_NAME</span> <u>não</u> funciona.</p>
+                        <br />
+                    </div>
+                    <table class="table table-bordered table-condensed table-striped">
+                        @foreach (var variable in Model.BodyVariables)
+                        {
+                            <tr>
+                                <td style="font-weight: bold;width: 30%">@variable.Key</td>
+                                <td><small class="text-muted">@Request.GetLocalizedString(variable.Value)</small></td>
+                            </tr>
+                        }
+                    </table>
+
+                    @if (Model.BodyConditionalVariables.Any())
+                    {
+                        <hr />
+                        <h4>Variávies condicionais</h4>
+                        <p>
+                            As variáveis condicionais permitem que você inclua conteúdo dependendo do caso.
+                            <a href="javascript:void(0)" id="conditionals-see-more">Veja mais</a>
+                        </p>
+                        <div id="conditionals-extra-info" style="display:none">
+                            <p><strong>Importante!</strong> Diferente das variáveis comuns, a variável condicional precisa de duas partes: uma de abertura e outra de fechamento. Assim:</p>
+                            <p><span class="label label-default">[IF:VARIAVEL]</span> seu conteúdo aqui no meio <span class="label label-default">[/IF:VARIAVEL]</span></p>
+                            <p>Veja detalhes neste artigo: <a href="http://suporte.ideianoar.com.br/pt-BR/articles/3439813-como-usar-variaveis-condicionais-no-template-de-email" target="_blank">Como usar variáveis condicionais no template de email</a></p>
+                            <br />
+                        </div>
+                        <table class="table table-bordered table-condensed table-striped">
+                            @foreach (var variable in Model.BodyConditionalVariables)
+                            {
+                                <tr>
+                                    <td style="font-weight: bold;width: 30%">@variable.Key</td>
+                                    <td><small class="text-muted">@Request.GetLocalizedString(variable.Value)</small></td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script src="~/Areas/Admin/assets/js/medium-editor/medium-editor.min.js"></script>
+    <script>
+        var editor = new MediumEditor('.editor', {
+            targetBlank: 'target',
+            toolbar: {
+                allowMultiParagraphSelection: true,
+                buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'unorderedlist', 'image']
+            }
+        });
+
+        $("#variables-see-more").click(function () {
+            $(this).hide();
+            $("#variables-extra-info").show();
+        });
+
+        $("#conditionals-see-more").click(function () {
+            $(this).hide();
+            $("#conditionals-extra-info").show();
+        });
+    </script>
+}

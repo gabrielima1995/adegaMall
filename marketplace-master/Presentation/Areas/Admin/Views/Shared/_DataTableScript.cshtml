@@ -1,0 +1,18 @@
+﻿<script>
+    $(document).ready(function () {
+        Globalize.loadCldr.then(function () {
+            var options = {
+                dom: '<"container"<"pull-right"B><"pull-left"f>>rtip',
+                iDisplayLength: 25,
+                buttons: [{
+                    extend: 'excel',
+                    text: 'Export Excel'
+                }]
+            };
+
+            $.extend(true, options, window.MaaS.dtOptions);
+
+            $('table').DataTable(options);
+        });
+    });
+</script>

@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model QuoteDetailsVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("QUOTE_LINK");
+    var config = MaaSConfig.Current;
+    var loginProfile = User.Identity.GetLoginProfile();
+    var isBuyer = loginProfile.IsBuyer();
+    var showUnlockAlert = ViewData.ContainsKey("unlockAlert") && (bool)ViewData["unlockAlert"];
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+            <div class="col-xs-12">
+                @if (showUnlockAlert)
+                {
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
+                        <i class="fas fa-info-circle"></i>  @Html.Localized("QUOTE_UNLOCK_DISCLAIMER_TITLE", "strong")<br />
+                        @Html.Localized("QUOTE_UNLOCK_DISCLAIMER")
+                    </div>
+                }
+                <p>
+                    @if (isBuyer)
+                    {
+                        if (Model.GroupId == null)
+                        {
+                            <a href="@Url.ActionLocalized("Buyer", "Quotes")">
+                                <i class="glyphicon glyphicon-chevron-left"></i>
+                                @Request.GetLocalizedString("BACK_BUTTON")
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.ActionLocalized("GroupDetails", "Quotes", new { id = Model.GroupId })">
+                                <i class="glyphicon glyphicon-chevron-left"></i>
+                                @Request.GetLocalizedString("BACK_BUTTON")
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        <a href="@Url.ActionLocalized("Index", "Quotes")">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            @Request.GetLocalizedString("BACK_BUTTON")
+                        </a>
+                    }
+                </p>
+                @Html.Partial("_DetailsInfo", Model)
+                @if (config.Quote.Answers.Enabled)
+                {
+                    @Html.Partial("_DetailsAnswers", Model)
+                }
+            </div>
+        </div>
+
+        <div>
+            @if ((isBuyer && config.Seller.UserRatings.Enabled) || (!isBuyer && config.Buyer.UserRatings.Enabled))
+            {
+                if (Model.UserRating != null)
+                {
+                    Write(Html.Partial("_UserRatingsForm", Model.UserRating));
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/mvc-ajax")
+    <script>
+        QuoteDetails.init();
+        QuoteAccept.init();
+    </script>
+}

@@ -1,0 +1,43 @@
+﻿@model OrderDetailsViewModel
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Histórico</h3>
+    </div>
+    <div class="box-body no-padding table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th width="150">Data</th>
+                    <th width="320">Status</th>
+                    <th width="180">Quem</th>
+                    <th>Obs</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var entry in Model.HistoryEntries)
+                {
+                    <tr>
+                        <td>@Model.LocalizeDateTime(entry.OccurredOn).ToString()</td>
+                        <td>@entry.Status.DisplayDescription()</td>
+                        <td>
+                            @if (entry.Person == null)
+                            {
+                                @:Sistema
+                            }
+                            else if (entry.Person.Id == Model.Buyer.Id)
+                            {
+                                @:Comprador
+                            }
+                            else
+                            {
+                                @:Vendedor
+                            }
+                        </td>
+                        <td>@Html.DisplayFor(model => entry.AdditionalInfo)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

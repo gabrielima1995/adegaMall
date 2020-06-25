@@ -1,0 +1,16 @@
+﻿@model IList<Presentation.Models.QuoteVM>
+
+<table class="col-xs-12 quote-panel-wrapper">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @Html.Partial("_QuoteItemTable", item)
+        }
+    </tbody>
+</table>
+

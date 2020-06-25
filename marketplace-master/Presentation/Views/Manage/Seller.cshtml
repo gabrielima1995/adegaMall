@@ -1,0 +1,73 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model Application.Sellers.SellerProfileViewModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("MY_ACCOUNT_LINK");
+    var loginProfile = User.Identity.GetLoginProfile();
+
+    ViewBag.CompleteRegister = false;
+    ViewBag.SocialMediaProfiles = true;
+
+    ViewBag.PostController = "Manage";
+    ViewBag.PostAction = "Seller";
+
+    var changeAvatar = MaaSConfig.Current.Seller.ChangeAvatar;
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+                @Html.Partial("_UserCallToAction")
+            </div>
+            <div class="col-xs-12">
+                @Html.Localized("MY_ACCOUNT_LINK", "h3")
+                <div class="row">
+                    <div class="col-xs-12 col-md-9">
+                        @Html.Partial("_SellerProfileForm", Model)
+                    </div>
+                    <div class="hidden-xs hidden-sm col-md-3">
+                        <div class="foto-perfil m-b-sm">
+                            <img src="@Model.AvatarUrl" alt="@Model.Name" class="avatar">
+                            
+                            @if (changeAvatar)
+                            {
+                                <a href="#" class="action edit js-change-avatar"><i class="fas fa-pen"></i></a>
+                                <a href="#" class="action trash js-remove-avatar"><i class="fas fa-trash"></i></a>
+                                <input type="file" id="file" name="file" class="js-avatar-file" style="display: none"/>
+                            }
+                        </div>
+                        @Html.Localized("PROFILE_IMAGE", "strong")
+                        
+                        @if (changeAvatar)
+                        {
+                            <div class="help-block text-muted">
+                                @Html.Localized("PROFILE_IMAGE_UPLOAD_HINT", "small")
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/scripts/maps-addresshelper")
+
+    @Html.Partial("_GoogleMapsScript")
+    @Html.Partial("_CitiesScript")
+
+    @if (changeAvatar)
+    {
+        <script>AvatarEditor.init('@Url.ActionLocalized("Change", "Avatar")', '@Url.ActionLocalized("Remove", "Avatar")')</script>
+    }
+
+    <script>SellerAddressAutocomplete.init()</script>
+    <script>$('.wpp-phone-input').mask('(00) 00000-0000')</script>
+}

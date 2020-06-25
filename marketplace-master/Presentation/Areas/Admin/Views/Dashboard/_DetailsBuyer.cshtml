@@ -1,0 +1,43 @@
+﻿@using Application.Helpers
+@model Domain.Entities.Buyer
+
+@{ 
+    var config = MaaSConfig.Current;
+}
+
+<div class="box box-primary">
+    <div class="box-body box-profile">
+        <img class="profile-user-img img-responsive img-circle" src="@ImgHelper.Avatar(Model.Avatar, 128)" alt="" style="width:128px; height:128px" />
+
+        <h3 class="profile-username text-center">@Html.DisplayFor(model => model.FullName)</h3>
+    </div>
+</div>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Sobre</h3>
+    </div>
+    <div class="box-body">
+        <strong><i class="fa fa-map-marker margin-r-5"></i>Endereço</strong>
+        <p class="text-muted">@(Model.Address == null ? "-" : Model.Address.ToString())</p>
+
+        <hr>
+        <strong><i class="fa fa-share-alt margin-r-5"></i> Contatos</strong>
+        <ul class="list-unstyled">
+            <li>@Html.DisplayFor(model => model.Email)</li>
+            @if (config.Buyer.Phone.Enabled && Model.PhoneNumber != null)
+            {
+                <li>@Html.DisplayFor(model => model.PhoneNumber)</li>
+            }
+        </ul>
+
+        <hr>
+        <strong><i class="fa fa-bars margin-r-5"></i> Outros</strong>
+        <ul class="list-unstyled">
+            @if (config.Buyer.DateOfBirth.Enabled)
+            {
+                <li><span>Nascimento</span>: <span class="text-muted">@Html.DisplayFor(model => model.DateOfBirth)</span></li>
+            }
+            <li><span>Cadastro</span>: <span class="text-muted">@Html.DisplayFor(model => model.CreatedAt)</span></li>
+        </ul>
+    </div>
+</div>

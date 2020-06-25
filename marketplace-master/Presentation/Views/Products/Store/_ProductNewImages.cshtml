@@ -1,0 +1,7 @@
+﻿@model IList<Domain.Entities.StoreModule.ProductImage>
+    
+@foreach (var item in Model)
+{
+    @Html.Partial("~/Views/Products/Store/_ProductImageForm.cshtml", item)
+}
+

@@ -1,0 +1,154 @@
+﻿@using Application.Modules.Products.Search
+@using Presentation.Helpers
+
+@model SearchViewModel
+
+@{
+    var config = MaaSConfig.Current;
+    var searchRangeOptions = config.Search.List.SearchRangeOptions;
+    var isMobile = BrowserHelper.IsMobileBrowser();
+
+    var fieldCount = 0;
+
+    if (config.Search.SearchFields.Query) { fieldCount++; }
+    if (config.Search.SearchFields.Category) { fieldCount++; }
+    if (config.Search.SearchFields.Location) { fieldCount++; }
+
+    if (config.Search.SearchFields.LocationRange)
+    {
+        fieldCount++;
+
+        Model.LocationRange = config.Search.List.SearchRange;
+    }
+
+    var fieldClass = $"col-xs-12 {Css.If(fieldCount == 1 || fieldCount == 4, "col-md-6").Else("col-md-4")}";
+}
+
+<form action="@Url.ActionLocalized("Search", "Products", new { area = "" })" method="get" name="search_home container-fluid">
+    @Html.HiddenFor(model => model.Lang)
+    @Html.Hidden("SellerId", Model.FilteredBySeller?.Id)
+    <div class="row">
+        <div class="col-hidden-xs @Css.If(fieldCount == 1, "col-md-3") @Css.If(fieldCount == 2, "col-md-2")"></div>
+
+        @if (config.Search.SearchFields.Query)
+        {
+            <div class="@fieldClass">
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.Product, new { @class = "form-control", placeholder = Request.GetLocalizedString("PRODUCT_FILTER_INPUT") })
+                </div>
+            </div>
+        }
+
+        @if (config.Search.SearchFields.Category)
+        {
+            <div class="@fieldClass">
+                <div class="form-group">
+                    @Html.Partial("_ProductCategoriesSelect", Model)
+                </div>
+            </div>
+        }
+
+        @if (config.Search.SearchFields.Location)
+        {
+            <div class="@fieldClass">
+                @Html.Partial("_GoogleMapsAutocomplete")
+            </div>
+        }
+
+        @if (config.Search.SearchFields.LocationRange)
+        {
+            <div class="@fieldClass">
+                <div class="form-group">
+                    @Html.DropDownListFor(model => model.LocationRange,
+                        new SelectList(searchRangeOptions, "Value", "Label", Model.LocationRange),
+                        new { @class = isMobile ? "form-control" : "form-control js-select" })
+
+                    @Html.ValidationMessageFor(model => model.LocationRange, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (config.Search.SearchFields.PeriodAvailability)
+    {
+        <div class="row">
+            <div class="col-xs-6 col-sm-3 col-sm-offset-3">
+                <div class="radio">
+                    <label>
+                        @Html.RadioButtonFor(model => model.SearchDaysOfWeek, SearchDaysOfWeek.OnlySatAndSun)
+                        @Html.Localized("PRODUCT_SEARCH_FILTER_ONLY_SAT_AND_SUN")
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        @Html.RadioButtonFor(model => model.SearchDaysOfWeek, SearchDaysOfWeek.OnlyMonToFri)
+                        @Html.Localized("PRODUCT_SEARCH_FILTER_ONLY_MON_TO_FRI")
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        @Html.RadioButtonFor(model => model.SearchDaysOfWeek, SearchDaysOfWeek.AllDaysOfWeek)
+                        @Html.Localized("PRODUCT_SEARCH_FILTER_ONLY_ALL_DAYS_OF_WEEK")
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-3">
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(model => model.OnlyMorning)
+                        @Html.Localized("PRODUCT_SEARCH_FILTER_ONLY_MORNING")
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(model => model.OnlyAfternoon)
+                        @Html.Localized("PRODUCT_SEARCH_FILTER_ONLY_AFTERNOON")
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(model => model.OnlyNight)
+                        @Html.Localized("PRODUCT_SEARCH_FILTER_ONLY_NIGHT")
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                @Html.Hidden("StartDate", Model.StartDate?.ToString("yyyy-MM-dd"))
+                @Html.Hidden("EndDate", Model.EndDate?.ToString("yyyy-MM-dd"))
+
+                <div class="input-group">
+                    @Html.TextBox("StartDateInput", Model.StartDate?.DisplayDate("GMT Standard Time"), new { @class = "form-control", placeholder = Request.GetLocalizedString("PRODUCT_SEARCH_FILTER_START_DATE"), @readonly = "readonly" })
+                    <div class="input-group-addon">-</div>
+                    @Html.TextBox("EndDateInput", Model.EndDate?.DisplayDate("GMT Standard Time"), new { @class = "form-control", placeholder = Request.GetLocalizedString("PRODUCT_SEARCH_FILTER_END_DATE"), @readonly = "readonly" })
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div style="overflow: hidden" class="js-datepicker-start-container">
+                            <div class="form-group">
+                                <center><div id="startDatePicker"></div></center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div style="overflow: hidden" class="js-datepicker-end-container">
+                            <div class="form-group">
+                                <center><div id="endDatePicker"></div></center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row margin-top-10 margin-bottom-default text-center">
+        <div class="col-xs-12">
+            @Html.Localized("PRODUCT_FIND_BUTTON", "button", new { type = "submit", @class = "btn btn-primary xl" })
+        </div>
+    </div>
+</form>

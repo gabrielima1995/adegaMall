@@ -1,0 +1,52 @@
+﻿@model OrderDetailsViewModel
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Produtos</h3>
+    </div>
+    <div class="box-body no-padding table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Categoria</th>
+                    <th>Qtde</th>
+                    <th>Preço</th>
+                    @if (Model.Products.Any(x => x.RentalInfo != null && (x.RentalInfo.StartDate != null && x.RentalInfo.EndDate != null)))
+                    {
+                        <th>Início da Atividade</th>
+                        <th>Fim da Atividade</th>
+                    }
+                    @if (Model.ShowShippingDetails)
+                    {
+                        <th>Frete</th>
+                    }
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Products)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.ActionLocalized("PublicPage", "Products", new { id = item.Product.FriendlyUrl, area = "" })" target="_blank">@item.FullItemName</a>
+                        </td>
+                        <td>@Html.DisplayFor(model => item.Category)</td>
+                        <td>@Html.DisplayFor(model => item.Quantity)</td>
+                        <td>@Html.DisplayFor(model => item.Price)</td>
+                        @if (Model.Products.Any(x => x.RentalInfo != null && (x.RentalInfo.StartDate != null && x.RentalInfo.EndDate != null)))
+                        {
+                            <td>@item.RentalInfo.StartDate.DisplayDateTime()</td>
+                            <td>@item.RentalInfo.EndDate.DisplayDateTime()</td>
+                        }
+                        @if (Model.ShowShippingDetails)
+                        {
+                            <td>@Html.DisplayFor(model => item.Shipping)</td>
+                        }
+                        <td>@Html.DisplayFor(model => item.Amount)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

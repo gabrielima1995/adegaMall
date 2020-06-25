@@ -1,0 +1,115 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    var config = MaaSConfig.Current;
+    var isAuthenticated = Request.IsAuthenticated;
+    var showProductWishButton = config.Product.Wishlist.Enabled && (!isAuthenticated || User.Identity.GetLoginProfile().IsBuyer());
+}
+
+@if (showProductWishButton)
+{
+    <script>
+        (function () {
+            var loaded = false;
+            var $main = $('body');
+
+            function toggleButton($productWishButton, wished) {
+                var $heart = $productWishButton.find('i');
+                var $text = $productWishButton.find('.wish-text');
+
+                if (!wished) {
+                    $heart.removeClass('far').addClass('fa');
+                    $productWishButton.attr("data-iswished", "1");
+                    $text.text($text.data('wished-text'));
+                } else {
+                    $heart.removeClass('fa').addClass('far');
+                    $productWishButton.attr("data-iswished", "0");
+                    $text.text($text.data('wish-text'));
+                }
+            }
+
+            function addOrRemoveWishlist($productWishButton) {
+                if (!loaded) return;
+
+                var productId = $productWishButton.attr('data-productid');
+
+                if (@(!isAuthenticated? 1 : 0)) {
+                    $.redirect(
+                        '@Url.ActionLocalized("AddItemAndProceedToLogin", "ProductWish")',
+                        {
+                            productId: productId
+                        });
+                }
+                
+                $.ajax({
+                    url: "/ProductWish/AddOrRemove/" + productId,
+                    type: 'POST',
+                    credentials: true,
+                    data: null,
+                    success: function (data) {
+                        if (data.success === true) {
+                            var wished = $productWishButton.attr('data-iswished') === "1";
+
+                            toggleButton($productWishButton, wished);
+                        }
+                    }
+                });
+            }
+
+            function verifyProductsWish(productsIds, $productWishButtons) {
+                $.ajax({
+                    url: "/ProductWish/Verify",
+                    type: 'POST',
+                    credentials: true,
+                    data: {
+                        productIds: productsIds
+                    },
+                    success: function (data) {
+                        loaded = true;
+
+                        if (data.products && data.products.length > 0) {
+                            $productWishButtons.each(function () {
+                                var $productWishButton = $(this);
+                                var productId = $productWishButton.attr('data-productid');
+
+                                var index = data.products.findIndex(function (productWishedId) {
+                                    return productWishedId === productId;
+                                });
+
+                                if (index > -1) {
+                                    toggleButton($productWishButton, false);
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+                var productsToVerifyIds = [];
+
+                var $productWishButtonArray = $('.js-product-wish-button');
+
+                $productWishButtonArray.each(function () {
+                    var $productWishButton = $(this);
+
+                    if ($productWishButton.attr("data-iswished") !== "1") {
+                        var productId = $productWishButton.attr('data-productid');
+                        productsToVerifyIds.push(productId);
+                    }
+                });
+
+                $main.on("click", ".js-product-wish-button", function () {
+                    addOrRemoveWishlist($(this));
+                });
+
+                if (productsToVerifyIds.length > 0) {
+                    verifyProductsWish(productsToVerifyIds, $productWishButtonArray);
+                }
+                else {
+                    loaded = true;
+                }
+            });
+        })();
+    </script>
+}

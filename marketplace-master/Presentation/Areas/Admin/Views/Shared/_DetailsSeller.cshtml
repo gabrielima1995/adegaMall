@@ -1,0 +1,30 @@
+﻿@using Application.Helpers
+
+@model Domain.Entities.Seller
+
+@{ 
+    var config = MaaSConfig.Current;
+}
+
+<div class="box-body profile-card">
+    <div class="profile-img-title">
+        <img class="profile-user-img img-responsive img-circle" src="@ImgHelper.Avatar(Model.Avatar, 64)" alt="" style="width:64px; height:64px" />
+        <span class="profile-title">Vendedor</span>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">@Html.DisplayFor(model => model.PublicProfileName)</li>
+        <li class="list-group-item">@Html.DisplayFor(model => model.Email)</li>
+        @if (config.Buyer.Phone.Enabled && Model.PhoneNumber != null)
+        {
+            <li class="list-group-item">@Model.DisplayPhoneNumber()</li>
+        }
+        @if (config.Payment.Enabled)
+        {
+            <li class="list-group-item">
+                Gateway ID:<br />
+                <small>@Model.SupplierGatewayId</small>
+            </li>
+        }
+        <li class="list-group-item"><a href="@Url.ActionLocalized("Details", "Sellers", new { Id = Model.Id })">Detalhes</a></li>
+    </ul>
+</div>

@@ -1,0 +1,28 @@
+﻿@model Presentation.Models.PurchaseConfirmationVM
+@{
+    ViewBag.Title = Request.GetLocalizedString("CREDITS_PACK_PURCHASE_CONFIRMATION_TITLE");
+}
+
+<div class="main-content bg-image-2 padding-top-120 padding-bottom-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                <div class="box-content text-center" style="margin-bottom:64px">
+                    @Html.Localized("CREDITS_PACK_PURCHASE_CONFIRMATION_TITLE", "h2")
+                    <hr />
+                    @Html.Localized("CREDITS_PACK_PURCHASE_ADDED","p", null, Model.CreditsAdded)
+                    <br />
+                    <h2><i class="fas fa-coins"></i> @Model.CreditsBefore <i class="fas fa-arrow-right"></i> <i class="fas fa-coins"></i> @Model.CreditsAfter</h2>
+                    <br />
+                    @if (MaaSConfig.Current.Quote.LeadSales.CreditsExpire)
+                    {
+                        @Html.Localized("CREDITS_PACK_PURCHASE_VALIDITY", "p", null, Model.ExpirationDate.ToShortDateString())
+                    }
+                    @Html.Localized("CREDITS_PACK_PURCHASE_DATE", "small", null, Model.PurchaseTime.ToString())
+                    <br /><br />
+                    <a href="@Url.ActionLocalized("Index", "Manage")" class="btn btn-default"><i class="fas fa-arrow-left"></i> @Request.GetLocalizedString("CREDITS_PACK_RETURN_BUTTON")</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

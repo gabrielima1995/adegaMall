@@ -1,0 +1,1264 @@
+// Não modificar este arquivo.
+
+@import "variables.sass"
+@import "mixins.sass"
+@import "functions.sass"
+@import "helpers.sass"
+@import "home.sass"
+@import "seller-registration-steps.sass"
+
+body
+  background-color: $color_bg1
+  color: $color_text
+  font-family: $font_text
+
+h1, .h1
+  @include title
+  font-size: 32px
+  font-weight: 700
+  margin-top: 0
+
+h1.product-title, h1.seller-title
+  @include title
+  font-size: 40px
+  font-weight: normal
+  padding-right: 40px
+
+h2, h3, h4, h5, h6, .h2, .h3, .h4, .h5, .h6
+  @include subtitle
+  margin-top: 0
+
+.h2, h2
+  font-size: 24px
+  font-weight: 700
+
+.h3, h3
+  font-size: 18px
+  font-weight: 700
+
+.h4, h4
+  font-size: 16px
+  font-weight: 700
+
+.h5, h5
+  font-size: 15px
+  font-weight: 400
+
+.h6, h6
+  font-size: 14px
+  font-style: italic
+  font-weight: 400
+
+.btn-round
+  border-radius: 100px
+
+hr
+  border-top-color: #d0d0d0
+
+a
+  @include anchor
+  @include transition(150ms)
+  text-decoration: none !important
+  &:focus, &:hover
+    color: darken($color_anchor, 20%)
+    text-decoration: underline
+  &.no-underline
+    text-decoration: none !important
+
+img.avatar
+  background-color: #FFF
+
+.btn-group
+  display: flex
+  .btn
+    flex-grow: 1
+
+.datepicker table tr td.active,
+.datepicker table tr td.active.disabled,
+.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td.active:hover
+  background: $primary_color !important
+
+.bg-image-1, .bg-image-2, .bg-image-3
+  background-size: cover !important
+
+.menu
+  padding: $default_padding 0
+  background: $menu_fixed_bg
+  @include transition(150ms)
+  *
+    @include transition(150ms)
+  .logo
+    max-height: 85px
+  .row
+    display: flex
+    align-items: center
+    .links
+      padding: 0
+      margin: 0
+      list-style: none
+      display: flex
+      align-items: center
+      justify-content: flex-end
+      li
+        display: inline-block
+        margin-right: $default_margin*2
+        &:last-child
+          margin-right: 0
+  .my-account-handler
+    opacity: 0.7
+
+  a
+    color: $menu_fixed_color
+    display: block
+    font-size: 14px
+    small
+      display: block
+      font-size: 12px
+      font-weight: 400
+    &:hover
+      color: $menu_fixed_hover_color
+  .lang-flags
+    a
+      display: inline-block
+
+.menu-btn
+  @include border-radius
+  background: $menu_fixed_btn_bg
+  color: $menu_fixed_btn_color !important
+  font-weight: 700
+  font-size: 16px
+  padding: 10px
+  text-align: center
+  &:hover, &:focus
+    color: $menu_fixed_btn_color !important
+    background-color: darken($menu_fixed_btn_bg, 10%)
+    text-decoration: none
+  &.menu-btn-register
+    text-transform: uppercase
+  &.menu-btn-cart
+    i, .badge
+      margin-right: 5px
+
+.footer
+  background: $footer_bg
+  color: $footer_color
+  padding: 80px 0 25px
+  h4
+    color: $footer_title_color
+    font-weight: 700
+    font-size: 18px
+    margin-top: 0
+    text-transform: uppercase
+  .footer-links
+    list-style: url($footer_bullet)
+    padding: 0 0 0 20px
+    li
+      line-height: 30px
+      a
+        color: $footer_anchor_color
+        &:hover
+          color: rgba($footer_anchor_color, .5)
+  .footer-facebook
+    margin-bottom: 1.8rem;
+  hr
+    margin-top: 50px
+    color: #ddd
+
+/* Menu mobile */
+
+.menu a.abre-menu
+  font-size: 24px
+  &:hover
+    color: $menu_fixed_color
+ 
+.side-menu-mobile
+  background: $menu_mobile_bg
+  position: fixed
+  top: 0
+  width: $menu_mobile_width
+  height: 100%
+  right: -100%
+  @include transition(200ms)
+  transition-timing-function: linear !important
+  .links
+    padding: 30px
+    margin: 0
+    li
+      padding: 10px 0
+      border-bottom: 1px solid lighten($menu_mobile_bg, 20%)
+      &:last-child
+        border-bottom: 0
+        padding-bottom: 0
+      &:first-child
+        padding-top: 0
+      a
+        color: $menu_mobile_color
+      .menu-btn
+        background: $menu_home_btn_bg
+        color: $menu_home_btn_color
+        display: block
+        font-size: 13px !important
+        text-align: center
+        small
+          display: block
+          font-size: 12px
+          font-weight: 400
+
+.contents
+  position: relative
+  right: 0
+  @include transition(200ms)
+  transition-timing-function: linear !important
+
+.menu-aberto
+  overflow: hidden
+  .contents
+    right: $menu_mobile_width
+  .side-menu-mobile
+    right: 0%
+
+.banner, .bg-image-2
+  & h2, & .h2, & h4.highlight
+    @include title_shadow
+    color: $color_bg1
+
+.main-banner-item
+  width: 100%
+  height: 530px
+  background-position: center center
+  background-repeat: no-repeat
+  /*min-width: 1306px;*/
+
+.main-product-search
+  padding: 40px 20px
+  background-color: $ecommerce_home_search_bg
+  .btn-container
+    margin-top: 15px
+
+.ecommerce-home-products
+  margin-top: 20px;
+
+.box-content
+  & h2, & .h2
+    @include subtitle
+    text-shadow: none
+  
+.main-content
+  padding: 30px 0 10px 0
+  .results-number
+    font-size: 18px
+    margin-bottom: 25px
+
+.card
+  @include border-radius
+  border: 1px solid #dddddd
+  text-align: center
+  margin-bottom: 30px
+  padding: 0 0 20px 0
+  background-color: $bg_card
+  position: relative
+  a.card-product-img-link
+    width: 100%
+    display: block
+    img
+      @include border-radius-top
+      width: 100%
+      margin-bottom: $default_margin
+      display: block
+      height: auto
+  h5, p
+    padding: 0 10px
+  .card-product-title
+    font-weight: bold
+    margin-bottom: 0
+  .card-product-price
+    font-size: 22px
+    margin-top: 5px
+  .card-discount-badge
+    position: absolute
+    top: 1.5rem
+    left: -1rem
+    .label
+      font-size: 1.3rem
+  .card-discount-price, .card-price-starting-from
+    margin-bottom: -0.8rem
+    margin-top: 0.5rem
+    color: #777
+  .card-price-starting-from
+    text-transform: lowercase
+  .card-discount-price-amount
+    text-decoration: line-through
+  .card-product-price-additional
+    font-size: 1.4rem
+    color: #777
+  .card-btn
+    margin-top: 2rem;
+
+//Outer Title
+.outer-title
+  text-align: center
+  margin-bottom: $default_margin*2
+
+.quote-decision-ribon
+  border: 1px solid #ddd
+  border-radius: 4px
+  padding: 5px 0 5px 9px
+  margin-top: 0.5rem
+  width: auto
+  .quote-decision-ribon-icon
+    font-size: 34px
+    display: inline-block
+    float: left
+    top: 3px
+    position: relative
+    margin-bottom: 6px
+  .quote-decision-ribon-text
+    margin-left: 55px
+
+.quote-status-nav
+  .quote-status-nav-item
+    .badge
+      background-color: #aaa
+    &.active .badge
+      background-color: #444
+
+.quote-date-added
+  margin-bottom: 0
+
+.quote-show-details
+  margin-bottom: 1rem
+  display: block
+
+.btn-danger
+  &.btn-danger-light
+    background-color: #fff;
+    color: #d43f3a;
+
+//Box
+.box-content
+  background: $box_background
+  color: set_text_color($box_background)
+  padding: $default_padding*2
+  overflow: hidden
+  @include border-radius
+
+.box-portfolio
+  background-color: white
+  border: 1px solid #ddd
+  color: $box_portfolio_color
+  padding: $default_padding
+  overflow: hidden
+  margin-bottom: $default_margin
+  @include border-radius
+  img
+    @include border-radius
+    img
+      @include border-radius-top
+      width: 100%
+      margin-bottom: $default_margin
+      @media (min-width: 992px)
+        height: 210px
+      @media (min-width: 1200px)
+        height: 253px
+  h4
+    text-align: center
+    margin-top: $default_margin
+
+.portfolio-modal
+  .portfolio-price
+    margin-left: 15px
+  .portfolio-carousel
+    margin: -15px
+    .item img
+      margin: 0
+      width: 100%
+  .portfolio-description
+    margin-top: 30px
+
+//List icon
+ul.icon-list
+  padding: 0
+  margin: 0
+  list-style: none
+  text-align: left
+  li
+    display: flex
+    align-items: center
+    padding: 20px 0
+    border-bottom: 1px solid #dcdcdc
+    font-size: 16px
+    img
+      max-width: 64px
+      margin-right: $default_margin
+    &:last-child
+      padding-bottom: 0
+      border-bottom: 0
+
+//Edit
+.edit
+  &.portfolio
+    h3
+      font-weight: 700
+      span
+        font-size: 32px
+
+//Categorias
+.categoria
+  position: relative
+  .acoes
+    font-size: 24px
+
+.js-private-fleet-param, .js-single-freight-param
+  position: relative
+  .acoes
+    font-size: 24px
+    padding: 0
+    padding-top: 28px
+
+
+@media (max-width:991px)
+  .categoria
+    position: relative
+    .categoria-opcao
+      z-index: 99
+    .acoes
+      width: 100%
+      text-align: center
+      margin-bottom: 15px
+
+  .js-private-fleet-param, .js-single-freight-param
+    position: relative
+    .acoes      
+      width: 100%
+      text-align: center
+      padding: 0
+     
+
+//Facebook button
+.facebook-btn
+  width: 100%
+  color: #ffffff
+  display: block
+  border: 1px solid #537db9
+  border-radius: 4px
+  text-align: left
+  padding: 6px
+  background-color: #5f88c6
+  background-image: url(../images/facebook-icon.png)
+  background-repeat: no-repeat
+  background-position: right center
+  background-size: 20px 20px
+  background-position-x: 98%
+  margin-bottom: $default_margin
+  &:hover
+    color: #ffffff
+    background-color: #3c5a99
+
+//Edit image => Edit/Delete
+.foto-perfil, .box-portfolio .imagem, .adicionar-fotos .imagem
+  position: relative
+  img
+    width: 100%
+    @include border-radius
+  a.action
+    display: inline-block
+    position: absolute
+    width: 32px
+    height: 32px
+    color: #ffffff
+    background: #333333
+    text-align: center
+    padding-top: 6px
+    right: 0
+    top: 0
+    @include border-radius
+  .action.trash
+    top: 36px
+
+.foto-perfil img
+  border: 1px solid #efefef
+
+.adicionar-fotos .imagem
+  margin-bottom: $default_margin
+  .action.trash
+    top: 0px
+
+.toggle-item
+  display: none
+
+//Profile
+.menu-perfil
+  padding: 0
+  margin: 0
+  list-style: none
+  li
+    border-bottom: 1px solid #fff
+    padding: 10px
+    &:last-child
+      border: 0
+    a
+      color: $default_color
+      font-size: medium
+  i.fa
+    width: 28px
+
+.profile-menu
+  margin-bottom: 30px
+  .navbar-header img
+    border: 2px solid #CCC
+    border-radius: 50%
+    padding: 2px
+    position: absolute
+    top: -10px
+    width: 70px
+  .profile-menu-img-box
+    width: 70px
+    height: 10px
+  i.fa
+    width: 20px
+  .navbar.navbar-default
+    background-color: #fff
+
+h4.profile-categories
+  margin-bottom: 2rem
+
+.profile-attributes
+  dt
+    color: #888
+    font-size: 1.3rem
+    font-weight: normal
+  dd
+    font-size: 2rem
+    margin-bottom: 1rem
+
+.profile-categories-sub li
+  margin-left: 14px
+
+.profile-hire-button
+  width: 100%
+
+.profile-portfolio-item h5
+  font-size: 1.8rem
+  margin-bottom: 2rem
+
+//owl-carousel
+$arrow_spacing: -30px
+.owl-nav
+  top: calc(50% - 7px)
+  position: absolute
+  width: 100%
+.owl-next
+  right: $arrow_spacing
+.owl-prev
+  left: $arrow_spacing
+.owl-prev, .owl-next
+  position: absolute
+
+@media (max-width: 768px)
+  .owl-nav
+    top: 0
+    position: relative
+    width: 100%
+    text-align: center
+    display: flex
+    justify-content: center
+    margin-top: $default_margin*2
+  .owl-next, .owl-prev
+    right: 0
+    left: 0
+    position: relative
+    display: inline-block
+    width: 32px
+    height: 32px
+    padding-top: 8px
+    margin: 0 5px
+    &:before
+      content: ''
+      position: absolute
+      width: 32px
+      height: 32px
+      border: 2px solid
+      border-radius: 100%
+      top: 0
+      left: 0
+
+.panel-white, .panel-white .panel-heading
+  border-color: #dddddd
+.panel-body
+  line-height: 22px
+.panel-heading
+  p
+    margin: 0
+    &.data
+      font-weight: 400
+      margin-right: 10px
+
+.social
+  list-style: none
+  padding: 0
+  margin: 30px 0
+  li
+    display: inline-block
+    margin: 0 10px
+    &:last-child
+      margin-right: 0
+    &:first-child
+      margin-left: 0
+    a
+      display: block
+      width: 48px
+      height: 48px
+
+// membership
+.membership-option
+  background-color: white;
+  padding: 10px
+  border: 1px solid #dcdcdc;
+  border-radius: 6px
+  text-align: left
+  margin-bottom: 15px
+  
+  &:last-child
+    margin-bottom: 0
+
+  .title
+    @include subtitle
+    font-size: 18px
+    font-weight: 700
+    font-size: 16px
+    text-transform: uppercase
+
+  .description
+    font-size: 12px
+
+  .price
+    @include subtitle
+    text-align: center
+    font-size: 32px
+    font-weight: bold
+
+    span
+      display: block
+      font-size: 14px
+      font-weight: 400
+
+//helpers
+img
+  max-width: 100%
+.flex-valign, .flex-xs-valign
+  display: flex
+  align-items: center
+.flex-grow-1
+  flex-grow: 1
+.margin-top-default
+  margin-top: $default_margin
+.margin-bottom-default
+  margin-bottom: $default_margin
+.margin-left-default
+  margin-left: $default_margin
+.margin-right-default
+  margin-right: $default_margin
+.padding-top-default
+  padding-top: $default_margin
+.padding-bottom-default
+  padding-bottom: $default_margin
+.padding-left-default
+  padding-left: $default_margin
+.padding-right-default
+  padding-right: $default_margin
+.underline
+  text-decoration: underline !important
+.full-height
+  height: 100%
+.block
+  display: block
+.border-radius
+  @include border-radius
+.shadow, .box-shadow
+  @include box-shadow(10px, #000000)
+
+@media (max-width: 767px)
+  .flex-valign
+    display: block
+  .footer h4
+    margin-top: 35px
+
+input::-webkit-calendar-picker-indicator
+  display: none
+
+input[type="date"]::-webkit-input-placeholder
+  visibility: hidden !important
+
+.field-validation-error.not-sellers-message 
+  display: block
+  text-align: center
+  font-size: 85%
+  padding: 10px !important
+  margin-bottom: 10px !important
+  -webkit-border-radius: 4px
+  -moz-border-radius: 4px
+  -ms-border-radius: 4px
+  border-radius: 4px
+  background: #b51010
+  color: #ffffff
+
+.js-toggle-status-button 
+  min-width: 70px
+
+textarea:focus
+  outline-style: solid
+  outline-width: 2px
+
+.glyphicon-spin
+  -webkit-animation: spin 1000ms infinite linear
+  animation: spin 1000ms infinite linear
+
+@-webkit-keyframes spin 
+  0% 
+    -webkit-transform: rotate(0deg)
+    transform: rotate(0deg)    
+  100% 
+    -webkit-transform: rotate(359deg)
+    transform: rotate(359deg)   
+
+@keyframes spin 
+  0% 
+    -webkit-transform: rotate(0deg)
+    transform: rotate(0deg)    
+  100% 
+    -webkit-transform: rotate(359deg)
+    transform: rotate(359deg)   
+
+
+/* Select2 */
+.select2
+  width: 100% !important
+
+.select2-selection
+  height: 34px !important
+
+.select2-selection__rendered
+  padding-top: 3px !important
+  padding-left: 16px !important
+
+.select2-selection__arrow
+  top: 5px !important
+
+.select2-results
+  color: $color_text
+
+.select2-results__option
+  padding-left: 15px !important
+
+.select2-search__field
+  padding-left: 10px !important
+
+/* DataTables */
+.buttons-html5
+  color: #363636
+
+.cc-icon
+  @include border-radius
+  width: 50px
+  height: 40px
+  display: inline-block
+  background-image: url("/assets/images/cc-all-cards.png")
+  &.cc-icon-mastercard
+    background-position: 0 0
+  &.cc-icon-visa
+    background-position: 100px 0
+  &.cc-icon-elo
+    background-position: 50px 0
+  &.cc-icon-amex
+    background-position: 0 80px
+  &.cc-icon-diners
+    background-position: 100px 80px
+  &.cc-icon-discover
+    background-position: 50px 80px
+  &.cc-icon-aura
+    background-position: 0 40px
+  &.cc-icon-jcb
+    background-position: 100px 40px
+  &.cc-icon-hipercard
+    background-position: 50px 40px
+
+.social-icons
+  width: 40px
+  height: 40px
+  display: inline-block
+  background-image: url(/assets/images/social-icons-color.png)
+  overflow: hidden
+  &.social-icons-black
+    background-image: url(/assets/images/social-icons-black.png)
+  &.social-icons-white
+    background-image: url(/assets/images/social-icons-white.png)
+  &.social-icons-facebook
+    background-position: 0 0
+  &.social-icons-instagram
+    background-position: 80px 0
+  &.social-icons-youtube
+    background-position: 40px 0px
+  &.social-icons-vimeo
+    background-position: 0 80px
+  &.social-icons-linkedin
+    background-position: 80px 80px
+  &.social-icons-twitter
+    background-position: 40px 80px
+  &.social-icons-pinterest
+    background-position: 0 40px
+  &.social-icons-whatsapp
+    background-position: 80px 40px
+
+.btn-cart-item
+  margin-top: 5px
+
+.product-top-actions-bar
+  text-transform: lowercase
+
+.product-price
+  margin-top: 30px
+  margin-bottom: 20px
+  .product-price-starting-from
+    text-transform: lowercase
+  .product-price-starting-from, .product-discount
+    color: #777
+    margin-top: -15px
+    padding-left: 3px
+  .product-discount-original-price
+    text-decoration: line-through
+  .product-price-amount
+    font-size: 50px
+    font-weight: 200
+    line-height: 30px
+    position: relative
+    .product-price-cents
+      position: absolute
+      font-size: 15px
+      top: -12px
+      padding-left: 2px
+  .product-price-specifications
+    margin-top: 1rem
+    font-size: 1.5rem
+    padding-left: 4px
+    list-style: none
+    >li
+      display: inline-block;
+    >li:after
+        content: ", "
+    >li:last-child:after
+        content: ""
+  .product-price-additional
+    margin-top: 1rem
+    font-size: 2.5rem
+
+.product-freight-list
+  padding-left: 12px;
+  border-left: 5px solid #CCC;
+  margin-left: 4px;
+
+.product-sold-by
+  margin-bottom: 30px
+  img
+    float: left
+    margin-right: 10px
+
+.product-section-icon
+  width: 25px
+
+.cart
+  &.cart-item
+    &.cart-item-image
+      width: 10%
+      min-width: 80px
+      max-width: 110px
+    &.cart-item-quantity, &.cart-item-unit-price, &.cart-item-shipping, &.cart-item-subtotal, &.cart-item-total
+      width: 11%
+    &.cart-item-unit-price, &.cart-item-package-credit, &.cart-item-shipping, &.cart-item-subtotal, &.cart-item-total
+      text-align: right
+    .cart-item-errors
+      font-size: 85%;
+      margin-top: 10px;
+      padding-left: 15px;
+    .discount-price
+      text-decoration: line-through
+
+.text-required
+  color: #F00;
+
+.quote-answer-item
+  img
+    width: 40px
+    height: 40px
+    margin-right: 15px
+    float: left
+  .quote-answer-item-title
+    font-size: 16px
+  .quote-answer-item-data
+    float: left
+    width: calc(100% - 55px)
+    small
+      font-size: 70%
+  .quote-answer-item-text
+    font-size: 13px
+  
+.orcamento
+  .orcamento-buyer-and-description
+    img
+      width: 40px
+      height: 40px
+      margin-right: 15px
+      float: left
+    .orcamento-buyer-and-description-info
+      float: left
+      width: calc(100% - 55px)
+  .orcamento-seller
+    img
+      width: 40px
+      height: 40px
+      margin-right: 15px
+      margin-top: 3px
+      float: left
+    .orcamento-seller-info
+      float: left
+  .orcamento-top-sellers
+    display: block
+    maring-bottom: 15px
+    img
+      width: 40px
+      height: 40px
+      margin-right: 5px
+      float-left
+.orcamento-details
+  margin-left: 37px
+
+.img-with-text
+  float: left
+  margin-right: 15px
+
+.panel > table.dataTable
+  margin-top: 0!important
+  margin-bottom: 0!important
+
+/* Account registration */
+
+.form-group
+  &.field-with-icon
+    i
+      width: 26px
+      font-size: 15px
+      vertical-align: middle
+    input
+      width: calc(100% - 30px)
+      display: inline-block
+  &.form-group-with-separator
+    border-left: 3px solid #CCC
+    padding-left: 15px
+
+.label.label-default.label-product-url
+  background-color: #CECECE
+  font-weight: normal
+  font-size: 90%
+  color: #333
+
+.list-group-item-split
+  display: flex
+  justify-content: space-between
+  p
+    margin-bottom: 0
+
+.card-metrics-big
+  height: 260px
+  display: flex
+  justify-content: center
+  align-items: center
+  h1
+    font-size: 44px
+  h5
+    font-size: 20px
+
+.rating-star
+  color: #4663D5
+
+.credits-dashcard
+  padding: 20px 0;
+
+.search-sidebar
+  h1, h2, h3, h4, h5
+    margin: 16px 0 0 16px
+
+.m-l-16
+  margin-left: 16px
+
+@media (min-width: 768px)
+  .row-equal
+    display: flex
+    flex-wrap: wrap
+
+.price-slider
+  width: 86%
+  margin-left: 7%
+  margin-right: 7%
+
+.slider
+  width: 100% !important
+
+.quote-card-name
+  display: table-cell
+  vertical-align: middle
+
+.quote-card-name-div
+  display: table
+  height: 48px
+  margin-left: 60px
+
+.position-relative
+  position:relative
+
+.pull-down-right
+  position: absolute
+  bottom: 40px
+  right: 40px
+
+.btn-border-primary
+  border-color: #337ab7
+
+.btn-danger.btn-outline
+  border-color: #d43f3a
+  color: #d43f3a
+  background-color: white
+
+.btn-danger.btn-outline:hover
+  color: #fff
+  background-color: #d9534f
+  border-color: #d43f3a
+
+.btn-danger.btn-outline:focus
+  color: #fff
+  background-color: #c9302c
+  border-color: #761c19
+
+.btn-success.btn-outline
+  color: #4cae4c
+  background-color: white
+  border-color: #4cae4c
+
+.btn-success.btn-outline:hover
+  color: #fff
+  background-color: #449d44
+  border-color: #398439
+
+.btn-success.btn-outline:focus
+  color: #fff
+  background-color: #449d44
+  border-color: #255625
+
+.btn-warning.btn-outline
+  color: #f0ad4e
+  background-color: white
+  border-color: #eea236
+
+.btn-warning.btn-outline:hover
+  color: #fff
+  background-color: #ec971f
+  border-color: #d58512
+
+.btn-warning.btn-outline:focus
+  color: #fff
+  background-color: #ec971f
+  border-color: #985f0d
+
+.btn-primary.btn-outline
+  border-color: #2e6da4
+  color: #2e6da4
+  background-color: white
+
+.btn-primary.btn-outline:hover
+  color: #fff
+  background-color: #337ab7
+  border-color: #2e6da4
+
+.btn-primary.btn-outline:focus
+  color: #fff
+  background-color: #286090
+  border-color: #122b40
+
+#cookieConsentMessage
+  padding: 1.5rem
+  text-align: center
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05)
+
+#cookieConsentLearnMore
+  display: block
+  margin-top: .8rem
+
+/* Accordion with arrows */
+.accordion
+  .panel-heading  
+    a:before 
+      font-family: 'Glyphicons Halflings'
+      content: "\e114"
+      float: right
+      transition: all 0.3s
+
+  .panel-heading.active 
+    a:before
+      -webkit-transform: rotate(-90deg)
+      -moz-transform: rotate(-90deg)
+      transform: rotate(-90deg)
+  .panel-title 
+    & > a,
+    & > a:active
+      display: block
+      padding: 5px
+      text-decoration: none
+    a:focus,
+    a:hover
+      color: inherit
+
+/* Radio button boxes */
+.box-list
+  display: block
+  margin: 0
+  padding: 0
+  list-style: none
+
+  li:first-child
+    padding-left: 0
+
+  li
+    display: inline-block
+    position: relative
+    float: left
+    margin-top: 5px
+    padding-right: 3px    
+
+  /* The box */
+.box-list .box,
+.box-cell .box,
+    display: block
+    min-width: 50px
+    height: 50px
+    line-height: 50px
+    border: 1px solid #3d3d3d  
+    text-align: center
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+
+    .discount
+      float: right
+      position: absolute
+      margin-top: 1px
+      z-index: 2
+      
+    /* Create a custom checkmark */
+    .checkmark
+      display: block
+      height: 100%
+      width: 100%
+      padding: 0 5px
+      position: relative
+      top: 0
+      left: 0
+  
+    /* Hide the browser's radio button */
+    input
+      position: absolute
+      opacity: 0
+  
+      /* When have the radio button is checked, add cursor pointer in checkmark */
+      ~ .checkmark
+        cursor: pointer
+  
+      /* When the radio button is checked, add a background in checkmark */
+      &:checked ~ .checkmark
+        color: #fff
+        background-color: #337ab7
+        border-color: #2e6da4
+     
+      /* When the radio button is disabled, add a background in checkmark */
+      &[disabled] ~ .checkmark
+        cursor: not-allowed
+        opacity: .5
+        background-color: #ececec
+
+/* Product wish button */
+.btn-product-wish
+  font-size: 16px
+  float: right
+  padding: 10px 15px
+
+  i
+    padding-right: 8px
+
+.btn-product-wish-card
+  font-size: 30px
+  position: absolute
+  top: 0px
+  right: 15px
+  padding-top: 10px
+  padding-right: 10px
+  text-align: right
+  z-index: 2
+
+.btn-product-wish-card[data-iswished="0"]
+  display: none !important
+
+.card:hover .btn-product-wish-card[data-iswished="0"]
+  display: inline-block !important
+
+dl.dl-inverted
+  dt
+    font-size: 1.2rem
+    font-weight: normal
+    color: #999
+  dd
+    margin-bottom: 1rem
+
+.dispute-msg
+  img
+    float: left
+  .dispute-msg-bubble
+    border: 1px solid #efefef
+    border-radius: 5px
+    margin-left: 60px
+    margin-right: 25px
+    margin-bottom: 10px
+    padding: 5px 10px
+  .dispute-msg-role
+    font-weight: bold
+
+.dispute-msg.dispute-msg-buyer
+  img
+    float: right
+  .dispute-msg-bubble
+    margin-left: 25px
+    margin-right: 60px
+    text-align: right
+
+.dispute-msg.dispute-msg-admin
+  img
+    display: none
+  .dispute-msg-bubble
+    margin-left: 0
+    margin-right: 0
+    color: #0c5460
+    background-color: #fbfeff
+    border-color: #e9f7f9
+
+/* fullcalendar-scheduler */
+.fc-unthemed .fc-view-container
+  background-color: white
+
+.fc-resourceTimelineMonth-view .fc-timeline-event 
+  overflow: hidden
+
+.product-editor-correios
+  background-color: #fbfbfb
+  border-radius: 5px
+
+a.action-disabled-for-assistant, button.action-disabled-for-assistant
+  opacity: 0.5 !important
+  cursor: default !important

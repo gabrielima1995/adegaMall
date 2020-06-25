@@ -1,0 +1,195 @@
+﻿@using Microsoft.AspNet.Identity
+@model Guid?
+@{
+    var productId = Model;
+}
+
+<script>
+    var ProductPublicPage = (function () {
+        var $quantity;
+        var $rentalStartDateTime;
+        var $rentalEndDateTime;
+        var $multiplier;
+        var $productAvailabilityId;
+        var $customFields;
+
+        function init() {
+            $quantity = $('#Quantity');
+            $rentalStartDateTime = $('[name="RentalStartDateTime"]');
+            $rentalEndDateTime = $('[name="RentalEndDateTime"]');
+            $productAvailabilityId = $('#ProductAvailabilityId');
+            $customFields = $('.js-customfield');
+
+            handleAddItemClick();
+            handleMultiplierChange();
+            loadShippingInfosIfIsBuyer();
+            getDoubleFreightWarning();
+        }
+
+        function handleMultiplierChange() {
+            $multiplier = $('#js-multiplier');
+            $multiplier.on('change', function (e) {
+                var price = parseFloat($('#js-multiplier-price-base').text());
+                var finalPrice = (price * parseFloat($(this).val())).toFixed(2);
+                $('#js-additional-total').text(finalPrice);
+            });
+        }
+
+        function loadShippingInfosIfIsBuyer() {
+            var isBuyer = @User.Identity.GetLoginProfile().IsBuyer().ToJson();
+            if (isBuyer) {
+                var id = $(".js-product-shipping-loading").show().attr("data-product-id");
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.ActionLocalized("LoadingShippingInfos", "Product")&id=" + id
+                }).done(function (response) {
+                    $(".js-product-shipping-loading").html(response);
+                });
+            }
+        }
+
+        function addAndProceedToLogin() {
+            var btn = $('.js-cart-add-item').button('loading');
+            var $stockVariant = $('[name="StockVariant"]:checked');
+            var $stockVariantDropdown = $('[name="StockVariant"]').find(':selected');
+            var quantity = $quantity.val();
+            var rentalStartDateTime = $rentalStartDateTime.length >= 1 ? $rentalStartDateTime.val() : null;
+            var rentalEndDateTime = $rentalEndDateTime.length >= 1 ? $rentalEndDateTime.val() : null;
+            var stockVariant = null;
+
+            if ($stockVariant.length === 1) {
+                stockVariant = $stockVariant.val();
+            }
+            else if ($stockVariantDropdown.length === 1) {
+                stockVariant = $stockVariantDropdown.val();
+            }
+
+            var productAvailabilityId = $productAvailabilityId.length >= 1 ? $productAvailabilityId.val() : "";
+            var idArrayCustomField = new Array();
+            var valuesArrayCustomField = new Array();
+            $customFields.val() != null ? $.each($customFields, function () { idArrayCustomField.push(this.name.replace(/.*\[(.*)\].*/g, "$1")) }) : "";
+            $customFields.val() != null ? $.each($customFields, function () {
+                if (this.type !== "checkbox")
+                    valuesArrayCustomField.push(this.value);
+                else valuesArrayCustomField.push(this.checked);
+            }) : "";
+            var multiplier = 0;
+            if ($('#js-multiplier').val()) {
+                multiplier = $('#js-multiplier').val();
+            }
+            var postUrl = $(".js-cart-add-item").attr("data-url");
+             $.ajax({
+                 type: "POST",
+                 url: postUrl,
+                 data: {
+                        quantity: quantity,
+                        rentalStartDateTime: rentalStartDateTime,
+                        rentalEndDateTime: rentalEndDateTime,
+                        multiplier: multiplier,
+                        stockVariant: stockVariant,
+                        productAvailabilityId: productAvailabilityId,
+                        cartCustomFieldIds: JSON.stringify(idArrayCustomField),
+                        cartCustomFieldsValues: JSON.stringify(valuesArrayCustomField)
+                    },
+                    success: function (data) {
+                        if (data.ok) {
+                            $(location).attr("href", "@Url.ActionLocalized("Login", "Account")");
+                        }
+                        else
+                        {
+                            btn.button('reset');
+                            toastr.error($('[name="StockVariant"]').find(':selected').val());
+                        }
+                       CartButton && CartButton.countProducts();
+
+                    },
+                });
+        }
+
+        function getDoubleFreightWarning() {
+            $.get("@Url.Action("DoubleFreightWarning", "Products", new { productId = productId })", function (html) {
+                $("#doubleFreightWarningContainer").html(html);
+            });
+        }
+
+        function handleAddItemClick() {
+            $('.js-cart-add-item').click(function (e) {
+                e.preventDefault();
+                var btn = $(".js-cart-add-item").button("loading");
+                var $stockVariant = $('[name="StockVariant"]:checked');
+                var $stockVariantDropdown = $('[name="StockVariant"]').find(':selected');
+                var isBuyer = @User.Identity.GetLoginProfile().IsBuyer().ToJson();
+
+                if (isBuyer) {
+                    var postUrl = $(this).attr('data-url');
+                    var quantity = $quantity.val();
+                    var rentalStartDateTime = $rentalStartDateTime.length >= 1 ? $rentalStartDateTime.val() : null;
+                    var rentalEndDateTime = $rentalEndDateTime.length >= 1 ? $rentalEndDateTime.val() : null;
+                    var stockVariant = null;
+
+                    if ($stockVariant.length === 1) {
+                        stockVariant = $stockVariant.val();
+                    }
+                    else if ($stockVariantDropdown.length === 1) {
+                        stockVariant = $stockVariantDropdown.val();
+                    }
+
+                    var productAvailabilityId = $productAvailabilityId.length >= 1 ? $productAvailabilityId.val() : "";
+                    var idArrayCustomField = new Array();
+                    var valuesArrayCustomField = new Array();
+                    $customFields.val() != null ? $.each($customFields, function () { idArrayCustomField.push(this.name.replace(/.*\[(.*)\].*/g, "$1")) }) : "";
+                    $customFields.val() != null ? $.each($customFields, function () {
+                        if (this.type != "checkbox")
+                        {
+                            valuesArrayCustomField.push(this.value);
+                        }
+                        else
+                        {
+                            valuesArrayCustomField.push(this.checked);
+                        }
+                    }) : "";
+                    var multiplier = 0;
+                    if ($("#js-multiplier").val()) {
+                        multiplier = $("#js-multiplier").val();
+                    }
+
+                    $.ajax({
+                        type: 'POST',
+                        url: postUrl,
+                        data: {
+                            quantity: quantity,
+                            rentalStartDateTime: rentalStartDateTime,
+                            rentalEndDateTime: rentalEndDateTime,
+                            multiplier: multiplier,
+                            stockVariant: stockVariant,
+                            productAvailabilityId: productAvailabilityId,
+                            customFieldsIds: JSON.stringify(idArrayCustomField),
+                            customFieldsValues: JSON.stringify(valuesArrayCustomField)
+                        },
+                        success: function (data) {
+                            if (data.ok) {
+                                toastr.success("@Request.GetLocalizedString("CART_ITEM_ADDED_MESSAGE")");
+                                showProductsInCartMsg();
+                            } else {
+                                toastr.error(data.errors[0].value);
+                            }
+                            btn.button('reset');
+                            CartButton && CartButton.countProducts();
+                        }
+                    });
+                } else addAndProceedToLogin();
+                return false;
+            });
+        }
+
+        function showProductsInCartMsg() {
+            $.get("/cart/countProducts/?lang=@Request.GetCurrentLang()", function (data) {
+                data.hasProducts && $("#productsInCartMsg").show().find(".js-count").text(data.productsCount);
+            });
+        }
+
+        return {
+            init: init
+        };
+    })();
+</script>

@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model Domain.Entities.IWithCity
+
+@{
+    var loginProfile = User.Identity.GetLoginProfile();
+    var isManagePage = Html.IsCurrent("Manage");
+    ViewBag.Cities = new Dictionary<string, string>(1);
+
+    if (!string.IsNullOrWhiteSpace(Model.CityAndState))
+    {
+        ViewBag.Cities.Add(Model.CityAndState, Model.CityAndState);
+    }
+}
+
+<div class="js-city-select-container">
+    @if (loginProfile != null && loginProfile.IsSeller() && isManagePage)
+    {
+        @Html.DropDownListFor(m => m.CityAndState,
+            new SelectList(ViewBag.Cities, "Key", "Value", Model.CityAndState),
+            Request.GetLocalizedString("CITY_AND_STATE_INPUT"),
+            new { @class = "form-control js-city-select", style = "width:100%", disabled = "disabled" })
+    }
+    else
+    {
+        @Html.DropDownListFor(m => m.CityAndState,
+            new SelectList(ViewBag.Cities, "Key", "Value", Model.CityAndState),
+            Request.GetLocalizedString("CITY_AND_STATE_INPUT"),
+            new { id="address-f5a", @class = "form-control js-city-select", style = "width:100%" })
+    }
+    @Html.HiddenFor(m => m.CityAndState, new { id = "address-f5b" })
+    @Html.ValidationMessageFor(model => model.CityAndState, "", new { @class = "text-danger" })
+</div>

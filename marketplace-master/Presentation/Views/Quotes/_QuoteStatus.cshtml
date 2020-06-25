@@ -1,0 +1,290 @@
+﻿@using Microsoft.AspNet.Identity
+@model QuoteVM
+
+@{
+    var config = MaaSConfig.Current;
+    var profile = User.Identity.GetLoginProfile();
+    var isSeller = profile.IsSellerOrSellerAssistant();
+    var isBuyer = profile.IsBuyer();
+    var quoteGroupAllClosed = (bool)(ViewData["QuoteGroupAllClosed"] ?? false);
+}
+
+@if (config.Quote.BuyerDecision.Enabled)
+{
+    if (isSeller)
+    {
+        if (Model.IsClosed)
+        {
+            if (Model.DealWon)
+            {
+                <div class="quote-decision-ribon quote-decision-ribon-accepted text-success">
+                    <i class="quote-decision-ribon-icon fa fa-hands-helping"></i>
+                    <div class="quote-decision-ribon-text">
+                        @Html.Localized("YOUR_QUOTE_HAS_BEEN_ACCEPTED")<br />
+                        @if (Model.HasProposal)
+                        {
+                            @:@Html.Localized("QUOTE_ANSWER_PRICE_INPUT_V2"): @Model.AcceptedValue.Value.DisplayDecimal(2) |
+                            @:@Html.Localized("DELIVERY_DEADLINE_LABEL"): @Model.Deadline.Value.ToShortDateString()
+                        }
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                if (config.Quote.QuoteBilling.Enabled && Model.Billing == null && Model.AcceptedValue.HasValue)
+                {
+                    <div class="m-t-sm">
+                        <p>
+                            @Html.Localized("QUOTE_BILLING_NOT_GENERATED_SELLERVIEW")
+                            <br />
+                            @Html.Localized("QUOTE_BILLING_GENERATE_TEXT", "small", new { @class = "text-info" })
+                        </p>
+                        @using (Html.BeginForm("CreateBilling", "Quotes", new { id = Model.Id }))
+                        {
+                            <button type="submit" class="btn btn-primary m-r-sm" data-loading-text="Aguarde...">
+                                <i class="fa fa-receipt"></i>
+                                @Request.GetLocalizedString("QUOTE_BILLING_GENERATE_BUTTON")
+                            </button>
+                        }
+                    </div>
+                }
+                else if(Model.Billing != null) /* Buyer decision is enabled, user is Seller, quote has been accepted, billing exists */
+                {
+                    if (Model.Billing.IsCancelled || Model.Billing.IsRefunded)
+                    {
+                        <div class="m-t-sm">
+                            <span class="text-danger">
+                                <i class="fa fa-times-circle"></i>
+                                @Request.GetLocalizedString("QUOTE_BILLING_CANCELLED_SELLERVIEW")
+                            </span>
+                        </div>
+                    }
+                    else if (Model.Billing.IsPaid)
+                    {
+                        <div class="m-t-sm">
+                            <span class="text-success">
+                                <i class="fa fa-check-circle"></i>
+                                @Request.GetLocalizedString("QUOTE_BILLING_PAID_SELLERVIEW")
+                            </span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="m-t-sm">
+                            <span>
+                                <i class="fa fa-receipt"></i>
+                                @Html.Localized("BILLING_SENT_TO_BUYER")
+                            </span>
+                            <br />
+                            <small>
+                                <a href="javascript:void(0)" id="btnShowBillingUrl" onclick="$(this).hide(); $('#billingUrlContainer').show()">@Request.GetLocalizedString("BUYER_DIDNT_RECEIVE_BILLING_HELP_TITLE")</a>
+                            </small>
+                            <div id="billingUrlContainer" style="display:none">
+                                @Html.Localized("SELLER_QUOTE_BILLING_URL_HELP", "p")
+                                <p>
+                                    <span class="text-muted label label-default label-product-url">
+                                        <i class="fa fa-link"></i>
+                                        @Url.ActionAbsolute("Pay", "Quotes", new { billingId = Model.Billing.Id })
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    }
+
+                    if (Model.Billing.OrderId != null)
+                    {
+                        <small>
+                            @Html.Localized("CLICK_TO_SEE_TRANSACTION_DETAILS")
+                            @Html.ActionLink(Request.GetLocalizedString("PAYMENT_NUMBER", Model.Billing.OrderId.Value.Substring()), "Details", "MySales", new { id = Model.Billing.OrderId }, null)
+                        </small>
+                    }
+                }
+            }
+            else /* Buyer decision is enabled, user is Seller, quote has been rejected */
+            {
+                <div class="quote-decision-ribon quote-decision-ribon-rejected text-danger">
+                    <i class="quote-decision-ribon-icon fa fa-times-circle"></i>
+                    <div class="quote-decision-ribon-text">
+                        @if (Model.HasProposal)
+                        {
+                            @Html.Localized("YOUR_QUOTE_HAS_BEEN_REJECTED", "strong")<br />
+                            @:@Html.Localized("QUOTE_ANSWER_PRICE_INPUT_V2"): @Model.AcceptedValue.Value.DisplayDecimal(2) |
+                            @:@Html.Localized("DELIVERY_DEADLINE_LABEL"): @Model.Deadline.Value.ToShortDateString()
+                        }
+                        else
+                        {
+                            @Html.Localized("CANCELLED_QUOTE_REQUEST", "strong")
+                        }
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            }
+        }
+        else /* Buyer decision is enabled, user is Seller, quote is NOT closed */
+        {
+            // No actions
+        }
+    }
+    else /* Buyer decision is enabled, user is Buyer */
+    {
+        if (Model.IsClosed)
+        {
+            if (Model.DealWon)
+            {
+                <div class="quote-decision-ribon quote-decision-ribon-accepted text-success">
+                    <i class="quote-decision-ribon-icon fa fa-hands-helping"></i>
+                    <div class="quote-decision-ribon-text">
+                        @Html.Localized("YOU_ACCEPTED_A_QUOTE_FROM_SELLER", "strong", null, Model.SellerName)<br />
+                        @if (Model.AcceptedValue != null)
+                        {
+                            @:@Html.Localized("QUOTE_ANSWER_PRICE_INPUT_V2"): @Model.AcceptedValue.Value.DisplayDecimal(2) |
+                            @:@Html.Localized("DELIVERY_DEADLINE_LABEL"): @Model.Deadline.Value.ToShortDateString()
+                        }
+
+                        @if (Model.Billing != null)
+                        {
+                            if (Model.Billing.IsCancelled || Model.Billing.IsRefunded)
+                            {
+                                <div class="m-t-sm">
+                                    <span class="text-danger">
+                                        <i class="fa fa-times-circle"></i>
+                                        @Html.Localized("QUOTE_BILLING_CANCELLED_BUYERVIEW")
+                                    </span>
+                                </div>
+                            }
+                            else if (Model.Billing.IsPaid)
+                            {
+                                <div class="m-t-sm">
+                                    <span class="text-success">
+                                        <i class="fa fa-check-circle"></i>
+                                        @Html.Localized("QUOTE_BILLING_PAID_BUYERVIEW")
+                                    </span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="m-t-sm">
+                                    @Html.Localized("QUOTE_BILLING_GENERATED_BUYERVIEW")
+                                    @if (config.Payment.Common.EnableTransactionWarranty)
+                                    {
+                                        <br />
+                                        @Html.Localized("QUOTE_BILLING_TRANSACTION_WARRANTED_INFO_BUYERVIEW", "small", new { @class = "text-info" })
+                                    }
+                                    <br />
+                                    <i class="fa fa-chevron-right"></i>
+                                    <a href="@Url.ActionAbsolute("Pay", "Quotes", new { billingId = Model.Billing.Id })">@Request.GetLocalizedString("QUOTE_BILLING_PROCEED_TO_PAYMENT")</a>
+                                </div>
+                            }
+
+                            if (Model.Billing.OrderId != null)
+                            {
+                                <small>
+                                    @Html.Localized("CLICK_TO_SEE_TRANSACTION_DETAILS")
+                                    @Html.ActionLink(Request.GetLocalizedString("PAYMENT_NUMBER", Model.Billing.OrderId.Value.Substring()), "Details", "MyOrders", new { id = Model.Billing.OrderId }, null)
+                                </small>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+            else /* Buyer decision is enabled, user is Buyer, quote has been rejected */
+            {
+                if (Model.GroupId == null /* In group view (quotes/index) we do not show it when the buyer has rejected a single quote */)
+                {
+                    <div class="quote-decision-ribon quote-decision-ribon-rejected text-danger">
+                        <i class="quote-decision-ribon-icon fa fa-times-circle"></i>
+                        <div class="quote-decision-ribon-text">
+                            @Html.Localized("YOU_REJECTED_A_QUOTE_FROM_SELLER", "strong", null, Model.SellerName)<br />
+                            @if (Model.AcceptedValue != null)
+                            {
+                                @:@Html.Localized("QUOTE_ANSWER_PRICE_INPUT_V2"): @Model.AcceptedValue.Value.DisplayDecimal(2) |
+                                @:@Html.Localized("DELIVERY_DEADLINE_LABEL"): @Model.Deadline.Value.ToShortDateString()
+                            }
+                            else
+                            {
+                                @Html.Localized("QUOTE_REJECTED_SELLER_NOTIFIED")
+                            }
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                }
+                else if (quoteGroupAllClosed)
+                {
+                    <div class="quote-decision-ribon quote-decision-ribon-rejected text-danger">
+                        <i class="quote-decision-ribon-icon fa fa-times-circle"></i>
+                        <div class="quote-decision-ribon-text">
+                            @Html.Localized("YOU_CANCELLED_THIS_QUOTE_BUYERVIEW", "strong")
+                            <br />
+                            @Html.Localized("QUOTE_CANCELLED_ALL_SELLERS_NOTIFIED")
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                }
+            }
+        }
+        else /* Buyer decision is enabled, user is buyer, quote is NOT closed */
+        {
+            // No actions
+        }
+    }
+}
+else /* Buyer decision NOT enabled */
+{
+    if (isSeller)
+    {
+        if (Model.IsClosed)
+        {
+            <p>
+                @Request.GetLocalizedString("QUOTE_CLOSED")<text>:</text>
+                @if (Model.DealWon)
+                {
+                    <span class="text-success">
+                        <i class="fa fa-thumbs-up"></i>
+                        @Html.Localized("QUOTE_CLOSED_DEAL_WON", "strong")
+                    </span>
+                }
+                else
+                {
+                    <span class="text-danger">
+                        <i class="fa fa-thumbs-down"></i>
+                        @Html.Localized("QUOTE_CLOSED_DEAL_LOST", "strong")
+                    </span>
+                }
+            </p>
+        }
+        else /* Buyer decision NOT enabled, user is seller, quote is NOT closed */
+        {
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <p>
+                        @Html.Localized("CLOSE_QUOTE")<text>:</text>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-success js-close-quote" data-url="@Url.ActionLocalized("Close", "Quotes")" data-id="@Model.Id" data-deal-won="true" @(Model.HasAnswerFromSeller ? "" : "disabled")>
+                                @Request.GetLocalizedString("CLOSE_QUOTE_DEAL_WON")
+                            </button>
+                            <button type="button" class="btn btn-danger js-close-quote" data-url="@Url.ActionLocalized("Close", "Quotes")" data-id="@Model.Id" data-deal-won="false" @(Model.HasAnswerFromSeller || config.Quote.RejectWithoutAnswer ? "" : "disabled")>
+                                @Request.GetLocalizedString("CLOSE_QUOTE_DEAL_LOST")
+                            </button>
+                        </div>
+
+                        @if (!Model.HasAnswerFromSeller)
+                        {
+                            <div class="m-b-sm"></div>
+                            @Html.Localized("CLOSE_QUOTE_NO_SELLER_ANSWER", "small", new { @class = "help-block text-muted" })
+                        }
+                    </p>
+                </div>
+            </div>
+        }
+    }
+    else /* Buyer decision NOT enabled, user is buyer */
+    {
+        if (Model.IsClosed)
+        {
+            // No actions
+        }
+        else
+        {
+            // No actions
+        }
+    }
+}

@@ -1,0 +1,262 @@
+﻿@using System
+@using Application.Modules.Products
+@using Presentation.Helpers
+@using Domain.Entities.StoreModule
+@using Domain.Modules.StoreModule.Entities
+@using System.Globalization
+
+
+@model Presentation.Models.CartViewModel
+
+@{
+    var config = MaaSConfig.Current;
+    var shippingPerProduct = config.Product.ShippingMode == ShippingMode.PerProduct;
+    var shippingPerStore = config.Product.ShippingMode == ShippingMode.PerStore;
+    var bmIsSale = config.Product.BusinessModel.Sale.Enabled;
+    var bmIsRental = config.Product.BusinessModel.Rental.Enabled;
+    var showQtyBox = bmIsSale || (bmIsRental && config.Product.BusinessModel.Rental.QuantityEnabled);
+    var showPackageCredit = config.Product.BusinessModel.Rental.Package.Enabled;
+
+    var lang = CultureInfo.CurrentCulture.GetCurrentLang();
+
+    bool showInstallments = false;
+    int minInstallments = 1;
+    var cart = Model.GetCart();
+
+    if (config.Product.EnableInstallmentsPerProduct)
+    {
+        if (cart.Items.Any(x => cart.Items.Any(y => y.Product.MaxInstallments != x.Product.MaxInstallments)))
+        {
+            showInstallments = true;
+            minInstallments = cart.Items.OrderBy(x => x.Product.MaxInstallments.Value).First().Product.MaxInstallments.Value;
+        }
+    }
+
+    bool showMultiplierBox = config.Product.BusinessModel.Rental.EnablePriceMultiplier;
+
+    var cartItems = config.Product.BusinessModel.Rental.Enabled
+        ? cart.Items.OrderBy(item => item.RentalInfo.StartDate).ToList() : cart.Items;
+}
+
+@if (cart.IsEmpty)
+{
+    @Html.Localized("CART_EMPTY_MESSAGE", "h4", new { @class = "margin-bottom-30" })
+}
+else
+{
+    <div class="panel panel-default">
+        <div class="table-responsive">
+            <table class="js-cart table table-hover">
+                <thead>
+                    <tr>
+                        <th class="cart cart-item cart-item-image">@Html.Localized("CART_ITEM_PRODUCT_LABEL")</th>
+                        <th class="cart cart-item cart-item-product"></th>
+                        @if (showQtyBox)
+                        {
+                            <th class="cart cart-item cart-item-quantity">@Html.Localized("CART_ITEM_QUANTITY_LABEL")</th>
+                        }
+                        @if (showPackageCredit)
+                        {
+                            <th class="cart cart-item cart-item-unit-price">@Html.Localized("CART_ITEM_PACKEGE_CREDIT_LABEL")</th>
+                        }
+                        <th class="cart cart-item cart-item-unit-price">@Html.Localized("CART_ITEM_UNIT_PRICE_LABEL")</th>
+                        @if (showMultiplierBox)
+                        {
+                            <th class="cart cart-item cart-item-additional-price text-right">@Html.Localized("CART_ADDITIONAL_PRICE_LABEL")</th>
+                        }
+                        <th class="cart cart-item cart-item-subtotal">@Html.Localized("CART_ITEM_SUBTOTAL_LABEL")</th>
+                        @if (Model.Visualization.ShowShippingAmount)
+                        {
+                            <th class="cart cart-item cart-item-shipping">@Html.Localized("CART_ITEM_SHIPPING_LABEL")</th>
+                        }
+                        @if (config.CustomFields.CartItem.Enabled && Model.CustomFields != null)
+                        {
+                            foreach (var item in Model.CustomFieldsNames)
+                            {
+                                <th class="cart cart-item cart-item-customfield">@item</th>
+                            }
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in cartItems)
+                    {
+                        var productUrl = item.Product.IsBillingProduct.GetValueOrDefault() ? "#" : Url.ActionLocalized("PublicPage", "Products", new { id = item.Product.FriendlyUrl });
+                        var errors = CartHelper.GetItemErrors(item, ViewData.ModelState);
+                        var rowClass = errors.Any() ? "danger" : "";
+                        var productTitle = item.FullProductTitle;
+
+                        <tr data-id="@item.Product.Id" class="@rowClass" readonly="readonly">
+                            <td class="cart cart-item cart-item-image">
+                                <a href="@productUrl" title="@productTitle">
+                                    <img src="@item.Product.GetCoverImageUrl(ProductImageSize.XS)" alt="@productTitle" />
+                                </a>
+                            </td>
+                            <td class="cart cart-item cart-item-info">
+                                @Html.Hidden("StockVariant", item.Variant?.Id)
+                                @Html.Hidden("ProductAvailabilityId", item.RentalInfo.ProductAvailability_Id)
+                                <label>
+                                    <a href="@productUrl" title="@productTitle">@productTitle</a>
+                                </label>
+                                <br />
+                                <small class="text-muted">
+                                    @Request.GetLocalizedString("CART_ITEM_SOLD_AND_DELIVERED_BY")
+                                    <span>@item.Product.Store.Seller.PublicProfileName</span>
+                                </small>
+                                @if (showInstallments && item.Product.MaxInstallments > 1)
+                                {
+                                    <br />
+                                    <small class="text-muted">
+                                        @if (item.Product.MaxInstallments == minInstallments)
+                                        {
+                                            <strong class="text-danger">
+                                                @string.Format(Request.GetLocalizedString("PRODUCT_CART_INSTALLMENTS_WARNING"), item.Product.MaxInstallments)
+                                            </strong>
+                                        }
+                                        else
+                                        {
+                                            Write(string.Format(Request.GetLocalizedString("PRODUCT_CART_INSTALLMENTS_WARNING"), item.Product.MaxInstallments));
+                                        }
+                                    </small>
+                                }
+
+                                @if (bmIsRental && (item.Product.ProductType == ProductType.Default || item.RentalInfo.ProductAvailability_Id.HasValue))
+                                {
+                                    <br />
+                                    <small class="text-muted">
+                                        @if (config.Product.BusinessModel.Rental.HideShiftDurationFromUsers)
+                                        {
+                                            <span><b>@item.RentalInfo.StartDate.DisplayDate()</b></span>
+                                        }
+                                        else
+                                        {
+                                            @:@Request.GetLocalizedString("CART_ITEM_RENTAL_PERIOD")
+                                            <span><b>@item.RentalInfo.StartDate.DisplayDateTime()</b> @Request.GetLocalizedString("CART_ITEM_RENTAL_PERIOD_UNTIL") <b>@item.RentalInfo.EndDate.DisplayDateTime()</b></span>
+                                        }
+                                    </small>
+                                }
+
+                                <br />
+                                <button type="button" class="js-remove-item btn btn-default btn-cart-item btn-xs">
+                                    <i class="fa fa-trash"></i>
+                                    @Request.GetLocalizedString("CART_ITEM_REMOVE_BUTTON")
+                                </button>
+
+                                @if (errors.Any())
+                                {
+                                    <ul class="cart-item-errors">
+                                        @foreach (var error in errors)
+                                        {
+                                            <li class="text-danger">@error</li>
+                                        }
+                                    </ul>
+                                }
+                            </td>
+
+                            @if (showQtyBox)
+                            {
+                                <td class="cart cart-item cart-item-quantity">
+                                    <input type="number" name="Quantity" value="@item.Quantity" class="form-control" />
+                                    <button type="button" class="js-change-quantity btn btn-default btn-cart-item btn-xs">
+                                        <i class="fa fa-sync"></i>
+                                        @Request.GetLocalizedString("CART_ITEM_CHANGE_QUANTITY_BUTTON")
+                                    </button>
+                                </td>
+                            }
+
+                            @if (showPackageCredit && item.Product.IsPackageType)
+                            {
+                                <td class="cart cart-item cart-item-package-credit">
+                                    <span>
+                                        @{int? packageCredit = item.Product.PackageCredits * item.Quantity;}
+                                        @packageCredit
+                                    </span>
+                                </td>
+                            }
+                            else if (showPackageCredit)
+                            {
+                                <td class="cart cart-item no-packge-credit">
+                                    <span></span>
+                                </td>
+                            }
+
+                            <td class="cart cart-item cart-item-unit-price">
+                                <span class="@(item.Discount > 0 ? "discount-price": "")">
+                                    @config.DefaultCurrency
+                                    @item.Price.DisplayDecimal(2)
+                                </span>
+                                @if (item.Discount > 0)
+                                {
+                                    <br>
+                                    <span><b>@config.DefaultCurrency @item.PriceWithDiscount.DisplayDecimal(2)</b></span>
+                                }
+                            </td>
+
+                            @if (showMultiplierBox)
+                            {
+                                <td class="cart cart-item cart-item-additional-price">
+                                    <span class="pull-right">@config.DefaultCurrency @item.Product.GetAdditionalPrice(item.Multiplier)</span>
+                                </td>
+                            }
+
+                            <td class="cart cart-item cart-item-subtotal">
+                                <span>
+                                    @config.DefaultCurrency
+                                    @item.SubTotal.DisplayDecimal(2)
+                                </span>
+                            </td>
+
+                            @if (Model.Visualization.ShowShippingAmount)
+                            {
+                                <td class="cart cart-item cart-item-shipping">
+                                    @if (item.Shipping == 0)
+                                    {
+                                        @:-
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            @config.DefaultCurrency
+                                            @item.Shipping.DisplayDecimal(2)
+                                        </span>
+
+                                        if (config.Product.BusinessModel.Rental.Enabled && config.Product.ShippingMode == ShippingMode.PerProduct)
+                                        {
+                                            <br />
+                                            <span class="text-@(item.Product.RentalSettings.ChargeDoubleShipping ?? false ? "success" : "danger")">
+                                                @Html.Localized((item.Product.RentalSettings.ChargeDoubleShipping ?? false)
+                                                    ? "CHARGE_DOUBLE_SHIPPING_MESSAGE"
+                                                    : "NO_CHARGE_DOUBLE_SHIPPING_MESSAGE")
+                                            </span>
+                                        }
+                                    }
+                                </td>
+                            }
+
+                            @if (config.CustomFields.CartItem.Enabled && Model.CustomFields.Count != 0)
+                            {
+                                foreach (var customfield in Model.CustomFields.Where(x => x.EntityId == item.Id).ToList())
+                                {
+                                    if (customfield.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ||
+                                        customfield.Value.Equals("false", StringComparison.InvariantCultureIgnoreCase))
+                                    {
+                                        <td class="cart cart-item cart-item-customfield">
+                                            @{
+                                                var booleanValue = customfield.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ? Html.Localized("AFFIRMATIVE_LABEL") : Html.Localized("NEGATIVE_LABEL");
+                                            }
+                                            @booleanValue
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="cart cart-item cart-item-customfield">@customfield.Value</td>
+                                    }
+                                }
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

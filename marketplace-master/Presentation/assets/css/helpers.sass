@@ -1,0 +1,135 @@
+.m-b-0
+  margin-bottom: 0;
+.m-b-xxs
+  margin-bottom: 3px;
+.m-b-xs
+  margin-bottom: 5px;
+.m-b-sm
+  margin-bottom: 10px;
+.m-b-md
+  margin-bottom: 30px;
+.m-b-lg
+  margin-bottom: 50px;
+
+.m-t-0
+  margin-top: 0;
+.m-t-xxs
+  margin-top: 3px;
+.m-t-xs
+  margin-top: 5px;
+.m-t-sm
+  margin-top: 10px;
+.m-t-md
+  margin-top: 30px;
+.m-t-lg
+  margin-top: 50px;
+
+.m-l-0
+  margin-left: 0;
+.m-l-xxs
+  margin-left: 3px;
+.m-l-xs
+  margin-left: 5px;
+.m-l-sm
+  margin-left: 10px;
+.m-l-md
+  margin-left: 30px;
+.m-l-lg
+  margin-left: 50px;
+
+.m-r-0
+  margin-right: 0;
+.m-r-xxs
+  margin-right: 3px;
+.m-r-xs
+  margin-right: 5px;
+.m-r-sm
+  margin-right: 10px;
+.m-r-md
+  margin-right: 30px;
+.m-r-lg
+  margin-right: 50px;
+
+// ------------------------------------------
+// REFATORAR TUDO ABAIXO À MEDIDA DO POSSÍVEL
+// ------------------------------------------
+
+//Margin-top
+$class-slug: margin-top !default
+@for $i from 1 through 30
+  .#{$class-slug}-#{$i*5}
+    margin-top: 0px + $i*5 !important
+
+//Margin-bottom
+$class-slug-2: margin-bottom !default
+@for $i from 1 through 30
+  .#{$class-slug-2}-#{$i*5}
+    margin-bottom: 0px + $i*5 !important
+
+//Margin-left
+$class-slug-3: margin-left !default
+@for $i from 1 through 30
+  .#{$class-slug-3}-#{$i*5}
+    margin-left: 0px + $i*5 !important
+
+//Margin-right
+$class-slug-4: margin-right !default
+@for $i from 1 through 30
+  .#{$class-slug-4}-#{$i*5}
+    margin-right: 0px + $i*5 !important
+
+//Padding-top
+$class-slug-5: padding-top !default
+@for $i from 1 through 30
+  .#{$class-slug-5}-#{$i*5}
+    padding-top: 0px + $i*5 !important
+
+//Padding-bottom
+$class-slug-6: padding-bottom !default
+@for $i from 1 through 30
+  .#{$class-slug-6}-#{$i*5}
+    padding-bottom: 0px + $i*5 !important
+
+//Padding-left
+$class-slug-7: padding-left !default
+@for $i from 1 through 30
+  .#{$class-slug-7}-#{$i*5}
+    padding-left: 0px + $i*5 !important
+
+//Padding-right
+$class-slug-8: padding-right !default
+@for $i from 1 through 30
+  .#{$class-slug-8}-#{$i*5}
+    padding-right: 0px + $i*5 !important
+
+//Max-width
+$class-slug-9: max-width !default
+@for $i from 1 through 30
+  .#{$class-slug-9}-#{$i*5}
+    max-width: 0px + $i*5 !important
+
+//Margin-all
+$class-slug-10: margin !default
+@for $i from 1 through 30
+  .#{$class-slug-10}-#{$i*5}
+    margin: 0px + $i*5 !important
+
+//Padding-all
+$class-slug-11: padding !default
+@for $i from 1 through 30
+  .#{$class-slug-11}-#{$i*5}
+    padding: 0px + $i*5 !important
+
+.align-center
+  display: table
+  margin-right: auto
+  margin-left: auto
+.margin-top-0
+  margin-top: 0 !important
+.margin-bottom-0
+  margin-bottom: 0 !important
+.padding-top-0
+  padding-top: 0 !important
+.padding-bottom-0
+  padding-bottom: 0 !important
+

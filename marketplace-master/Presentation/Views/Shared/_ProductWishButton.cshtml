@@ -1,0 +1,26 @@
+﻿@model Domain.Modules.StoreModule.Interfaces.IWishlistItem
+@{
+    if (ViewBag.IsWished == null)
+    {
+        ViewBag.IsWished = false;
+    }
+
+    var wished = "0";
+    var heartFill = "far";
+
+    if (ViewBag.IsWished == true)
+    {
+        wished = "1";
+        heartFill = "fa";
+    }
+}
+
+<a href="javascript:void(0);" class="btn btn-default btn-product-wish js-product-wish-button" 
+   data-productid="@Model.Id" data-iswished="@wished">
+    <i class="@heartFill fa-heart"></i>
+    <span class="wish-text" 
+          data-wish-text="@Request.GetLocalizedString("PRODUCT_WISH_BUTTON")" 
+          data-wished-text="@Request.GetLocalizedString("PRODUCT_WISHED_BUTTON")">
+        @Request.GetLocalizedString("PRODUCT_WISH_BUTTON")
+    </span>
+</a>

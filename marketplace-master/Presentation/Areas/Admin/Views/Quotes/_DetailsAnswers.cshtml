@@ -1,0 +1,103 @@
+﻿@using Presentation.Models
+@model V2.Application.Modules.QuoteRequests.Model.QuoteDetailsForAdminDto
+
+@{
+    var config = MaaSConfig.Current;
+
+    ViewData.Add("IsClosed", Model.IsClosed);
+    ViewData.Add("DealWon", Model.DealWon);
+    ViewData.Add("SellerUrl", Model.SellerUrl ?? "");
+}
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Histórico de Mensagens</h3>
+    </div>
+    <div class="box-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="180">Quem</th>
+                        <th>Mensagem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p><span>Comprador</span></p>
+                            <small class="text-muted">@Html.DisplayFor(model => Model.Quote.CreatedAt)</small>
+                        </td>
+                        <td>
+                            <p>@Html.DisplayFor(model => Model.Quote.Description)</p>
+
+                            @if (Model.Quote.Attachments.Any())
+                            {
+                                <p>
+                                    @foreach (var attachment in Model.Quote.Attachments)
+                                    {
+                                        <a href="@attachment.AttachmentUrl" target="_blank">anexo</a>
+                                    }
+                                </p>
+                            }
+                        </td>
+                    </tr>
+                    @foreach (var item in Model.Answers)
+                    {
+                        <tr>
+                            <td>
+                                <p>
+                                    @if (item.AuthorId == item.Buyer_Id)
+                                    {
+                                        <span>Comprador</span>
+                                    }
+                                    else if (item.AuthorId == item.Seller_Id)
+                                    {
+                                        <span>Vendedor</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Moderador</span>
+                                    }
+                                </p>
+                                <small class="text-muted">@Html.DisplayFor(model => item.CreatedAt)</small>
+                            </td>
+                            <td>
+                                <p>@Html.DisplayFor(model => item.Text)</p>
+
+                                @if (item.Price != null)
+                                {
+                                    <p>
+                                        <span>@config.DefaultCurrency</span>
+                                        @item.Price.Value.DisplayDecimal(2)
+                                    </p>
+                                }
+
+                                @if (item.Attachments.Any())
+                                {
+                                    <p>
+                                        @foreach (var attachment in item.Attachments)
+                                        {
+                                            <a href="@attachment.AttachmentUrl" target="_blank">anexo</a>
+                                        }
+                                    </p>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@if (config.Quote.Moderation.Enabled)
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h4>Nova mensagem</h4>
+
+            @Html.Partial("_DetailsAnswerForm", new QuoteAnswerVM(Model, false, Model.DealWon), ViewData)
+        </div>
+    </div>
+}

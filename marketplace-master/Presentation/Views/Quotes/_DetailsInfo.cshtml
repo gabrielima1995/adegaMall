@@ -1,0 +1,236 @@
+﻿@using Presentation.Helpers
+@model QuoteVM
+
+@{
+    var config = MaaSConfig.Current;
+    var isSeller = User.Identity.GetLoginProfile().IsSellerOrSellerAssistant();
+    var isBuyer = User.Identity.GetLoginProfile().IsBuyer();
+    var isGroup = ViewData.ContainsKey("IsGroupView");
+    var totalSellersCount = (int?)ViewData["TotalSellersCount"] ?? 0;
+    var allClosed = (bool?)ViewData["AllClosed"] ?? false;
+}
+
+<div class="orcamento">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3><u>@Model.Title</u></h3>
+
+            <div class="orcamento-buyer-and-description">
+                @if (isSeller)
+                {
+                    if (!Model.HideBuyerDetailsUntilDealClosed)
+                    {
+                        <img src="@Model.BuyerAvatar" class="img-circle" />
+                    }
+                    else
+                    {
+                        <img src="@MaaSConfig.Current.Layout.Images.DefaultAvatar" class="img-circle" />
+                    }
+                }
+                <div class="orcamento-buyer-and-description-info">
+                    @if (isSeller && config.Buyer.UserRatings.Enabled)
+                    {
+                        <strong>
+                            @if (Model.HideBuyerDetailsUntilDealClosed)
+                            {
+                                @:@Html.Localized("BUYER_DETAILS_HIDDEN_UNTIL_DEAL_CLOSED")
+                            }
+                            else
+                            {
+                                @:@Model.BuyerName
+                            }
+                        </strong>
+                        <p>@Html.Partial("_RatingStars", Model.SellerAverageRating) - <span class="text-primary">@Model.SellerRatingCount @Request.GetLocalizedString("RATINGS_COUNT")</span></p>
+                    }
+
+                    <p>@Html.TextWithLineBreaks(Model.Description.HtmlEncode())</p>
+
+                    @if (!Model.HideBuyerDetailsUntilDealClosed && (!config.Quote.Answers.Enabled || config.Quote.ShowBuyerContactInfo))
+                    {
+                        <p>
+                            @Model.BuyerEmail<br />
+                            @Model.BuyerPhone
+                        </p>
+                    }
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <ul class="list-unstyled orcamento-details">
+                @if (Model.CategoryId.HasValue)
+                {
+                    <li>
+                        <i class="fa fa-tag"></i>
+                        @Model.CategoryName / @Model.SubCategoryName
+                    </li>
+                }
+
+                @if (Model.PortfolioItemId.HasValue)
+                {
+                    <li>
+                        @Html.Localized("QUOTE_PORTFOLIO_ITEM_LABEL", "b"): @Model.PortfolioItemTitle
+                    </li>
+                }
+
+                @if (Model.Quantity.HasValue && Model.Quantity > 0)
+                {
+                    <li>
+                        @Html.Localized("QUOTE_QUANTITY_LABEL", "b"): @Model.Quantity
+                    </li>
+                }
+
+                @if (config.Quote.Date.Enabled && Model.Date.HasValue && (isBuyer || config.Quote.Date.IsPublic))
+                {
+                    <li>
+                        <i class="fa fa-calendar"></i>
+                        @Model.Date.Value.DisplayDate()
+                    </li>
+                }
+
+                @if (config.Quote.Phone.Enabled && !string.IsNullOrEmpty(Model.Phone) && !Model.HideBuyerDetailsUntilDealClosed && (isBuyer || config.Quote.Phone.IsPublic))
+                {
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        @Model.Phone
+                    </li>
+                }
+
+                @if ((config.Quote.Address.Enabled || config.Quote.CityAndState.Enabled) && Model.HasAddress && (isBuyer || config.Quote.Address.IsPublic))
+                {
+                    <li>
+                        <i class="fa fa-map-marker-alt"></i>
+                        @if (config.Quote.Address.Enabled && Model.AddressStreet != null)
+                        {
+                            @(Model.AddressStreet + ", " + Model.AddressNumber)
+                            @:-
+                            @(Model.AddressNeighborhood)
+                            @:-
+                        }
+                        @if ((config.Quote.Address.Enabled || config.Quote.CityAndState.Enabled) && Model.CityAndState != null)
+                        {
+                            @:@Model.CityAndState
+                        }
+                    </li>
+                }
+
+                @if (config.Quote.QuoteMax.Enabled && Model.Amount.HasValue && (isBuyer || config.Quote.Address.IsPublic))
+                {
+                    <li>
+                        <i class="fa fa-dollar-sign"></i>
+                        @Html.Localized("QUOTE_MAX_BUDGET_SIMPLE_LABEL"):
+                        @config.DefaultCurrency @Model.Amount.Value.DisplayDecimal(2)
+                    </li>
+                }
+
+                @if (config.Quote.Preference.Enabled && !Model.IsShortQuote && (isBuyer || config.Quote.Preference.IsPublic))
+                {
+                    <li>
+                        <i class="fa fa-exclamation-circle"></i>
+                        @Html.Localized("QUOTE_PREFERENCE_SIMPLE_LABEL"):
+                        @Html.Localized($"PREF_{Model.Preference.ToString().ToUpper()}_LABEL")
+                    </li>
+                }
+
+                @if (Model.AttachmentUrl != null)
+                {
+                    <li>
+                        <i class="fa fa-file"></i>
+                        @Html.Localized("QUOTE_ATTACHMENT_LABEL"):
+                        @Html.Localized("QUOTE_ATTACHMENT_CLICK_TO_OPEN", "a", new { href = Model.AttachmentUrl, target = "_blank" })
+                        <i class="fa fa-external-link"></i>
+                    </li>
+                }
+
+                @if (config.CustomFields.Quotes.Enabled && Model.CustomFieldDefinitions?.Count > 0)
+                {
+                    foreach (var customField in Model.CustomFields)
+                    {
+                        if (@Model.CustomFieldDefinitions[new Guid(customField.Key)].IsPublic)
+                        {
+                            var value = Model.CustomFields[customField.Key.ToString()];
+                            <li>
+                                <i class="far fa-dot-circle"></i>
+                                @Model.CustomFieldDefinitions[new Guid(customField.Key)].Name :
+                                <span>
+                                    @if (CustomFieldHelper.IsLink(value))
+                                    {
+                                        <a href="@value"><i class="fas fa-paperclip"></i> @Request.GetLocalizedString("CUSTOM_FIELD_VIEW_FILE")</a>
+                                    }
+                                    else
+                                    {
+                                        @CustomFieldHelper.LocalizeField(value, Request.GetCurrentLang())
+                                    }
+                                </span>
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+
+            @if (isBuyer)
+            {
+                if (isGroup && totalSellersCount > 0)
+                {
+                    @:@Html.Localized("QUOTE_GROUP_TOTAL_SELLERS", "span", new { @class = "total-sellers-count" }, totalSellersCount)
+                }
+                else if (Model.SellerName != null)
+                {
+                    <p class="orcamento-seller">
+                        <a href="@Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.SellerUrl } )"><img src="@Model.SellerAvatar" class="img-circle" /></a>
+                        <div class="orcamento-seller-info">
+
+                            <small class="text-muted">@Html.Localized("SELLER_TITLE")</small>
+                            @if (!config.Seller.UserRatings.Enabled)
+                            {
+                                <br />
+                            }
+                            <strong>@Model.SellerName</strong>
+
+                            @if (config.Seller.UserRatings.Enabled)
+                            {
+                                <br />
+                                <span>@Html.Partial("_RatingStars", Model.SellerAverageRating) - <span class="text-primary">@Model.SellerRatingCount @Request.GetLocalizedString("RATINGS_COUNT")</span></span>
+                            }
+                        </div>
+                    </p>
+                }
+            }
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <p class="data quote-date-added">
+                        <small>
+                            @Html.Localized("DATE_ADDED_LABEL") @Model.CreatedAt.DisplayDateTime()
+                        </small>
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-6 text-right">
+                    @if (config.Quote.BuyerDecision.Enabled && isGroup && Model.GroupId != null && !allClosed)
+                    {
+                        <button class="btn btn-danger btn-danger-light btn-sm button-cancel-all">
+                            <i class="fa fa-ban"></i>
+                            @Request.GetLocalizedString("CANCEL_QUOTE_ALL")
+                        </button>
+                        <div class="disclaimer" style="display:none">
+                            <p class="text text-warning">
+                                <i class="fa fa-exclamation-circle"></i>
+                                @Request.GetLocalizedString("CANCEL_QUOTE_ALL_DISCLAIMER")
+                            </p>
+                            @Html.ActionLink(Request.GetLocalizedString("CANCEL_QUOTE_ALL"), "CancelGroup", "Quotes", new { groupId = Model.GroupId }, new { @class = "btn btn-danger" })
+                        </div>
+                    }
+                    else if (config.Quote.BuyerDecision.Enabled && !Model.IsClosed && isBuyer)
+                    {
+                        <a href="@Url.Action("CancelQuote", "Quotes", new { id = Model.Id })" class="btn btn-danger btn-danger-light btn-sm">
+                            <i class="fa fa-ban"></i>
+                            @Html.Localized("QUOTE_CANCEL_BUYER")
+                        </a>
+                    }
+                </div>
+            </div>
+
+            @Html.Partial("_QuoteStatus", Model)
+        </div>
+    </div>
+</div>

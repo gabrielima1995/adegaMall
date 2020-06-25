@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Languages\DefaultLanguageStrings.tsv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Languages\DefaultLanguageStrings.tsv">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="morelinq" Version="2.6.0" />
+    <PackageReference Include="NullGuard.Fody" Version="1.8.7" />
+    <PackageReference Include="Owin" Version="1.0.0" />
+    <PackageReference Include="Unity" Version="5.11.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NewContext.Acl\NewContext.Acl.csproj" />
+    <ProjectReference Include="..\NewContext.Core\NewContext.Core.csproj" />
+    <ProjectReference Include="..\NewContext.Domain\NewContext.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

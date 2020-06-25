@@ -1,0 +1,66 @@
+﻿@using PaymentIntegrator.Core.Subscriptions
+
+@model IEnumerable<V2.Application.Modules.Subscriptions.Model.SubscriptionListItemForAdminDto>
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("SUBSCRIPTIONS_LANG_UBIQUITOUS");
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-refresh"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-body table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Vendedor</th>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.SellerName</td>
+                            <td>@item.StartDate.ToShortDateString()</td>
+                            <td>@item.PlanName</td>
+                            <td>@item.Amount</td>
+                            @if (item.Status == 1 || item.Status == 2)
+                            {
+                                <td>@(((SubscriptionStatus.Paid)).DisplayDescription())</td>
+                            }
+                            else
+                            {
+                                <td>@(((SubscriptionStatus)item.Status).DisplayDescription())</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+@section scripts
+{
+    <script>DataTableCustom.create()</script>
+
+    <script>
+        $(function () {
+            window.MaaS.dtOptions = {
+                order: [[1, "desc"]]
+            };
+        });
+    </script>
+}

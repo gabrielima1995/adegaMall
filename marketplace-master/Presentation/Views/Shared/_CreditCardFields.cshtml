@@ -1,0 +1,89 @@
+﻿@model Application.CreditCards.CreditCardModel
+
+@{
+    var year = DateTime.UtcNow.Year;
+
+    var months = new string('\0', 12).Select((c, i) =>
+    {
+        var l = (++i).ToString("00");
+        return new KeyValuePair<string, string>(l, l);
+    });
+
+    var years = new string('\0', 10).Select((c, i) =>
+    {
+        var l = (i + year).ToString("00");
+        return new KeyValuePair<string, string>(l, l);
+    });
+}
+
+<div class="m-b-sm">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(i => i.FullName)
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="far fa-user"></i></span>
+                    @Html.TextBoxFor(i => i.FullName, new { @class = "form-control", placeholder = Request.GetLocalizedString("CREDIT_CARD_FULLNAME_INPUT") })
+                </div>
+
+                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(i => i.DocumentNumber)
+                @Html.TextBoxFor(i => i.DocumentNumber, new { @class = "form-control js-cpf", placeholder = Request.GetLocalizedString("CREDIT_CARD_DOCUMENT_TEXT")})
+                @Html.ValidationMessageFor(model => model.DocumentNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(i => i.DateOfBirth)
+                @Html.TextBoxFor(i => i.DateOfBirth, new { @class = "form-control js-date no-picker", placeholder = Request.GetLocalizedString("CREDIT_CARD_DATE_OF_BIRTH_TEXT") })
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Number)
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="far fa-credit-card"></i></span>
+                @Html.TextBoxFor(i => i.Number, new { @class = "form-control js-credit-card", placeholder = Request.GetLocalizedString("CREDIT_CARD_NUMBER_INPUT_V2"), maxlength = 16 })
+            </div>
+            @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <div class="btn-group" role="group" aria-label="...">
+            <div class="form-group">
+                @Html.LabelFor(i => i.Month)/@Html.LabelFor(i => i.Year)
+                <div class="form-group">
+                    @Html.DropDownListFor(i => i.Month, new SelectList(months, "Key", "Value"),
+                        Request.GetLocalizedString("CREDIT_CARD_MONTH_INPUT"),
+                        new { @class = "btn btn-default" })
+                    @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(i => i.Year, new SelectList(years, "Key", "Value"),
+                        Request.GetLocalizedString("CREDIT_CARD_YEAR_INPUT"),
+                        new { @class = "btn btn-default" })
+                    @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-6">
+            @Html.LabelFor(i => i.CVV)
+        </div>
+        <div class="col-xs-6 col-md-3">
+            @Html.TextBoxFor(i => i.CVV, new { @class = "form-control js-digits", placeholder = "CVV", maxlength = 4 })
+            @Html.ValidationMessageFor(model => model.CVV, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>

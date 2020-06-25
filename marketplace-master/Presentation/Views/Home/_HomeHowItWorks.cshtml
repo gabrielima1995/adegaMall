@@ -1,0 +1,37 @@
+﻿@using Presentation.Helpers
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (config.HowItWorks.IsVisible)
+{
+    <div class="howitworks">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    @Html.Localized("HOW_IT_WORKS_TITLE", "h2")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <img src="@CustomAssetsHelper.HomeBenefitsIcon(0)" alt="" class="icone">
+                    @Html.Localized("HOW_IT_WORKS_TITLE_1", "h3")
+                    @Html.Localized("HOW_IT_WORKS_TEXT_1", "p")
+                </div>
+
+                <div class="col-xs-12 col-md-4">
+                    <img src="@CustomAssetsHelper.HomeBenefitsIcon(1)" alt="" class="icone">
+                    @Html.Localized("HOW_IT_WORKS_TITLE_2", "h3")
+                    @Html.Localized("HOW_IT_WORKS_TEXT_2", "p")
+                </div>
+
+                <div class="col-xs-12 col-md-4">
+                    <img src="@CustomAssetsHelper.HomeBenefitsIcon(2)" alt="" class="icone">
+                    @Html.Localized("HOW_IT_WORKS_TITLE_3", "h3")
+                    @Html.Localized("HOW_IT_WORKS_TEXT_3", "p")
+                </div>
+            </div>
+        </div>
+    </div>
+}

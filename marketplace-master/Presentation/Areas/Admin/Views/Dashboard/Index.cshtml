@@ -1,0 +1,590 @@
+﻿@model Presentation.Areas.Admin.Models.Reports.AdminDashboardReportViewModel
+
+@{
+    ViewBag.Title = "Dashboard";
+    var config = MaaSConfig.Current;
+    bool hideDate = true;
+}
+
+<section class="content-header">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <h1>
+                <i class="fa fa-dashboard" aria-hidden="true"></i>
+                @ViewBag.Title
+            </h1>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            @using (Html.BeginForm("Index", "Dashboard", FormMethod.Get))
+            {
+                <div class="row">
+                    <div class="col-xs-5 form-group">
+                        <label>Data Inicial</label>
+                        @Html.TextBox("startDate", "", new { @class = "form-control datepicker datemask" })
+                    </div>
+
+                    <div class="col-xs-5 form-group">
+                        <label>Data Final</label>
+                        @Html.TextBox("endDate", "", new { @class = "form-control datepicker datemask" })
+                    </div>
+
+                    <div class="col-xs-1">
+                        <button class="btn btn-success" type="submit" style="margin-top: 23px">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="content container-fluid">
+    @if (config.Portfolio.Enabled || config.Product.Enabled)
+    {
+        <h4>@Request.GetLocalizedString("ADMIN_DASHBOARD_USERS_TITLE")</h4>
+
+        if (config.Dashboard.LevelOne.Enabled)
+        {
+            <div class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>@Model.NewSellersCount</h3>
+                            <p>@Request.GetLocalizedString("ADMIN_DASHBOARD_SELLERS_TOTAL")</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-briefcase"></i>
+                        </div>
+                        <a href="@Url.ActionLocalized("Index", "Sellers")" class="small-box-footer">
+                            <span>@Request.GetLocalizedString("ADMIN_MORE_INFO")</span>
+                            <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                @if (config.Product.Enabled)
+                {
+                    <div class="col-lg-3 col-xs-6">
+                        <div class="small-box bg-yellow">
+                            <div class="inner">
+                                <h3>@Model.NewBuyersCount</h3>
+                                <p>@Request.GetLocalizedString("ADMIN_DASHBOARD_BUYERS_TOTAL")</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person"></i>
+                            </div>
+                            <a href="@Url.ActionLocalized("Index", "Buyers")" class="small-box-footer">
+                                <span>@Request.GetLocalizedString("ADMIN_MORE_INFO")</span>
+                                <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    }
+
+    @if (config.Quote.LeadSales.Enabled && config.Quote.LeadSales.IndividualPacks.Enabled && config.Dashboard.LevelOne.Enabled)
+    {
+        <hr />
+        <h4>Créditos</h4>
+        <div class="row">
+            <div class="col-xs-12 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="small-box bg-green">
+                            <div class="inner">
+                                <h3>@Model.Model.CreditsPacksPurchased</h3>
+                                <p>Pacotes de créditos adquiridos</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-cash"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="small-box bg-green">
+                            <div class="inner">
+                                <h3>@config.DefaultCurrency @Model.Model.CreditsTransactionsTotal.RoundTo2Places()</h3>
+                                <p>Faturamento com pacotes de créditos</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-cash"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (config.Quote.Enabled)
+    {
+        <hr />
+        <h4>@Request.GetLocalizedString("ADMIN_DASHBOARD_QUOTES_TITLE")</h4>
+
+        <div class="row">
+            <div class="col-xs-12 col-lg-6">
+                <div class="row">
+                    @if (config.Dashboard.LevelOne.Enabled)
+                    {
+
+                        <div class="col-xs-6">
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3>@Model.NewQuotesCount</h3>
+                                    <p>@Request.GetLocalizedString("ADMIN_DASHBOARD_QUOTES_TOTAL")</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-clipboard"></i>
+                                </div>
+                                @*<a href="@Url.ActionLocalized("Index", "Quotes")" class="small-box-footer">
+                                        <span>@Request.GetLocalizedString("ADMIN_MORE_INFO")</span>
+                                        <i class="fa fa-arrow-circle-right"></i>
+                                    </a>*@
+                            </div>
+                        </div>
+                        if (config.Quote.BuyerDecision.Enabled)
+                        {
+                            <div class="col-xs-6">
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <h3>@config.DefaultCurrency @Model.TotalWonQuotesValue</h3>
+                                        <p>@Request.GetLocalizedString("ADMIN_DASHBOARD_QUOTES_TOTAL_VALUE")</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-cash"></i>
+                                    </div>
+                                    @*<a href="@Url.ActionLocalized("Index", "Quotes")" class="small-box-footer">
+                                            <span>@Request.GetLocalizedString("ADMIN_MORE_INFO")</span>
+                                            <i class="fa fa-arrow-circle-right"></i>
+                                        </a>*@
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    @if (config.Dashboard.LevelTwo.Enabled)
+                    {
+
+                        <div class="col-xs-6">
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3>@(Model.AdvancedMetrics.TotalGroupQuotes + Model.AdvancedMetrics.TotalIndividualQuotes)</h3>
+                                    @Html.Localized("SELLER_METRICS_QUOTES_UNIQUE", "p")
+                                    @if (!hideDate)
+                                    {<small>@Model.AdvancedMetrics.StartDate.DisplayDate() - @Model.AdvancedMetrics.EndDate.DisplayDate()</small>}
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-clipboard"></i>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-6">
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3>@Model.AdvancedMetrics.CountAcceptedQuotes</h3>
+                                    @Html.Localized("SELLER_METRICS_QUOTES_ACCEPTED", "p")
+                                    @if (!hideDate)
+                                    {<small>@Model.AdvancedMetrics.StartDate.DisplayDate() - @Model.AdvancedMetrics.EndDate.DisplayDate()</small>}
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-checkmark"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3>@Model.AdvancedMetrics.CountRejectedQuotes</h3>
+                                    @Html.Localized("SELLER_METRICS_QUOTES_REJECTED", "p")
+                                    @if (!hideDate)
+                                    {<small>@Model.AdvancedMetrics.StartDate.DisplayDate() - @Model.AdvancedMetrics.EndDate.DisplayDate()</small>}
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-close"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3>
+                                        @config.DefaultCurrency
+                                        @Model.AdvancedMetrics.AverageAcceptedQuoteValue.RoundTo2Places()
+                                    </h3>
+                                    @Html.Localized("SELLER_METRICS_AVERAGE_QUOTE", "p")
+                                    @if (!hideDate)
+                                    {<small>@Model.AdvancedMetrics.StartDate.DisplayDate() - @Model.AdvancedMetrics.EndDate.DisplayDate()</small>}
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-cash"></i>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-xs-12 col-lg-6">
+                <div class="row">
+                    @if (config.Dashboard.LevelTwo.Enabled)
+                    {
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">@Request.GetLocalizedString("SELLER_METRICS_BEST_SELLERS")</h3>
+                                </div>
+                                <div class="box-body no-padding">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width: 10px">#</th>
+                                                <th>Vendedor</th>
+                                                <th>Orçamentos Aceitos</th>
+                                                <th>Total</th>
+                                            </tr>
+                                            @if (Model.AdvancedMetrics.ListTopServiceSellers.Count == 0)
+                                            {
+                                                <tr>
+                                                    <td>-</td>
+                                                    <td>Nenhum valor encontrado para o período</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                </tr>
+                                            }
+
+                                            @for (int i = 0; i < Model.AdvancedMetrics.ListTopServiceSellers.Count; i++)
+                                            {
+                                                var seller = Model.AdvancedMetrics.ListTopServiceSellers[i];
+                                                <tr>
+                                                    <td>@(i + 1)</td>
+                                                    <td><a href=@seller.Url>@seller.Name</a></td>
+                                                    <td>@seller.Sales</td>
+                                                    <td>@seller.SalesTotal.RoundTo2Places()</td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">@Request.GetLocalizedString("SELLER_METRICS_BEST_QUOTE_CATEGORIES")</h3>
+                                </div>
+                                <div class="box-body no-padding">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width: 10px">#</th>
+                                                <th>Categoria</th>
+                                                <th>Orçamentos Aceitos</th>
+                                                <th>Total</th>
+                                            </tr>
+                                            @if (Model.AdvancedMetrics.ListTopQuoteCategories.Count == 0)
+                                            {
+                                                <tr>
+                                                    <td>-</td>
+                                                    <td>Nenhum valor encontrado para o período</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                </tr>
+                                            }
+
+                                            @for (int i = 0; i < Model.AdvancedMetrics.ListTopQuoteCategories.Count; i++)
+                                            {
+                                                var category = Model.AdvancedMetrics.ListTopQuoteCategories[i];
+                                                <tr>
+                                                    <td>@(i + 1)</td>
+                                                    <td>@category.Name</td>
+                                                    <td>@category.Sales</td>
+                                                    <td>@category.SalesTotal.RoundTo2Places()</td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (config.Subscription.Enabled)
+    {
+        <hr />
+        <h4>@Request.GetLocalizedString("ADMIN_DASHBOARD_SUBSCRIPTIONS_TITLE")</h4>
+
+        if (config.Dashboard.LevelOne.Enabled)
+        {
+            <div class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>@Model.ActiveSubscriptionsCount</h3>
+                            <p>@Request.GetLocalizedString("ADMIN_DASHBOARD_SUBSCRIPTIONS_TOTAL")</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-refresh"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>
+                                @config.DefaultCurrency
+                                @Model.ActiveSubscriptionsAmount.DisplayDecimal(2)
+                            </h3>
+                            <p>@Request.GetLocalizedString("ADMIN_DASHBOARD_SUBSCRIPTIONS_AMOUNT")</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-card"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+    @if (config.Product.Enabled && !config.Product.HideStoreMenusFromSeller)
+    {
+        <hr />
+        <h4>@Request.GetLocalizedString("ADMIN_DASHBOARD_ORDERS_TITLE")</h4>
+        <div class="row">
+            <div class="col-lg-6 col-xs-12">
+                <div class="row">
+                    @if (config.Dashboard.LevelOne.Enabled)
+                    {
+                        <div class="col-xs-6">
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>@Model.PaidOrdersCount</h3>
+                                    <p>@Request.GetLocalizedString("ADMIN_DASHBOARD_ORDERS_TOTAL")</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-bag"></i>
+                                </div>
+                                @*<a href="@Url.ActionLocalized("Index", "Orders")" class="small-box-footer">
+                                        <span>@Request.GetLocalizedString("ADMIN_MORE_INFO")</span>
+                                        <i class="fa fa-arrow-circle-right"></i>
+                                    </a>*@
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>
+                                        @config.DefaultCurrency
+                                        @Model.PaidOrdersAmount.DisplayDecimal(2)
+                                    </h3>
+                                    <p>@Request.GetLocalizedString("ADMIN_DASHBOARD_ORDERS_AMOUNT")</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-arrow-swap"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>
+                                        @config.DefaultCurrency
+                                        @Model.PaidOrdersFee.DisplayDecimal(2)
+                                    </h3>
+                                    <p>@Request.GetLocalizedString("ADMIN_DASHBOARD_ORDERS_FEE")</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-money"></i>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @if (config.Dashboard.LevelTwo.Enabled)
+                    {
+                        <div class="col-xs-6">
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>
+                                        @config.DefaultCurrency
+                                        @Model.AdvancedMetrics.AverageOrderValue.DisplayDecimal(2)
+                                    </h3>
+                                    @Html.Localized("SELLER_METRICS_ORDERS_AVERAGE", "p")
+                                    @if (!hideDate)
+                                    {<small>@Model.AdvancedMetrics.StartDate.DisplayDate() - @Model.AdvancedMetrics.EndDate.DisplayDate()</small>}
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-cash"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3>@Model.AdvancedMetrics.CountAbandonedCarts</h3>
+                                    @Html.Localized("SELLER_METRICS_ABANDONED_CARTS", "p")
+                                    @if (!hideDate)
+                                    {<small>@Model.AdvancedMetrics.StartDate.DisplayDate() - @Model.AdvancedMetrics.EndDate.DisplayDate()</small>}
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-android-cart"></i>
+                                </div>
+                                <a href="@Url.ActionLocalized("Carts", "Dashboard")" class="small-box-footer">
+                                    <span>@Request.GetLocalizedString("ADMIN_MORE_INFO")</span>
+                                    <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-6 col-xs-12">
+                <div class="row">
+                    @if (config.Dashboard.LevelTwo.Enabled)
+                    {
+                        if (!(config.Quote.Enabled && config.Quote.QuoteBilling.Enabled))
+                        {
+                            <div class="col-xs-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">@Request.GetLocalizedString("SELLER_METRICS_BEST_PRODUCT_CATEGORIES")</h3>
+                                    </div>
+                                    <div class="box-body no-padding">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <th style="width: 10px">#</th>
+                                                    <th>Categoria</th>
+                                                    <th>Unidades Vendidas</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                                @if (Model.AdvancedMetrics.ListTopProductCategories.Count == 0)
+                                                {
+                                                    <tr>
+                                                        <td>-</td>
+                                                        <td>Nenhum valor encontrado para o período</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                    </tr>
+                                                }
+
+                                                @for (int i = 0; i < Model.AdvancedMetrics.ListTopProductCategories.Count; i++)
+                                                {
+                                                    var category = Model.AdvancedMetrics.ListTopProductCategories[i];
+                                                    <tr>
+                                                        <td>@(i + 1)</td>
+                                                        <td>@category.Name</td>
+                                                        <td>@category.Sales</td>
+                                                        <td>@category.SalesTotal.RoundTo2Places()</td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">@Request.GetLocalizedString("SELLER_METRICS_BEST_SELLERS")</h3>
+                                </div>
+                                <div class="box-body no-padding">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width: 10px">#</th>
+                                                <th>Vendedor</th>
+                                                <th>Pedidos</th>
+                                                <th>Total</th>
+                                            </tr>
+                                            @if (Model.AdvancedMetrics.ListTopProductSellers.Count == 0)
+                                            {
+                                                <tr>
+                                                    <td>-</td>
+                                                    <td>Nenhum valor encontrado para o período</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                </tr>
+                                            }
+
+                                            @for (int i = 0; i < Model.AdvancedMetrics.ListTopProductSellers.Count; i++)
+                                            {
+                                                var seller = Model.AdvancedMetrics.ListTopProductSellers[i];
+                                                <tr>
+                                                    <td>@(i + 1)</td>
+                                                    <td><a class="" href=@seller.Url>@seller.Name</a></td>
+                                                    <td>@seller.Sales</td>
+                                                    <td>@seller.SalesTotal.RoundTo2Places()</td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">@Request.GetLocalizedString("SELLER_METRICS_BEST_SELLING_PRODUCTS")</h3>
+                                </div>
+                                <div class="box-body no-padding">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width: 10px">#</th>
+                                                <th>Produto</th>
+                                                <th>Unidades Vendidas</th>
+                                                <th>Total</th>
+                                            </tr>
+                                            @if (Model.AdvancedMetrics.ListTopProducts.Count == 0)
+                                            {
+                                                <tr>
+                                                    <td>-</td>
+                                                    <td>Nenhum valor encontrado para o período</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                </tr>
+                                            }
+
+                                            @for (int i = 0; i < Model.AdvancedMetrics.ListTopProducts.Count; i++)
+                                            {
+                                                var product = Model.AdvancedMetrics.ListTopProducts[i];
+                                                <tr>
+                                                    <td>@(i + 1)</td>
+                                                    <td><a class="" href=@product.Url>@product.Name</a></td>
+                                                    <td>@product.Sales</td>
+                                                    <td>@product.SalesTotal.RoundTo2Places()</td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</section>

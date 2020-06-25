@@ -1,0 +1,96 @@
+﻿@using System
+@model SearchResultVM
+
+@{
+    bool PortfolioSearch = MaaSConfig.Current.Search.ResultType == Domain.Config.General.ResultType.Portfolio;
+    var config = MaaSConfig.Current;
+
+    ViewBag.Title = Request.GetLocalizedString(PortfolioSearch ? "PORTFOLIO_SEARCH_TITLE" : "SEARCH_TITLE");
+}
+
+@section styles
+{
+    @Styles.Render("~/Content/search-page")
+}
+
+<!-- BANNER -->
+<div class="bg-image-1 banner padding-top-60 padding-bottom-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                @Html.Localized(PortfolioSearch ? "PORTFOLIO_SEARCH_TITLE" : "SEARCH_TITLE", "h4", new { @class = "highlight" })
+                @Html.Partial("_SearchFilters", Model)
+            </div>  
+        </div>
+    </div>
+</div>
+<!-- /BANNER -->
+
+<!-- RESULTS -->
+<div class="main-content bg1">
+    <div class="container">
+        <div class="row results-number">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <strong>@Model.TotalItems</strong> @Html.Localized(PortfolioSearch ? "PORTFOLIO_ITEMS_FOUND_COUNT" : "SELLERS_FOUND_COUNT")
+                @if (Model.TotalItems >= 2 && config.Search.SearchType == Domain.Config.General.SearchType.Seller && config.Search.ResultType == Domain.Config.General.ResultType.Seller && config.Quote.Enabled && config.Quote.RequestQuoteToSearchedSellers && config.Quote.GeneralQuote.Enabled)
+                {
+                    <a class="btn btn-sm btn-primary btn-outline" href="@Url.ActionLocalized("RequestFromSearch","Quotes", new { searchQueryString = Request.QueryString.ToString().ToBase64() })"><i class="fas fa-reply-all"></i> @Request.GetLocalizedString("QUOTE_SEARCH_SELLERS_BUTTON")</a>
+                }
+                <div class="pull-right">
+                    @Html.Partial("_SwitchViewMode", Model)
+                </div>
+
+                @if (Model.ViewMode == SearchResultViewMode.List)
+                {
+                    <div class="pull-right">
+                        @Html.Partial("_Sorting", Model)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (Model.ViewMode == SearchResultViewMode.Map)
+    {
+        <div style="height: 500px">
+            <div id="map"></div>
+        </div>
+    }
+
+    <div class="container">
+        @if (Model.ViewMode == SearchResultViewMode.List)
+        {
+            <div id="js-result-wrapper" class="row">
+                @Html.Partial("_ResultList", Model)
+            </div>
+
+            <div class="row">
+                <div id="js-loading" class="progress" style="display: none">
+                    <div class="progress-bar progress-bar-striped progress-bar-success active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        @Html.Localized("LOADING_TEXT", "span", new { @class = "sr-only" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- /RESULTS -->
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/scripts/maps-addons")
+    @Html.Partial("_GoogleMapsScript")
+
+    @if (MaaSConfig.Current.Search.Enabled && MaaSConfig.Current.Search.SearchFields.Location)
+    {
+        <script>GoogleMapsAutocomplete.initNoLocation()</script>
+    }
+
+    <script id="infoWindowMarkup" type="text/html">@Html.Partial("_InfoWindowMarkup")</script>
+    <script>SubCategoriesScript.init()</script>
+    <script>
+        var isMap = @(Model.ViewMode == SearchResultViewMode.Map ? "true" : "false");
+        var resultsJson = @Html.Raw(Model.ItemsJson);
+        SearchIndex.init(isMap, resultsJson);
+    </script>
+}

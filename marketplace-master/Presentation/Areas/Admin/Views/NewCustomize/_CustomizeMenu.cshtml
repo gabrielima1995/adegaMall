@@ -1,0 +1,92 @@
+﻿@model int
+@{ 
+    
+}
+    
+<div class="row">
+    <div class="col-xs-12 visible-sm visible-xs">
+        <div class="btn-group btn-group-justified">
+            <div class="btn-group">
+                <a href="@Url.ActionLocalized("Marketplace", "NewCustomize")" class="btn btn-nav @(Model == 0 ? "active" : "")">
+                    <span class="glyphicon glyphicon-briefcase"></span>
+                    @Html.Localized("ADMIN_CUSTOMIZE_MENU_MARKETPLACE","p")
+                </a>
+            </div>
+            <div class="btn-group">
+                <a href="@Url.ActionLocalized("Home", "NewCustomize")" class="btn btn-nav @(Model == 1 ? "active" : "")">
+                    <span class="glyphicon glyphicon-home"></span>
+                    @Html.Localized("ADMIN_CUSTOMIZE_MENU_HOME", "p")
+                </a>
+            </div>
+            <div class="btn-group">
+                <a href="@Url.ActionLocalized("Identity", "NewCustomize")" class="btn btn-nav @(Model == 2 ? "active" : "")">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    @Html.Localized("ADMIN_CUSTOMIZE_MENU_IDENTITY", "p")
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 visible-sm visible-xs">
+        <div class="btn-group btn-group-justified">
+            <div class="btn-group">
+                <a href="@Url.ActionLocalized("Seller", "NewCustomize")" class="btn btn-nav @(Model == 3 ? "active" : "")">
+                    <span class="glyphicon glyphicon-user"></span>
+                    @Html.Localized("ADMIN_CUSTOMIZE_MENU_SELLERS", "p")
+                </a>
+            </div>
+            <div class="btn-group">
+                <a href="@Url.ActionLocalized("Buyer", "NewCustomize")" class="btn btn-nav @(Model == 4 ? "active" : "")">
+                    <span class="glyphicon glyphicon-user"></span>
+                    @Html.Localized("ADMIN_CUSTOMIZE_MENU_BUYERS", "p")
+                </a>
+            </div>
+            <div class="btn-group">
+                <a href="@Url.ActionLocalized("Others", "NewCustomize")" class="btn btn-nav @(Model == 5 ? "active" : "")">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    @Html.Localized("ADMIN_CUSTOMIZE_MENU_OTHERS", "p")
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 hidden-sm hidden-xs">
+        <div class="btn-group btn-group-justified">
+            <div class="btn-group">
+                <a href="@Url.ActionLocalized("Marketplace", "NewCustomize")" class="btn btn-nav @(Model == 0 ? "active" : "")">
+                    <span class="glyphicon glyphicon-briefcase"></span>
+                    @Html.Localized("ADMIN_CUSTOMIZE_MENU_MARKETPLACE", "p")
+                </a>
+            </div>
+            <div class="btn-group">
+                <a href="@Url.ActionLocalized("Home", "NewCustomize")" class="btn btn-nav @(Model == 1 ? "active" : "")">
+                    <span class="glyphicon glyphicon-home"></span>
+                    @Html.Localized("ADMIN_CUSTOMIZE_MENU_HOME", "p")
+                </a>
+            </div>
+            <div class="btn-group">
+                <a href="@Url.ActionLocalized("Identity", "NewCustomize")" class="btn btn-nav @(Model == 2 ? "active" : "")">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    @Html.Localized("ADMIN_CUSTOMIZE_MENU_IDENTITY", "p")
+                </a>
+            </div>
+            <div class="btn-group">
+                <a href="@Url.ActionLocalized("Seller", "NewCustomize")" class="btn btn-nav @(Model == 3 ? "active" : "")">
+                    <span class="glyphicon glyphicon-user"></span>
+                    @Html.Localized("ADMIN_CUSTOMIZE_MENU_SELLERS", "p")
+                </a>
+            </div>
+            <div class="btn-group">
+                <a href="@Url.ActionLocalized("Buyer", "NewCustomize")" class="btn btn-nav @(Model == 4 ? "active" : "")">
+                    <span class="glyphicon glyphicon-user"></span>
+                    @Html.Localized("ADMIN_CUSTOMIZE_MENU_BUYERS", "p")
+                </a>
+            </div>
+            <div class="btn-group">
+                <a href="@Url.ActionLocalized("Others", "NewCustomize")" class="btn btn-nav @(Model == 5 ? "active" : "")">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    @Html.Localized("ADMIN_CUSTOMIZE_MENU_OTHERS", "p")
+                </a>
+            </div>
+        </div>
+    </div>
+    
+</div>

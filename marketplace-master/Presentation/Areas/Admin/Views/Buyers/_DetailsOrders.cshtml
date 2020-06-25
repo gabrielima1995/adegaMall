@@ -1,0 +1,62 @@
+﻿@model Domain.Entities.Buyer
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (config.Product.Enabled)
+{
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Pedidos</h3>
+        </div>
+        @if (Model.Orders.Any())
+        {
+            <div class="box-body table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Vendedor</th>
+                            <th>Valor</th>
+                            <th>Data</th>
+                            <th>Pagamento</th>
+                            <th>Situação</th>
+                            <th>Localidade</th>
+                            <th>Frete</th>
+                            <th>Envio</th>
+                            <th>Taxa Marketplace</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Orders)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@Url.ActionLocalized("Details", "Orders", new { id = item.Id })">@item.Id.ToString().Substring(0, 8)</a>
+                                </td>
+                                <td>
+                                    <a href="@Url.ActionLocalized("Details", "Sellers", new { id = item.Seller.Id })">@item.Seller.PublicProfileName</a>
+                                </td>
+                                <td>@Html.DisplayFor(model => item.Amount)</td>
+                                <td>@Html.DisplayFor(model => item.CreatedAt)</td>
+                                <td>@Html.DisplayFor(model => item.PaymentMethod)</td>
+                                <td>@Html.DisplayFor(model => item.Status)</td>
+                                <td>@Html.DisplayFor(model => item.ShippingAddress.CityAndState)</td>
+                                <td>@Html.DisplayFor(model => item.Shipping)</td>
+                                <td>@Html.DisplayFor(model => item.ShippingMethod)</td>
+                                <td>@Html.DisplayFor(model => item.StartupFee)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="box-body">
+                <p>Nenhum pedido realizado.</p>
+            </div>
+        }
+    </div>
+}

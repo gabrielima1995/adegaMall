@@ -1,0 +1,67 @@
+﻿@using Presentation.Helpers
+@model Presentation.Models.PurchaseCreditsPackVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("CREDITS_PACK_TITLE");
+    var isStripe = MaaSConfig.Current.Payment.GatewayIsStripe();
+
+    var hasErrors = !ViewData.ModelState.IsValid;
+    var subscribeErros = CartHelper.GetCartErrors(ViewData.ModelState, true);
+    var isBuyer = User.Identity.GetLoginProfile().IsBuyer();
+}
+
+<div class="main-content bg-image-2 padding-top-120 padding-bottom-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2 box-content text-center" style="margin-bottom:64px">
+                        <div>
+                            <h2>@Model.Pack.NameLocalized(Request.GetCurrentLang())</h2>
+                        </div>
+                        <hr />
+                        <div>
+                            <small>@Model.Pack.DescriptionLocalized(Request.GetCurrentLang())</small>
+                        </div>
+                        <br />
+                        <h2><i class="fas fa-coins"></i> @Model.Pack.CreditsAmount @Request.GetLocalizedString("CREDITS_LABEL")</h2>
+                        <h2>@MaaSConfig.Current.DefaultCurrency @Model.Pack.Price.RoundTo2Places()</h2>
+                        @if (MaaSConfig.Current.Quote.LeadSales.CreditsExpire)
+                        {
+                            @Html.Localized("CREDITS_PACK_DESCRIPTION_DAYS", "small", null, Model.Pack.ValidityDays.GetValueOrDefault())
+                            <br />
+                        }
+                        @if (hasErrors)
+                        {
+                            <div class="row">
+                                <div class="alert alert-danger">
+                                    @Html.Localized("SUBSCRIBE_ERRORS_TO_PROCEED")
+                                    <a href="@Css.If(isBuyer, Url.ActionLocalized("Buyer", "Manage"), Url.ActionLocalized("Seller", "Manage"))" class="btn btn-default">
+                                        <i class="glyphicon glyphicon-chevron-left"></i>
+                                        @Request.GetLocalizedString("SUBSCRIBE_COMPLETE_REGISTRATION")
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="box-content text-center" style="margin-bottom:64px">
+                    @Html.Localized("CREDITS_PACK_PAYMENT_LABEL", "h2", new { @class = "text-center" })
+                    <hr />
+
+                    @Html.Partial(isStripe ? "_PurchaseFormStripe" : "_PurchaseForm", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @if (isStripe)
+    {
+        @Html.Partial("_PurchasePackStripeScript")
+    }
+}

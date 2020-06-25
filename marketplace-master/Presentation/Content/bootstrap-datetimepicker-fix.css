@@ -1,0 +1,9 @@
+﻿/*
+    Outro componente estraga a visualização deste.
+    A regra abaixo corrige a visualização na página de anúncio do produto.
+*/
+
+.bootstrap-datetimepicker-widget .datepicker {
+    padding-left: 15px;
+    padding-right: 15px;
+}

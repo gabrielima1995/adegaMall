@@ -1,0 +1,23 @@
+﻿@model Presentation.Areas.Admin.Models.CustomizeHomeVM
+@{
+    int index = (int)ViewBag.Index;
+}
+
+<div class="col-xs-12 col-sm-6 equal-height">
+    <div class="row">
+        <div class="col-xs-4 text-center">
+            <div style="display:block;" class="center-block">
+                <img src="@Model.MiscArea.Items[index]" class="img-responsive new-images-preview" style="max-height:120px; max-width:90%;" />
+            </div>
+        </div>
+        <div class="col-xs-8" style="overflow:hidden">
+            @Html.Localized("ADMIN_CUSTOMIZE_ICON", "label")
+            @Html.HiddenFor(Model => Model.MiscArea.Items[index], new { @class = "new-images-hidden" })
+            @Html.TextBox($"misc-item{index}-image", null, new { type = "file", @class = "new-images" })
+            <br />
+            <a class="btn btn-danger btn-outline btn-sm" href="@Url.ActionLocalized("RemoveMiscItem", "NewCustomize", new { index })"><i class="fa fa-trash"></i> Excluir Item</a>
+            @*@Html.ActionLink("Excluir Item", "RemoveMiscItem", new { index }, new { @class = "btn btn-danger" })*@
+        </div>
+    </div>
+    <hr />
+</div>

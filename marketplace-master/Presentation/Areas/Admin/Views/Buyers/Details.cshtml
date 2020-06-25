@@ -1,0 +1,47 @@
+﻿@model Presentation.Areas.Admin.Views.Buyers.BuyerModel
+
+@{
+    ViewBag.Title = "Detalhes do Comprador";
+
+    var config = MaaSConfig.Current;
+
+    var shippingOutEnabled =
+        config.Product.PrivateFleetShipping.Enabled ||
+        (config.Product.ShippingMode == Domain.Entities.StoreModule.ShippingMode.PerProduct &&
+            (config.Product.SedexShipping.Enabled || config.Product.PACShipping.Enabled));
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-user" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.ActionLocalized("Index", "Dashboard")"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="@Url.ActionLocalized("Index", "Buyers")">Compradores</a></li>
+        <li class="active">Detalhes do Comprador</li>
+    </ol>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            @Html.Partial("_DetailsProfile", Model)
+        </div>
+        <div class="col-md-9">
+            @Html.Partial("_DetailsAddresses", Model.Buyer)
+            @Html.Partial("_DetailsOrders", Model.Buyer)
+            @Html.Partial("_DetailsQuotes", Model.Buyer)
+            @if (config.Buyer.UserRatings.Enabled)
+            {
+                Html.RenderPartial("_DetailsRatings", ViewData["RatingsList"]);
+            }
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>DataTableCustom.create()</script>
+    <script>BuyerDetails.init()</script>
+}

@@ -1,0 +1,46 @@
+﻿@using Domain.Entities
+@model CustomFieldVM
+
+<div class="row">
+    <div class="col-xs-12">
+        <hr />
+        <h3 class="text-center">Opções</h3>
+        <ul class="list-group list-group-bordered">
+            @foreach (var opt in Model.Options)
+            {
+                <li class="list-group-item">
+                    @opt.Name
+                    <a href="javascript:void(0)" class="pull-right text-danger js-remove-option" data-model-id="@Model.Id" data-model-opt-id="@opt.Id">
+                        Remover  <i class="fa fa-minus-circle"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+        <div class="form-group row">
+            <div class="col-xs-10">
+                <label>Nova Opção</label>
+                @switch (Model.DataType)
+                {
+                    case CustomFieldDataType.RawText:
+                        @Html.TextBox($"js-add-option-{Model.Id}", "", new { id = $"js-add-option-{Model.Id}", @class = "form-control" })
+                        break;
+                    case CustomFieldDataType.Number:
+                        @Html.TextBox($"js-add-option-{Model.Id}", "", new { id = $"js-add-option-{Model.Id}", @class = "form-control", type = "number" })
+                        break;
+                    case CustomFieldDataType.Date:
+                        @Html.TextBox($"js-add-option-{Model.Id}", "", new { id = $"js-add-option-{Model.Id}", @class = "form-control datepicker datemask" })
+                        break;
+                }
+                @*@Html.TextBox($"js-add-option-{Model.Id}", "", new { id = $"js-add-option-{Model.Id}", @class = "form-control" })*@
+            </div>
+
+            <div class="col-xs-2 text-center">
+                <label>Adicionar</label>
+                <a class="btn btn-sm btn-success js-add-option" data-model-id="@Model.Id">
+                    <i class="fa fa-plus-circle"></i>
+                </a>
+            </div>
+        </div>
+        <hr />
+    </div>
+</div>

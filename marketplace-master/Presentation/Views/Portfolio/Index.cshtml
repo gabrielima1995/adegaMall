@@ -1,0 +1,87 @@
+﻿@using Application.Modules.Portfolio
+@using Microsoft.AspNet.Identity
+
+@model Application.Modules.Portfolio.PortfolioViewModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("PORTFOLIO_LINK");
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+<!-- CONTENTS -->
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Hidden("maxCategories", MaaSConfig.Current.Portfolio.CategoriesLimit)
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-9 m-b-sm">
+                @Html.Localized("SELLER_SUB_CATEGORIES_TITLE", "h3")
+                @using (Html.BeginForm("Index", "Portfolio", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { @class = "" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    foreach (var subCategory in Model.SubCategories)
+                    {
+                        @Html.Partial("_PortfolioSubCategory", subCategory)
+                    }
+
+                    @Html.Localized("SAVE_CHANGES_BUTTON", "button", new { type = "submit", @class = $"btn btn-primary btn-block {Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.PortfolioEdit)}" })
+                }
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Localized("PORTFOLIO_LINK", "h3")
+                @Html.Partial("_PortfolioItems", Model.Items ?? new List<PortfolioItemVM>())
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /CONTENTS -->
+
+@section scripts{
+    <script>SubCategoriesScript.init()</script>
+
+    <script>
+        (function ($, MaaS) {
+            var $body = $('body');
+            
+            $body.on('click', '.js-add-category', function (e) {
+                e.preventDefault();
+
+                let maxCategories = $('#maxCategories').val();
+
+                if ($('.categoria').length < maxCategories) {
+                    var $this = $(this);
+
+                    $.ajax({
+                        url: '@Url.ActionLocalized("AddSubCategory", "Portfolio")',
+                        success: function (data) {
+
+                            var $categoria = $this.parents('.categoria');
+
+                            $(data).insertAfter($categoria).slideDown();
+                        }
+                    });
+                }
+            });
+
+            $body.on('click', '.js-remove-category', function (e) {
+                e.preventDefault();
+                var $this = $(this);
+
+                if ($('.categoria').length !== 1) {
+                    $this.parents('.categoria').remove();
+                }
+            });
+        })(window.jQuery, window.MaaS);
+    </script>
+}

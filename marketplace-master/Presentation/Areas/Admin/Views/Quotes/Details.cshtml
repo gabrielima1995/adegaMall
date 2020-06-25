@@ -1,0 +1,98 @@
+﻿@model Presentation.Areas.Admin.Controllers.Portfolio.QuoteDetailsViewModel
+
+@{
+    ViewBag.Title = "Orçamento #" + Model.Dto.Quote.Id.ToString().Substring(0, 8);
+    var config = MaaSConfig.Current;
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-cubes" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.ActionLocalized("Index", "Dashboard")"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="@Url.ActionLocalized("Index", "Quotes")">Orçamentos</a></li>
+        <li class="active">Detalhes do Orçamento</li>
+    </ol>
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-body no-padding">
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.Partial("~/Areas/Admin/Views/Shared/_DetailsBuyer.cshtml", Model.Dto.Buyer)
+                </div>
+                <div class="col-md-4">
+                    @if (Model.HasOriginalSeller)
+                    {
+                        @Html.Partial("~/Areas/Admin/Views/Shared/_DetailsSeller.cshtml", Model.Dto.Seller)
+                    }
+                    else
+                    {
+                        <div class="box-header">
+                            <h3 class="box-title">Enviar para vendedores</h3>
+                        </div>
+                        <div class="box-body">
+                            @using (Html.BeginForm("SendToSellers", "Quotes", FormMethod.Post))
+                            {
+                                @Html.Hidden("groupId", Model.Dto.Quote.GroupId)
+                                @Html.Hidden("quoteId", Model.Dto.Quote.Id)
+
+                                <div class="form-group">
+                                    @Html.DropDownList("SendToSellerIds", Model.SellersToSendQuoteTo, new { @class = "form-control", multiple = "multiple" })
+                                </div>
+
+                                <button type="submit" class="btn btn-default btn-sm" btn-loading="Aguarde..." id="btnSendToSellers">
+                                    <i class="fa fa-fw fa-send"></i> Enviar
+                                </button>
+                            }
+                            <hr />
+
+                            @if (Model.HasSellersInQuoteGroup)
+                            {
+                                <p>Este orçamento já foi repassado para os seguintes vendedores:</p>
+                                <ul>
+                                    @foreach (var seller in Model.SellersInQuoteGroup)
+                                    {
+                                        <li>@Html.ActionLink(seller.AlternativeName, "Details", "Sellers", new { Id = seller.Id, Area = "Admin" }, null)</li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p>Este orçamento ainda não foi repassado para nenhum vendedor.</p>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="col-md-4">
+                    @Html.Partial("_DetailsInfo", Model.Dto)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial("_DetailsAnswers", Model.Dto)
+</section>
+
+@section scripts {
+    @Scripts.Render("~/bundles/mvc-ajax")
+    @Scripts.Render("~/bundles/scripts/saas")
+
+    <script>
+        $("#SendToSellerIds").select2({
+            placeholder: 'Selecione vendedores',
+            allowClear: true
+        });
+
+        $("#btnSendToSellers").click(function () { $(this).button("loading") });
+    </script>
+
+    <script>
+        QuoteDetails.init(function() {
+            window.location.reload();
+        });
+    </script>
+}

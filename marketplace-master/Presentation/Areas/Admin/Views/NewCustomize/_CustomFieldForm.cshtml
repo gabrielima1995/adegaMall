@@ -1,0 +1,109 @@
+﻿@model CustomFieldVM
+
+@{
+    bool typeIsBuyer = "buyer".Equals(Request.QueryString["type"], StringComparison.OrdinalIgnoreCase);
+    bool typeIsSeller = "seller".Equals(Request.QueryString["type"], StringComparison.OrdinalIgnoreCase);
+    bool typeIsQuote = "quote".Equals(Request.QueryString["type"], StringComparison.OrdinalIgnoreCase);
+    bool typeIsProduct = "product".Equals(Request.QueryString["type"], StringComparison.OrdinalIgnoreCase);
+    var config = MaaSConfig.Current;
+    var publicFieldInfo =
+        typeIsBuyer ? "Campos públicos do cadastro de comprador serão visíveis para o vendedor nos pedidos" :
+        typeIsSeller ? "Campos públicos do cadastro de vendedor serão visíveis no perfil público/anúncio do vendedor" :
+        typeIsQuote ? "Campos públicos do orçamento serão visíveis para o vendedor em seu painel" :
+        typeIsProduct ? "Campos públicos do produto serão visíveis para todos na página de anúncio do produto" :
+        "Determina se o campo é visível para os usuários da plataforma de acordo com o contexto, ou somente para os administradores";
+    var blockChangesInfo = "Trava o campo após o usuário ser aprovado na moderação, para que o seu preenchimento não possa mais ser alterado";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4 class="panel-title">Novo campo</h4>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("NewCustomField", "NewCustomize", FormMethod.Post, new { @class = "form-group" }))
+        {
+            <span>@Html.ValidationSummary(true, "", new { @class = "text-danger" })</span>
+            <div class="row">
+                <div class="col-xs-6">
+                    @Html.HiddenFor(Model => Model.EntityType)
+
+                    @Html.LabelFor(Model => Model.Name)
+                    @Html.TextBoxFor(Model => Model.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.Name, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-xs-6">
+                    @Html.LabelFor(Model => Model.Name_EN)
+                    @Html.TextBoxFor(Model => Model.Name_EN, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.Name_EN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-6">
+                    @Html.LabelFor(Model => Model.Placeholder)
+                    @Html.TextBoxFor(Model => Model.Placeholder, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.Placeholder, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="col-xs-6">
+                    @Html.LabelFor(Model => Model.Placeholder_EN)
+                    @Html.TextBoxFor(Model => Model.Placeholder_EN, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.Placeholder_EN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.CheckBoxFor(Model => Model.IsMandatory, new { @class = "" })
+                    @Html.LabelFor(Model => Model.IsMandatory)
+                    @Html.ValidationMessageFor(Model => Model.IsMandatory, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-xs-6 form-group">
+                    @Html.CheckBoxFor(Model => Model.IsPublic, new { @class = "" })
+                    @Html.LabelFor(Model => Model.IsPublic)
+                    <span class="fa fa-info-circle" data-toggle="tooltip" title="@publicFieldInfo"></span>
+                    @Html.ValidationMessageFor(Model => Model.IsPublic, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            if (typeIsSeller || typeIsBuyer)
+            {
+                if (config.Seller.Moderation.Enabled || config.Buyer.Moderation.Enabled)
+                {
+                    <div class="row">
+                        <div class="col-xs-6 form-group">
+                            @Html.CheckBoxFor(Model => Model.BlockChangesAfterApprovedInModeration, new { @class = "" })
+                            @Html.LabelFor(Model => Model.BlockChangesAfterApprovedInModeration)
+                            <span class="fa fa-info-circle" data-toggle="tooltip" title="@blockChangesInfo"></span>
+                            @Html.ValidationMessageFor(Model => Model.BlockChangesAfterApprovedInModeration, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+            }
+            <br />
+            <div class="row">
+                <div class="col-xs-4 form-group">
+                    @Html.LabelFor(Model => Model.Order)
+                    @Html.TextBoxFor(Model => Model.Order, new { @class = "form-control", type = "number", min = "0", max = "100" })
+                    @Html.ValidationMessageFor(Model => Model.Order, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-4 form-group">
+                    @Html.LabelFor(Model => Model.DataType)
+                    @Html.EnumDropDownListFor(Model => Model.DataType, new { id = "js-data-dropdown", @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.DataType, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-xs-4 form-group">
+                    @Html.LabelFor(Model => Model.InputType)
+                    @Html.DropDownListFor(Model => Model.InputType, new SelectList(new string[] { }), new { id = "js-input-dropdown", @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.InputType, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <hr />
+            <div class="text-center"><button type="submit" class="btn btn-primary">Enviar</button></div>
+        }
+    </div>
+</div>

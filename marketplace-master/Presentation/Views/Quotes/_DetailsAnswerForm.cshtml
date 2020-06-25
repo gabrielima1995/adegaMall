@@ -1,0 +1,130 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model QuoteAnswerVM
+
+@{
+    var config = MaaSConfig.Current;
+    var loginProfile = User.Identity.GetLoginProfile();
+    var isBuyer = loginProfile.IsBuyer();
+    var isSeller = loginProfile.IsSeller();
+    var isClosed = (bool)ViewData["IsClosed"];
+    var dealWon = (bool)ViewData["DealWon"];
+
+    var showProposalFields = !isClosed && loginProfile.IsSeller();
+}
+
+@using (Html.BeginForm("AddAnswer", "Quotes", new { area = "" }, FormMethod.Post, new { id = "frmAddAnswer", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.AuthorId)
+    @Html.HiddenFor(model => model.Buyer_Id)
+    @Html.HiddenFor(model => model.Quote_Id)
+    @Html.HiddenFor(model => model.Seller_Id)
+
+    if (loginProfile.IsSeller() && config.Quote.BuyerDecision.Enabled)
+    {
+        <div class="row m-b-sm">
+            @if (isClosed)
+            {
+                <div class="col-xs-12">
+                    <span class="text text-warning">
+                        <i class="fa fa-exclamation-circle"></i>
+                        @Request.GetLocalizedString("QUOTE_CLOSED_HELP")
+                    </span>
+                </div>
+            }
+            else
+            {
+                <div class="col-xs-12">
+                    <div style="display:inline-block" class="m-r-md">
+                        @Html.RadioButtonFor(Model => Model.CancelQuote, false, new { name = "cancelQuote", id = "SendMessage" })
+                        <label for="SendMessage"> @Request.GetLocalizedString("ANSWER_QUOTE")</label>
+                    </div>
+                    <div style="display:inline-block">
+                        @Html.RadioButtonFor(Model => Model.CancelQuote, true, new { name = "cancelQuote", id = "CancelQuote" })
+                        <label for="CancelQuote"> @Request.GetLocalizedString("QUOTE_REJECT_ACTION_SELLER")</label>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control answer", placeholder = Request.GetLocalizedString("QUOTE_ANSWER_TEXT_INPUT_V2") } })
+        @Html.ValidationMessageFor(model => model.Text)
+    </div>
+
+    <div class="row">
+        @if (showProposalFields)
+        {
+            <div class="col-xs-12 col-sm-6" id="proposalFieldsContainer">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <label>Sua proposta</label>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control price js-money", placeholder = Request.GetLocalizedString("QUOTE_ANSWER_PRICE_INPUT_V2") } })
+                                    @Html.HiddenFor(i => i.PriceRequired)
+                                    @Html.ValidationMessageFor(model => model.Price)
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(i => i.DeliveryDeadline, "{0:d}", new { @class = "form-control date js-date", placeholder = Request.GetLocalizedString("DELIVERY_DEADLINE_LABEL") })
+                                    @Html.ValidationMessageFor(model => model.DeliveryDeadline, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        @if (loginProfile.IsSeller() && config.Quote.BuyerDecision.Enabled && !isClosed)
+                        {
+                            <span id="quoteProposalHelp" class="text-info">
+                                <i class="fa fa-info-circle"></i>
+                                @Html.Localized("QUOTE_PROPOSAL_HELP_V2", "span")
+                            </span>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                <input type="file" name="quoteAttachment" class="form-control" />
+                @Html.Localized("QUOTE_ATTACHMENT_INFO", "small", new { @class = "text-muted" })
+            </div>
+        </div>
+    </div>
+
+    <button id="btnAddAnswer" type="submit" class="btn btn-primary" data-loading-text="@Request.GetLocalizedString("LOADING_TEXT")">
+        <i class="glyphicon glyphicon-share-alt"></i>
+        @Request.GetLocalizedString("QUOTE_ANSWER_POST_BUTTON")
+    </button>
+
+    if (isBuyer)
+    {
+        if (Model.QuoteGroupId == null)
+        {
+            <a href="@Url.ActionLocalized("Buyer", "Quotes")" class="btn btn-link">
+                @Request.GetLocalizedString("BACK_BUTTON")
+            </a>
+        }
+        else
+        {
+            <a href="@Url.ActionLocalized("GroupDetails", "Quotes", new { id = Model.QuoteGroupId })" class="btn btn-link">
+                @Request.GetLocalizedString("BACK_BUTTON")
+            </a>
+        }
+    }
+    else if (isSeller)
+    {
+        <a href="@Url.ActionLocalized("Index", "Quotes")" class="btn btn-link">
+            @Request.GetLocalizedString("BACK_BUTTON")
+        </a>
+    }
+    else
+    {
+        <a href="@Url.ActionLocalized("Index", "Quotes", new { area = "Admin" })" class="btn btn-link">
+            @Request.GetLocalizedString("BACK_BUTTON")
+        </a>
+    }
+}

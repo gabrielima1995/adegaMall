@@ -1,0 +1,134 @@
+﻿@using Microsoft.AspNet.Identity
+@using Domain.StoreModule.Entities
+@model OrderDetailsVM
+
+@{
+    var config = MaaSConfig.Current;
+
+    ViewBag.Title = Request.GetLocalizedString("ORDER_LABEL") + " " + Model.Order.Id.DisplayShortGuid();
+    var viewPathFmt = "~/Views/Products/MyOrders/{0}.cshtml";
+    var loginProfile = User.Identity.GetLoginProfile();
+
+    var bmIsRental = config.Product.BusinessModel.Rental.Enabled;
+    var bmRentalIsShift = bmIsRental && config.Product.BusinessModel.Rental.RentalPeriodMode == RentalPeriodMode.Shifts;
+    var bmRentalIsGridView = bmIsRental && !bmRentalIsShift && config.Product.BusinessModel.Rental.GridView.Enabled;
+}
+
+@section styles {
+    <style>
+        .order.order-item.image {
+            width: 15%;
+        }
+
+        .order.order-item.unit-price {
+            width: 13%;
+        }
+
+        .order.order-item.subtotal {
+            width: 13%;
+        }
+
+        .order.order-item.shipping {
+            width: 13%;
+        }
+
+        .order.order-item.total {
+            width: 14%;
+        }
+    </style>
+
+    @Styles.Render("~/Content/datetime-picker")
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+            <div class="col-xs-12">
+                <h3>@ViewBag.Title</h3>
+                @Html.Partial(string.Format(viewPathFmt, "_OrderDetails"), Model)
+                <a href="@Url.ActionLocalized("Index", "MyOrders")">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                    @Html.Localized("MY_ORDERS_BACK_INDEX")
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/scripts/datetime-picker")
+
+    <script>
+        var bmIsRental = '@bmIsRental';
+        var bmRentalIsShift = '@bmRentalIsShift';
+        var bmRentalIsGridView = '@bmRentalIsGridView';
+
+        $(document).ready(function () {
+            $('.js-cancel-rental').click(function (e) {
+                e.preventDefault();
+
+                swal({
+                    title: "@Html.Raw(Request.GetLocalizedString("ALERT_WARNING_TITLE"))",
+                    text: "@Html.Raw(Request.GetLocalizedString("ORDER_BUYER_CANCEL_PRODUCT_CONFIRMATION_MESSAGE") + " " + Request.GetLocalizedString("ORDER_BUYER_CANCEL_ORDER_RENTAL_ADDITIONAL_MESSAGE"))",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: "@Html.Raw(Request.GetLocalizedString("ALERT_CONFIRM_BUTTON"))",
+                    cancelButtonText: "@Html.Raw(Request.GetLocalizedString("ALERT_CANCEL_BUTTON"))",
+                    closeOnConfirm: false
+                },
+                function () {
+                    $.redirect('@Url.ActionLocalized("ChangeStatus", "MyOrders", new { id = Model.Order.Id })');
+                    return true;
+                });
+
+                return false;
+            });
+
+            $('.js-change-period-rental').on('click', function (e) {
+                var $this = $(this);
+
+                var $container = $this.parent();
+
+                if (bmIsRental === "True") {
+                    ProductRentalPublicPage.init($container);
+
+                    if (bmRentalIsShift === "True") {
+                        RentalCalendar.init($container);
+                    }
+
+                    if (bmRentalIsGridView === "True") {
+                        RentalGridView.init($container);
+                    }
+                }
+
+                $container.find('.js-confirm-change-period-modal').modal('show');
+            });
+
+            $('.js-new-period-rental').on('click', function (e) {
+                var $this = $(this);
+
+                var $container = $this.parent();
+
+                if (bmIsRental === "True") {
+                    ProductRentalPublicPage.init($container);
+
+                    if (bmRentalIsShift === "True") {
+                        RentalCalendar.init($container);
+                    }
+
+                    if (bmRentalIsGridView === "True") {
+                        RentalGridView.init($container);
+                    }
+                }
+
+                $container.find('.js-confirm-new-period-rental').modal('show');
+            });
+
+        });
+    </script>
+}

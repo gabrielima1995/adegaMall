@@ -1,0 +1,94 @@
+﻿@model Presentation.Areas.Admin.Views.Sellers.SellerModel
+
+@{
+    ViewBag.Title = "Detalhes do Vendedor";
+
+    var config = MaaSConfig.Current;
+
+    var tabOrdersActive = config.Product.Enabled;
+    var tabQuotesActive = !tabOrdersActive && config.Quote.Enabled;
+    var tabScheduleTransferActive = config.Payment.GatewayIsPagarme() && config.Payment.Common.EnableTransactionWarranty;
+
+    var tabsViewData = new ViewDataDictionary();
+    tabsViewData.Add("TabOrdersActive", tabOrdersActive);
+    tabsViewData.Add("TabQuotesActive", tabQuotesActive);
+    tabsViewData.Add("TabScheduleTransferActive", tabScheduleTransferActive);
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-user" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.ActionLocalized("Index", "Dashboard")"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="@Url.ActionLocalized("Index", "Sellers")">Vendedores</a></li>
+        <li class="active">Detalhes do Vendedor</li>
+    </ol>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            @Html.Partial("_DetailsProfile", Model, ViewData)
+        </div>
+        <div class="col-md-9">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    @if (config.Product.Enabled)
+                    {
+                        <li class="@(tabOrdersActive ? "active" : "")"><a href="#orders" data-toggle="tab">Vendas</a></li>
+                        <li><a href="#products" data-toggle="tab">Produtos</a></li>
+                    }
+                    @if (config.Quote.Enabled)
+                    {
+                        <li class="@(tabQuotesActive ? "active" : "")"><a href="#quotes" data-toggle="tab">Orçamentos</a></li>
+                    }
+                    @if (config.Seller.UserRatings.Enabled)
+                    {
+                        <li><a href="#ratings" data-toggle="tab">Avaliações</a></li>
+                    }
+                    @if (config.Quote.LeadSales.Enabled && config.Quote.LeadSales.IndividualPacks.Enabled)
+                    {
+                        <li><a href="#creditsbought" data-toggle="tab">Compra de Créditos</a></li>
+                    }
+                    @if (config.Payment.GatewayIsPagarme() && config.Payment.Common.EnableTransactionWarranty)
+                    {
+                        <li><a href="#scheduledTransfer" data-toggle="tab">Pedidos em Garantia</a></li>
+                    }
+                </ul>
+                <div class="tab-content">
+                    @Html.Partial("_DetailsOrders", Model.Seller, tabsViewData)
+                    @Html.Partial("_DetailsProducts", Model.Seller)
+                    @Html.Partial("_DetailsQuotes", Model.Seller, tabsViewData)
+                    @Html.Partial("_DetailsScheduledTransfer", Model.SellerScheduledTransfer)
+                    @if (config.Quote.LeadSales.Enabled && config.Quote.LeadSales.IndividualPacks.Enabled)
+                    {
+                        @Html.Partial("_DetailsCredits", Model.Seller.LeadSalesProfile?.CreditsPackTransactions ?? new List<Domain.Entities.CreditsPackTransaction>())
+                    }
+                    @if (config.Seller.UserRatings.Enabled)
+                    {
+                        Html.RenderPartial("_DetailsRatings", ViewData["RatingsList"], tabsViewData);
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        function createDataTables() {
+            var tableIds = ["#orderList", "#productList", "#quoteList", "#creditList", "#ratingList","#scheduledTransferList"];
+            for (var i = 0; i < tableIds.length; i++) {
+                var sortColumn = $(tableIds[i] + " th[data-sort]");
+                DataTableCustom.create(tableIds[i], {
+                    "order": [[sortColumn.index(), sortColumn.data("sort")]]
+                });
+            }
+        }
+        createDataTables();
+    </script>
+    <script>SellerDetails.init()</script>
+}

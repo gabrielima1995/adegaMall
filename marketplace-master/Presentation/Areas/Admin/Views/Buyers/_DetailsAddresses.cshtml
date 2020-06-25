@@ -1,0 +1,43 @@
+﻿@model Domain.Entities.Buyer
+
+@{ 
+    var config = MaaSConfig.Current;
+
+    var shippingOutEnabled =
+        config.Product.PrivateFleetShipping.Enabled ||
+        (config.Product.ShippingMode == Domain.Entities.StoreModule.ShippingMode.PerProduct &&
+            (config.Product.SedexShipping.Enabled || config.Product.PACShipping.Enabled));
+}
+
+@if (config.Product.Enabled)
+{
+    if (shippingOutEnabled)
+    {
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Endereços de Entrega</h3>
+            </div>
+            @if (Model.ShippingAddresses.Any())
+            {
+                <div class="box-body table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <tbody>
+                            @foreach (var item in Model.ShippingAddresses)
+                            {
+                                <tr>
+                                    <td>@item.Address.ToString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="box-body">
+                    <p>Nenhum endereço cadastrado.</p>
+                </div>
+            }
+        </div>
+    }
+}

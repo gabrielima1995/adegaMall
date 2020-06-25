@@ -1,0 +1,125 @@
+﻿@using Microsoft.AspNet.Identity
+@model Presentation.Models.QuoteViewModels.QuoteGroupDetailsForBuyerVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("QUOTE_LINK");
+    var config = MaaSConfig.Current;
+    var loginProfile = User.Identity.GetLoginProfile();
+    ViewData.Add("IsGroupView", true);
+    ViewData.Add("AllClosed", Model.AllClosed);
+    ViewData.Add("TotalSellersCount", Model.TotalSellersCount);
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+            <div class="col-xs-12">
+                <p>
+                    <a href="@Url.ActionLocalized("Buyer", "Quotes")">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        @Request.GetLocalizedString("BACK_BUTTON")
+                    </a>
+                </p>
+                @Html.Partial("_DetailsInfo", Model.Quote, ViewData)
+
+                @if (MaaSConfig.Current.Layout.TransactionWarrantyDisplay.ShowReassuringMessages)
+                {
+                    @Html.Partial("_TransactionWarrantyReassuranceMsg")
+                }
+
+                <h4>
+                    <i class="fa fa-users"></i>
+                    @Html.Localized("SELLERS_TITLE")
+                </h4>
+
+                @if (Model.SellerInteractions.Any())
+                {
+                    <p>@Html.Localized("QUOTE_GROUP_INTERACTIONS_HINT", "small", new { @class = "help-block text-muted" })</p>
+                    <div class="panel panel-default">
+                        <ul class="list-group" id="answersContainer">
+                            @foreach (var item in Model.SellerInteractions)
+                            {
+                                <li class="list-group-item quote-answer-item">
+                                    <a href="@Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = item.SellerNickname } )" target="_blank">
+                                        <img src="@item.SellerAvatarUrl" class="img-circle" />
+                                    </a>
+                                    <div class="quote-answer-item-data">
+                                        <strong class="quote-answer-item-title">@item.SellerName</strong>
+                                        <p>
+                                            @if (item.HasInteraction)
+                                            {
+                                                @Html.Localized(item.IsInteractionBySeller ? "QUOTE_GROUP_INTERACTIONS_SELLER_SAID" : "QUOTE_GROUP_INTERACTIONS_YOU_SAID")<text>:</text>
+                                                <em class="quote-answer-item-text">@item.InteractionText</em>
+                                                if (item.InteractionPrice != null)
+                                                {
+                                                    <br />
+                                                    <strong class="label label-info label-lg m-r-sm">
+                                                        @config.DefaultCurrency
+                                                        @item.InteractionPrice.Value.DisplayDecimal(2)
+                                                    </strong>
+                                                }
+                                                if (item.InteractionDeadline != null)
+                                                {
+                                                    <strong class="label label-info label-lg">
+                                                        @Request.GetLocalizedString("DELIVERY_DEADLINE_LABEL"):
+                                                        @item.InteractionDeadline.Value.ToShortDateString()
+                                                    </strong>
+                                                }
+                                                if (item.AttachmentUrl != null)
+                                                {
+                                                    <br />
+                                                    @Html.Localized("QUOTE_ATTACHMENT_LABEL", "strong")<text>:</text>
+                                                    @Html.Localized("QUOTE_ATTACHMENT_CLICK_TO_OPEN", "a", new { href = item.AttachmentUrl, target = "_blank" })
+                                                    <i class="fa fa-external-link"></i>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @Html.Localized("QUOTE_LATEST_ANSWER_NON_EXISTENT")
+                                            }
+
+                                            <a href="@Url.ActionLocalized("Details", "Quotes", new { id = item.QuoteId, addAnswer = 1 })" class="btn btn-default btn-sm pull-right">
+                                                <i class="glyphicon glyphicon-share-alt"></i>
+                                                @Html.Localized("QUOTE_LATEST_ANSWER_ACTION_ANSWER")
+                                            </a>
+                                        </p>
+                                        @if (item.HasInteraction)
+                                        {
+                                            <small class="text-muted">@Html.DisplayFor(model => item.InteractionDate)</small>
+                                        }
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    if (Model.HasAdditionalSellers)
+                    {
+                        <div class="help-block group-details-additional-sellers">
+                            @Html.Localized("GROUP_DETAILS_ADDITIONAL_SELLERS_COUNT", "small", null, Model.AdditionalSellersCount)
+                        </div>
+                    }
+                }
+                else if (MaaSConfig.Current.Quote.GeneralQuote.ShowSellersWithoutAnswer)
+                {
+                    <p>@Html.Localized("QUOTE_GROUP_INTERACTIONS_NONE", "small", new { @class = "help-block text-muted" }, MaaSConfig.Current.Enterprise.CustomerServiceEmail)</p>
+                }
+                else
+                {
+                    <p>@Html.Localized("QUOTE_GROUP_INTERACTIONS_HIDDEN_SELLERS", "small", new { @class = "help-block text-muted" }, MaaSConfig.Current.Enterprise.CustomerServiceEmail)</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/mvc-ajax")
+    <script>QuoteDetails.init()</script>
+}

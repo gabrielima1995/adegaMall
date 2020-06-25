@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("SCHEDULE_LINK");
+
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+@section styles
+{
+    @Styles.Render("~/Content/fullcalendar")
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+            <div class="col-xs-12">
+                <h3>@ViewBag.Title</h3>
+                @Html.Localized("RENTAL_SCHEDULE_BUYER_DESCRIPTION", "p")
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <hr />
+            </div>
+        </div>
+
+        <div class="row m-b-md">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="schedule-wrapper"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="list-unstyled schedule-caption-list">
+                    <li class="schedule-caption-list-item schedule-caption-ok">
+                        <i class="fa fa-circle" style="color: #398439"></i>
+                        @Html.Localized("SCHEDULE_COLOR_RENTAL_OK")
+                    </li>
+                    <li class="schedule-caption-list-item schedule-caption-delivery-pending">
+                        <i class="fa fa-circle" style="color: #d58512"></i>
+                        @Html.Localized("SCHEDULE_COLOR_DELIVERY_PENDING")
+                    </li>
+                    <li class="schedule-caption-list-item schedule-caption-return-pendind">
+                        <i class="fa fa-circle" style="color: #ac2925"></i>
+                        @Html.Localized("SCHEDULE_COLOR_RETURN_PENDING")
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section plugins
+{
+    @Scripts.Render("~/bundles/scripts/fullcalendar")
+}
+
+@section scripts
+{
+    @Html.Partial("_ScheduleScript")
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('#ProductId').change(function (e) {
+                $('#frmFilters').submit();
+            });
+        });
+    </script>
+
+}

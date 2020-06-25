@@ -1,0 +1,190 @@
+﻿@using Application.Sellers
+
+@model ProductPageVM
+
+@{
+    var config = MaaSConfig.Current;
+    var isAuthenticated = Request.IsAuthenticated;
+    var showProductWishButton = config.Product.Wishlist.Enabled && (!isAuthenticated || User.Identity.GetLoginProfile().IsBuyer());
+    var isBuyer = User.Identity.GetLoginProfile().IsBuyer();
+}
+
+<div class="row m-b-sm">
+    <div class="col-xs-12">
+        @if (Model.IsOutOfStock)
+        {
+            <p>@Html.Localized("PRODUCT_DETAILS_OUT_OF_STOCK", "div", new { @class = "alert alert-danger" })</p>
+        }
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        @Html.Partial("_ProductsImagesCarousel", Model.Product)
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        @if (showProductWishButton)
+                        {
+                            @Html.Partial("_ProductWishButton", Model.Product)
+                        }
+
+                        <h1 class="product-title">@Model.Product.Title</h1>
+
+                        @if (Model.PriceModel.DisplayPrice.HasAnyPrice)
+                        {
+                            <div class="product-price">
+                                @if (Model.PriceModel.DisplayPrice.Discount.HasDiscount)
+                                {
+                                    <p class="product-discount">
+                                        <span class="text-muted">De</span>
+                                        <span class="product-discount-original-price">@Model.PriceModel.DisplayPrice.Discount.Original.FullPriceText</span>
+                                        <span class="label label-success">@Model.PriceModel.DisplayPrice.Discount.Formatted</span>
+                                    </p>
+                                }
+
+                                else if (Model.PriceModel.DisplayPrice.CanIncrease)
+                                {
+                                    <p class="product-price-starting-from">
+                                        @Html.Localized("PRODUCT_PRICE_STARTING_FROM", "span", new { @class = "text-muted" })
+                                    </p>
+                                }
+
+                                <div class="product-price-amount">
+                                    @if (Model.PriceModel.DisplayPrice.HasPrice)
+                                    {
+                                        <div>
+                                            @Model.PriceModel.DisplayPrice.Currency
+                                            @Model.PriceModel.DisplayPrice.IntegerPart<span class="product-price-cents">@Model.PriceModel.DisplayPrice.CentsPart</span>
+
+                                            @if (Model.PriceModel.DisplayPrice.HasTextComplementLabel)
+                                            {
+                                                <small style="padding-left: 2rem" class="text-lowercase">/ @string.Format(Request.GetLocalizedString(Model.PriceModel.DisplayPrice.TextComplementLabel), Model.PriceModel.DisplayPrice.TextComplementParam)</small>
+                                            }
+                                        </div>
+                                    }
+
+                                    @if (Model.PriceModel.DisplayPrice.HasAdditionalPrice)
+                                    {
+                                        <div class="product-price-additional">
+                                            <span class="product-price-additional-amount">@Model.PriceModel.DisplayPrice.AdditionalPriceText</span>
+                                        </div>
+                                    }
+                                </div>
+
+                                @if (Model.PriceModel.DisplayShortPrice.HasAnyPrice && Model.PriceModel.DisplayPrice.Value != Model.PriceModel.DisplayShortPrice.Value)
+                                {
+                                    <div class="card-product-price m-t-sm text-muted">
+                                        @if (Model.PriceModel.HasBasePrice)
+                                        {
+                                            <div>
+                                                @Html.Localized("PRODUCT_PRICE_EQUIVALENT_TO")
+                                                @Model.PriceModel.DisplayShortPrice.FullPriceText
+                                                @if (Model.PriceModel.DisplayShortPrice.HasTextComplementLabel)
+                                                {
+                                                    <small class="text-muted text-lowercase">/ @string.Format(Request.GetLocalizedString(Model.PriceModel.DisplayShortPrice.TextComplementLabel), Model.PriceModel.DisplayShortPrice.TextComplementParam)</small>
+                                                }
+                                            </div>
+                                        }
+
+                                        @if (Model.PriceModel.DisplayShortPrice.HasAdditionalPrice)
+                                        {
+                                            <div class="card-product-price-additional">
+                                                @if (!Model.PriceModel.HasBasePrice)
+                                                {
+                                                    @:@Html.Localized("PRODUCT_PRICE_EQUIVALENT_TO")
+                                                }
+                                                <span class="card-product-price-additional-amount">@Model.PriceModel.DisplayShortPrice.AdditionalPriceText</span>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+
+                                @if (Model.PaymentOptions != null)
+                                {
+                                    <div class="clearfix" style="margin-top: 15px"></div>
+                                    <small class="text-muted">
+                                        <em>@Model.PaymentOptions.GetDescription()</em>
+                                    </small>
+                                }
+                            </div>
+
+                            if (Model.ShowAnyShipping && isBuyer)
+                            {
+                                <div class="js-product-shipping-loading m-b-md" data-product-id="@Model.Product.Id" style="display: none">
+                                    <p><i class="fas fa-spinner fa-spin"></i></p>
+                                </div>
+                            }
+                        }
+                        <div class="product-sold-by">
+                            <img src="@Model.Product.Store.Seller.GetAvatarUrl(50, 50)" alt="@Model.Product.Store.Seller.PublicProfileName" class="img-circle" width="50" height="50" />
+                            <small>@Request.GetLocalizedString("CART_ITEM_SOLD_AND_DELIVERED_BY")</small>
+                            <br />
+                            <span>@Model.Product.Store.Seller.PublicProfileName (@Html.Localized("PROFILE_URL_LABEL", "a", new { href = Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.Product.Store.Seller.FriendlyUrl }) }))</span>
+                            @if (config.Seller.UserRatings.Enabled)
+                            {
+                                <p>
+                                    @Html.Partial("_RatingStars", Model.SellerRatingAverage) -
+                                    <a class="text-primary" href="@Url.ActionLocalized("Overview","UserRating", new { sellerId = Model.Product.Store_SellerId })">@Model.SellerRatingsCount @Request.GetLocalizedString("RATINGS_COUNT")</a>
+                                </p>
+                            }
+                        </div>
+
+                        @if (config.Product.BusinessModel.Rental.Enabled)
+                        {
+                            if (!string.IsNullOrEmpty(Model.Product.RentalSettings.AvailabilityWarning))
+                            {
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="alert alert-warning" role="alert">
+                                            <i class="fa fa-exclamation-triangle"></i>
+                                            @Model.Product.RentalSettings.AvailabilityWarning
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            if (Model.Product.RentalSettings.MinRentalAmount.GetValueOrDefault() > 0m)
+                            {
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="alert alert-warning" role="alert">
+                                            <i class="fa fa-exclamation-triangle"></i>
+                                            @Request.GetLocalizedString("PRODUCT_MIN_RENTAL_AMOUNT_IS_X", $"{Model.Product.RentalSettings.MinRentalAmount.Value.DisplayCurrency()}")
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+
+                        @if (config.Product.Price.Enabled && Model.Product.Price.HasValue)
+                        {
+
+                            <div class="margin-top-10 margin-bottom-10">
+                                @Html.Partial("_ProductAddToCart", Model)
+                            </div>
+
+                            if (config.Payment.Enabled && config.Layout.PaymentMethodsDisplay.ShowInProductDetailsScreen.Enabled)
+                            {
+                                <hr />
+                                @Html.Localized("ACCEPTED_PAYMENT_METHODS_TEXT", "small")
+                                @Html.Partial("_AcceptedPaymentMethods")
+                            }
+                        }
+
+
+                        @if (MaaSConfig.Current.SocialMedia.EnableShareButtons)
+                        {
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    @Html.Localized("SOCIAL_SHARE_PRODUCT_LABEL", "strong")
+                                    <div class="sharethis-inline-share-buttons"></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

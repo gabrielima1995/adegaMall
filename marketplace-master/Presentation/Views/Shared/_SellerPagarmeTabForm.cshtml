@@ -1,0 +1,114 @@
+﻿@model Application.Sellers.SellerGatewayViewModel
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@Html.HiddenFor(model => model.Pagarme.Enabled)
+@Html.HiddenFor(model => model.GatewayRegistered)
+
+@if (!Model.GatewayRegistered)
+{
+    @:@Html.Localized("PAGARME_REGISTRATION_TEXT", "p")
+}
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pagarme.LegalName)
+            @Html.EditorFor(model => model.Pagarme.LegalName, new { htmlAttributes = new { @class = "form-control", placeholder = Request.GetLocalizedString("PAGARME_SELLER_BANKACCOUNT_LEGALNAME_INPUT") } })
+            @Html.ValidationMessageFor(model => model.Pagarme.LegalName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pagarme.DocumentNumber)
+            @Html.TextBoxFor(i => i.Pagarme.DocumentNumber, new { @class = "form-control js-cpfcnpj", placeholder = Request.GetLocalizedString("PAGARME_SELLER_BANKACCOUNT_DOCUMENTNUMBER_INPUT") })
+            @Html.ValidationMessageFor(model => model.Pagarme.DocumentNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-xs-12 col-sm-7">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Pagarme.BankCode)
+            @Html.EnumDropDownListFor(i => i.Pagarme.BankCode, new { @class = "form-control js-bank-selector" })
+            @Html.ValidationMessageFor(model => model.Pagarme.BankCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-5">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Pagarme.Type)
+            @Html.EnumDropDownListFor(i => i.Pagarme.Type, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Pagarme.Type, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-7">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Pagarme.Agencia)
+            @Html.TextBoxFor(i => i.Pagarme.Agencia, new { @class = "form-control", placeholder = Request.GetLocalizedString("PAGARME_SELLER_BANKACCOUNT_AGENCIA_INPUT") })
+            @Html.ValidationMessageFor(model => model.Pagarme.Agencia, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-5">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Pagarme.AgenciaDv)
+            @Html.TextBoxFor(i => i.Pagarme.AgenciaDv, new { @class = "form-control", placeholder = Request.GetLocalizedString("PAGARME_SELLER_BANKACCOUNT_AGENCIADV_INPUT") })
+            @Html.ValidationMessageFor(model => model.Pagarme.AgenciaDv, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-7">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Pagarme.Conta)
+            @Html.TextBoxFor(i => i.Pagarme.Conta, new { @class = "form-control", placeholder = Request.GetLocalizedString("PAGARME_SELLER_BANKACCOUNT_CONTA_INPUT") })
+            @Html.ValidationMessageFor(model => model.Pagarme.Conta, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-5">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Pagarme.ContaDv)
+            @Html.TextBoxFor(i => i.Pagarme.ContaDv, new { @class = "form-control", placeholder = Request.GetLocalizedString("PAGARME_SELLER_BANKACCOUNT_CONTADV_INPUT") })
+            @Html.ValidationMessageFor(model => model.Pagarme.ContaDv, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(model => model.Pagarme.Terms1)
+                @Request.GetLocalizedString("PAGARME_SELLER_TERMS1_LABEL_V2")
+            </label>
+            @Html.ValidationMessageFor(model => model.Pagarme.Terms1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(model => model.Pagarme.Terms2)
+                @Request.GetLocalizedString("PAGARME_SELLER_TERMS2_LABEL_V2")
+            </label>
+            @Html.ValidationMessageFor(model => model.Pagarme.Terms2, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>

@@ -1,0 +1,185 @@
+﻿@using Microsoft.AspNet.Identity;
+@using Domain.DTO;
+
+@{
+    var config = MaaSConfig.Current;
+    var isGestaoIna = User.Identity.IsAuthenticated && User.Identity.GetLoginProfile().IsGestao();
+}
+
+<ul class="sidebar-menu" data-widget="tree">
+    <li class="@Html.ClassIfCurrent("active", "Index", "Dashboard")">
+        <a href="@Url.ActionLocalized("Index", "Dashboard")">
+            <i class="fa fa-dashboard"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+    <li class="admin-menu-users treeview @Html.ClassIfCurrentController("active open-menu", "Sellers", "Buyers")">
+        <a href="#">
+            <i class="fa fa-users"></i>
+            <span>Usuários</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li class="admin-menu-users-sellers @Html.ClassIfCurrent("active", "Sellers")">@Html.Localized("SELLERS_LANG_UBIQUITOUS", "a", new { href = Url.ActionLocalized("Index", "Sellers", new { area = "Admin" }) })</li>
+
+            @if (config.Seller.Moderation.Enabled)
+            {
+                <li class="admin-menu-users-sellers-moderation">@Html.Localized("SELLERS_PENDING_MENU", "a", new { href = Url.ActionLocalized("Index", "Sellers", new { area = "Admin", mode = "moderation" }) })</li>
+            }
+
+            <li class="admin-menu-users-buyers @Html.ClassIfCurrent("active", "Buyers")">@Html.Localized("BUYERS_LANG_UBIQUITOUS", "a", new { href = Url.ActionLocalized("Index", "Buyers", new { area = "Admin" }) })</li>
+
+            @if (config.Buyer.Moderation.Enabled)
+            {
+                <li class="admin-menu-users-buyers-moderation">@Html.Localized("BUYERS_PENDING_MENU", "a", new { href = Url.ActionLocalized("Index", "Buyers", new { area = "Admin", mode = "moderation" }) })</li>
+            }
+
+            @if (config.Payment.Common.EnableTransactionWarranty)
+            {
+                <li class="admin-menu-users-disputes @Html.ClassIfCurrent("active", "Disputes")">@Html.Localized("DISPUTES_LANG_UBIQUITOUS", "a", new { href = Url.ActionLocalized("Index", "Disputes", new { area = "Admin" }) })</li>
+            }
+
+            @if (config.Seller.UserRatings.Enabled || config.Buyer.UserRatings.Enabled)
+            {
+                <li class="admin-menu-users-ratings @Html.ClassIfCurrent("active", "Ratings")"><a href="@Url.ActionLocalized("Index", "Ratings")">Avaliações</a></li>
+            }
+        </ul>
+    </li>
+
+    @if (config.Portfolio.Enabled)
+    {
+        <li class="admin-menu-quotes treeview @Html.ClassIfCurrentController("active open-menu", "Quotes", "Categories", "SubCategories")">
+            <a href="#">
+                <i class="fa fa-address-card-o"></i>
+                <span>Portfólio</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="admin-menu-quotes-list @Html.ClassIfCurrent("active", "Quotes")">@Html.ActionLink("Orçamentos", "Index", "Quotes")</li>
+                <li class="admin-menu-quotes-categories @Html.ClassIfCurrent("active", "Categories")">@Html.ActionLink("Categorias", "Index", "Categories")</li>
+                <li class="admin-menu-quotes-subcategories @Html.ClassIfCurrent("active", "SubCategories")">@Html.ActionLink("Subcategorias", "Index", "SubCategories")</li>
+                @if (config.Quote.LeadSales.Enabled && config.Quote.LeadSales.IndividualPacks.Enabled)
+                {
+                    <li class="admin-menu-quotes-credits @Html.ClassIfCurrent("active", "Credits")">@Html.ActionLink("Pacotes de Créditos", "Index", "Credits")</li>
+                }
+            </ul>
+        </li>
+    }
+
+    @if (config.Product.Enabled)
+    {
+        <li class="admin-menu-orders treeview @Html.ClassIfCurrentController("active open-menu", "Orders", "ProductCategories", "ProductVariantTypes", "ProductVariants", "RentalShifts", "ProductTemplates")">
+            <a href="#">
+                <i class="fa fa-cube"></i>
+                <span>Produtos</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="admin-menu-orders-list @Html.ClassIfCurrent("active", "Index", "Orders")">@Html.ActionLink("Pedidos", "Index", "Orders")</li>
+                @if (config.Finance.PanelEnabled)
+                {
+                    <li class="admin-menu-orders-transfers @Html.ClassIfCurrent("active", "TransferJournal", "Orders")">@Html.ActionLink("Financeiro", "TransferJournal", "Orders")</li>
+                }
+                <li class="admin-menu-orders-categories @Html.ClassIfCurrent("active", "ProductCategories")">@Html.ActionLink("Categorias", "Index", "ProductCategories")</li>
+                <li class="admin-menu-orders-variant-types @Html.ClassIfCurrent("active", "ProductVariantTypes")">@Html.ActionLink("Variantes", "Index", "ProductVariantTypes")</li>
+                <li class="admin-menu-orders-variant-items @Html.ClassIfCurrent("active", "ProductVariants")">@Html.ActionLink("Itens de Variantes", "Index", "ProductVariants")</li>
+                @if (config.Product.BusinessModel.Rental.Enabled && config.Product.BusinessModel.Rental.RentalPeriodMode == Domain.StoreModule.Entities.RentalPeriodMode.Shifts)
+                {
+                    <li class="admin-menu-orders-rental-shifts @Html.ClassIfCurrent("active", "RentalShifts")">@Html.ActionLink("Turnos de Locação", "Index", "RentalShifts")</li>
+                }
+                @if (config.Product.Templates.Enabled)
+                {
+                    <li class="admin-menu-orders-variant-items @Html.ClassIfCurrent("active", "ProductTemplates")">@Html.ActionLink("Modelos de produtos", "Index", "ProductTemplates")</li>
+                }
+                @if (config.BatchImport.Products.Enabled)
+                {
+                    <li class="admin-menu-orders-products-import @Html.ClassIfCurrent("active", "Import", "Products")">@Html.ActionLink("Importar produtos", "Import", "Products")</li>
+                }
+            </ul>
+        </li>
+    }
+
+    @if (config.Subscription.Enabled)
+    {
+        <li class="admin-menu-subscriptions treeview @Html.ClassIfCurrentController("active open-menu", "Subscriptions", "Plans")">
+            <a href="#">
+                <i class="fa fa-refresh"></i>
+                <span>Assinaturas</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="admin-menu-subscriptions-active @Html.ClassIfCurrent("active", "Subscriptions")">@Html.Localized("SUBSCRIPTIONS_LANG_UBIQUITOUS", "a", new { href = Url.ActionLocalized("Index", "Subscriptions", new { area = "Admin" }) })</li>
+                <li class="admin-menu-subscriptions-plans @Html.ClassIfCurrent("active", "Plans")">@Html.Localized("PLANS_TITLE", "a", new { href = Url.ActionLocalized("Index", "Plans", new { area = "Admin" }) })</li>
+            </ul>
+        </li>
+    }
+
+    @if (isGestaoIna || config.AdminCustomization.Enabled)
+    {
+        <li class="admin-menu-customize treeview @Html.ClassIfCurrentController("active open-menu", "Banners", "EcommerceHome", "Customize")">
+            <a href="#">
+                <i class="fa fa-paint-brush"></i>
+                <span>Personalização</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="admin-menu-customize-new @Html.ClassIfCurrent("active", "NewCustomize")">@Html.Localized("CUSTOMIZE_PANEL_LINK", "a", new { href = Url.ActionLocalized("Marketplace", "NewCustomize", new { area = "Admin" }) })</li>
+                <li class="admin-menu-customize-messages @Html.ClassIfCurrent("active", "MessageTemplates")">@Html.Localized("CUSTOMIZE_MESSAGE_TEMPLATES_LINK", "a", new { href = Url.ActionLocalized("Index", "MessageTemplates", new { area = "Admin" }) })</li>
+                @if (config.AdminCustomization.HtmlCustomizationEnabled)
+                {
+                    <li class="admin-menu-customize-html @Html.ClassIfCurrent("active", "Html", "Customize")">@Html.Localized("CUSTOMIZE_HTML_LINK", "a", new { href = Url.ActionLocalized("Html", "Customize", new { area = "Admin" }) })</li>
+                }
+            </ul>
+        </li>
+    }
+
+    <li class="admin-menu-languages treeview @Html.ClassIfCurrentController("active open-menu", "Languages", "Strings")">
+        <a href="#">
+            <i class="fa fa-language"></i>
+            <span>Idiomas</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li class="admin-menu-languages-select @Html.ClassIfCurrent("active", "Languages")">@Html.ActionLink("Idiomas", "Index", "Languages")</li>
+            <li class="admin-menu-languages-labels @Html.ClassIfCurrent("active", "Strings")">@Html.ActionLink("Arquivo de tradução", "Index", "Strings")</li>
+        </ul>
+    </li>
+
+    <li class="admin-menu-manage treeview @Html.ClassIfCurrentController("active open-menu", "Config", "Strings", "Admins", "ApiTokens")">
+        <a href="#">
+            <i class="fa fa-sliders"></i>
+            <span>Gestão</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            @if (isGestaoIna)
+            {
+                <li class="admin-menu-manage-config @Html.ClassIfCurrent("active", "Config")">@Html.ActionLink("Configuração", "Index", "Config")</li>
+                <li class="admin-menu-manage-admins @Html.ClassIfCurrent("active", "Admins")">@Html.ActionLink("Admins", "Index", "Admins")</li>
+                <li class="admin-menu-manage-setups">@Html.ActionLink("Pré-Setups", "BusinessModel", "Config")</li>
+                <li class="admin-menu-manage-gateway">@Html.ActionLink("Gateway", "PaymentGateway", "Config")</li>
+            }
+            <li class="admin-menu-manage-strings @Html.ClassIfCurrent("active", "Strings")">@Html.ActionLink("Arquivo de tradução", "Index", "Strings")</li>
+            <li class="admin-menu-manage-api-tokens @Html.ClassIfCurrent("active", "ApiTokens")">@Html.ActionLink("Tokens de api", "Index", "ApiTokens")</li>
+            @if (config.WebApp.PushNotifications.IsEnabled)
+            {
+                <li class="admin-menu-manage-notifications @Html.ClassIfCurrent("active", "Notifications")">@Html.ActionLink("Notificações", "Index", "Notifications")</li>
+            }
+        </ul>
+    </li>
+</ul>

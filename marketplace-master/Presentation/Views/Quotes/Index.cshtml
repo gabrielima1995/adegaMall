@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model Presentation.Models.QuoteListVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("QUOTE_LINK");
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+@section styles
+{
+    @Styles.Render("~/Content/datatable")
+
+    <style>
+        .dataTables_paginate {
+            text-align: center !important;
+        }
+    </style>
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+                @Html.Partial("_UserCallToAction")
+            </div>
+
+            @if (MaaSConfig.Current.Layout.TransactionWarrantyDisplay.ShowReassuringMessages)
+            {
+                <div class="col-xs-12">
+                    @Html.Partial("_TransactionWarrantyReassuranceMsg")
+                </div>
+            }
+
+            <div class="col-xs-12">
+                @Html.Localized("QUOTE_LINK", "h3")
+                @if (loginProfile.IsSeller())
+                {
+                    @Html.Partial("_StatusButtons")
+                }
+                @Html.Partial("_QuotesTable", Model.Quotes)
+                @Html.Partial("_LockFilters")
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/datatable")
+    <script>QuotesIndex.init()</script>
+}

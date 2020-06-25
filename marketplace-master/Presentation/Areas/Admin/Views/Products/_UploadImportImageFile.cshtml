@@ -1,0 +1,23 @@
+﻿@model Presentation.Areas.Admin.Views.Products.ImportModelBase
+
+@using (Html.BeginForm("ImportImagesResults", "Products", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { id = "frmUploadImages", enctype = "multipart/form-data" }))
+{
+    <div class="form-inline">
+        <div class="form-group">
+            <input type="file" class="form-control js-import-images-file" name="file" />
+        </div>
+
+        <button type="submit" id="btnUploadImages" class="btn btn-primary" style="display:none" data-loading-text="@Request.GetLocalizedString("LOADING_TEXT")">
+            @Request.GetLocalizedString("PRODUCTS_IMPORT_IMPORT_BUTTON")
+        </button>
+        <i class="fa fa-spinner fa-spin" style="display:none"></i>
+    </div>
+    <p class="text-danger" id="invalidImageFileType" style="display:none">@Html.Localized("PRODUCTS_IMPORT_INVALID_FILE_FORMAT")</p>
+}
+
+<p class="alert alert-warning" id="dontLeavePageImages" style="display: none">
+    <i class="fa fa-info-circle"></i>
+    @Html.Localized("PRODUCTS_IMPORT_DONT_LEAVE_PAGE")
+    @Html.Localized("PRODUCTS_IMPORT_OPEN_NEW_TAB")
+    <a href="@Url.Action("Index", "Dashboard")" target="_blank">@Html.Localized("PRODUCTS_IMPORT_OPEN_NEW_TAB_BUTTON")</a>
+</p>

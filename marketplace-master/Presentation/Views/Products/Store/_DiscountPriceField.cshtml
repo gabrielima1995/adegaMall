@@ -1,0 +1,31 @@
+﻿@model Application.Modules.Products.ProductEditorViewModel
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (Model.ShowDiscountPrice)
+{
+    if (!Model.ShowByBasePrice)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.DiscountPrice)
+            <div class="input-group">
+                <span class="input-group-addon">@config.DefaultCurrency</span>
+                @Html.TextBoxFor(i => i.DiscountPrice, new { @class = "form-control js-money", placeholder = Request.GetLocalizedString("PRODUCT_DISCOUNT_PRICE_INPUT") })
+            </div>
+            @Html.ValidationMessageFor(model => model.DiscountPrice, "", new { @class = "text-danger" })
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.DiscountBasePrice)
+            <div class="input-group">
+                <span class="input-group-addon">@config.DefaultCurrency</span>
+                @Html.TextBoxFor(i => i.DiscountBasePrice, new { @class = "form-control js-money", placeholder = Request.GetLocalizedString("PRODUCT_DISCOUNT_BASEPRICE_INPUT") })
+            </div>
+            @Html.ValidationMessageFor(model => model.DiscountBasePrice, "", new { @class = "text-danger" })
+        </div>
+    }
+}

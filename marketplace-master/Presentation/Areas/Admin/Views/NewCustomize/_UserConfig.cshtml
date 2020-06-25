@@ -1,0 +1,45 @@
+﻿@model Domain.UserConfig.UserConfiguration
+
+@using (Html.BeginForm("UserConfig", "NewCustomize", FormMethod.Post))
+{
+    <h4 class="">Plugin de chat externo</h4>
+    <div class="row">
+        <div class="col-xs-12 equal-height">
+            <div class="form-group">
+                @Html.Label("Script")
+                @Html.TextAreaFor(Model => Model.ChatConfig.Script, new { @class = "form-control" })
+                <label>@Html.CheckBoxFor(Model => Model.ChatConfig.Enabled) Habilitar</label>
+            </div>
+        </div>
+        <div class="col-xs-12 equal-height">
+            <div class="callout callout-info adm-callout">
+                <p><i class="fa fa-info-circle"></i>  Este campo é utilizado para integrar-se com plugins externos de chat. Cole aqui o script solicitado, que ele será automaticamente inserido nas páginas relevantes da plataforma.</p>
+                <a href="http://suporte.ideianoar.com.br/pt-BR/articles/3206680-chat-para-usar-na-plataforma" style="color:blue">
+                    Clique aqui 
+                </a>
+                 e veja algumas dicas de plugins de chat para usar na plataforma
+            </div>
+        </div>
+    </div>
+    <hr />
+    <h4 class="">Blog personalizado</h4>
+    <div class="row">
+        <div class="col-xs-12 equal-height">
+            <div class="form-group">
+                @Html.Label("Endereço")
+                @Html.TextBoxFor(Model => Model.BlogConfig.Address, new { @class = "form-control", placeholder = "http://www.blog-exemplo.com.br" })
+                <label>@Html.CheckBoxFor(Model => Model.BlogConfig.Enabled) Habilitar</label>
+                <br />
+            </div>
+        </div>
+        <div class="col-xs-12 equal-height">
+            <div class="callout callout-info adm-callout">
+                <p><i class="fa fa-info-circle"></i>  Você pode adicionar através deste campo um link externo para seu próprio blog ou site. Ao habilitar esta opção, o link selecionado ficará disponível para os usuários através da opção "Blog" no menu superior das páginas principais</p>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="text-center">
+        <button class="btn btn-primary">Aplicar</button>
+    </div>
+}

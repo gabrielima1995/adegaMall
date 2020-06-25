@@ -1,0 +1,51 @@
+﻿@model BannerCreateEditVM
+
+@Html.HiddenFor(model => model.Banner.Id)
+
+@if (Html.IsCurrent("Edit", "Banners"))
+{
+    @Html.HiddenFor(model => model.Banner.ImageUrl)
+}
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Banner.ImageUrl)
+    <span class="text-required">*</span>
+    <input type="file" name="bannerimage" />
+    @Html.ValidationMessageFor(model => model.Banner.ImageUrl)
+    <small class="help-block">
+        @Request.GetLocalizedString("BANNER_IMAGE_URL_TEXT")
+        <a href="/assets/images/template-banner-1920-530.jpg" target="_blank">Template</a>
+    </small>
+
+    @if (Model.Banner.ImageUrl != null)
+    {
+        <p><img src="@Model.Banner.ImageThumbLg" alt="@Model.Banner.ImageUrl" /></p>
+    }
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Banner.ActionUrl)
+    <span class="text-required">*</span>
+    @Html.EditorFor(model => model.Banner.ActionUrl, new { htmlAttributes = new { @class = "form-control", placeholder = "BANNER_ACTION_URL_INPUT" } })
+    @Html.ValidationMessageFor(model => model.Banner.ActionUrl)
+    <small class="help-block">@Request.GetLocalizedString("BANNER_ACTION_URL_TEXT")</small>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        <div class="form-group m-b-0">
+            @Html.LabelFor(model => model.Banner.StartsAt)
+            @Html.EditorFor(model => model.Banner.StartsAt, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Banner.StartsAt)
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <div class="form-group m-b-0">
+            @Html.LabelFor(model => model.Banner.ExpiresAt)
+            @Html.EditorFor(model => model.Banner.ExpiresAt, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Banner.ExpiresAt)
+        </div>
+    </div>
+</div>
+
+<small class="help-block">@Request.GetLocalizedString("BANNER_DATES_TEXT")</small>

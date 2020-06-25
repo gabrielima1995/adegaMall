@@ -1,0 +1,62 @@
+﻿@using Application.Modules.Portfolio
+@model IList<PortfolioItemVM>
+
+@{
+    var config = MaaSConfig.Current;
+    var profile = User.Identity.GetLoginProfile();
+}
+
+<div class="row edit portfolio">
+    @if (config.Portfolio.ItemsLimit == 0 || config.Portfolio.ItemsLimit > Model.Count)
+    {
+        <div class="col-xs-12 col-sm-4">
+            <div class="box-portfolio equal-height">
+                <div class="flex-valign full-height">
+                    <h3 class="text-center">
+                        <a href="@Url.ActionLocalized("CreateItem", "Portfolio")" title="@Request.GetLocalizedString("ADD_NEW_PORTFOLIO_ITEM_LINK")" class="@Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.PortfolioEdit)">
+                            <span class="glyphicon glyphicon-plus-sign block text-center m-b-sm"></span>
+                            @Html.Localized("ADD_NEW_PORTFOLIO_ITEM_LINK", "b")
+                        </a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    }
+
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-12 col-sm-4">
+            <div class="box-portfolio equal-height">
+                <div class="imagem">
+                    <img src="@item.GetCoverImageUrl()" alt="@item.Title" />
+
+                    <a href="@Url.ActionLocalized("EditItem", "Portfolio", new {id = item.Id})" class="action edit @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.PortfolioEdit)">
+                        <i class="fas fa-pen"></i>
+                    </a>
+
+                    <a href="@Url.ActionLocalized("DeleteItem", "Portfolio", new {id = item.Id})" class="action trash @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.PortfolioEdit)">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+
+                <h4>@item.Title</h4>
+
+                @if(MaaSConfig.Current.CustomFields.Portfolio.Enabled && item.CustomFieldDefinitions?.Count > 0)
+                {
+                    foreach(var field in item.CustomFieldDefinitions)
+                    {
+                        if (field.Value.IsPublic && !string.IsNullOrWhiteSpace(item.CustomFields[field.Key.ToString()]))
+                        {
+                            <p><strong>@field.Value.NameLocalized(Request.GetCurrentLang()): </strong> @item.CustomFields[field.Key.ToString()]</p>
+                        }
+                    }
+                }
+
+                @if (!string.IsNullOrEmpty(item.Description))
+                {
+                    <p>@item.Description.Truncate(200)</p>
+                }
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,42 @@
+﻿@model ProductTemplateCreateEditViewModel
+
+@{
+    ViewBag.Title = "Editar o modelo " + Model.Title;
+}
+
+<section class="content-header">
+    <h1>@ViewBag.Title</h1>
+</section>
+
+<section class="content">
+    <div class="m-b-lg">
+        @using (Html.BeginForm())
+        {
+            @:@Html.Partial("_Form")
+            <button id="btnSubmit" type="submit" class="btn btn-primary btn-lg m-r-sm">Salvar</button>
+            @Html.ActionLink("voltar sem salvar", "Index", new { Area = "Admin" })
+        }
+    </div>
+
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">Cuidado</h3>
+        </div>
+        <div class="box-body">
+            @using (Html.BeginForm("Delete", "ProductTemplates", new { id = Model.Id, Area = "Admin" }))
+            {
+                <button type="submit" class="btn btn-danger">
+                    Excluir o modelo
+                </button>
+                <div class="help-block text-danger">
+                    Os produtos criados a partir do modelo serão excluídos juntamente com o modelo. Não é possível reverter esta ação.
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>ProductTemplateCreateEdit.init()</script>
+}

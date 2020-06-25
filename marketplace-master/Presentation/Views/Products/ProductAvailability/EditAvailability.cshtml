@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model Presentation.Models.ProductViewModels.ProductAvailabilityVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("EDIT_PRODUCT_AVAILABILITY_TITLE");
+
+    var viewPathFmt = "~/Views/Products/ProductAvailability/{0}.cshtml";
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+<!-- CONTENTS --> 
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-8">
+                <h3>@ViewBag.Title</h3>
+                @Html.Localized("PRODUCT_AVAILABILITY_INFO", "p")
+                @Html.Partial(string.Format(viewPathFmt, "_EditAvailabilityForm"))
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /CONTENTS -->

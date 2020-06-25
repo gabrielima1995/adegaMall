@@ -1,0 +1,175 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model Application.Sellers.SellerGatewayViewModel
+
+@{
+    var viewPathFmt = "~/Views/Shared/{0}.cshtml";
+    var loginProfile = User.Identity.GetLoginProfile();
+    ViewBag.Title = Request.GetLocalizedString("GATEWAY_SELLER_PANEL_TITLE");
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+                @Html.Partial("_UserCallToAction")
+            </div>
+            <div class="col-xs-12 col-md-9">
+                @Html.Localized("GATEWAY_SELLER_PANEL_TITLE", "h3")
+
+                @using (Html.BeginForm("Gateway", "Manage", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form", autocomplete = "off" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.SellerId)
+
+                    <!-- https://stackoverflow.com/a/30064656/484108 trick to disable chrome's autofill -->
+                    <input autocomplete="false" name="hidden" type="text" style="display:none">
+
+                    <div class="panel panel-default">
+                        @if (Model.SellerReceivesMoipPayment)
+                        {
+                            <div class="panel-body js-seller-moip-panel">
+                                @Html.Partial(string.Format(viewPathFmt, "_SellerMoipTabForm"), Model)
+                            </div>
+                        }
+
+                        else if (Model.SellerReceivesPagarmePayment)
+                        {
+                            <div class="panel-body js-seller-pagarme-panel">
+                                @Html.Partial(string.Format(viewPathFmt, "_SellerPagarmeTabForm"), Model)
+                            </div>
+                        }
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                @Html.Localized("SAVE_CHANGES_BUTTON", "button", new { id = "saveGateway", type = "submit", @class = $"btn btn-primary btn-block {Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.GatewayEdit)}" })
+
+                                @if (Model.GatewayRegistered)
+                                {
+                                    @Html.Localized("GATEWAY_UPDATE_BUTTON", "button", new { id = "updateGateway", type = "button", @class = "btn btn-default btn-block" })
+                                }
+                            </div>
+
+                            @if (Model.GatewayRegistered)
+                            {
+                                if (Model.SellerReceivesMoipPayment)
+                                {
+                                    <div class="alert alert-warning">
+                                        @Html.Localized("WIRECARD_UPDATE_TEXT", "p")
+                                    </div>
+                                }
+
+                                else if (Model.SellerReceivesPagarmePayment)
+                                {
+                                    <div class="alert alert-warning">
+                                        @Html.Localized("PAGARME_UPDATE_TEXT", "p")
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(".js-bank-selector").select2();
+        $(".wpp-phone-input").mask("(00) 00000-0000");
+    </script>
+
+    @if (Model.SellerReceivesMoipPayment)
+    {
+        @:@Html.Partial("_CitiesScript")
+        <script>
+            $(document).ready(function() {
+                function setMoipBankAccountLabel(hasCompany) {
+                    $("#js-seller-moip-bankaccount-title").text(hasCompany
+                        ? '@Html.Raw(Request.GetLocalizedString("MOIP_SELLER_BANKACCOUNT_LABEL") + " " + Request.GetLocalizedString("MOIP_SELLER_HASCOMPANY_COMPANY_OPTION"))'
+                        : '@Html.Raw(Request.GetLocalizedString("MOIP_SELLER_BANKACCOUNT_LABEL") + " " + Request.GetLocalizedString("MOIP_SELLER_HASCOMPANY_PERSON_OPTION"))');
+                }
+
+                $("input:radio[name='@(nameof(Model.Moip)).@(nameof(Model.Moip.HasCompany))']").on("click change",
+                    function(e) {
+                        var hasCompany = $(this).val() === "True";
+
+                        $(".js-seller-moip-company-wrapper").css("display", hasCompany ? "block" : "none");
+                        $(".js-moip-seller-company-enabled").val(hasCompany ? "True" : "False");
+                        setMoipBankAccountLabel(hasCompany);
+                    });
+
+                $(".js-moip-seller-company-sameaddress").change(function(e) {
+                    var sameAddress = $(this).is(":checked");
+                    $(".js-seller-moip-company-address-wrapper").css("display", sameAddress ? "none" : "block");
+                    $(".js-moip-seller-company-address-enabled").val(sameAddress ? "False" : "True");
+                });
+
+                setMoipBankAccountLabel(@Html.Raw(Model.Moip.HasCompany ? "true" : "false"));
+            });
+        </script>
+
+        if (Model.GatewayRegistered)
+        {
+            <script>
+                $(document).ready(function () {
+                    $(".js-seller-moip-panel input, .js-seller-moip-panel select").prop("disabled", true);
+                    $("#saveGateway").hide();
+                    $("#updateGateway").on("click", function (e) {
+                        $(this).hide();
+                        $("#saveGateway").show();
+                        $(".js-seller-moip-panel input, .js-seller-moip-panel select").prop("disabled", false);
+                        $("#Moip_Terms1, #Moip_Terms2").prop("checked", false);
+                    });
+                });
+            </script>
+        }
+    }
+
+    @if (Model.SellerReceivesPagarmePayment)
+    {
+        if (Model.GatewayRegistered)
+        {
+            <script>
+                $(document).ready(function () {
+                    $(".js-seller-pagarme-panel input, .js-seller-pagarme-panel select").prop("disabled", true);
+                    $("#saveGateway").hide();
+                    $("#updateGateway").on("click", function (e) {
+                        $(this).hide();
+                        $("#saveGateway").show();
+                        $(".js-seller-pagarme-panel input, .js-seller-pagarme-panel select").prop("disabled", false);
+                        $("#Pagarme_Terms1, #Pagarme_Terms2").prop("checked", false);
+                    });
+                });
+            </script>
+        }
+    }
+
+    @if (Model.SellerAddress != null)
+    {
+        <script>
+            $('#autoCompleteAddress').click(function (e) {
+                e.preventDefault();
+                var self = $(this);
+                var address = self.data('address');
+                var cityAndState = address.city + " - " + address.state;
+                $('#Street').val(address.street);
+                $('#StreetNumber').val(address.number);
+                $('#Complement').val(address.complementary);
+                $('#District').val(address.neighborhood);
+                $('#ZipCode').val(address.zipCode);
+                $('#CityAndState').append($('<option>', {
+                    text: cityAndState
+                }));
+                $('#CityAndState').val(cityAndState);
+            });
+        </script>
+    }
+}

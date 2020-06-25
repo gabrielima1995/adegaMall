@@ -1,0 +1,118 @@
+﻿@using Presentation.Helpers
+@using Domain.QuoteRequests
+@using Presentation.Areas.Admin.Controllers.Portfolio
+@using V2.Application.Modules.QuoteRequests.Model
+@model ResultList<QuoteListForAdminDto>
+
+@{
+    ViewBag.Title = "Pedidos de Orçamento";
+    var config = MaaSConfig.Current;
+    var currentPage = Request.QueryString.AllKeys.Contains("page") ? Request.QueryString["page"].AsInt() : 0;
+    var maxPage = (int)Math.Floor(Model.TotalCount / Model.PageSize * 1d);
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-file-o" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+
+    @if (MaaSConfig.Current.Quote.GeneralQuote.Enabled && MaaSConfig.Current.Quote.GeneralQuote.RegisterQuoteEvenWhenNoSellers)
+    {
+        <p>
+            <a href="@Url.ActionLocalized("WithoutSeller", "Quotes")"> @Request.GetLocalizedString("QUOTES_WITHOUT_SELLERS_ADMIN_LINK")</a>
+        </p>
+    }
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-body table-responsive">
+            <table class="table table-bordered table-hover" id="quoteList">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Comprador</th>
+                        <th>Vendedor</th>
+                        <th>Título</th>
+                        <th>Categoria</th>
+                        <th>Subcategoria</th>
+                        <th>Respostas</th>
+                        <th class="js-sort-column">Data</th>
+                        <th>Situação</th>
+                        <th>Localidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr class="@Css.If(item.IsClosed && item.DealResult == QuoteDealResult.Won, "success").ElseIf(item.IsClosed && item.DealResult == QuoteDealResult.Lost, "danger").Get()">
+                            <td data-order="@Dt.Order(item.Id)">
+                                <a href="@Url.ActionLocalized("Details", "Quotes", new { id = item.Id })">@item.Id.ToString().Substring(0, 8)</a>
+                            </td>
+                            <td data-order="@Dt.Order(item.BuyerName)">
+                                <a href="@Url.ActionLocalized("Details", "Buyers", new { id = item.BuyerId })">@item.BuyerName</a>
+                            </td>
+                            <td data-order="@Dt.Order(item.SellerName)">
+                                <a href="@Url.ActionLocalized("Details", "Sellers", new { id = item.SellerId })">@item.SellerName</a>
+                            </td>
+                            <td data-order="@Dt.Order(item.Title)">@Html.DisplayFor(model => item.Title)</td>
+                            <td data-order="@Dt.Order(item.CategoryName)">@Html.DisplayFor(model => item.CategoryName)</td>
+                            <td data-order="@Dt.Order(item.SubCategoryName)">@Html.DisplayFor(model => item.SubCategoryName)</td>
+                            <td data-order="@Dt.Order(item.AnswersCount)">@Html.DisplayFor(model => item.AnswersCount)</td>
+                            <td data-order="@Dt.Order(item.CreatedAt)">@Html.DisplayFor(model => item.CreatedAt)</td>
+                            <td data-order="@Dt.Order(item.DealResult)">
+                                @if (item.IsClosed)
+                                {
+                                    @:@item.DealResult.DisplayDescription()
+                                }
+                                else if (item.LatestInteraction != null)
+                                {
+                                    <span>última resposta em</span>
+                                    @:@Html.DisplayFor(model => item.LatestInteraction)
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                            <td data-order="@Dt.Order(item.CityAndState)">@Html.DisplayFor(model => item.CityAndState)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Quotes", new { page = 0 })" )>
+                        <i class="fa fa-angle-double-left"></i>
+                    </a>
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Quotes", new { page = Math.Max(currentPage - 1, 0) })" )>
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="btn btn-primary" href="" )>
+                        @(currentPage + 1)
+                    </a>
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Quotes", new { page = Math.Min(currentPage + 1, maxPage) })" )>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Quotes", new { page = maxPage })" )>
+                        <i class="fa fa-angle-double-right"></i>
+                    </a>
+                </div>
+                <div class="col-xs-12 text-center">
+                    <span>Exibindo resultados @(currentPage * Model.PageSize + 1) - @Math.Min(Model.TotalCount, (currentPage + 1) * Model.PageSize) de @Model.TotalCount</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        var sortColumn = $("#quoteList th.js-sort-column").index();
+        DataTableCustom.create("#quoteList", {
+            searching: true, paging: false, info: false, order: [[sortColumn, "desc"]]
+        });
+    </script>
+}

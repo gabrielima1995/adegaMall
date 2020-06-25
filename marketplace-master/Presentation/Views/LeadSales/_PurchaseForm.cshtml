@@ -1,0 +1,94 @@
+﻿@model Presentation.Models.PurchaseCreditsPackVM
+@{
+    var card = new Domain.DTO.CreditCard();
+    Model.Payment.CreditCard = card;
+
+    var year = DateTime.UtcNow.Year;
+
+    var months = new string('\0', 12).Select((c, i) =>
+    {
+        var l = (++i).ToString("00");
+        return new KeyValuePair<string, string>(l, l);
+    });
+
+    var years = new string('\0', 10).Select((c, i) =>
+    {
+        var l = (i + year).ToString("00");
+        return new KeyValuePair<string, string>(l, l);
+    });
+
+}
+
+@using (Html.BeginForm("PurchaseCredits", "LeadSales", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.CreditsPackId)
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(i => i.Payment.Installments)
+                @Html.DropDownListFor(i => i.Payment.Installments, Model.GetInstallmentsSelectList(), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Payment.Installments, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(i => i.Payment.CreditCard.Number)
+                @Html.TextBoxFor(i => i.Payment.CreditCard.Number, new { @class = "form-control js-credit-card", placeholder = Request.GetLocalizedString("CREDIT_CARD_NUMBER_INPUT_V2"), maxlength = 16 })
+                @Html.ValidationMessageFor(model => model.Payment.CreditCard.Number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(i => i.Payment.CreditCard.FullName)
+                @Html.TextBoxFor(i => i.Payment.CreditCard.FullName, new { @class = "form-control", placeholder = Request.GetLocalizedString("CREDIT_CARD_FULLNAME_INPUT") })
+                @Html.ValidationMessageFor(model => model.Payment.CreditCard.FullName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(i => i.Payment.CreditCard.Month)
+                @Html.DropDownListFor(i => i.Payment.CreditCard.Month, new SelectList(months, "Key", "Value"),
+                 Request.GetLocalizedString("CREDIT_CARD_MONTH_INPUT"),
+                 new { @class = "form-control", style = "width:100%" })
+                @Html.ValidationMessageFor(model => model.Payment.CreditCard.Month, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(i => i.Payment.CreditCard.Year)
+                @Html.DropDownListFor(i => i.Payment.CreditCard.Year, new SelectList(years, "Key", "Value"),
+                 Request.GetLocalizedString("CREDIT_CARD_YEAR_INPUT"),
+                 new { @class = "form-control", style = "width:100%" })
+                @Html.ValidationMessageFor(model => model.Payment.CreditCard.Year, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(i => i.Payment.CreditCard.CVV)
+                @Html.TextBoxFor(i => i.Payment.CreditCard.CVV, new { @class = "form-control js-digits", placeholder = Request.GetLocalizedString("CREDIT_CARD_CVV_INPUT"), maxlength = 4 })
+                @Html.ValidationMessageFor(model => model.Payment.CreditCard.CVV, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-credit-card"></i> @Request.GetLocalizedString("CREDITS_PACK_PAYMENT_BUTTON")</button>
+        </div>
+    </div>
+}

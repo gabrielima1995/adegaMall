@@ -1,0 +1,136 @@
+﻿@model CustomizeHtmlVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("CUSTOMIZE_HTML_TITLE");
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-paint-brush" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            @Html.Localized("CUSTOMIZE_HTML_PAGE_DISCLAIMER", "p")
+            Saiba mais sobre essa funcionalidade
+            <a href="http://suporte.ideianoar.com.br/pt-BR/articles/3366064-html-avancado">clicando aqui.</a>
+            @using (Html.BeginForm("Html", "Customize", FormMethod.Post))
+            {
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@Request.GetLocalizedString("CUSTOMIZE_HTML_HEAD_TITLE")</h3>
+                    </div>
+                    <div class="box-body">
+                        <p>@Request.GetLocalizedString("CUSTOMIZE_HTML_HEAD_DESCRIPTION", "small", new { @class = "text-muted" })</p>
+                        @Html.TextAreaFor(model => model.HtmlHead, new { @class = "form-control autosize js-customization-input", placeholder = Request.GetLocalizedString("CUSTOMIZE_HTML_HEAD_INPUT") })
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@Request.GetLocalizedString("CUSTOMIZE_HTML_BODY_START_TITLE")</h3>
+                    </div>
+                    <div class="box-body">
+                        <p>@Request.GetLocalizedString("CUSTOMIZE_HTML_BODY_START_DESCRIPTION", "small", new { @class = "text-muted" })</p>
+                        @Html.TextAreaFor(model => model.HtmlBodyStart, new { @class = "form-control autosize js-customization-input", placeholder = Request.GetLocalizedString("CUSTOMIZE_HTML_BODY_START_INPUT") })
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@Request.GetLocalizedString("CUSTOMIZE_HTML_BODY_END_TITLE")</h3>
+                    </div>
+                    <div class="box-body">
+                        <p>@Request.GetLocalizedString("CUSTOMIZE_HTML_BODY_END_DESCRIPTION", "small", new { @class = "text-muted" })</p>
+                        @Html.TextAreaFor(model => model.HtmlBodyEnd, new { @class = "form-control autosize js-customization-input", placeholder = Request.GetLocalizedString("CUSTOMIZE_HTML_BODY_END_INPUT") })
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    @Html.Localized("ALERT_WARNING_TITLE", "strong")
+                    @Html.Localized("CUSTOMIZE_HTML_PAGE_FORBIDDEN")
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(model => model.AgreeToTerms, new { @class = "js-agree" })
+                        @Html.DisplayNameFor(model => model.AgreeToTerms)
+                        @Html.ValidationMessageFor(model => model.AgreeToTerms)
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg js-btn-save">
+                    <i class="fa fa-check"></i>
+                    @Request.GetLocalizedString("SAVE_CHANGES_BUTTON")
+                </button>
+            }
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    @Scripts.Render("~/Areas/Admin/assets/js/codemirror/codemirror.js", "~/Areas/Admin/assets/js/codemirror/xml.js", "~/Areas/Admin/assets/js/codemirror/javascript.js", "~/Areas/Admin/assets/js/codemirror/css.js", "~/Areas/Admin/assets/js/codemirror/htmlmixed.js")
+    @Styles.Render("~/Areas/Admin/assets/css/codemirror.css", "~/Areas/Admin/assets/css/codemirror-dracula.css")
+
+    <script>
+
+        var CustomizeHtml = (function () {
+
+            var inputsChanged = false;
+
+            function init() {
+                setSaveButtonState();
+                handleCheckAgree();
+                handleTextAreaChange();
+                createNiceCodeEditor();
+            }
+
+            function createNiceCodeEditor() {
+                $("textarea").each(function () {
+                    var textarea = this;
+                    CodeMirror.fromTextArea(textarea, {
+                        lineNumbers: true,
+                        mode: "htmlmixed",
+                        theme: "dracula"
+                    }).on("change", function () {
+                        inputsChanged = true;
+                        setSaveButtonState();
+                    });
+                });
+            }
+
+            function handleCheckAgree() {
+                $('.js-agree').change(function () {
+                    setSaveButtonState();
+                });
+            }
+
+            function handleTextAreaChange() {
+                $('.js-customization-input').change(function () {
+                    inputsChanged = true;
+                    setSaveButtonState();
+                });
+            }
+
+            function setSaveButtonState() {
+                $('.js-btn-save').attr('disabled', 'disabled');
+
+                if (!inputsChanged || !$('.js-agree').is(':checked'))
+                    return;
+
+                $('.js-btn-save').removeAttr('disabled');
+            }
+
+            return {
+                init: init
+            };
+
+        })();
+
+    </script>
+    <script>CustomizeHtml.init()</script>
+}

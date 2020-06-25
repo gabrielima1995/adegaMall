@@ -1,0 +1,330 @@
+﻿@using Domain.Entities.PortfolioModule
+@using Presentation.Helpers
+
+@model Presentation.Models.QuoteViewModels.QuoteListItemForBuyerVM
+
+@{
+    var config = MaaSConfig.Current;
+    var quoteGroupAllClosed = Model.IsGroup && config.Quote.BuyerDecision.Enabled && Model.AllClosed;
+    var quoteStatusViewData = new ViewDataDictionary { { "QuoteGroupAllClosed", quoteGroupAllClosed } };
+}
+
+<tr data-id="@Model.Quote.Id" class="orcamento">
+    <td>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3><u>@Model.Quote.Title</u></h3>
+
+                <div class="orcamento-buyer-and-description">
+                    <div class="orcamento-buyer-and-description-info">
+                        <p class="m-b-0">@Html.TextWithLineBreaks(Model.Quote.Description.HtmlEncode())</p>
+
+                        @if (!config.Quote.Answers.Enabled)
+                        {
+                            <p class="quote-buyer-contacts" style="margin-top:1rem">
+                                @Model.Quote.BuyerEmail<br />
+                                @Model.Quote.Phone
+                            </p>
+                        }
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <small class="quote-show-details">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-chevron-down"></i>
+                        ver mais detalhes
+                    </a>
+                </small>
+
+                <ul class="list-unstyled orcamento-details" style="display:none">
+                    @if (Model.Quote.CategoryId.HasValue)
+                    {
+                        <li>
+                            <i class="fa fa-tag"></i>
+                            @Model.Quote.CategoryName / @Model.Quote.SubCategoryName
+                        </li>
+                    }
+
+                    @if (Model.Quote.PortfolioItemId.HasValue)
+                    {
+                        <li>
+                            <i class="fa fa-address-card"></i>
+                            @Html.Localized("QUOTE_PORTFOLIO_ITEM_LABEL"): @Model.Quote.PortfolioItemTitle
+                        </li>
+                    }
+
+                    @if (config.Quote.PortfolioItemQuote.Quantity.Enabled && Model.Quote.Quantity.HasValue && Model.Quote.Quantity > 0)
+                    {
+                        <li>
+                            <i class="fas fa-cubes"></i>
+                            @Html.Localized("QUOTE_QUANTITY_LABEL"): @Model.Quote.Quantity
+                        </li>
+                    }
+
+                    @if (config.Quote.Date.Enabled && Model.Quote.Date.HasValue)
+                    {
+                        <li>
+                            <i class="fa fa-calendar"></i>
+                            @Model.Quote.Date.Value.DisplayDate()
+                        </li>
+                    }
+
+                    @if ((config.Quote.Address.Enabled || config.Quote.CityAndState.Enabled) && Model.Quote.HasAddress)
+                    {
+                        <li>
+                            <i class="fa fa-map-marker-alt"></i>
+                            @if (config.Quote.Address.Enabled && Model.Quote.AddressStreet != null)
+                            {
+                                @(Model.Quote.AddressStreet + ", " + Model.Quote.AddressNumber)
+                                @:-
+                                @(Model.Quote.AddressNeighborhood)
+                                @:-
+                            }
+                            @if ((config.Quote.Address.Enabled || config.Quote.CityAndState.Enabled) && Model.Quote.CityAndState != null)
+                            {
+                                @:@Model.Quote.CityAndState
+                            }
+                        </li>
+                    }
+
+                    @if (config.Quote.QuoteMax.Enabled && Model.Quote.Amount.HasValue)
+                    {
+                        <li>
+                            <i class="fa fa-dollar-sign"></i>
+                            @Html.Localized("QUOTE_MAX_BUDGET_SIMPLE_LABEL"):
+                            @config.DefaultCurrency @Model.Quote.Amount.Value.DisplayDecimal(2)
+                        </li>
+                    }
+
+                    @if (config.Quote.Preference.Enabled && !Model.Quote.IsShortQuote)
+                    {
+                        <li>
+                            <i class="fa fa-exclamation-circle"></i>
+                            @Html.Localized("QUOTE_PREFERENCE_SIMPLE_LABEL"):
+                            @Html.Localized($"PREF_{ Model.Quote.Preference.ToString().ToUpper() }_LABEL")
+                        </li>
+                    }
+
+                    @if (Model.Quote.AttachmentUrl != null)
+                    {
+                        <li>
+                            <i class="fa fa-file"></i>
+                            @Html.Localized("QUOTE_ATTACHMENT_LABEL"):
+                            @Html.Localized("QUOTE_ATTACHMENT_CLICK_TO_OPEN", "a", new { href = Model.Quote.AttachmentUrl, target = "_blank" })
+                            <i class="fa fa-external-link"></i>
+                        </li>
+                    }
+
+                    @if (Model.Quote.CustomFieldDefinitions?.Count > 0)
+                    {
+                        foreach (var customField in Model.Quote.CustomFields)
+                        {
+                            if (string.IsNullOrWhiteSpace(customField.Value) || !Model.Quote.CustomFieldDefinitions[new Guid(customField.Key)].IsPublic)
+                            {
+                                continue;
+                            }
+                            var value = Model.Quote.CustomFields[customField.Key.ToString()];
+                            <li>
+                                <i class="far fa-dot-circle"></i>
+                                @Model.Quote.CustomFieldDefinitions[new Guid(customField.Key)].Name :
+                                <span>
+                                    @if (CustomFieldHelper.IsLink(value))
+                                    {
+                                        <a href="@value"><i class="fas fa-paperclip"></i> @Request.GetLocalizedString("CUSTOM_FIELD_VIEW_FILE")</a>
+                                    }
+                                    else
+                                    {
+                                        @CustomFieldHelper.LocalizeField(value, Request.GetCurrentLang())
+                                    }
+                                </span>
+                            </li>
+                        }
+                    }
+                </ul>
+
+                @if (Model.IsGroup)
+                {
+                    if (config.Quote.GeneralQuote.ShowSellersWithoutAnswer || Model.TotalSellersCount > 0)
+                    {
+                        <p class="orcamento-top-sellers">
+                            @if (config.Quote.GeneralQuote.ShowSellersWithoutAnswer)
+                            {
+                                foreach (var seller in Model.TopSellers)
+                                {
+                                    <a href="@Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = seller.Nickname })" target="_blank">
+                                        <img src="@seller.AvatarUrl" class="img-circle" alt="@seller.Name" />
+                                    </a>
+                                }
+                                if (Model.AdditionalSellersCount > 0)
+                                {
+                                    <a href="@Url.ActionLocalized("GroupDetails", "Quotes", new { id = Model.Quote.GroupId, addAnswer = 1 })">
+                                        <span class="additional-sellers-count badge">+@Model.AdditionalSellersCount</span>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <a href="@Url.ActionLocalized("GroupDetails", "Quotes", new { id = Model.Quote.GroupId, addAnswer = 1 })">
+                                    @Html.Localized("QUOTE_GROUP_TOTAL_SELLERS", "span", new { @class = "total-sellers-count" }, Model.TotalSellersCount)
+                                </a>
+                            }
+                        </p>
+                    }
+                }
+                else
+                {
+                    <p class="orcamento-seller">
+                        <a href="@Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.Quote.SellerUrl })" target="_blank">
+                            <img src="@Model.Quote.SellerAvatar" class="img-circle" />
+                        </a>
+                        <div class="orcamento-seller-info">
+                            <a href="@Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.Quote.SellerUrl })" target="_blank">
+                                <small class="text-muted">@Html.Localized("SELLER_TITLE")</small><br />
+                            </a>
+                            <a href="@Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.Quote.SellerUrl })" target="_blank">
+                                <strong>@Model.Quote.SellerName</strong>
+                            </a>
+                        </div>
+                    </p>
+                }
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8">
+                        <p class="data quote-date-added">
+                            <small>
+                                @Html.Localized("DATE_ADDED_LABEL") @Model.Quote.CreatedAt.DisplayDateTime()
+                            </small>
+                        </p>
+                    </div>
+
+                    @if (Model.IsGroup && config.Quote.BuyerDecision.Enabled && !Model.AllClosed)
+                    {
+                        <div class="col-xs-12 col-sm-4 text-right">
+                            <button class="btn btn-sm btn-danger btn-danger-light button-cancel-all">
+                                <i class="fa fa-ban"></i>
+                                @Request.GetLocalizedString("CANCEL_QUOTE_ALL")
+                            </button>
+                            <div class="disclaimer" style="display:none">
+                                <p class="text text-warning">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    @Request.GetLocalizedString("CANCEL_QUOTE_ALL_DISCLAIMER")
+                                </p>
+                                @Html.ActionLink(Request.GetLocalizedString("CANCEL_QUOTE_ALL"), "CancelGroup", "Quotes", new { groupId = Model.Quote.GroupId }, new { @class = "btn btn-danger" })
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                @Html.Partial("_QuoteStatus", Model.Quote, quoteStatusViewData)
+
+                @if (config.Quote.Answers.Enabled)
+                {
+                    <hr />
+                    if (Model.LatestInteraction == null)
+                    {
+                        <p>
+                            @Html.Localized("QUOTE_LATEST_ANSWER_NON_EXISTENT")
+                            @if (Model.IsGroup)
+                            {
+                                <a href="@Url.ActionLocalized("GroupDetails", "Quotes", new { id = Model.Quote.GroupId, addAnswer = 1 })" class="btn btn-default btn-sm pull-right">
+                                    <i class="glyphicon glyphicon-share-alt"></i>
+                                    @Html.Localized("QUOTE_LATEST_ANSWER_ACTION_SEE_SELLERS")
+                                </a>
+                            }
+                            else if (Model.Quote.Status == QuoteStatus.Opened)
+                            {
+                                <a href="@Url.ActionLocalized("Details", "Quotes", new { id = Model.Quote.Id, addAnswer = 1 })" class="btn btn-default btn-sm pull-right">
+                                    <i class="glyphicon glyphicon-share-alt"></i>
+                                    @Html.Localized("QUOTE_LATEST_ANSWER_ACTION_ANSWER")
+                                </a>
+                            }
+                        </p>
+                    }
+                    else
+                    {
+                        <div class="quote-latest-answer">
+                            <h4>
+                                @Request.GetLocalizedString("QUOTE_LATEST_ANSWER_LABEL")
+                                @if (Model.IsGroup)
+                                {
+                                    <span>&ensp;</span>
+                                    <small><a class="text-info" href="@Url.ActionLocalized("GroupDetails", "Quotes", new { id = Model.Quote.GroupId, addAnswer = 1 })">@Html.Localized("QUOTE_LATEST_ANSWER_ACTION_SEE_ALL") <i class="glyphicon glyphicon-share-alt"></i></a></small>
+                                }
+                                else if (!Model.Quote.IsClosed)
+                                {
+                                    <span>&ensp;</span>
+                                    <small><a class="text-info" href="@Url.ActionLocalized("Details", "Quotes", new { id = Model.Quote.Id, addAnswer = 1 })">@Html.Localized("QUOTE_LATEST_ANSWER_ACTION_SEE_ALL") <i class="glyphicon glyphicon-share-alt"></i></a></small>
+                                }
+                            </h4>
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="quote-answer-item">
+                                        @if (Model.LatestInteraction.IsSeller)
+                                        {
+                                            <a href="@Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.LatestInteraction.SellerNickname })" target="_blank">
+                                                <img src="@Model.LatestInteraction.AvatarUrl" class="img-circle" />
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <img src="@Model.LatestInteraction.AvatarUrl" class="img-circle" />
+                                        }
+
+                                        <div class="quote-answer-item-data">
+                                            <strong>@Model.LatestInteraction.Name</strong>
+                                            <p>
+                                                @if (Model.LatestInteraction.Price != null)
+                                                {
+                                                    <strong class="label label-info label-lg m-r-sm">
+                                                        @config.DefaultCurrency
+                                                        @Model.LatestInteraction.Price.Value.DisplayDecimal(2)
+                                                    </strong>
+                                                }
+                                                @if (Model.LatestInteraction.DeliveryDeadline != null)
+                                                {
+                                                    <strong class="label label-info label-lg m-r-sm">
+                                                        @Request.GetLocalizedString("DELIVERY_DEADLINE_LABEL")
+                                                        @Model.LatestInteraction.DeliveryDeadline.Value.ToShortDateString()
+                                                    </strong>
+                                                }
+                                                <span>@Model.LatestInteraction.Text</span>
+                                            </p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    @if (Model.IsGroup)
+                                    {
+                                        <a href="@Url.ActionLocalized("GroupDetails", "Quotes", new { id = Model.Quote.GroupId, addAnswer = 1 })" class="btn btn-default btn-sm pull-right">
+                                            @Html.Localized("QUOTE_LATEST_ANSWER_ACTION_SEE_ALL")
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        if (Model.Quote.IsClosed)
+                                        {
+                                            <a href="@Url.ActionLocalized("Details", "Quotes", new { id = Model.Quote.Id, addAnswer = 1 })" class="btn btn-default btn-sm pull-right">
+                                                <i class="glyphicon glyphicon-share-alt"></i>
+                                                @Html.Localized("QUOTE_LATEST_ANSWER_ACTION_SEE_ALL")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.ActionLocalized("Details", "Quotes", new { id = Model.Quote.Id, addAnswer = 1 })" class="btn btn-default btn-sm pull-right">
+                                                <i class="glyphicon glyphicon-share-alt"></i>
+                                                @Html.Localized("QUOTE_LATEST_ANSWER_ACTION_ANSWER")
+                                            </a>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </td>
+</tr>
+

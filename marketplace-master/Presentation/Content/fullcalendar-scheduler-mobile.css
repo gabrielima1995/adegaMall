@@ -1,0 +1,35 @@
+﻿.schedule-wrapper .fc-widget-header.fc-time-area tr:first-child .fc-cell-content {
+    overflow: hidden !important;
+}
+
+@media screen and (max-width: 768px) {
+    .schedule-wrapper .fc-toolbar.fc-header-toolbar {
+        margin-bottom: 5px;
+    }
+
+    .schedule-wrapper .fc-center h2 {
+        font-size: 16px !important;
+        max-width: 190px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .schedule-wrapper .fc-widget-header.fc-time-area tr:first-child .fc-cell-content {
+        font-size: 10px !important;
+    }
+
+    .schedule-wrapper .fc-prev-button, .schedule-wrapper .fc-next-button, .schedule-wrapper .fc-resourceTimelineWeek-button, .schedule-wrapper .fc-resourceTimelineDay-button, .schedule-wrapper .fc-today-button {
+        font-size: 10px;
+        padding: 3px;
+    }
+
+    .schedule-wrapper .fc-today-button {
+        margin-left: 1px !important;
+        padding-top: 4px;
+    }
+
+    .schedule-wrapper .fc-resource-area.fc-widget-content .fc-cell-content {
+        font-size: 10px;
+        overflow-x: auto;
+    }
+}

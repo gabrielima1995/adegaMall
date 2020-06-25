@@ -1,0 +1,92 @@
+﻿@model EcommerceHomeVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("ECOMMERCE_HOME_TITLE");
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-home" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Categorias de produtos que aparecem na home</h3>
+                </div>
+                @if (Model.Categories.Any())
+                {
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Categoria</th>
+                                    <th>Ordem</th>
+                                    <th width="50"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Categories)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="javascript:void(0)" data-category-id="@item.Id" class="js-btn-edit-category">
+                                                @Html.DisplayFor(model => item.CategoryName)
+                                            </a>
+                                            @if (item.UseCustomCategory)
+                                            {
+                                                <a class="btn btn-sm btn-default pull-right" href="@Url.ActionLocalized("Index", "CustomItem", new { area = "Admin", catId = item.CustomCategoryId })">
+                                                    <i class="fa fa-pencil"></i>
+                                                    Editar Itens
+                                                </a>
+                                            }
+                                        </td>
+                                        <td>@Html.DisplayFor(model => item.Order)</td>
+                                        <td>
+                                            <center>
+                                                @using (Html.BeginForm("RemoveCategory", "EcommerceHome"))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.Hidden("id", item.Id)
+                                                }
+                                                <a href="javascript:void(0)" class="text-danger js-btn-remove-category">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="box-body">
+                        <em class="text-muted">
+                            <span>Nenhuma categoria relacionada.</span>
+                        </em>
+                    </div>
+                }
+                <div class="box-footer">
+                    <button id="btnAddCategory" class="btn btn-primary" data-toggle="#modalCategory">
+                        <i class="fa fa-plus"></i>
+                        Adicionar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal fade" id="modalCategory"></div>
+
+@section scripts
+{
+    <script>EcommerceHome.init('@Url.ActionLocalized("CategoryModal", "EcommerceHome")')</script>
+}

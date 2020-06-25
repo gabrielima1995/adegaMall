@@ -1,0 +1,401 @@
+﻿@model Application.Sellers.SellerGatewayViewModel
+
+@{
+    var config = MaaSConfig.Current;
+
+    ViewBag.PersonCities = new Dictionary<string, string>(1);
+    ViewBag.CompanyCities = new Dictionary<string, string>(1);
+
+    if (!string.IsNullOrWhiteSpace(Model.Moip?.Person?.Address?.CityAndState))
+    {
+        ViewBag.PersonCities.Add(Model.Moip.Person.Address.CityAndState, Model.Moip.Person.Address.CityAndState);
+    }
+
+    if (!string.IsNullOrWhiteSpace(Model.Moip?.Company?.Address?.CityAndState))
+    {
+        ViewBag.CompanyCities.Add(Model.Moip.Company.Address.CityAndState, Model.Moip.Company.Address.CityAndState);
+    }
+}
+
+@Html.HiddenFor(model => model.Moip.Enabled)
+@Html.HiddenFor(model => model.Moip.Person.Enabled)
+@Html.HiddenFor(model => model.Moip.Person.Address.Enabled)
+@Html.HiddenFor(model => model.Moip.Company.Enabled, new { @class = "js-moip-seller-company-enabled" })
+@Html.HiddenFor(model => model.Moip.Company.Address.Enabled, new { @class = "js-moip-seller-company-address-enabled" })
+@Html.HiddenFor(model => model.Moip.BankAccount.Enabled)
+@Html.HiddenFor(model => model.GatewayRegistered)
+
+@if (!Model.GatewayRegistered)
+{
+    @:@Html.Localized("PAGARME_REGISTRATION_TEXT", "p")
+}
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+<div class="row">
+    <div class="col-xs-12">
+        @Html.LabelFor(model => model.Moip.HasCompany)
+
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(model => model.Moip.HasCompany, false)
+                @Request.GetLocalizedString("MOIP_SELLER_HASCOMPANY_PERSON_OPTION")
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(model => model.Moip.HasCompany, true)
+                @Request.GetLocalizedString("MOIP_SELLER_HASCOMPANY_COMPANY_OPTION")
+            </label>
+        </div>
+    </div>
+</div>
+
+<br />
+
+@Html.Localized("MOIP_SELLER_PERSON_LABEL", "h3")
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Moip.Person.Name)
+            @Html.EditorFor(model => model.Moip.Person.Name, new { htmlAttributes = new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_PERSON_NAME_INPUT") } })
+            @Html.ValidationMessageFor(model => model.Moip.Person.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Moip.Person.LastName)
+            @Html.EditorFor(model => model.Moip.Person.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_PERSON_LASTNAME_INPUT") } })
+            @Html.ValidationMessageFor(model => model.Moip.Person.LastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Moip.Person.TaxDocumentNumber)
+            @Html.TextBoxFor(i => i.Moip.Person.TaxDocumentNumber, new { @class = "form-control js-cpfcnpj", placeholder = Request.GetLocalizedString("MOIP_SELLER_PERSON_TAXDOCUMENTNUMBER_INPUT") })
+            @Html.ValidationMessageFor(model => model.Moip.Person.TaxDocumentNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Moip.Person.BirthDate)
+            @Html.TextBoxFor(i => i.Moip.Person.BirthDate, "{0:d}", new { @class = "form-control date", placeholder = Request.GetLocalizedString("MOIP_SELLER_PERSON_BIRTHDATE_INPUT") })
+            @Html.ValidationMessageFor(model => model.Moip.Person.BirthDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-7">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Moip.EmailAddress)
+            @Html.TextBoxFor(i => i.Moip.EmailAddress, new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_EMAILADDRESS_INPUT"), type = "email" })
+            @Html.ValidationMessageFor(model => model.Moip.EmailAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-sm-5">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Moip.Person.Phone)
+            @Html.TextBoxFor(i => i.Moip.Person.Phone, new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_PERSON_PHONE_INPUT"), type = "phone" })
+            @Html.ValidationMessageFor(model => model.Moip.Person.Phone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<br />
+
+@Html.Localized("MOIP_SELLER_PERSON_ADDRESS_LABEL", "h3")
+
+
+<div class="row">
+
+    @if (Model.SellerAddress != null)
+    {
+        <small class="form-group col-xs-12 col-sm-9">
+            <i class="far fa-copy"></i>   
+                    <a href="javascript:void(0)" id="autoCompleteAddress" data-address="@Model.SellerAddress.ToJson()">Usar o mesmo endereço do cadastro base</a>
+        </small>
+    }
+
+    <div class="col-xs-12 col-sm-9">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.Person.Address.Street)
+            @Html.TextBoxFor(i => i.Moip.Person.Address.Street, new { @class = "form-control", id = "Street", placeholder = Request.GetLocalizedString("MOIP_SELLER_ADDRESS_INPUT") })
+            @Html.ValidationMessageFor(model => model.Moip.Person.Address.Street, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-3">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.Person.Address.StreetNumber)
+            @Html.TextBoxFor(i => i.Moip.Person.Address.StreetNumber, new { @class = "form-control", id = "StreetNumber", placeholder = Request.GetLocalizedString("MOIP_SELLER_ADDRESS_NUMBER_INPUT") })
+            @Html.ValidationMessageFor(model => model.Moip.Person.Address.StreetNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.Person.Address.Complement)
+            @Html.TextBoxFor(i => i.Moip.Person.Address.Complement, new { @class = "form-control", id = "Complement", placeholder = Request.GetLocalizedString("MOIP_SELLER_ADDRESS_COMPLEMENT_INPUT") })
+            @Html.ValidationMessageFor(model => model.Moip.Person.Address.Complement, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.Person.Address.District)
+            @Html.TextBoxFor(i => i.Moip.Person.Address.District, new { @class = "form-control", id = "District", placeholder = Request.GetLocalizedString("MOIP_SELLER_ADDRESS_DISTRICT_INPUT") })
+            @Html.ValidationMessageFor(model => model.Moip.Person.Address.District, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.Person.Address.ZipCode)
+            @Html.TextBoxFor(i => i.Moip.Person.Address.ZipCode, new { @class = "form-control js-zipcode", id = "ZipCode", placeholder = Request.GetLocalizedString("MOIP_SELLER_ADDRESS_ZIPCODE_INPUT") })
+            @Html.ValidationMessageFor(model => model.Moip.Person.Address.ZipCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-9">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.Person.Address.CityAndState)
+            <div class="js-city-select-container">
+                @Html.DropDownListFor(m => m.Moip.Person.Address.CityAndState,
+                    new SelectList(ViewBag.PersonCities, "Key", "Value", Model.Moip.Person.Address.CityAndState),
+                    Request.GetLocalizedString("MOIP_SELLER_ADDRESS_CITYSTATE_INPUT"),
+                    new { @class = "form-control js-city-select", id = "CityAndState", style = "width:100%" })
+                @Html.HiddenFor(m => m.Moip.Person.Address.CityAndState)
+                @Html.ValidationMessageFor(model => model.Moip.Person.Address.CityAndState, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-3">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.Person.Address.Country)
+            @Html.TextBoxFor(i => i.Moip.Person.Address.Country, new { @class = "form-control", disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.Moip.Person.Address.Country, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="js-seller-moip-company-wrapper" style="display: @(Model.Moip.HasCompany ? "block" : "none")">
+
+    <br />
+    @Html.Localized("MOIP_SELLER_COMPANY_LABEL", "h3")
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Moip.Company.BusinnessName)
+                @Html.EditorFor(model => model.Moip.Company.BusinnessName, new { htmlAttributes = new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_COMPANY_BUSINESSNAME_INPUT") } })
+                @Html.ValidationMessageFor(model => model.Moip.Company.BusinnessName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Moip.Company.Name)
+                @Html.EditorFor(model => model.Moip.Company.Name, new { htmlAttributes = new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_COMPANY_NAME_INPUT") } })
+                @Html.ValidationMessageFor(model => model.Moip.Company.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Moip.Company.TaxDocumentNumber)
+                @Html.TextBoxFor(i => i.Moip.Company.TaxDocumentNumber, new { @class = "form-control js-cpfcnpj", placeholder = Request.GetLocalizedString("MOIP_SELLER_COMPANY_TAXDOCUMENTNUMBER_INPUT") })
+                @Html.ValidationMessageFor(model => model.Moip.Company.TaxDocumentNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Moip.Company.Phone)
+                @Html.TextBoxFor(i => i.Moip.Company.Phone, new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_COMPANY_PHONE_INPUT"), type = "phone" })
+                @Html.ValidationMessageFor(model => model.Moip.Company.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    @Html.Localized("MOIP_SELLER_COMPANY_ADDRESS_LABEL", "h3")
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBoxFor(model => model.Moip.Company.SamePersonAddress, new { @class = "js-moip-seller-company-sameaddress" })
+                    @Request.GetLocalizedString("MOIP_SELLER_COMPANY_SAMEPERSONADDRESS_LABEL")
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="js-seller-moip-company-address-wrapper" style="display: @(Model.Moip.Company.SamePersonAddress ? "none" : "block")">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.Moip.Company.Address.Street)
+                    @Html.TextBoxFor(i => i.Moip.Company.Address.Street, new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_ADDRESS_INPUT") })
+                    @Html.ValidationMessageFor(model => model.Moip.Company.Address.Street, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-3">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.Moip.Company.Address.StreetNumber)
+                    @Html.TextBoxFor(i => i.Moip.Company.Address.StreetNumber, new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_ADDRESS_NUMBER_INPUT") })
+                    @Html.ValidationMessageFor(model => model.Moip.Company.Address.StreetNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.Moip.Company.Address.Complement)
+                    @Html.TextBoxFor(i => i.Moip.Company.Address.Complement, new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_ADDRESS_COMPLEMENT_INPUT") })
+                    @Html.ValidationMessageFor(model => model.Moip.Company.Address.Complement, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.Moip.Company.Address.District)
+                    @Html.TextBoxFor(i => i.Moip.Company.Address.District, new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_ADDRESS_DISTRICT_INPUT") })
+                    @Html.ValidationMessageFor(model => model.Moip.Company.Address.District, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.Moip.Company.Address.ZipCode)
+                    @Html.TextBoxFor(i => i.Moip.Company.Address.ZipCode, new { @class = "form-control js-zipcode", placeholder = Request.GetLocalizedString("MOIP_SELLER_ADDRESS_ZIPCODE_INPUT") })
+                    @Html.ValidationMessageFor(model => model.Moip.Company.Address.ZipCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-9">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.Moip.Company.Address.CityAndState)
+                    <div class="js-city-select-container">
+                        @Html.DropDownListFor(m => m.Moip.Company.Address.CityAndState,
+                            new SelectList(ViewBag.CompanyCities, "Key", "Value", Model.Moip.Company.Address.CityAndState),
+                            Request.GetLocalizedString("MOIP_SELLER_ADDRESS_CITYSTATE_INPUT"),
+                            new { @class = "form-control js-city-select", style = "width:100%" })
+                        @Html.HiddenFor(m => m.Moip.Company.Address.CityAndState)
+                        @Html.ValidationMessageFor(model => model.Moip.Company.Address.CityAndState, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-3">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.Moip.Company.Address.Country)
+                    @Html.TextBoxFor(i => i.Moip.Company.Address.Country, new { @class = "form-control", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.Moip.Company.Address.Country, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+@Html.Localized("MOIP_SELLER_BANKACCOUNT_LABEL", "h3", new { id = "js-seller-moip-bankaccount-title" })
+
+<div class="row">
+    <div class="col-xs-12 col-sm-7">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.BankAccount.Bank)
+            @Html.EnumDropDownListFor(i => i.Moip.BankAccount.Bank, new { @class = "form-control js-bank-selector" })
+            @Html.ValidationMessageFor(model => model.Moip.BankAccount.Bank, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-5">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.BankAccount.Type)
+            @Html.EnumDropDownListFor(i => i.Moip.BankAccount.Type, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Moip.BankAccount.Type, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-7">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.BankAccount.AgencyNumber)
+            @Html.TextBoxFor(i => i.Moip.BankAccount.AgencyNumber, new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_BANKACCOUNT_AGENCYNUMBER_INPUT") })
+            @Html.ValidationMessageFor(model => model.Moip.BankAccount.AgencyNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-5">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.BankAccount.AgencyCheckNumber)
+            @Html.TextBoxFor(i => i.Moip.BankAccount.AgencyCheckNumber, new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_BANKACCOUNT_AGENCYCHECKNUMBER_INPUT") })
+            @Html.ValidationMessageFor(model => model.Moip.BankAccount.AgencyCheckNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-7">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.BankAccount.AccountNumber)
+            @Html.TextBoxFor(i => i.Moip.BankAccount.AccountNumber, new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_BANKACCOUNT_ACCOUNTNUMBER_INPUT") })
+            @Html.ValidationMessageFor(model => model.Moip.BankAccount.AccountNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-5">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Moip.BankAccount.AccountCheckNumber)
+            @Html.TextBoxFor(i => i.Moip.BankAccount.AccountCheckNumber, new { @class = "form-control", placeholder = Request.GetLocalizedString("MOIP_SELLER_BANKACCOUNT_ACCOUNTCHECKNUMBER_INPUT") })
+            @Html.ValidationMessageFor(model => model.Moip.BankAccount.AccountCheckNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-xs-12">
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(model => model.Moip.Terms1)
+                @Request.GetLocalizedString("MOIP_SELLER_TERMS1_LABEL")
+            </label>
+            @Html.ValidationMessageFor(model => model.Moip.Terms1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(model => model.Moip.Terms2)
+                @Request.GetLocalizedString("MOIP_SELLER_TERMS2_LABEL")
+            </label>
+            @Html.ValidationMessageFor(model => model.Moip.Terms2, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>

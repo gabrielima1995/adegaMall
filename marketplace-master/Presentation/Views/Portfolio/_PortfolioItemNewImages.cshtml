@@ -1,0 +1,6 @@
+﻿@model IList<Domain.Modules.Portfolio.PortfolioItemImage>
+    
+@foreach (var item in Model)
+{
+    @Html.Partial("_PortfolioItemImageForm", item)
+}

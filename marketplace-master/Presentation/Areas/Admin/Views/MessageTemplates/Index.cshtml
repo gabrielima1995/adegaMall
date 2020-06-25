@@ -1,0 +1,63 @@
+﻿@model MessageTemplateViewModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("CUSTOMIZE_MESSAGE_TEMPLATES_TITLE");
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-envelope"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+    <div class="box-body table-responsive">
+    <table class="table table-hover js-items-list">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Mensagem")
+            </th>
+            <th>
+                @Html.DisplayName("Descrição")
+            </th>
+            <th>
+                Ações
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Specifications)
+        {
+            <tr>
+                <td>
+                    @Request.GetLocalizedString(item.TitleLabel)
+                </td>
+                <td>
+                    @Request.GetLocalizedString(item.DescriptionLabel)
+                </td>
+                <td>
+                    @for (var i = 0; i < Model.Langs.Count; i++)
+                    {
+                        @Html.ActionLink("Editar "+ Model.Langs[i], "Edit", new { key = item.TemplateKey, lang = Model.Langs[i] })
+
+                        if (i < Model.Langs.Count - 1)
+                        {
+                            <span> | </span>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>DataTableCustom.create()</script>
+}

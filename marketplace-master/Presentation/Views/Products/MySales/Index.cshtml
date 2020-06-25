@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNet.Identity
+@model Application.Modules.Products.Orders.MySalesViewModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("MY_SALES_LINK");
+    var viewPathFmt = "~/Views/Products/MySales/{0}.cshtml";
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+@section styles
+{
+    @Styles.Render("~/Content/datatable")
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+            <div class="col-xs-12">
+                @Html.Localized("MY_SALES_LINK", "h3")
+                @Html.Partial(string.Format(viewPathFmt, "_Sales"), Model.Orders)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section plugins
+{
+    @Scripts.Render("~/bundles/datatable")
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $('table').DataTable({
+                "dom": '<<"pull-right"B><"pull-left"f>>rtip',
+                "info": false,
+                "oLanguage": {
+                    "oPaginate": {
+                        "sPrevious": "«",
+                        "sNext": "»"
+                    }
+                }
+            });
+        });
+    </script>
+}

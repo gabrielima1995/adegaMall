@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNet.Identity
+@model OrderDetailsVM
+
+@{
+    var isBuyer = User.Identity.GetLoginProfile().IsBuyer();
+}
+
+@if (MaaSConfig.Current.Payment.Common.EnableTransactionWarranty && Model.Order.AutoCompletionDate.HasValue)
+{
+    <li class="list-group-item list-group-item-split" style="height:48px">
+        @if (Model.Order.Status == Domain.Entities.StoreModule.OrderStatus.Completed)
+        {
+            <strong>@Request.GetLocalizedString("ACTUAL_TRANSFER_DATE_LABEL")</strong>
+            <div class="text-right">
+                @if (Model.CompletedDate.HasValue)
+                {
+                    <span>@Model.CompletedDate.Value.ToShortDateString()</span>
+                }
+                else
+                {
+                    <span>-</span>
+                }
+            </div>
+        }
+        else
+        {
+            <strong>@Request.GetLocalizedString("DISPUTE_AUTO_TRANSFER_DATE_LABEL")</strong>
+            <div class="text-right">
+                @if (Model.Order.Dispute_Id != null)
+                {
+                    @:@Html.ActionLink(Request.GetLocalizedString("DISPUTE_ONGOING_LABEL"), "Details", "Dispute", new { orderId = Model.Order.Id }, new { @class = "btn btn-warning btn-sm btn-outline m-l-sm" })
+                }
+                else if (isBuyer && !Model.IsOrderCompleted)
+                {
+                    @:@Html.ActionLink(Request.GetLocalizedString("DISPUTE_BEGIN_LABEL_V2"), "OpenDispute", "Dispute", new { orderId = Model.Order.Id }, new { @class = "btn btn-warning btn-sm btn-outline m-l-sm" })
+                }
+
+                @if (isBuyer && Model.CanAuthorizePayment())
+                {
+                    using (Html.BeginForm("AuthorizePayment", "Dispute", FormMethod.Post, new { style = "display:inline-block" }))
+                    {
+                        @:@Html.Hidden("orderId", Model.Order.Id)
+                        <button class="btn btn-success btn-sm m-l-sm" type="submit">@Request.GetLocalizedString("DISPUTE_AUTHORIZE_TRANSFER_LABEL")</button>
+                    }
+                }
+
+                @if (Model.Order.Dispute_Id == null)
+                {
+                    <span class="m-l-sm">@Model.Order.AutoCompletionDate.Value.ToShortDateString()</span>
+                }
+            </div>
+        }
+    </li>
+}

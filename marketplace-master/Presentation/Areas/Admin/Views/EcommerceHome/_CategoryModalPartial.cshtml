@@ -1,0 +1,98 @@
+﻿@model EcommerceHomeCategoryVM
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">
+                @if (Model.IsEdit)
+                {
+                    <span>Editar categoria</span>
+                }
+                else
+                {
+                    <span>Adicionar categoria</span>
+                }
+            </h4>
+        </div>
+
+        @using (Ajax.BeginForm("SaveCategory", "EcommerceHome", new AjaxOptions
+        {
+            UpdateTargetId = "modalCategory",
+        }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.IsEdit)
+            @Html.HiddenFor(model => model.EcommerceHomeId)
+            @Html.HiddenFor(model => model.CustomCategoryId)
+
+            <div class="modal-body">
+                @Html.ValidationSummary(false)
+                <div class="row">
+                    <div class="col-xs-6 form-group">
+                        <label>Tipo de Categoria</label>
+                        <br />
+                        <div>
+                            <input id="radio-cc-no" type="radio" name="UseCustomCategory" value="false" @(Model.UseCustomCategory ? "" : "checked") />
+                            <label for="radio-cc-no" class="m-r-lg">Produto</label>&ensp;
+                            <input id="radio-cc-yes" type="radio" name="UseCustomCategory" value="true" @(Model.UseCustomCategory ? "checked" : "") />
+                            <label for="radio-cc-yes">Item Personalizado</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 custom-category-form" style="@(Model.UseCustomCategory ? "" : "display:none")">
+                        <label>Tipo de Exibição</label>
+                        <br />
+                        <input id="radio-no-carousel" type="radio" name="CarouselDisplay" value="false" @(Model.CarouselDisplay.GetValueOrDefault() ? "" : "checked") />
+                        <label for="radio-no-carousel" class="m-r-lg">Extendido</label>&ensp;
+                        <input id="radio-yes-carousel" type="radio" name="CarouselDisplay" value="true" @(Model.CarouselDisplay.GetValueOrDefault() ? "checked" : "") />
+                        <label for="radio-yes-carousel">Carrossel</label>
+                    </div>
+                </div>
+                <div class="row">
+                    @*Custom Category*@
+                    <div class="custom-category-form" style="@(Model.UseCustomCategory ? "" : "display:none")">
+                        <div class="col-xs-6 col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CustomCategoryName)<br />
+                                @Html.TextBoxFor(model => model.CustomCategoryName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CustomCategoryName)
+                            </div>
+                        </div>
+                    </div>
+
+                    @*Product Category*@
+                    <div class="col-xs-12 col-md-6 product-category-form" style="@(Model.UseCustomCategory ? "display:none" : "")">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProductCategoryId)<br />
+                            @Html.DropDownList("ProductCategoryId", null, "Selecione uma categoria", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ProductCategoryId)
+                            <p class="help-block">@Html.Localized("ECOMMERCE_HOME_CATEGORY_ID_TEXT")</p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Order)
+                            @Html.EditorFor(model => model.Order, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Order)
+                            <p class="help-block">@Html.Localized("ECOMMERCE_HOME_ORDER_TEXT")</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)" class="btn btn-link" data-dismiss="modal">
+                    @Html.Localized("CANCEL_LABEL")
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-check"></i>
+                    @Html.Localized("SAVE_CHANGES_BUTTON")
+                </button>
+            </div>
+        }
+    </div>
+</div>

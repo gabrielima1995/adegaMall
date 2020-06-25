@@ -1,0 +1,79 @@
+﻿@model BannerIndexVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("BANNERS_TITLE");
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-picture-o" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+
+    <p>
+        <a href="@Url.ActionLocalized("Create", "Banners")" class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            Criar um banner
+        </a>
+    </p>
+
+    @if (Model.Items.Any())
+    {
+        <div class="box">
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th width="117">Imagem</th>
+                            <th>URL do Clique</th>
+                            <th width="100">Início</th>
+                            <th width="100">Fim</th>
+                            <th width="50"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@Url.ActionLocalized("Edit", "Banners", new { id = item.Id })">
+                                        <img src="@item.ImageThumbSm" alt="@item.ImageUrl" />
+                                    </a>
+                                </td>
+                                <td>@Html.DisplayFor(model => item.ActionUrl)</td>
+                                <td>@Html.DisplayFor(model => item.StartsAt)</td>
+                                <td>@Html.DisplayFor(model => item.ExpiresAt)</td>
+                                <td>
+                                    <center>
+                                        @using (Html.BeginForm("Delete", "Banners"))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("id", item.Id)
+                                        }
+                                        <a href="javascript:void(0)" class="text-danger js-btn-delete">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </center>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>Nenhum banner cadastrado.</span>
+        </div>
+    }
+</section>
+
+@section scripts
+{
+    <script>BannersIndex.init()</script>
+}

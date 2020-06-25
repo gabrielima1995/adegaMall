@@ -1,0 +1,77 @@
+﻿@using Domain.DTO
+@model BannerCreateEditVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("CUSTOMIZE_SELLER_REGISTRATION_TITLE");
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-paint-brush" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@Request.GetLocalizedString("CUSTOMIZE_SELLER_BENEFITS_LABEL")</h3>
+                </div>
+                <div class="box-body">
+                    <p><small class="text-muted">@Request.GetLocalizedString("CUSTOMIZE_SELLER_BENEFITS_HELP")</small></p>
+
+                    <p>
+                        <small class="text-muted">
+                            <strong>@Request.GetLocalizedString("CUSTOMIZE_HINT"):</strong>
+                            @Request.GetLocalizedString("CUSTOMIZE_SELLER_BENEFITS_HINT")
+                            <a href="/assets/images/template-icon-300x300.png" target="_blank">Template</a>
+                        </small>
+                    </p>
+
+                    <hr class="thin" />
+
+                    @Html.Partial("_File", new CustomizeFileInfoVM
+                    {
+                        FileType = CloudFileType.PlatformImage,
+                        Option = CustomizeOption.SellerBenefitsIcon1,
+                        RedirectUrl = Url.ActionLocalized("SellerRegistration", "Customize", new { area = "Admin" }),
+                        CurrentUrl = MaaSConfig.Current.HelpQuestions.Items[0].ImageUrl,
+                        Label = Request.GetLocalizedString("CUSTOMIZE_SELLER_BENEFITS_ICON_1_LABEL"),
+                        UiNoBox = true
+                    })
+
+                    <hr class="thin" />
+
+                    @Html.Partial("_File", new CustomizeFileInfoVM
+                    {
+                        FileType = CloudFileType.PlatformImage,
+                        Option = CustomizeOption.SellerBenefitsIcon2,
+                        RedirectUrl = Url.ActionLocalized("SellerRegistration", "Customize", new { area = "Admin" }),
+                        CurrentUrl = MaaSConfig.Current.HelpQuestions.Items[1].ImageUrl,
+                        Label = Request.GetLocalizedString("CUSTOMIZE_SELLER_BENEFITS_ICON_2_LABEL"),
+                        UiNoBox = true
+                    })
+
+                    <hr class="thin" />
+
+                    @Html.Partial("_File", new CustomizeFileInfoVM
+                    {
+                        FileType = CloudFileType.PlatformImage,
+                        Option = CustomizeOption.SellerBenefitsIcon3,
+                        RedirectUrl = Url.ActionLocalized("SellerRegistration", "Customize", new { area = "Admin" }),
+                        CurrentUrl = MaaSConfig.Current.HelpQuestions.Items[2].ImageUrl,
+                        Label = Request.GetLocalizedString("CUSTOMIZE_SELLER_BENEFITS_ICON_3_LABEL"),
+                        UiNoBox = true
+                    })
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>Customize.init()</script>
+}

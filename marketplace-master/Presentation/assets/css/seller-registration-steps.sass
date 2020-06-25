@@ -1,0 +1,43 @@
+﻿@import "variables.sass"
+@import "mixins.sass"
+@import "functions.sass"
+	
+.seller-registration-steps
+  text-align: center
+
+.seller-registration-steps-container
+  margin: 0 auto
+
+.seller-registration-steps-buttons
+  margin-bottom: 1rem
+
+.seller-registration-button
+  @include border-radius
+  padding: 8px 14px
+  font: $font_btn
+  font-size: 15px
+  line-height: 1.3333333
+  border-radius: 6px
+  display: inline-block
+  margin-bottom: 0
+  font-weight: 400
+  text-align: center
+  white-space: nowrap
+  vertical-align: middle
+  touch-action: manipulation
+  cursor: pointer
+  user-select: none
+  color: $home_hero_main_btn_color
+  background-color: $home_hero_main_btn_bg
+  &:hover,&:focus
+    background: darken($home_hero_main_btn_bg, 10%)
+    color: $home_hero_main_btn_color
+    text-decoration: none
+    
+.seller-registration-button.step-completed
+  color: #212529
+  background-color: #e2e6ea
+  &:hover,&:focus
+    background: darken(#e2e6ea, 10%)
+    color: #212529
+    text-decoration: none

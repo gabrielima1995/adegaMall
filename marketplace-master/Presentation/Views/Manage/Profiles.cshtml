@@ -1,0 +1,94 @@
+﻿@using Domain.Entities
+@model ManageProfileViewModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("MANAGE_PROFILES_TITLE");
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+                @Html.Partial("_UserCallToAction")
+            </div>
+            <div class="col-xs-12">
+                <h3>
+                    <i class="fas fa-users" aria-hidden="true"></i>
+                    @Html.Localized("MANAGE_PROFILES_TITLE")
+                </h3>
+
+                <div class="list-group">
+                    @foreach (var profile in Model.Profiles)
+                    {
+                        <div class="list-group-item">
+                            <div class="media">
+                                <div class="media-left">
+                                    <img class="media-object" src="@profile.Avatar" alt="@profile.Name" width="80" height="80" style="max-width: initial">
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">@profile.Name</h4>
+                                    <p>
+                                        @Html.Localized("PERSON_TYPE"):
+                                        @profile.Type.DisplayDescription()
+                                    </p>
+                                    @if (profile.IsDisabled)
+                                    {
+                                        <span class="label label-danger">@Html.LocalizedString("PROFILE_DISABLED")</span>
+                                        <small>@Html.LocalizedString("PROFILE_DISABLED_DESCRIPTION")</small>
+                                    }
+                                    else if (profile.PersonId == loginProfile.ActualPersonId())
+                                    {
+                                        <small>@Html.LocalizedString("PROFILE_LOGGED_IN")</small>
+                                    }
+                                    else
+                                    {
+                                        using (Html.BeginForm("Profiles", "Manage", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" id="@Html.IdFor(model => model.LoginWithPersonId)" name="@Html.NameFor(model => model.LoginWithPersonId)" value="@profile.PersonId" />
+                                            <button type="submit" class="btn btn-default btn-sm">@Html.LocalizedString("PROFILE_LOGIN")</button>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                @if (Model.CanRegisterAsBuyer)
+                {
+                    using (Html.BeginForm("AdditionalProfile", "Register"))
+                    {
+                        @GetRegisterForm(loginProfile, PersonType.Buyer, "PROFILE_REGISTER_AS_BUYER")
+                    }
+                }
+
+                @if (Model.CanRegisterAsSeller)
+                {
+                    using (Html.BeginForm("AdditionalProfile", "Register"))
+                    {
+                        @GetRegisterForm(loginProfile, PersonType.Seller, "PROFILE_REGISTER_AS_SELLER")
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@helper GetRegisterForm(LoginProfile profile, PersonType newProfileType, string buttonLabel)
+{
+    <div class="form-group">
+        @Html.AntiForgeryToken()
+        <input type="hidden" value="@profile.ActualUserId()" id="@nameof(AdditionalProfileViewModel.UserId)" name="@nameof(AdditionalProfileViewModel.UserId)" />
+        <input type="hidden" value="@profile.ActualPersonId()" id="@nameof(AdditionalProfileViewModel.OriginalPersonId)" name="@nameof(AdditionalProfileViewModel.OriginalPersonId)" />
+        <input type="hidden" value="@newProfileType" id="@nameof(AdditionalProfileViewModel.NewProfileType)" name="@nameof(AdditionalProfileViewModel.NewProfileType)" />
+        <button type="submit" class="btn btn-default">
+            <i class="fas fa-plus"></i>
+            @Html.LocalizedString(buttonLabel)
+        </button>
+    </div>
+}

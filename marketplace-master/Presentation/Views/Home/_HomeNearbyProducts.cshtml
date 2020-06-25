@@ -1,0 +1,24 @@
+﻿@{
+    var config = MaaSConfig.Current;
+}
+
+@if (config.Product.Enabled && config.NearbyProducts.Enabled)
+{
+    <!-- NEARBY PRODUCTS -->
+    <div class="nearby-products">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    @Html.Localized("PRODUCT_NEARBY_TITLE", "h2")
+                </div>
+            </div>
+            <div class="nearby-products-container row flex-valign">
+                <div class="col-xs-12 text-center">
+                    @Html.Localized("PRODUCT_NEARBY_GEOLOCATION_OFF", "p", new { style = "display:none;", @class = "js-geolocation-off-message" })
+                    <p class="js-message-error" style="display:none;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /NEARBY PRODUCTS -->
+}

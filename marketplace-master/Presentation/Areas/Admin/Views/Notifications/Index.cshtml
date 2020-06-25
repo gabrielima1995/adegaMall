@@ -1,0 +1,102 @@
+﻿@using Presentation.Helpers
+@model Presentation.Models.PushNotificationViewModel
+
+@{
+    ViewBag.Title = "Notificações";
+    var config = MaaSConfig.Current;
+
+    int allSellers = ViewBag.AllSellerCount ?? 0;
+    int enabledSellers = ViewBag.EnabledSellerCount ?? 0;
+    int requiredModerationSellers = ViewBag.RequiredModerationSellersCount ?? 0;
+
+    int allBuyers = ViewBag.AllBuyersCount ?? 0;
+    int enabledBuyers = ViewBag.EnabledBuyersCount ?? 0;
+    int requiredModerationBuyers = ViewBag.RequiredModerationBuyersCount ?? 0;
+
+    bool successMessage = ViewBag.Success ?? false;
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h4 class="panel-title">Notificar base de usuários</h4></div>
+                <div class="panel-body">
+                    <p>
+                        <i class="fa fa-info-circle"></i> Use este formulário para enviar uma notificação de texto para o navegador de seus compradores ou vendedores. Apenas usuários que optaram por habilitar as notificações em seu navegador são contabilizados aqui e receberão as mensagens enviadas.
+                    </p>
+                    <a href="http://suporte.ideianoar.com.br/pt-BR/articles/3313989-enviar-notificacoes-para-vendedores-e-compradores-via-push">Saiba Mais</a>
+                    <hr />
+                    @using (Html.BeginForm("NotifyUsers", "Notifications", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            @Html.Label("Título da Notificação")
+                            @Html.TextBoxFor(Model => Model.Title, new { @class = "form-control", maxLength = 48 })
+                            @Html.ValidationMessageFor(Model => Model.Title, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Texto da Notificação")
+                            @Html.TextAreaFor(Model => Model.Body, new { @class = "form-control", maxLength = 100, style = "resize:vertical" })
+                            @Html.ValidationMessageFor(Model => Model.Body, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Link para redirecionamento (opcional)")
+                            @Html.TextBoxFor(Model => Model.Link, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(Model => Model.Link, "", new { @class = "text-danger" })
+                        </div>
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="row text-center">
+                            <div class="col-xs-6">
+                                <label>@Html.RadioButtonFor(Model => Model.TargetRole, "AllSellers") Notificar @allSellers vendedores</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label>@Html.RadioButtonFor(Model => Model.TargetRole, "EnabledSellers") Notificar @enabledSellers vendedores ativos</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label>@Html.RadioButtonFor(Model => Model.TargetRole, "RequiredModerationSellers") Notificar @requiredModerationSellers vendedores em moderação</label>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <label>@Html.RadioButtonFor(Model => Model.TargetRole, "AllBuyers") Notificar @allBuyers compradores</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label>@Html.RadioButtonFor(Model => Model.TargetRole, "EnabledBuyers") Notificar @enabledBuyers compradores ativos</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label>@Html.RadioButtonFor(Model => Model.TargetRole, "RequiredModerationBuyers") Notificar @requiredModerationBuyers compradores em moderação</label>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i> Enviar</button>
+                        </div>
+                    }
+                </div>
+            </div>
+            @if (successMessage)
+            {
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Notificação enviada</h4>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text text-success"><i class="fa fa-check"></i> Notificação enviada com sucesso!</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

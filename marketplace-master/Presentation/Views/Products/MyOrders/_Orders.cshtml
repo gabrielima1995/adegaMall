@@ -1,0 +1,44 @@
+﻿@model IList<Domain.Entities.StoreModule.Order>
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-striped" data-order="[[ 3, &quot;desc&quot; ]]">
+                    <thead>
+                        <tr>
+                            <th>@Html.Localized("ORDER_LABEL")</th>
+                            <th>@Html.Localized("ORDER_SELLER_LABEL")</th>
+                            <th data-visible="false" style="display: none">Email</th>
+                            <th>@Html.Localized("ORDER_DATE_LABEL")</th>
+                            <th>@Html.Localized("ORDER_STATUS_LABEL")</th>
+                            <th>@Html.Localized("ORDER_AMOUNT_LABEL")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><a href="@Url.ActionLocalized("Details", "MyOrders", new {id = item.Id})">@item.Id.DisplayShortGuid()</a></td>
+                                <td>@(item.Seller.AlternativeName ?? item.Seller.Name)</td>
+                                <td style="display: none">@item.Seller.Email</td>
+                                <td data-order="@item.CreatedAt.Ticks">@item.CreatedAt.DisplayDate()</td>
+                                <td>@item.Status.DisplayDescription()</td>
+                                <td data-order="@item.Amount">@config.DefaultCurrency @item.Amount.DisplayDecimal(2)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    @Html.Localized("MY_ORDERS_EMPTY", "label")
+}

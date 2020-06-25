@@ -1,0 +1,54 @@
+﻿@using Domain.Entities.StoreModule
+@model CheckoutVM
+
+@{
+    var cart = Model.Cart;
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        @Request.GetLocalizedString("CART_SHIPPING_INFO_TITLE")
+    </div>
+    @if (cart.ShippingMethod == ShippingMethod.OnSitePickup)
+    {
+        <div class="panel-body">
+            <span>@Request.GetLocalizedString("CART_ONSITEPICKUP_ADDRESSES_INFO"):</span>
+        </div>
+
+        <ul class="list-group">
+            @foreach (var seller in cart.Sellers)
+            {
+                <li class="list-group-item">
+                    <strong>@seller.Seller.PublicProfileName</strong>
+                    <br />
+                    <em>@seller.Seller.Address.ToString()</em>
+                    <ul>
+                        @foreach (var item in cart.Items.Where(x => x.Product.Store.SellerId == seller.Seller.Id))
+                        {
+                            <li>@item.Product.Title</li>
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+
+        <div class="panel-body">
+            <div class="alert alert-info m-b-0">
+                <i class="glyphicon glyphicon-info-sign"></i>
+                @Request.GetLocalizedString("CART_ONSITEPICKUP_INSTRUCTIONS")
+            </div>
+        </div>
+    }
+    else if (cart.ShippingMethod == ShippingMethod.NoShipping)
+    {
+        <div class="panel-body">
+            @Html.Localized("CART_NOSHIPPING_INFO", "p")
+        </div>
+    }
+    else if (cart.ShippingMethod == ShippingMethod.ActualNoShipping)
+    {
+        <div class="panel-body">
+            @Html.Localized("CART_ACTUAL_NOSHIPPING_INFO", "p")
+        </div>
+    }
+</div>

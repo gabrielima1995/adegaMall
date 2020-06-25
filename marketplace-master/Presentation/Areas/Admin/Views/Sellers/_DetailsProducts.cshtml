@@ -1,0 +1,144 @@
+﻿@using Presentation.Helpers
+@using Domain.Entities.StoreModule
+@model Domain.Entities.Seller
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (config.Product.Enabled)
+{
+    <div class="tab-pane" id="products">
+        @if (Model.Store != null && Model.Store.Products.Any())
+        {
+            <div class="table-responsive">
+                <table id="productList" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th data-sort="asc">Produto</th>
+                            <th>Categoria</th>
+                            <th>Preço</th>
+                            <th>Estoque</th>
+                            @if (config.Product.ShippingMode == ShippingMode.PerProduct)
+                            {
+                                if (config.Product.PrivateFleetShipping.Enabled)
+                                {
+                                    <th>Frete próprio</th>
+                                }
+                                if (config.Product.SedexShipping.Enabled)
+                                {
+                                    <th>Sedex</th>
+                                }
+                                if (config.Product.PACShipping.Enabled)
+                                {
+                                    <th>PAC</th>
+                                }
+                                if (config.Product.OnSitePickupShipping.Enabled)
+                                {
+                                    <th>Retirada</th>
+                                }
+                                if (config.Product.NoShipping.Enabled)
+                                {
+                                    <th>Download</th>
+                                }
+                            }
+                            <th>Visível</th>
+                            @if (config.Product.CanPauseProducts)
+                            {
+                                <th>Moderar</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Store.Products)
+                        {
+                            <tr>
+                                <td data-order="@Dt.Order(item.Title)">
+                                    <a href="@Url.ActionLocalized("PublicPage", "Products", new { id = item.FriendlyUrl, area = "" })" target="_blank">@item.Title</a>
+                                </td>
+                                <td data-order="@Dt.Order(item.Category?.Name)">@Html.DisplayFor(model => item.Category.Name)</td>
+                                <td data-order="@Dt.Order(item.ProductPriceMapped.DisplayPrice.Value)">
+                                    @item.ProductPriceMapped.DisplayPrice.FullPriceText
+                                    @if (item.ProductPriceMapped.DisplayPrice.Discount.HasDiscount)
+                                    {
+                                        <span class="label label-success label-success-outline">
+                                            @item.ProductPriceMapped.DisplayPrice.Discount.Formatted
+                                        </span>
+                                    }
+                                </td>
+                                <td data-order="@Dt.Order(item.CurrentStock)">@Html.DisplayFor(model => item.CurrentStock)</td>
+                                @if (config.Product.ShippingMode == ShippingMode.PerProduct)
+                                {
+                                    if (config.Product.PrivateFleetShipping.Enabled)
+                                    {
+                                        <td data-order="@Dt.Order(item.PrivateFleetEnabled)">@YesNoLabel(item.PrivateFleetEnabled)</td>
+                                    }
+                                    if (config.Product.SedexShipping.Enabled)
+                                    {
+                                        <td data-order="@Dt.Order(item.SedexEnabled)">@YesNoLabel(item.SedexEnabled)</td>
+                                    }
+                                    if (config.Product.PACShipping.Enabled)
+                                    {
+                                        <td data-order="@Dt.Order(item.PACEnabled)">@YesNoLabel(item.PACEnabled)</td>
+                                    }
+                                    if (config.Product.OnSitePickupShipping.Enabled)
+                                    {
+                                        <td data-order="@Dt.Order(item.OnSitePickupEnabled)">@YesNoLabel(item.OnSitePickupEnabled)</td>
+                                    }
+                                    if (config.Product.NoShipping.Enabled)
+                                    {
+                                        <td data-order="@Dt.Order(item.NoShippingEnabled)">
+                                            @YesNoLabel(item.NoShippingEnabled)
+                                            @if (item.NoShippingEnabled)
+                                            {
+                                                <a href="@item.NoShippingUrl" target="_blank">link</a>
+                                            }
+                                        </td>
+                                    }
+                                }
+                                <td data-order="@Dt.Order(item.IsDisabled)">
+                                    @YesNoLabel(!item.IsDisabled.GetValueOrDefault())
+                                </td>
+                                @if (config.Product.CanPauseProducts)
+                                {
+                                    <td data-order="@Dt.Order(item.IsDisabled)">
+                                        @if (item.IsDisabled.GetValueOrDefault())
+                                        {
+                                            <a class="btn btn-sm btn-success" href="@Url.ActionLocalized("ChangeProductStatus", "Sellers", new { productId = item.Id, sellerId = Model.Id, disabled = false })">
+                                                <i class="fa fa-check-circle"></i>
+                                                Habilitar
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-sm btn-danger" href="@Url.ActionLocalized("ChangeProductStatus", "Sellers", new { productId = item.Id, sellerId = Model.Id, disabled = true })">
+                                                <i class="fa fa-times-circle"></i>
+                                                Desabilitar
+                                            </a>
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>Nenhum produto cadastrado.</p>
+        }
+    </div>
+}
+
+@helper YesNoLabel(bool flag)
+{
+    if (flag)
+    {
+        <span class="label label-success label-success-outline">sim</span>
+    }
+    else
+    {
+        <span class="label label-danger label-danger-outline">não</span>
+    }
+}

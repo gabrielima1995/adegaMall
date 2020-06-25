@@ -1,0 +1,60 @@
+﻿@using Presentation.Helpers
+@model IEnumerable<Domain.Entities.CreditsPackTransaction>
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (config.Quote.LeadSales.Enabled && config.Quote.LeadSales.IndividualPacks.Enabled)
+{
+    <div class="tab-pane" id="creditsbought">
+        @if (Model != null && Model.Any())
+        {
+            <div class="table-responsive">
+                <table id="creditList" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Créditos comprados</th>
+                            <th>Preço</th>
+                            <th data-sort="desc">Data da Compra</th>
+                            @if (config.Quote.LeadSales.CreditsExpire)
+                            {
+                                <th>Expiração</th>
+                            }
+                            <th>Disponíveis</th>
+                            <th>Consumidos</th>
+                            @if (config.Quote.LeadSales.CreditsExpire)
+                            {
+                                <th>Expirados</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td data-order="@Dt.Order(item.CreditsBundle?.InitialCredits)">@item.CreditsBundle.InitialCredits</td>
+                                <td data-order="@Dt.Order(item.Amount)">@item.Amount</td>
+                                <td data-order="@Dt.Order(item.CreatedAt)">@item.CreatedAt.ToString()</td>
+                                @if (config.Quote.LeadSales.CreditsExpire)
+                                {
+                                    <td data-order="@Dt.Order(item.CreditsBundle?.ExpirationDate)">@item.CreditsBundle.ExpirationDate.ToString()</td>
+                                }
+                                <td data-order="@Dt.Order(item.CreditsBundle?.AvailableCredits)">@item.CreditsBundle.AvailableCredits</td>
+                                <td data-order="@Dt.Order(item.CreditsBundle?.InitialCredits)">@(item.CreditsBundle.InitialCredits - @item.CreditsBundle.CurrentCredits)</td>
+                                @if (config.Quote.LeadSales.CreditsExpire)
+                                {
+                                    <td data-order="@Dt.Order(item.CreditsBundle?.ExpiredCredits)">@item.CreditsBundle.ExpiredCredits</td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>Nenhum compra de créditos encontrada</p>
+        }
+    </div>
+}

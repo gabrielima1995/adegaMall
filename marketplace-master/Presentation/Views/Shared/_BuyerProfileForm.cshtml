@@ -1,0 +1,258 @@
+﻿@using Microsoft.AspNet.Identity
+@using Application.Sellers
+@using Domain.Entities
+@using Application.Helpers
+
+@model Presentation.Models.BuyerProfileVM
+
+@{
+    var config = MaaSConfig.Current;
+
+    string controller = (ViewBag.PostController ?? ViewContext.RouteData.Values["controller"]).ToString();
+    string action = (ViewBag.PostAction ?? ViewContext.RouteData.Values["action"]).ToString();
+
+    var isManagePage = Html.IsCurrent("Manage");
+    var loginProfile = isManagePage ? User.Identity.GetLoginProfile() : null;
+    var documentNumberInvalid = !ViewData.ModelState.IsValidField(nameof(Model.DocumentNumber));
+
+    ViewBag.RequiredModeration = Model.RequireModeration;
+    ViewBag.ModerationIsEnable = MaaSConfig.Current.Buyer.Moderation.Enabled;
+
+    bool requireModeration = ViewBag.RequiredModeration == null ? true : ViewBag.RequiredModeration;
+    bool moderationIsEnable = ViewBag.ModerationIsEnable == null ? true : ViewBag.ModerationIsEnable;
+
+    var blockChangesBirthDate = moderationIsEnable && !requireModeration && config.Buyer.DateOfBirth.BlockChangesAfterApprovedInModeration;
+    var blockChangesDocumentNumber = moderationIsEnable && !requireModeration && config.Buyer.DocumentNumber.BlockChangesAfterApprovedInModeration;
+
+    if (ViewBag.AllFields == null)
+    {
+        ViewBag.AllFields = true;
+    }
+
+    if (ViewBag.CompleteRegister == null)
+    {
+        ViewBag.CompleteRegister = true;
+    }
+}
+
+@using (Html.BeginForm(action, controller, new { ReturnUrl = ViewBag.ReturnUrl, lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.RequireModeration,requireModeration)
+    if (isManagePage)
+    {
+        <div class="foto-perfil visible-xs visible-sm m-b-md">
+            <img src="@loginProfile.GetAvatarUrl()" alt="@loginProfile.Name">
+            <a href="#" class="action edit js-change-avatar"><i class="fas fa-pen"></i></a>
+            <a href="#" class="action trash js-remove-avatar"><i class="fas fa-trash"></i></a>
+            <input type="file" id="file" name="file" class="js-avatar-file" style="display: none" />
+        </div>
+    }
+
+    if (ViewBag.AllFields)
+    {
+        <div class="form-group">
+            @Html.LabelFor(i => i.Name)
+            @Html.TextBoxFor(i => i.Name, new { @class = "form-control", placeholder = Request.GetLocalizedString("COMPLETE_NAME_INPUT") })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    }
+    else
+    {
+        @Html.HiddenFor(i => i.Name)
+    }
+
+    if (ViewBag.AllFields)
+    {
+        <div class="form-group">
+            @Html.LabelFor(i => i.Email)
+            @Html.TextBoxFor(i => i.Email, new { @class = "form-control", placeholder = Request.GetLocalizedString("EMAIL_INPUT"), type = "email" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    }
+    else
+    {
+        @Html.HiddenFor(i => i.Email)
+    }
+
+    if ((config.Buyer.Phone.Enabled || config.Payment.AntiFraud.Enabled) && ViewBag.AllFields)
+    {
+        <div class="form-group">
+            @Html.LabelFor(i => i.PhoneNumber)
+            @Html.TextBoxFor(i => i.PhoneNumber, new { @class = "form-control", placeholder = Request.GetLocalizedString("PHONE_INPUT"), type = "phone" })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            @Html.HiddenFor(i => i.PhoneNumberRequired)
+        </div>
+    }
+    else
+    {
+        @Html.HiddenFor(i => i.PhoneNumber)
+    }
+
+    if (ViewBag.CompleteRegister)
+    {
+        if (config.Buyer.Avatar.Enabled)
+        {
+            <div class="form-group flex-valign">
+                <img src="@ImgHelper.Avatar(Model.AvatarUrl, 255)" alt="" class="max-width-90 margin-right-15 border-radius">
+                <div class="margin-bottom-15 visible-xs"></div>
+                @Html.TextBoxFor(model => model.NewPicture, new { type = "file" })
+            </div>
+            @Html.HiddenFor(i => i.Picture)
+            @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
+        }
+    }
+
+    if (config.Buyer.DocumentNumber.Enabled || config.Payment.Enabled)
+    {
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.DocumentNumber)
+                    @if (blockChangesDocumentNumber && (Model.DocumentNumber != null && !documentNumberInvalid))
+                    {
+                        @Html.TextBoxFor(i => i.DocumentNumber, new { @class = "form-control" + (config.Buyer.DocumentNumber.AllowFreeText ? "" : " js-cpfcnpj"), disabled = "disabled" })
+                        @Html.HiddenFor(i => i.DocumentNumber)
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(i => i.DocumentNumber, new { @class = "form-control" + (config.Buyer.DocumentNumber.AllowFreeText ? "" : " js-cpfcnpj"), placeholder = Request.GetLocalizedString("DOCUMENT_NUMBER_INPUT_BUYER") })
+                    }
+                    @Html.ValidationMessageFor(model => model.DocumentNumber, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(i => i.DocumentNumberRequired)
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        @if (config.Buyer.DateOfBirth.Enabled)
+        {
+            <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.DateOfBirth)
+                    @if (blockChangesBirthDate)
+                    {
+                        @Html.TextBoxFor(i => i.DateOfBirth, "{0:d}", new { @class = "form-control date no-picker", placeholder = Request.GetLocalizedString("DATE_OF_BIRTH_INPUT"), @disabled = "disabled" })
+                        @Html.HiddenFor(Model => Model.DateOfBirth)
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(i => i.DateOfBirth, "{0:d}", new { @class = "form-control date no-picker", placeholder = Request.GetLocalizedString("DATE_OF_BIRTH_INPUT") })
+                    }
+                    @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(i => i.DateOfBirthRequired)
+                </div>
+            </div>
+        }
+
+        @if (config.Buyer.Genre.Enabled)
+        {
+            <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.Genre)
+                    <select id="@nameof(Model.Genre)" name="@nameof(Model.Genre)" class="form-control js-select">
+                        <option value="@Genre.Male" @(Model.Genre == Genre.Male ? "selected" : "")>@Request.GetLocalizedString("MALE_GENRE_LABEL")</option>
+                        <option value="@Genre.Female" @(Model.Genre == Genre.Female ? "selected" : "")>@Request.GetLocalizedString("FEMALE_GENRE_LABEL")</option>
+                        <option value="@Genre.Other" @(Model.Genre == Genre.Other ? "selected" : "")>@Request.GetLocalizedString("OTHER_GENRE_LABEL")</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Genre, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(i => i.GenreRequired)
+                </div>
+            </div>
+        }
+    </div>
+
+    if (config.CustomFields.Buyer.Enabled && Model.CustomFieldDefinitions != null && Model.CustomFieldDefinitions.Any())
+    {
+        <div class="row">
+            @for (int i = 0; i < Model.CustomFieldDefinitions.Count; i++)
+            {
+                ViewData["Index"] = i;
+                <div class="col-xs-12 col-sm-6">
+                    @Html.Partial("_CustomFieldForms", Model, ViewData)
+                    <br />
+                </div>
+            }
+        </div>
+        <hr />
+    }
+
+    if (Model.AddressEnabled)
+    {
+        <div class="row">
+            <div class="col-xs-12 col-sm-9">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.Address)
+                    @Html.TextBoxFor(i => i.Address, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_INPUT") })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(i => i.AddressRequired)
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-3">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.AddressNumber)
+                    @Html.TextBoxFor(i => i.AddressNumber, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_NUMBER_INPUT") })
+                    @Html.ValidationMessageFor(model => model.AddressNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.AddressAdditionalInfo)
+                    @Html.TextBoxFor(i => i.AddressAdditionalInfo, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_ADDITIONAL_INFO_INPUT") })
+                    @Html.ValidationMessageFor(model => model.AddressAdditionalInfo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.AddressNeighborhood)
+                    @Html.TextBoxFor(i => i.AddressNeighborhood, new { @class = "form-control", placeholder = Request.GetLocalizedString("NEIGHBORHOOD_INPUT") })
+                    @Html.ValidationMessageFor(model => model.AddressNeighborhood, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.AddressZipCode)
+                    @Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control" + (config.Buyer.AllowPlainTextZipCode ? "" : " js-zipcode"), placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") })
+                    @Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    }
+
+    if (config.Buyer.Address.Enabled || config.Buyer.CityAndState.Enabled || config.Payment.Enabled)
+    {
+        <div class="form-group">
+            @Html.LabelFor(i => i.CityAndState)
+            @if (config.Buyer.AllowPlainTextCity)
+            {
+                @Html.TextBoxFor(i => i.CityAndState, new { @class = "form-control", placeholder = Request.GetLocalizedString("CITY_AND_STATE_INPUT") })
+            }
+            else
+            {
+                @Html.Partial("_CitiesSelect", Model)
+            }
+            @Html.HiddenFor(i => i.CityAndStateRequired)
+        </div>
+    }
+
+    if (ViewBag.AllFields || ViewBag.CompleteRegister)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.PreferredTimeZoneId)
+            @Html.DropDownList("PreferredTimeZoneId", null, new { @class = "form-control" })
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.Localized("SAVE_CHANGES_BUTTON", "button", new { type = "submit", @class = "btn btn-primary btn-block" })
+    </div>
+}

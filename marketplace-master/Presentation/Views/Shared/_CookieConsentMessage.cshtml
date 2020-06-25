@@ -1,0 +1,26 @@
+﻿<div class="containter">
+    <div id="cookieConsentMessage">
+        @Html.Localized("GDPR_COOKIE_CONSENT_TITLE", "h3")
+        @Html.Localized("GDPR_COOKIE_CONSENT_TEXT", "p")
+
+        <form class="btn-group-vertical" action="@Url.Action("AllowCookies", "CookieConsent", new { returnUrl = Request.UrlReferrer })" method="post">
+            <button type="submit" name="allow" value="Allow" class="btn btn-success">
+                <span class="fa fa-check"></span>
+                @Html.Localized("GDPR_COOKIE_CONSENT_ACCEPT")
+            </button>
+        </form>
+
+        @if (MaaSConfig.Current.Enterprise.PrivacyPolicyUrl != null)
+        {
+            @Html.Localized("GDPR_COOKIE_CONSENT_LEARN_MORE", "a", new { id = "cookieConsentLearnMore", href = MaaSConfig.Current.Enterprise.PrivacyPolicyUrl, target = "_blank" })
+        }
+
+        @*
+        <form class="btn-group-vertical" action="@Url.Action("NoCookies", "CookieConsent", new { returnUrl = Request.RawUrl })" method="post" data-async="true" data-target="#cookie-alert">
+            <button type="submit" name="decline" class="btn btn-outline" value="Decline">
+                @Html.Localized("GDPR_COOKIE_CONSENT_DENY")
+            </button>
+        </form>
+        *@
+    </div>
+</div>

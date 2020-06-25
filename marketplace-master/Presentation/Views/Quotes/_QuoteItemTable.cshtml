@@ -1,0 +1,435 @@
+﻿@using Domain.Entities.PortfolioModule
+@using Presentation.Helpers
+@using Microsoft.AspNet.Identity
+
+@model QuoteVM
+
+@{
+    var config = MaaSConfig.Current;
+    var profile = User.Identity.GetLoginProfile();
+    var isBuyer = profile.IsBuyer();
+    var isSeller = profile.IsSellerOrSellerAssistant();
+    var hideDetails = Model.QuoteDetailsHidden && isSeller && config.Quote.LeadSales.Enabled;
+
+    var hideAvatar = hideDetails && config.Quote.LeadSales.HiddenFields.Avatar;
+    var hidePhone = hideDetails && config.Quote.LeadSales.HiddenFields.Phone;
+    var hideEmail = hideDetails && config.Quote.LeadSales.HiddenFields.Email;
+    var hideName = hideDetails && config.Quote.LeadSales.HiddenFields.Name;
+
+    var hideTitle = hideDetails && config.Quote.LeadSales.HiddenFields.Title;
+    var hideDescription = hideDetails && config.Quote.LeadSales.HiddenFields.Description;
+    var hideAddress = hideDetails && config.Quote.LeadSales.HiddenFields.Address;
+    var hideAmount = hideDetails && config.Quote.LeadSales.HiddenFields.Amount;
+    var hideCategories = hideDetails && config.Quote.LeadSales.HiddenFields.Categories;
+    var hideDate = hideDetails && config.Quote.LeadSales.HiddenFields.Date;
+    var hideCustomFields = hideDetails && config.Quote.LeadSales.HiddenFields.CustomFields;
+
+    string replacement = Request.GetLocalizedString("QUOTE_LOCKED_REPLACEMENT_TEXT");
+    var offset = TimeZoneInfo.FindSystemTimeZoneById(User.Identity.GetLoginProfile().PreferredTimeZoneId).BaseUtcOffset;
+
+    if (Model.LatestAnswer != null)
+    {
+        Model.LatestAnswer.AnswerDate += offset;
+    }
+}
+
+<tr data-id="@Model.Id" class="orcamento">
+    <td>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>
+                    @if (config.Quote.LeadSales.Enabled)
+                    {
+                        if (hideDetails)
+                        {
+                            <i class="text-danger fas fa-lock"></i>
+                        }
+                        else
+                        {
+                            <i class="text-success fas fa-unlock"></i>
+                        }
+                    }
+                    @if (hideTitle)
+                    {
+                        <u>@Request.GetLocalizedString("LOCKED_QUOTE_TITLE"): @replacement</u>
+                    }
+                    else
+                    {
+                        <u>@Model.Title</u>
+                    }
+                </h3>
+
+                <div class="orcamento-buyer-and-description">
+                    @if (isSeller)
+                    {
+                        if (hideAvatar || Model.HideBuyerDetailsUntilDealClosed)
+                        {
+                            <img src="@MaaSConfig.Current.Layout.Images.DefaultAvatar" class="img-circle" />
+                        }
+                        else
+                        {
+                            <img src="@Model.BuyerAvatar" class="img-circle" />
+                        }
+                    }
+                    <div class="orcamento-buyer-and-description-info">
+                        @if (isSeller)
+                        {
+                            if (hideName)
+                            {
+                                <strong>@Request.GetLocalizedString("LOCKED_QUOTE_NAME"): </strong><span>@replacement</span>
+                            }
+                            else if (Model.HideBuyerDetailsUntilDealClosed)
+                            {
+                                <strong>Nome:</strong>
+                                @Html.Localized("BUYER_DETAILS_HIDDEN_UNTIL_DEAL_CLOSED")
+                            }
+                            else
+                            {
+                                <strong>@Model.BuyerName</strong>
+                                if (config.Buyer.UserRatings.Enabled)
+                                {
+                                    <br />
+                                    <p>@Html.Partial("_RatingStars", Model.SellerAverageRating) - <span class="text-primary">@Model.SellerRatingCount @Request.GetLocalizedString("RATINGS_COUNT")</span></p>
+                                }
+                            }
+                        }
+
+                        @if (hideDescription)
+                        {
+                            <p><strong>@Request.GetLocalizedString("LOCKED_QUOTE_DESCRIPTION"):</strong> @replacement</p>
+                        }
+                        else
+                        {
+                            <p>@Html.TextWithLineBreaks(Model.Description.HtmlEncode())</p>
+                        }
+
+                        @if (!config.Quote.Answers.Enabled || config.Quote.ShowBuyerContactInfo)
+                        {
+                            <p>
+                                @if (hideEmail)
+                                {
+                                    <strong>Email: </strong><span>@replacement</span>
+                                }
+                                else if (Model.HideBuyerDetailsUntilDealClosed)
+                                {
+                                    <strong>Telefone:</strong>
+                                    @Html.Localized("BUYER_DETAILS_HIDDEN_UNTIL_DEAL_CLOSED")
+                                }
+                                else
+                                {
+                                    @Model.BuyerEmail
+                                }
+                                <br />
+                                @if (hidePhone)
+                                {
+                                    <strong>@Request.GetLocalizedString("LOCKED_QUOTE_PHONE"): </strong><span>@replacement</span>
+                                }
+                                else if (Model.HideBuyerDetailsUntilDealClosed)
+                                {
+                                    <strong>Telefone:</strong>
+                                    @Html.Localized("BUYER_DETAILS_HIDDEN_UNTIL_DEAL_CLOSED")
+                                }
+                                else
+                                {
+                                    @Model.BuyerPhone
+                                }
+                            </p>
+                        }
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                @if (!config.Quote.LeadSales.Enabled)
+                {
+                    <small class="quote-show-details">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-chevron-down"></i>
+                            ver mais detalhes
+                        </a>
+                    </small>
+                }
+
+                <ul class="list-unstyled orcamento-details" style="@Css.If(!config.Quote.LeadSales.Enabled,"display:none","")">
+                    @if (!hideCategories && Model.CategoryId.HasValue)
+                    {
+                        <li>
+                            <i class="fa fa-tag"></i>
+                            @Model.CategoryName / @Model.SubCategoryName
+                        </li>
+                    }
+
+                    @if (Model.PortfolioItemId.HasValue)
+                    {
+                        <li>
+                            <i class="fa fa-address-card"></i>
+                            @Html.Localized("QUOTE_PORTFOLIO_ITEM_LABEL"): @Model.PortfolioItemTitle
+                        </li>
+                    }
+
+                    @if (config.Quote.PortfolioItemQuote.Quantity.Enabled && Model.Quantity.HasValue && Model.Quantity > 0)
+                    {
+                        <li>
+                            <i class="fas fa-cubes"></i>
+                            @Html.Localized("QUOTE_QUANTITY_LABEL"): @Model.Quantity
+                        </li>
+                    }
+
+                    @if (config.Quote.Date.Enabled && Model.Date.HasValue && config.Quote.Date.IsPublic)
+                    {
+                        if (hideDetails && hideDate)
+                        {
+                            <li>
+                                <i class="fa fa-calendar"></i>
+                                @Request.GetLocalizedString("LOCKED_QUOTE_DATE"): @replacement
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <i class="fa fa-calendar"></i>
+                                @Model.Date.Value.DisplayDate()
+                            </li>
+                        }
+                    }
+
+                    @if (config.Quote.Phone.Enabled && !string.IsNullOrEmpty(Model.Phone) && config.Quote.Phone.IsPublic)
+                    {
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            @if (hidePhone)
+                            {
+                                <span>
+                                    @Request.GetLocalizedString("LOCKED_QUOTE_PHONE"):
+                                    @replacement
+                                </span>
+                            }
+                            else if (Model.HideBuyerDetailsUntilDealClosed)
+                            {
+                                <strong>Telefone:</strong>
+                                @Html.Localized("BUYER_DETAILS_HIDDEN_UNTIL_DEAL_CLOSED")
+                            }
+                            else
+                            {
+                                @Model.Phone
+                            }
+                        </li>
+                    }
+
+                    @if ((config.Quote.Address.Enabled || config.Quote.CityAndState.Enabled) && Model.HasAddress && config.Quote.Address.IsPublic)
+                    {
+                        <li>
+                            <i class="fa fa-map-marker-alt"></i>
+                            @if (hideAddress)
+                            {
+                                <span>@Request.GetLocalizedString("LOCKED_QUOTE_ADDRESS"): @replacement</span>
+                            }
+                            else
+                            {
+                                <span>
+                                    @if (config.Quote.Address.Enabled && Model.AddressStreet != null)
+                                    {
+                                        @(Model.AddressStreet + ", " + Model.AddressNumber)
+                                        @:-
+                                        @(Model.AddressNeighborhood)
+                                        @:-
+                                    }
+                                    @if ((config.Quote.Address.Enabled || config.Quote.CityAndState.Enabled) && Model.CityAndState != null)
+                                    {
+                                        @:@Model.CityAndState
+                                    }
+                                </span>
+                            }
+                        </li>
+                    }
+
+                    @if (config.Quote.QuoteMax.Enabled && Model.Amount.HasValue && config.Quote.QuoteMax.IsPublic)
+                    {
+                        <li>
+                            <i class="fa fa-dollar-sign"></i>
+                            @if (hideAmount)
+                            {
+                                <span>
+                                    @Html.Localized("QUOTE_MAX_BUDGET_SIMPLE_LABEL"):
+                                    @replacement
+                                </span>
+                            }
+                            else
+                            {
+                                <span>
+                                    @Html.Localized("QUOTE_MAX_BUDGET_SIMPLE_LABEL"):
+                                    @config.DefaultCurrency @Model.Amount.Value.DisplayDecimal(2)
+                                </span>
+                            }
+                        </li>
+                    }
+
+                    @if (config.Quote.Preference.Enabled && !hideDetails && !Model.IsShortQuote && config.Quote.Preference.IsPublic)
+                    {
+                        <li>
+                            <i class="fa fa-exclamation-circle"></i>
+                            @Html.Localized("QUOTE_PREFERENCE_SIMPLE_LABEL"):
+                            @Html.Localized($"PREF_{ Model.Preference.ToString().ToUpper() }_LABEL")
+                        </li>
+                    }
+
+                    @if (Model.AttachmentUrl != null && !hideDetails)
+                    {
+                        <li>
+                            <i class="fa fa-file"></i>
+                            @Html.Localized("QUOTE_ATTACHMENT_LABEL"):
+                            @Html.Localized("QUOTE_ATTACHMENT_CLICK_TO_OPEN", "a", new { href = Model.AttachmentUrl, target = "_blank" })
+                            <i class="fa fa-external-link"></i>
+                        </li>
+                    }
+
+                    @if (Model.CustomFieldDefinitions?.Count > 0)
+                    {
+                        foreach (var customField in Model.CustomFields)
+                        {
+                            if (string.IsNullOrWhiteSpace(customField.Value) || !Model.CustomFieldDefinitions[new Guid(customField.Key)].IsPublic)
+                            {
+                                continue;
+                            }
+
+                            <li>
+                                <i class="far fa-dot-circle"></i>
+                                @if (hideDetails && hideCustomFields)
+                                {
+                                    <span>
+                                        @Model.CustomFieldDefinitions[new Guid(customField.Key)].Name : @replacement
+                                    </span>
+                                }
+                                else
+                                {
+                                    var value = Model.CustomFields[customField.Key.ToString()];
+
+                                    <span>
+                                        @Model.CustomFieldDefinitions[new Guid(customField.Key)].Name :
+                                        @if (CustomFieldHelper.IsLink(value))
+                                        {
+                                            <a href="@value"><i class="fas fa-paperclip"></i> @Request.GetLocalizedString("CUSTOM_FIELD_VIEW_FILE")</a>
+                                        }
+                                        else
+                                        {
+                                            <span>@CustomFieldHelper.LocalizeField(value, Request.GetCurrentLang())</span>
+                                        }
+                                    </span>
+
+                                }
+                            </li>
+                        }
+                    }
+                </ul>
+
+                @if (isBuyer)
+                {
+                    <p class="orcamento-seller">
+                        <a href="@Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.SellerUrl } )"><img src="@Model.SellerAvatar" class="img-circle" /></a>
+                        <div class="orcamento-seller-info">
+                            <small class="text-muted">@Html.Localized("SELLER_TITLE")</small><br />
+                            <strong>@Model.SellerName</strong>
+                        </div>
+                    </p>
+                }
+
+                <p class="data quote-date-added">
+                    <small>
+                        @Html.Localized("DATE_ADDED_LABEL") @Model.CreatedAt.DisplayDateTime()
+                    </small>
+                </p>
+
+                @Html.Partial("_QuoteStatus", Model)
+
+                @if (hideDetails)
+                {
+                    <div class="pull-right">
+                        <a class="btn text-success" style="border-color:#4CAF50" href="@Url.ActionLocalized("ConfirmUnlock", "Quotes", new { quoteId = Model.Id })"><i class="fas fa-unlock-alt"></i> @Request.GetLocalizedString("UNLOCK_QUOTE_BUTTON")</a>
+                    </div>
+                }
+
+                @if (config.Quote.Answers.Enabled && !hideDetails)
+                {
+                    <hr />
+                    if (Model.LatestAnswer == null)
+                    {
+                        <p>
+                            @Html.Localized("QUOTE_LATEST_ANSWER_NON_EXISTENT")
+
+                            @if (Model.Status == QuoteStatus.Opened)
+                            {
+                                <a href="@Url.ActionLocalized("Details", "Quotes", new { id = Model.Id, addAnswer = 1 })" class="btn btn-default btn-sm pull-right">
+                                    <i class="glyphicon glyphicon-share-alt"></i>
+                                    @Html.Localized("QUOTE_LATEST_ANSWER_ACTION_ANSWER")
+                                </a>
+                            }
+                        </p>
+                    }
+                    else
+                    {
+                        <div class="quote-latest-answer">
+                            @Html.Localized("QUOTE_LATEST_ANSWER_LABEL", "h4")
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="quote-answer-item">
+                                        <img src="@Model.LatestAnswer.AuthorAvatar" class="img-circle" alt="@Model.LatestAnswer.AuthorName" />
+                                        <div class="quote-answer-item-data">
+                                            <strong>@Model.LatestAnswer.AuthorName</strong>
+                                            <p>
+                                                @if (Model.LatestAnswer.Price != null)
+                                                {
+                                                    <strong class="label label-info label-lg m-r-sm">
+                                                        @config.DefaultCurrency
+                                                        @Model.LatestAnswer.Price.Value.DisplayDecimal(2)
+                                                    </strong>
+                                                }
+                                                @if (Model.LatestAnswer.DeliveryDeadline.HasValue)
+                                                {
+                                                    <strong class="label label-info label-lg m-r-sm">
+                                                        @Request.GetLocalizedString("DELIVERY_DEADLINE_LABEL")
+                                                        @Model.LatestAnswer.DeliveryDeadline.Value.ToDayAndMonthString()
+                                                    </strong>
+                                                }
+                                                <span>@Model.LatestAnswer.Text</span>
+                                                @if (Model.LatestAnswer.AttachmentUrl != null)
+                                                {
+                                                    <br />
+                                                    @Html.Localized("QUOTE_ATTACHMENT_LABEL", "strong")<text>:</text>
+                                                    @Html.Localized("QUOTE_ATTACHMENT_CLICK_TO_OPEN", "a", new { href = Model.LatestAnswer.AttachmentUrl, target = "_blank" })
+                                                    <i class="fa fa-external-link"></i>
+                                                }
+                                                @if (Model.LatestAnswer.IsProposal)
+                                                {
+                                                    <br />
+                                                    <strong>
+                                                        @Request.GetLocalizedString("QUOTE_PROPOSAL_SENT_LABEL")
+                                                        <i class="fa fa-check-circle"></i>
+                                                    </strong>
+                                                }
+                                            </p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    @if (Model.Status == QuoteStatus.Opened)
+                                    {
+                                        <a href="@Url.ActionLocalized("Details", "Quotes", new { id = Model.Id, addAnswer = 1 })" class="btn btn-default btn-sm pull-right">
+                                            <i class="glyphicon glyphicon-share-alt"></i>
+                                            @Html.Localized("QUOTE_LATEST_ANSWER_ACTION_ANSWER")
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.ActionLocalized("Details", "Quotes", new { id = Model.Id, addAnswer = 1 })" class="btn btn-default btn-sm pull-right">
+                                            @Html.Localized("QUOTE_LATEST_ANSWER_ACTION_SEE_ALL")
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </td>
+</tr>

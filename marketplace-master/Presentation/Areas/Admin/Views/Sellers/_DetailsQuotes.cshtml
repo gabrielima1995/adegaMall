@@ -1,0 +1,47 @@
+﻿@using Presentation.Helpers
+@model Domain.Entities.Seller
+
+@{
+    var config = MaaSConfig.Current;
+    var active = (bool)ViewBag.TabQuotesActive;
+}
+
+@if (config.Quote.Enabled)
+{
+    <div class="@(active ? "active" : "") tab-pane" id="quotes">
+        @if (Model.Quotes.Any())
+        {
+            <div class="table-responsive">
+                <table id="quoteList" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Vendedor</th>
+                            <th>Categoria</th>
+                            <th>Subcategoria</th>
+                            <th data-sort="desc">Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Quotes)
+                        {
+                            <tr>
+                                <td data-order="@Dt.Order(item.Id)">
+                                    <a href="@Url.ActionLocalized("Details", "Quotes", new { id = item.Id })">@item.Id.ToString().Substring(0, 8)</a>
+                                </td>
+                                <td data-order="@Dt.Order(item.Seller?.PublicProfileName)">@Html.DisplayFor(model => item.Seller.PublicProfileName)</td>
+                                <td data-order="@Dt.Order(item.Category?.Name)">@Html.DisplayFor(model => item.Category.Name)</td>
+                                <td data-order="@Dt.Order(item.SubCategory?.Name)">@Html.DisplayFor(model => item.SubCategory.Name)</td>
+                                <td data-order="@Dt.Order(item.CreatedAt)">@Html.DisplayFor(model => item.CreatedAt)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>Nenhum pedido de orçamento recebido.</p>
+        }
+    </div>
+}

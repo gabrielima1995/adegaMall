@@ -1,0 +1,39 @@
+﻿@model Application.Modules.Products.PrivateFleetParameterViewModel
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+<div class="row js-private-fleet-param">
+    @using (Html.BeginCollectionItem("PrivateFleetParams", ViewData.ModelState.IsValid))
+    {
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="col-xs-12 col-sm-5 col-md-5">
+            <div class="form-group">
+                @Html.Localized("PRODUCT_DELIVERY_RANGE_LABEL", "small")
+                <div class="input-group">
+                    @Html.EditorFor(i => i.Range, new { htmlAttributes = new { @class = "form-control", placeholder = Request.GetLocalizedString("PRODUCT_DELIVERY_RANGE_INPUT") } })
+                    <span class="input-group-addon">km</span>
+                </div>
+                @Html.ValidationMessageFor(model => model.Range, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-5 col-md-5">
+            <div class="form-group">
+                @Html.Localized("PRODUCT_SHIPPING_LABEL", "small")
+                <div class="input-group">
+                    <span class="input-group-addon">@config.DefaultCurrency</span>
+                    @Html.EditorFor(i => i.Shipping, new { htmlAttributes = new { @class = "form-control js-decimal", data_places = 2, placeholder = Request.GetLocalizedString("PRODUCT_SHIPPING_INPUT") } })
+                </div>
+                @Html.ValidationMessageFor(model => model.Shipping, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-2 col-md-1 acoes">
+            <a href="javascript:void(0);" class="remover"><span class="glyphicon glyphicon-minus-sign minus"></span></a>
+        </div>
+    }
+</div>
+

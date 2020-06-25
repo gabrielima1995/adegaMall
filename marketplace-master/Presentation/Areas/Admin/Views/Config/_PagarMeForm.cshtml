@@ -1,0 +1,48 @@
+﻿@model PagarmeConfigViewModel
+@{
+
+}
+
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+@using (Ajax.BeginForm("ConfigurePagarMe", "Config", null, new AjaxOptions() { HttpMethod = "Post", UpdateTargetId = "pagar-me-form" }, new { @class = "form-horizontal" }))
+{
+    <div class="form-group">
+        <div class="col-xs-5 text-right">
+            @Html.LabelFor(Model => Model.ApiKey, new { @class = "" })
+        </div>
+        <div class="col-xs-7">
+            @Html.TextBoxFor(Model => Model.ApiKey, new { @class = "form-control gateway-info-input", placeholder = "ak_live_..." })
+        </div>
+        @Html.ValidationMessageFor(Model => Model.ApiKey, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <div class="col-xs-5 text-right">
+            @Html.LabelFor(Model => Model.EncryptionKey, new { @class = "" })
+        </div>
+        <div class="col-xs-7">
+            @Html.TextBoxFor(Model => Model.EncryptionKey, new { @class = "form-control gateway-info-input", placeholder = "ek_live_..." })
+        </div>
+        @Html.ValidationMessageFor(Model => Model.EncryptionKey, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <div class="col-xs-5 text-right">
+            @Html.LabelFor(Model => Model.StartupReceiver, new { @class = "" })
+        </div>
+        <div class="col-xs-7">
+            @Html.TextBoxFor(Model => Model.StartupReceiver, new { @class = "form-control gateway-info-input", placeholder = "re_..." })
+        </div>
+        @Html.ValidationMessageFor(Model => Model.StartupReceiver, "", new { @class = "text-danger" })
+    </div>
+    <div class="text-center">
+        <hr />
+        @if (Model.IsConfigured())
+        {
+            <p><i class="fa fa-info-circle"></i>Gateway já configurado em produção, dados apenas para visualização</p>
+        }
+        else
+        {
+            <button class="btn btn-primary gateway-info-input" type="submit"><i class="fa fa-check"></i> Aplicar</button>
+        }
+    </div>
+}

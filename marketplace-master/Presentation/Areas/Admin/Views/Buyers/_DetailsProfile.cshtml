@@ -1,0 +1,204 @@
+﻿@using Application.Helpers
+@using Presentation.Helpers
+@model Presentation.Areas.Admin.Views.Buyers.BuyerModel
+
+@{
+    var config = MaaSConfig.Current;
+    double averageRating = 0;
+    if (config.Buyer.UserRatings.Enabled)
+    {
+        if (ViewData.ContainsKey("AverageRating"))
+        {
+            averageRating = (double)ViewData["AverageRating"];
+        }
+    }
+}
+
+<div class="box box-primary">
+    <div class="box-body box-profile">
+        <img class="profile-user-img img-responsive img-circle" src="@ImgHelper.Avatar(Model.Buyer.Avatar, 128)" alt="" style="width:128px; height:128px" />
+
+        <h3 class="profile-username text-center">@Html.DisplayFor(Model => Model.Buyer.FullName)</h3>
+
+        @if (config.Product.Enabled)
+        {
+            <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                    <b>Pedidos</b> <a class="pull-right">@Model.Buyer.Orders.Count</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Total</b>
+                    <a class="pull-right">
+                        @config.DefaultCurrency
+                        @(Model.Buyer.Orders.Sum(x => x.Amount).DisplayDecimal(2))
+                    </a>
+                </li>
+            </ul>
+        }
+        @if (config.Quote.Enabled)
+        {
+            <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                    <b>Orçamentos</b> <a class="pull-right">@Model.Buyer.Quotes.Count</a>
+                </li>
+            </ul>
+        }
+
+        @if (config.Buyer.UserRatings.Enabled)
+        {
+            <ul class="list-group list-group-bordered">
+                <li class="list-group-item text-center">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        if (averageRating - i >= 0.9)
+                        {
+                            <i class="fa fa-star rating-star"></i>
+                        }
+                        else if (averageRating - i >= 0.5)
+                        {
+                            <i class="fa fa-star-half-o rating-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star-o rating-star"></i>
+                        }
+                    }
+                    | @averageRating.ToString("0.00") | @ViewData["RatingsCount"] avaliações
+                </li>
+            </ul>
+        }
+
+        @if (config.Buyer.Moderation.Enabled)
+        {
+            <center>
+                @if (Model.Buyer.RequireModeration.GetValueOrDefault())
+                {
+                    <p class="text-danger">
+                        <i class="fa fa-minus-circle"></i>
+                        Comprador aguardando moderação
+                    </p>
+                    using (Html.BeginForm("ApproveModeration", "Buyers", FormMethod.Post))
+                    {
+                        @Html.Hidden("buyerguid", Model.Id.ToString())
+                        <button class="btn btn-success btn-sm"><i class="fa fa-check-circle"></i> Aprovar cadastro</button>
+                        <hr />
+                    }
+
+                }
+                else
+                {
+                    <p class="text-success">
+                        <i class="fa fa-check-circle"></i>
+                        Aprovado por moderador
+                    </p>
+                }
+            </center>
+        }
+
+        <center>
+            @if (Model.Buyer.Enabled)
+            {
+                <p class="text-success">
+                    <i class="fa fa-check-circle"></i>
+                    Comprador ATIVO
+                </p>
+                <a href="javascript:void(0)" class="btn btn-danger btn-sm" id="btnChangeStatus">Desativar</a>
+                <div id="changeStatusConfirmationContainer" style="display:none">
+                    <strong class="text-danger">Tem certeza?</strong>
+                    <p class="text-muted">O comprador não poderá mais acessar a plataforma e não conseguirá realizar novo cadastro com o mesmo email. Você poderá reativá-lo, se desejar.</p>
+                    @using (Html.BeginForm("ChangeEnabled", "Buyers", FormMethod.Post, new { role = "form", id = "frmChangeStatus" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("Id", Model.Buyer.Id)
+                        @Html.Hidden("Enabled", Boolean.FalseString)
+                        <a href="javascript:void(0)" class="text-danger" id="btnConfirmChangeStatus">Sim, desativar</a> @:|
+                        <a href="javascript:void(0)" class="text-muted" id="btnCancelChangeStatus">voltar</a>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-danger">
+                    <i class="fa fa-minus-circle"></i>
+                    Comprador DESATIVADO
+                </p>
+                <a href="javascript:void(0)" class="btn btn-success btn-sm" id="btnChangeStatus">Ativar</a>
+                <div id="changeStatusConfirmationContainer" style="display:none">
+                    <strong class="text-danger">Tem certeza?</strong>
+                    <p class="text-muted">O comprador terá seu acesso à plataforma reestabelecido. O comprador não será avisado; use as informações de contato, abaixo, se precisar notificá-lo.</p>
+                    @using (Html.BeginForm("ChangeEnabled", "Buyers", FormMethod.Post, new { role = "form", id = "frmChangeStatus" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("Id", Model.Buyer.Id)
+                        @Html.Hidden("Enabled", Boolean.TrueString)
+                        <a href="javascript:void(0)" class="text-success" id="btnConfirmChangeStatus">Sim, reativar</a> @:|
+                        <a href="javascript:void(0)" class="text-muted" id="btnCancelChangeStatus">voltar</a>
+                    }
+                </div>
+            }
+        </center>
+    </div>
+</div>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Sobre</h3>
+    </div>
+    <div class="box-body">
+        <strong><i class="fa fa-map-marker margin-r-5"></i>Endereço</strong>
+        <p class="text-muted">@(Model.Buyer.Address == null ? "-" : Model.Buyer.Address.ToString())</p>
+
+        <hr>
+        <strong><i class="fa fa-share-alt margin-r-5"></i> Contatos</strong>
+        <ul class="list-unstyled">
+            <li>@Html.DisplayFor(Model => Model.Buyer.Email)</li>
+            @if (config.Buyer.Phone.Enabled && Model.Buyer.PhoneNumber != null)
+            {
+                <li>@Html.DisplayFor(Model => Model.Buyer.PhoneNumber)</li>
+            }
+        </ul>
+
+        <hr>
+        <strong><i class="fa fa-bars margin-r-5"></i> Outros</strong>
+        <ul class="list-unstyled">
+            @if (config.Buyer.DateOfBirth.Enabled)
+            {
+                <li><span>Nascimento</span>: <span class="text-muted">@Html.DisplayFor(Model => Model.Buyer.DateOfBirth)</span></li>
+            }
+            @if (config.Buyer.DocumentNumber.Enabled)
+            {
+                <li><span>Documento</span>: <span class="text-muted">@Html.DisplayFor(Model => Model.Buyer.DocumentNumber)</span></li>
+            }
+            @if (config.Buyer.Genre.Enabled)
+            {
+                <li><span>Sexo</span>: <span class="text-muted">@Html.DisplayFor(Model => Model.Buyer.Genre)</span></li>
+            }
+            <li><span>Cadastro</span>: <span class="text-muted">@Html.DisplayFor(Model => Model.Buyer.CreatedAt)</span></li>
+        </ul>
+
+        @if (config.CustomFields.Buyer.Enabled && Model.CustomFieldDefinitions != null)
+        {
+            <hr />
+            <strong><i class="fa fa-plus-circle margin-r-5"></i>Informações adicionais</strong>
+            <ul class="list-unstyled">
+                @foreach (var field in Model.CustomFieldDefinitions)
+                {
+                    if (Model.CustomFields.ContainsKey(field.Key.ToString()))
+                    {
+                        var value = Model.CustomFields[field.Key.ToString()];
+                        <li>
+                            <span>@field.Value.Name</span>:
+                            @if (CustomFieldHelper.IsLink(value))
+                            {
+                                <a href="@value"><i class="fa fa-paperclip"></i> @Request.GetLocalizedString("CUSTOM_FIELD_VIEW_FILE")</a>
+                            }
+                            else
+                            {
+                                <span>@CustomFieldHelper.LocalizeField(value, Request.GetCurrentLang())</span>
+                            }
+                        </li>
+                    }
+                }
+            </ul>
+        }
+    </div>
+</div>

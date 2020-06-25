@@ -1,0 +1,78 @@
+﻿@using Domain.Entities.StoreModule
+@model Presentation.Models.StoreVM
+
+@{
+    var viewPathFmt = "~/Views/Products/Store/{0}.cshtml";
+    var profile = User.Identity.GetLoginProfile();
+
+    var config = MaaSConfig.Current;
+    var showBasePrice = config.Product.Enabled &&
+        config.Product.BusinessModel.Rental.Enabled &&
+        config.Product.BusinessModel.Rental.FixedPeriodRental.Enabled &&
+        config.Product.BusinessModel.Rental.FixedPeriodRental.RegisterByBasePrice;
+
+    var percentFee = (decimal)ViewBag.PercentFee;
+    var amountFee = (decimal)ViewBag.AmountFee;
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        @Html.Localized("MY_STORE_TITLE", "h3")
+        @if (config.Payment.Enabled)
+        {
+            <div class="clearfix m-b-sm">
+                <div class="seller-store-fees pull-left">
+                    @Html.Localized("MY_FEES_TITLE", "strong"): @percentFee.ToString("N0")% + @amountFee.DisplayCurrency()
+                    @if (ViewBag.IsLiable)
+                    {
+                        <br />
+                        <strong>Chargeback Compartilhado</strong>
+                    }
+                </div>
+
+                @if (config.Product.GetShippingMethodsEnabled().HasAny(ShippingMethod.PostalRegular, ShippingMethod.PostalExpress))
+                {
+                    <div class="seller-store-default-shipping pull-left m-l-md">
+                        <i class="fas fa-truck"></i>
+                        @if (Model.DefaultShippingIsConfigured)
+                        {
+                            @Html.Localized("STORE_DEFAULT_SHIPPING", "strong")@:
+                            @Html.Localized("STORE_DEFAULT_SHIPPING_VALUES_FORMAT", "span", null,
+                                Model.DefaultShippingAmount.DisplayCurrency(),
+                                Model.DefaultShippingDeliveryDays)
+                            @:(@Html.ActionLink(Request.GetLocalizedString("STORE_DEFAULT_SHIPPING_UPDATE"), "DefaultShipping"))
+                        }
+                        else
+                        {
+                            @Html.ActionLink(Request.GetLocalizedString("STORE_DEFAULT_SHIPPING_SETUP"), "DefaultShipping", null, new { @class = Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit) })
+                        }
+                        <i class="fas fa-info-circle js-tooltip" title="@Html.LocalizedString("STORE_DEFAULT_SHIPPING_SETUP_TIP")"></i>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    @Html.Partial(string.Format(viewPathFmt, "_CreateProductLink"))
+
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table class="seller-store-products table" id="tblProducts">
+                <thead>
+                    <tr>
+                        <th width="60"></th>
+                        @Html.Localized("PRODUCT_TITLE_LABEL", "th")
+                        @Html.Localized("PRODUCT_CATEGORY_LABEL", "th", new { width = "20%" })
+                        @Html.Localized("PRODUCT_PRICE_LABEL", "th", new { width = "15%" })
+                        @if (!config.Product.Stock.HideCurrentStock.Enabled)
+                        {
+                            @Html.Localized("STOCK", "th", new { width = "15%" })
+                        }
+                        <th width="30"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        @Html.Partial("~/Views/Products/Store/_ModalDeleteProductAlert.cshtml")
+    </div>
+</div>

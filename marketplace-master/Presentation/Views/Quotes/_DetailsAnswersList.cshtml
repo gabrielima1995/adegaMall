@@ -1,0 +1,97 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model List<QuoteAnswerVM>
+
+@{
+    var config = MaaSConfig.Current;
+    var userId = User.Identity.GetPersonId();
+    var isClosed = false;
+    var dealWon = false;
+
+    if (ViewData.ContainsKey("IsClosed"))
+    {
+        isClosed = (bool)ViewData["IsClosed"];
+    }
+
+    if (ViewData.ContainsKey("DealWon"))
+    {
+        dealWon = (bool)ViewData["DealWon"];
+    }
+
+    var offset = TimeZoneInfo.FindSystemTimeZoneById(User.Identity.GetLoginProfile().PreferredTimeZoneId).BaseUtcOffset;
+
+    foreach (var answer in Model)
+    {
+        answer.AnswerDate += offset;
+    }
+}
+
+@foreach (var item in Model)
+{
+    <li class="list-group-item quote-answer-item">
+        @if (item.AuthorId == item.Seller_Id)
+        {
+
+            <a href="@Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = ViewData["SellerUrl"] } )"><img src="@item.AuthorAvatar" class="img-circle" /></a>
+        }
+        else
+        {
+            <img src="@item.AuthorAvatar" class="img-circle" />
+        }
+
+        <div class="quote-answer-item-data">
+            <strong class="quote-answer-item-title">@item.AuthorName</strong>
+            <p>
+                @if (item.Price != null)
+                {
+                    <strong class="quote-answer-item-data-price label label-info label-lg m-r-sm">
+                        @config.DefaultCurrency
+                        @item.Price.Value.DisplayDecimal(2)
+                    </strong>
+                }
+                @if (item.DeliveryDeadline.HasValue)
+                {
+                    <strong class="quote-answer-item-data-deadline label label-info label-lg m-r-sm">
+                        @Request.GetLocalizedString("DELIVERY_DEADLINE_LABEL"):
+                        @item.DeliveryDeadline.Value.ToShortDateString()
+                    </strong>
+                }
+                <span class="quote-answer-item-data-text">@item.Text</span>
+                @if (item.AttachmentUrl != null)
+                {
+                    <br />
+                    @Html.Localized("QUOTE_ATTACHMENT_LABEL", "strong")<text>:</text>
+                    @Html.Localized("QUOTE_ATTACHMENT_CLICK_TO_OPEN", "a", new { href = item.AttachmentUrl, target = "_blank" })
+                    <i class="fa fa-external-link"></i>
+                }
+            </p>
+            <small class="text-muted">@Html.DisplayFor(model => item.AnswerDate)</small>
+            <br />
+            @if (config.Quote.BuyerDecision.Enabled && item.IsProposal && item.IsLatestProposal && dealWon)
+            {
+                <span class="label label-success label-lg"><i class="fa fa-check-circle-o"></i>  @Request.GetLocalizedString("ACCEPTED_QUOTE_PROPOSAL")</span>
+            }
+            @if (config.Quote.BuyerDecision.Enabled && User.Identity.GetLoginProfile().IsBuyer() && item.IsProposal)
+            {
+                if (item.IsLatestProposal && !isClosed)
+                {
+                    <button class="btn btn-success accept-quote-btn">@Request.GetLocalizedString("ACCEPT_QUOTE_LABEL")</button>
+                    <div class="accept-disclaimer" style="display:none">
+                        <p class="text text-warning">
+                            <i class="fa fa-exclamation-circle text text-warning"></i>
+                            @Html.Localized("ACCEPT_QUOTE_DISCLAIMER_V2")
+                        </p>
+
+                        @using (Html.BeginForm("AcceptQuote", "Quotes", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.Hidden("QuoteId", item.Quote_Id)
+                            @Html.Hidden("QuoteAnswerId", item.Id)
+                            <button class="btn btn-success confirm-accept" type="submit">@Request.GetLocalizedString("ACCEPT_QUOTE_LABEL_CONFIRM")</button>
+                        }
+                    </div>
+                }
+            }
+        </div>
+        <div class="clearfix"></div>
+    </li>
+}

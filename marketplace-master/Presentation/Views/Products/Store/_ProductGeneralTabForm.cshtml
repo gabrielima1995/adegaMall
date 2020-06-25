@@ -1,0 +1,615 @@
+﻿@using Domain.Entities.StoreModule
+@using Presentation.Helpers
+
+@model Application.Modules.Products.ProductEditorViewModel
+
+@{
+    var viewPathFmt = "~/Views/Products/Store/{0}.cshtml";
+    var config = MaaSConfig.Current;
+
+    var onlyActualNoShipping =
+        config.Product.GetShippingMethodsEnabled().Count == 1 &&
+        config.Product.GetShippingMethodsEnabled()[0] == ShippingMethod.ActualNoShipping;
+
+    var isTemplate = Model.TemplateId.HasValue;
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title)
+            @if (isTemplate && !Model.TitleIsEditable)
+            {
+                @Html.TextBoxFor(i => i.Title, new { @class = "form-control input-lg", disabled = "disabled" })
+                @Html.HiddenFor(i => i.Title)
+            }
+            else
+            {
+                @Html.TextBoxFor(i => i.Title, new { @class = "form-control input-lg", placeholder = Request.GetLocalizedString("PRODUCT_TITLE_INPUT") })
+            }
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+@if (Model.FriendlyUrl != null)
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <p>
+                <span class="text-muted label label-default label-product-url">
+                    <i class="fa fa-link"></i>
+                    @Model.PublicPageUrl
+                </span>
+                @Html.HiddenFor(m => m.FriendlyUrl)
+            </p>
+            <hr />
+        </div>
+    </div>
+}
+
+<div class="row">
+    @if (Model.ShowProductType)
+    {
+        <div class="col-xs-12 col-sm-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductType)
+                @Html.DropDownListFor(model => model.ProductType, EnumSelectHelper.GetSelectList(Model.ProductType.GetType(), Model.ProductType), Request.GetLocalizedString("PRODUCT_TYPE_SELECT"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+    else
+    {
+        @Html.HiddenFor(model => model.ProductType)
+    }
+
+    @if (config.Product.CustomId.Enabled)
+    {
+        <div class="col-xs-12 col-sm-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomId)
+                @Html.EditorFor(i => i.CustomId, new { htmlAttributes = new { @class = "form-control", placeholder = Request.GetLocalizedString("PRODUCT_TITLE_INPUT") } })
+                @Html.ValidationMessageFor(model => model.CustomId, "", new { @class = "text-danger" })
+                <small class="help-block">@Request.GetLocalizedString("PRODUCT_CUSTOM_ID_TEXT")</small>
+            </div>
+        </div>
+    }
+
+    @if (config.Product.Category.Enabled)
+    {
+        <div class="col-xs-12 col-sm-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Category)
+                @if (isTemplate && !Model.CategoryIsEditable)
+                {
+                    @Html.DropDownListFor(m => m.Category,
+                        new SelectList(Model.Categories, "Id", "Name", Model.Category),
+                        new { @class = "form-control", disabled = "disabled" })
+                    @Html.HiddenFor(i => i.Category)
+                }
+                else
+                {
+                    @Html.Partial("~/Views/Products/_ProductCategoriesSelect.cshtml", Model)
+                }
+                @Html.HiddenFor(i => i.CategoryRequired)
+            </div>
+        </div>
+    }
+
+    @if (config.Product.Price.Enabled && config.Product.BusinessModel.Sale.Enabled)
+    {
+        <div class="col-xs-12 col-sm-3">
+            @Html.Partial(string.Format(viewPathFmt, "_PriceField"), Model)
+        </div>
+        if (config.Product.DiscountPrice.Enabled)
+        {
+            <div class="col-xs-12 col-sm-3">
+                @Html.Partial(string.Format(viewPathFmt, "_DiscountPriceField"), Model)
+            </div>
+        }
+    }
+
+    @if (config.Product.EnableInstallmentsPerProduct)
+    {
+        <div class="col-xs-12 col-sm-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaxInstallments)
+                <br />
+                @Html.TextBoxFor(model => model.MaxInstallments, new { min = "1", max = config.Payment.PaymentGateway.Installments.MaxInstallments, type = "number", @class = "form-control" })
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description)
+            @if (isTemplate && !Model.DescriptionIsEditable)
+            {
+                <div class="well">@Html.Markdown(Model.Description)</div>
+                @Html.HiddenFor(model => model.Description)
+            }
+            else
+            {
+                @Html.TextAreaFor(i => i.Description, new { @class = "form-control", placeholder = Request.GetLocalizedString("PRODUCT_DESCRIPTION_INPUT"), cols = "30", rows = "2" })
+                <small class="help-block">
+                    <a class="text text-info" href="http://suporte.ideianoar.com.br/pt-BR/articles/2047024-como-formatar-textos-de-campos-especificos-indicados-na-plataforma" target="_blank">
+                        <i class="fa fa-question-circle"></i>
+                        @Request.GetLocalizedString("MARKDOWN_HELP_TEXT")
+                    </a>
+                </small>
+            }
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+@if (config.Product.Specifications.Enabled)
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Specifications)
+                @if (isTemplate && !Model.SpecificationsIsEditable)
+                {
+                    <div class="well">@Html.Markdown(Model.Specifications)</div>
+                    @Html.HiddenFor(model => model.Specifications)
+                }
+                else
+                {
+                    @Html.TextAreaFor(i => i.Specifications, new { @class = "form-control", placeholder = Request.GetLocalizedString("PRODUCT_SPECIFICATIONS_INPUT"), cols = "30", rows = "2" })
+                }
+                @Html.ValidationMessageFor(model => model.Specifications, "", new { @class = "text-danger" })
+                @Html.HiddenFor(i => i.SpecificationsRequired)
+            </div>
+        </div>
+    </div>
+}
+
+@if (config.CustomFields.Product.Enabled && Model.CustomFieldDefinitions != null && Model.CustomFieldDefinitions.Count > 0)
+{
+    <hr />
+    <div class="row">
+        @for (int i = 0; i < Model.CustomFieldDefinitions.Count; i++)
+        {
+            ViewData["Index"] = i;
+            <div class="col-xs-12 m-b-sm">
+                @Html.Partial("_CustomFieldForms", Model, ViewData)
+            </div>
+        }
+    </div>
+}
+
+@if (config.Product.Image.Enabled)
+{
+    <hr />
+    @Html.Localized("PRODUCT_IMAGES_LABEL", "h3")
+
+    if (!isTemplate || Model.ImagesIsEditable)
+    {
+        <img src="~/assets/images/thumb-cropping-hint.png" aria-hidden="true" alt="" class="img-with-text m-b-sm" />
+        @Html.Localized("PHOTO_UPLOAD_SQUARE_TEXT", "p")
+    }
+
+    <div class="row toggle-item adicionar-fotos" style="display: block">
+        @if (isTemplate && !Model.ImagesIsEditable)
+        {
+            <div class="col-xs-12">
+                @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
+            </div>
+        }
+        else
+        {
+            <div class="col-xs-12">
+                <div class="form-group flex-valign">
+                    @Html.TextBox("new-images", null, new { type = "file", multiple = "", id = "new-images" })
+                </div>
+
+                @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
+            </div>
+            <div id="uploadInfo" class="col-xs-12" style="display:none">
+                <p>
+                    <i id="uploadSpinner" class="fa fa-spinner fa-spin" style="display:none"></i>
+                    <span id="uploadPct"></span>
+                    <i id="uploadOk" class="fa fa-check text-success" style="display:none"></i>
+                </p>
+            </div>
+        }
+        <div class="col-xs-12">
+            <div class="row js-images-container">
+                @foreach (var image in Model.Images)
+                {
+                    @Html.Partial(string.Format(viewPathFmt, "_ProductImageForm"), image)
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@if (config.Product.CanPauseProducts)
+{
+    <hr />
+    @Html.Localized("PRODUCT_PAUSE_STATUS", "h3")
+
+    <div class="row">
+        <div class="col-xs-12">
+            @Html.RadioButtonFor(model => model.DisableProduct, false) @Request.GetLocalizedString("PRODUCT_UNPAUSED")
+            <br />
+            @Html.RadioButtonFor(model => model.DisableProduct, true) @Request.GetLocalizedString("PRODUCT_PAUSED")
+        </div>
+    </div>
+}
+
+@if (config.Product.BusinessModel.Rental.Enabled)
+{
+    <hr />
+    @Html.Localized("PRODUCT_RENTAL_TITLE", "h3")
+    @Html.Localized("PRODUCT_RENTAL_DESCRIPTION", "p")
+
+    if (config.Product.BusinessModel.Rental.Enabled && config.Product.BusinessModel.Rental.EnablePeriodPerProduct)
+    {
+        @Html.HiddenFor(model => model.ProductRentalPeriodUnit, new { @class = "form-control", id = "rentalUnit-hidden" })
+    }
+    if (config.Product.BusinessModel.Rental.Enabled)
+    {
+        @Html.HiddenFor(model => model.RentalMarginUnit, new { @class = "form-control", id = "rentalMarginUnit-hidden" })
+    }
+
+    <div class="block-schedule-for-product row m-t-sm m-b-sm ">
+        <div class="col-xs-12">
+            <label>Disponibilidade na Agenda</label>
+            <div class="checkbox m-t-0">
+                <label>
+                    @Html.CheckBoxFor(i => i.BlockScheduleForProduct)
+                    @Html.DisplayNameFor(model => model.BlockScheduleForProduct)
+                    <span class="fa fa-lock"></span>
+                </label>
+                @Html.ValidationMessageFor(model => model.BlockScheduleForProduct, "", new { @class = "text-danger" })
+                @Html.Localized("PRODUCT_BLOCK_SCHEDULE_NOTICE_TEXT", "small", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @if (Model.RentalPeriodModeShifts)
+        {
+            <div class="col-xs-6">
+                <div class="form-group" id="shiftOptions">
+                    <label>Turnos</label>
+                    @foreach (var shift in Model.RentalShiftOptions)
+                    {
+                        <div class="checkbox js-shift-option" data-duration-minutes="@shift.DurationInMinutes">
+                            <label>
+                                @if (shift.Selected)
+                                {
+                                    <input type="checkbox" name="@Html.NameFor(m => m.RentalShiftIds)" value="@shift.Id" checked="checked">
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="@Html.NameFor(m => m.RentalShiftIds)" value="@shift.Id">
+                                }
+                                @shift.Name
+
+                                @if (!config.Product.BusinessModel.Rental.HideShiftDurationFromUsers)
+                                {
+                                    <small class="text-muted">@shift.StartTime - @shift.EndTime</small>
+                                }
+
+                                @if (config.Product.Price.Enabled)
+                                {
+                                    <span class="js-shift-price">(@config.DefaultCurrency <span class="js-shift-price-value"></span>)</span>
+                                }
+                            </label>
+                        </div>
+                    }
+                    @Html.ValidationMessageFor(model => model.RentalShiftIds, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        @if (Model.ShowFixedPeriodRental)
+        {
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RentalFixedPeriod)
+                    <div class="input-group">
+                        @if (Model.FixedPeriodRentalDisabled)
+                        {
+                            @Html.EditorFor(model => model.RentalFixedPeriod, new { htmlAttributes = new { @class = "form-control", placeholder = "", disabled = "disabled" } })
+                            @Html.HiddenFor(model => model.RentalFixedPeriod)
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.RentalFixedPeriod, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                        }
+
+                        @if (config.Product.BusinessModel.Rental.EnablePeriodPerProduct &&
+                            !Model.FixedPeriodRentalDisabled)
+                        {
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="js-prodUnit-text">Horas</span>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" data-id="Minute" class="js-prodUnit-option">Minutos</a></li>
+                                    <li><a href="#" data-id="Hour" class="js-prodUnit-option">Horas</a></li>
+                                    <li><a href="#" data-id="Day" class="js-prodUnit-option">Dias</a></li>
+                                    <li><a href="#" data-id="Month" class="js-prodUnit-option">Meses</a></li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="input-group-addon">@Request.GetLocalizedString(Model.RentalPeriodLabel)</span>
+                        }
+                    </div>
+                    @Html.HiddenFor(model => model.FixedRentalRequired)
+                    @Html.ValidationMessageFor(model => model.RentalFixedPeriod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.RentalFixedPeriod)
+        }
+
+        @if (Model.ShowMinMaxPeriodRental)
+        {
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MinRentalPeriod)
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.MinRentalPeriod, new { htmlAttributes = new { @class = "form-control", placeholder = "0", } })
+                        @if (config.Product.BusinessModel.Rental.EnablePeriodPerProduct)
+                        {
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="js-prodUnit-text">Horas</span>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" data-id="Minute" class="js-prodUnit-option">Minutos</a></li>
+                                    <li><a href="#" data-id="Hour" class="js-prodUnit-option">Horas</a></li>
+                                    <li><a href="#" data-id="Day" class="js-prodUnit-option">Dias</a></li>
+                                    <li><a href="#" data-id="Month" class="js-prodUnit-option">Meses</a></li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="input-group-addon">@Request.GetLocalizedString(Model.RentalPeriodLabel)</span>
+                        }
+                    </div>
+                    @Html.HiddenFor(model => model.MinMaxPeriodRequired)
+                    @Html.ValidationMessageFor(model => model.MinRentalPeriod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MaxRentalPeriod)
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.MaxRentalPeriod, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
+                        @if (config.Product.BusinessModel.Rental.EnablePeriodPerProduct)
+                        {
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="js-prodUnit-text">Horas</span>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" data-id="Minute" class="js-prodUnit-option">Minutos</a></li>
+                                    <li><a href="#" data-id="Hour" class="js-prodUnit-option">Horas</a></li>
+                                    <li><a href="#" data-id="Day" class="js-prodUnit-option">Dias</a></li>
+                                    <li><a href="#" data-id="Month" class="js-prodUnit-option">Meses</a></li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="input-group-addon">@Request.GetLocalizedString(Model.RentalPeriodLabel)</span>
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(model => model.MaxRentalPeriod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="row">
+        @if (config.Product.Price.Enabled && config.Product.BusinessModel.Rental.Enabled)
+        {
+            <div class="col-xs-12 col-sm-3">
+                @Html.Partial(string.Format(viewPathFmt, "_PriceField"), Model)
+
+                @if (config.Product.DiscountPrice.Enabled)
+                {
+                    @Html.Partial(string.Format(viewPathFmt, "_DiscountPriceField"), Model)
+                }
+
+                @if (config.Product.BusinessModel.Rental.MinRentalAmount.Enabled)
+                {
+                    <div class="form-group js-product-type-0-show @(Model.ShowMinRentalAmount ? "" : "hide")">
+                        @Html.LabelFor(model => model.MinRentalAmount)
+                        <div class="input-group">
+                            <span class="input-group-addon">@config.DefaultCurrency</span>
+                            @Html.TextBoxFor(i => i.MinRentalAmount, new { @class = "form-control js-money" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.MinRentalAmount, "", new { @class = "text-danger" })
+                        @Html.Localized("PRODUCT_MIN_RENTAL_AMOUNT_INFO", "small", new { @class = "help-block" })
+                    </div>
+                }
+            </div>
+        }
+
+        <div class="col-xs-6 col-sm-4 col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.MinRentalNotice)
+                <div class="input-group">
+                    @Html.EditorFor(model => model.MinRentalNotice, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
+                    <div id="noticePeriodSelector" class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="current-text">Horas</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-id="3">Minutos</a></li>
+                            <li><a href="#" data-id="0">Horas</a></li>
+                            <li><a href="#" data-id="1">Dias</a></li>
+                            <li><a href="#" data-id="2">Meses</a></li>
+                        </ul>
+                        @Html.Hidden("MinRentalNoticeUnit", (int)(Model?.MinRentalNoticeUnit ?? Domain.StoreModule.Entities.RentalPeriodUnit.Day))
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.MinRentalNotice, "", new { @class = "text-danger" })
+                @Html.Localized("PRODUCT_MIN_NOTICE_TEXT", "small", new { @class = "help-block" })
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-4 col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.RentalMargin)
+                <div class="input-group">
+                    @Html.EditorFor(model => model.RentalMargin, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="js-prodMarginUnit-text">Horas</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-id="Minute" class="js-prodMarginUnit-option">Minutos</a></li>
+                            <li><a href="#" data-id="Hour" class="js-prodMarginUnit-option">Horas</a></li>
+                            <li><a href="#" data-id="Day" class="js-prodMarginUnit-option">Dias</a></li>
+                            <li><a href="#" data-id="Month" class="js-prodMarginUnit-option">Meses</a></li>
+                        </ul>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.RentalMargin, "", new { @class = "text-danger" })
+                @Html.Localized("RENTAL_MARGIN_HELP_TEXT", "small", new { @class = "help-block" })
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-4 col-md-3 js-product-type-1-show @(Model.ShowPackageCredits ? "" : "hide")">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PackageCredits)
+                <div class="input-group">
+                    @Html.EditorFor(model => model.PackageCredits, new { htmlAttributes = new { @class = "form-control" } })
+                    <span class="input-group-addon">@Request.GetLocalizedString("PRODUCT_PACKAGE_CREDITS_UNIT_PLURAL")</span>
+                </div>
+                @Html.ValidationMessageFor(model => model.PackageCredits, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.PackageCreditsRequired)
+                @Html.Localized("PRODUCT_PACKAGE_CREDITS_HELP_TEXT", "small", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+
+    if (config.Product.BusinessModel.Rental.EnablePriceMultiplier)
+    {
+        <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MultiplierOption)
+                    @Html.DropDownListFor(model => model.MultiplierOption, Presentation.Helpers.EnumHelper.SelectListFrom(Model.MultiplierOption), new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="priceMultiplierFields">
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MinMultiplier)
+                    @Html.TextBoxFor(model => model.MinMultiplier, new { @class = "form-control", type = "number", min = 0 })
+                    @Html.ValidationMessageFor(model => model.MinMultiplier, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MaxMultiplier)
+                    @Html.TextBoxFor(model => model.MaxMultiplier, new { @class = "form-control", type = "number", min = 0 })
+                    @Html.ValidationMessageFor(model => model.MaxMultiplier, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MultiplierPrice)
+                    <div class="input-group">
+                        <span class="input-group-addon">@config.DefaultCurrency</span>
+                        @Html.TextBoxFor(model => model.MultiplierPrice, new { @class = "form-control js-money" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.MultiplierPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    }
+
+    if (Model.AnyPolicyEnabled)
+    {
+        <div class="row">
+            @if (Model.CancelOrderPolicyEnabled)
+            {
+                var cancelOrderBefore = config.Product.BusinessModel.Rental.Buyer.Cancel.BeforeInHours;
+                var cancelOrderOptions = EnumSelectHelper.GetSelectList(
+                    Model.CancelOrderPolicy.GetType(),
+                    Model.CancelOrderPolicy,
+                    (value, text) => string.Format(text, cancelOrderBefore));
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CancelOrderPolicy)
+                        @Html.DropDownListFor(model => model.CancelOrderPolicy, cancelOrderOptions, Request.GetLocalizedString("CANCEL_ORDER_POLICY_SELECT"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CancelOrderPolicy, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+
+            @if (Model.ChangePeriodRentalPolicyEnabled)
+            {
+                var changePeriodRentalBefore = config.Product.BusinessModel.Rental.Buyer.ChangePeriod.BeforeInHours;
+                var changePeriodRentalOptions = EnumSelectHelper.GetSelectList(
+                    Model.ChangePeriodRentalPolicy.GetType(),
+                    Model.ChangePeriodRentalPolicy,
+                    (value, text) => string.Format(text, changePeriodRentalBefore));
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ChangePeriodRentalPolicy)
+                        @Html.DropDownListFor(model => model.ChangePeriodRentalPolicy, changePeriodRentalOptions, Request.GetLocalizedString("CHANGE_PERIOD_RENTAL_POLICY_SELECT"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ChangePeriodRentalPolicy, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.AvailabilityWarning)
+                @Html.TextAreaFor(model => model.AvailabilityWarning, new { @class = "form-control", placeholder = Request.GetLocalizedString("PRODUCT_AVAILABILITY_WARNING_INPUT") })
+                @Html.HiddenFor(model => model.AvailabilityWarning)
+            </div>
+        </div>
+    </div>
+
+    if (Model.FriendlyUrl != null)
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <p>
+                    @Html.ActionLink(Request.GetLocalizedString("VIEW_PRODUCT_SCHEDULE"), "Index", "Schedule", new { productId = Model.Id }, new { target = "_blank" })
+                </p>
+            </div>
+            @if (!Model.ProductAvailabilityEnabled)
+            {
+                <div class="col-xs-12">
+                    <p>
+                        @Html.ActionLink(Request.GetLocalizedString("VIEW_PRODUCT_AVAILABILITY_SCHEDULE"), "NewAvailability", "Schedule", new { productId = Model.Id }, new { target = "_blank" })
+                    </p>
+                </div>
+            }
+        </div>
+    }
+}
+

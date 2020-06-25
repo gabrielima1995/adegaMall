@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNet.Identity
+@model Presentation.Models.DefaultShippingViewModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("STORE_DEFAULT_SHIPPING");
+    var config = MaaSConfig.Current;
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+        </div>
+
+        @Html.Localized("MY_STORE_TITLE", "h3")
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @using (Html.BeginForm("DefaultShipping", "Store", new { lang = Request.GetCurrentLang() }, FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-xs-12 m-b-xs">
+                            @Html.Localized("PRODUCT_DEFAULT_SHIPPING_LABEL", "strong")
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-2">
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">@config.DefaultCurrency</span>
+                                @Html.TextBoxFor(model => model.Amount, new { @class = "form-control js-decimal", data_places = 2, placeholder = Html.LocalizedString("PRODUCT_DEFAULT_SHIPPING_AMOUNT_INPUT") })
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-3">
+                            <div class="input-group form-group">
+                                @Html.Localized("PRODUCT_DEFAULT_SHIPPING_DELIVERY_DAYS_LABEL", "span", new { @class = "input-group-addon" })
+                                @Html.TextBoxFor(model => model.DeliveryDays, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.DeliveryDays, "", new { @class = "text-danger" })
+                    @Html.Localized("PRODUCT_DEFAULT_SHIPPING_TEXT", "p", new { @class = "small text-muted" })
+                    @Html.Localized("STORE_DEFAULT_SHIPPING_SETUP_INFO", "p", new { @class = "small text-muted" })
+
+                    <button type="submit" class="btn btn-primary" id="js-submit">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        @Html.Localized("SAVE_PORTFOLIO_ITEM_BUTTON")
+                    </button>
+                    <a href="@Url.ActionLocalized("Index", "Store", new { area = "" })" class="btn">
+                        <i class="fas fa-chevron-left"></i>
+                        @Html.Localized("BACK_TO_PRODUCTS_BUTTON")
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

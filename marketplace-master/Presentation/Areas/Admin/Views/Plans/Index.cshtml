@@ -1,0 +1,134 @@
+﻿@using Presentation.Helpers
+@model IEnumerable<Domain.Entities.SubscriptionModule.Plan>
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("PLANS_TITLE");
+
+    var config = MaaSConfig.Current;
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-refresh"></i>
+        @ViewBag.Title
+    </h1>
+    <div>
+        <p>
+            <h5>
+                Saiba como funcionamento de Planos de assinatura
+                <a href="http://suporte.ideianoar.com.br/pt-BR/collections/2222852-planos-de-assinatura">
+                    clicando aqui
+                </a>
+            </h5>
+        </p>
+    </div>
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-body table-responsive">
+            <p><button id="js-import-plans-button" class="btn btn-primary">Importar planos</button></p>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Recorrência</th>
+                        <th>Trial</th>
+                        <th>Valor</th>
+                        @if (config.Quote.LeadSales.Enabled)
+                        {
+                            <th>Créditos por mês</th>
+                            if (config.Quote.LeadSales.CreditsExpire)
+                            {
+                                <th>Validade dos créditos (dias)</th>
+                            }
+                        }
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr data-id="@item.Id">
+                            <td data-order="@Dt.Order(item.Name)">
+                                @item.Name
+                            </td>
+                            <td data-order="@Dt.Order(item.Days)">
+                                @item.Days
+                            </td>
+                            <td data-order="@Dt.Order(item.TrialDays)">
+                                @item.TrialDays
+                            </td>
+                            <td data-order="@Dt.Order(item.Amount)">
+                                @(config.DefaultCurrency + item.Amount.DisplayDecimal(2))
+                            </td>
+                            @if (config.Quote.LeadSales.Enabled)
+                            {
+                                <td>
+                                    <div class="js-edit-div-1">
+                                        <span class="js-edit-text">@item.CreditsPerMonth.GetValueOrDefault()</span><a class="js-edit-button pull-right" href="#"><i class="fa fa-pencil-square"></i> Editar</a>
+                                    </div>
+                                    <div class="js-edit-div-2 form-group" style="display:none">
+                                        <input class="form-control js-text-form" type="number" min="0" max="9999" value="@item.CreditsPerMonth.GetValueOrDefault()" />
+                                        <span style="display:none" class="js-url">@Url.ActionLocalized("UpdateCredits", "Plans")</span>
+                                        <button class="btn btn-success js-check-submit" data-value="credits"><i class="fa fa-check"></i></button>
+                                    </div>
+                                </td>
+                                if (config.Quote.LeadSales.CreditsExpire)
+                                {
+                                    <td>
+                                        <div class="js-edit-div-1">
+                                            <span class="js-edit-text">@item.CreditsValidityDays.GetValueOrDefault()</span><a class="js-edit-button pull-right" href="#"><i class="fa fa-pencil-square"></i> Editar</a>
+                                        </div>
+                                        <div class="js-edit-div-2 form-group" style="display:none">
+                                            <input class="form-control js-text-form" type="number" min="0" max="9999" value="@item.CreditsValidityDays.GetValueOrDefault()" />
+                                            <span style="display:none" class="js-url">@Url.ActionLocalized("UpdateCredits", "Plans")</span>
+                                            <button class="btn btn-success js-check-submit" data-value="days"><i class="fa fa-check"></i></button>
+                                        </div>
+                                    </td>
+                                }
+                            }
+                            <td data-order="@Dt.Order(item.Enabled)">
+                                @StatusIcon(item.Enabled) |
+                                <span class="hidden">@(item.Enabled ? "Desativar" : "Ativar")</span>
+                                <a href="javascript:void(0)" class="js-toggle-status-button"
+                                   data-enable="@Url.ActionLocalized("Enable", "Plans", new {id = item.Id})"
+                                   data-disable="@Url.ActionLocalized("Disable", "Plans", new {id = item.Id})"
+                                   data-id="@item.Id">@(item.Enabled ? "Desativar" : "Ativar")</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @if (config.Quote.LeadSales.Enabled)
+            {
+                <div class="text-center">
+                    <small>
+                        <i class="fa fa-question-circle" style="color: cornflowerblue"></i>
+                        Aprenda a configurar planos de assinatura de créditos clicando em um dos links a seguir (conforme seu gateway de pagamento):
+                        <a href="http://suporte.ideianoar.com.br/pt-BR/articles/3709752-como-cadastrar-planos-no-pagar-me">
+                            Pagarme
+                        </a> ou
+                        <a href="http://suporte.ideianoar.com.br/pt-BR/articles/3714722-como-cadastrar-planos-na-wirecard">
+                            Wirecard
+                        </a>
+                    </small>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@helper StatusIcon(bool enabled)
+{
+    var cssClass = "text-" + (enabled ? "success" : "danger");
+    <i class="fa fa-circle @cssClass js-status-icon"></i>
+}
+
+@section scripts
+{
+    <script>DataTableCustom.create()</script>
+    <script>PlansIndex.init()</script>
+}

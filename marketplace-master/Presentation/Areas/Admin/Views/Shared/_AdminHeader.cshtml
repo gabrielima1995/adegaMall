@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (Request.IsAuthenticated)
+{
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            <li class="user user-menu">
+                <a>
+                    <img src="~/Areas/Admin/assets/img/adminlte/user.png" class="user-image" alt="User Image">
+                    <span class="hidden-xs">@User.Identity.GetUserName()</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.ActionLocalized("Index", "Home", new { Area = "" })">
+                    <i class="fa fa-eye"></i>
+                    Ver o site
+                </a>
+            </li>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">
+                    <i class="fa fa-sign-out"></i>
+                    Sair
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+}

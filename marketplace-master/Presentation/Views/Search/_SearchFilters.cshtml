@@ -1,0 +1,84 @@
+﻿@using Presentation.Helpers
+@model SearchResultVM
+
+@{
+    var config = MaaSConfig.Current;
+    var portfolio = config.Search.SearchType == Domain.Config.General.SearchType.Portfolio;
+    int fieldCount = 0;
+    if (config.Search.SearchFields.Query)
+    {
+        fieldCount++;
+    }
+    if (config.Search.SearchFields.Category)
+    {
+        fieldCount++;
+    }
+    if (config.Search.SearchFields.Location)
+    {
+        fieldCount++;
+    }
+    if (config.Search.SearchFields.Category && Model.SubCategories.Any())
+    {
+        fieldCount++;
+    }
+
+    var fieldClass = $"col-xs-12 {Css.If(fieldCount == 1, "col-md-6")} {Css.If(fieldCount >= 2 && !Model.SubCategories.Any(), "col-md-4","col-md-6")}";
+}
+
+@using (Html.BeginForm(Model.Request.ActionUrl, "Search", FormMethod.Get))
+{
+    @Html.HiddenFor(model => model.Lang)
+    @Html.Hidden("mode", Model.ViewMode)
+
+    if (config.Search.Enabled)
+    {
+        if (config.Search.SearchFields.Location)
+        {
+            <div class="row">
+                <div class="col-xs-12">
+                    @Html.Partial("_GoogleMapsAutocomplete")
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            @if (config.Search.SearchFields.Query)
+            {
+                <div class="@fieldClass">
+                    <div class="form-group">
+                        @Html.TextBox("query", Model.Request.Query, new { @class = "form-control", placeholder = Request.GetLocalizedString(portfolio ? "PORTFOLIO_FILTER_INPUT" : "SELLER_FILTER_INPUT") })
+                    </div>
+                </div>
+            }
+
+            @if (config.Search.SearchFields.Category)
+            {
+                <div class="@fieldClass">
+                    <div class="form-group">
+                        @Html.Partial("_CategoriesSelect", Model)
+                    </div>
+                </div>
+
+                <div class="@fieldClass">
+                    <div class="form-group">
+                        @Html.Partial("_SubCategoriesSelect", Model)
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row margin-top-10 margin-bottom-default text-center">
+            <div class="col-xs-12">
+                @Html.Localized(portfolio ? "FIND_PORTFOLIO_BUTTON" : "FIND_SELLER_BUTTON", "button", new { type = "submit", @class = "btn btn-primary xl" })
+            </div>
+        </div>
+    }
+}
+
+<div class="row text-center">
+    <div class="col-xs-12">
+        @if (config.Quote.Enabled && config.Quote.GeneralQuote.Enabled)
+        {
+            @Html.Localized("GENERAL_QUOTE_BUTTON", "a", new { href = Url.ActionLocalized("Request", "Quotes"), @class = "btn btn-default btn-sm" })
+        }
+    </div>
+</div>

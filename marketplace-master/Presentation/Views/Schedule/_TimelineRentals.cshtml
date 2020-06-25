@@ -1,0 +1,20 @@
+﻿@model IList<V2.Application.Modules.StoreModule.Queries.RentalScheduleItem>
+
+<div class="text-left">
+    @if (Model.Count == 0)
+    {
+        <p>
+            @Request.GetLocalizedString("SCHEDULE_TIMELINE_NO_RENTALS_MESSAGE")
+        </p>
+    }
+
+    @foreach (var item in Model)
+    {
+        <h3>@Html.Raw(item.Title)</h3>
+        <p>
+            @Html.Raw(item.Description)<br />
+            @Html.Localized("SCHEDULE_TIMELINE_RENTAL_LINK", "a", new { href = @Url.Action("Details", "MySales", new { id = item.Id }), target = "_blank" })
+        </p>
+        <hr />
+    }
+</div>

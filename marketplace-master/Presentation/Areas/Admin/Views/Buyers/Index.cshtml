@@ -1,0 +1,120 @@
+﻿@using Presentation.Helpers
+
+@model Presentation.Areas.Admin.Views.Buyers.IndexModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("BUYERS_ACTIVE_TITLE");
+    var isModeration = "moderation".Equals(Request.QueryString["mode"], StringComparison.OrdinalIgnoreCase);
+    var isInative = "inactive".Equals(Request.QueryString["mode"], StringComparison.OrdinalIgnoreCase);
+
+    if (isModeration)
+    {
+        ViewBag.Title = Request.GetLocalizedString("BUYERS_PENDING_TITLE");
+    }
+    if (isInative)
+    {
+        ViewBag.Title = Request.GetLocalizedString("BUYERS_INACTIVE_TITLE");
+    }
+}
+
+<section class="content-header clearfix">
+    <h1><i class="fa fa-user" aria-hidden="true"></i> @ViewBag.Title</h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-body">
+            <div class="form-group">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Buyers")"><i class="fa fa-check"></i> @Request.GetLocalizedString("BUYERS_LIST_ACTIVE_LINK")</a>
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Buyers", new { mode = "inactive" })"><i class="fa fa-ban"></i> @Request.GetLocalizedString("BUYERS_LIST_INACTIVE_LINK")</a>
+                    @if (Model.Config.Buyer.Moderation.Enabled && !"true".Equals(Request.QueryString["onlypending"], StringComparison.OrdinalIgnoreCase))
+                    {
+                        <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Buyers", new { mode = "moderation" })"><i class="fa fa-exclamation-circle"></i> @Request.GetLocalizedString("BUYERS_LIST_PENDING_LINK")</a>
+                    }
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="buyerList">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Local</th>
+                            @if (!isModeration)
+                            {
+                                if (Model.Config.Product.Enabled)
+                                {
+                                    <th data-sort="desc">Pedidos</th>
+                                    <th>Total dos Pedidos</th>
+                                }
+                                if (Model.Config.Quote.Enabled)
+                                {
+                                    <th>Orçamentos</th>
+                                }
+                            }
+                            <th data-sort="desc">Cadastro</th>
+                            <th>Perfil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Buyers)
+                        {
+                            <tr>
+                                <td data-order="@Dt.Order(item.Name)">
+                                    <a href="@Url.ActionLocalized("Details", "Buyers", new {id = item.Id})">@item.Name</a>
+                                </td>
+                                <td data-order="@Dt.Order(item.Email)">@Html.DisplayFor(model => item.Email)</td>
+                                <td data-order="@Dt.Order(item.CityState)">@Html.DisplayFor(model => item.CityState)</td>
+                                @if (!isModeration)
+                                {
+                                    if (Model.Config.Product.Enabled)
+                                    {
+                                        <td data-order="@Dt.Order(item.OrdersCount)">@Html.DisplayFor(model => item.OrdersCount)</td>
+                                        <td data-order="@Dt.Order(item.OrdersTotalAmount)">@Html.DisplayFor(model => item.OrdersTotalAmount)</td>
+                                    }
+                                    if (Model.Config.Quote.Enabled)
+                                    {
+                                        <td data-order="@Dt.Order(item.QuotesCount)">@Html.DisplayFor(model => item.QuotesCount)</td>
+                                    }
+                                }
+                                <td data-order="@Dt.Order(item.RegisteredAt)">@Html.DisplayFor(model => item.RegisteredAt)</td>
+                                <td data-order="@Dt.Order(item.IsCompleteBuyer)">
+                                    @if (item.IsCompleteBuyer)
+                                    {
+                                        <span class="label label-success label-success-outline">
+                                            completo
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-danger label-danger-outline" data-toggle="popover" title="Perfil incompleto" data-placement="left" data-content="O cadastro deste comprador não está completo.">
+                                            incompleto <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        var sortColumn = $("#buyerList th[data-sort]");
+        DataTableCustom.create("#buyerList", {
+            "order": [[sortColumn.index(), sortColumn.data("sort")]]
+        });
+    </script>
+    <script>
+        $(function () {
+            $("[data-toggle='popover']").hover(
+                function () { $(this).popover("show"); },
+                function () { $(this).popover("hide"); });
+        })();
+    </script>
+}

@@ -1,0 +1,120 @@
+﻿@using Domain.Entities
+@model CustomFieldVM
+@{
+    bool typeIsBuyer = "buyer".Equals(Request.QueryString["type"], StringComparison.OrdinalIgnoreCase);
+    bool typeIsSeller = "seller".Equals(Request.QueryString["type"], StringComparison.OrdinalIgnoreCase);
+    var config = MaaSConfig.Current;
+}
+
+<div>
+    @using (Html.BeginForm("UpdateField", "NewCustomize", FormMethod.Post, new { @class = "form-group" }))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="col-xs-6">
+                @Html.HiddenFor(Model => Model.EntityType, new { @class = "entity-type" })
+                @Html.HiddenFor(Model => Model.Id)
+
+                @Html.LabelFor(Model => Model.Name)
+                @Html.TextBoxFor(Model => Model.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-xs-6">
+                @Html.LabelFor(Model => Model.Name_EN)
+                @Html.TextBoxFor(Model => Model.Name_EN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.Name_EN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-6">
+                @Html.LabelFor(Model => Model.Placeholder)
+                @Html.TextBoxFor(Model => Model.Placeholder, new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.Placeholder, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="col-xs-6">
+                @Html.LabelFor(Model => Model.Placeholder_EN)
+                @Html.TextBoxFor(Model => Model.Placeholder_EN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.Placeholder_EN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.CheckBoxFor(Model => Model.IsMandatory, new { @class = "" })
+                @Html.LabelFor(Model => Model.IsMandatory)
+                @Html.ValidationMessageFor(Model => Model.IsMandatory, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-xs-6 form-group">
+                @Html.CheckBoxFor(Model => Model.IsPublic, new { @class = "" })
+                @Html.LabelFor(Model => Model.IsPublic)
+                @Html.ValidationMessageFor(Model => Model.IsPublic, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        if (typeIsSeller || typeIsBuyer)
+        {
+            if (config.Seller.Moderation.Enabled || config.Buyer.Moderation.Enabled)
+            {
+                <div class="row">
+                    <div class="col-xs-6 form-group">
+                        @Html.CheckBoxFor(Model => Model.BlockChangesAfterApprovedInModeration, new { @class = "" })
+                        @Html.LabelFor(Model => Model.BlockChangesAfterApprovedInModeration)
+                        @Html.ValidationMessageFor(Model => Model.BlockChangesAfterApprovedInModeration, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+        }
+        <br />
+        <div class="row">
+            <div class="col-xs-4 form-group">
+                @Html.LabelFor(Model => Model.Order)
+                @Html.TextBoxFor(Model => Model.Order, new { @class = "form-control", type = "number", min = "0", max = "100" })
+                @Html.ValidationMessageFor(Model => Model.Order, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-4 form-group">
+                @Html.LabelFor(Model => Model.DataType)
+                @Html.HiddenFor(Model => Model.DataType)
+                <br />
+                <input class="form-control" type="text" value="@(Request.GetLocalizedString($"CUSTOM_FIELD_DATATYPE_{Model.DataType.ToString().ToUpper()}"))" disabled />
+            </div>
+
+            <div class="col-xs-4 form-group">
+                @Html.LabelFor(Model => Model.InputType)
+                @Html.HiddenFor(Model => Model.InputType)
+                <br />
+                <input class="form-control" type="text" value="@(Request.GetLocalizedString($"CUSTOM_FIELD_INPUTTYPE_{Model.InputType.ToString().ToUpper()}"))" disabled />
+            </div>
+        </div>
+        if (Model.InputType == CustomFieldInputType.Options)
+        {
+            <div id=@($"options-{Model.Id.ToString()}")>
+                @Html.Partial("_CustomFieldOptions", Model)
+            </div>
+        }
+        <div class="text-center">
+            <br />
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-refresh"></i>
+                Atualizar
+            </button>
+        </div>
+    }
+    <hr />
+    @using (Html.BeginForm("DeleteCustomField", "NewCustomize", FormMethod.Post))
+    {
+        @Html.Hidden("fieldId", Model.Id)
+        @Html.Hidden("entityType", Model.EntityType.ToString())
+        <div class="text-center">
+            <small class="text-muted">@Request.GetLocalizedString("CUSTOM_FIELD_DELETE_WARNING")</small>
+            <br />
+            <small><input type="checkbox" name="confirmed" required="required" value="true" />Estou ciente e quero prosseguir</small>
+            <br /><br />
+            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-ban"></i> Excluir Campo</button>
+        </div>
+    }
+</div>

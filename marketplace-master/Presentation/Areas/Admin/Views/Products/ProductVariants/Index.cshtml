@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Application.Modules.Products.Variants.ProductVariantListItemViewModel>
+
+@{
+    ViewBag.Title = "Itens de variantes";
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-indent"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <p>
+        @Html.ActionLink("Novo item de variante", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <table class="table table-hover js-items-list">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VariantType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order)
+                </th>
+                <th>
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VariantType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Order)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "js-delete-item", data_item = item.Name })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+@section scripts
+{
+    @Html.Partial("_DataTableScript")
+
+    <script>
+        $(document).ready(function () {
+            $('.js-items-list .js-delete-item').click(function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+
+                swal({
+                    title: "Atenção",
+                    text: "Confirma a exclusão do item '" + $this.data('item').trim() + "'?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Sim, confirmo",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false
+                },
+                    function () {
+                        $.redirect($this.attr('href'));
+                    });
+            });
+        });
+    </script>
+}

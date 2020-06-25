@@ -1,0 +1,164 @@
+﻿@{
+    var config = MaaSConfig.Current;
+
+    ViewBag.IsHome = ViewBag.IsHome ?? false;
+
+    var title = ViewBag.IsHome
+        ? ViewBag.Title
+        : ViewBag.Title + " - " + config.ApplicationName;
+
+    var isAuthenticated = Request.IsAuthenticated;
+    var loginProfile = User.Identity.GetLoginProfile() ?? new LoginProfile();
+    ViewBag.HasCustomFileField = false;
+
+    var notificationToken = Session["NotificationToken"] ?? "";
+}
+
+<!DOCTYPE html>
+<html lang="@Request.GetCurrentLang()">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="@config.Layout.Images.Favicon" />
+    @if (MaaSConfig.Current.WebApp.IsEnabled)
+    {
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="@title">
+        <link rel="apple-touch-icon" href="@config.Layout.Images.Favicon">
+        <link rel="manifest" href="~/manifest.json" />
+    }
+    <title>@title</title>
+
+    @Html.Partial("_MetaTags")
+    @Html.Partial("_GoogleTagManagerHead")
+    @Html.Partial("_GoogleAnalyticsScript")
+
+    @if (MaaSConfig.Current.WebApp.IsEnabled)
+    {
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('@(config.Environment.AppUrl + "serviceworker.js")');
+            }
+        </script>
+
+        if (MaaSConfig.Current.WebApp.PushNotifications.Enabled)
+        {
+            @*<script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>*@
+            <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-messaging.js"></script>
+            <script>
+                // Initialize Firebase
+                var config = {
+                    apiKey: "AIzaSyDwz0tZiwPyTtQKkoHpbWCoWkyQ4veZFtg",
+                    authDomain: "ina-marketplace.firebaseapp.com",
+                    databaseURL: "https://ina-marketplace.firebaseio.com",
+                    projectId: "ina-marketplace",
+                    storageBucket: "ina-marketplace.appspot.com",
+                    messagingSenderId: "327533907626"
+                };
+                firebase.initializeApp(config);
+            </script>
+        }
+    }
+
+    @*Social media plugin*@
+    @if (MaaSConfig.Current.SocialMedia.EnableShareButtons)
+    {
+        <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=@config.SocialMedia.ShareThis_Id&product=inline-share-buttons' async='async'></script>
+    }
+
+    @Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
+
+    <style>
+        .hero-bg { background-image: url("@CustomAssetsHelper.HomeBackground()") }
+        .preload * {
+          -webkit-transition: none !important;
+          -moz-transition: none !important;
+          -ms-transition: none !important;
+          -o-transition: none !important;
+        }
+    </style>
+    @Html.Partial("_IntegrationHeader")
+
+    @Html.Raw(Html.Action("Head", "PlatformCustomization"))
+</head>
+
+<body class="preload @(ViewBag.IsHome ? "home" : "")">
+    @Html.Raw(Html.Action("BodyStart", "PlatformCustomization"))
+    @Html.Partial("_GoogleTagManagerBody")
+    <span id="fcm-notification-token" style="display:none">@notificationToken</span>
+    <div class="contents">
+        <div id="cookieConsentFormContainer"></div>
+
+        @if (!ViewBag.IsHome)
+        {
+            @Html.Action("Header", "Common", true)
+        }
+
+        @RenderBody()
+        @Html.Action("Footer", "Common", true)
+    </div>
+
+    @Html.Action("MenuMobile", "Common", true)
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>WebFont.load({ google: { families: ['Open Sans:300,400,700,800'] } })</script>
+
+    <script>(function () { window.MaaS = window.MaaS || { lang: '@Request.GetCurrentLang()'} })()</script>
+
+    @Scripts.Render("~/bundles/js")
+
+    @Html.Partial("_JavaScriptMessages")
+
+    @Scripts.Render("~/bundles/globalize")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @RenderSection("plugins", required: false)
+
+    @Scripts.Render("~/bundles/globalize_" + Request.GetCurrentLang())
+    @Scripts.Render("~/bundles/scripts")
+    @Scripts.Render("~/bundles/scripts/saas")
+    @RenderSection("scripts", required: false)
+
+    @Html.Partial("_Messages")
+    @Html.Partial("_FacebookScript")
+
+    @if (CookieConsent.AskCookieConsent())
+    {
+        @:@Scripts.Render("~/assets/js/saas/CookieConsentLoader.js")
+        <script>CookieConsentLoader.init()</script>
+    }
+
+    <script>EcommerceHome.init()</script>
+
+    @if (config.Product.Enabled && isAuthenticated && loginProfile.IsBuyer())
+    {
+        <script>CartButton.init()</script>
+    }
+
+    <script>Main.init()</script>
+
+    @if (config.WebApp.PushNotifications.IsEnabled && (User.Identity?.IsAuthenticated).GetValueOrDefault())
+    {
+        <script src="~/assets/js/PushNotifications.js"></script>
+    }
+
+    @Html.Partial("_IntegrationFooter")
+    @Html.Partial("_UserScriptsFooter")
+
+    <script>$(window).load(function () { $('body').removeClass('preload') })</script>
+    @Html.Raw(Html.Action("BodyEnd", "PlatformCustomization"))
+
+    @Html.EmitRequiredScripts()
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+    @if (config.Seller.Assistant.Enabled)
+    {
+        <script>DisableSellerAssistantActions.init("@Html.LocalizedString("ACTION_DISABLED_FOR_SELLER_ASSISTANT")")</script>
+    }
+</body>
+</html>

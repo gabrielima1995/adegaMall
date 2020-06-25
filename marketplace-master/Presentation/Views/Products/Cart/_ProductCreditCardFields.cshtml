@@ -1,0 +1,126 @@
+﻿@model CheckoutVM
+
+@{
+    var year = DateTime.UtcNow.Year;
+
+    var months = new string('\0', 12).Select((c, i) =>
+    {
+        var l = (++i).ToString("00");
+        return new KeyValuePair<string, string>(l, l);
+    });
+
+    var years = new string('\0', 10).Select((c, i) =>
+    {
+        var l = (i + year).ToString("00");
+        return new KeyValuePair<string, string>(l, l);
+    });
+
+    bool extendedView = MaaSConfig.Current.Payment.GatewayIsWirecard();
+
+    bool installmentWarning =
+        MaaSConfig.Current.Product.EnableInstallmentsPerProduct &&
+        Model.Cart.TotalItems > 1 &&
+        Model.Payment.Installments < MaaSConfig.Current.Payment.PaymentGateway.Installments.MaxInstallments;
+}
+
+@if (Model.ShowInstallmentOptions())
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(i => i.Payment.Installments)
+                @Html.DropDownListFor(i => i.Payment.Installments, Model.GetInstallmentsSelectList(), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Payment.Installments, "", new { @class = "text-danger" })
+                @if (installmentWarning)
+                {
+                    Write(Html.Localized("PRODUCT_CHECKOUT_INSTALLMENTS_WARNING", "small", new { @class = "text-danger" }));
+                }
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Payment.CreditCard.Number)
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <img src="~/fonts/dialpad.svg" style="max-width: 13px;" />
+                </span>
+                @Html.TextBoxFor(i => i.Payment.CreditCard.Number, new { @class = "form-control js-credit-card", placeholder = Request.GetLocalizedString("CREDIT_CARD_NUMBER_INPUT_V2"), maxlength = 16 })
+            </div>
+            @Html.ValidationMessageFor(model => model.Payment.CreditCard.Number, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Payment.CreditCard.FullName)
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                @Html.TextBoxFor(i => i.Payment.CreditCard.FullName, new { @class = "form-control", placeholder = Request.GetLocalizedString("CREDIT_CARD_FULLNAME_INPUT") })
+            </div>
+            @Html.ValidationMessageFor(model => model.Payment.CreditCard.FullName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+@if (extendedView)
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(i => i.Payment.CreditCard.DocumentNumber)
+                @Html.TextBoxFor(i => i.Payment.CreditCard.DocumentNumber, new { @class = "form-control js-cpfcnpj", placeholder = Request.GetLocalizedString("CREDIT_CARD_DOCUMENT_LABEL") })
+                @Html.ValidationMessageFor(model => model.Payment.CreditCard.DocumentNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(i => i.Payment.CreditCard.DateOfBirth)
+                @Html.TextBoxFor(i => i.Payment.CreditCard.DateOfBirth, "{0:d}", new { @class = "form-control date" })
+                @Html.ValidationMessageFor(model => model.Payment.CreditCard.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Payment.CreditCard.Month)
+            @Html.DropDownListFor(i => i.Payment.CreditCard.Month, new SelectList(months, "Key", "Value"),
+                Request.GetLocalizedString("CREDIT_CARD_MONTH_INPUT"),
+                new { @class = "form-control", style = "width:100%" })
+            @Html.ValidationMessageFor(model => model.Payment.CreditCard.Month, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Payment.CreditCard.Year)
+            @Html.DropDownListFor(i => i.Payment.CreditCard.Year, new SelectList(years, "Key", "Value"),
+                Request.GetLocalizedString("CREDIT_CARD_YEAR_INPUT"),
+                new { @class = "form-control", style = "width:100%" })
+            @Html.ValidationMessageFor(model => model.Payment.CreditCard.Year, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        <div class="form-group">
+            @Html.LabelFor(i => i.Payment.CreditCard.CVV)
+            @Html.TextBoxFor(i => i.Payment.CreditCard.CVV, new { @class = "form-control js-digits", placeholder = Request.GetLocalizedString("CREDIT_CARD_CVV_INPUT"), maxlength = 4 })
+            @Html.ValidationMessageFor(model => model.Payment.CreditCard.CVV, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+﻿<script>
+    (function($) {
+        window.MaaS = window.MaaS || {};
+
+        MaaS.messages = MaaS.messages || {};
+
+        MaaS.messages = $.extend({
+            upload_error: '@Request.GetLocalizedString("UPLOAD_ERROR")',
+            loading_text: '@Request.GetLocalizedString("LOADING_TEXT")'
+        }, MaaS.messages);
+    })(window.jQuery);
+</script>

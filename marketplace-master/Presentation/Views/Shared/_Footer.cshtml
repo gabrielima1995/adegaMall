@@ -1,0 +1,154 @@
+﻿@using Microsoft.AspNet.Identity
+@using Presentation.Helpers
+
+@{
+    var isAuthenticated = Request.IsAuthenticated;
+    var profile = User.Identity.GetLoginProfile();
+    var isUser = isAuthenticated && profile.IsBuyerOrSellerOrSellerAssistant();
+    var isAdmin = isAuthenticated && profile.IsAdminOrGestao();
+    var config = MaaSConfig.Current;
+}
+
+<!-- FOOTER -->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                @Html.Localized("ABOUT_LABEL", "h4")
+                @Html.Localized("ABOUT_TEXT", "p")
+                <p>
+                    @config.Enterprise.Name<br>
+                    @Html.Localized("DOCUMENT_NUMBER_FOOTER") @config.Enterprise.DocumentNumber
+                </p>
+                <p>
+                    @Html.Localized("CUSTOMER_SERVICE_TEXT", "strong")<br>
+                    @config.Enterprise.CustomerServiceEmail
+                </p>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                @Html.Localized("FOOTER_LINKS_LABEL", "h4")
+                <ul class="footer-links">
+                    <li class="footer-menu-home">
+                        @Html.Localized("HOME_LINK", "a", new { href = Url.ActionLocalized("Index", "Home") })
+                    </li>
+
+                    @if (isAuthenticated)
+                    {
+                        if (isUser)
+                        {
+                            <li class="footer-menu-account">
+                                @Html.Localized("MY_ACCOUNT_LINK", "a", new { href = Url.ActionLocalized("Index", "Manage") })
+                            </li>
+                        }
+                        else if (isAdmin)
+                        {
+                            <li class="footer-menu-admin">
+                                <a href="@Url.ActionLocalized("Index", "Sellers", new {area = "Admin"})">Painel admin</a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="footer-menu-login">
+                            @Html.Localized("LOGIN_LINK", "a", new { href = Url.ActionLocalized("Login", "Account") })
+                        </li>
+                    }
+
+                    @if (config.Blog.Url != null)
+                    {
+                        <li class="footer-menu-blog">
+                            @Html.Localized("BLOG_LINK", "a", new { href = config.Blog.Url })
+                        </li>
+                    }
+                    @if (config.Enterprise.TermsOfUseUrl != null)
+                    {
+                        <li class="footer-menu-terms">
+                            @Html.Localized("TERMS_USE_LINK", "a", new { href = config.Enterprise.TermsOfUseUrl })
+                        </li>
+                    }
+                    @if (config.Enterprise.PrivacyPolicyUrl != null)
+                    {
+                        <li class="footer-menu-privacy">
+                            @Html.Localized("PRIVACY_POLICY_LINK", "a", new { href = config.Enterprise.PrivacyPolicyUrl })
+                        </li>
+                    }
+                    @foreach (var link in config.AdditionalLinks)
+                    {
+                        if ((link?.Enabled).GetValueOrDefault())
+                        {
+                            <li class="footer-menu-extra">
+                                @Html.Localized(link.Label, "a", new { href = link.Url })
+                            </li>
+                        }
+                    }
+
+                    @if (isAuthenticated)
+                    {
+                        <li class="footer-menu-logout">
+                            @using (Html.BeginForm("LogOff", "Account", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                @Html.Localized("LOGOUT_LINK", "a", new { href = "javascript:document.getElementById('logoutForm').submit()" })
+                            }
+                        </li>
+                    }
+                </ul>
+
+                @if (config.Payment.Enabled && config.Layout.PaymentMethodsDisplay.ShowInFooter.Enabled)
+                {
+                    @Html.Localized("ACCEPTED_PAYMENT_METHODS_TITLE", "h4", new { @class = "footer-payments-title" })
+                    @Html.Localized("ACCEPTED_PAYMENT_METHODS_TEXT", "p", new { @class = "footer-payments-text" })
+                    @Html.Partial("_AcceptedPaymentMethods")
+                }
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                @if (!string.IsNullOrWhiteSpace(config.Facebook.PageUrl))
+                {
+                    <div class="footer-facebook">
+                        <h4>Facebook</h4>
+                        <div class="fb-page" data-href="@config.Facebook.PageUrl" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="@config.Facebook.PageUrl" class="fb-xfbml-parse-ignore">
+                                <a href="@config.Facebook.PageUrl">@config.ApplicationName</a>
+                            </blockquote>
+                        </div>
+                    </div>
+                }
+
+                @if (config.Enterprise.SocialNetworks.HasAny)
+                {
+                    <div id="socialNetworkIcons">
+                        @Html.Localized("FOOTER_SOCIAL_NETWORKS", "h4")
+                        @{
+                            var socialIconsClass = $"social-icons {Css.If(config.Enterprise.SocialNetworks.UseBlackIcons, "social-icons-black")} {Css.If(config.Enterprise.SocialNetworks.UseWhiteIcons, "social-icons-white")}";
+                        }
+                        <ul class="list-unstyled list-inline">
+                            @foreach (var network in config.Enterprise.SocialNetworks.Networks)
+                            {
+                                if (network.IsConfigured)
+                                {
+                                    <li>
+                                        <a href="@network.Url" class="@socialIconsClass @network.CssClass" title="@network.Name" target="_blank"></a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-xs-12 text-right">
+                <a href="http://ideianoar.com.br" title="Ideia no ar - Plataforma de Marketplace">
+                    <img src="@MaaSConfig.Current.Layout.Images.PoweredBy" alt="Desenvolvido por Ideia no Ar">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /FOOTER -->

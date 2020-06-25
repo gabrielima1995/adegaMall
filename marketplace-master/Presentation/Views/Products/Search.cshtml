@@ -1,0 +1,124 @@
+﻿@using System.Linq;
+@using Application.Helpers
+
+@model Application.Modules.Products.Search.SearchViewModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("PRODUCT_SEARCH_TITLE");
+}
+
+@section styles
+{
+    @Styles.Render("~/Content/datetime-picker")
+}
+
+
+<div class="bg-image-1 banner padding-top-60 padding-bottom-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-8 col-md-offset-2">
+                @Html.Localized("PRODUCT_SEARCH_TITLE", "h4", new { @class = "highlight text-center" })
+                @Html.Partial("_SearchFilters", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-content bg1">
+    <div class="container">
+        @if (Model.FilteredBySeller != null)
+        {
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <a href="@Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.FilteredBySeller.FriendlyUrl })">
+                                <img src="@ImgHelper.Avatar(Model.FilteredBySeller.Avatar, 80)" alt="" aria-hidden="true" class="img-with-text img-circle" style="width: 80px; height: 80px" />
+                            </a>
+                            <div>
+                                <h4>@Model.FilteredBySeller.PublicProfileName</h4>
+                                @Html.Localized("PRODUCT_SEARCH_FILTERED_BY_SELLER", "p")
+                                <a href="@Url.ActionLocalized("Search", "Products")">
+                                    <i class="fa fa-times"></i>
+                                    @Html.Localized("REMOVE_FILTER")
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="row results-number">
+            <div class="col-xs-12 text-center"><strong>@Model.Total</strong> @Html.Localized("PRODUCTS_FOUND_COUNT")</div>
+        </div>
+        <div class="row">
+            @if (Model.Results.Any())
+            {
+                <div class="col-xs-8 col-sm-3 pull-right">
+                    @using (Html.BeginForm("Search", "Products", FormMethod.Get))
+                    {
+                        @QueryParamsAsHiddenFields(except: "sortType")
+                        <div class="form-group">
+                            @Html.DropDownList("SortType", null, new { id = "ddlSortType", @class = "form-control" })
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="search-result-facets col-xs-12 col-sm-3">
+                @Html.Partial("_SearchFacets", Model)
+            </div>
+            <div class="search-result-cards col-xs-12 col-sm-9">
+                <div id="js-result-wrapper" class="row">
+                    @Html.Partial("_SearchResult", Model)
+                </div>
+                <div class="row">
+                    <div id="js-loading" class="progress" style="display: none">
+                        <div class="progress-bar progress-bar-striped progress-bar-success active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            @Html.Localized("LOADING_TEXT", "span", new { @class = "sr-only" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@helper QueryParamsAsHiddenFields(params string[] except)
+{
+    foreach (var key in Request.QueryString.AllKeys.Except(except, StringComparer.OrdinalIgnoreCase))
+    {
+        foreach (var value in Request.QueryString.GetValues(key))
+        {
+            if (key != null && value != null)
+            {
+                @:@Html.Hidden(key, value)
+            }
+        }
+    }
+}
+
+@section scripts
+{
+    @*@Html.Partial("_CitiesScript")*@
+    @Scripts.Render("~/bundles/scripts/datetime-picker")
+    @Scripts.Render("~/bundles/scripts/maps-addons")
+    @Html.Partial("_GoogleMapsScript")
+
+    @if (MaaSConfig.Current.Search.Enabled && MaaSConfig.Current.Search.SearchFields.Location)
+    {
+        <script>GoogleMapsAutocomplete.initNoLocation()</script>
+    }
+
+    <script>
+        $(document).ready(function () {
+            Globalize.loadCldr.then(function () {
+                ProductSearch.init();
+            });
+        });
+    </script>
+
+    @Html.Partial("_ProductWishScript")
+}

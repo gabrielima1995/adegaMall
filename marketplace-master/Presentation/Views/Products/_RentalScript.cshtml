@@ -1,0 +1,40 @@
+﻿@using Domain.StoreModule.Entities
+
+@model Application.Modules.Products.IProductDetailsToSelectPeriodViewModel
+
+@{
+    var config = MaaSConfig.Current;
+
+    var bmIsRental = config.Product.BusinessModel.Rental.Enabled;
+    var bmRentalIsShift = bmIsRental && config.Product.BusinessModel.Rental.RentalPeriodMode == RentalPeriodMode.Shifts;
+    var bmRentalIsGridView = bmIsRental && !bmRentalIsShift && config.Product.BusinessModel.Rental.GridView.Enabled && (Model.RentalPeriodUnit == RentalPeriodUnit.Hour || Model.RentalPeriodUnit == RentalPeriodUnit.Minute);
+}
+
+@if (bmIsRental)
+{
+    <script>
+        $(document).ready(function () {
+            Globalize.loadCldr.then(function () {
+                ProductRentalPublicPage.init();
+            });
+        });
+    </script>
+
+    if (bmRentalIsShift)
+    {
+        <script>
+            $(document).ready(function () {
+                RentalCalendar.init();
+            });
+        </script>
+    }
+
+    if (bmRentalIsGridView)
+    {
+        <script>
+            $(document).ready(function () {
+                RentalGridView.init();
+            });
+        </script>
+    }
+}

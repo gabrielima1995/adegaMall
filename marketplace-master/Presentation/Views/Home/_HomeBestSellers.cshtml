@@ -1,0 +1,52 @@
+﻿@using Application.Home
+@model IReadOnlyCollection<BestSellerDto>
+
+@if (Model.Count > 0)
+{
+    <!-- BEST SELLERS -->
+    <div class="best-sellers">
+        <div class="container">
+            <div class="row">
+                @Html.Localized("BEST_SELLERS_TITLE", "h2")
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="carousel-sellers">
+                        <div class="owl-carousel">
+                            @foreach (var seller in Model)
+                            {
+                            <div class="seller text-center">
+                                <div class="image">
+                                    <a href="@seller.PublicProfileUrl" title="@seller.Name">
+                                        <img src="@seller.GetScaledImageUrl()" alt="@seller.Name">
+                                        <div class="name">@seller.Name</div>
+                                    </a>
+                                </div>
+
+                                @if (MaaSConfig.Current.Seller.UserRatings.Enabled && seller.AverageRating > 0)
+                                {
+                                    <div>
+                                        @Html.Partial("_RatingStars", seller.AverageRating)
+                                        @*
+                                        Não é interessante mostrar quantidade de avaliações por enquanto, porque a quantidade avaliações ainda não é signficativa
+                                        <br />
+                                        <span class="text-primary">@seller.ReviewsCount @Request.GetLocalizedString("RATINGS_COUNT")</span>
+                                        *@
+                                    </div>
+                                }
+
+                                @if (MaaSConfig.Current.Search.ShowDescription)
+                                {
+                                    <div class="m-b-sm"></div>
+                                    <small><em>@(seller.Description?.Truncate(MaaSConfig.Current.Search.DescriptionMaxLength))</em></small>
+                                }
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /BEST SELLERS -->
+}

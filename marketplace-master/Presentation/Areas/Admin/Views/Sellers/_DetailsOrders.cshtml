@@ -1,0 +1,59 @@
+﻿@using Presentation.Helpers
+@model Domain.Entities.Seller
+
+@{
+    var config = MaaSConfig.Current;
+    var active = (bool)ViewBag.TabOrdersActive;
+}
+
+@if (config.Product.Enabled)
+{
+    <div class="@(active ? "active" : "") tab-pane" id="orders">
+        @if (Model.Orders.Any())
+        {
+            <div class="table-responsive">
+                <table id="orderList" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Comprador</th>
+                            <th>Valor</th>
+                            <th data-sort="desc">Data</th>
+                            <th>Pagamento</th>
+                            <th>Situação</th>
+                            <th>Localidade</th>
+                            <th>Frete</th>
+                            <th>Método de Envio</th>
+                            <th>Taxa Marketplace</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Orders)
+                        {
+                            <tr>
+                                <td data-order="@Dt.Order(item.Id)">
+                                    <a href="@Url.ActionLocalized("Details", "Orders", new { id = item.Id })">@item.Id.ToString().Substring(0, 8)</a>
+                                </td>
+                                <td data-order="@Dt.Order(item.Buyer.FullName)">
+                                    <a href="@Url.ActionLocalized("Details", "Buyers", new { id = item.Buyer.Id })">@item.Buyer.FullName</a>
+                                </td>
+                                <td data-order="@Dt.Order(item.Amount)">@Html.DisplayFor(model => item.Amount)</td>
+                                <td data-order="@Dt.Order(item.CreatedAt)">@Html.DisplayFor(model => item.CreatedAt)</td>
+                                <td data-order="@Dt.Order(item.PaymentMethod)">@Html.DisplayFor(model => item.PaymentMethod)</td>
+                                <td data-order="@Dt.Order(item.Status)">@Html.DisplayFor(model => item.Status)</td>
+                                <td data-order="@Dt.Order(item.ShippingAddress?.CityAndState)">@Html.DisplayFor(model => item.ShippingAddress.CityAndState)</td>
+                                <td data-order="@Dt.Order(item.Shipping)">@Html.DisplayFor(model => item.Shipping)</td>
+                                <td data-order="@Dt.Order(item.ShippingMethod)">@Html.DisplayFor(model => item.ShippingMethod)</td>
+                                <td data-order="@Dt.Order(item.StartupFee)">@Html.DisplayFor(model => item.StartupFee)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>Nenhuma venda realizada.</p>
+        }
+    </div>
+}

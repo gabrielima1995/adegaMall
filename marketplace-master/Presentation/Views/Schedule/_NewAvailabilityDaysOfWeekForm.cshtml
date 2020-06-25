@@ -1,0 +1,7 @@
+﻿@using Domain.StoreModule.Entities
+@model Presentation.Models.ScheduleViewModels.NewAvailabilityVM
+
+@foreach (var item in Model.DaysOfWeek)
+{
+    @Html.Partial("_NewAvailabilityDayOfWeekForm", item)
+}

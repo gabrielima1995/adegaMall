@@ -1,0 +1,110 @@
+﻿@model Domain.DTO.RentalCalendarViewModel
+
+@{
+    if (ViewBag.ForceSelectPeriod == null)
+    {
+        ViewBag.ForceSelectPeriod = false;
+    }
+
+    if (ViewBag.Quantity == null)
+    {
+        ViewBag.Quantity = 1;
+    }
+
+    var canSelectPeriod = !Model.IsPackageProduct || ViewBag.ForceSelectPeriod;
+}
+
+<div class="row">
+    <input type="hidden" id="rentalCalendarCurrent" value="@Model.CurrentUrl" />
+    <div class="col-xs-2 col-md-3">
+        @if (Model.PreviousUrl != null)
+        {
+            <a href="@Model.PreviousUrl" class="btn btn-link js-rental-calendar-previous"><i class="fa fa-chevron-left"></i></a>
+        }
+        else
+        {
+            <a class="btn btn-link js-rental-calendar-previous"><i class="fa fa-chevron-left"></i></a>
+        }
+    </div>
+    <div class="col-xs-10 col-md-6 form-group">
+        @Html.DropDownList("rentalCalendarMonth", (SelectList)ViewBag.MonthOptions, new { @class = "form-control js-rental-calendar-month", data_productid = Model.ProductId })
+    </div>
+    <div class="col-xs-2 col-md-3 text-right">
+        @if (Model.NextUrl != null)
+        {
+            <a href="@Model.NextUrl" class="btn btn-link js-rental-calendar-next"><i class="fa fa-chevron-right"></i></a>
+        }
+        else
+        {
+            <a class="btn btn-link js-rental-calendar-next"><i class="fa fa-chevron-right"></i></a>
+        }
+    </div>
+</div>
+<div>
+    <table class="table table-bordered" style="width: 100%">
+        <thead>
+            <tr>
+                <td></td>
+                @foreach (var date in Model.HeaderDates)
+                {
+                    <td class="text-center">
+                        @date.Day<small class="text-muted">/@date.Month</small>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td></td>
+                @foreach (var date in Model.HeaderDates)
+                {
+                    <td class="text-center">@date.ToString("ddd")</td>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.Lines)
+            {
+                <tr>
+                    <td>
+                        @line.Shift.Name
+                        @if (Model.ShowShiftDuration)
+                        {
+                            <br />
+                            <small class="text-muted">@line.Shift.FormattedStartTime - @line.Shift.FormattedEndTime</small>
+                        }
+                        @if  (line.Shift.FormattedPrice != null)
+                        {
+                            <br />
+                            <small>@line.Shift.FormattedPrice</small>
+                        }
+                    </td>
+                    @foreach (var column in line.Columns)
+                    {
+                        <td class="text-center">
+                            @if (column.IsAvailable)
+                            {
+                                if (column.IsSelected)
+                                {
+                                    if (canSelectPeriod)
+                                    {
+                                        <input type="checkbox" checked="checked" disabled="disabled"/>
+                                    }
+                                }
+                                else
+                                {
+                                    if (canSelectPeriod)
+                                    {
+                                        <input type="checkbox" class="js-rentalshift-addtocart" data-date="@column.Date.ToShortDateString()" data-start="@column.Start.ToString("HH:mm")" data-end="@column.End.ToString("HH:mm")"/>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    }
+                                }
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

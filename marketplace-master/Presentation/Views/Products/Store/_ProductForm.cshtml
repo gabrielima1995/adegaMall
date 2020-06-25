@@ -1,0 +1,128 @@
+﻿@using Domain.Entities.StoreModule
+@model Application.Modules.Products.ProductEditorViewModel
+
+@{
+    var viewPathFmt = "~/Views/Products/Store/{0}.cshtml";
+    var action = ViewContext.RouteData.Values["action"].ToString();
+    var config = MaaSConfig.Current;
+    var profile = User.Identity.GetLoginProfile();
+
+    var showStockAndVariantsTab =
+        (config.Product.Variants.Enabled && !Model.StockByVariant) ||
+        (config.Product.BusinessModel.ShowStock && !Model.ProductAvailabilityEnabled);
+
+    var shippingMethods = config.Product.GetShippingMethodsEnabled();
+    var hasShippingOptions = shippingMethods.HasAnyBesides(ShippingMethod.NoShipping, ShippingMethod.ActualNoShipping);
+    var showShippingOrDimensionsTab = shippingMethods.HasAnyBesides(ShippingMethod.ActualNoShipping) || config.Product.AnyDimensionsEnabled;
+
+    var showProductAvailabilityTab =
+        config.Product.BusinessModel.Rental.Enabled &&
+        config.Product.BusinessModel.Rental.GridView.Enabled &&
+        config.Product.BusinessModel.Rental.ProductAvailability.Enabled &&
+        !Model.IsNew;
+
+    var tabSet = ViewBag.Tab != null;
+
+    ViewData["ImagesIsEditable"] = Model.TemplateId == null || Model.ImagesIsEditable;
+}
+
+@using (Html.BeginForm(action, "Store", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.Id)
+
+    //Product templates
+    @Html.HiddenFor(model => model.TemplateId)
+    @Html.HiddenFor(model => model.TitleIsEditable)
+    @Html.HiddenFor(model => model.CategoryIsEditable)
+    @Html.HiddenFor(model => model.DescriptionIsEditable)
+    @Html.HiddenFor(model => model.SpecificationsIsEditable)
+    @Html.HiddenFor(model => model.VariantsIsEditable)
+    @Html.HiddenFor(model => model.ImagesIsEditable)
+    @Html.HiddenFor(model => model.DimensionsIsEditable)
+
+    <div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
+        <div id="formProduct">
+            <div class="panel panel-default">
+                <div class="panel-heading @(!tabSet ? "active" : "")" role="tab" id="heading1">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                            @Request.GetLocalizedString("PRODUCT_GENERAL_PANEL_TITLE")
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse @(!tabSet ? "in" : "")" role="tabpanel" aria-labelledby="heading1">
+                    <div class="panel-body">
+                        @Html.Partial(string.Format(viewPathFmt, "_ProductGeneralTabForm"), Model)
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" style="@(showShippingOrDimensionsTab ? "": "display:none")">
+                <div class="panel-heading @(!tabSet ? "active" : "")" role="tab" id="heading2">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                            @Request.GetLocalizedString(hasShippingOptions ? "PRODUCT_SHIPPING_METHOD_LABEL" : "PRODUCT_DIMENSIONS_TITLE")
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse @(!tabSet ? "in" : "")" role="tabpanel" aria-labelledby="heading2">
+                    <div class="panel-body">
+                        @Html.Partial(string.Format(viewPathFmt, "_ProductShippingForm"), Model)
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" style="@(showStockAndVariantsTab ? "": "display:none")">
+                <div class="panel-heading @(!tabSet ? "active" : "")" role="tab" id="heading3">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                            @Request.GetLocalizedString("PRODUCT_STOCK_AND_VARIANTS_PANEL_TITLE")
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse @(!tabSet ? "in" : "")" role="tabpanel" aria-labelledby="heading3">
+                    <div class="panel-body">
+                        @Html.Partial(string.Format(viewPathFmt, "_ProductStockAndVariantsTabForm"), Model)
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" style="@(showProductAvailabilityTab ? "": "display:none")">
+                <div class="panel-heading @(!tabSet || ViewBag.Tab == "product-availability" ? "active" : "")" role="tab" id="heading4">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" href="#collapse4" aria-expanded="true" aria-controls="collapse4">
+                            @Request.GetLocalizedString("PRODUCT_AVAILABILITY_PANEL_TITLE")
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse @(!tabSet || ViewBag.Tab == "product-availability" ? "in" : "")" role="tabpanel" aria-labelledby="heading4">
+                    <div id="js-product-availability-tab" class="panel-body">
+                        @Html.Partial(string.Format(viewPathFmt, "_ProductAvailabilityTabForm"), Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block btn-lg @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)" id="js-submit">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    @Html.Localized("SAVE_PORTFOLIO_ITEM_BUTTON")
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-6 text-right">
+            <div class="form-group">
+                <a href="@Url.ActionLocalized("Index", "Store", new { area = "" })" class="btn btn-lg">
+                    <i class="fas fa-chevron-left"></i>
+                    @Html.Localized("BACK_TO_PRODUCTS_BUTTON")
+                </a>
+            </div>
+        </div>
+    </div>
+}

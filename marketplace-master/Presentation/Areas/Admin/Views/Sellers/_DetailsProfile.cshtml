@@ -1,0 +1,343 @@
+﻿@using Application.Helpers
+@using Presentation.Helpers
+@model Presentation.Areas.Admin.Views.Sellers.SellerModel
+
+@{
+    var config = MaaSConfig.Current;
+    double averageRating = 0;
+    if (config.Seller.UserRatings.Enabled)
+    {
+        averageRating = (double)ViewData["AverageRating"];
+    }
+}
+
+<div class="box box-primary">
+    <div class="box-body box-profile">
+        <img class="profile-user-img img-responsive img-circle" src="@ImgHelper.Avatar(Model.Seller.Avatar, 128)" alt="" style="width:128px; height:128px" />
+
+        <h3 class="profile-username text-center">@Html.DisplayFor(model => Model.Seller.FullName)</h3>
+
+        @if (Model.Seller.Enabled)
+        {
+            <p class="text-muted text-center">
+                <a href="@Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.Seller.FriendlyUrl, area = "" })" target="_blank">acessar perfil público</a>
+            </p>
+        }
+
+        @if (config.Product.Enabled)
+        {
+            <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                    <b>Vendas</b> <a class="pull-right">@Model.Seller.Orders.Count</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Total</b>
+                    <a class="pull-right">
+                        @config.DefaultCurrency
+                        @(Model.Seller.Orders.Sum(x => x.Amount).DisplayDecimal(2))
+                    </a>
+                </li>
+
+            </ul>
+            if (config.Payment.Common.EnableCustomFeesByVendor)
+            {
+                <ul class="list-group list-group-bordered custom-fee-item">
+                    <li class="list-group-item">
+                        <b>Taxas Personalizadas</b>
+                        <a class="pull-right">@(Model.Seller.OverrideGlobalPaymentFees.GetValueOrDefault() ? "SIM" : "NÃO")</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Chargeback Dividido</b>
+                        <a class="pull-right">@(Model.Seller.IsSellerLiable() ? "SIM" : "NÃO")</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Comissão %</b>
+                        <a class="pull-right">@Model.Seller.GetCurrentPaymentPercentFee().DisplayDecimal(2) %</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Comissão Fixa</b>
+                        <a class="pull-right">@config.DefaultCurrency @Model.Seller.GetCurrentPaymentAmountFee().DisplayDecimal(2)</a>
+                    </li>
+                    <li class="list-group-item text-right">
+                        <a class="btn btn-primary" href="javascript:void(0)" id="btnEditFeeForm">Editar Taxas</a>
+                    </li>
+                </ul>
+            }
+        }
+        @if (config.Quote.Enabled)
+        {
+            <ul class="list-group list-group-unbordered">
+                @if (config.Quote.LeadSales.Enabled)
+                {
+                    <li class="list-group-item">
+                        <b>Créditos</b> <a class="pull-right js-add-credits" href="#"><i class="fa fa-plus-square"></i> @(Model.Seller.LeadSalesProfile?.TotalAvailableCredits ?? 0)</a>
+                    </li>
+                }
+                <li class="list-group-item">
+                    <b>Orçamentos</b> <a class="pull-right">@Model.Seller.Quotes.Count</a>
+                </li>
+            </ul>
+        }
+        @if (config.Seller.UserRatings.Enabled)
+        {
+            <ul class="list-group list-group-bordered">
+                <li class="list-group-item text-center">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        if (averageRating - i >= 0.9)
+                        {
+                            <i class="fa fa-star rating-star"></i>
+                        }
+                        else if (averageRating - i >= 0.5)
+                        {
+                            <i class="fa fa-star-half-o rating-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star-o rating-star"></i>
+                        }
+                    }
+                    | @averageRating.ToString("0.00") | @ViewData["RatingsCount"] avaliações
+                </li>
+
+            </ul>
+        }
+        @if (config.Payment.Common.EnableCustomFeesByVendor)
+        {
+            <div class="text-center box box-success box-solid" id="editFeeForm" style="display:none">
+                @using (Html.BeginForm("ChangeFees", "Sellers", FormMethod.Post, new { role = "form", id = "frmEditFees" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("Id", Model.Seller.Id)
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <b>Personalizar Taxas</b>
+                            <div class="input-group form-row" style="width:100%">
+                                <div class="col-xs-6">
+                                    <label for="overrideGlobalFeeRadioYes">Sim</label>
+                                    <input class="fee-radio" type="radio" name="OverrideGlobalPaymentFees" id="overrideGlobalFeeRadioYes" value="true" @(Model.Seller.OverrideGlobalPaymentFees.GetValueOrDefault() ? "checked" : "") />
+                                </div>
+                                <div class="col-xs-6">
+                                    <label for="overrideGlobalFeeRadioNo">Não</label>
+                                    <input class="fee-radio" type="radio" name="OverrideGlobalPaymentFees" id="overrideGlobalFeeRadioNo" value="false" @(Model.Seller.OverrideGlobalPaymentFees.GetValueOrDefault() ? "" : "checked") />
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Dividir Chargeback</b>
+                            <div class="input-group form-row" style="width:100%">
+                                <div class="col-xs-6">
+                                    <label for="customIsLiableYes">Sim</label>
+                                    <input class="fee-radio" type="radio" name="CustomIsLiable" id="customIsLiableYes" value="true" @(Model.Seller.CustomIsLiable.GetValueOrDefault() ? "checked" : "") />
+                                </div>
+                                <div class="col-xs-6">
+                                    <label for="customIsLiableNo">Não</label>
+                                    <input class="fee-radio" type="radio" name="CustomIsLiable" id="customIsLiableNo" value="false" @(Model.Seller.CustomIsLiable.GetValueOrDefault() ? "" : "checked") />
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Comissão %</b>
+                            @Html.TextBox("customPaymentFeePercent", Model.Seller.CustomPaymentFeePercent, new { @class = "form-control fee-input-form", style = "width:50%; margin:auto" })
+                        </li>
+                        <li class="list-group-item">
+                            <b>Comissão Fixa</b>
+                            @Html.TextBox("customPaymentFeeAmount", Model.Seller.CustomPaymentFeeAmount, new { @class = "form-control fee-input-form", style = "width:50%; margin:auto" })
+                        </li>
+                    </ul>
+                    <button type="submit" class="btn btn-sm btn-success">Atualizar Taxas</button>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-danger" id="btn-cancel-modify-fee">Cancelar</a>
+                }
+                <br />
+            </div>
+        }
+        @if (config.Seller.Moderation.Enabled)
+        {
+            <center>
+                @if (Model.Seller.RequireModeration.GetValueOrDefault() || Model.Seller.RequireModeration == null)
+                {
+                    <p class="text-danger">
+                        <i class="fa fa-minus-circle"></i>
+                        Vendedor aguardando moderação
+                    </p>
+                    using (Html.BeginForm("ApproveModeration", "Sellers", FormMethod.Post))
+                    {
+                        @Html.Hidden("sellerguid", Model.Id.ToString())
+                        <button type="submit" class="btn btn-success btn-sm" name="isApproved" id="isApproved" value="true"><i class="fa fa-check-circle"></i> Aprovar cadastro</button>
+                        <button type="submit" class="btn btn-danger btn-sm"  name="isApproved" id="isApproved" value="false"><i class="fa fa-check-circle"></i> Reprovar cadastro</button>
+                        <hr />
+                    }
+                }
+                else
+                {
+                    @ChangeStatus()
+                }
+            </center>
+        }
+        else
+        {
+            @ChangeStatus()
+        }
+    </div>
+</div>
+
+@if (config.Quote.LeadSales.Enabled)
+{
+    <div class="box box-primary js-credits-box" id="" style="display:none">
+        <div class="box-header with-border">
+            <h3 class="box-title">Adicionar créditos</h3>
+        </div>
+        <div class="box-body">
+            @using (Html.BeginForm("AddCredits", "Sellers", FormMethod.Post, new { @class = "" }))
+            {
+                <div class="row">
+                    <span>@Html.Hidden("sellerId", Model.Seller.Id)</span>
+                    <div class="form-group col-xs-6">
+                        @Html.Label("Quantidade")
+                        @Html.TextBox("amount", 0, new { type = "number", min = "1", max = "999", @class = "form-control" })
+                    </div>
+                    @if (config.Quote.LeadSales.CreditsExpire)
+                    {
+                        <div class="form-group col-xs-6">
+                            @Html.Label("Validade (dias)")
+                            @Html.TextBox("duration", config.Quote.LeadSales.CreditsDefaultDuration, new { type = "number", min = "1", max = "999", @class = "form-control" })
+                        </div>
+                    }
+                </div>
+                <div class="text-center"><button class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Adicionar créditos</button></div>
+            }
+        </div>
+    </div>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Sobre</h3>
+    </div>
+    <div class="box-body">
+        <strong><i class="fa fa-map-marker margin-r-5"></i>Endereço</strong>
+        <p class="text-muted">@(Model.Seller.Address == null ? "-" : Model.Seller.Address.ToString())</p>
+
+        <hr>
+        <strong><i class="fa fa-share-alt margin-r-5"></i> Contatos</strong>
+        <ul class="list-unstyled">
+            <li>@Html.DisplayFor(model => Model.Seller.Email)</li>
+            @if (config.Seller.Phone.Enabled && Model.Seller.PhoneNumber != null)
+            {
+                <li>@Html.DisplayFor(model => Model.Seller.PhoneNumber)</li>
+            }
+        </ul>
+
+        <hr>
+        <strong><i class="fa fa-bars margin-r-5"></i> Outros</strong>
+        <ul class="list-unstyled">
+            @if (config.Seller.DateOfBirth.Enabled)
+            {
+                <li><span>Nascimento</span>: <span class="text-muted">@Html.DisplayFor(model => Model.Seller.DateOfBirth)</span></li>
+            }
+            @if (config.Seller.DocumentNumber.Enabled)
+            {
+                <li><span>Documento</span>: <span class="text-muted">@Html.DisplayFor(model => Model.Seller.DocumentNumber)</span></li>
+            }
+            @if (config.Seller.Genre.Enabled)
+            {
+                <li><span>Sexo</span>: <span class="text-muted">@Html.DisplayFor(model => Model.Seller.Genre)</span></li>
+            }
+            <li><span>Cadastro</span>: <span class="text-muted">@Html.DisplayFor(model => Model.Seller.CreatedAt)</span></li>
+        </ul>
+
+        @if (config.CustomFields.Seller.Enabled && Model.CustomFieldDefinitions != null)
+        {
+            <hr />
+            <strong><i class="fa fa-plus-circle margin-r-5"></i>Informações adicionais</strong>
+            <ul class="list-unstyled">
+                @foreach (var field in Model.CustomFieldDefinitions)
+                {
+                    if (Model.CustomFields.ContainsKey(field.Key.ToString()))
+                    {
+                        var value = Model.CustomFields[field.Key.ToString()];
+                        <li>
+                            <span>@field.Value.Name</span>:
+                            @if (CustomFieldHelper.IsLink(value))
+                            {
+                                <a href="@value"><i class="fa fa-paperclip"></i> @Request.GetLocalizedString("CUSTOM_FIELD_VIEW_FILE")</a>
+                            }
+                            else
+                            {
+                                <span>@CustomFieldHelper.LocalizeField(value, Request.GetCurrentLang())</span>
+                            }
+                        </li>
+                    }
+                }
+            </ul>
+        }
+    </div>
+</div>
+
+@if (Model.Seller.Enabled)
+{
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <h3 class="box-title">Acesso ao Perfil</h3>
+        </div>
+        <div class="box-body">
+            <p class="text-muted">
+                Você, administrador, pode acessar o perfil do vendedor como se estivesse fazendo login com sua conta.
+                Você terá acesso ao painel de configuração e poderá alterar os dados como se fosse o próprio vendedor.
+            </p>
+            <p class="text-muted">
+                Esta função é fornecida para que você possa dar <u>suporte</u> ao vendedor.
+            </p>
+            <a href="@Url.ActionLocalized("SignInAsSeller", "Sellers", new { id = Model.Seller.Id })">
+                <i class="fa fa-key"></i>
+                login com a conta do vendedor
+            </a>
+        </div>
+    </div>
+}
+
+@helper ChangeStatus()
+{
+    <center>
+        @if (Model.Seller.Enabled)
+        {
+            <p class="text-success">
+                <i class="fa fa-check-circle"></i>
+                Vendedor ATIVO
+            </p>
+            <a href="javascript:void(0)" class="btn btn-danger btn-sm" id="btnChangeStatus">Desativar</a>
+            <div id="changeStatusConfirmationContainer" style="display:none">
+                <strong class="text-danger">Tem certeza?</strong>
+                <p class="text-muted">O vendedor não poderá mais acessar a plataforma, não conseguirá realizar vendas e não conseguirá realizar novo cadastro com o mesmo email. Você poderá reativá-lo, se desejar.</p>
+                @using (Html.BeginForm("ChangeEnabled", "Sellers", FormMethod.Post, new { role = "form", id = "frmChangeStatus" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("Id", Model.Seller.Id)
+                    @Html.Hidden("Enabled", Boolean.FalseString)
+                    <a href="javascript:void(0)" class="text-danger" id="btnConfirmChangeStatus">Sim, desativar</a> @:|
+                    <a href="javascript:void(0)" class="text-muted" id="btnCancelChangeStatus">voltar</a>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-danger">
+                <i class="fa fa-minus-circle"></i>
+                Vendedor DESATIVADO
+            </p>
+            <a href="javascript:void(0)" class="btn btn-success btn-sm" id="btnChangeStatus">Ativar</a>
+            <div id="changeStatusConfirmationContainer" style="display:none">
+                <strong class="text-danger">Tem certeza?</strong>
+                <p class="text-muted">O vendedor terá seu acesso à plataforma reestabelecido.</p>
+                @using (Html.BeginForm("ChangeEnabled", "Sellers", FormMethod.Post, new { role = "form", id = "frmChangeStatus" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("Id", Model.Seller.Id)
+                    @Html.Hidden("Enabled", Boolean.TrueString)
+                    <a href="javascript:void(0)" class="text-success" id="btnConfirmChangeStatus">Sim, reativar</a> @:|
+                    <a href="javascript:void(0)" class="text-muted" id="btnCancelChangeStatus">voltar</a>
+                }
+            </div>
+        }
+    </center>
+}

@@ -1,0 +1,5 @@
+﻿@if (MaaSConfig.Current.Environment.GoogleServices.MapsApiKey != null)
+{
+    var url = $"https://maps.googleapis.com/maps/api/js?key={MaaSConfig.Current.Environment.GoogleServices.MapsApiKey}&libraries=places";
+    <script src="@url"></script>
+}

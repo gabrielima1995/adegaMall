@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model Presentation.Models.NewLockVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("NEW_LOCK_SCHEDULE_LINK");
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+@section styles
+{
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+
+            <div class="col-xs-12">
+                <h3>@ViewBag.Title</h3>
+                @Html.Localized("NEW_LOCK_DESCRIPTION", "p")
+                @Html.Partial("_NewLockForm", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section plugins
+{
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $('input[type=radio][name=Type]').click(function() {
+                var $this = $(this);
+                var val = $this.val();
+
+                if (val === 'ByDayOfWeek') {
+                    $('.js-by-date').css('display', 'none');
+                    $('.js-by-day-of-week').css('display', 'block');
+                } else {
+                    $('.js-by-date').css('display', 'block');
+                    $('.js-by-day-of-week').css('display', 'none');
+                }
+            });
+
+            $('input[type=radio][name=IsSpecificProduct]').change(function () {
+                var checked = this.value == "true";
+                $('.js-product-container').css('display', checked ? 'block' : 'none');
+                $('.js-all-store-container').css('display', !checked ? 'block' : 'none');
+            });
+
+            $('.js-all-day').click(function (e) {
+                $('#StartTime').val('00:00');
+                $('#EndTime').val('23:59');
+            });
+        });
+    </script>
+}

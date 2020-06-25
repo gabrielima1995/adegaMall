@@ -1,0 +1,34 @@
+﻿@model Presentation.Models.QuoteListVM
+@{
+    bool onlyUnlocked = Request.QueryString.Get("filter") == "onlyUnlocked";
+    bool onlyLocked = Request.QueryString.Get("filter") == "onlyLocked";
+}
+
+@if (MaaSConfig.Current.Quote.LeadSales.Enabled && Model.ViewingOpenQuotes)
+{
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+            @if (onlyLocked)
+            {
+                <a class="" href="@Url.ActionLocalized("Index", "Quotes", new { view = "open", filter = "onlyUnlocked" })"><i class="fas fa-unlock-alt"></i> Ver desbloqueados</a>
+                <span> | <i class="fas fa-lock"></i> Ver bloqueados | </span>
+                <a class="" href="@Url.ActionLocalized("Index", "Quotes", new { view = "open", filter = "" })"><i class="fas fa-list-alt"></i> Ver todos</a>
+            }
+            @if (onlyUnlocked)
+            {
+                <span><i class="fas fa-unlock-alt"></i> Ver desbloqueados | </span>
+                <a class="" href="@Url.ActionLocalized("Index", "Quotes", new { view = "open", filter = "onlyLocked" })"><i class="fas fa-lock"></i> Ver bloqueados</a>
+                <span> | </span>
+                <a class="" href="@Url.ActionLocalized("Index", "Quotes", new { view = "open", filter = "" })"><i class="fas fa-list-alt"></i> Ver todos</a>
+            }
+            @if(!onlyLocked && !onlyUnlocked)
+            {
+                <a class="" href="@Url.ActionLocalized("Index", "Quotes", new { view = "open", filter = "onlyUnlocked" })"><i class="fas fa-unlock-alt"></i> Ver desbloqueados</a>
+                <span> | </span>
+                <a class="" href="@Url.ActionLocalized("Index", "Quotes", new { view = "open", filter = "onlyLocked" })"><i class="fas fa-lock"></i> Ver bloqueados</a>
+                <strong> | <i class="fas fa-list-alt"></i> Ver todos</strong>
+            }
+        </div>
+    </div>
+    <br />
+}

@@ -1,0 +1,162 @@
+﻿@using Domain.StoreModule.Entities
+@model Presentation.Models.NewLockVM
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@using (Html.BeginForm("NewLock", "Schedule", new { lang = Request.GetCurrentLang(), area = "" }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="radio" style="margin-top: 0">
+                        <label>
+                            <input type="radio" name="@nameof(Model.Type)" id="@nameof(Model.Type)" value="@LockType.ByDate" @(Model.Type == LockType.ByDate ? "checked" : "") />
+                            @Html.Localized("SCHEDULE_ADD_BLOCK_BY_DATE")
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="@nameof(Model.Type)" id="@nameof(Model.Type)" value="@LockType.ByDayOfWeek" @(Model.Type == LockType.ByDayOfWeek ? "checked" : "") />
+                            @Html.Localized("SCHEDULE_ADD_BLOCK_BY_WEEKDAY")
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+
+                    <div class="row js-by-date">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                        @Html.Localized("NEW_LOCK_START_DATE_LABEL")
+                                    </span>
+                                    @Html.TextBoxFor(i => i.StartDate, new { @class = "form-control js-date", placeholder = "__/__/____" })
+
+                                </div>
+                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.Localized("NEW_LOCK_END_DATE_LABEL", "span", new { @class = "input-group-addon" })
+                                    @Html.TextBoxFor(i => i.EndDate, new { @class = "form-control js-date", placeholder = "__/__/____" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="js-by-day-of-week form-group" style="display: none">
+                        @Html.DropDownListFor(model => model.DayOfWeek,
+                                 ViewBag.DaysOfWeek as SelectList,
+                                 null,
+                                 new { @class = "form-control js-select" })
+                        @Html.ValidationMessageFor(model => model.DayOfWeek, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-time"></i>
+                                    @Html.Localized("NEW_LOCK_START_TIME_LABEL")
+                                </span>
+                                @Html.TextBoxFor(i => i.StartTime, new { @class = "form-control js-time", placeholder = "__:__" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="input-group">
+                                @Html.Localized("NEW_LOCK_END_TIME_LABEL", "span", new { @class = "input-group-addon" })
+                                @Html.TextBoxFor(i => i.EndTime, new { @class = "form-control js-time", placeholder = "__:__" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <small><a href="javascript:void(0)" class="js-all-day">aplicar para o dia todo</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default active">
+                        <i class="fa fa-cubes"></i>
+                        <input type="radio" name="IsSpecificProduct" autocomplete="off" value="false" checked="checked"> @Html.Localized("NEW_LOCK_TARGET_ALL_STORE")
+                    </label>
+                    <label class="btn btn-default">
+                        <i class="fa fa-cube"></i>
+                        <input type="radio" name="IsSpecificProduct" autocomplete="off" value="true"> @Html.Localized("NEW_LOCK_TARGET_SPECIFIC_PRODUCT")
+                    </label>
+                </div>
+            </div>
+
+            <div class="js-all-store-container">
+                @Html.Localized("NEW_LOCK_ALL_STORE_DESCRIPTION", "small", new { @class = "text-muted" })
+            </div>
+
+            <div class="js-product-container" style="display: none">
+                @Html.DropDownListFor(model => model.ProductId,
+                         ViewBag.Products as SelectList,
+                         Request.GetLocalizedString("NEW_LOCK_PRODUCT_SELECT"),
+                         new { @class = "form-control js-product" })
+                @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @Html.LabelFor(model => model.Mode)
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="radio" style="margin-top: 0">
+                                <label>
+                                    <input type="radio" name="@nameof(Model.Mode)" id="@nameof(Model.Mode)" value="@LockMode.FullyUnavailable" @(Model.Mode == LockMode.FullyUnavailable ? "checked" : "") />
+                                    @Html.Localized("LOCK_TYPE_FULLY_UNAVAILABLE")
+                                </label>
+                                @Html.Localized("LOCK_TYPE_FULLY_UNAVAILABLE_DESCRIPTION", "small", new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="radio" style="margin-top: 0">
+                                <label>
+                                    <input type="radio" name="@nameof(Model.Mode)" id="@nameof(Model.Mode)" value="@LockMode.OnlyForShipping" @(Model.Mode == LockMode.OnlyForShipping ? "checked" : "") />
+                                    @Html.Localized("LOCK_TYPE_ONLY_FOR_SHIPPING")
+                                </label>
+                                @Html.Localized("LOCK_TYPE_ONLY_FOR_SHIPPING_DESCRIPTION", "small", new { @class = "help-block" })
+                            </div>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Mode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="js-submit">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    @Html.Localized("SAVE_NEW_LOCK_BUTTON")
+                </button>
+            </div>
+        </div>
+    </div>
+}

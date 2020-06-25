@@ -1,0 +1,43 @@
+﻿@using Domain.Config.General
+@model Application.Home.HomeViewModel
+
+@{
+    var config = MaaSConfig.Current;
+    var noSlogan = false;
+    if (ViewData.ContainsKey("noSlogan"))
+    {
+        noSlogan = (bool)ViewData["noSlogan"];
+    }
+}
+
+@if (config.HeroUnit.Enabled)
+{
+    <div class="container hero-contents">
+        <div class="row">
+            <div class="col-xs-12">
+                @if (!noSlogan)
+                {
+                    <h1 class="home-hero-title">@Html.Localized("APPLICATION_SLOGAN_1")</h1>
+                    <h2 class="home-hero-slogan">@Html.Localized("APPLICATION_SLOGAN_2")</h2>
+                }
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-8 col-md-offset-2">
+                            @if (config.Search.Enabled)
+                            {
+                                if (config.Search.SearchType == SearchType.Product)
+                                {
+                                    @Html.Partial("~/Views/Products/_ProductsSearchHome.cshtml", Model.ProductsSearch)
+                                }
+                                else if (config.Search.SearchType == SearchType.Seller || config.Search.SearchType == SearchType.Portfolio)
+                                {
+                                    @Html.Partial("_SellersSearchHome", Model.SellersSearch)
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,309 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model Application.Modules.Products.ProductEditorViewModel
+
+@{
+    var viewPathFmt = "~/Views/Products/Store/{0}.cshtml";
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">@Html.Partial("_UserMenu", loginProfile)</div>
+            <div class="col-xs-12">
+                <h3>@ViewBag.Title</h3>
+
+                @if (Model.TemplateId.HasValue)
+                {
+                    <div class="alert alert-warning template-fields-locked-msg">
+                        @Html.Localized("PRODUCT_TEMPLATE_SOME_FIELDS_LOCKED", "p")
+                    </div>
+                }
+
+                @Html.Partial(string.Format(viewPathFmt, "_ProductForm"))
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        (function ($, MaaS) {
+            $(document).ready(function () {
+                StoreProduct.init();
+            });
+        })(window.jQuery, window.MaaS);
+    </script>
+    @Html.Partial("_VariantsScript")
+    @Html.Partial("_StockVariantsScript")
+
+    <script>
+        var ProductImageUploadInfo = (function () {
+
+            var _info, _spinner, _pct, _ok;
+
+            function init() {
+                _info = $('#uploadInfo');
+                _spinner = $('#uploadSpinner');
+                _pct = $('#uploadPct');
+                _ok = $('#uploadOk');
+            }
+
+            function showInfo(pct) {
+                var text = Math.round(pct) + '%';
+                _info.show();
+                _spinner.show();
+                _ok.hide();
+                _pct.show().text(text);
+            }
+
+            function showCompleted() {
+                showInfo(100);
+                _spinner.hide();
+                _ok.show();
+            }
+
+            function hide() {
+                _info.hide();
+            }
+
+            return {
+                init: init,
+                showInfo: showInfo,
+                showCompleted: showCompleted,
+                hide: hide
+            };
+
+        })();
+
+        (function ($, MaaS) {
+            $(document).on('click', '.trash', function (e) {
+                e.preventDefault();
+                var element = $(this).parent().parent();
+                element.fadeOut(100, function () { element.remove() });
+            });
+
+            var $periodUnitInput = $('.js-prodUnit-option');
+            var $periodUnitTexts = $('.js-prodUnit-text');
+            $periodUnitInput.on('click', function (e) {
+                let id = $(this).attr('data-id');
+                $('#rentalUnit-hidden').val(id);
+                UpdateUnitTexts(id, $periodUnitTexts);
+            });
+
+            var $marginUnitInput = $('.js-prodMarginUnit-option');
+            var $marginUnitTexts = $('.js-prodMarginUnit-text');
+            $marginUnitInput.on('click', function (e) {
+                let id = $(this).attr('data-id');
+                $('#rentalMarginUnit-hidden').val(id);
+                UpdateUnitTexts(id, $marginUnitTexts);
+            });
+
+            function UpdateUnitTexts(id, selector) {
+                let newText = '';
+                switch (id) {
+                case 'Minute':
+                    newText = 'Minutos';
+                    break;
+                case 'Hour':
+                    newText = 'Horas';
+                    break;
+                case 'Day':
+                    newText = 'Dias';
+                    break;
+                case 'Month':
+                    newText = 'Meses';
+                    break;
+                }
+
+                selector.text(newText);
+            }
+
+            UpdateUnitTexts($('#rentalUnit-hidden').val(), $periodUnitTexts);
+            UpdateUnitTexts($('#rentalMarginUnit-hidden').val(), $marginUnitTexts);
+
+            var $newImagesInput = $('#new-images');
+            var $submitButton = $('#js-submit');
+            var $body = $('body');
+            var $privateFleetParamsContainer = $('.js-private-fleet-params-container');
+            var $privateFleet = $('.js-private-fleet');
+            var $noShipping = $('.js-no-shipping');
+            var $stockVariantWrapper = $('.js-stock-variant-wrapper');
+            var $generalStockWrapper = $('.js-general-stock-wrapper');
+            var $variantsWrapper = $('.js-variants-wrapper');
+            var $productTypeSelect = $('#@(nameof(Model.ProductType))');
+
+            ProductImageUploadInfo.init();
+
+            $newImagesInput.uploadfy({
+                fileType: 'product',
+                started: function () {
+                    submitToggle(false);
+                },
+                progress: function (percentage) {
+                    console.log(percentage);
+                    ProductImageUploadInfo.showInfo(percentage);
+                },
+                completed: function (files) {
+                    ProductImageUploadInfo.showCompleted();
+                    displayImages(files);
+                },
+                error: function () {
+                    ProductImageUploadInfo.hide();
+                    toastr.error(MaaS.messages.upload_error);
+                },
+                finaly: function () {
+                    $newImagesInput.val('');
+                    submitToggle(true);
+                    window.setTimeout(ProductImageUploadInfo.hide, 1000);
+                }
+            });
+
+            $('.js-private-fleet-param-add-button').click(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: '@Url.ActionLocalized("AddPrivateFleetParam", "Store")',
+                    success: function (data) {
+                        $privateFleetParamsContainer.append(data);
+
+                        $(document).ready(function () {
+                            MaaS.initPlugins();
+                        });
+                    }
+                });
+            });
+
+            $('#@(nameof(Model.PrivateFleetEnabled))').change(function () {
+                $privateFleet.css('display', this.checked ? 'block' : 'none');
+
+                if (!this.checked) {
+                    $privateFleetParamsContainer.html('');
+                }
+            });
+
+            $body.on('click', '.js-private-fleet-param .minus', function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                $this.parents('.js-private-fleet-param').remove();
+                return false;
+            });
+
+            $('#@(nameof(Model.NoShippingEnabled))').change(function () {
+                $noShipping.css('display', this.checked ? 'block' : 'none');
+            });
+
+            $body.on('change', 'input:radio[name="@(nameof(Model.StockByVariant))"]', function () {
+                var byVariant = $(this).val() === 'True';
+
+                $stockVariantWrapper.css('display', byVariant ? 'block' : 'none');
+                $generalStockWrapper.css('display', !byVariant ? 'block' : 'none');
+                $variantsWrapper.css('display', !byVariant ? 'block' : 'none');
+            });
+
+            $productTypeSelect.data('prev', $productTypeSelect.val());
+
+            toggleElementsByProductType(undefined, $productTypeSelect.val());
+
+            $productTypeSelect.change(function () {
+                var $this = $(this);
+                var prev = $this.data('prev');
+                var val = $this.val();
+
+                toggleElementsByProductType(prev, val);
+
+                $productTypeSelect.data('prev', val);
+            });
+
+            function toggleElementsByProductType(prev, val) {
+                if (prev !== undefined) {
+                    $body.find('.js-product-type-' + prev + '-hide').removeClass('hide');
+                    $body.find('.js-product-type-' + prev + '-show').addClass('hide');
+                }
+
+                $body.find('.js-product-type-' + val + '-hide').addClass('hide');
+                $body.find('.js-product-type-' + val + '-show').removeClass('hide');
+            }
+
+            toggleElementsByAvailabilityMode($('input[name="@(nameof(Model.AvailabilityMode))"]:checked'));
+
+            $body.on('change', 'input:radio[name="@(nameof(Model.AvailabilityMode))"]', function () {
+                toggleElementsByAvailabilityMode($(this));
+            });
+
+            function toggleElementsByAvailabilityMode($this) {
+                var autoMode = $this.val() === 'Auto';
+
+                $('.js-availability-mode-auto-fields').css('display', autoMode ? 'block' : 'none');
+                $('.js-availability-mode-manual-fields').css('display', !autoMode ? 'block' : 'none');
+            }
+
+            function submitToggle(enable) {
+                if (enable === false) {
+                    $submitButton.button('loading');
+                } else {
+                    $submitButton.button('reset');
+                }
+            }
+
+            function displayImages(files) {
+                $.post('@Url.Action("NewImagesHtml")', {
+                    images: files
+                })
+                .done(function (html) {
+                    $('.js-images-container').append(html);
+                })
+                .fail(function () {
+                    toastr.error(MaaS.messages.upload_error);
+                })
+                .always(function () {
+                    $newImagesInput.val('');
+                    submitToggle(true);
+                });
+            }
+        })(window.jQuery, window.MaaS);
+    </script>
+
+    <script>new ProductNoticePeriodSelector('#noticePeriodSelector')</script>
+    <script>ProductEditorShipping.init()</script>
+
+    <script>
+        (function ($, MaaS) {
+            $(document).ready(function () {
+                $(".js-delete-availability-button").click(function (e) {
+                    e.preventDefault();
+
+                    var self = $(this);
+
+                    var deleteUrl = self.data('delete-url');
+
+                    swal({
+                        title: "@Html.Raw(Request.GetLocalizedString("PRODUCT_AVAILABILITY_MODAL_DELETE_TITLE").Replace("\"", "'"))",
+                        text: "@Html.Raw(Request.GetLocalizedString("PRODUCT_AVAILABILITY_MODAL_DELETE_BODY").Replace("\"", "'"))",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: "@Html.Raw(Request.GetLocalizedString("PRODUCT_AVAILABILITY_MODAL_DELETE_ACCEPT"))",
+                        cancelButtonText: "@Html.Raw(Request.GetLocalizedString("PRODUCT_AVAILABILITY_MODAL_DELETE_DISMISS"))",
+                        closeOnConfirm: false
+                    },
+                    function() {
+                        $.redirect(deleteUrl);
+                        return true;
+                    });
+
+                    return false;
+                });
+            });
+
+            $(document.body).on('change', '#formProduct input, #formProduct select, #formProduct textarea', function () {
+                $('#availabilityWarning').removeAttr('hidden');
+                console.log('entrou aqui');
+            });
+
+        })(window.jQuery, window.MaaS);
+    </script>
+}

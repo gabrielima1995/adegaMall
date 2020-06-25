@@ -1,0 +1,414 @@
+﻿@using Microsoft.AspNet.Identity
+@using Domain.Entities
+
+@model Application.Sellers.SellerProfileViewModel
+
+@{
+    var config = MaaSConfig.Current;
+
+    var docFreeText = config.Seller.DocumentNumber.AllowFreeText;
+
+    var isManagePage = Html.IsCurrent("Manage");
+    var loginProfile = User.Identity.GetLoginProfile();
+    var searchShowsDescription = config.Search.ShowDescription;
+    ViewBag.RequireModeration = Model.RequireModeration;
+    ViewBag.ModerationIsEnable = MaaSConfig.Current.Seller.Moderation.Enabled;
+
+    bool requireModeration = ViewBag.RequireModeration == null ? true : ViewBag.RequireModeration;
+    bool moderationIsEnable = ViewBag.ModerationIsEnable == null ? true : ViewBag.ModerationIsEnable;
+    var blockChangesBirthDate = moderationIsEnable && !requireModeration && config.Seller.DateOfBirth.BlockChangesAfterApprovedInModeration;
+    var blockChangesDocumentNumber = moderationIsEnable && !requireModeration && config.Seller.DocumentNumber.BlockChangesAfterApprovedInModeration;
+
+    bool canEditDocument = !isManagePage || (config.Payment.Enabled && string.IsNullOrWhiteSpace(loginProfile.SupplierGatewayId));
+}
+
+@if (ViewBag.CompleteRegister)
+{
+    <div class="form-group flex-valign">
+        <img src="@Model.AvatarUrl" alt="" class="max-width-90 margin-right-15 border-radius" />
+        <div class="margin-bottom-15 visible-xs"></div>
+        @Html.TextBoxFor(model => model.NewPicture, new { type = "file" })
+    </div>
+
+    @Html.HiddenFor(i => i.Picture)
+    @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
+}
+
+@if (ViewBag.AllFields)
+{
+    <div class="form-group">
+        @Html.LabelFor(i => i.Name)
+        @Html.TextBoxFor(i => i.Name, new { @class = "form-control", placeholder = Request.GetLocalizedString("COMPLETE_NAME_INPUT") })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+}
+else
+{
+    @Html.HiddenFor(i => i.Name)
+}
+
+@if (config.Seller.AlternativeName.Enabled)
+{
+    <div class="form-group">
+        @Html.LabelFor(i => i.AlternativeName)
+
+        @if (config.Seller.AlternativeName.GenerateEncoded)
+        {
+            @Html.TextBoxFor(i => i.AlternativeName, new { @class = "form-control", placeholder = Request.GetLocalizedString("ALTERNATIVE_INPUT"), @readonly = "readonly" })
+        }
+        else
+        {
+            @Html.TextBoxFor(i => i.AlternativeName, new { @class = "form-control", placeholder = Request.GetLocalizedString("ALTERNATIVE_INPUT") })
+        }
+
+        @Html.ValidationMessageFor(model => model.AlternativeName, "", new { @class = "text-danger" })
+        @Html.HiddenFor(i => i.AlternativeNameRequired)
+
+        @if (!string.IsNullOrEmpty(Model.FriendlyUrl))
+        {
+            <p class="m-t-xs">
+                <a href="@Model.ProfileUrl" class="text-muted label label-default label-product-url">
+                    <i class="fa fa-link"></i>
+                    @Model.ProfileUrl
+                </a>
+            </p>
+        }
+    </div>
+}
+
+@if (config.Seller.AboutMe.Enabled)
+{
+    <div class="form-group">
+        @Html.LabelFor(i => i.AboutMe)
+        @Html.TextAreaFor(i => i.AboutMe, new { @class = "form-control", placeholder = Request.GetLocalizedString("ABOUT_ME_INPUT") })
+        <small class="help-block">
+            <a class="text text-info" href="http://suporte.ideianoar.com.br/pt-BR/articles/2047024-como-formatar-textos-de-campos-especificos-indicados-na-plataforma" target="_blank">
+                <i class="fa fa-question-circle"></i>
+                @Request.GetLocalizedString("MARKDOWN_HELP_TEXT")
+            </a>
+        </small>
+        @if (searchShowsDescription)
+        {
+            <small class="help-block">
+                <i class="fa fa-search"></i>
+                @Html.Localized("SEARCH_RESULT_DESCRIPTION_MAX_LENGTH", "span", new { @class = "text-muted" }, config.Search.DescriptionMaxLength)
+                @Html.Localized("MAKE_A_SEARCH", "a", new { target = "_blank", href = Url.Action("Index", "Search", new { lang = Request.GetCurrentLang() }) })
+            </small>
+        }
+
+        @Html.ValidationMessageFor(model => model.AboutMe, "", new { @class = "text-danger" })
+        @Html.HiddenFor(i => i.AboutMeRequired)
+    </div>
+}
+
+@if (ViewBag.AllFields)
+{
+    if (loginProfile.IsSellerAssistant())
+    {
+        <div class="form-group">
+            @Html.LabelFor(i => i.Email)
+            @Html.TextBoxFor(i => i.Email, new { @class = "form-control", placeholder = Request.GetLocalizedString("EMAIL_INPUT"), type = "email", disabled = "disabled" })
+            @Html.HiddenFor(i => i.Email)
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            @Html.LabelFor(i => i.Email)
+            @Html.TextBoxFor(i => i.Email, new { @class = "form-control", placeholder = Request.GetLocalizedString("EMAIL_INPUT"), type = "email" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    }
+}
+else
+{
+    @Html.HiddenFor(i => i.Email)
+}
+
+@if (config.Seller.Phone.Enabled && ViewBag.AllFields)
+{
+    <div class="form-group">
+        @Html.LabelFor(i => i.PhoneNumber)
+        @Html.TextBoxFor(i => i.PhoneNumber, new { @class = "form-control", placeholder = Request.GetLocalizedString("PHONE_INPUT"), type = "phone" })
+        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+        @Html.HiddenFor(i => i.PhoneNumberRequired)
+    </div>
+}
+else
+{
+    @Html.HiddenFor(i => i.PhoneNumber)
+}
+
+@if (config.Seller.DocumentNumber.Enabled || config.Payment.Enabled)
+{
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(i => i.DocumentNumber)
+                @if (blockChangesDocumentNumber)
+                {
+                    @Html.TextBoxFor(i => i.DocumentNumber, new { @class = docFreeText ? "form-control" : "form-control js-cpfcnpj", disabled = "disabled" })
+                    @Html.HiddenFor(i => i.DocumentNumber)
+                }
+                else
+                {
+                    @Html.TextBoxFor(i => i.DocumentNumber, new { @class = docFreeText ? "form-control" : "form-control js-cpfcnpj", placeholder = Request.GetLocalizedString("DOCUMENT_NUMBER_INPUT") })
+                }
+                @Html.ValidationMessageFor(model => model.DocumentNumber, "", new { @class = "text-danger" })
+                @Html.HiddenFor(i => i.DocumentNumberRequired)
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    @if (config.Seller.DateOfBirth.Enabled)
+    {
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(i => i.DateOfBirth)
+                @if (blockChangesBirthDate)
+                {
+                    @Html.TextBoxFor(i => i.DateOfBirth, "{0:d}", new { @class = "form-control date no-picker", placeholder = Request.GetLocalizedString("DATE_OF_BIRTH_INPUT"), disabled = "disabled" })
+                    @Html.HiddenFor(i => i.DateOfBirth)
+                }
+                else
+                {
+                    @Html.TextBoxFor(i => i.DateOfBirth, "{0:d}", new { @class = "form-control date no-picker", placeholder = Request.GetLocalizedString("DATE_OF_BIRTH_INPUT") })
+                }
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                @Html.HiddenFor(i => i.DateOfBirthRequired)
+            </div>
+        </div>
+    }
+
+    @if (config.Seller.Genre.Enabled)
+    {
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(i => i.Genre)
+                <select id="@nameof(Model.Genre)" name="@nameof(Model.Genre)" class="form-control js-select">
+                    <option value="@Genre.Male" @(Model.Genre == Genre.Male ? "selected" : "")>@Request.GetLocalizedString("MALE_GENRE_LABEL")</option>
+                    <option value="@Genre.Female" @(Model.Genre == Genre.Female ? "selected" : "")>@Request.GetLocalizedString("FEMALE_GENRE_LABEL")</option>
+                    <option value="@Genre.Other" @(Model.Genre == Genre.Other ? "selected" : "")>@Request.GetLocalizedString("OTHER_GENRE_LABEL")</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.Genre, "", new { @class = "text-danger" })
+                @Html.HiddenFor(i => i.GenreRequired)
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row">
+    @if (config.Seller.AdditionalInfo1.Enabled)
+    {
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(i => i.AdditionalInfo1)
+                @Html.TextBoxFor(i => i.AdditionalInfo1, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDITIONAL_INFO_1_INPUT") })
+                @Html.ValidationMessageFor(model => model.AdditionalInfo1, "", new { @class = "text-danger" })
+                @Html.HiddenFor(i => i.AdditionalInfo1Required)
+            </div>
+        </div>
+    }
+
+    @if (config.Seller.AdditionalInfo2.Enabled)
+    {
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(i => i.AdditionalInfo2)
+                @Html.TextBoxFor(i => i.AdditionalInfo2, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDITIONAL_INFO_2_INPUT") })
+                @Html.ValidationMessageFor(model => model.AdditionalInfo2, "", new { @class = "text-danger" })
+                @Html.HiddenFor(i => i.AdditionalInfo2Required)
+            </div>
+        </div>
+    }
+</div>
+
+@if (config.CustomFields.Seller.Enabled && Model.CustomFieldDefinitions?.Count > 0)
+{
+    <div class="row">
+        @for (int i = 0; i < Model.CustomFieldDefinitions.Count; i++)
+        {
+            ViewData["Index"] = i;
+            var field = Model.CustomFieldDefinitions.ElementAt(i);
+            <div class="col-xs-12">
+                @Html.Partial("_CustomFieldForms", Model, ViewData)
+                <br />
+            </div>
+        }
+    </div>
+    <hr />
+}
+
+@if (config.Seller.FacebookProfile.Enabled)
+{
+    <div class="form-group">
+        @Html.LabelFor(i => i.FacebookProfile)
+        @Html.TextBoxFor(i => i.FacebookProfile, new { @class = "form-control", placeholder = Request.GetLocalizedString("FACEBOOK_PROFILE_URL") })
+        @Html.ValidationMessageFor(model => model.FacebookProfile, "", new { @class = "text-danger" })
+        @Html.HiddenFor(i => i.FacebookProfileRequired)
+    </div>
+}
+
+@if (config.Seller.LinkedInProfile.Enabled)
+{
+    <div class="form-group">
+        @Html.LabelFor(i => i.LinkedInProfile)
+        @Html.TextBoxFor(i => i.LinkedInProfile, new { @class = "form-control", placeholder = Request.GetLocalizedString("LINKEDIN_PROFILE_URL") })
+        @Html.ValidationMessageFor(model => model.LinkedInProfile, "", new { @class = "text-danger" })
+        @Html.HiddenFor(i => i.LinkedInProfileRequired)
+    </div>
+}
+
+@if (config.Seller.InstagramProfile.Enabled)
+{
+    <div class="form-group">
+        @Html.LabelFor(i => i.InstagramProfile)
+        @Html.TextBoxFor(i => i.InstagramProfile, new { @class = "form-control", placeholder = Request.GetLocalizedString("INSTAGRAM_PROFILE_URL") })
+        @Html.ValidationMessageFor(model => model.InstagramProfile, "", new { @class = "text-danger" })
+        @Html.HiddenFor(i => i.InstagramProfileRequired)
+    </div>
+}
+
+@if (config.Seller.GooglePlusProfile.Enabled)
+{
+    <div class="form-group">
+        @Html.LabelFor(i => i.GooglePlusProfile)
+        @Html.TextBoxFor(i => i.GooglePlusProfile, new { @class = "form-control", placeholder = Request.GetLocalizedString("GOOGLEPLUS_PROFILE_URL") })
+        @Html.ValidationMessageFor(model => model.GooglePlusProfile, "", new { @class = "text-danger" })
+        @Html.HiddenFor(i => i.GooglePlusProfileRequired)
+    </div>
+}
+
+@if (config.Seller.WhatsAppNumber.Enabled)
+{
+    <div class="form-group">
+        @Html.LabelFor(i => i.WhatsAppNumber)
+        @Html.TextBoxFor(i => i.WhatsAppNumber, new { @class = "form-control wpp-phone-input", placeholder = Request.GetLocalizedString("PHONE_INPUT") })
+        @Html.ValidationMessageFor(model => model.WhatsAppNumber, "", new { @class = "text-danger" })
+        @Html.HiddenFor(i => i.WhatsAppNumberRequired)
+    </div>
+}
+
+@if (config.Seller.Address.Enabled || Model.AddressRequired)
+{
+    <hr />
+    @Html.Localized("ADDRESS_LABEL", "h4")
+
+    <div id="changeAddressContainer">
+        <div class="row">
+            <div class="col-xs-12">
+                <p><small><a href="javascript:void(0)" id="btnChangeAddress">Alterar endereço</a></small></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="addressAutocompleteContainer">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <input type="text" id="txtAddrAutocomplete" class="form-control" placeholder="@Request.GetLocalizedString("ADDRESS_INPUT")" />
+                    @Html.HiddenFor(i => i.AddressLat)
+                    @Html.HiddenFor(i => i.AddressLng)
+                    @Html.Localized("GOOGLE_ADDRESS_INPUT_HELP", "small", new { @class = "help-block text-muted" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="addressFieldsContainer">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9">
+                <div class="form-group">
+                    @if (isManagePage)
+                    {
+                        @:@Html.TextBoxFor(i => i.Address, new { @class = "form-control input-sm", placeholder = Request.GetLocalizedString("ADDRESS_INPUT"), disabled = "disabled" })
+                    }
+                    else
+                    {
+                        @:@Html.TextBoxFor(i => i.Address, new { @class = "form-control input-sm", placeholder = Request.GetLocalizedString("ADDRESS_INPUT") })
+                    }
+                    @Html.HiddenFor(i => i.Address)
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(i => i.AddressRequired)
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-3">
+                <div class="form-group">
+                    @if (isManagePage)
+                    {
+                        @:@Html.TextBoxFor(i => i.AddressNumber, new { @class = "form-control input-sm", placeholder = Request.GetLocalizedString("ADDRESS_NUMBER_INPUT"), disabled = "disabled" })
+                    }
+                    else
+                    {
+                        @:@Html.TextBoxFor(i => i.AddressNumber, new { @class = "form-control input-sm", placeholder = Request.GetLocalizedString("ADDRESS_NUMBER_INPUT") })
+                    }
+                    @Html.HiddenFor(i => i.AddressNumber)
+                    @Html.ValidationMessageFor(model => model.AddressNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    @Html.TextBoxFor(i => i.AddressAdditionalInfo, new { @class = "form-control input-sm", placeholder = Request.GetLocalizedString("ADDRESS_ADDITIONAL_INFO_INPUT") })
+                    @Html.ValidationMessageFor(model => model.AddressAdditionalInfo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    @if (isManagePage)
+                    {
+                        @:@Html.TextBoxFor(i => i.AddressNeighborhood, new { @class = "form-control input-sm", placeholder = Request.GetLocalizedString("NEIGHBORHOOD_INPUT"), disabled = "disabled" })
+                    }
+                    else
+                    {
+                        @:@Html.TextBoxFor(i => i.AddressNeighborhood, new { @class = "form-control input-sm", placeholder = Request.GetLocalizedString("NEIGHBORHOOD_INPUT") })
+                    }
+                    @Html.HiddenFor(i => i.AddressNeighborhood)
+                    @Html.ValidationMessageFor(model => model.AddressNeighborhood, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    @if (isManagePage)
+                    {
+                        @:@Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control js-zipcode input-sm", placeholder = Request.GetLocalizedString("ZIPCODE_INPUT"), disabled = "disabled" })
+                    }
+                    else
+                    {
+                        @:@Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control js-zipcode input-sm", placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") })
+                    }
+                    @Html.HiddenFor(i => i.AddressZipCode)
+                    @Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Partial("_CitiesSelect", Model)
+            @Html.HiddenFor(i => i.CityAndStateRequired)
+        </div>
+
+        <div id="addressMap" style="width: 100%; height: 200px; display: @(isManagePage ? "none" : "block")"></div>
+    </div>
+    @Html.HiddenFor(Model => Model.RequireModeration)
+}
+
+@if (ViewBag.AllFields || ViewBag.CompleteRegister)
+{
+    <hr />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PreferredTimeZoneId)
+                @Html.DropDownList("PreferredTimeZoneId", null, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,101 @@
+﻿@using Domain.QuoteRequests
+
+@model V2.Application.Modules.QuoteRequests.Model.QuoteDetailsForAdminDto
+
+<div class="box-header">
+    <h3 class="box-title">Detalhes</h3>
+</div>
+<div class="box-body">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <td class="text-bold">Data de Abertura</td>
+                    <td class="text-right">@Html.DisplayFor(model => model.Quote.CreatedAt)</td>
+                </tr>
+                <tr>
+                    <td class="text-bold">Status</td>
+                    <td class="text-right">
+                        @if (Model.Quote.IsClosed && Model.Quote.DealResult != null)
+                        {
+                            if (Model.Quote.DealResult == QuoteDealResult.Won)
+                            {
+                                <span class="label label-success">@Model.Quote.DealResult.Value.DisplayDescription()</span>
+                            }
+                            else if (Model.Quote.DealResult == QuoteDealResult.Lost)
+                            {
+                                <span class="label label-danger">@Model.Quote.DealResult.Value.DisplayDescription()</span>
+                            }
+                            else
+                            {
+                                <span class="label label-default">@Model.Quote.DealResult.Value.DisplayDescription()</span>
+                            }
+                        }
+                        else
+                        {
+                            <span class="label label-default">Aberto</span>
+                        }
+                    </td>
+                </tr>
+            
+                @if (Model.Quote.Category_Id.HasValue)
+                {
+                    <tr>
+                        <td class="text-bold">Categoria</td>
+                        <td class="text-right">
+                            @Html.DisplayFor(model => model.Quote.Category.Name) /
+                            @Html.DisplayFor(model => model.Quote.SubCategory.Name)
+                        </td>
+                    </tr>
+                }
+                
+                @if (Model.Quote.PortfolioItem_Id.HasValue)
+                {
+                    <tr>
+                        <td class="text-bold">@Request.GetLocalizedString("QUOTE_PORTFOLIO_ITEM_LABEL")</td>
+                        <td class="text-right">
+                            @Html.DisplayFor(model => model.Quote.PortfolioItem.Title)
+                        </td>
+                    </tr>
+                }
+                
+                @if (Model.Quote.Quantity > 0)
+                {
+                    <tr>
+                        <td class="text-bold">@Request.GetLocalizedString("QUOTE_QUANTITY_LABEL")</td>
+                        <td class="text-right">
+                            @Html.DisplayFor(model => model.Quote.Quantity)
+                        </td>
+                    </tr>
+                }
+
+                <tr>
+                    <td class="text-bold">Localidade</td>
+                    <td class="text-right">
+                        @if (Model.Address == null)
+                        {
+                            <span>-</span>
+                        }
+                        else
+                        {
+                            @:@Html.DisplayFor(model => model.Address.CityAndState)
+                        }
+                    </td>
+                </tr>
+                @if (MaaSConfig.Current.CustomFields.Quotes.Enabled && Model.CustomFieldDefinitions != null)
+                {
+                    foreach (var field in Model.CustomFieldDefinitions)
+                    {
+                        if (Model.CustomFields.ContainsKey(field.Key.ToString()))
+                        {
+                            <tr>
+                                <td class="text-bold">@field.Value.NameLocalized(Request.GetCurrentLang())</td>
+                                <td class="text-right">@Model.CustomFields[field.Key.ToString()]</td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

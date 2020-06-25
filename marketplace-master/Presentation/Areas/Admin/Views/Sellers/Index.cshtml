@@ -1,0 +1,176 @@
+﻿@using Presentation.Helpers
+@model Presentation.Areas.Admin.Views.Sellers.IndexModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("SELLERS_ACTIVE_TITLE");
+    var isModeration = "moderation".Equals(Request.QueryString["mode"], StringComparison.OrdinalIgnoreCase);
+    var isInative = "inactive".Equals(Request.QueryString["mode"], StringComparison.OrdinalIgnoreCase);
+
+    if (isModeration)
+    {
+        ViewBag.Title = Request.GetLocalizedString("SELLERS_PENDING_TITLE");
+    }
+    if (isInative)
+    {
+        ViewBag.Title = Request.GetLocalizedString("SELLERS_INACTIVE_TITLE");
+    }
+}
+
+<section class="content-header clearfix">
+    <h1><i class="fa fa-user" aria-hidden="true"></i> @ViewBag.Title</h1>
+    @if (Model.ShowGlobalFees)
+    {
+        <h4>
+            @Html.Localized("ADMIN_GLOBAL_FEES"):
+            @Model.Config.Payment.Common.GlobalStartupPercentageFee% +
+            @Model.Config.DefaultCurrency @Model.Config.Payment.Common.GlobalStartupAmountFee |
+            Chargeback: @(Model.Config.Payment.Common.GlobalIsLiable ? "Compartilhado" : "Apenas Marketplace")
+        </h4>
+    }
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-body">
+            <div class="form-group">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Sellers")"><i class="fa fa-check"></i> @Request.GetLocalizedString("SELLERS_LIST_ACTIVE_LINK")</a>
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Sellers", new { mode = "inactive" })"><i class="fa fa-ban"></i> @Request.GetLocalizedString("SELLERS_LIST_INACTIVE_LINK")</a>
+                    @if (Model.Config.Seller.Moderation.Enabled && !"true".Equals(Request.QueryString["onlypending"], StringComparison.OrdinalIgnoreCase))
+                    {
+                        <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Sellers", new { mode = "moderation" })"><i class="fa fa-exclamation-circle"></i> @Request.GetLocalizedString("SELLERS_LIST_PENDING_LINK")</a>
+                    }
+                </div>
+                @if (Model.Config.BatchImport.Sellers.Enabled)
+                {
+                    <a class="btn btn-link" href="@Url.ActionLocalized("Import", "Sellers")">@Request.GetLocalizedString("IMPORT_SELLERS")</a>
+                }
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="sellerList">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Nome Comercial</th>
+                            <th>Email</th>
+                            <th>Local</th>
+                            @if (!isModeration)
+                            {
+                                if (Model.Config.Product.Enabled)
+                                {
+                                    <th data-sort="desc">Pedidos</th>
+                                    <th>Total dos Pedidos</th>
+                                }
+                                if (Model.Config.Quote.Enabled)
+                                {
+                                    <th>Orçamentos</th>
+                                }
+                                if (Model.Config.Subscription.Enabled)
+                                {
+                                    <th>Assinante</th>
+                                }
+                                if (Model.Config.Payment.Common.EnableCustomFeesByVendor)
+                                {
+                                    <th>Taxas</th>
+                                    <th>Chargeback</th>
+                                }
+                            }
+                            <th data-sort="desc">Cadastro</th>
+                            <th data-sort="desc">Data de Modificação</th>
+                            <th>Perfil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Sellers)
+                        {
+                            <tr>
+                                <td data-order="@Dt.Order(item.Name)">
+                                    <a href="@Url.ActionLocalized("Details", "Sellers", new { id = item.Id })">@item.Name</a>
+                                </td>
+                                <td data-order="@Dt.Order(item.AlternativeName)">@item.AlternativeName</td>
+                                <td data-order="@Dt.Order(item.Email)">@Html.DisplayFor(model => item.Email)</td>
+                                <td data-order="@Dt.Order(item.CityState)">@Html.DisplayFor(model => item.CityState)</td>
+                                @if (!isModeration)
+                                {
+                                    if (Model.Config.Product.Enabled)
+                                    {
+                                        <td data-order="@Dt.Order(item.OrdersCount)">@Html.DisplayFor(model => item.OrdersCount)</td>
+                                        <td data-order="@Dt.Order(item.OrdersTotalAmount)">@Html.DisplayFor(model => item.OrdersTotalAmount)</td>
+                                    }
+                                    if (Model.Config.Quote.Enabled)
+                                    {
+                                        <td data-order="@Dt.Order(item.QuotesCount)">@Html.DisplayFor(model => item.QuotesCount)</td>
+                                    }
+                                    if (Model.Config.Subscription.Enabled)
+                                    {
+                                        <td data-order="@Dt.Order(item.HasActiveSubscription)">
+                                            @if (item.HasActiveSubscription)
+                                            {
+                                                <span class="label label-success label-success-outline">sim</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-danger label-danger-outline">não</span>
+                                            }
+                                        </td>
+                                    }
+                                    if (Model.Config.Payment.Common.EnableCustomFeesByVendor)
+                                    {
+                                        <td data-order="@Dt.Order(item.CustomPaymentFeePercent)">
+                                            @if (item.EnableCustomFees)
+                                            {
+                                                <span>@item.CustomPaymentFeePercent%+@Model.Config.DefaultCurrency@item.CustomPaymentFeeAmount.RoundTo2Places()</span>
+                                            }
+                                            else
+                                            {
+                                                @Html.Localized("ADMIN_GLOBAL_FEES")
+                                            }
+                                        </td>
+                                        <td data-order="@Dt.Order(item.CustomIsLiable)">
+                                            <span>@(item.CustomIsLiable ? "Sim" : "Não")</span>
+                                        </td>
+                                    }
+                                }
+                                <td data-order="@Dt.Order(item.RegisteredAt)">@Html.DisplayFor(model => item.RegisteredAt)</td>
+                                @if (item.ModifiedAt != null)
+                                {
+                                    <td data-order="@Dt.Order(item.ModifiedAt)">@Html.DisplayFor(model => item.ModifiedAt)</td>
+                                }
+                                else
+                                {
+                                    <td>-</td>
+                                }
+                                <td data-order="@Dt.Order(item.IsCompleteSeller)">
+                                    @if (item.IsCompleteSeller)
+                                    {
+                                        <span class="label label-success label-success-outline">
+                                            completo
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-danger label-danger-outline" data-toggle="popover" title="Perfil incompleto" data-placement="left" data-html="true" data-profile="@item.CompleteProfile">
+                                            incompleto <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        var sortColumn = $("#sellerList th[data-sort]");
+        DataTableCustom.create("#sellerList", {
+            "order": [[sortColumn.index(), sortColumn.data("sort")]]
+        });
+    </script>
+    <script>
+        SellerIncompleteProfile.init()
+    </script>
+}

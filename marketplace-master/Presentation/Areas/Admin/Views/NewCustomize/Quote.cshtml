@@ -1,0 +1,305 @@
+﻿@model Presentation.Areas.Admin.Models.CustomizeQuoteRequestVM
+
+@{
+    ViewBag.Title = "Customizar formulário de orçamentos";
+}
+
+<section class="content-header"></section>
+
+<section class="content container-fluid">
+
+    @Html.Partial("_CustomizeMenu", 5)
+
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">Customizar formulário de pedido de orçamento</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                @using (Html.BeginForm("Quote", "NewCustomize", FormMethod.Post))
+                {
+                    <span>@Html.ValidationSummary(true, "", new { @class = "text-danger" })</span>
+
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <img class="img-bordered img-responsive" src="~/Areas/Admin/assets/img/customize/quote_request.png" />
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="row">
+
+                            <div>@Html.HiddenFor(Model => Model.Lang)</div>
+
+                            @*//City and State*@
+                            <div>
+                                <div class="col-xs-12">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_QUOTE_CITYANDSTATE", "h4")
+                                </div>
+                                <div class="col-xs-5 form-group">
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.CityAndState.Status, CustomizeFieldVM.FieldStatus.DISABLED)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_DISABLED")
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.CityAndState.Status, CustomizeFieldVM.FieldStatus.ENABLED_OPTIONAL)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED")
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.CityAndState.Status, CustomizeFieldVM.FieldStatus.ENABLED_MANDATORY)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED_MANDATORY")
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(model => model.CityAndState.IsPublic)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_IS_PUBLIC")
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7 form-group">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_FIELD_TITLE", "label")
+                                    @Html.ValidationMessageFor(Model => Model.CityAndState.Title, "", new { @class = "text-danger" })
+                                    @Html.TextBoxFor(Model => Model.CityAndState.Title, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            @*//Address*@
+                            <div>
+                                <div class="col-xs-12">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_QUOTE_ADDRESS", "h4")
+                                </div>
+                                <div class="col-xs-5 form-group">
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.Address.Status, CustomizeFieldVM.FieldStatus.DISABLED)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_DISABLED")
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.Address.Status, CustomizeFieldVM.FieldStatus.ENABLED_OPTIONAL)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED")
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.Address.Status, CustomizeFieldVM.FieldStatus.ENABLED_MANDATORY)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED_MANDATORY")
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(model => model.Address.IsPublic)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_IS_PUBLIC")
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7 form-group">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_FIELD_TITLE", "label")
+                                    @Html.ValidationMessageFor(Model => Model.Address.Title, "", new { @class = "text-danger" })
+                                    @Html.TextBoxFor(Model => Model.Address.Title, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            @*//Phone*@
+                            <div>
+                                <div class="col-xs-12">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_QUOTE_PHONE", "h4")
+                                </div>
+                                <div class="col-xs-5 form-group">
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.Phone.Status, CustomizeFieldVM.FieldStatus.DISABLED)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_DISABLED")
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.Phone.Status, CustomizeFieldVM.FieldStatus.ENABLED_OPTIONAL)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED")
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.Phone.Status, CustomizeFieldVM.FieldStatus.ENABLED_MANDATORY)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED_MANDATORY")
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(model => model.Phone.IsPublic)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_IS_PUBLIC")
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7 form-group">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_FIELD_TITLE", "label")
+                                    @Html.ValidationMessageFor(Model => Model.Phone.Title, "", new { @class = "text-danger" })
+                                    @Html.TextBoxFor(Model => Model.Phone.Title, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            @*//Date*@
+                            <div>
+                                <div class="col-xs-12">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_QUOTE_DATE", "h4")
+                                </div>
+                                <div class="col-xs-5 form-group">
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.Date.Status, CustomizeFieldVM.FieldStatus.DISABLED)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_DISABLED")
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.Date.Status, CustomizeFieldVM.FieldStatus.ENABLED_OPTIONAL)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED")
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.Date.Status, CustomizeFieldVM.FieldStatus.ENABLED_MANDATORY)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED_MANDATORY")
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(model => model.Date.IsPublic)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_IS_PUBLIC")
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7 form-group">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_FIELD_TITLE", "label")
+                                    @Html.ValidationMessageFor(Model => Model.Date.Title, "", new { @class = "text-danger" })
+                                    @Html.TextBoxFor(Model => Model.Date.Title, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            @*//Preference*@
+                            <div>
+                                <div class="col-xs-12">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_QUOTE_PREFERENCE", "h4")
+                                </div>
+                                <div class="col-xs-5 form-group">
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.Preference.Status, CustomizeFieldVM.FieldStatus.DISABLED)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_DISABLED")
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.Preference.Status, CustomizeFieldVM.FieldStatus.ENABLED_OPTIONAL)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED")
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.Preference.Status, CustomizeFieldVM.FieldStatus.ENABLED_MANDATORY)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED_MANDATORY")
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(model => model.Preference.IsPublic)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_IS_PUBLIC")
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7 form-group">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_FIELD_TITLE", "label")
+                                    @Html.ValidationMessageFor(Model => Model.Preference.Title, "", new { @class = "text-danger" })
+                                    @Html.TextBoxFor(Model => Model.Preference.Title, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            @*//QuoteMax*@
+                            <div>
+                                <div class="col-xs-12">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_QUOTE_MAX", "h4")
+                                </div>
+                                <div class="col-xs-5 form-group">
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.QuoteMax.Status, CustomizeFieldVM.FieldStatus.DISABLED)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_DISABLED")
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.QuoteMax.Status, CustomizeFieldVM.FieldStatus.ENABLED_OPTIONAL)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED")
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(Model => Model.QuoteMax.Status, CustomizeFieldVM.FieldStatus.ENABLED_MANDATORY)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED_MANDATORY")
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(model => model.QuoteMax.IsPublic)
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_IS_PUBLIC")
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7 form-group">
+                                    @Html.Localized("ADMIN_CUSTOMIZE_FIELD_TITLE", "label")
+                                    @Html.ValidationMessageFor(Model => Model.QuoteMax.Title, "", new { @class = "text-danger" })
+                                    @Html.TextBoxFor(Model => Model.QuoteMax.Title, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SAVE_BUTTON")</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+     @if (MaaSConfig.Current.CustomFields.Quotes.Enabled)
+    {
+        <div class="panel panel-info center-block" style="max-width: 400px;">
+            <div class="panel-heading">
+                <h4 class="panel-title">@Request.GetLocalizedString("CUSTOM_FIELD_TITLE_QUOTE")</h4>
+            </div>
+            <div class="panel-body">
+                <div class="text-center">
+                    <a class="btn btn-primary" href="@Url.ActionLocalized("CustomFields","NewCustomize", new { type = "quote" })">@Request.GetLocalizedString("CUSTOM_FIELD_TITLE_QUOTE")  <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    }
+</section>

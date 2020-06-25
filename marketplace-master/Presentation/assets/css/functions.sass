@@ -1,0 +1,30 @@
+﻿@import "variables.sass"
+@import "mixins.sass"
+
+/* Variable text color */
+@function set_text_color($color)
+  @if (lightness($color) > 60)
+    @return darken($color, 60%)
+  @else
+    @return $white_color
+
+/* Backgrounds Loop */
+$bgs: 1 $bg_1 set-text-color($bg_1), 2 $bg_2  set-text-color($bg_2), 3 $bg_3  set-text-color($bg_3), image-1 $bg_image_1 $bg_image_1_color, image-2 $bg_image_2 $bg_image_3_color, image-3 $bg_image_3 $bg_image_3_color, default $default_color set_text_color($default_color), black $black_color set_text_color($black_color), gray $gray_color set_text_color($gray_color), white $white_color set_text_color($white_color), success $success_color set_text_color($success_color), info $info_color set_text_color($info_color), warning $warning_color set_text_color($warning_color), danger $danger_color set_text_color($danger_color), primary $primary_color set_text_color($primary_color), secondary $secondary_color set_text_color($secondary_color)
+@each $bg in $bgs
+  .bg-#{nth($bg, 1)}
+    background: nth($bg, 2)
+    color: nth($bg, 3)
+
+/* Colors loop */
+$colors: default $default_color, black $black_color, gray $gray_color, white $white_color, success $success_color, info $info_color, warning $warning_color, danger $danger_color, primary $primary_color, secondary $secondary_color
+@each $color in $colors
+  .color-#{nth($color, 1)}
+    color: nth($color, 2)
+
+//Social networks
+$icons: social-facebook social-instagram social-youtube social-twitter social-linkedin social-skype social-soundcloud social-blogger social-steam social-behance social-flickr social-twitch
+=social-images
+  @each $social in $icons
+    .icone.#{$social}
+      background: url("../images/#{$social}.png") no-repeat
++social-images

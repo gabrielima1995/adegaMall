@@ -1,0 +1,83 @@
+﻿@using Presentation.Helpers
+@using Presentation.Areas.Admin.Views.Ratings
+@model IndexViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+    var config = MaaSConfig.Current;
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-star"></i>
+        @Model.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-body">
+            <div class="form-group">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Ratings", new { area = "admin" })">
+                        <i class="fa fa-check"></i>
+                        Avaliações Visíveis
+                    </a>
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Ratings", new { area = "admin", mode = "hidden" })">
+                        <i class="fa fa-ban"></i>
+                        Ocultas (@Model.HiddenRatings.Count)
+                    </a>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Avaliado</th>
+                            <th>Avaliador</th>
+                            <th>Nota</th>
+                            <th>Comentário</th>
+                            <th>Data</th>
+                            <th>Pedido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.RatingsForCurrentMode)
+                        {
+                            <tr>
+                                <td><a href="@Url.ActionLocalized("Details", "Ratings", new { id = item.Id.ToString() })">@item.Id.Substring()</a></td>
+                                <td><a href="~/admin/@(item.TargetRole.ToLower() + "s")/details/@item.RatingTargetId">@item.TargetName</a> (@item.LocalizedRole(item.TargetRole))</td>
+                                <td><a href="~/admin/@(item.SenderRole.ToLower() + "s")/details/@item.RatingSenderId">@item.SenderName</a></td>
+                                <td data-order="@Dt.Order(item.Rating.GetValueOrDefault())" class="text-center">
+                                    <span>
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (item.Rating.Value >= i)
+                                            {
+                                                <i class="fa fa-star rating-star" style="color:#0094ff"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-star-o rating-star" style="color:#0094ff"></i>
+                                            }
+                                        }
+                                    </span>
+                                </td>
+                                <td>@(item.Comment == null ? "-" : item.Comment.Truncate(60))</td>
+                                <td>@item.CreatedAt</td>
+                                <td>@((item.OrderId ?? item.QuoteId).Value.Substring())</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>DataTableCustom.create("table", { order: [[5, "desc"]] })</script>
+}

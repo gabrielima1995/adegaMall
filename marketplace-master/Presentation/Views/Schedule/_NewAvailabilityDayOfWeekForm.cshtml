@@ -1,0 +1,34 @@
+﻿@using Domain.StoreModule.Entities
+@model Presentation.Models.ScheduleViewModels.NewAvailabilityDayOfWeekVM
+
+@using (Html.BeginCollectionItem("DaysOfWeek", ViewData.ModelState.IsValid))
+{
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-12 col-lg-4 form-group">
+            @Html.Localized(Model.DayOfWeekLabel, "label", new { style = "padding-top: 5px" })
+            @Html.HiddenFor(model => model.DayOfWeek)
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4 form-group">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.StartTime1, new { @class = "form-control js-time", placeholder = "__:__", style = "margin-left: 1px;" })
+                <span class="input-group-addon" style="padding: 6px">
+                    -
+                </span>
+                @Html.TextBoxFor(model => model.EndTime1, new { @class = "form-control js-time", placeholder = "__:__", style = "margin-left: -1px;" })
+            </div>
+            @Html.ValidationMessageFor(model => model.StartTime1, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.EndTime1, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4 form-group">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.StartTime2, new { @class = "form-control js-time", placeholder = "__:__", style = "margin-left: 1px;" })
+                <span class="input-group-addon" style="padding: 6px">
+                    -
+                </span>
+                @Html.TextBoxFor(model => model.EndTime2, new { @class = "form-control js-time", placeholder = "__:__", style = "margin-left: -1px;" })
+            </div>
+            @Html.ValidationMessageFor(model => model.StartTime2, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.EndTime2, "", new { @class = "text-danger" })
+        </div>
+    </div>
+}

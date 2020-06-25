@@ -1,0 +1,108 @@
+﻿@using Presentation.Helpers
+@model Presentation.Models.FinanceViewModels.TransferJournalReportVM
+
+@{
+    ViewBag.Title = "Movimentações Financeiras";
+    var config = MaaSConfig.Current;
+    var periodFilter = string.IsNullOrEmpty(Request["transfer_journal_period"]) ? "all" : Request["transfer_journal_period"];
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-exchange-alt" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-body">
+
+            @using (Html.BeginForm("TransferJournal", "Orders", FormMethod.Get, new { id = "frmTransferJournalFilter" }))
+            {
+                <div class="form-group">
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonX("period", "all", periodFilter)
+                            Mostrar todos os registros
+                        </label>
+                    </div>
+
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonX("period", "seven_days", periodFilter)
+                            Dos últimos 7 dias para frente
+                        </label>
+                    </div>
+
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonX("period", "thirty_days", periodFilter)
+                            Dos últimos 30 dias para frente
+                        </label>
+                    </div>
+
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonX("period", "current_month", periodFilter)
+                            Somente os do mês atual
+                        </label>
+                    </div>
+                </div>
+            }
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Vendedor</th>
+                            <th>Pedido</th>
+                            <th>Data Pedido</th>
+                            <th>Vl Pedido</th>
+                            <th>% Comissão</th>
+                            <th>Parcela</th>
+                            <th>Vl Parcela</th>
+                            <th>Vl Comissão</th>
+                            <th>Vl Transferência</th>
+                            <th>Dt Previsto</th>
+                            <th>Dt Realizado</th>
+                            <th>Dt Cancelado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr class="@(item.Cancelled ? "danger" : item.Completed ? "success" : "")">
+                                <td data-order="@Dt.Order(item.SellerName)">@Html.DisplayFor(model => item.SellerName)</td>
+                                <td data-order="@Dt.Order(item.ShortOrderId)">
+                                    <a href="@Url.ActionLocalized("Details", "Orders", new { id = item.OrderId })">@item.ShortOrderId</a>
+                                </td>
+                                <td data-order="@Dt.Order(item.OrderDate)">@Html.DisplayFor(model => item.OrderDate)</td>
+                                <td data-order="@Dt.Order(item.OrderTotal)">@item.OrderTotal.DisplayDecimal(2)</td>
+                                <td data-order="@Dt.Order(item.CommissionPct)">@(item.CommissionPct * 100)</td>
+                                <td data-order="@Dt.Order(item.InstallmentNumber)">@item.InstallmentStr</td>
+                                <td data-order="@Dt.Order(item.InstallmentAmount)">@item.InstallmentAmount.DisplayDecimal(2)</td>
+                                <td data-order="@Dt.Order(item.InstallmentCommissionAmount)">@item.InstallmentCommissionAmount.DisplayDecimal(2)</td>
+                                <td data-order="@Dt.Order(item.TransferAmount)">@item.TransferAmount.DisplayDecimal(2)</td>
+                                <td data-order="@Dt.Order(item.DueDate)">@Html.DisplayFor(model => item.DueDate)</td>
+                                <td data-order="@Dt.Order(item.CompletedDate)">@Html.DisplayFor(model => item.CompletedDate)</td>
+                                <td data-order="@Dt.Order(item.CancelledDate)">@Html.DisplayFor(model => item.CancelledDate)</td>
+                            </tr>
+                            }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        DataTableCustom.create('table', {
+            'order': [[9, 'asc']]
+        });
+
+        TransferJournal.init();
+    </script>
+}

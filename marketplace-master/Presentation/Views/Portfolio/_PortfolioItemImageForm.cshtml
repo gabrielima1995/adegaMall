@@ -1,0 +1,18 @@
+﻿@using Application.Modules.Portfolio
+@model Domain.Modules.Portfolio.PortfolioItemImage
+
+@using (Html.BeginCollectionItem("Images", ViewData.ModelState.IsValid))
+{
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="imagem">
+            @Html.HiddenFor(model => model.Url)
+            @Html.HiddenFor(model => model.Position)
+
+            <img src="@Model.GetUrl()" alt="">
+
+            <a href="#" class="action trash">
+                <span class="fa fa-trash"></span>
+            </a>
+        </div>
+    </div>
+}

@@ -1,0 +1,99 @@
+﻿@{
+    var metaTags = new Dictionary<string, string>();
+    var config = MaaSConfig.Current;
+
+    metaTags.Add("og:type", "website");
+
+    if (ViewBag.DoNotIndex != null && ViewBag.DoNotIndex == true)
+    {
+        metaTags.Add("robots", "noindex");
+    }
+
+    if (ViewBag.Title == null)
+    {
+        ViewBag.Title = config.ApplicationName;
+    }
+
+    metaTags.Add("title", ViewBag.Title);
+    metaTags.Add("og:title", ViewBag.Title);
+
+    if (ViewBag.Description == null)
+    {
+        ViewBag.Description = Request.GetLocalizedString("ABOUT_TEXT");
+    }
+
+    metaTags.Add("description", ViewBag.Description);
+    metaTags.Add("og:description", ViewBag.Description);
+
+    if (ViewBag.Canonical == null)
+    {
+        ViewBag.Canonical = Request.Url.ToString();
+    }
+
+    metaTags.Add("og:url", ViewBag.Canonical);
+
+    if (ViewBag.Image == null)
+    {
+        ViewBag.Image = config.Layout.Images.FacebookSharing ?? config.Layout.Images.Background1;
+    }
+
+    if (ViewBag.Image.StartsWith("/assets"))
+    {
+        ViewBag.Image = Request.Url.Scheme + "://" + Request.Url.Authority + ViewBag.Image;
+    }
+
+    System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"\?(w|width)=\S+");
+    if (regex.IsMatch(ViewBag.Image))
+    {
+        ViewBag.Image = ViewBag.Image.Replace(regex.Match(ViewBag.Image).Value, "?w=600&h=315");
+        metaTags.Add("og:image:width", "600");
+        metaTags.Add("og:image:height", "315");
+    }
+
+    metaTags.Add("og:image", ViewBag.Image);
+
+    if (ViewBag.Image != null && ViewBag.Image.ToString().StartsWith("https", StringComparison.OrdinalIgnoreCase))
+    {
+        metaTags.Add("og:image:secure_url", ViewBag.Image);
+    }
+
+    if (!string.IsNullOrWhiteSpace(config.Facebook.AppId))
+    {
+        metaTags.Add("fb:app_id", config.Facebook.AppId);
+    }
+
+    metaTags.Add("og:site_name", config.ApplicationName);
+    metaTags.Add("og:locale", Request.GetCurrentLang().Replace("-", "_"));
+
+    metaTags.Add("twitter:card", "summary_large_image");
+    metaTags.Add("twitter:title", ViewBag.Title);
+    metaTags.Add("twitter:description", ViewBag.Description);
+
+
+    if (regex.IsMatch(ViewBag.Image))
+    {
+        ViewBag.Image = ViewBag.Image.Replace(regex.Match(ViewBag.Image).Value, "?w=440&h=220");
+    }
+
+    metaTags.Add("twitter:image", ViewBag.Image);
+
+    if (ViewBag.TwitterTags != null)
+    {
+        foreach (var tag in ViewBag.TwitterTags)
+        {
+            metaTags.Add(tag.Key, tag.Value);
+        }
+    }
+
+    foreach (var item in metaTags)
+    {
+        if (item.Key.StartsWith("og:") || item.Key.StartsWith("fb:"))
+        {
+            <meta property="@item.Key" content="@item.Value" />
+        }
+        else
+        {
+            <meta name="@item.Key" content="@item.Value" />
+        }
+    }
+}

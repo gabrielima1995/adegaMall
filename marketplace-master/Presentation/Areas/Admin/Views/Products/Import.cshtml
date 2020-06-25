@@ -1,0 +1,87 @@
+﻿@model Presentation.Areas.Admin.Views.Products.ImportModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("IMPORT_PRODUCTS");
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-fw fa-cloud-upload"></i>
+        @ViewBag.Title
+    </h1>
+
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Dashboard")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">@Request.GetLocalizedString("IMPORT_PRODUCTS")</li>
+    </ol>
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-body">
+            @Html.Localized("PRODUCTS_IMPORT_TEXT", "p")
+            <ul>
+                <li>@Html.Localized("BATCH_IMPORT_SELLERS_MUST_EXIST_NOTICE")</li>
+                <li>@Html.Localized("BATCH_IMPORT_CATEGORIES_NOTICE")</li>
+            </ul>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form">
+                        <div class="form-group">
+                            @Html.DropDownList("SourceTypeSelect", Model.SourceTypes, Request.GetLocalizedString("PRODUCTS_IMPORT_SELECT_FORMAT"), new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="steps" style="display: none">
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4><i class="fa fa-download"></i> @Request.GetLocalizedString("PRODUCTS_IMPORT_STEP_1")</h4>
+                        @Html.Localized("PRODUCTS_IMPORT_GENERATE_TEMPLATE", "h5")
+                        @Html.Localized("PRODUCTS_IMPORT_GENERATE_TEMPLATE_TEXT", "p")
+
+                        <a href="javascript:void(0)" id="btnDownloadTemplate" target="_blank" class="btn btn-default" data-baseurl="@Url.ActionLocalized("DownloadImportTemplate", "Products")">
+                            @Request.GetLocalizedString("PRODUCTS_IMPORT_GENERATE_TEMPLATE_BUTTON")
+                        </a>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h4><i class="fa fa-cloud-upload"></i> @Request.GetLocalizedString("PRODUCTS_IMPORT_STEP_2")</h4>
+                        @Html.Localized("PRODUCTS_IMPORT_UPLOAD_SOURCE", "h5")
+                        @Html.Localized("PRODUCTS_IMPORT_UPLOAD_SOURCE_TEXT", "p")
+                        @Html.Partial("_UploadImportFile")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title"><i class="fa fa-fw fa-image"></i> Importar imagens</h3>
+        </div>
+        <div class="box-body">
+            <p>Envie um arquivo .zip com imagens para os produtos já importados.</p>
+            <ul>
+                <li>Os nomes dos arquivos devem estar no formato <span class="label label-default">[id_personalizado]-[diferenciador].jpg</span></li>
+                <li>Por exemplo, se você tem um produto com id personalizado <span class="label label-default">123</span> e quer enviar 3 imagens, os nomes dos arquivos seriam <span class="label label-default">123-a.jpg</span>, <span class="label label-default">123-b.jpg</span> e <span class="label label-default">123-c.jpg</span></li>
+                <li>A plataforma aceita imagens dos tipos <span class="label label-default">jpg</span>, <span class="label label-default">png</span> e <span class="label label-default">gif</span></li>
+                <li>Os arquivos de imagem devem estar na raiz do arquivo zip, ou seja, não procuraremos por imagens dentro de subpastas no zip</li>
+                <li>@Html.Localized("BATCH_IMPORT_CATEGORIES_NOTICE")</li>
+            </ul>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.Partial("_UploadImportImageFile")
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script>ProductsImport.init()</script>
+    <script>ProductImagesImport.init()</script>
+}

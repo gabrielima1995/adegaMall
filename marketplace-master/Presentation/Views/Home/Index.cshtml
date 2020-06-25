@@ -1,0 +1,101 @@
+﻿@model Application.Home.HomeViewModel
+@{
+    ViewBag.Title = Request.GetLocalizedString("HOME_TITLE");
+    ViewBag.IsHome = true;
+    var heroEnabled = MaaSConfig.Current.HeroUnit.Enabled;
+    var bannerEnabled = MaaSConfig.Current.Banners.Enabled;
+}
+
+@section styles
+{
+    @Styles.Render("~/Content/datetime-picker")
+    @if (bannerEnabled)
+    {
+        @:@Styles.Render("~/Content/banner-fix.css")
+    }
+}
+
+@if (!heroEnabled)
+{
+    @Html.Action("Header", "Common", true)
+}
+
+@if (heroEnabled && !bannerEnabled)
+{
+    <div class="hero-bg">
+        @Html.Action("Header", "Common", true)
+        @Html.Partial("_HomeHero")
+    </div>
+}
+
+@if (!heroEnabled && bannerEnabled)
+{
+    @Html.Partial("_Banners")
+}
+
+@if (heroEnabled && bannerEnabled)
+{
+    <div class="hero-bg">
+        @Html.Action("Header", "Common", true)
+        @Html.Partial("_Banners")
+        @{ViewData.Add("noSlogans", true);}
+        @Html.Partial("_HomeHero", ViewData)
+    </div>
+}
+
+@Html.Partial("_HomeNearbyProducts")
+
+@Html.Partial("_EcommerceHome_Search")
+
+@Html.Partial("_EcommerceHome_Products")
+
+@Html.Partial("_HomeHowItWorks")
+
+@Html.Partial("_HomeBestSellers", Model.BestSellers, ViewData)
+
+@Html.Partial("_HomeCallSellers")
+
+@Html.Partial("_HomeMiscArea")
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/scripts/datetime-picker")
+
+    @Html.Partial("_SubCategoriesScript")
+    @Html.Partial("_CitiesScript")
+    @Html.Partial("_ProductWishScript")
+
+    @if (MaaSConfig.Current.Search.Enabled)
+    {
+        if (MaaSConfig.Current.Search.SearchFields.Location)
+        {
+            @Html.Partial("_GoogleMapsScript")
+
+            if (MaaSConfig.Current.Search.BrowserGeolocation)
+            {
+                <script>GoogleMapsAutocomplete.init()</script>
+            }
+            else
+            {
+                <script>GoogleMapsAutocomplete.initNoLocation()</script>
+            }
+        }
+
+        <script>
+            $(document).ready(function () {
+                Globalize.loadCldr.then(function () {
+                    ProductSearch.init();
+                });
+            });
+        </script>
+    }
+
+    @if (MaaSConfig.Current.Product.Enabled && MaaSConfig.Current.NearbyProducts.Enabled)
+    {
+        <script>
+            $(document).ready(function () {
+                NearbyProducts.init();
+            });
+        </script>
+    }
+}

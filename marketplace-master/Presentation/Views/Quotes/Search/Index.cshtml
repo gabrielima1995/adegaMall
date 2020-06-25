@@ -1,0 +1,120 @@
+﻿@using Microsoft.AspNet.Identity
+@model List<V2.Application.Modules.Search.Quotes.QuoteSearchResultItem>
+
+@{
+    var config = MaaSConfig.Current;
+
+    int totalCount = (int)ViewBag.TotalCount;
+    int currentPage = (int)ViewBag.CurrentPage;
+    int pages = (int)Math.Ceiling(totalCount / (float)config.Search.QuotesSearch.ResultsPerPage);
+
+    var hideDetails = !User.Identity.GetLoginProfile().IsSellerOrSellerAssistant() || MaaSConfig.Current.Quote.LeadSales.Enabled;
+
+    var hideTitle = hideDetails && config.Search.QuotesSearch.HiddenFields.Title;
+    var hideAvatar = hideDetails && config.Search.QuotesSearch.HiddenFields.Avatar;
+    var hideDescription = hideDetails && config.Search.QuotesSearch.HiddenFields.Description;
+    var hidePhone = hideDetails && config.Search.QuotesSearch.HiddenFields.Phone;
+    var hideAddress = hideDetails && config.Search.QuotesSearch.HiddenFields.Address;
+    var hideEmail = hideDetails && config.Search.QuotesSearch.HiddenFields.Email;
+    var hideAmount = hideDetails && config.Search.QuotesSearch.HiddenFields.Amount;
+    var hideName = hideDetails && config.Search.QuotesSearch.HiddenFields.Name;
+    var hideCategories = hideDetails && config.Search.QuotesSearch.HiddenFields.Categories;
+    var hideDate = hideDetails && config.Search.QuotesSearch.HiddenFields.Date;
+
+    int maxPrice = (int)MaaSConfig.Current.Search.QuotesSearch.MaxPrice;
+    int orderingType = 1;
+    if (!string.IsNullOrWhiteSpace(Request.QueryString["ordering"]))
+    {
+        int.TryParse(Request.QueryString["ordering"], out orderingType);
+    }
+
+    string replacement = Request.GetLocalizedString("QUOTE_SEARCH_LOGIN_REPLACE");
+
+    ViewBag.Title = "Buscar orçamentos";
+}
+<div class="container-fluid">
+    <div class="row row-equal">
+        <div class="col-xs-12 col-sm-2 search-sidebar">
+            @Html.Partial("Search/_FiltersForm", new Presentation.Models.QuoteViewModels.QuoteSearchVM() { Categories = ViewBag.Categories, SubCategories = ViewBag.SubCategories })
+        </div>
+        <div class="col-xs-12 col-sm-10 search-body">
+            <div class="row">
+                <div class="col-xs-12">
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-9">
+                            @using (Html.BeginForm("Search", "Quotes", FormMethod.Get))
+                            {
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="input-group">
+                                                @Html.TextBox("query", "", new { @class = "form-control", placeholder = "Digite os termos da busca" })
+                                                <span class="input-group-btn">
+                                                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Pesquisar</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="form-group">
+                                @*@Html.DropDownList("ordering", new SelectList(Enum.GetNames(typeof(V2.Application.Modules.Search.Quotes.QuoteSort))).ToList(), "Ordenar por", new { @class = "form-control" })*@
+                                <select class="form-control" id="ordering-input" name="ordering-input">
+                                    <option value="" disabled>Ordenar por</option>
+                                    <option value="0" @(orderingType == 0 ? "selected" : "")>Mais Relevante</option>
+                                    <option value="1" @(orderingType == 1 ? "selected" : "")>Mais Recente</option>
+                                    <option value="2" @(orderingType == 2 ? "selected" : "")>Mais Antigo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @foreach (var quote in Model)
+                {
+                    Html.RenderPartial("Search/_SearchResultItem", quote, ViewData);
+                }
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <ul class="pagination">
+                        <li class="@(currentPage <= 1 ? "disabled" : "")"><a href="@(currentPage <= 1 ? "#" : Presentation.Helpers.QueryStringHelper.AddOrUpdateValue(Request.Url, "page", (currentPage-1).ToString()))" class="js-page" data-page-num="@(currentPage-1)"><i class="fas fa-chevron-left"></i></a></li>
+                        @for (int i = Math.Max(1, currentPage - 5); i <= Math.Min(pages, currentPage + 5); i++)
+                        {
+                            <li class="@((currentPage == i) ? "active" : "")"><a href="@Presentation.Helpers.QueryStringHelper.AddOrUpdateValue(Request.Url, "page", i.ToString())" class="js-page" data-page-num="@i">@i</a></li>
+                        }
+                        <li class="@(currentPage >= pages ? "disabled" : "")"><a href="@(currentPage >= pages ? "#" : @Presentation.Helpers.QueryStringHelper.AddOrUpdateValue(Request.Url, "page", (currentPage+1).ToString()))" class="js-page" data-page-num="@(currentPage+1)"><i class="fas fa-chevron-right"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Html.Partial("_GoogleMapsScript")
+    <script>GoogleMapsAutocomplete.initNoLocation()</script>
+    <script>SubCategoriesScript.init()</script>
+
+    <script>
+        $('.js-apply-filters').on('click', function (e) {
+            $('#page').val(1);
+        });
+
+        $('#price-slider').slider({
+            ticks: [0, @maxPrice],
+            ticks_labels: ['R$ 0', 'R$ @maxPrice'],
+            ticks_snap_bounds: 5
+        });
+
+        $('#ordering-input').on('change', function (e) {
+            $('#ordering').val($(this).val());
+            $('.js-apply-filters').trigger("click");
+        });
+
+    </script>
+}

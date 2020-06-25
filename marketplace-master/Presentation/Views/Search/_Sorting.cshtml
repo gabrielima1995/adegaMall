@@ -1,0 +1,19 @@
+﻿@model SearchResultVM
+
+@using (Html.BeginForm(Model.Request.ActionUrl, "Search", FormMethod.Get, new { id = "frmSorting" }))
+{
+    foreach (var key in Request.QueryString.AllKeys)
+    {
+        if (string.IsNullOrWhiteSpace(key))
+        {
+            continue;
+        }
+
+        if (!key.Equals("sort", StringComparison.OrdinalIgnoreCase) && Request.QueryString[key] != null)
+        {
+            <input type="hidden" name="@key" value="@Request.QueryString[key]" />
+        }
+    }
+
+    @Html.DropDownList("sort", Model.SortOptions, null, new { @class = "form-control", id = "ddlSort" })
+}

@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = Request.GetLocalizedString("CART_TITLE");
+    var config = MaaSConfig.Current;
+}
+
+<!-- CONTENTS -->
+<div class="js-cart-loading">
+    <center class="m-t-lg m-b-lg">
+        <p>
+            <i class="fas fa-spinner fa-spin" style="font-size: 80px;"></i>
+            <h4>@Html.Localized(config.Product.HasPhysicalShipping ? "CART_LOADING_SHIPPING_LABEL" : "CART_LOADING_LABEL")</h4>
+        </p>
+    </center>
+</div>
+
+@section scripts{
+    <script>
+        (function ($) {
+            var waitTimeForMessage = 6 * 1000;
+            var waitTimeForError = 12 * 1000;
+            var isDone = false;
+
+            $.ajax({
+                type: 'GET',
+                url: '@Url.ActionLocalized("IndexCartWithViewModel", "Cart")'
+            }).done(function (response) {
+                isDone = true;
+                $(".js-cart-loading").html(response);
+            });
+
+            var timeoutMessagesContainer = $(".js-cart-loading center");
+            window.setTimeout(function () {
+                if (!isDone) {
+                    timeoutMessagesContainer.append($("<p>").text("@Html.LocalizedString("CART_LOADING_WAIT_MSG_1")"));
+                    window.setTimeout(function () {
+                        if (!isDone) {
+                            timeoutMessagesContainer.append($("<p>").text("@Html.LocalizedString("CART_LOADING_WAIT_MSG_2")"));
+                        }
+                    }, waitTimeForError);
+                }
+            }, waitTimeForMessage);
+
+        })(window.jQuery);
+    </script>
+    @if (config.Product.Order.ExtraInfoField.Enabled)
+    {
+        <script>
+            $(document.body).on("click", ".btn-cart-proceed-to-checkout", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $("#cartExtraInfo").submit();
+            });
+        </script>
+    }
+
+    <script>
+        (function ($) {
+            $(document.body).on('click', '.js-change-quantity', function () {
+                var $this = $(this);
+
+                var product = $this.parent().parent().data('id');
+                var quantity = $this.parent().find('input[name="Quantity"]').val();
+                var stockVariant = $this.parent().parent().find('input[name="StockVariant"]').val();
+                var productAvailabilityId = $this.parent().parent().find('input[name="ProductAvailabilityId"]').val();
+
+                $.redirect('@Url.ActionLocalized("ChangeQuantity", "Cart")', { id: product, quantity: quantity, stockVariant: stockVariant, productAvailabilityId: productAvailabilityId });
+            });
+
+            $(document.body).on('click', '.js-remove-item', function () {
+                var $this = $(this);
+
+                var product = $this.parent().parent().data('id');
+                var stockVariant = $this.parent().parent().find('input[name="StockVariant"]').val();
+                var productAvailabilityId = $this.parent().parent().find('input[name="ProductAvailabilityId"]').val();
+
+                $.redirect('@Url.ActionLocalized("RemoveItem", "Cart")', { id: product, stockVariant: stockVariant, productAvailabilityId: productAvailabilityId });
+            });
+
+            $(document.body).on('click', '.js-choose-shipping-method-button', function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+
+                $.redirect('@Url.ActionLocalized("ChooseShippingMethod", "Cart")', { method: $this.find('input').val() });
+
+                return false;
+            });
+
+            $(document.body).on('click', '.js-choose-shipping-address-button', function (e) {
+               e.preventDefault();
+
+               var $this = $(this);
+
+               $.redirect('@Url.ActionLocalized("ChooseShippingAddress", "Cart")', { id: $this.find('input').val() });
+
+               return false;
+           });
+        })(window.jQuery);
+    </script>
+
+    <script>
+        $('#modalShippingWarning').ready(function () {
+            var message = $('.modal-body').attr("data-modal-message");
+            if (message !== null && message !== "" && message !== undefined) {
+                $('#modalShippingWarning').modal('show');
+            }
+        });
+    </script>
+
+    <script>
+        $(document.body).ready(function () {
+            var chooseShippingAddressUrl = '@Url.ActionLocalized("ChooseShippingAddress", "Cart")';
+            var openNewShippingAddressModal = @(ViewBag.OpenNewShippingAddressModal ? "true" : "false");
+            CitiesScript.init('@Request.GetLocalizedString("CITY_AND_STATE_INPUT")');
+            CartShippingAddress.init(chooseShippingAddressUrl, openNewShippingAddressModal);
+        });
+    </script>
+
+}
+@Html.Partial("~/Views/Products/Cart/_ModalShippingWarning.cshtml")

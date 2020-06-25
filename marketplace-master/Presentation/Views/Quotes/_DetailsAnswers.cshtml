@@ -1,0 +1,31 @@
+﻿@model QuoteDetailsVM
+
+@{
+    var config = MaaSConfig.Current;
+    var userId = User.Identity.GetPersonId();
+
+    ViewData.Add("IsClosed", Model.IsClosed);
+    ViewData.Add("DealWon", Model.DealWon);
+    ViewData.Add("SellerUrl", Model.SellerUrl ?? "");
+
+    var isSeller = User.Identity.GetLoginProfile().IsSellerOrSellerAssistant();
+}
+
+@if (MaaSConfig.Current.Layout.TransactionWarrantyDisplay.ShowReassuringMessages)
+{
+    @Html.Partial("_TransactionWarrantyReassuranceMsg")
+}
+
+<h4>
+    <i class="fa fa-comments"></i>
+    @Html.Localized("ANSWERS_TITLE")
+</h4>
+
+<div class="panel panel-default">
+    <ul class="list-group" id="answersContainer">
+        @Html.Partial("_DetailsAnswersList", Model.Answers, ViewData)
+    </ul>
+    <div class="panel-body">
+        @Html.Partial("_DetailsAnswerForm", new QuoteAnswerVM(Model, isSeller, Model.DealWon), ViewData)
+    </div>
+</div>

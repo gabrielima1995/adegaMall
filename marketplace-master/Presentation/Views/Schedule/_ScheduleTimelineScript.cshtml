@@ -1,0 +1,124 @@
+﻿@{
+    var config = MaaSConfig.Current;
+}
+
+<script>
+    $(document).ready(function() {
+        var productId = $('#ProductId').val();
+        var lang = '@Request.GetCurrentLang()';
+
+        var calendarEl = document.getElementById('schedule-wrapper');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            schedulerLicenseKey: '@(config.Environment.FullCalendar.LicenseKey ?? string.Empty)',
+            plugins: ['resourceTimeline'],
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'resourceTimelineMonth,resourceTimelineWeek,resourceTimelineDay'
+            },
+            views: {
+                day: {
+                    titleFormat: {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        weekday: 'long'
+                    }
+                }
+            },
+            defaultView: 'resourceTimelineDay',
+            aspectRatio: 1.5,
+            navLinks: true,
+            editable: true,
+            eventLimit: true,
+            locale: lang,
+            businessHours: {
+                daysOfWeek: [1, 2, 3, 4, 5],
+                startTime: '08:00',
+                endTime: '18:00'
+            },
+            eventTimeFormat: { // like '14:30'
+                hour: '2-digit',
+                minute: '2-digit',
+                meridiem: false
+            },
+            displayEventEnd: true,
+            height: 'auto',
+            minTime: '@config.Product.BusinessModel.Rental.Seller.Schedule.Configuration.MinTime',
+            maxTime: '@config.Product.BusinessModel.Rental.Seller.Schedule.Configuration.MaxTime',
+            timeGridEventMinHeight: 32,
+            resourceLabelText: '@Request.GetLocalizedString("SCHEDULE_TIMELINE_RESOURCE_TITLE")',
+            resourceAreaWidth : '30%',
+            refetchResourcesOnNavigate : true,
+            resources: {
+                url: '@Url.Action("TimelineResources")',
+                extraParams: {
+                    productId: productId,
+                    lang: lang
+                }
+            },
+            eventSources: [{
+                    url: '@Url.Action("TimelineEvents")',
+                    extraParams: {
+                        productId: productId,
+                        lang: lang
+                    }
+                }
+            ],
+            eventRender: function (info) {
+                var eventObj = info.event;
+                var $el = $(info.el);
+
+                $el.popover({
+                    title: eventObj.extendedProps.tooltip_title || eventObj.title,
+                    content: eventObj.extendedProps.description,
+                    trigger: 'hover',
+                    placement: 'auto',
+                    container: '#schedule-wrapper',
+                    html: true
+                });
+            },
+            eventClick: function (info) {
+                if (info.event.extendedProps.block == true) {
+                    swal({
+                            title: "@(Html.Raw(Request.GetLocalizedString("DELETE_LOCK_MESSAGE_TITLE")))",
+                            text: "@(Html.Raw(Request.GetLocalizedString("DELETE_LOCK_MESSAGE_TEXT")))",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "@(Html.Raw(Request.GetLocalizedString("DELETE_LOCK_MESSAGE_CONFIRM")))",
+                            closeOnConfirm: false,
+                            html: false
+                        },
+                        function() {
+                            $.redirect('@Url.Action("DeleteLock")' + info.event.id + '?lang=' + lang,
+                                null, 'POST');
+                        });
+                } else {
+                    $.ajax({
+                        url: '@Url.Action("TimelineRentals")',
+                        data: {
+                            start: info.event.extendedProps.start_utc,
+                            end: info.event.extendedProps.end_utc,
+                            productId: productId,
+                            productAvailability: info.event.extendedProps.productAvailability,
+                            lang: lang
+                        },
+                        success: function(data) {
+                            swal({
+                                title: "@Html.Raw(Request.GetLocalizedString("SCHEDULE_TIMELINE_RENTALS_MODAL_TITLE"))",
+                                text: data,
+                                showCancelButton: false,
+                                closeOnConfirm: false,
+                                html: true
+                            });
+                        }
+                    });
+                }
+            }
+        });
+
+        calendar.render();
+    });
+</script>

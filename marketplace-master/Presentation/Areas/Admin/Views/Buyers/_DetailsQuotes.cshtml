@@ -1,0 +1,50 @@
+﻿@model Domain.Entities.Buyer
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (config.Quote.Enabled)
+{
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Pedidos de Orçamento</h3>
+        </div>
+        @if (Model.Quotes.Any())
+        {
+            <div class="box-body table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Vendedor</th>
+                            <th>Categoria</th>
+                            <th>Subcategoria</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Quotes)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@Url.ActionLocalized("Details", "Quotes", new { id = item.Id })">@item.Id.ToString().Substring(0, 8)</a>
+                                </td>
+                                <td>@Html.DisplayFor(model => item.Seller.PublicProfileName)</td>
+                                <td>@Html.DisplayFor(model => item.Category.Name)</td>
+                                <td>@Html.DisplayFor(model => item.SubCategory.Name)</td>
+                                <td>@Html.DisplayFor(model => item.CreatedAt)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="box-body">
+                <p>Nenhum pedido de orçamento enviado.</p>
+            </div>
+        }
+    </div>
+}

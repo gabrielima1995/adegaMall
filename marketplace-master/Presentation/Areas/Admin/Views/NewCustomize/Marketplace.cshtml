@@ -1,0 +1,73 @@
+﻿@model Presentation.Areas.Admin.Models.CustomizeMarketplaceVM
+
+@{
+    //ViewBag.Title = Request.GetLocalizedString("ADMIN_CUSTOMIZATION_PANEL_TITLE");
+    ViewBag.Title = "Marketplace";
+}
+
+<section class="content-header">
+    @Html.Partial("_CustomizeMenu", 0)
+</section>
+
+<section class="content container-fluid">
+
+    <br />
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">Marketplace</h1>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="text-center">
+                        <img class="img-responsive img-bordered center-block" src="~/areas/admin/assets/img/customize/footer.png" />
+                    </div>
+                    <br />
+                    <div>
+                        <span>
+                            <i class="fa fa-info-circle"></i>
+                            @Html.Localized("ADMIN_CUSTOMIZE_MARKETPLACE_INFO", "small")
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    @using (Html.BeginForm("Marketplace", "NewCustomize"))
+                    {
+                        <span>@Html.ValidationSummary(true, "", new { @class = "text-danger" })</span>
+
+                        @Html.HiddenFor(Model => Model.Lang)
+                        <div class="form-group">
+                            @Html.LabelFor(Model => Model.MarketplaceName)
+                            @Html.TextBoxFor(Model => Model.MarketplaceName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(Model => Model.MarketplaceName)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(Model => Model.DocumentNumber)
+                            @Html.TextBoxFor(Model => Model.DocumentNumber, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(Model => Model.DocumentNumber)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(Model => Model.CustomerServiceEmail)
+                            @Html.TextBoxFor(Model => Model.CustomerServiceEmail, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(Model => Model.CustomerServiceEmail)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(Model => Model.AboutText)
+                            @Html.TextAreaFor(Model => Model.AboutText, new { @class = "form-control", style = "resize: vertical;" })
+                            @Html.ValidationMessageFor(Model => Model.AboutText)
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> @Request.GetLocalizedString("ADMIN_CUSTOMIZE_SAVE_BUTTON")</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

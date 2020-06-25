@@ -1,0 +1,57 @@
+﻿@import "variables.sass"
+
+@mixin title
+  font-family: $font_title
+  color: $color_title
+
+@mixin subtitle
+  font-family: $font_subtitle
+  color: $color_subtitle
+
+@mixin anchor
+  font-family: $font_text
+  color: $color_anchor
+
+@mixin btn
+  font-family: $font_btn
+  color: $color_bg1
+
+/*Border radius */
+@mixin border-radius()
+  -webkit-border-radius: $radius
+  -moz-border-radius: $radius
+  -ms-border-radius: $radius
+  border-radius: $radius
+
+@mixin border-radius-top()
+  -webkit-border-radius: $radius $radius 0 0
+  -moz-border-radius: $radius $radius 0 0
+  -ms-border-radius: $radius $radius 0 0
+  border-radius: $radius $radius 0 0
+
+/* Text shadow */
+@mixin text-shadow($color)
+  -webkit-text-shadow: 1px 1px 1px $color
+  -moz-text-shadow: 1px 1px 1px $color
+  -ms-text-shadow: 1px 1px 1px $color
+  text-shadow: 1px 1px 1px $color
+
+/* Box shadow */
+@mixin box-shadow($depth, $color)
+  -webkit-box-shadow: 1px 1px $depth rgba($color, .3)
+  -moz-box-shadow: 1px 1px $depth rgba($color, .3)
+  -ms-box-shadow: 1px 1px $depth rgba($color, .3)
+  box-shadow: 1px 1px $depth rgba($color, .3)
+
+/* Transition */
+@mixin transition($duration)
+  -webkit-transition: all $duration ease-in-out
+  -moz-transition: all $duration ease-in-out
+  -ms-transition: all $duration ease-in-out
+  transition: all $duration ease-in-out
+
+@mixin title_shadow
+  text-shadow: 2px 2px 15px $title_shadow_color
+
+@mixin slogan_shadow
+  text-shadow: 2px 2px 20px $slogan_shadow_color

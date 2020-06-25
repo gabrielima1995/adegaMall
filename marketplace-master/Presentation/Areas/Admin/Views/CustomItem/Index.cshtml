@@ -1,0 +1,106 @@
+﻿@model EcommerceHomeCategoryVM
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-pencil-square-o"></i>
+        Editar Categoria
+    </h1>
+    <h3>@Model.CategoryName</h3>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            @if (HttpContext.Current.Items.Contains("errors"))
+            {
+                <div id="customItemErrors" class="alert alert-danger">
+                    <ul>
+                        @foreach (var error in HttpContext.Current.Items["errors"] as IEnumerable<string>)
+                        {
+                            <li>@error</li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Items personalizados que podem ser exibidos</h3>
+                </div>
+                @if (Model.HasCustomItems)
+                {
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Título</th>
+                                    <th class="text-center">Duração</th>
+                                    <th width="50" class="text-center">
+                                        <i class="fa fa-picture-o"></i>
+                                    </th>
+                                    <th width="50" class="text-center">Link</th>
+                                    <th width="100"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.CustomItems)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => item.Title)</td>
+                                        <td>@item.GetDateString()</td>
+                                        <td>
+                                            <button class="btn btn-default btn-sm image-zoom-btn" data-container="body" data-toggle="popover" data-placement="left" data-trigger="focus" data-popover-content=".popover-custom-image">
+                                                <i class="fa fa-search-plus js-btn-show-image"></i>
+                                            </button>
+
+                                            <div class="hidden popover-custom-image">
+                                                <div class="popover-body">
+                                                    <img src="@item.ImageUrl" style="max-width:180px; max-height:180px" />
+                                                </div>
+                                            </div>
+
+                                        </td>
+
+                                        <td><a href="@item.TargetUrl" class="btn btn-sm btn-default"><i class="fa fa-paperclip"></i></a></td>
+                                        <td>
+                                            <a href="javascript:void(0)" data-custom-item-id="@item.Id" class="btn btn-sm btn-primary js-btn-edit-custom-item">
+                                                <i class="fa fa-wrench"></i>
+                                            </a>
+                                            @using (Html.BeginForm("DeleteCustomItem", "CustomItem", FormMethod.Post, new { style = "display:inline-block" }))
+                                            {
+                                                Write(Html.Hidden("id", item.Id));
+                                                <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash   "></i></button>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="box-body">
+                        <em class="text-muted">
+                            <span>Nenhum item personalizado</span>
+                        </em>
+                    </div>
+                }
+                <div class="box-footer">
+                    <button id="btnAddCustomItem" class="btn btn-primary">
+                        <i class="fa fa-plus"></i>
+                        Novo Item
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="custom-item-form" class="col-xs-12 col-md-6">
+
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>CustomCategory.init('@Url.ActionLocalized("GetCustomItemForm", "CustomItem")', "@Model.CustomCategoryId.Value")</script>
+}

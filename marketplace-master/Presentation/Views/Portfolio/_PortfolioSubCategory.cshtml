@@ -1,0 +1,27 @@
+﻿@model Application.Modules.Portfolio.SubCategories.SubCategoryAndCategorySelector
+
+@{ 
+    var profile = User.Identity.GetLoginProfile();
+}
+
+<div class="row categoria">
+    @using (Html.BeginCollectionItem("SubCategories", ViewData.ModelState.IsValid))
+    {
+        <div class="col-xs-12 col-md-5">
+            <div class="form-group">
+                @Html.Partial("_CategoriesSelect", Model)
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-5">
+            <div class="form-group">
+                @Html.Partial("_SubCategoriesSelect", Model)
+            </div>
+        </div>
+
+        <div class="acoes">
+            <a href="" class="adicionar @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.PortfolioEdit)"><span class="glyphicon glyphicon-plus-sign plus js-add-category"></span></a>
+            <a href="" class="remover @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.PortfolioEdit)"><span class="glyphicon glyphicon-minus-sign minus js-remove-category"></span></a>
+        </div>
+    }
+</div>

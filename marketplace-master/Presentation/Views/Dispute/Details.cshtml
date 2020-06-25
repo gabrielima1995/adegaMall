@@ -1,0 +1,132 @@
+﻿@using Domain.Entities.DisputeModule
+@using Presentation.Models.DisputeViewModels
+@using Microsoft.AspNet.Identity
+@model DisputeViewModel
+
+@{
+    var config = MaaSConfig.Current;
+    var orderId = Guid.Parse(Model.OrderId).Substring();
+    var disputeClosed = Model.Status.In(DisputeStatus.ClosedByAdmin, DisputeStatus.ClosedByBuyer, DisputeStatus.ClosedBySeller, DisputeStatus.ClosedForInactivity);
+    var profile = User.Identity.GetLoginProfile();
+    ViewBag.Title = Request.GetLocalizedString("DISPUTE_DETAILS_TITLE", orderId);
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        <h2>@Html.Localized("DISPUTE_DETAILS_TITLE", "span", null, orderId)</h2>
+        @if (!disputeClosed)
+        {
+            if (profile.IsAdminOrGestao())
+            {
+                <p>@Html.Localized("DISPUTE_DETAILS_TEXT_ADMIN")</p>
+            }
+            else if (profile.IsBuyer())
+            {
+                <p>@Html.Localized("DISPUTE_DETAILS_TEXT_BUYER")</p>
+            }
+            else if (profile.IsSellerOrSellerAssistant())
+            {
+                <p>@Html.Localized("DISPUTE_DETAILS_TEXT_SELLER")</p>
+            }
+        }
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4">
+
+                        <dl class="dl-inverted">
+                            <dt>@Request.GetLocalizedString("ORDER_LABEL")</dt>
+                            <dd><a href="@Model.GetOrderUrl(profile)" target="_blank">#@orderId</a></dd>
+
+                            <dt>@Request.GetLocalizedString("ORDER_DATE_LABEL")</dt>
+                            <dd>@Model.CreatedAt.ToShortDateString()</dd>
+
+                            <dt>@Request.GetLocalizedString("ORDER_AMOUNT_LABEL")</dt>
+                            <dd>@Model.OrderAmount.DisplayCurrency()</dd>
+
+                            <dt>@Request.GetLocalizedString("DELIVERY_DEADLINE_LABEL")</dt>
+                            <dd>@Model.Deadline.ToShortDateString()</dd>
+
+                            <dt>@Request.GetLocalizedString("ORDER_BUYER_LABEL")</dt>
+                            <dd>@Model.BuyerName</dd>
+
+                            <dt>@Request.GetLocalizedString("ORDER_SELLER_LABEL")</dt>
+                            <dd>@Model.SellerName</dd>
+                        </dl>
+
+                        <hr />
+
+                        <dl class="dl-inverted">
+                            <dt>@Request.GetLocalizedString("DISPUTE_STATUS_LABEL")</dt>
+                            <dd>@Model.Status.DisplayDescription()</dd>
+
+                            <dt>@Request.GetLocalizedString("DISPUTE_TRANSFER_STATUS_LABEL")</dt>
+                            <dd>@Model.GetTransferStatusLocalized()</dd>
+                        </dl>
+
+                        <ul class="dispute-actions-box list-group">
+                            @if (Model.CanAuthorizePayment() && (profile.IsBuyer() || profile.IsAdminOrGestao()))
+                            {
+                                <li class="dispute-authorize-transfer-box list-group-item">
+                                    @using (Html.BeginForm("AuthorizePayment", "Dispute", FormMethod.Post))
+                                    {
+                                        @:@Html.Localized("DISPUTE_IN_FAVOR_OF_SELLER_TITLE", "h4")
+                                        @:@Html.Localized("DISPUTE_IN_FAVOR_OF_SELLER_TEXT", "p")
+                                        @Html.Hidden("orderId", Model.OrderId)
+                                        <button class="btn btn-success btn-outline" type="submit">
+                                            @Request.GetLocalizedString("DISPUTE_AUTHORIZE_TRANSFER_LABEL")
+                                        </button>
+                                    }
+                                </li>
+                            }
+                            @if (Model.IsCancellable() && (profile.IsSeller() || profile.IsAdminOrGestao()))
+                            {
+                                <li class="dispute-return-payment-box list-group-item">
+                                    @using (Html.BeginForm("ReturnPayment", "Dispute", FormMethod.Post))
+                                    {
+                                        @:@Html.Localized("DISPUTE_IN_FAVOR_OF_BUYER_TITLE", "h4")
+                                        @:@Html.Localized("DISPUTE_IN_FAVOR_OF_BUYER_TEXT", "p")
+                                        @Html.Hidden("orderId", Model.OrderId)
+                                        <button class="btn btn-danger btn-outline" type="submit">
+                                            @Request.GetLocalizedString("DISPUTE_RETURN_PAYMENT_LABEL")
+                                        </button>
+                                    }
+                                </li>
+                            }
+                            @if (profile.IsBuyerOrSellerOrSellerAssistant() && Model.Status.In(DisputeStatus.OpenedByBuyer, DisputeStatus.OpenedBySeller))
+                            {
+                                <li class="dispute-request-mediation-box list-group-item">
+                                    @Html.Localized("DISPUTE_REQUEST_MEDIATION_TITLE", "h4")
+                                    @Html.Localized("DISPUTE_REQUEST_MEDIATION_TEXT", "p")
+                                    @Html.ActionLink("Solicitar Mediação", "RequestMediation", "Dispute", new { disputeId = Model.DisputeId }, new { @class = "btn btn-small btn-default" })
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-sm-12 col-md-8">
+                        <div class="dispute-msg-list m-b-md">
+                            @Html.Localized("DISPUTE_MESSAGES_TITLE", "h3")
+                            @if (Model.MessageList.Any())
+                            {
+                                foreach (var message in Model.MessageList)
+                                {
+                                    Html.RenderPartial("_DisputeComment", message);
+                                }
+                            }
+                            else
+                            {
+                                @:@Html.Localized("DISPUTE_MESSAGES_NO_ENTRIES", "p")
+                            }
+                        </div>
+
+                        @if (!disputeClosed)
+                        {
+                            @:@Html.Partial("_DisputeCommentForm", new DisputeCommentViewModel(Model.DisputeId))
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

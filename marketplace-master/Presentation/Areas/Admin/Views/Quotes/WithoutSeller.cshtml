@@ -1,0 +1,105 @@
+﻿@using Presentation.Helpers
+@using Presentation.Areas.Admin.Controllers.Portfolio
+@using V2.Application.Modules.QuoteRequests.Model
+@model ResultList<QuoteWithoutSellerListDto>
+
+@{
+    ViewBag.Title = "Pedidos de Orçamento Sem Vendedor";
+    var config = MaaSConfig.Current;
+    var currentPage = Request.QueryString.AllKeys.Contains("page") ? Request.QueryString["page"].AsInt() : 0;
+    var maxPage = (int)Math.Floor(Model.TotalCount / Model.PageSize * 1d);
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-file-o" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+    <p>
+        <a href="@Url.ActionLocalized("Index", "Quotes")"> @Request.GetLocalizedString("QUOTES_BACK_TO_INDEX_ADMIN_LINK")</a>
+    </p>
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-body">
+            <p>Esta lista é apresentada para que você:</p>
+            <ul>
+                <li>Entenda locais e categorias que ainda não são atendidos por sua base de vendedores e priorize a prospecção</li>
+                <li>Direcione os orçamentos que fizerem sentido para vendedores que possam atender à demanda</li>
+            </ul>
+            <p>Clique num pedido de orçamento para ver os detalhes e direcionar a um ou mais vendedores.</p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Comprador</th>
+                            <th>Título</th>
+                            <th>Categoria</th>
+                            <th>Subcategoria</th>
+                            <th>Data</th>
+                            <th>Localidade</th>
+                            <th>Encaminhado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr class="@Css.If(item.HasBeenSentToAnySellers, "success")">
+                                <td data-order="@Dt.Order(item.Id)">
+                                    <a href="@Url.ActionLocalized("Details", "Quotes", new { id = item.Id })">@item.Id.ToString().Substring(0, 8)</a>
+                                </td>
+                                <td data-order="@Dt.Order(item.BuyerName)">
+                                    <a href="@Url.ActionLocalized("Details", "Buyers", new { id = item.BuyerId })">@item.BuyerName</a>
+                                </td>
+                                <td data-order="@Dt.Order(item.Title)">@Html.DisplayFor(model => item.Title)</td>
+                                <td data-order="@Dt.Order(item.CategoryName)">@Html.DisplayFor(model => item.CategoryName)</td>
+                                <td data-order="@Dt.Order(item.SubCategoryName)">@Html.DisplayFor(model => item.SubCategoryName)</td>
+                                <td data-order="@Dt.Order(item.CreatedAt)">@Html.DisplayFor(model => item.CreatedAt)</td>
+                                <td data-order="@Dt.Order(item.CityAndState)">@Html.DisplayFor(model => item.CityAndState)</td>
+                                <td data-order="@Dt.Order(item.HasBeenSentToAnySellers)">
+                                    @if (item.HasBeenSentToAnySellers)
+                                    {
+                                        <span>Sim</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Não</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Quotes", new { page = 0 })" )>
+                        <i class="fa fa-angle-double-left"></i>
+                    </a>
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Quotes", new { page = Math.Max(currentPage - 1, 0) })" )>
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="btn btn-primary" href="" )>
+                        @(currentPage + 1)
+                    </a>
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Quotes", new { page = Math.Min(currentPage + 1, maxPage) })" )>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <a class="btn btn-default" href="@Url.ActionLocalized("Index", "Quotes", new { page = maxPage })" )>
+                        <i class="fa fa-angle-double-right"></i>
+                    </a>
+                </div>
+                <div class="col-xs-12 text-center">
+                    <span>Exibindo resultados @(currentPage * Model.PageSize + 1) - @Math.Min(Model.TotalCount, (currentPage + 1) * Model.PageSize) de @Model.TotalCount</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>DataTableCustom.create('table', { searching: true, paging: false, info: false, order: [[5, 'desc']] })</script>
+}

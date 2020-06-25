@@ -1,0 +1,16 @@
+﻿@{
+    var enabled = MaaSConfig.Current.Banners.Enabled;
+}
+
+@if (enabled)
+{
+    @:@Html.Action("Banners", "Banners")
+}
+
+@section scripts
+{
+    @if (enabled)
+    {
+        <script>MainBanners.init()</script>
+    }
+}

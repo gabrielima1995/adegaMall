@@ -1,0 +1,23 @@
+﻿@model ProductTemplateCreateEditViewModel
+
+@{
+    ViewBag.Title = "Cadastre um modelo de produto";
+}
+
+<section class="content-header">
+    <h1>@ViewBag.Title</h1>
+</section>
+
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        @:@Html.Partial("_Form")
+        <button id="btnSubmit" type="submit" class="btn btn-primary btn-lg m-r-sm">Salvar</button>
+        @Html.ActionLink("cancelar", "Index")
+    }
+</section>
+
+@section scripts
+{
+    <script>ProductTemplateCreateEdit.init()</script>
+}

@@ -1,0 +1,95 @@
+﻿@using Microsoft.AspNet.Identity
+@model OrderDetailsVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("SALE_LABEL") + " " + Model.Order.Id.DisplayShortGuid();
+    var viewPathFmt = "~/Views/Products/MySales/{0}.cshtml";
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+@section styles
+{
+    <style>
+        .order.order-item.image {
+            width: 15%;
+        }
+
+        .order.order-item.unit-price {
+            width: 13%;
+        }
+
+        .order.order-item.subtotal {
+            width: 13%;
+        }
+
+        .order.order-item.shipping {
+            width: 13%;
+        }
+
+        .order.order-item.total {
+            width: 14%;
+        }
+    </style>
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+            <div class="col-xs-12">
+                <h3>@ViewBag.Title</h3>
+                @Html.Partial(string.Format(viewPathFmt, "_SaleDetails"), Model)
+                @Html.Localized("MY_SALES_BACK_INDEX", "a", new { href = Url.ActionLocalized("Index", "MySales") })
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('#orderDetailsTabs').tab();
+
+            $('.js-change-status').click(function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+
+                swal({
+                        title: "@Html.Raw(Request.GetLocalizedString("ALERT_WARNING_TITLE"))",
+                        text: "@Html.Raw(Request.GetLocalizedString("ORDER_CHANGE_STATUS_CONFIRMATION_MESSAGE")) '" + $this.text().trim() + "'?",
+                        type: $this.data('type'),
+                        showCancelButton: true,
+                        confirmButtonText: "@Html.Raw(Request.GetLocalizedString("ALERT_CONFIRM_BUTTON"))",
+                        cancelButtonText: "@Html.Raw(Request.GetLocalizedString("ALERT_CANCEL_BUTTON"))",
+                        closeOnConfirm: false,
+                        inputPlaceholder: $this.data('inputplaceholder')
+                    },
+                    function (inputValue) {
+                        if (inputValue === false) return false;
+
+                        if (typeof inputValue === 'string' && inputValue.trim() === "") {
+                            if ($this.data("inputrequired") !== false) {
+                                swal.showInputError("@Request.GetLocalizedString("ORDER_ADDITIONAL_INFO_REQUIRED")!");
+                                return false;
+                            }
+                        }
+
+                        $.redirect('@Url.ActionLocalized("ChangeStatus", "MySales", new { id = Model.Order.Id })', {
+                            status: $this.data('status'),
+                            additionalInfo: $this.data('type') !== 'input' ? '' : inputValue.trim()
+                        });
+
+                        return true;
+                    });
+
+                return false;
+            });
+        });
+    </script>
+}

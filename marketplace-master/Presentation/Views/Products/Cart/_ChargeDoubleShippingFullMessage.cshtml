@@ -1,0 +1,28 @@
+﻿@using Domain.Entities.StoreModule
+
+@model Domain.Entities.StoreModule.Cart
+    
+@{
+    var config = MaaSConfig.Current;
+}
+    
+@if (config.Product.BusinessModel.Rental.Enabled &&
+        Model.ShippingMethod != ShippingMethod.OnSitePickup &&
+        Model.Shipping != 0 &&
+        config.Product.ShippingMode == ShippingMode.PerProduct)
+{
+    if (Model.Items.All(i => i.Product.RentalSettings.ChargeDoubleShipping == true))
+    {
+        <div class="alert alert-success" role="alert">
+            <i class="fa fa-check-circle"></i>
+            @Html.Localized("CHARGE_DOUBLE_SHIPPING_FULL_MESSAGE")
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+            <i class="fa fa-exclamation-triangle"></i>
+            @Html.Localized("NO_CHARGE_DOUBLE_SHIPPING_FULL_MESSAGE")
+        </div>
+    }
+}

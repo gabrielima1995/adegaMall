@@ -1,0 +1,116 @@
+﻿@using Presentation.Helpers
+@model Presentation.Areas.Admin.Models.UserRatingDetailsViewModel
+@{
+    ViewBag.Title = "Avaliações";
+    var config = MaaSConfig.Current;
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-star"></i>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.ActionLocalized("Index", "Dashboard")"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="@Url.ActionLocalized("Index", "Ratings")">Avaliações</a></li>
+        <li class="active">Detalhes da Avaliação</li>
+    </ol>
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="row">
+            <div class="col-xs-12 col-md-5">
+                <div class="box-body">
+                    <dl class="dl-inverted">
+                        <dt>Nota</dt>
+                        <dd>@Html.Partial("_RatingStars", (double)Model.Rating.Rating.Value)</dd>
+
+                        <dt>Data</dt>
+                        <dd>@Model.Rating.CreatedAt</dd>
+
+                        <dt>Comentário</dt>
+                        <dd>@Model.Rating.Comment</dd>
+
+                        @if (Model.Rating.OrderId.HasValue)
+                        {
+                            <dt>Pedido</dt>
+                            <dd>
+                                <a href="@Url.ActionLocalized("Details", "Orders", new { id = Model.Rating.OrderId.Value })">
+                                    @Model.Rating.OrderId.Value.Substring()
+                                </a>
+                            </dd>
+                        }
+
+                        @if (Model.Rating.QuoteId.HasValue)
+                        {
+                            <dt>Orçamento</dt>
+                            <dd>
+                                <a href="@Url.ActionLocalized("Details", "Quotes", new { id = Model.Rating.QuoteId.Value.ToString() })">
+                                    @Model.Rating.QuoteId.Value.Substring()
+                                </a>
+                            </dd>
+                        }
+
+                        <dt>Visível</dt>
+                        <dd>
+                            <span class="@Css.If(Model.Rating.Hidden, "text-danger", "text-success")">@(Model.Rating.Hidden ? "Não" : "Sim")</span> &bull;
+                            @if (Model.Rating.Hidden)
+                            {
+                                <a href="@Url.ActionLocalized("ModerateRating", "Ratings", new { id = Model.Rating.Id.ToString(), hidden = false })">exibir</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.ActionLocalized("ModerateRating", "Ratings", new { id = Model.Rating.Id.ToString(), hidden = true })">ocultar</a>
+                            }
+                        </dd>
+                    </dl>
+
+                    @if (config.Ratings.AdminCanDeleteRatings)
+                    {
+                        using (Html.BeginForm("DeleteRating", "Ratings", FormMethod.Post))
+                        {
+                            <span>@Html.Hidden("deleteId", Model.Rating.Id)</span>
+                            <button class="btn btn-danger btn-outline btn-sm" type="submit">
+                                <i class="fa fa-ban"></i>
+                                Excluir avaliação
+                            </button>
+                            <br/>
+                            <small class="text-muted">esta ação não pode ser desfeita</small>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-7">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box-body profile-card">
+                            <div class="profile-img-title">
+                                <img class="profile-user-img img-responsive img-circle" src="@Model.GetAvatar(Model.Target)" alt="" style="width:64px; height:64px" />
+                                <span class="profile-title">Avaliado</span>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item">@Model.Target.Name</li>
+                                <li class="list-group-item">@Html.Partial("_RatingStars", Model.TargetAverageRating)</li>
+                                <li class="list-group-item">Avaliações: @Model.TargetRatingsCount</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box-body profile-card">
+                            <div class="profile-img-title">
+                                <img class="profile-user-img img-responsive img-circle" src="@Model.GetAvatar(Model.Sender)" alt="" style="width:64px; height:64px" />
+                                <span class="profile-title">Avaliador</span>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item">@Model.Sender.Name</li>
+                                <li class="list-group-item">@Html.Partial("_RatingStars", Model.SenderAverageRating)</li>
+                                <li class="list-group-item">Avaliações: @Model.SenderRatingsCount</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

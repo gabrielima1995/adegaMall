@@ -1,0 +1,148 @@
+﻿@using Domain.DTO
+@model object
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("ADMIN_CUSTOMIZE_OTHERS_TITLE");
+}
+
+<section class="content-header"></section>
+
+<section class="content container-fluid">
+
+    @Html.Partial("_CustomizeMenu", 5)
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-6 col-lg-offset-3 text-center">
+            <div class="panel panel-primary">
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_OTHERS_TITLE")</h4>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            @if (MaaSConfig.Current.Product.Enabled)
+                            {
+                                @Html.Localized("ADMIN_CUSTOMIZE_PRODUCT", "h4")
+                                <hr />
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <a class="btn btn-fixedwidth btn-default" href="~/admin/productcategories/">
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_PRODUCT_CATEGORIES") <i class="fa fa-arrow-circle-o-right"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <a class="btn btn-fixedwidth btn-default" href="~/admin/productvarianttypes/">
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_PRODUCT_VARIANTS") <i class="fa fa-arrow-circle-o-right"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <a class="btn btn-fixedwidth btn-default" href="~/admin/productvariants/">
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_PRODUCT_VARIANT_ITEMS") <i class="fa fa-arrow-circle-o-right"></i>
+                                        </a>
+                                    </div>
+                                    @if (MaaSConfig.Current.CustomFields.Product.Enabled)
+                                    {
+                                        <div class="col-xs-12">
+                                            <a class="btn btn-fixedwidth btn-default" href="@Url.ActionLocalized("CustomFields", "NewCustomize", new { type="product" })">
+                                                @Request.GetLocalizedString("CUSTOMIZE_PRODUCT_FIELDS_LINK") <i class="fa fa-arrow-circle-o-right"></i>
+                                            </a>
+                                        </div>
+                                    }
+
+                                    @if (MaaSConfig.Current.CustomFields.CartItem.Enabled)
+                                    {
+                                        <div class="col-xs-12">
+                                            <a class="btn btn-fixedwidth btn-default" href="@Url.ActionLocalized("CustomFields", "NewCustomize", new { type="cartItem" })">
+                                                @Request.GetLocalizedString("CUSTOMIZE_CART_FIELDS_LINK") <i class="fa fa-arrow-circle-o-right"></i>
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            }
+
+                            @if (MaaSConfig.Current.Portfolio.Enabled)
+                            {
+                                @Html.Localized("ADMIN_CUSTOMIZE_PORTFOLIO", "h4")
+                                <hr />
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <a class="btn btn-fixedwidth btn-default" href="~/admin/categories/">
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_PORTFOLIO_CATEGORIES") <i class="fa fa-arrow-circle-o-right"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <a class="btn btn-fixedwidth btn-default" href="~/admin/subcategories/">
+                                            @Request.GetLocalizedString("ADMIN_CUSTOMIZE_PORTFOLIO_SUBCATEGORIES") <i class="fa fa-arrow-circle-o-right"></i>
+                                        </a>
+                                    </div>
+                                    @if (MaaSConfig.Current.CustomFields.Portfolio.Enabled)
+                                    {
+                                        <div class="col-xs-12">
+                                            <a class="btn btn-fixedwidth btn-default" href="@Url.ActionLocalized("CustomFields", "NewCustomize", new { type = "portfolio" })">
+                                                @Request.GetLocalizedString("CUSTOMIZE_PORTFOLIO_FIELDS_LINK") <i class="fa fa-arrow-circle-o-right"></i>
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            @Html.Localized("ADMIN_CUSTOMIZE_PLATFORM", "h4")
+                            <hr />
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <a class="btn btn-fixedwidth btn-default" href="@Url.ActionLocalized("UserConfig","NewCustomize")">
+                                        @Request.GetLocalizedString("ADMIN_USERCONFIGS_BTN") <i class="fa fa-arrow-circle-o-right"></i>
+                                    </a>
+                                </div>
+                                <div class="col-xs-12">
+                                    <a class="btn btn-fixedwidth btn-default" href="~/admin/customize/identity/">
+                                        @Request.GetLocalizedString("ADMIN_CUSTOMIZE_OTHERS_ICONS") <i class="fa fa-arrow-circle-o-right"></i>
+                                    </a>
+                                </div>
+                                @if (MaaSConfig.Current.Banners.Enabled)
+                                {
+                                    <div class="col-xs-12">
+                                        <a class="btn btn-fixedwidth btn-default" href="~/admin/banners/">
+                                            @Request.GetLocalizedString("BANNERS_TITLE") <i class="fa fa-arrow-circle-o-right"></i>
+                                        </a>
+                                    </div>
+                                }
+                                <div class="col-xs-12">
+                                    <a class="btn btn-fixedwidth btn-default" href="~/admin/customize/docs/">
+                                        @Request.GetLocalizedString("CUSTOMIZE_DOCS_LINK") <i class="fa fa-arrow-circle-o-right"></i>
+                                    </a>
+                                </div>
+                                <div class="col-xs-12">
+                                    <a class="btn btn-fixedwidth btn-default" href="~/admin/messagetemplates/">
+                                        @Request.GetLocalizedString("CUSTOMIZE_MESSAGE_TEMPLATES_LINK") <i class="fa fa-arrow-circle-o-right"></i>
+                                    </a>
+                                </div>
+                                @if (MaaSConfig.Current.Payment.Enabled)
+                                {
+                                    <div class="col-xs-12">
+                                        <a href="@Url.ActionLocalized("Payment", "NewCustomize")" class="btn btn-fixedwidth btn-default">
+                                            Opções de pagamento <i class="fa fa-arrow-circle-o-right"></i>
+                                        </a>
+                                    </div>
+                                }
+                                @if (MaaSConfig.Current.Quote.Enabled)
+                                {
+                                    <div class="col-xs-12">
+                                        <a href="@Url.ActionLocalized("Quote", "NewCustomize")" class="btn btn-fixedwidth btn-default">
+                                            @Request.GetLocalizedString("CUSTOMIZE_QUOTE_FIELDS_LINK") <i class="fa fa-arrow-circle-o-right"></i>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,62 @@
+﻿@model PaymentGatewayConfigViewModel
+@{
+    ViewBag.Title = "Configurar Gateway de Pagamentos";
+}
+
+<section class="content-header text-center"><h3>@ViewBag.Title</h3></section>
+
+<section class="content container">
+    <div class="row">
+
+        @if (!Model.IsGatewayConfigured())
+        {
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Selecionar Gateway</div>
+                    <div class="panel-body text-center">
+                        <p>Selecione com qual gateway de pagamento deseja operar</p>
+                        <a href="@Url.ActionLocalized("SwitchGateway", "Config", new { newGateway = "pagarme" })" class="btn btn-primary" style="width:200px"><i class="fa fa-dollar"></i> Pagar.Me</a>
+                        <br /><br />
+                        <a href="@Url.ActionLocalized("SwitchGateway", "Config", new { newGateway = "moip" })" class="btn btn-primary" style="width:200px"><i class="fa fa-dollar"></i> Moip (Wirecard)</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="col-xs-12 col-sm-6 @(Model.IsGatewayConfigured() ? "col-sm-offset-3" : "")">
+            <div class="panel panel-primary">
+                @if (MaaSConfig.Current.Payment.GatewayIsWirecard())
+                {
+                    <div class="panel-heading">Configurar Gateway Moip/Wirecard</div>
+                    <div class="panel-body text-center" id="moip-form">
+                        @Html.Partial("_MoipForm", Model.MoipConfig, ViewData)
+                    </div>
+                }
+                else if (MaaSConfig.Current.Payment.GatewayIsPagarme())
+                {
+                    <div class="panel-heading">Configurar Gateway Pagar.me</div>
+                    <div class="panel-body text-center" id="pagar-me-form">
+                        @Html.Partial("_PagarMeForm", Model.PagarMeConfig, ViewData)
+                    </div>
+                }
+                else
+                {
+                    <div class="panel-heading">Selecione um Gateway</div>
+                    <div class="panel-body text-center">
+                        <strong class="text-danger"><i class="fa fa-warning"></i>Selecione um gateway de pagamento para prosseguir</strong>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    @if (Model.IsGatewayConfigured())
+    {
+        <script>
+            $('.gateway-info-input').attr('disabled', "true");
+        </script>
+    }
+}

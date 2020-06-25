@@ -1,0 +1,160 @@
+﻿@model Application.Modules.Portfolio.PortfolioItemViewModel
+
+@{
+    /**/
+
+    var action = ViewContext.RouteData.Values["action"].ToString();
+    var config = MaaSConfig.Current;
+}
+
+@using (Html.BeginForm(action, "Portfolio", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.TextBoxFor(i => i.Title, new { @class = "form-control input-lg", placeholder = Request.GetLocalizedString("TITLE_PORTFOLIO_ITEM_INPUT") })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    if (Model.FriendlyUrl != null)
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <p>
+                    <span class="text-muted label label-default label-product-url">
+                        <i class="fa fa-link"></i>
+                        @Model.PublicPageUrl
+                    </span>
+                    @Html.HiddenFor(m => m.FriendlyUrl)
+                </p>
+                <hr />
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description)
+                @Html.TextAreaFor(i => i.Description, new { @class = "form-control", placeholder = Request.GetLocalizedString("DESCRIPTION_PORTFOLIO_ITEM_INPUT_V2"), cols = "30", rows = "2" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                <small class="help-block">
+                    <a class="text text-info" href="http://suporte.ideianoar.com.br/pt-BR/articles/2047024-como-formatar-textos-de-campos-especificos-indicados-na-plataforma" target="_blank">
+                        <i class="fa fa-question-circle"></i>
+                        @Request.GetLocalizedString("MARKDOWN_HELP_TEXT")
+                    </a>
+                </small>
+            </div>
+        </div>
+    </div>
+
+    if (config.Portfolio.Price.Enabled)
+    {
+        <div class="row">
+            <div class="col-xs-4 col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price)
+                    @Html.TextBoxFor(i => i.Price, new { @class = "form-control js-money", placeholder = Request.GetLocalizedString("PRICE_PORTFOLIO_ITEM_INPUT") })
+                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(i => i.PriceRequired)
+                </div>
+            </div>
+        </div>
+    }
+
+    if (config.CustomFields.Portfolio.Enabled)
+    {
+        <div class="row">
+            @for (int i = 0; i < Model.CustomFieldDefinitions?.Count; i++)
+            {
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        @{
+                            ViewData["Index"] = i;
+                            Write(Html.Partial("_CustomFieldForms", Model, ViewData));
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-xs-12 col-md-9 m-t-sm">
+            @Html.Localized("SELLER_SUB_CATEGORIES_TITLE", "h4")
+            @foreach (var subCategory in Model.SubCategories)
+            {
+                @Html.Partial("_PortfolioSubCategory", subCategory)
+            }
+        </div>
+    </div>
+
+    <hr />
+
+    if (config.Portfolio.VideoUrl.Enabled)
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    @Html.RadioButtonFor(i => i.IsVideo, true, new { id = "link-youtube", @class = "margin-right-5", data_toggle = "toggle", toggle = "link-youtube" })
+                    <label for="link-youtube">
+                        @Html.DisplayNameFor(model => model.VideoUrl)
+                        <i class="fa fa-info-circle" data-toggle="popover" data-placement="right" data-trigger="hover" title="@Request.GetLocalizedString("VIDEO_SUPPORTED_EMBEDS_HELP")" data-html="true" data-content="- YouTube <br />- Vimeo <br />- Twitter <br />- Facebook <br />- Imgur <br />- Instagram <br />- Dailymotion <br />- Twitch.tv <br />"></i>
+                    </label>
+                </div>
+                <div class="form-group toggle-item link-youtube" style="display: @(Model.IsVideo ? "block" : "none")">
+                    @Html.TextBoxFor(i => i.VideoUrl, new { @class = "form-control", placeholder = Request.GetLocalizedString("VIDEO_URL_PORTFOLIO_ITEM_INPUT") })
+                    @Html.ValidationMessageFor(model => model.VideoUrl, "", new { @class = "text-danger" })
+                    <br />
+                    @Html.Localized("CUSTOM_THUMB_UPLOAD_TEXT", "p")
+                    @Html.TextBox("custom-thumb", null, new { type = "file", multiple = "", id = "custom-thumb" })
+                    @Html.ValidationMessageFor(Model => Model, "", new { @class = "text-danger" })
+
+                    <div class="js-thumb-container">
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.RadioButtonFor(i => i.IsVideo, false, new { id = "adicionar-fotos", @class = "margin-right-5", data_toggle = "toggle", toggle = "adicionar-fotos" })
+                    <label for="adicionar-fotos">@Html.DisplayNameFor(model => model.Images)</label>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row toggle-item adicionar-fotos" style="display: @(Model.IsVideo ? "none" : "block")">
+        <div class="col-xs-12">
+            <img src="~/assets/images/thumb-cropping-hint.png" aria-hidden="true" alt="" class="img-with-text" />
+            @Html.Localized("PHOTO_UPLOAD_SQUARE_TEXT", "p")
+
+            <div class="form-group flex-valign">
+                @Html.TextBox("new-images", null, new { type = "file", multiple = "", id = "new-images" })
+            </div>
+
+            @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xs-12">
+            <div class="row js-images-container">
+                @foreach (var image in Model.Images)
+                {
+                    @Html.Partial("_PortfolioItemImageForm", image)
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.Localized("SAVE_PORTFOLIO_ITEM_BUTTON", "button", new { id = "js-submit", type = "submit", @class = "btn btn-primary btn-block box-shadow" })
+            </div>
+        </div>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+}

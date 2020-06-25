@@ -1,0 +1,142 @@
+﻿@model StringsViewModel
+
+@{
+    ViewBag.Title = "Arquivo de tradução";
+}
+
+@section styles {
+    <style>
+        table .str {
+            padding: 0 !important;
+            position: relative;
+        }
+
+            table .str > span {
+                display: block;
+                padding: 8px;
+                padding-right: 35px;
+            }
+
+            table .str > i {
+                position: absolute;
+                top: 1px;
+                right: 0;
+                padding: 10px;
+            }
+    </style>
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-language"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="box box-primary">
+        <div class="box-body">
+            <p>Nesta página você edita todos os textos da plataforma. Dicas:</p>
+            <ul>
+                <li>Localize o texto a ser editado usando a busca nativa do navegador (<span class="label label-default">CTRL+F</span> no Windows e <span class="label label-default">CMD+F</span> no Mac)</li>
+                <li>Cada alteração é refletida imediatamente na plataforma. Para visualizar, atualize a página desejada (<span class="label label-default">F5</span> em ambos Windows e Mac)</li>
+                <li>A opção "restaurar padrão" restaura todas as traduções para o original em Português do Brasil</li>
+
+            </ul>
+            <p>
+                <a href="http://suporte.ideianoar.com.br/pt-BR/articles/2693853-como-editar-os-textos-da-minha-plataforma">Clique aqui</a> e saiba como você pode traduzir os textos da sua plataforma.<br>
+                Você pode ativar e desativar idiomas, bem como selecionar o idioma padrão, acessando @Html.ActionLink("esta página", "Index", "Languages").
+            </p>
+
+            <table class="table table-hover" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        @foreach (var lang in Model.Languages)
+                        {
+                            <th>@lang</th>
+                        }
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var entry in Model.Translations)
+                    {
+                        <tr>
+                            <td><strong>@entry.Label</strong></td>
+                            @foreach (var str in entry.Strs)
+                            {
+                                <td class="str">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <span contenteditable="" data-lang="@str.Lang" data-label="@entry.Label">@str.Value</span>
+                                            <i aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                            }
+                            <td class="text-center">
+                                @if (ViewBag.Defaults.ContainsKey(entry.Label))
+                                {
+                                    <a href="@Url.ActionLocalized("RestoreDefault", "Strings", new { labelName = entry.Label })" class="text-danger"><i class="fa fa-times"></i><small>restaurar padrão</small></a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        (function () {
+            window.MaaS.dtOptions = {
+                iDisplayLength: 500,
+                order: []
+            };
+
+            $('[contenteditable]')
+                .focus(function () {
+                    var $this = $(this);
+                    $this.data("before", $this.text());
+                })
+                .blur(function () {
+                    var $this = $(this);
+                    var $icon = $this.siblings('i');
+
+                    if ($this.data("before") !== $this.text()) {
+                        $icon.attr('class', 'fa fa-refresh fa-spin');
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.ActionLocalized("Update", "Strings")',
+                            data: {
+                                Label: $this.data('label'),
+                                Lang: $this.data('lang'),
+                                Value: $this.text()
+                            },
+                            credentials: true,
+                            success: function () {
+                                $icon.attr('class', 'fa fa-check');
+
+                                setTimeout(function () {
+                                    $icon.fadeOut(600,
+                                        function () {
+                                            $icon.removeAttr('class')
+                                                .removeAttr('style');
+                                        });
+                                }, 3000);
+                            },
+                            error: function (xhr, textStatus, error) {
+                                toastr.error(error, textStatus);
+                                $icon.removeAttr('class');
+                            }
+                        });
+                    }
+                });
+        })();
+    </script>
+}

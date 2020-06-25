@@ -1,0 +1,16 @@
+﻿.home-hero-title {
+    display: none
+}
+
+.home-hero-slogan {
+    display: none
+}
+
+    .home-hero-slogan + .container-fluid {
+        padding-top: 30px
+    }
+
+.hero-bg {
+    padding-bottom: 20px!important;
+    min-height: 0!important
+}

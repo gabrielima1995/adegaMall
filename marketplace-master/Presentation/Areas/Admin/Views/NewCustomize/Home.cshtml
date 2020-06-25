@@ -1,0 +1,446 @@
+﻿@using Domain.DTO
+@model Presentation.Areas.Admin.Models.CustomizeHomeVM
+
+@{
+    ViewBag.Title = "Personalizar Home";
+}
+
+<section class="content-header">
+    @Html.Partial("_CustomizeMenu", 1)
+</section>
+
+<section class="content container-fluid">
+
+    <br />
+    @using (Html.BeginForm("SubmitHome", "NewCustomize", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(Model => Model.Lang)
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_SLOGANS")</h1>
+                            </div>
+
+                            <div class="panel-body">
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <img class="img-bordered img-responsive center-block" src="~/areas/admin/assets/img/customize/home_hero.jpg" />
+                                        <br />
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="row">
+
+                                            <div class="col-xs-12 form-group">
+                                                @Html.LabelFor(Model => Model.HomeHero.Slogan1, new { @class = "control-label" })
+                                                @Html.TextBoxFor(Model => Model.HomeHero.Slogan1, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(Model => Model.HomeHero.Slogan1, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="col-xs-12 form-group">
+                                                @Html.LabelFor(Model => Model.HomeHero.Slogan2, new { @class = "control-label" })
+                                                @Html.TextBoxFor(Model => Model.HomeHero.Slogan2, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(Model => Model.HomeHero.Slogan2, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="col-xs-12 form-group">
+                                                <hr class="" />
+                                                @Html.LabelFor(Model => Model.HomeHero.SearchType, new { @class = "control-label" })
+                                                @Html.EnumDropDownListFor(Model => Model.HomeHero.SearchType, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(Model => Model.HomeHero.SearchType, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                            <div class="col-xs-12">
+                                                @Html.Localized("ADMIN_CUSTOMIZE_HOME_SEARCHQUERY_LABEL", "h4")
+                                            </div>
+                                            <div class="col-xs-5 form-group">
+                                                <div class="radio">
+                                                    <label>
+                                                        @Html.RadioButtonFor(Model => Model.HomeHero.SearchQuery.Status, CustomizeFieldVM.FieldStatus.DISABLED)
+                                                        @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_DISABLED")
+                                                    </label>
+                                                </div>
+
+                                                <div class="radio">
+                                                    <label>
+                                                        @Html.RadioButtonFor(Model => Model.HomeHero.SearchQuery.Status, CustomizeFieldVM.FieldStatus.ENABLED_OPTIONAL)
+                                                        @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED")
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xs-7 form-group">
+
+                                                @Html.Localized("ADMIN_CUSTOMIZE_FIELD_PLACEHOLDER", "label")
+                                                @Html.ValidationMessageFor(Model => Model.HomeHero.SearchQuery.Placeholder, "", new { @class = "text-danger" })
+                                                @Html.TextBoxFor(Model => Model.HomeHero.SearchQuery.Placeholder, new { @class = "form-control" })
+
+                                            </div>
+
+                                            <div class="col-xs-12">
+                                                @Html.Localized("ADMIN_CUSTOMIZE_HOME_SEARCHCATEGORY_LABEL", "h4")
+                                            </div>
+                                            <div class="col-xs-5 form-group">
+                                                <div class="radio">
+                                                    <label>
+                                                        @Html.RadioButtonFor(Model => Model.HomeHero.SearchCategory.Status, CustomizeFieldVM.FieldStatus.DISABLED)
+                                                        @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_DISABLED")
+                                                    </label>
+                                                </div>
+
+                                                <div class="radio">
+                                                    <label>
+                                                        @Html.RadioButtonFor(Model => Model.HomeHero.SearchCategory.Status, CustomizeFieldVM.FieldStatus.ENABLED_OPTIONAL)
+                                                        @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED")
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-7 form-group">
+
+                                                @Html.Localized("ADMIN_CUSTOMIZE_FIELD_PLACEHOLDER", "label")
+                                                @Html.ValidationMessageFor(Model => Model.HomeHero.SearchCategory.Placeholder, "", new { @class = "text-danger" })
+                                                @Html.TextBoxFor(Model => Model.HomeHero.SearchCategory.Placeholder, new { @class = "form-control" })
+
+                                            </div>
+
+
+                                            <div class="col-xs-12">
+                                                @Html.Localized("ADMIN_CUSTOMIZE_HOME_SEARCHLOCATION_LABEL", "h4")
+                                            </div>
+                                            <div class="col-xs-12 form-group">
+                                                <div class="radio">
+                                                    <label>
+                                                        @Html.RadioButtonFor(Model => Model.HomeHero.SearchLocation.Status, CustomizeFieldVM.FieldStatus.DISABLED)
+                                                        @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_DISABLED")
+                                                    </label>
+                                                </div>
+
+                                                <div class="radio">
+                                                    <label>
+                                                        @Html.RadioButtonFor(Model => Model.HomeHero.SearchLocation.Status, CustomizeFieldVM.FieldStatus.ENABLED_OPTIONAL)
+                                                        @Request.GetLocalizedString("ADMIN_CUSTOMIZE_FIELD_ENABLED")
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 form-group">
+                                                @Html.LabelFor(Model => Model.HomeHero.SearchRange, new { @class = "control-label" })
+                                                @Html.TextBoxFor(Model => Model.HomeHero.SearchRange, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(Model => Model.HomeHero.SearchRange, "", new { @class = "text-danger" })
+                                                <hr class="" />
+                                            </div>
+
+                                            <div class="col-xs-3">
+                                                <img class="img-responsive" src="@Model.HomeHero.HomeBackgroundUrl" />
+                                            </div>
+                                            <div class="col-xs-9">
+                                                @Html.Localized("CUSTOMIZE_HOME_BG_LABEL", "label")
+                                                @Html.HiddenFor(Model => Model.HomeHero.HomeBackgroundUrl, new { @class = "new-images-hidden" })
+                                                @Html.TextBox("HomeBackgroundUrl", null, new { type = "file", @class = "new-images" })
+                                                @Html.Localized("CUSTOMIZE_HOME_BG_INFO", "small")
+                                                <hr />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (MaaSConfig.Current.EcommerceProducts.Enabled)
+                    {
+                        <div class="col-xs-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h1 class="panel-title">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_ECOMMERCEHOME")</h1>
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <img class="img-responsive img-bordered center-block" src="~/areas/admin/assets/img/customize/ecommerce_home.jpg" />
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <h3 class="text-center">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_ECOMMERCEHOME")</h3>
+                                            <br />
+                                            <div class="text-center">
+                                                <a class="btn btn-primary" href="@Url.ActionLocalized("Index", "EcommerceHome", new { area = "Admin" })">
+                                                    @Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_GOTOPAGE") &ensp;<i class="fa fa-arrow-circle-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="col-xs-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_HOWITWORKS")</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <img class="img-bordered img-responsive center-block" src="~/areas/admin/assets/img/customize/how_it_works.jpg" />
+                                        <p><small class="text-muted">@Request.GetLocalizedString("CUSTOMIZE_HOME_BENEFITS_HELP")</small></p>
+                                        <p>
+                                            <small class="text-muted">
+
+                                                <strong>@Request.GetLocalizedString("CUSTOMIZE_HINT"):</strong>
+                                                @Request.GetLocalizedString("CUSTOMIZE_HOME_BENEFITS_HINT")
+                                                <a href="/assets/images/template-icon-300x300.png" target="_blank">Template</a>
+                                            </small>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6" style="overflow:hidden">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                @Html.Localized("ADMIN_CUSTOMIZE_TITLE_LABEL", "label")
+                                                @Html.TextBoxFor(Model => Model.HowItWorks.SectionTitle, new { @class = "form-control" })
+                                                <br />
+                                                @Html.CheckBoxFor(Model => Model.HowItWorks.SectionEnabled, new { @class = "" })
+                                                @Html.Localized("ADMIN_CUSTOMIZE_SECTION_ENABLED", "label")
+                                            </div>
+                                        </div>
+                                        <h4>@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_ICON_LABEL") 1</h4>
+                                        <div class="row">
+                                            <div class="col-xs-8">
+                                                @Html.Localized("ADMIN_CUSTOMIZE_TITLE_LABEL", "label")
+                                                @Html.TextBoxFor(Model => Model.HowItWorks.Item1.Title, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(Model => Model.HowItWorks.Item1.Title, "", new { @class = "text-danger" })
+
+                                                @Html.Localized("ADMIN_CUSTOMIZE_DESCRIPTION", "label")
+                                                @Html.TextAreaFor(Model => Model.HowItWorks.Item1.Description, new { @class = "form-control", style = "resize:vertical;" })
+                                                @Html.ValidationMessageFor(Model => Model.HowItWorks.Item1.Description, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-xs-4">
+                                                @Html.Localized("ADMIN_CUSTOMIZE_ICON", "label")
+                                                @Html.HiddenFor(Model => Model.HowItWorks.Item1.IconUrl, new { @class = "new-images-hidden" })
+                                                @Html.TextBox("Item1Icon", null, new { type = "file", @class = "new-images" })
+                                                <br />
+                                                <img class="img-responsive" style="max-height:100px" src="@Model.HowItWorks.Item1.IconUrl" />
+                                            </div>
+                                        </div>
+                                        <h4>@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_ICON_LABEL") 2</h4>
+                                        <div class="row">
+                                            <div class="col-xs-8">
+                                                @Html.Localized("ADMIN_CUSTOMIZE_TITLE_LABEL", "label")
+                                                @Html.TextBoxFor(Model => Model.HowItWorks.Item2.Title, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(Model => Model.HowItWorks.Item2.Title, "", new { @class = "text-danger" })
+
+                                                @Html.Localized("ADMIN_CUSTOMIZE_DESCRIPTION", "label")
+                                                @Html.TextAreaFor(Model => Model.HowItWorks.Item2.Description, new { @class = "form-control", style = "resize:vertical;" })
+                                                @Html.ValidationMessageFor(Model => Model.HowItWorks.Item2.Description, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-xs-4">
+                                                @Html.Localized("ADMIN_CUSTOMIZE_ICON", "label")
+                                                @Html.HiddenFor(Model => Model.HowItWorks.Item2.IconUrl, new { @class = "new-images-hidden" })
+                                                @Html.TextBox("Item1Icon", null, new { type = "file", @class = "new-images" })
+                                                <br />
+                                                <img class="img-responsive" style="max-height:100px" src="@Model.HowItWorks.Item2.IconUrl" />
+                                            </div>
+                                        </div>
+                                        <h4>@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_ICON_LABEL") 3</h4>
+                                        <div class="row">
+                                            <div class="col-xs-8">
+                                                @Html.Localized("ADMIN_CUSTOMIZE_TITLE_LABEL", "label")
+                                                @Html.TextBoxFor(Model => Model.HowItWorks.Item3.Title, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(Model => Model.HowItWorks.Item3.Title, "", new { @class = "text-danger" })
+
+                                                @Html.Localized("ADMIN_CUSTOMIZE_DESCRIPTION", "label")
+                                                @Html.TextAreaFor(Model => Model.HowItWorks.Item3.Description, new { @class = "form-control", style = "resize:vertical;" })
+                                                @Html.ValidationMessageFor(Model => Model.HowItWorks.Item3.Description, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-xs-4">
+                                                @Html.Localized("ADMIN_CUSTOMIZE_ICON", "label")
+                                                @Html.HiddenFor(Model => Model.HowItWorks.Item3.IconUrl, new { @class = "new-images-hidden" })
+                                                @Html.TextBox("Item1Icon", null, new { type = "file", @class = "new-images" })
+                                                <br />
+                                                <img class="img-responsive" style="max-height:100px" src="@Model.HowItWorks.Item3.IconUrl" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_BESTSELLERS")</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <img class="img-bordered img-responsive" src="~/Areas/Admin/assets/img/customize/best_sellers.jpg" />
+                                    </div>
+                                    <div class="col-xs-6">
+                                        @Html.Localized("ADMIN_CUSTOMIZE_TITLE_LABEL", "label")
+                                        @Html.TextBoxFor(Model => Model.BestSellersTitle, new { @class = "form-control" })
+                                        <br />
+                                        @Html.CheckBoxFor(Model => Model.EnableBestSellers, new { @class = "" })
+                                        @Html.Localized("ADMIN_CUSTOMIZE_SECTION_ENABLED", "label")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_CALLSELLERS")</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <img class="img-bordered img-responsive" src="~/Areas/Admin/assets/img/customize/call_sellers.jpg" />
+                                        <hr />
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        @Html.Localized("ADMIN_CUSTOMIZE_TITLE_LABEL", "label")
+                                        @Html.TextBoxFor(Model => Model.SellerCall.Title, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(Model => Model.SellerCall.Title, "", new { @class = "text-danger" })
+                                        <br />
+                                        @Html.CheckBoxFor(Model => Model.SellerCall.Enabled, new { @class = "" })
+                                        @Html.Localized("ADMIN_CUSTOMIZE_SECTION_ENABLED", "label")
+                                        <br />
+                                        <label>@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_TEXT") 1</label>
+                                        @Html.TextBoxFor(Model => Model.SellerCall.Text1, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(Model => Model.SellerCall.Text1, "", new { @class = "text-danger" })
+                                        <br />
+                                        <label>@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_TEXT") 2</label>
+                                        @Html.TextBoxFor(Model => Model.SellerCall.Text2, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(Model => Model.SellerCall.Text2, "", new { @class = "text-danger" })
+                                        <br />
+                                        <label>@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_TEXT") 3</label>
+                                        @Html.TextBoxFor(Model => Model.SellerCall.Text3, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(Model => Model.SellerCall.Text3, "", new { @class = "text-danger" })
+                                        <br />
+                                        <label>@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_BUTTONTEXT")</label>
+                                        @Html.TextBoxFor(Model => Model.SellerCall.ButtonText, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(Model => Model.SellerCall.ButtonText, "", new { @class = "text-danger" })
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <img class="img-responsive" style="max-height:100px" src="@Model.SellerCall.IconUrl" />
+                                            </div>
+                                            <div class="col-xs-8">
+                                                @Html.Localized("ADMIN_CUSTOMIZE_ICON", "label")
+                                                @Html.HiddenFor(Model => Model.SellerCall.IconUrl, new { @class = "new-images-hidden" })
+                                                @Html.TextBox("SellerCallIcon", null, new { type = "file", @class = "new-images" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">@Request.GetLocalizedString("ADMIN_CUSTOMIZE_SELLER_MISC")</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <img class="img-bordered img-responsive center-block" style="" src="~/Areas/Admin/assets/img/customize/misc_area.jpg" />
+                                        <hr />
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6" id="misc-items-area">
+                                        @Html.Localized("ADMIN_CUSTOMIZE_TITLE_LABEL", "label")
+                                        @Html.TextBoxFor(Model => Model.MiscArea.SectionTitle, new { @class = "form-control" })
+                                        <br />
+                                        @Html.CheckBoxFor(Model => Model.MiscArea.EnableSection, new { @class = "" })
+                                        @Html.Localized("ADMIN_CUSTOMIZE_SECTION_ENABLED", "label")
+                                        <hr />
+                                        <div class="row">
+                                            @for (int i = 0; i < Model.MiscArea.Items.Count; i++)
+                                            {
+                                                var item = Model.MiscArea.Items[i];
+                                                ViewBag.Index = i;
+                                                Html.RenderPartial("_MiscAreaItem", Model);
+                                            }
+                                        </div>
+                                        <div class="text-center">
+                                            <a class="btn btn-primary" href="@Url.ActionLocalized("CreateNewMiscItem", "NewCustomize")"><i class="fa fa-plus-square"></i> Adicionar novo item</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 form-group text-center">
+                <span>@Html.ValidationSummary(true, "", new { @class = "text-danger" })</span>
+                <button class="btn btn-success js-submit" type="submit"><i class="fa fa-check"></i> @Request.GetLocalizedString("ADMIN_CUSTOMIZE_SAVE_BUTTON")</button>
+            </div>
+        </div>
+
+    }
+</section>
+
+@section scripts
+{
+    <script>Customize.init()</script>
+
+    <script>
+        (function ($, MaaS) {
+
+            var $newImagesInput = $('.new-images');
+            var $submitButton = $('.js-submit');
+
+            $newImagesInput.each(function (index) {
+                let hiddenField = $(this).parent().children('.new-images-hidden');
+                let imgPreview = $(this).parent().parent().find('.new-images-preview');
+
+                $(this).uploadfy({
+                    fileType: 'platform',
+                    started: function () {
+                        submitToggle(false);
+                    },
+                    progress: function (percentage) {
+                        console.log(percentage);
+                    },
+                    completed: function (files) {
+                        hiddenField.val(files[0]);
+                        if (imgPreview) {
+                            imgPreview.attr('src', files[0]);
+                        }
+                    },
+                    error: function () {
+                        toastr.error(MaaS.messages.upload_error);
+                    },
+                    finaly: function () {
+                        submitToggle(true);
+                    }
+                });
+            });
+
+            function submitToggle(enable) {
+                if (enable === false) {
+                    $submitButton.button('loading');
+                } else {
+                    $submitButton.button('reset');
+                }
+            }
+        })(window.jQuery, window.MaaS);
+    </script>
+}
+

@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNet.Identity
+@using Application.Modules.Products
+
+@model ProductPageVM
+
+@{
+    ViewBag.Title = Model.Product.Title;
+    ViewBag.Description = Model.Product.Description?.Truncate(155);
+    ViewBag.Url = Url.ActionLocalized("PublicPage", "Products", new { id = Model.Product.FriendlyUrl });
+    ViewBag.Image = Model.Product.GetCoverImageUrl(ProductImageSize.MD);
+}
+
+@section styles
+{
+    @Styles.Render("~/Content/datetime-picker")
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-0">
+    <div id="doubleFreightWarningContainer"></div>
+    <div class="container">
+        @Html.Partial("_ProductTopActions", Model)
+        @Html.Partial("_ProductMainBoard", Model)
+        @Html.Partial("_ProductInfos", Model)
+        @Html.Partial("_RelatedSameSeller", Model)
+        @Html.Partial("_RelatedOther", Model)
+    </div>
+</div>
+
+@if (!User.Identity.IsAuthenticated || !(User.Identity.GetLoginProfile()?.IsBuyer() ?? false))
+{
+    using (Html.BeginForm("AddItemAndProceedToLogin", "Cart", FormMethod.Post, new { id = "frmAddAndProceedToLogin" }))
+    {
+        <input type="hidden" name="id" id="id" value="@Model.Product.Id" />
+        @Html.Hidden("cartCustomFieldIds")
+        @Html.Hidden("cartCustomFieldsValues")
+        @Html.Hidden("quantity", 1)
+        @Html.Hidden("rentalStartDateTime")
+        @Html.Hidden("rentalEndDateTime")
+        @Html.Hidden("multiplier", 0)
+        @Html.Hidden("stockVariant")
+        @Html.Hidden("productAvailabilityId")
+    }
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/scripts/datetime-picker")
+    @Html.Action("PublicPageScript", new { productId = Model.Product.Id })
+
+    <script>
+        var addToCartHidden = @(!Model.ShowAddToCart ? 1 : 0);
+        ProductPublicPage.init();
+    </script>
+
+    @Html.Partial("_RentalScript", Model)
+    @Html.Partial("_ProductWishScript")
+}

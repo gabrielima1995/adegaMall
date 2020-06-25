@@ -1,0 +1,176 @@
+﻿@using Microsoft.AspNet.Identity
+@using Application.Helpers
+@using Presentation.Helpers
+
+@model StoreTemplatesViewModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("MY_STORE_TITLE");
+    var config = MaaSConfig.Current;
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+@section styles
+{
+    @Styles.Render("~/Content/datatable")
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+                @Html.Localized("MY_STORE_TITLE", "h3")
+                @if (config.Payment.Enabled)
+                {
+                    <div class="seller-store-fees m-b-sm">
+                        <strong>@Html.Localized("MY_FEES_TITLE")</strong>: 20% + R$ 0,00
+                        @if (false)
+                        {
+                            <br />
+                            <strong>Chargeback Compartilhado</strong>
+                        }
+                    </div>
+                }
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-7">
+                        @if (!config.Product.Templates.ForceSellerToUseTemplates)
+                        {
+                            <a href="@Url.Action("Index", "Store")">
+                                <i class="fas fa-chevron-left"></i>
+                                @Html.Localized("STORE_BACK_TO_MAIN_LIST")
+                            </a>
+                        }
+                    </div>
+
+                    <div class="col-xs-12 col-md-5">
+                        <div class="btn-group btn-group-justified m-b-md">
+                            @if (Model.CurrentMode == "all")
+                            {
+                                <a href="@Url.Action("Templates", "Store")" class="btn btn-default active">Todos os itens (@Model.AllItems.Count)</a>
+                            }
+                            <a href="@Url.Action("Templates", "Store", new { @mode = "mine" })" class="btn btn-default @Css.If(Model.CurrentMode == "mine", "active")">Meus produtos (@Model.MyItems.Count)</a>
+                            <a href="@Url.Action("Templates", "Store", new { @mode = "available" })" class="btn btn-default @Css.If(Model.CurrentMode == "available", "active")">Modelos (@Model.AvailableItems.Count)</a>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.CurrentMode == "mine" && Model.MyItems.Count == 0)
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <center>
+                                Você ainda não tem nenhum produto. Clique aqui para @Html.ActionLink("criar a partir de um modelo", "Templates", "Store", new { @mode = "available" }).
+                            </center>
+                        </div>
+                    </div>
+                }
+                else if (Model.CurrentMode == "available" && Model.AvailableItems.Count == 0)
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <center>
+                                Ops... Não há mais modelos aqui. Parece que você já adicinou à sua vitrine todos os que estavam disponíveis.
+                            </center>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="store-templates table" id="tblTemplates">
+                            <thead>
+                                <tr>
+                                    <th width="60"></th>
+                                    @Html.Localized("PRODUCT_TITLE_LABEL", "th")
+                                    @Html.Localized("PRODUCT_CATEGORY_LABEL", "th", new { width = "20%" })
+                                    @if (Model.CurrentMode != "available")
+                                    {
+                                        @Html.Localized("PRODUCT_PRICE_LABEL", "th", new { width = "15%" })
+                                        @Html.Localized("STOCK", "th", new { width = "15%" })
+                                    }
+                                    <th width="30"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.CurrentList)
+                                {
+                                    <tr>
+                                        <td data-order="@Dt.Order(item.Title)">
+                                            @if (item.SellerProductId.HasValue)
+                                            {
+                                                <a href="@Url.ActionLocalized("EditProduct", "Store", new { id = item.SellerProductId })">
+                                                    <img src="@ImgHelper.Product(item.CoverImageUrl, 80)" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <img src="@ImgHelper.Product(item.CoverImageUrl, 80)" />
+                                            }
+                                        </td>
+                                        <td data-order="@Dt.Order(item.Title)">
+                                            @if (item.SellerProductId.HasValue)
+                                            {
+                                                <a href="@Url.ActionLocalized("EditProduct", "Store", new { id = item.SellerProductId })">
+                                                    @Html.DisplayFor(model => item.Title)
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                @Html.DisplayFor(model => item.Title)
+                                                <small class="block">
+                                                    <a href="@Url.Action("CreateProduct", "Store", new { templateId = item.TemplateId })">Adicionar à minha vitrine</a>
+                                                </small>
+                                            }
+                                        </td>
+                                        <td data-order="@Dt.Order(item.Category)">@Html.DisplayFor(model => item.Category)</td>
+                                        @if (Model.CurrentMode != "available")
+                                        {
+                                            <td data-order="@Dt.Order(item.Price)">
+                                                @if (item.Price != null)
+                                                {
+                                                    if (item.Price.HasBasePrice)
+                                                    {
+                                                        @Html.DisplayFor(model => item.Price.BasePrice.Value)
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.DisplayFor(model => item.Price.Price.Value)
+                                                    }
+                                                }
+                                            </td>
+                                            <td data-order="@Dt.Order(item.CurrentStock)">@Html.DisplayFor(model => item.CurrentStock)</td>
+                                        }
+                                        <td data-order="@Dt.Order(item.Title)">
+                                            @if (item.SellerProductId.HasValue)
+                                            {
+                                                <a href="@Url.ActionLocalized("DeleteProduct", "Store", new { id = item.SellerProductId })" class="text-danger" title="Remover este produto da minha vitrine" data-toggle="tooltip">
+                                                    <i class="fa fa-trash" style="font-size: 20px"></i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.ActionLocalized("CreateProduct", "Store", new { templateId = item.TemplateId })" class="text-primary" title="Adicionar este produto à minha vitrine" data-toggle="tooltip">
+                                                    <i class="fas fa-plus-square" style="font-size: 24px"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/datatable")
+    <script>StoreTemplates.init()</script>
+}

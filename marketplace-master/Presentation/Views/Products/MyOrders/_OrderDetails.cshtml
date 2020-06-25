@@ -1,0 +1,180 @@
+﻿@model OrderDetailsVM
+
+@{
+    var viewPathFmt = "~/Views/Products/MyOrders/{0}.cshtml";
+    var config = MaaSConfig.Current;
+}
+
+<div class="panel">
+    @if (Model.ShowBoletoPaymentInfo || Model.ShowOfflinePaymentInfo || Model.ShowOnSitePickupInfo)
+    {
+        <div class="panel-body">
+            @if (Model.ShowBoletoPaymentInfo)
+            {
+                <div class="alert alert-warning">
+                    @Html.Localized("MY_ORDERS_BOLETO_TITLE", "h5")
+                    @Html.Localized("MY_ORDERS_BOLETO_INFO", "p")
+                    <p><i class="fa fa-file-text-o"></i> <a href="@(Model.Order.Transaction?.BoletoUrl)" target="_blank">@(Model.Order.Transaction?.BoletoUrl)</a></p>
+                    @if (Model.Order.Transaction?.BoletoBarCode != null)
+                    {
+                        <p><i class="fa fa-barcode"></i> @Html.Localized("MY_ORDERS_BOLETO_BARCODE_LABEL", "span"): @(Model.Order.Transaction?.BoletoBarCode)</p>
+                    }
+                </div>
+            }
+
+            @if (Model.ShowOfflinePaymentInfo)
+            {
+                <div class="alert alert-warning">
+                    @Html.Localized("MY_ORDERS_OFFLINE_PAYMENT_TITLE", "h5")
+                    @Html.Localized("MY_ORDERS_OFFLINE_PAYMENT_INFO", "p")
+                </div>
+            }
+
+            @if (Model.ShowOnSitePickupInfo)
+            {
+                <div class="alert alert-info">
+                    @Html.Localized("MY_ORDERS_ONSITEPICKUP_ADDRESS_TITLE", "h5")
+                    @Html.Localized("MY_ORDERS_ONSITEPICKUP_ADDRESS_INFO", "p")
+                    @(Model.Order.ShippingAddress.ToString())
+                </div>
+            }
+        </div>
+    }
+
+<ul class="list-group">
+    <li class="list-group-item list-group-item-split">
+        <strong>Forma de pagamento</strong>
+        <span class="text-right">@Model.Order.PaymentMethod.DisplayDescription()</span>
+    </li>
+
+    @if (Model.ShowInstallmentsCount)
+    {
+        <li class="list-group-item list-group-item-split">
+            <strong>@Request.GetLocalizedString("INSTALLMENTS_COUNT")</strong>
+            <span class="text-right">@Model.Order.Transaction.Installments x @config.DefaultCurrency@((Model.Order.Transaction.Amount / Model.Order.Transaction.Installments).DisplayDecimal(2))</span>
+        </li>
+    }
+
+    <li class="list-group-item list-group-item-split">
+        <strong>@Request.GetLocalizedString("ORDER_DATE_LABEL")</strong>
+        <span class="text-right">@Model.Order.CreatedAt.DisplayDate()</span>
+    </li>
+    <li class="list-group-item list-group-item-split">
+        <strong>@Request.GetLocalizedString("ORDER_STATUS_LABEL")</strong>
+        <span class="text-right">@Model.Order.Status.DisplayDescription()</span>
+    </li>
+
+        @if (Model.ShowShipping)
+        {
+            <li class="list-group-item list-group-item-split">
+                <strong>@Request.GetLocalizedString("CART_SHIPPING_METHOD_LABEL")</strong>
+                <span class="text-right">
+                    @Model.ShippingMethod.DisplayDescription() |
+                    @if (Model.TrackingLink.OK)
+                    {
+                        @:@Html.Localized("ORDER_TRACKING_CODE", "a", new { href = Model.TrackingLink.Result.ToString(), target = "_blank" })
+                    }
+                    else
+                    {
+                        <span>@Model.TrackingLink.Errors.ToSimpleString()</span>
+                    }
+                </span>
+            </li>
+            if (Model.ShowDeliveryDate)
+            {
+                <li class="list-group-item list-group-item-split">
+                    <strong>@Request.GetLocalizedString("CART_SHIPPING_DAYS_LABEL")</strong>
+                    <span class="text-right">
+                        @Model.DeliveryDate
+                    </span>
+                </li>
+            }
+        }
+
+        <li class="list-group-item list-group-item-split">
+            <strong>@Request.GetLocalizedString("ORDER_SELLER_LABEL")</strong>
+            <span class="text-right">
+                @if (Model.Order.IsPaid || Model.ShippingMethod == Domain.Entities.StoreModule.ShippingMethod.NoShipping)
+                {
+                    @Model.Order.Seller.PublicProfileName @:(@Html.DisplayFor(model => model.Order.Seller.Email))
+                }
+                else
+                {
+                    @Model.Order.Seller.PublicProfileName
+                }
+            </span>
+        </li>
+
+    @if (config.Seller.Phone.Enabled)
+    {
+        if (Model.Order.IsPaid || Model.ShippingMethod == Domain.Entities.StoreModule.ShippingMethod.NoShipping)
+        {
+            <li class="list-group-item list-group-item-split">
+                <strong>@Request.GetLocalizedString("ORDER_SELLER_PHONE_LABEL")</strong>
+                <span class="text-right">@Model.Order.Seller.PhoneNumber</span>
+            </li>
+        }
+        else
+        {
+            <li class="list-group-item list-group-item-split">
+                <strong>@Request.GetLocalizedString("ORDER_SELLER_PHONE_LABEL")</strong>
+                <span class="text-right">@Request.GetLocalizedString("SELLER_DETAILS_HIDDEN_UNTIL_DEAL_CLOSED")</span>
+            </li>
+        }
+    }
+
+    @if (Model.ShowCancelPolicy)
+    {
+        <li class="list-group-item list-group-item-split">
+            @Html.Localized("CANCEL_ORDER_POLICY_LABEL", "strong")
+            <span class="text-right">@Request.GetLocalizedString(string.Format(Model.CancelOrderPolicyLabel, Model.CancelOrderPolicyHours))</span>
+        </li>
+    }
+
+    @if (Model.ShowAddressSeller)
+    {
+        <li class="list-group-item list-group-item-split">
+            @Html.Localized("ORDER_SELLER_ADDRESS_LABEL", "strong")
+            <span class="text-right">@Model.Order.Seller.Address</span>
+        </li>
+    }
+
+    @if (Model.ShowCancelOption)
+    {
+        if (Model.CanCancelRental)
+        {
+            <li class="list-group-item list-group-item-split">
+                <button class="btn btn-danger js-cancel-rental">@Request.GetLocalizedString("ORDER_BUYER_CANCEL_PRODUCT_RENTAL")</button>
+            </li>
+        }
+        else
+        {
+            <li class="list-group-item list-group-item-split">
+                <div>
+                    <button class="btn btn-danger" disabled>@Request.GetLocalizedString("ORDER_BUYER_CANCEL_PRODUCT_RENTAL")</button>
+                    <i class="fa fa-info-circle" aria-hidden="true" title="@Request.GetLocalizedString(Model.CannotCancelOrderLabel)" data-toggle="tooltip" style="color: #f0ad4e;"></i>
+                </div>
+            </li>
+        }
+    }
+
+    @Html.Partial("_OrderTransactionWarrantyInfo")
+</ul>
+</div>
+
+@if (config.Product.Order.ExtraInfoField.Enabled && Model.Order.ExtraInfo != null)
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @Html.Localized("ORDER_EXTRA_INFO_TITLE", "label")
+            @Html.Markdown(Model.Order.ExtraInfo)
+        </div>
+    </div>
+}
+
+@Html.Partial(string.Format(viewPathFmt, "_OrderDetailsProducts"), Model)
+
+@if (config.Seller.UserRatings.Enabled && Model.UserRating != null)
+{
+    @Html.Partial("~/Views/Products/_OrderReview.cshtml", Model.UserRating)
+}

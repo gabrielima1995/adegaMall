@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model Presentation.Models.ScheduleViewModels.NewAvailabilityVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("NEW_AVAILABILITY_SCHEDULE_LINK");
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+@section styles
+{
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+
+            <div class="col-xs-12">
+                <h3>@ViewBag.Title</h3>
+                @Html.Localized("NEW_AVAILABILITY_DESCRIPTION", "p")
+                @Html.Partial("_NewAvailabilityForm", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section plugins
+{
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var $productSelect = $('.js-product');
+            var $saveButton = $('#js-submit');
+            var $daysOfWeekContainer = $('.js-days-of-week-container');
+
+            function getIsSpecificProductChecked() {
+                return $('input[type=radio][name=IsSpecificProduct]:checked').val() === "true";
+            }
+
+            function loadDaysOfWeekForm(productId) {
+                Globalize.loadCldr.then(function () {
+                    $saveButton.button("loading");
+
+                    $.ajax({
+                        url: '@Url.ActionLocalized("NewAvailabilityDaysOfWeek", "Schedule")',
+                        data: {
+                            productId: productId
+                        },
+                        success: function (data) {
+                            $daysOfWeekContainer.html(data);
+
+                            MaaS.initPlugins($daysOfWeekContainer);
+                        },
+                        complete: function() {
+                            $saveButton.button("reset");
+                        }
+                    });
+                });
+            }
+
+            function checkDaysOfWeekForm(isSpecificProductChecked) {
+                if (isSpecificProductChecked) {
+                    loadDaysOfWeekForm($productSelect.val());
+                } else {
+                    $productSelect.val(null);
+                    loadDaysOfWeekForm(null);
+                }
+            }
+
+            function checkSpecificProduct(checked) {
+                $('.js-product-container').css('display', checked ? 'block' : 'none');
+                $('.js-all-store-container').css('display', !checked ? 'block' : 'none');
+
+                checkDaysOfWeekForm(checked);
+            }
+
+            $('input[type=radio][name=IsSpecificProduct]').change(function () {
+                checkSpecificProduct(this.value === "true");
+            });
+
+            $productSelect.change(function() {
+                checkDaysOfWeekForm(true);
+            });
+
+            checkSpecificProduct(getIsSpecificProductChecked());
+        });
+    </script>
+}

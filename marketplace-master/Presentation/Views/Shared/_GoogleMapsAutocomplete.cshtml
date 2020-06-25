@@ -1,0 +1,39 @@
+﻿@{
+    var config = MaaSConfig.Current;
+    var parts = new List<string>();
+
+    if (!string.IsNullOrEmpty(Request["location"]))
+    {
+        parts.Add(Request["location"]);
+    }
+
+    if (!string.IsNullOrEmpty(Request["address"]))
+    {
+        parts.Add(Request["address"]);
+    }
+
+    var inputValue = string.Join(" - ", parts);
+}
+
+@if (config.Search.Enabled && config.Search.SearchFields.Location)
+{
+    <div class="form-group">
+        <div class="input-group">
+            <input id="GoogleMapsAutocomplete" name="" placeholder="@Request.GetLocalizedString("PRODUCT_FILTER_LOCATION_INPUT")" class="form-control" value="@inputValue" />
+
+            @Html.Hidden("location", Request.QueryString["location"], new { id = "hdnLocationName" })
+            @Html.Hidden("address", Request.QueryString["address"], new { id = "hdnLocationAddress" })
+
+            @Html.Hidden("lat", Request.QueryString["lat"], new { id = "hdnLocationLat" })
+            @Html.Hidden("lng", Request.QueryString["lng"], new { id = "hdnLocationLng" })
+
+            @Html.Hidden("boundsay", Request.QueryString["boundsay"], new { id = "hdnBoundsAY" })
+            @Html.Hidden("boundsax", Request.QueryString["boundsax"], new { id = "hdnBoundsAX" })
+            @Html.Hidden("boundsby", Request.QueryString["boundsby"], new { id = "hdnBoundsBY" })
+            @Html.Hidden("boundsbx", Request.QueryString["boundsbx"], new { id = "hdnBoundsBX" })
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default" id="js-clear-autocomplete"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </div>
+}

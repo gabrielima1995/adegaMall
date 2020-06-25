@@ -1,0 +1,75 @@
+﻿@using Presentation.Helpers
+@model IEnumerable<Presentation.Models.DisputeViewModels.DisputeViewModel>
+
+@{
+    ViewBag.Title = "Disputas";
+    var config = MaaSConfig.Current;
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-comments" aria-hidden="true"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-body table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Comprador</th>
+                        <th>Vendedor</th>
+                        <th>Pedido</th>
+                        <th>Status</th>
+                        <th>Data de Abertura</th>
+                        <th>Resolução Automática</th>
+                        <th>Mediação Solicitada</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td data-order="@Dt.Order(item.DisputeId)">
+                                <a href="@Url.ActionLocalized("Details", "Dispute", new { orderId = item.OrderId, area = "" })">@item.DisputeId.Truncate(10)</a>
+                            </td>
+                            <td data-order="@Dt.Order(item.BuyerName)">
+                                <a href="@Url.ActionLocalized("Details", "Buyers", new { id = item.BuyerId})">@item.BuyerName</a>
+                            </td>
+                            <td data-order="@Dt.Order(item.SellerName)">
+                                <a href="@Url.ActionLocalized("Details", "Sellers", new { id = item.SellerId })">@item.SellerName</a>
+                            </td>
+                            <td data-order="@Dt.Order(item.OrderId)">
+                                <a href="@Url.ActionLocalized("Details", "Orders", new { id = item.OrderId })">@item.OrderId.Truncate(10)</a>
+                            </td>
+                            <td data-order="@Dt.Order(item.Status.ToString())">
+                                @item.Status.DisplayDescription()
+                            </td>
+                            <td data-order="@Dt.Order(item.CreatedAt)">
+                                @Html.DisplayFor(model => item.CreatedAt)
+                            </td>
+                            <td data-order="@Dt.Order(item.AutoTransferDeadline)">
+                                @Html.DisplayFor(model => item.AutoTransferDeadline)
+                            </td>
+                            <td data-order="@Dt.Order(item.MediationRequested)">
+                                @Request.GetLocalizedString(item.MediationRequested ? "AFFIRMATIVE_LABEL" : "NEGATIVE_LABEL")
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        DataTableCustom.create('table', {
+            'order': [[5, 'desc']]
+        });
+    </script>
+}

@@ -1,0 +1,82 @@
+﻿@using Microsoft.AspNet.Identity
+@using Application.Sellers
+
+@model Application.Sellers.SellerProfileViewModel
+
+@{
+    var viewPathFmt = "~/Views/Shared/{0}.cshtml";
+
+    var config = MaaSConfig.Current;
+
+    var enableSkip = ViewData.ContainsKey("EnableSkip");
+
+    string controller = (ViewBag.PostController ?? ViewContext.RouteData.Values["controller"]).ToString();
+    string action = (ViewBag.PostAction ?? ViewContext.RouteData.Values["action"]).ToString();
+
+    var isManagePage = Html.IsCurrent("Manage");
+    var loginProfile = isManagePage ? User.Identity.GetLoginProfile() : null;
+
+    ViewBag.AllFields = ViewBag.AllFields ?? true;
+    ViewBag.CompleteRegister = ViewBag.CompleteRegister ?? true;
+    ViewBag.SocialMediaProfiles = ViewBag.SocialMediaProfiles ?? false;
+}
+
+@if (config.Seller.SkipToContent.Enabled && enableSkip)
+{
+    <div class="panel-heading text-right">
+        <button id="btnConfirmSkip" class="btn btn-default" onclick="confirmSkip()">@Html.Localized("BTN_SKIP_TO_CONTENT") <i class="fas fa-fast-forward"></i></button>
+    </div>
+
+    <div id="confirmSkip" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">@Html.Localized("SKIP_TO_CONTENT")</h4>
+                </div>
+                <div class="modal-body">
+                    <p>@Html.Localized("CONFIRM_SKIP_QUESTION")</p>
+                    <p class="text-warning"><small>@Html.Localized("CONFIRM_SMALL_SKIP_QUESTION")</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Html.Localized("BTN_SKIP_CANCEL")</button>
+                    <a href="/manage"><button type="button" class="btn btn-primary">@Html.Localized("BTN_SKIP_CONFIRM") <i class="fas fa-fast-forward"></i></button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm(action, controller, new { returnUrl = ViewBag.ReturnUrl, lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form", enctype = "multipart/form-data", autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(i => i.Nickname)
+
+    <!-- https://stackoverflow.com/a/30064656/484108 trick to disable chrome's autofill -->
+    <input autocomplete="false" name="hidden" type="text" style="display:none">
+
+    if (isManagePage)
+    {
+        <div class="foto-perfil visible-xs visible-sm m-b-md">
+            <img src="@loginProfile.GetAvatarUrl()" alt="@loginProfile.Name">
+            <a href="#" class="action edit js-change-avatar @Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.ProfileEdit)"><i class="fas fa-pen"></i></a>
+            <a href="#" class="action trash js-remove-avatar @Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.ProfileEdit)"><i class="fas fa-trash"></i></a>
+            <input type="file" id="file" name="file" class="js-avatar-file" style="display: none" />
+        </div>
+    }
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.Partial(string.Format(viewPathFmt, "_SellerGeneralTabForm"), Model)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.Localized("SAVE_CHANGES_BUTTON", "button", new { type = "submit", @class = $"btn btn-primary btn-block {Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.ProfileEdit)}" })
+            </div>
+        </div>
+    </div>
+}

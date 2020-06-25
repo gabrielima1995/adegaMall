@@ -1,0 +1,66 @@
+﻿@model Application.Modules.Products.Variants.ProductStockVariantItemViewModel
+
+@{
+    var isEditable = (bool)(ViewData["VariantsIsEditable"] ?? true);
+}
+
+<div class="row categoria stock-variant">
+    @using (Html.BeginCollectionItem("StockVariants", ViewData.ModelState.IsValid))
+    {
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="col-xs-12 col-sm-4 categoria-opcao">
+            <div class="form-group">
+                @if (isEditable)
+                {
+                    @Html.DropDownListFor(m => m.StockVariant,
+                        new SelectList(Model.StockVariants, "Id", "Name", Model.StockVariant),
+                        Request.GetLocalizedString("PRODUCT_STOCK_VARIANT_INPUT"),
+                        new { @class = "form-control js-variant-stock js-select" })
+                    @Html.ValidationMessageFor(model => model.StockVariant, "", new { @class = "text-danger" })
+                }
+                else
+                {
+                    @Html.DropDownListFor(m => m.StockVariant,
+                        new SelectList(Model.StockVariants, "Id", "Name", Model.StockVariant),
+                        new { @class = "form-control", disabled = "disabled" })
+                    @Html.HiddenFor(model => model.StockVariant)
+                }
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-3">
+            @if (Model.Id != 0)
+            {
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">@Request.GetLocalizedString("PRODUCT_STOCK_VARIANT_STOCK_CURRENT_LABEL")</span>
+                        @Html.EditorFor(i => i.CurrentStock, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.CurrentStock, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.CurrentStock)
+                </div>
+            }
+        </div>
+
+        <div class="col-xs-12 col-sm-3">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">@Request.GetLocalizedString("PRODUCT_STOCK_VARIANT_STOCK_UPDATED_LABEL")</span>
+                    @Html.EditorFor(i => i.UpdatedStock, new { htmlAttributes = new { @class = "form-control", placeholder = Request.GetLocalizedString("PRODUCT_STOCK_VARIANT_STOCK_UPDATED_INPUT") } })
+                </div>
+                @Html.ValidationMessageFor(model => model.UpdatedStock, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        if (isEditable)
+        {
+            <div class="col-xs-12 col-sm-2">
+                <div class="acoes">
+                    <a href="javascript:void(0)" class="adicionar"><span class="glyphicon glyphicon-plus-sign plus"></span></a>
+                    <a href="javascript:void(0)" class="remover"><span class="glyphicon glyphicon-minus-sign minus"></span></a>
+                </div>
+            </div>
+        }
+    }
+</div>

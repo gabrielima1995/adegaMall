@@ -1,0 +1,39 @@
+﻿@model IList<Application.Modules.Portfolio.PortfolioSocialMediaViewModel>
+
+@Html.Localized("SOCIAL_MEDIA_TITLE", "span", new { @class = "text-black text-uppercase font-size-16 block bold margin-bottom-30" })
+
+<ul class="social-media-list">
+    @foreach (var socialMedia in Model)
+    {
+        var provider = socialMedia.SocialNetwork.Name;
+        var removeLink = Url.ActionLocalized("RemoveLink", "SocialMedia", new { provider = provider });
+
+        <li>
+            <img src="@socialMedia.SocialNetwork.Image" />
+
+            <div class="social-info">
+                <span class="social-media">@provider</span>
+
+                @if (socialMedia.IsLinked)
+                {
+                    <span class="linkedto">
+                        @Html.Localized("LINKED_TEXT") <a href="@removeLink" data-toggle="tooltip" title="@Request.GetLocalizedString("RELINK_ACCOUNT_BUTTON")" data-placement="top" class="text-orange bold underline">@socialMedia.SellerSocialMedia.Nickname</a>
+                    </span>
+
+                    <span class="followers">
+                        @socialMedia.SellerSocialMedia.Followers.DisplayShortNumber() @Html.Localized("SELLER_FOLLOWERS_COUNT") <em>(@Html.Localized("UPDATED_TEXT") @socialMedia.SellerSocialMedia.UpdatedAt.DisplayDateTime()</em>
+                    </span>
+                }
+                else
+                {
+                    using (Html.BeginForm("ExternalLogin", "SocialMedia", new { lang = Request.GetCurrentLang() }))
+                    {
+                        @Html.AntiForgeryToken()
+                        
+                        @Html.Localized("LINK_ACCOUNT_BUTTON", "button", new { type = "submit", @class = "btn btn-primary", id = provider, name="provider", value = provider })
+                    }
+                }
+            </div>
+        </li>
+    }
+</ul>

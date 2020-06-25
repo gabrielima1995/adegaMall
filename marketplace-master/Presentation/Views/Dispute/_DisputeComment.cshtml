@@ -1,0 +1,24 @@
+﻿@using Presentation.Helpers
+@model Presentation.Models.DisputeViewModels.DisputeCommentViewModel
+
+@{
+    var isSeller = Model.SenderRole == "Seller";
+    var isBuyer = Model.SenderRole == "Buyer";
+    var isSystem = Model.SenderRole == "System";
+    var isAdmin = !isSeller && !isBuyer && !isSystem;
+
+    var roleLocalized =
+        isSeller ? Request.GetLocalizedString("ORDER_SELLER_LABEL") :
+        isBuyer ? Request.GetLocalizedString("ORDER_BUYER_LABEL") :
+        isSystem ? Request.GetLocalizedString("DISPUTE_SYSMESSAGE_LABEL") :
+        Request.GetLocalizedString("DISPUTE_ADMIN_LABEL");
+}
+
+<div class="dispute-msg @Css.If(isBuyer, "dispute-msg-buyer") @Css.If(isSystem || isAdmin, "dispute-msg-admin")">
+    <img class="img-circle" src="@Model.SenderAvatar" alt="@(Model.SenderName ?? Model.SenderRole)" width="50" height="50" />
+    <div class="dispute-msg-bubble">
+        <span class="dispute-msg-role">@roleLocalized</span>
+        <p class="m-b-0">@Model.Message</p>
+        <small class="text-muted">@Model.DatePosted</small>
+    </div>
+</div>

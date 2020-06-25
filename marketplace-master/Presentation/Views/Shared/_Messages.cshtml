@@ -1,0 +1,27 @@
+﻿@{
+    var successMessage = this.GetSuccessMessage();
+    var warningMessage = this.GetWarningMessage();
+    var errorMessage = this.GetErrorMessage();
+
+    if (!string.IsNullOrEmpty(successMessage))
+    {
+
+        <script>
+            toastr.success('@successMessage');
+        </script>
+    }
+
+    if (!string.IsNullOrEmpty(warningMessage))
+    {
+        <script>
+            toastr.warning('@warningMessage');
+        </script>
+    }
+
+    if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <script>
+            toastr.error('@errorMessage');
+        </script>
+    }
+}

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Domain.Entities.CreditsPack>
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("CREDITS_PACK_TITLE");
+    var loginProfile = User.Identity.GetLoginProfile();
+
+    var colSize = "col-xs-12 col-sm-6 col-md-3";
+}
+
+<div class="main-content bg-image-2 padding-top-120 padding-bottom-120">
+    <div class="container">
+        <div class="row">
+            @foreach (var pack in Model)
+            {
+                <div class="@colSize">
+                    <div class="box-content text-center" style="margin-bottom:64px">
+                        <div>
+                            <h2>@pack.NameLocalized(Request.GetCurrentLang())</h2>
+                        </div>
+                        <hr />
+                        <div>
+                            <small>@pack.DescriptionLocalized(Request.GetCurrentLang())</small>
+                        </div>
+                        <br />
+                        <h2><i class="fas fa-coins"></i> @pack.CreditsAmount @Request.GetLocalizedString("CREDITS_LABEL")</h2>
+                        <h2>@MaaSConfig.Current.DefaultCurrency @pack.Price.RoundTo2Places()</h2>
+                        @if (MaaSConfig.Current.Quote.LeadSales.CreditsExpire)
+                        {
+                            @Html.Localized("CREDITS_PACK_DESCRIPTION_DAYS", "small", null, pack.ValidityDays.GetValueOrDefault())
+                            <br />
+                        }
+                        @if (MaaSConfig.Current.Quote.LeadSales.IndividualPacks.ShowPricePerCredit)
+                        {
+                            @Html.Localized("CREDITS_PACK_COST_BENEFIT", "small", new { @class = "text-sucess" }, MaaSConfig.Current.DefaultCurrency + " " + ((pack.Price / pack.CreditsAmount).RoundTo2Places()))
+                        }
+                        <h5><br /></h5>
+                        <a href="@Url.ActionLocalized("PurchaseCredits", "LeadSales", new { packId = pack.Id.ToString() } )" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> @Request.GetLocalizedString("CREDITS_PACK_BUY_BUTTON")</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

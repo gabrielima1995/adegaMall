@@ -1,0 +1,154 @@
+﻿@model Domain.Entities.IWithCustomFields
+
+@{
+    var lang = Request.GetCurrentLang();
+    int index = (int)ViewData["Index"];
+
+    ViewBag.HasCustomFileField = true;
+    var requireModeration = ViewBag.RequireModeration ?? true;
+    var moderationEnabled = ViewBag.ModerationIsEnable ?? true;
+}
+
+@{
+    var field = Model.CustomFieldDefinitions.ElementAt(index);
+    var blockChangesRazor = moderationEnabled && field.Value.BlockChangesAfterApprovedInModeration && !requireModeration;
+    var blockChangesHtml = moderationEnabled && field.Value.BlockChangesAfterApprovedInModeration && !requireModeration ? "disabled" : "";
+
+    if (Model.CustomFields.ContainsKey(field.Key.ToString()))
+    {
+        if (field.Value.InputType != Domain.Entities.CustomFieldInputType.Checkbox)
+        {
+            <label>@field.Value.NameLocalized(lang)</label>
+        }
+
+        switch (field.Value.InputType)
+        {
+            case Domain.Entities.CustomFieldInputType.Text:
+                if (field.Value.DataType == Domain.Entities.CustomFieldDataType.Number)
+                {
+                    if (blockChangesRazor)
+                    {
+                        Write(Html.TextBoxFor(Model => Model.CustomFields[field.Key.ToString()], new { @class = "form-control js-customfield", type = "number", placeholder = field.Value.PlaceholderLocalized(lang), @disabled = "disabled" }));
+                        Write(Html.HiddenFor(Model => Model.CustomFields[field.Key.ToString()]));
+                    }
+                    else
+                    {
+                        Write(Html.TextBoxFor(Model => Model.CustomFields[field.Key.ToString()], new { @class = "form-control js-customfield", type = "number", placeholder = field.Value.PlaceholderLocalized(lang) }));
+                    }
+                }
+                else
+                {
+                    if (blockChangesRazor)
+                    {
+                        Write(Html.TextBoxFor(Model => Model.CustomFields[field.Key.ToString()], new { @class = "form-control js-customfield", placeholder = field.Value.PlaceholderLocalized(lang), @disabled = "disabled" }));
+                        Write(Html.HiddenFor(Model => Model.CustomFields[field.Key.ToString()]));
+                    }
+                    else
+                    {
+                        Write(Html.TextBoxFor(Model => Model.CustomFields[field.Key.ToString()], new { @class = "form-control js-customfield", placeholder = field.Value.PlaceholderLocalized(lang) }));
+                    }
+                }
+                break;
+
+            case Domain.Entities.CustomFieldInputType.MultilineText:
+                if (blockChangesRazor)
+                {
+                    Write(Html.TextAreaFor(Model => Model.CustomFields[field.Key.ToString()], new { @class = "form-control js-customfield", placeholder = field.Value.PlaceholderLocalized(lang), @disabled = "disabled" }));
+                    Write(Html.HiddenFor(Model => Model.CustomFields[field.Key.ToString()]));
+                }
+                else
+                {
+                    Write(Html.TextAreaFor(Model => Model.CustomFields[field.Key.ToString()], new { @class = "form-control js-customfield", placeholder = field.Value.PlaceholderLocalized(lang) }));
+                }
+                break;
+
+            case Domain.Entities.CustomFieldInputType.Options:
+                <div>
+                    @{
+                        var list = field.Value.Options.Select(x => x.Name).ToList();
+                        var currentValue = Model.CustomFields[field.Key.ToString()];
+                        list.Sort();
+                        if (blockChangesRazor)
+                        {
+                            Write(Html.DropDownListFor(Model => Model.CustomFields[field.Key.ToString()], new SelectList(list, currentValue), field.Value.PlaceholderLocalized(lang), new { @class = "form-control js-customfield", @disabled = "disabled" }));
+                            Write(Html.HiddenFor(Model => Model.CustomFields[field.Key.ToString()]));
+                        }
+                        else
+                        {
+                            Write(Html.DropDownListFor(Model => Model.CustomFields[field.Key.ToString()], new SelectList(list, currentValue), field.Value.PlaceholderLocalized(lang), new { @class = "form-control js-customfield" }));
+                        }
+                    }
+                </div>
+                break;
+
+            case Domain.Entities.CustomFieldInputType.Checkbox:
+                <div>
+                    @{
+                        string id = $@"CustomFields[{field.Key.ToString()}]";
+                        string value;
+                        bool isChecked = Model.CustomFields.TryGetValue(field.Key.ToString(), out value) && value.Equals("true", StringComparison.OrdinalIgnoreCase);
+                        <label>
+                            <input class="js-customfield" name="@id" id="@id" type="checkbox" value="true" @(isChecked ? "checked" : "") @blockChangesHtml />
+                            &ensp;@field.Value.NameLocalized(lang)
+                            @Html.Hidden(id, isChecked)
+                        </label>
+                    }
+                </div>
+                break;
+
+            case Domain.Entities.CustomFieldInputType.DatePicker:
+                if (field.Value.DataType == Domain.Entities.CustomFieldDataType.Date)
+                {
+                    if (blockChangesRazor)
+                    {
+                        Write(Html.TextBoxFor(Model => Model.CustomFields[field.Key.ToString()], new { @class = "form-control date-picker datemask js-customfield", placeholder = field.Value.PlaceholderLocalized(lang), @disabled = "disabled" }));
+                        Write(Html.HiddenFor(Model => Model.CustomFields[field.Key.ToString()]));
+                    }
+                    else
+                    {
+                        Write(Html.TextBoxFor(Model => Model.CustomFields[field.Key.ToString()], new { @class = "form-control date-picker datemask js-customfield", placeholder = field.Value.PlaceholderLocalized(lang) }));
+                    }
+                }
+                else
+                {
+                    if (blockChangesRazor)
+                    {
+                        Write(Html.TextBoxFor(Model => Model.CustomFields[field.Key.ToString()], new { @class = "form-control datetimemask js-customfield", placeholder = field.Value.PlaceholderLocalized(lang), @disabled = "disabled" }));
+                        Write(Html.HiddenFor(Model => Model.CustomFields[field.Key.ToString()]));
+                    }
+                    else
+                    {
+                        Write(Html.TextBoxFor(Model => Model.CustomFields[field.Key.ToString()], new { @class = "form-control datetimemask js-customfield", placeholder = field.Value.PlaceholderLocalized(lang) }));
+                    }
+                }
+                break;
+
+            case Domain.Entities.CustomFieldInputType.File:
+                <div>
+                    @{Html.RequireScript("/assets/js/saas/ondemand/CustomFieldFile.js");}
+                    @Html.HiddenFor(Model => Model.CustomFields[field.Key.ToString()], new { @class = "js-file-hidden", id = "file-hidden-" + field.Key.Substring() })
+                    @if (blockChangesRazor)
+                    {
+                        @Html.TextBox("cf_" + field.Value.GetHashCode().ToString(), Model.CustomFields[field.Key.ToString()], new { type = "file", @class = "js-file js-customfield", id = "file-" + field.Key.Substring(), @disabled = "disabled" })
+                        @Html.HiddenFor(Model => Model.CustomFields[field.Key.ToString()]);
+                    }
+                    else
+                    {
+                        @Html.TextBox("cf_" + field.Value.GetHashCode().ToString(), Model.CustomFields[field.Key.ToString()], new { type = "file", @class = "js-file js-customfield", id = "file-" + field.Key.Substring() })
+
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.CustomFields[field.Key.ToString()]))
+                    {
+                        <br />
+                        <a class="js-customfield" target="_blank" href="@Model.CustomFields[field.Key.ToString()]"><i class="fas fa-paperclip"></i> <u>Ver arquivo existente</u></a>
+                    }
+                </div>
+                break;
+
+            default:
+                break;
+        }
+
+        @Html.ValidationMessageFor(model => model.CustomFields[field.Key.ToString()], "", new { @class = "text-danger" })
+    }
+}

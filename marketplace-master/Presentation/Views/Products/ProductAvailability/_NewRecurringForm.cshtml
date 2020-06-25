@@ -1,0 +1,118 @@
+﻿@using Domain.Modules.StoreModule.Entities
+@model Presentation.Models.ProductViewModels.RecurringProductAvailabilityVM
+
+@{
+    var daysOfWeek = ViewBag.DaysOfWeek as Dictionary<DayOfWeek, string>;
+    var recurringUnits = ViewBag.RecurringUnits as Dictionary<RecurringProductAvailabilityUnit, string>;
+}
+
+@using (Html.BeginForm("NewRecurring", "ProductAvailability", new { productId = Model.ProductId, lang = Request.GetCurrentLang(), area = "" }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ProductId)
+
+    if (Model.EndTimeDisabled)
+    {
+        @Html.HiddenFor(model => model.EndTime, new { @class = "js-availability-end-time" })
+    }
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <div class="col-xs-12">
+                            @Html.LabelFor(model => model.UnitValue)
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.UnitValue, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                        </div>
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(model => model.Unit, new SelectList(recurringUnits, "Key", "Value", Model.Unit), new { @class = "js-recurring-unit js-select" })
+                            @Html.ValidationMessageFor(model => model.UnitValue, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group js-recurring-daysofweek-container">
+                        @Html.LabelFor(model => model.DaysOfWeek)
+                        
+                        @foreach (var dayOfWeek in daysOfWeek)
+                        {
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="@nameof(Model.DaysOfWeek)" id="@nameof(Model.DaysOfWeek)" value="@dayOfWeek.Key" @(Model.DaysOfWeek.Contains(dayOfWeek.Key) ? "checked" : "") />
+                                    @Request.GetLocalizedString(dayOfWeek.Value)
+                                </label>
+                            </div>
+                        }
+
+                        @Html.ValidationMessageFor(model => model.DaysOfWeek, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            @Html.Localized("PRODUCT_AVAILABILITY_TIME_LABEL", "label")
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.StartTime, new { @class = "form-control js-time js-availability-start-time", placeholder = "___:___", style = "margin-left: 1px;" })
+                                <span class="input-group-addon" style="padding: 6px">
+                                    -
+                                </span>
+                                @Html.TextBoxFor(model => model.EndTime, new { @class = "form-control js-time js-availability-end-time", placeholder = "___:___", style = "margin-left: -1px;" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CurrentStock)
+                                @Html.EditorFor(model => model.CurrentStock, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+
+                                @Html.ValidationMessageFor(model => model.CurrentStock, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @if (!Model.DiscountDisabled)
+                        {
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Discount)
+                                    <div class="input-group">
+                                        @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+
+                                    @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            @Html.HiddenFor(i => i.Discount, new { Value = "0" })
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block btn-lg">
+                    @Html.Localized("SAVE_PRODUCT_AVAILABILITY_BUTTON")
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <a href="@Url.ActionLocalized("EditProduct", "Store", new { id = Model.ProductId, tab = "product-availability", area = "" })" class="btn btn-default btn-block btn-lg">
+                    @Html.Localized("BACK_TO_PRODUCT_AVAILABILITIES_BUTTON")
+                </a>
+            </div>
+        </div>
+    </div>
+}

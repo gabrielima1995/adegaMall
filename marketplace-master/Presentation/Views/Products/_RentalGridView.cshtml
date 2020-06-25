@@ -1,0 +1,125 @@
+﻿@using Domain.Modules.StoreModule.Entities;
+@model Domain.DTO.RentalGridView
+
+@{
+    var totalLines = Model.Days.Max(i => i.TotalPeriods);
+    var totalDays = MaaSConfig.Current.Product.BusinessModel.Rental.GridView.Days;
+    var totalPeriods = MaaSConfig.Current.Product.BusinessModel.Rental.GridView.Periods;
+
+    var firstDate = Model.Days[0].Day;
+
+    var previousUrl = firstDate.Date <= DateTime.Today ? null : GenerateDateUrl(firstDate.AddDays(-totalDays));
+    var nextUrl = GenerateDateUrl(firstDate.AddDays(totalDays));
+
+    var titleLabel = "RENTAL_GRID_TITLE_INFO";
+
+    if (Model.Product.IsPackageType)
+    {
+        titleLabel += "_WHEN_PACKAGE";
+    }
+
+    if (ViewBag.ForceSelectPeriod == null)
+    {
+        ViewBag.ForceSelectPeriod = false;
+    }
+
+    if (ViewBag.Quantity == null)
+    {
+        ViewBag.Quantity = 1;
+    }
+
+    if (ViewBag.ShowDiscount == null)
+    {
+        ViewBag.ShowDiscount = true;
+    }
+
+    var canSelectPeriod = !Model.Product.IsPackageType || ViewBag.ForceSelectPeriod;
+    var showDiscount = ViewBag.ShowDiscount == true;
+}
+
+@functions {
+    string GenerateDateUrl(DateTime date)
+    {
+        return Url.Action("RentalGrid", "Products", new { productId = Model.Product.Id, year = date.Year, month = date.Month, day = date.Day, ignoreOrderProductId = ViewBag.IgnoreOrderProductId, ignoreOrderProductRentalInfoId = ViewBag.IgnoreOrderProductRentalInfoId, quantity = ViewBag.Quantity, productAvailabilityId = ViewBag.ProductAvailabilityId, forceSelectPeriod = ViewBag.ForceSelectPeriod, showDiscount = ViewBag.ShowDiscount, start = ViewBag.StartDate?.ToString("yyyy-MM-dd"), time = ViewBag.StartTime });
+    }
+}
+
+<div class="row">
+    <div class="col-xs-2 col-md-3">
+        @if (previousUrl != null)
+        {
+            <a href="@previousUrl" class="btn btn-link js-rental-grid-prev"><i class="fa fa-chevron-left"></i></a>
+        }
+    </div>
+    <div class="col-xs-10 col-md-6 text-center">
+        @Html.Localized(titleLabel, "label", new { style = "display: inline-block;" })
+    </div>
+    <div class="col-xs-2 col-md-3 text-right">
+        @if (nextUrl != null)
+        {
+            <a href="@nextUrl" class="btn btn-link js-rental-grid-next"><i class="fa fa-chevron-right"></i></a>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-bordered" style="width: 100%; margin-bottom: 10px;">
+            <thead>
+                <tr>
+                    @foreach (var gridDay in Model.Days)
+                    {
+                        <td class="text-center">@gridDay.Day.ToString("ddd").ToUpper()</td>
+                    }
+                </tr>
+                <tr>
+                    @foreach (var gridDay in Model.Days)
+                    {
+                        <td class="text-center">
+                            <b>@gridDay.Day.Day.ToString("00")/@gridDay.Day.Month.ToString("00")</b>
+                        </td>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (var line = 0; line < totalLines; line++)
+                {
+                    <tr>
+                        @foreach (var column in Model.Days)
+                        {
+                            var display = totalPeriods == -1 || line < totalPeriods;
+
+                            <td class="text-center box-cell @(display ? "" : "hide")">
+                                @if (column.Periods.Count > line)
+                                {
+                                    var period = column.Periods[line];
+
+                                    <label class="box">
+                                        @if (period.Discount > 0 && showDiscount)
+                                        {
+                                            <span class="label label-success discount">@period.Discount% off</span>
+                                        }
+
+                                        @if (canSelectPeriod)
+                                        {
+                                            var isChecked = period.ToString().Equals(ViewBag.StartTime) && column.Day.Equals(ViewBag.StartDate);
+
+                                            @InputExtensions.RadioButton(Html, "RentalGridPeriod", $"{column.Day:dd/MM/yyyy} {period}", isChecked, new {data_date = column.Day.ToShortDateString(), data_start = period, data_availability = period.Availability, @class = "js-rental-grid-period"})
+                                        }
+                                        <span class="checkmark">@period</span>
+                                    </label>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (totalPeriods > 0)
+    {
+        <div class="col-xs-12">
+            <button class="btn btn-default js-rental-grid-plus-button btn-block">Exibir todos os horários</button>
+        </div>
+    }
+</div>

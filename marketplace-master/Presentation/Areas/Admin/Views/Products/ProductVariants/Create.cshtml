@@ -1,0 +1,73 @@
+﻿@model Application.Modules.Products.Variants.ProductVariantViewModel
+
+@{
+    ViewBag.Title = "Novo item de variante";
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-folder"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.VariantType, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.VariantType,
+                        new SelectList(Model.VariantTypes, "Id", "Name", Model.VariantType),
+                        Request.GetLocalizedString("PRODUCT_VARIANT_TYPE_INPUT"),
+                        new { @class = "form-control js-select" })
+                            @Html.ValidationMessageFor(model => model.VariantType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Order, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Order, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Order, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <p>
+                                <input type="submit" value="Salvar" class="btn btn-primary" />
+                            </p>
+                            <p class="text-danger">
+                                <i class="fa fa-exclamation-circle"></i>
+                                <span>@Request.GetLocalizedString("PRODUCT_CHANGES_DALAY_SEARCH")</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div>
+                @Html.ActionLink("Voltar para a lista", "Index")
+            </div>
+        </div>
+    </div>
+</section>

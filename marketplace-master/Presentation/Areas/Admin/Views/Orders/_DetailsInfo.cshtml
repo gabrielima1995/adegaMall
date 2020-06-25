@@ -1,0 +1,72 @@
+﻿@model OrderDetailsViewModel
+
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-5">
+            <dl class="dl-inverted">
+                <dt>Data do Pedido</dt>
+                <dd>@Html.DisplayFor(model => model.OrderDate)</dd>
+
+                <dt>Pagamento</dt>
+                <dd>
+                    @Model.PaymentMethodDescription
+
+                    @if (Model.HasTransaction)
+                    {
+                        <span>
+                            |
+                            @Model.InstallmentsCount @Request.GetLocalizedString("INSTALLMENTS_COUNT")
+                        </span>
+                    }
+                </dd>
+
+                <dt>Status</dt>
+                <dd>
+                    @if (Model.ShowButtonForCheckingTranStatus)
+                    {
+                        <a href="@Url.ActionLocalized("CheckTranStatus", "Orders", new { id = Model.OrderId })" title="Verifica o status atualizado da transação no Gateway">verificar pagamento</a>
+                        @:&nbsp;
+                    }
+                    <span>@Model.StatusDescription</span>
+                </dd>
+
+                @if (Model.HasTransaction)
+                {
+                    <dt>Transação</dt>
+                    <dd>
+                        <a href="@Model.GatewayTransactionUrl" target="_blank">Ver no Gateway</a>
+                    </dd>
+                }
+
+                <dt>Envio</dt>
+                <dd>@Model.ShippingMethodDescription</dd>
+
+                @if (Model.ShowShippingDetails)
+                {
+                    if (Model.ShippingOut)
+                    {
+                        <dt>De</dt>
+                        <dd>@Model.SellerAddress</dd>
+
+                        <dt>Para</dt>
+                        <dd>@Model.ShippingAddress</dd>
+                    }
+                    else
+                    {
+                        <dt>Endereço de Coleta</dt>
+                        <dd>@Model.ShippingAddress</dd>
+                    }
+                }
+
+                <dt>Total dos Produtos</dt>
+                <dd>@Html.DisplayFor(model => model.ProductsAmount)</dd>
+
+                <dt>Total do Frete</dt>
+                <dd>@Html.DisplayFor(model => model.ShippingAmount)</dd>
+
+                <dt>Total Final</dt>
+                <dd>@Html.DisplayFor(model => model.TotalAmount)</dd>
+            </dl>
+        </div>
+    </div>
+</div>

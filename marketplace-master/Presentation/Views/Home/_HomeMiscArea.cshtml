@@ -1,0 +1,33 @@
+﻿@using Application.Helpers;
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (config.MiscArea.IsVisible)
+{
+    <div class="misc-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    @Html.Localized("MISC_AREA_TITLE", "h2")
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="owl-carousel misc">
+                        @for (int i = 0; i < config.MiscArea.Items.Count; i++)
+                        {
+                            var item = config.MiscArea.Items[i];
+
+                            <div class="carousel-@(i + 1)">
+                                <img src="@ImgHelper.BlobToCdn(item.ImageUrl, null)" alt="">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

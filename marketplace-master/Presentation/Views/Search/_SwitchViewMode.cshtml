@@ -1,0 +1,28 @@
+﻿@model SearchResultVM
+
+@if (Model.HasMultipleViewModes)
+{
+    using (Html.BeginForm(Model.Request.ActionUrl, "Search", FormMethod.Get, new { id = "frmSwitchViewMode" }))
+    {
+        foreach (var key in Request.QueryString.AllKeys)
+        {
+            if (!key.Equals("mode", StringComparison.OrdinalIgnoreCase) && Request.QueryString[key] != null)
+            {
+                <input type="hidden" name="@key" value="@Request.QueryString[key]" />
+            }
+        }
+
+        <input type="hidden" name="mode" id="hdnViewMode" />
+
+        <div style="margin-left:15px;" class="btn-group" role="group" aria-label="modo de visualização">
+            <button type="button" class="btn btn-default" data-view-mode="Map">
+                <span class="fa fa-map-o"></span>
+                Mapa
+            </button>
+            <button type="button" class="btn btn-default" data-view-mode="List">
+                <span class="fa fa-th-large"></span>
+                Lista
+            </button>
+        </div>
+    }
+}

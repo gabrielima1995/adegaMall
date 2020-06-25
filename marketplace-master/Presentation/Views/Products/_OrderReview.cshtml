@@ -1,0 +1,63 @@
+﻿@model OrderRatingViewModel
+
+@if (Model.Enabled)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">Avaliação</h1>
+        </div>
+        <div class="panel-body">
+            @if (Model.IsOrderCompleted)
+            {
+                if (Model.CanPostRatingNow)
+                {
+                    <div>
+                        <a class="btn btn-success" href="@Url.ActionLocalized("SendRating", "UserRating", new { ratingId = Model.UserRating.Id })">
+                            @Request.GetLocalizedString(Model.IsSeller ? "RATE_THIS_BUYER" : "RATE_THIS_SELLER")
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                }
+                else if (Model.UserRating.Rating.HasValue)
+                {
+                    <strong>
+                        Sua Avaliação
+                        <span class="text-center">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (Model.UserRating.Rating.Value >= i)
+                                {
+                                    <i class="fas fa-star rating-star"></i>
+                                }
+                                else
+                                {
+                                    <i class="far fa-star rating-star"></i>
+                                }
+                            }
+                        </span>
+                    </strong>
+
+                    if (Model.UserRating.Comment != null)
+                    {
+                        <br />
+                        <p>@Model.UserRating.Comment</p>
+                    }
+
+                    if (Model.UserRating.PairedRating.HasValue && !Model.UserRating.IsPairCompleted)
+                    {
+                        <br />
+                        <small class="text-muted"><i class="fas fa-info-circle"></i> @Html.Localized("USER_RATING_BLIND_PENDING")</small>
+                    }
+                }
+                else
+                {
+                    <div>@Html.Localized("USER_RATING_EXPIRED")</div>
+                }
+            }
+            else
+            {
+                <div>@Html.Localized("USER_RATING_AWAITING_ORDER_COMPLETION")</div>
+            }
+        </div>
+    </div>
+}

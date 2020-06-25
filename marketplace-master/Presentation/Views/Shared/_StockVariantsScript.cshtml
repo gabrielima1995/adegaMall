@@ -1,0 +1,51 @@
+﻿<script>
+    $(function () {
+        $('body').on('change', '.js-stock-variant-type', function (e) {
+            var $this = $(this);
+            
+            $.ajax({
+                url: '@Url.ActionLocalized("AddStockVariant", "Store")&variantType=' + $this.val(),
+                success: function(data) {
+                    $('.stock-variant').each(function() {
+                        var $item = $(this);
+
+                        $item.remove();
+                    });
+
+                    $('.js-stock-variant-wrapper').append(data);
+                }
+            });
+        });
+    });
+
+    (function ($, MaaS) {
+        var $body = $('body');
+
+        $body.on('click', '.stock-variant .plus', function (e) {
+            e.preventDefault();
+
+            if ($('.stock-variant').length < 30) {
+                var $this = $(this);
+
+                $.ajax({
+                    url: '@Url.ActionLocalized("AddStockVariant", "Store")&variantType=' + $('.js-stock-variant-type').val(),
+                    success: function (data) {
+
+                        var $stockVariant = $this.parents('.stock-variant');
+
+                        $(data).insertAfter($stockVariant).slideDown();
+                    }
+                });
+            }
+        });
+
+        $body.on('click', '.stock-variant .minus', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+
+            if ($('.stock-variant').length !== 1) {
+                $this.parents('.stock-variant').remove();
+            }
+        });
+    })(window.jQuery, window.MaaS);
+</script>

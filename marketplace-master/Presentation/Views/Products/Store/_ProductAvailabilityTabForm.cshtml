@@ -1,0 +1,74 @@
+﻿@using Domain.Modules.StoreModule.Entities
+@model Application.Modules.Products.ProductEditorViewModel
+
+@{
+    var viewPathFmt = "~/Views/Products/Store/{0}.cshtml";
+    var config = MaaSConfig.Current;
+    var profile = User.Identity.GetLoginProfile();
+}
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(model => model.AvailabilityMode, ProductAvailabilityMode.Auto)
+                <b>@Html.Localized("PRODUCT_AVAILABILITY_MODE_AUTO_LABEL")</b>
+            </label>
+            <p>@Html.Localized("PRODUCT_AVAILABILITY_MODE_AUTO_DESCRIPTION")</p>
+        </div>
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(model => model.AvailabilityMode, ProductAvailabilityMode.Manual)
+                <b>@Html.Localized("PRODUCT_AVAILABILITY_MODE_MANUAL_LABEL")</b>
+            </label>
+            <p>@Html.Localized("PRODUCT_AVAILABILITY_MODE_MANUAL_DESCRIPTION")</p>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="row js-availability-mode-auto-fields m-t-sm">
+            <div class="col-xs-12">
+                <p>
+                    @Html.ActionLink(Request.GetLocalizedString("PRODUCT_AVAILABILITY_AUTO_SCHEDULE_LINK"), "Index", "Schedule", new { productId = Model.Id }, new { target = "_blank", @class = Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.ScheduleView) })
+                </p>
+            </div>
+        </div>
+        <div class="row js-availability-mode-manual-fields m-t-sm">
+            @if (Model.ShowNewAvailability)
+            {
+                <div class="col-sm-12">
+                    <a href="@Url.ActionLocalized("NewAvailability", "ProductAvailability", new {productId = Model.Id})"
+                        class="btn btn-default btn-block btn-lg @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.ProductsEdit)"
+                        data-toggle="tooltip"
+                        title="@Request.GetLocalizedString("PRODUCT_AVAILABILITY_INFO")">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        @Html.Localized("NEW_PRODUCT_AVAILABILITY_BUTTON")
+                    </a>
+                </div>
+            }
+
+            @if (Model.ShowNewRecurringAvailability)
+            {
+                <div class="col-sm-12">
+                    <a href="@Url.ActionLocalized("NewRecurring", "ProductAvailability", new {productId = Model.Id})"
+                       class="btn btn-default btn-block btn-lg @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.ProductsEdit)"
+                       data-toggle="tooltip"
+                       title="@Request.GetLocalizedString("RECURRING_PRODUCT_AVAILABILITY_INFO")">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        @Html.Localized("NEW_RECURRING_PRODUCT_AVAILABILITY_BUTTON")
+                    </a>
+                </div>
+            }
+
+            @if (Model.ShowAvailabilities)
+            {
+                <div class="col-sm-12">
+                    @Html.Partial(string.Format(viewPathFmt, "_ProductAvailabilitiesTable"), Model)
+                </div>
+            }
+        </div>
+        <div id="availabilityWarning" class="col-sm-12 alert alert-danger" hidden>
+            @Html.Localized("PRODUCTS_AVAILABILITY_WARNING")
+        </div>
+    </div>
+</div>
+

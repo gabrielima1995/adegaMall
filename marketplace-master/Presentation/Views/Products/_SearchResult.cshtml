@@ -1,0 +1,113 @@
+﻿@using Application.Modules.Products
+@using Domain.Modules.StoreModule.Entities
+@using Microsoft.AspNet.Identity
+@model Application.Modules.Products.Search.SearchResultViewModel
+
+@{
+    var config = MaaSConfig.Current;
+    var isAuthenticated = Request.IsAuthenticated;
+    var showProductWishButton = config.Product.Wishlist.Enabled && (!isAuthenticated || User.Identity.GetLoginProfile().IsBuyer());
+}
+
+@if (Model.Results == null || Model.Results.Count == 0)
+{
+    <div class="col-xs-12 well text-center">
+        <span class="text-gray">@Html.Markdown(Request.GetLocalizedString("SEARCH_EMPTY_HELP"))</span>
+    </div>
+}
+else
+{
+    foreach (var product in Model.Results)
+    {
+        var price = product.Price;
+        var productUrl = Url.ActionLocalized("PublicPage", "Products", new { id = product.FriendlyUrl });
+
+        <div class="col-xs-12 col-sm-4">
+            <div class="card equal-height">
+                @if (price.DisplayShortPrice.HasAnyPrice)
+                {
+                    if (price.DisplayShortPrice.Discount.HasDiscount)
+                    {
+                        <div class="card-discount-badge">
+                            <span class="label label-success">@price.DisplayShortPrice.Discount.Formatted</span>
+                        </div>
+                    }
+                }
+
+                @if (showProductWishButton)
+                {
+                    @Html.Partial("_ProductWishButtonCard", product)
+                }
+
+                <a href="@productUrl" title="@product.Title" class="card-product-img-link">
+                    <img src="~/assets/images/product-img-placeholder.jpg" data-src="@product.GetCoverImageUrl(ProductImageSize.SM)" alt="@product.Title" class="js-load-img" />
+                </a>
+
+                <h5 class="card-product-title">@product.Title</h5>
+
+                <small class="search-result-seller-name text-muted" style="display: block">
+                    @product.SellerProfileName
+                </small>
+
+                @if (!string.IsNullOrEmpty(product.Distance))
+                {
+                    <small class="search-result-distance text-muted" style="display: block">
+                        @product.Distance
+                    </small>
+                }
+
+                @if (config.Product.Price.Enabled && price.DisplayShortPrice.HasAnyPrice)
+                {
+                    if (price.DisplayShortPrice.Discount.HasDiscount)
+                    {
+                        <p class="card-discount-price">
+                            <small>
+                                de <span class="card-discount-price-amount">@price.DisplayShortPrice.Discount.Original.FullPriceText</span> por
+                            </small>
+                        </p>
+                    }
+
+                    else if (price.DisplayShortPrice.CanIncrease)
+                    {
+                        <p class="card-price-starting-from">
+                            <small>
+                                @Html.Localized("PRODUCT_PRICE_STARTING_FROM", "span", new { @class = "text-muted" })
+                            </small>
+                        </p>
+                    }
+
+                    <div class="card-product-price">
+                        @if (price.HasBasePrice)
+                        {
+                            <div>
+                                @price.DisplayShortPrice.FullPriceText
+                                @if (price.DisplayShortPrice.HasTextComplementLabel)
+                                {
+                                    <small class="text-muted text-lowercase">/ @string.Format(Request.GetLocalizedString(price.DisplayShortPrice.TextComplementLabel), price.DisplayShortPrice.TextComplementParam)</small>
+                                }
+                            </div>
+                        }
+
+                        @if (price.DisplayShortPrice.HasAdditionalPrice)
+                        {
+                            <div class="card-product-price-additional">
+                                <span class="card-product-price-additional-amount">@price.DisplayShortPrice.AdditionalPriceText</span>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="card-product-price">&nbsp;</p>
+                }
+
+                <a href="@productUrl" class="btn btn-default btn-round card-btn">
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                    @Request.GetLocalizedString("PRODUCT_PUBLIC_PAGE_BUTTON")
+                </a>
+            </div>
+        </div>
+    }
+
+    <input type="hidden" class="js-next-url" style="display: none" value="@(Model.NextResults ?? "")"/>
+}

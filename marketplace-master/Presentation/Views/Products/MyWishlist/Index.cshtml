@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNet.Identity
+@model V2.Application.Modules.ProductWishModule.MyWishesViewModel
+
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("PRODUCTWISH_LINK");
+    var viewPathFmt = "~/Views/Products/MyWishlist/{0}.cshtml";
+
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+@section styles
+{
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        @Html.Partial("_ProfileInvisibleMessage", loginProfile)
+
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+            </div>
+            <div class="col-xs-12">
+                <h3>@ViewBag.Title</h3>
+
+                <div id="js-result-wrapper" class="row">
+                    @Html.Partial(string.Format(viewPathFmt, "_Products"), Model)
+                </div>
+
+                <div class="row">
+                    <div id="js-loading" class="progress" style="display: none">
+                        <div class="progress-bar progress-bar-striped progress-bar-success active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            @Html.Localized("LOADING_TEXT", "span", new { @class = "sr-only" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section plugins
+{
+
+}
+
+@section scripts
+{
+    <script>
+        SearchLoaderOnScroll.init(function () {
+
+        });
+    </script>
+
+    @Html.Partial("_ProductWishScript")
+}

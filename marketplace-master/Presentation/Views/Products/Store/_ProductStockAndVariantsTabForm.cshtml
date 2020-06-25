@@ -1,0 +1,112 @@
+﻿@model Application.Modules.Products.ProductEditorViewModel
+
+@{
+    var viewPathFmt = "~/Views/Products/Store/{0}.cshtml";
+    var config = MaaSConfig.Current;
+    var stockByVariantEnabled = config.Product.Variants.StockByVariantEnabled;
+    var showStock = config.Product.BusinessModel.ShowStock && !Model.ProductAvailabilityEnabled;
+    ViewData["VariantsIsEditable"] = Model.TemplateId == null || Model.VariantsIsEditable;
+}
+
+@if (showStock && stockByVariantEnabled)
+{
+    @Html.Localized("PRODUCT_STOCK_BY_VARIANT_TITLE", "h3")
+    @Html.Localized("PRODUCT_STOCK_BY_VARIANT_MESSAGE", "p")
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="radio">
+                <label>
+                    @Html.RadioButtonFor(model => model.StockByVariant, false)
+                    @Request.GetLocalizedString("PRODUCT_GENERAL_STOCK_LABEL")
+                    <small>
+                        @Request.GetLocalizedString("PRODUCT_GENERAL_STOCK_DESCRIPTION")
+                    </small>
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    @Html.RadioButtonFor(model => model.StockByVariant, true)
+                    @Request.GetLocalizedString("PRODUCT_STOCK_BY_VARIANT_LABEL")
+                    <small>
+                        @Request.GetLocalizedString("PRODUCT_STOCK_BY_VARIANT_DESCRIPTION")
+                    </small>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="js-stock-variant-wrapper" style="display: @(Model.StockByVariant ? "block" : "none")">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StockVariantType)
+                    @Html.DropDownListFor(model => model.StockVariantType,
+                        new SelectList(Model.StockVariantTypes, "Id", "Name", Model.StockVariantType),
+                        Request.GetLocalizedString("PRODUCT_STOCK_VARIANT_TYPE_INPUT"),
+                        new {@class = "form-control js-stock-variant-type js-select" })
+                    @Html.ValidationMessageFor(model => model.StockVariantType, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(i => i.StockVariantTypeRequired)
+                </div>
+            </div>
+        </div>
+
+        @foreach (var stockVariant in Model.StockVariants)
+        {
+            @Html.Partial(string.Format(viewPathFmt, "_ProductStockVariant"), stockVariant)
+        }
+    </div>
+    <hr />
+}
+
+<div class="js-variants-wrapper" style="display: @(Model.StockByVariant ? "none" : "block")">
+    @if (config.Product.Variants.Enabled)
+    {
+        @Html.Localized("PRODUCT_VARIANTS_LABEL", "h3")
+        @Html.Localized("PRODUCT_VARIANTS_DESCRIPTION", "p")
+
+        foreach (var variant in Model.Variants)
+        {
+            @Html.Partial(string.Format(viewPathFmt, "_ProductVariant"), variant)
+        }
+        <hr />
+    }
+</div>
+
+<div class="js-general-stock-wrapper" style="display: @(!showStock || Model.StockByVariant ? "none" : "block")">
+    @Html.Localized("PRODUCT_STOCK_TITLE", "h3")
+    @Html.Localized("PRODUCT_STOCK_DESCRIPTION", "p")
+
+    <div class="row">
+        <div class="col-xs-4 col-sm-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CurrentStock)
+                @Html.EditorFor(model => model.CurrentStock, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", placeholder = Request.GetLocalizedString("PRODUCT_STOCK_CURRENT_INPUT") } })
+                @Html.HiddenFor(model => model.CurrentStock)
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UpdatedStock)
+                @Html.EditorFor(model => model.UpdatedStock, new { htmlAttributes = new { @class = "form-control", placeholder = Request.GetLocalizedString("PRODUCT_STOCK_UPDATED_INPUT") } })
+            </div>
+        </div>
+        @if (config.Product.BusinessModel.Rental.Enabled)
+        {
+            <div class="col-xs-4 col-sm-3">
+                <div class="form-group form-group-with-separator">
+                    @Html.LabelFor(model => model.CurrentRentalStock)
+                    @Html.EditorFor(model => model.CurrentRentalStock, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                </div>
+            </div>
+        }
+        <div class="col-xs-12">
+            <div class="checkbox">
+                <label>
+                    @Html.EditorFor(model => model.DeleteWhenStockZero)
+                    @Html.DisplayNameFor(model => model.DeleteWhenStockZero)
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

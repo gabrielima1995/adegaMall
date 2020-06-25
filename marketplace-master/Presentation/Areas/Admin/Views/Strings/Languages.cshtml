@@ -1,0 +1,97 @@
+﻿@model LanguagesViewModel
+
+@{
+    ViewBag.Title = "Idiomas do marketplace";
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-language"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-body">
+                    @Html.ValidationSummary()
+
+                    @if (Model.ActivationList.Count() > 0)
+                    {
+                        using (Html.BeginForm("Activate", "Languages", FormMethod.Post, new { @class = "form", role = "form" }))
+                        {
+                            @Html.Label("ActivateId", "Ativar idiomas")
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        @Html.DropDownList("ActivateId", Model.ActivationList, "Selecione um idioma para ativar", new { @class = "form-control" })
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary">Ativar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                        }
+                    }
+
+                    <h2 class="h4">Idiomas ativos</h2>
+
+                    <table class="table">
+                        <tbody>
+                            @foreach (var lang in Model.ActiveLanguages)
+                            {
+                                <tr>
+                                    <td>
+                                        @lang.DisplayName
+                                    </td>
+                                    <td class="text-right">
+                                        @if (!lang.IsDefault)
+                                        {
+                                            using (Html.BeginForm("Deactivate", "Languages", FormMethod.Post, new { role = "form" }))
+                                            {
+                                                @Html.Hidden("DeactivateId", lang.Language)
+                                                <a href="#" class="js-form-submit">desativar</a>
+                                            }
+                                        }
+                                    </td>
+                                    <td class="text-right">
+                                        @if (lang.IsDefault)
+                                        {
+                                            <span>padrão</span>
+                                        }
+                                        else
+                                        {
+                                            using (Html.BeginForm("SetAsDefault", "Languages", FormMethod.Post, new { role = "form" }))
+                                            {
+                                                @Html.Hidden("SetAsDefaultId", lang.Language)
+                                                <a href="#" class="js-form-submit">tornar padrão</a>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <p>
+                <i class="fa fa-chevron-right"></i>
+                @Html.ActionLink("Clique aqui", "Index", "Strings")
+                para definir os textos de cada idioma
+            </p>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        $(".js-form-submit").click(function (e) {
+            e.preventDefault();
+            $(this).parent().submit();
+        });
+    </script>
+}

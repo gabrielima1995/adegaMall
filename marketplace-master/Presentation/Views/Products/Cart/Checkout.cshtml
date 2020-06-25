@@ -1,0 +1,238 @@
+﻿@using Presentation.Helpers
+@using PaymentIntegrator.Core.PaymentMethods
+
+@model CheckoutVM
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("CART_CHECKOUT_TITLE");
+
+    var viewPathFmt = "~/Views/Products/Cart/{0}.cshtml";
+
+    var config = MaaSConfig.Current;
+    var hasErrors = !ViewData.ModelState.IsValid;
+    var cartErrors = CartHelper.GetCartErrors(ViewData.ModelState, true);
+
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-0">
+    <div class="container">
+        <div class="m-b-lg">
+            <div class="row">
+                @if (hasErrors)
+                {
+                    <div class="col-xs-12">
+                        <div class="alert alert-danger">
+                            @Html.Localized("CART_CORRECT_ERRORS_TO_PROCEED", "p")
+                            <ul>
+                                @foreach (var error in cartErrors)
+                                {
+                                    <li>@error</li>
+                                }
+                                @foreach (var item in Model.Cart.Items)
+                                {
+                                    var errors = CartHelper.GetItemErrors(item, ViewData.ModelState);
+                                    foreach (var error in errors)
+                                    {
+                                        <li>@item.Product.Title: @error</li>
+                                    }
+                                }
+                            </ul>
+                            <br />
+                            <a href="@Url.ActionLocalized("Index", "Cart")" class="btn btn-default">
+                                <i class="glyphicon glyphicon-chevron-left"></i>
+                                @Request.GetLocalizedString("CART_CHECKOUT_BACK_TO_CORRECT")
+                            </a>
+                        </div>
+                    </div>
+                }
+
+            <div class="col-xs-12 col-md-8">
+                @if (!Model.IsShippingOut)
+                {
+                    @Html.Partial("~/Views/Products/Cart/_ShippingInformation.cshtml", Model)
+                }
+                @if (MaaSConfig.Current.Product.Order.ExtraInfoField.Enabled && Model.Cart.ExtraInfo != null)
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            @Html.Localized("ORDER_EXTRA_INFO_TITLE", "label")
+                            @Html.Markdown(Model.Cart.ExtraInfo)
+                        </div>
+                    </div>
+                }
+                <div>
+                    <table class="table">
+                        @if (Model.ShowShipping)
+                        {
+                            <tr class="checkout-items-total">
+                                <td>@Html.Localized("CART_ITEMS_TOTAL")</td>
+                                <td class="text-right">@config.DefaultCurrency @Model.Cart.SubTotal.DisplayDecimal(2)</td>
+                            </tr>
+
+                            <tr class="checkout-shipping">
+                                <td>@Html.Localized("CART_SHIPPING_LABEL")</td>
+                                <td class="text-right">
+                                    @if (Model.Cart.Shipping == 0)
+                                    {
+                                        @:-
+                                    }
+                                    else
+                                    {
+                                        @config.DefaultCurrency @Model.Cart.Shipping.DisplayDecimal(2)
+                                    }
+                                </td>
+                            </tr>
+
+                            if (Model.Cart.DeliveryDate != null)
+                            {
+                                var date = Model.Cart.DeliveryDate?.ToShortDateString();
+                                <tr class="checkout-shipping-date">
+                                    <td>@Html.Localized("CART_SHIPPING_DAYS_LABEL")</td>
+                                    <td class="text-right">@date</td>
+                                </tr>
+                            }
+                        }
+
+                        <tr class="checkout-grand-total">
+                            <td>@Html.Localized("CART_TOTAL_LABEL")</td>
+                            <td class="text-right"><label>@config.DefaultCurrency @Model.Cart.Amount.DisplayDecimal(2)</label></td>
+                        </tr>
+                    </table>
+
+                    @Html.Partial(string.Format(viewPathFmt, "_ChargeDoubleShippingFullMessage"), Model.Cart)
+                </div>
+            </div>
+
+                <div class="col-xs-12 col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            @Request.GetLocalizedString("CART_PAYMENT_TITLE")
+                        </div>
+                        @if (config.Payment.Enabled || Model.ShowOfflinePaymentOption)
+                        {
+                            if (config.Payment.Common.EnableTransactionWarranty)
+                            {
+                                <div class="panel-body">
+                                    <div class="text-success">
+                                        <i class="fa fa-check"></i>
+                                        @Html.Localized("TRANSACTION_WARRANTY_CART_REASSURANCE")
+                                    </div>
+                                </div>
+                            }
+
+                            <fieldset @(ViewData.ModelState.IsValid ? "" : "disabled") class="list-group">
+                                @if (!Model.ShowPaymentMethodOptions)
+                                {
+                                    @:@Html.HiddenFor(model => Model.Payment.Method, new { @class = "js-payment-method" })
+                                }
+
+                                <!-- PGTO POR FORA DA PLATAFORMA -->
+                                @if (Model.ShowOfflinePaymentOption)
+                                {
+                                    <div class="list-group-item">
+                                        @if (Model.ShowPaymentMethodOptions)
+                                        {
+                                            <div class="radio">
+                                                <label>
+                                                    @Html.RadioButtonFor(model => Model.Payment.Method, PaymentMethod.Offline, new { @class = "js-payment-method-selector" })
+                                                    @Html.Localized("CHECKOUT_PAY_OFFLINE_LABEL")
+                                                </label>
+                                            </div>
+                                        }
+                                        <div id="offlinePaymentFields">
+                                            @using (Html.BeginForm("Checkout", "Cart", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                <input type="hidden" name="@Html.NameFor(model => Model.Payment.Method)" value="@PaymentMethod.Offline" />
+                                                @Html.Localized("CHECKOUT_PAY_OFFLINE_BUTTON", "button", new { type = "submit", @class = "btn btn-lg btn-primary btn-block" })
+                                                @Html.Localized("CHECKOUT_PAY_OFFLINE_DESCRIPTION", "small", new { @class = "text-muted help-bloc" })
+                                            }
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- PGTO BOLETO -->
+                                @if (Model.ShowBoletoPaymentOption)
+                                {
+                                    <div class="list-group-item">
+                                        @if (Model.ShowPaymentMethodOptions)
+                                        {
+                                            <div class="radio">
+                                                <label>
+                                                    @Html.RadioButtonFor(model => Model.Payment.Method, PaymentMethod.Boleto, new { @class = "js-payment-method-selector" })
+                                                    @Html.Localized("CHECKOUT_PAY_WITH_BOLETO_BUTTON")
+                                                </label>
+                                            </div>
+                                        }
+                                        <div id="boletoFields">
+                                            @using (Html.BeginForm("Checkout", "Cart", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                <input type="hidden" name="@Html.NameFor(model => Model.Payment.Method)" value="@PaymentMethod.Boleto" />
+                                                @Html.Localized("CHECKOUT_PAY_WITH_BOLETO_BUTTON", "button", new { type = "submit", @class = "btn btn-lg btn-primary btn-block" })
+                                            }
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- PGTO CARTAO CREDITO -->
+                                @if (Model.ShowCreditCardPaymentOption)
+                                {
+                                    <div class="list-group-item">
+                                        @if (Model.ShowPaymentMethodOptions)
+                                        {
+                                            <div class="radio">
+                                                <label>
+                                                    @Html.RadioButtonFor(model => Model.Payment.Method, PaymentMethod.CreditCard, new { @class = "js-payment-method-selector" })
+                                                    Pagar com Cartão de Crédito
+                                                </label>
+                                            </div>
+                                        }
+                                        <div id="creditCardFields">
+                                            @if (config.Layout.PaymentMethodsDisplay.ShowInCheckoutScreen.Enabled)
+                                            {
+                                                @Html.Localized("ACCEPTED_PAYMENT_METHODS_TEXT", "p")
+                                                @Html.Partial("_AcceptedPaymentMethods")
+                                                <hr />
+                                            }
+
+                                            @using (Html.BeginForm("Checkout", "Cart", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                <input type="hidden" name="@Html.NameFor(model => Model.Payment.Method)" value="@PaymentMethod.CreditCard" />
+
+                                                if (config.Payment.PaymentGateway.Installments.MaxInstallments > 1 && Model.Cart.Amount < config.Payment.PaymentGateway.Installments.MinOrderAmount)
+                                                {
+                                                    <p>
+                                                        @string.Format(Request.GetLocalizedString("INSTALLMENTS_ORDER_MIN_AMOUNT"), config.DefaultCurrency, config.Payment.PaymentGateway.Installments.MinOrderAmount)
+                                                    </p>
+                                                }
+
+                                                @Html.Partial(string.Format(viewPathFmt, "_ProductCreditCardFields"), Model)
+
+                                                @Html.Localized("CHECKOUT_PAY_WITH_CREDIT_CARD_BUTTON", "button", new { type = "submit", @class = "btn btn-lg btn-primary btn-block" })
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script>
+        var chooseShippingAddressUrl = '@Url.ActionLocalized("ChooseShippingAddress", "Cart")';
+        var paymentMethodSelector = 'input[name="@Html.NameFor(model => Model.Payment.Method)"]';
+        CartCheckout.init(paymentMethodSelector);
+    </script>
+}

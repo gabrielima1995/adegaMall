@@ -1,0 +1,103 @@
+﻿@using Application.Modules.Products
+@using Domain.Entities.StoreModule
+
+@model V2.Application.Modules.ProductWishModule.MyWishesViewModel
+
+@{
+    var config = MaaSConfig.Current;
+    var isAuthenticated = Request.IsAuthenticated;
+    var showProductWishButton = config.Product.Wishlist.Enabled && (!isAuthenticated || User.Identity.GetLoginProfile().IsBuyer());
+}
+
+@if (Model.Items.Count > 0)
+{
+    foreach (var product in Model.Items)
+    {
+        var price = product.ProductPriceMapped;
+        var productUrl = Url.ActionLocalized("PublicPage", "Products", new { id = product.FriendlyUrl });
+
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <div class="card equal-height">
+                @if (price.DisplayShortPrice.HasAnyPrice)
+                {
+                    if (price.DisplayShortPrice.Discount.HasDiscount)
+                    {
+                        <div class="card-discount-badge">
+                            <span class="label label-success">@price.DisplayShortPrice.Discount.Formatted</span>
+                        </div>
+                    }
+                }
+
+                @if (showProductWishButton)
+                {
+                    @Html.Partial("_ProductWishButtonCard", product, new ViewDataDictionary { { "IsWished", true } })
+                }
+
+                <a href="@productUrl" title="@product.Title" class="card-product-img-link">
+                    <img src="@product.GetCoverImageUrl(ProductImageSize.SM)" alt="@product.Title" />
+                </a>
+
+                <h5 class="card-product-title">@product.Title</h5>
+
+                @if (config.Product.Price.Enabled && price.DisplayShortPrice.HasAnyPrice)
+                {
+                    if (price.DisplayShortPrice.Discount.HasDiscount)
+                    {
+                        <p class="card-discount-price">
+                            <small>
+                                de <span class="card-discount-price-amount">@price.DisplayShortPrice.Discount.Original.FullPriceText</span> por
+                            </small>
+                        </p>
+                    }
+
+                    else if (price.DisplayShortPrice.CanIncrease)
+                    {
+                        <p class="card-price-starting-from">
+                            <small>
+                                @Html.Localized("PRODUCT_PRICE_STARTING_FROM", "span", new { @class = "text-muted" })
+                            </small>
+                        </p>
+                    }
+
+                    <div class="card-product-price">
+                        @if (price.HasBasePrice)
+                        {
+                            <div>
+                                @price.DisplayShortPrice.FullPriceText
+                                @if (price.DisplayShortPrice.HasTextComplementLabel)
+                                {
+                                    <small class="text-muted text-lowercase">/ @string.Format(Request.GetLocalizedString(price.DisplayShortPrice.TextComplementLabel), price.DisplayShortPrice.TextComplementParam)</small>
+                                }
+                            </div>
+                        }
+
+                        @if (price.DisplayShortPrice.HasAdditionalPrice)
+                        {
+                            <div class="card-product-price-additional">
+                                <span class="card-product-price-additional-amount">@price.DisplayShortPrice.AdditionalPriceText</span>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="card-product-price">&nbsp;</p>
+                }
+
+                <a href="@productUrl" class="btn btn-default btn-round card-btn">
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                    @Request.GetLocalizedString("PRODUCT_PUBLIC_PAGE_BUTTON")
+                </a>
+            </div>
+        </div>
+    }
+
+}
+else
+{
+    <div class="col-md-12">
+        <p>@Html.Localized("PRODUCTWISH_EMPTY")</p>
+    </div>
+}
+
+<input type="hidden" class="js-next-url" style="display: none" value="@(Model.NextPageUrl ?? "")" />

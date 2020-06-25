@@ -1,0 +1,56 @@
+﻿@model Domain.Entities.UserRating
+
+@{
+    var config = MaaSConfig.Current;
+    var isSeller = ViewData.ContainsKey("isSeller");
+}
+
+@if (Model != null)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">Avaliação</h1>
+        </div>
+        <div class="panel-body">
+            @if (Model.IsCompleted && !Model.Rating.HasValue)
+            {
+                <div class="text-center">
+                    <button disabled class="btn btn-danger btn-sm">@Html.Localized("USER_RATING_EXPIRED")</button>
+                </div>
+            }
+            else if (!Model.Rating.HasValue)
+            {
+                <div class="text-center">
+                    <a class="btn btn-success" href="@Url.ActionLocalized("SendRating", "UserRating", new { ratingId = Model.Id })">
+                        @(isSeller ? @Html.Localized("USER_RATING_BUYER") :@Html.Localized("USER_RATING_SELLER"))&ensp;<i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            }
+            else if (Model.Rating.HasValue)
+            {
+                <strong>
+                    Sua Avaliação <span class="text-center">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (Model.Rating.Value >= i)
+                            {
+                                <i class="fas fa-star rating-star"></i>
+                            }
+                            else
+                            {
+                                <i class="far fa-star rating-star"></i>
+                            }
+                        }
+                    </span>
+                </strong>
+                <br />
+                <p>@Model.Comment</p>
+            }
+            @if (Model.PairedRating.HasValue && !Model.IsPairCompleted)
+            {
+                <br />
+                <small class="text-muted"><i class="fas fa-info-circle"></i> @Html.Localized("USER_RATING_BLIND_PENDING")</small>
+            }
+        </div>
+    </div>
+}

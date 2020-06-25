@@ -1,0 +1,122 @@
+﻿@using System.Globalization
+@using Domain.Entities.StoreModule
+@model CartViewModel
+
+@{
+    var cart = @Model.GetCart();
+    var viewPathFmt = "~/Views/Products/Cart/{0}.cshtml";
+    var config = MaaSConfig.Current;
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        @Request.GetLocalizedString("CART_SHIPPING_ADDRESS_TITLE")
+    </div>
+    <div class="panel-body">
+        <div class="m-b-md">
+            @Html.Localized("CART_SHIPPING_ADDRESS_INFO", "h4")
+            <ul class="list-unstyled">
+                @foreach (var address in Model.ShippingAddresses)
+                {
+                    <li>
+                        <div class="radio">
+                            <label class="js-choose-shipping-address-button">
+                                @Html.RadioButton("shipping-address", address.Id, cart.ShippingAddress?.Id == address.Id)
+                                @address.ToString()
+                            </label>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <button type="button" class="btn btn-default js-new-shipping-address-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                @Html.Localized("NEW_SHIPPING_ADDRESS_BUTTON")
+            </button>
+        </div>
+        @if (Model.Visualization.ShowShippingMethods)
+        {
+            @Html.Localized("CART_SHIPPING_METHOD_LABEL", "h4", new { @class = "margin-bottom-10" })
+
+            <ul class="cart-shipping-methods list-unstyled">
+                @foreach (var shippingMethod in Model.AvailableShippingMethods)
+                {
+                    <li>
+                        @if (config.Product.OnlyOneShippingMethodEnabled)
+                        {
+                            @Html.Hidden("shipping-method", shippingMethod)
+                            @shippingMethod.GetDescriptionLocalized()
+                        }
+                        else
+                        {
+                            <div class="radio">
+                                <label class="js-choose-shipping-method-button">
+                                    @Html.RadioButton("shipping-method", shippingMethod, Model.SelectedShippingMethod == shippingMethod)
+                                    @shippingMethod.GetDescriptionLocalized()
+                                </label>
+                                @{
+                                    var products = Model.ListProductsNotSupporting(shippingMethod);
+                                    if (products.Count > 0)
+                                    {
+                                        <small class="text-danger">
+                                            Não disponível para:
+                                            @string.Join(", ", products)
+                                        </small>
+                                    }
+                                }
+
+                                @if (shippingMethod == ShippingMethod.OnSitePickup)
+                                {
+                                    @:@Html.Localized("ON_SITE_PICKUP_CAN_BE_REVIEWED", "small", new { @class = "block", style = "padding-left: 21px" })
+                                }
+                            </div>
+                        }
+                    </li>
+                }
+                @if (Model.AvailableShippingMethods.Count == 0)
+                {
+                    <li>@Html.Localized("CART_PRODUCT_SHIPPING_LABEL_ERROR", "p")</li>
+                }
+            </ul>
+
+            if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.ActualNoShipping))
+            {
+                @Html.Localized("ACTUAL_NO_SHIPPING_DELIVERY_TIME", "p")
+            }
+            if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.NoShipping))
+            {
+                @Html.Localized("NO_SHIPPING_DELIVERY_TIME", "p")
+            }
+            else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.OnSitePickup))
+            {
+                @Html.Localized("ON_SITE_PICKUP_DELIVERY_TIME", "p")
+            }
+            else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PostalExpress))
+            {
+                @Html.Localized("POSTAL_EXPRESS_DELIVERY_TIME", "p")
+            }
+            else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PostalRegular))
+            {
+                @Html.Localized("POSTAL_REGULAR_DELIVERY_TIME", "p")
+            }
+            else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PrivateFleet))
+            {
+                @Html.Localized("PRIVATE_FLEET_SHIPPING_DELIVERY_TIME", "p")
+                <p>
+                    @Html.Localized("DELIVERY_TIME_LABEL", "strong"):
+                    @Html.Localized("PRIVATE_FLEET_SHIPPING_DELIVERY_TIME")
+                </p>
+            }
+        }
+
+        @Html.Partial(string.Format(viewPathFmt, "_ChargeDoubleShippingFullMessage"), Model.GetCart())
+        @Html.Partial(string.Format(viewPathFmt, "_RentalWithDifferentsDatesFullMessage"), Model.GetCart())
+
+        @if (!string.IsNullOrEmpty(Model.ShippingWarningMessage))
+        {
+            <div class="alert alert-warning m-b-0 m-t-sm">
+                @Html.Localized("CART_SHIPPING_WARNING_ALERT_LABEL", "p")
+                <p class="text-danger">@Model.ShippingWarningMessage</p>
+            </div>
+        }
+    </div>
+</div>

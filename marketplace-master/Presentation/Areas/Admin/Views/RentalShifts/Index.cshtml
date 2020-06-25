@@ -1,0 +1,98 @@
+﻿@model RentalShiftsIndexViewModel
+
+@{
+    ViewBag.Title = "Turnos de locação";
+}
+
+<style>
+    #currentShifts {
+        margin-bottom: 2rem;
+    }
+
+        #currentShifts td {
+            padding: 8px 15px;
+        }
+</style>
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-clock-o"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-body">
+                    <p>Cadastre as opções de turnos que os vendedores deverão associar em seus produtos.</p>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table" id="currentShifts">
+                        <thead>
+                            <tr>
+                                <th width="25%">Turno</th>
+                                <th width="25%">Início</th>
+                                <th width="25%">Fim</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var shift in Model.RentalShiftItems)
+                            {
+                                <tr data-shift-id="@shift.Id">
+                                    <td>
+                                        <span contenteditable="true" class="js-shift-name">@shift.Name</span>
+                                        <i aria-hidden="true"></i>
+                                    </td>
+                                    <td>
+                                        <span contenteditable="true" class="js-shift-start">@shift.FormattedStartTime</span>
+                                        <i aria-hidden="true"></i>
+                                    </td>
+                                    <td>
+                                        <span contenteditable="true" class="js-shift-end">@shift.FormattedEndTime</span>
+                                        <i aria-hidden="true"></i>
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("remover", "Delete", new { id = shift.Id }, new { @class = "js-remove" })
+                                        <i aria-hidden="true"></i>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-body">
+                    @using (Html.BeginForm("Create", "RentalShifts", FormMethod.Post, new { id = "formAddShift" }))
+                    {
+                        <label>Adicionar um turno</label>
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <input type="text" class="form-control" id="txtAddName" placeholder="Turno" />
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="text" class="form-control" id="txtAddStart" placeholder="00:00 início" />
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="text" class="form-control" id="txtAddEnd" placeholder="23:59 fim" />
+                            </div>
+                            <div class="col-xs-3">
+                                <button type="submit" class="btn btn-default" id="btnAddShift">
+                                    <i class="fa fa-plus"></i>
+                                    Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+@section scripts
+{
+    <script>RentalShiftsIndex.init()</script>
+}

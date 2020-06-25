@@ -1,0 +1,52 @@
+﻿@model Application.Modules.Products.Variants.ProductVariantTypeAndItemSelector
+
+@{
+    var isEditable = (bool)(ViewData["VariantsIsEditable"] ?? true);
+}
+
+<div class="row categoria variant">
+    @using (Html.BeginCollectionItem("Variants", ViewData.ModelState.IsValid))
+    {
+        <div class="col-xs-12 col-sm-5 categoria-opcao">
+            <div class="form-group">
+                @if (isEditable)
+                {
+                    @Html.Partial("_VariantTypesSelect", Model)
+                }
+                else
+                {
+                    @Html.DropDownListFor(m => m.VariantType,
+                        new SelectList(Model.VariantTypes, "Id", "Name", Model.VariantType),
+                        new { @class = "form-control", disabled = "disabled" })
+                    @Html.HiddenFor(model => model.VariantType)
+                }
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-5 categoria-opcao">
+            <div class="form-group">
+                @if (isEditable)
+                {
+                    @Html.Partial("_VariantsSelect", Model)
+                }
+                else
+                {
+                    @Html.DropDownListFor(m => m.Variant,
+                        new SelectList(Model.Variants, "Id", "Name", Model.Variant),
+                        new { @class = "form-control", disabled = "disabled" })
+                    @Html.HiddenFor(model => model.Variant)
+                }
+            </div>
+        </div>
+
+        if (isEditable)
+        {
+            <div class="col-xs-12 col-sm-2">
+                <div class="acoes">
+                    <a href="javascript:void(0)" class="adicionar"><span class="glyphicon glyphicon-plus-sign plus"></span></a>
+                    <a href="javascript:void(0)" class="remover"><span class="glyphicon glyphicon-minus-sign minus"></span></a>
+                </div>
+            </div>
+        }
+    }
+</div>

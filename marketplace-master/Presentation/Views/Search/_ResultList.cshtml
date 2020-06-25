@@ -1,0 +1,63 @@
+﻿@model SearchResultVM
+
+@{
+    var config = MaaSConfig.Current;
+    var showDistance = Model.Items.Any(x => x.Distance != null);
+    var showDescription = Model.Items.Any(x => x.ShowDescription);
+}
+
+@if (Model.Items == null || Model.Items.Count == 0)
+{
+    <div class="col-xs-12 well text-center">
+        <span class="text-gray">@Html.Markdown(Request.GetLocalizedString("SEARCH_EMPTY_HELP"))</span>
+    </div>
+}
+
+@foreach (var item in Model.Items)
+{
+    <div class="col-xs-12 col-sm-4 col-md-3">
+        <div class="card equal-height">
+            <a href="@item.DetailsUrl" title="@item.Title" class="card-product-img-link">
+                <img src="~/assets/images/product-img-placeholder.jpg" data-src="@item.ImageUrl" alt="@item.Title" class="js-load-img" />
+            </a>
+
+            <h5 class="card-product-title">@item.Title</h5>
+
+            @if (showDistance)
+            {
+                <p>@item.FriendlyDistance&nbsp;</p>
+            }
+
+            
+            <small class="text-muted" style="display:block">
+                @if (!string.IsNullOrWhiteSpace(item.Subtitle))
+                {
+                    <span>@item.Subtitle</span>
+                }
+                else
+                {
+                    @:&nbsp;
+                }
+            </small>
+            
+
+            @if (showDescription)
+            {
+                <p><small><em>@item.Description</em></small></p>
+            }
+            else
+            {
+                <br />
+            }
+
+            @if(config.Seller.UserRatings.Enabled && item.AverageRating.HasValue && item.RatingsCount.HasValue)
+            {
+                <p>@Html.Partial("_RatingStars", item.AverageRating)<br />@item.RatingsCount.ToString() avaliações</p>
+            }
+
+            @Html.Localized("SEARCH_SELLER_PROFILE_BUTTON", "a", new { href = item.DetailsUrl, @class = "btn btn-default btn-round" })
+        </div>
+    </div>
+}
+
+<input type="hidden" class="js-next-url" style="display: none" value="@(Model.NextPageUrl ?? "")" />

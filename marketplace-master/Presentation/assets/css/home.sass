@@ -1,0 +1,213 @@
+// Não modificar este arquivo.
+
+@import "variables.sass"
+@import "mixins.sass"
+@import "functions.sass"
+
+.hero-contents
+  color: $home_hero_title_color
+
+.home-hero-title
+  @include title_shadow
+  color: $home_hero_title_color
+  font: $home_hero_title_font
+  font-weight: 700
+  font-size: 60px
+  padding: 50px 0 30px 0
+  text-align: center
+
+.home-hero-slogan
+  @include slogan_shadow
+  color: $home_hero_slogan_color
+  font: $home_hero_slogan_font
+  font-weight: bold
+  font-size: 24px
+  margin-bottom: $default_margin*4
+  text-align: center
+
+.home-hero-main-btn
+  @include border-radius
+  @include box-shadow(10px, #000000)
+  background-color: $home_hero_main_btn_bg
+  color: $home_hero_main_btn_color
+  font: $font_btn
+  display: inline-block
+  font-size: 18px
+  font-weight: 700
+  padding: 10px 35px
+  white-space: normal !important
+  &:hover,&:focus
+    background: darken($home_hero_main_btn_bg, 10%)
+    color: $home_hero_main_btn_color
+    text-decoration: none
+
+.home-hero-second-btn
+  @include border-radius
+  @include box-shadow(10px, #000000)
+  background-color: $home_hero_second_btn_bg
+  color: $home_hero_second_btn_color
+  display: inline-block
+  font: $font_btn
+  font-weight: 400
+  font-size: 14px
+  padding: 5px 15px
+  &:hover,&:focus
+    background: darken($home_hero_second_btn_bg, 10%)
+    color: $home_hero_second_btn_color
+    text-decoration: none
+
+.home
+  .menu
+    z-index: 999
+    background: $menu_home_bg
+    box-shadow: 0 0 0 transparent
+    position: relative
+    .row .links li
+      a.item-menu, a.item-menu:hover
+        color: $menu_home_color !important
+    .row links li a
+      color: $menu_home_color
+      &:hover
+        color: $menu_home_color
+        small
+          color: $menu_home_color
+    .menu-btn
+      background: $menu_home_btn_bg
+      color: $menu_home_btn_color
+      &:hover, &:focus
+        color: $menu_home_btn_color !important
+        background-color: darken($menu_fixed_btn_bg, 10%)
+    a.abre-menu
+      color: $menu_home_color
+      &:hover
+        color: $menu_home_color
+
+.hero-bg
+  background-size: cover
+  padding-bottom: 50px
+  height: 100%
+  min-height: 100vh
+
+.howitworks
+  padding: 80px 0
+  background: $howitworks_bg
+  h2
+    color: $howitworks_title_color
+    font: $howitworks_title_font
+    font-size: 38px
+    font-weight: 700
+    margin-bottom: 60px
+    margin-top: 0
+    text-align: center
+  .icone
+    margin: 0 auto
+    display: block
+    max-width: 140px
+    max-height: 140px
+    margin-bottom: 20px
+  h3, p
+    text-align: center
+  h3
+    color: $howitworks_subtitle_color
+    font: $howitworks_subtitle_font
+    font-weight: 700
+    font-size: 24px
+  p
+    color: $howitworks_text_color
+    font: $howitworks_text_font
+    font-size: 14px
+    margin-bottom: 25px
+
+.best-sellers
+  padding: 60px 0
+  background: $bestsellers_bg
+  h2
+    color: $bestsellers_title_color
+    font: $bestsellers_title_font
+    font-size: 38px
+    margin-bottom: 55px
+    margin-top: 0
+    text-align: center
+  .seller
+    font-size: 18px
+    text-align: center
+    img
+      @include border-radius
+      margin-bottom: 30px
+    .name
+      font-weight: 700
+    a
+      color: $color_title
+    a:hover, a:focus
+      color: lighten($color_title, 20%)
+      text-decoration: none
+
+.call-sellers
+  background: $callsellers_bg
+  padding: 50px 0
+  h2
+    color: $callsellers_title_color
+    font: $callsellers_title_font
+    font-size: 28px
+    margin-top: 10px
+    margin-bottom: 30px
+  .call-sellers-action-btn
+    @include border-radius
+    @include box-shadow(10px, #000000)
+    background: $callsellers_btn_bg
+    color: $callsellers_btn_color
+    display: inline-block
+    font-size: 18px
+    padding: 10px 35px
+    &:hover, &:focus
+      background: darken($callsellers_btn_bg, 10%)
+      color: $callsellers_btn_color
+      text-decoration: none
+  .box
+    @include border-radius
+    background: $callsellers_box_bg
+    color: $callsellers_box_color
+    font-weight: 700
+    margin-bottom: $default_margin
+    padding: $default_padding
+    text-align: center
+
+.nearby-products
+  background: $nearbyproducts_bg
+  padding: 50px 0
+  h2
+    color: $nearbyproducts_title_color
+    font: $nearbyproducts_title_font
+    font-size: 28px
+    margin-top: 10px
+    margin-bottom: 30px
+  p
+    color: $nearbyproducts_title_color
+  .js-nearby-btn
+    @include border-radius
+    @include box-shadow(10px, #000000)
+    background: $nearbyproducts_btn_bg
+    color: $nearbyproducts_btn_color
+    display: inline-block
+    font-size: 18px
+    padding: 10px 35px
+    &:hover, &:focus
+      background: darken($nearbyproducts_btn_bg, 10%)
+      color: $nearbyproducts_btn_color
+      text-decoration: none
+
+.misc-area
+  background: $misc_bg
+  padding: 80px 0
+  h2
+    color: $misc_title_color
+    font: $misc_title_font
+    margin-bottom: 50px
+    text-align: center
+
+@media (max-width: 767px)
+  .home-hero-title
+    padding-top: 70px
+    font-size: 40px
+  .call-sellers img
+    padding: 35px

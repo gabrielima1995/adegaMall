@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    /**/
+
+    var config = MaaSConfig.Current;
+}
+
+@if (config.Quote.Enabled)
+{
+    var totalOpenedRequest = User.Identity.GetTotalOpenedQuotes();
+
+    <li>
+        <a href="@Url.ActionLocalized("Buyer", "Quotes")">
+            <i class="far fa-folder-open" aria-hidden="true"></i>
+            <strong>
+                @Html.Localized("QUOTE_LINK")
+                @if (totalOpenedRequest > 0)
+                {
+                    <span class="badge js-open-requests-badge">@totalOpenedRequest</span>
+                }
+            </strong>
+        </a>
+    </li>
+}
+
+@if (config.Product.Enabled)
+{
+    <li>
+        <a href="@Url.ActionLocalized("Index", "MyOrders")">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            @Html.Localized("MY_ORDERS_LINK", "strong")
+        </a>
+    </li>
+}
+
+@if (config.Product.Enabled && config.Product.BusinessModel.Rental.Enabled && config.Product.BusinessModel.Rental.Buyer.Schedule.Enabled)
+{
+    <li>
+        <a href="@Url.ActionLocalized("Index", "ScheduleBuyer")">
+            <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+            @Html.Localized("SCHEDULE_LINK", "strong")
+        </a>
+    </li>
+}
+
+@if (config.Product.Enabled && config.Product.Wishlist.Enabled)
+{
+    <li>
+        <a href="@Url.ActionLocalized("Index", "MyWishList")">
+            <i class="far fa-heart" aria-hidden="true"></i>
+            @Html.Localized("PRODUCTWISH_LINK", "strong")
+        </a>
+    </li>
+}

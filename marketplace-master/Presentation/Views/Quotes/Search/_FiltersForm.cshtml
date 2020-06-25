@@ -1,0 +1,68 @@
+﻿@model Presentation.Models.QuoteViewModels.QuoteSearchVM
+@{
+    string query = Request.QueryString["query"];
+    var config = MaaSConfig.Current.Search.QuotesSearch;
+    int maxPrice = (int)config.MaxPrice;
+
+    int initMinPrice = 0;
+    int initMaxPrice = maxPrice - 1;
+
+    var priceStr = Request.QueryString["price"];
+    if (priceStr != null && priceStr.Contains(','))
+    {
+        int.TryParse(priceStr.Split(',')[0], out initMinPrice);
+        int.TryParse(priceStr.Split(',')[1], out initMaxPrice);
+    }
+}
+
+@using (Html.BeginForm("Search", "Quotes", FormMethod.Get))
+{
+    <br />
+    @Html.Hidden("Query", query)
+    @Html.Hidden("page", 0)
+    @Html.Hidden("ordering", 0)
+
+    if (config.Filters.Category)
+    {
+        <div class="form-group">
+            @Html.Label("Categoria")
+            @Html.Partial("_CategoriesSelect", Model)
+        </div>
+        if (config.Filters.SubCategory)
+        {
+            <div class="form-group">
+                @Html.Label("Subcategoria")
+                @Html.Partial("_SubCategoriesSelect", Model)
+            </div>
+        }
+    }
+
+    if (config.Filters.PriceRange)
+    {
+        <div>
+            @Html.Label("Valor")
+            <div class="price-slider">
+                <input name="price" id="price-slider" type="text" class="span2" value="" data-slider-min="0" data-slider-max="@maxPrice" data-slider-step="5" data-slider-value="[@initMinPrice,@initMaxPrice]" />
+            </div>
+        </div>
+    }
+    if (config.Filters.MinDate)
+    {
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.MinDate, new { @class = "" })
+            @Html.TextBox("MinDate", Request.QueryString["minDate"], new { @class = "date-picker text-black form-control" })
+        </div>
+    }
+    if (config.Filters.MaxDate)
+    {
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.MaxDate, new { @class = "" })
+            @Html.TextBox("MaxDate", Request.QueryString["maxDate"], new { @class = "date-picker text-black form-control" })
+        </div>
+    }
+    <div class="text-center">
+        <br />
+        <button type="submit" class="btn btn-default text-primary js-apply-filters"><i class="fas fa-filter"></i>  Filtrar</button>
+    </div>
+    <br />
+}

@@ -1,0 +1,20 @@
+﻿<div class="modal" tabindex="-1" role="dialog" id="modalDeleteAvailabilityAlert">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color:red">@Html.Localized("PRODUCT_AVAILABILITY_MODAL_DELETE_TITLE")</h5>
+            </div>
+            <div class="modal-body">
+                @Html.Localized("PRODUCT_AVAILABILITY_MODAL_DELETE_BODY", "p")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    @Html.Localized("PRODUCT_AVAILABILITY_MODAL_DELETE_DISMISS")
+                </button>
+                <a id="deleteAvailability" type="button" class="btn btn-info confirm-delete-availability" href="">
+                    @Html.Localized("PRODUCT_AVAILABILITY_MODAL_DELETE_ACCEPT")
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

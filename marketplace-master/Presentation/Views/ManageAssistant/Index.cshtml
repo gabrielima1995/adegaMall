@@ -1,0 +1,108 @@
+﻿@model ViewModelBase<Presentation.Controllers.ManageAssistantIndexViewModel>
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("SELLER_ASSISTANT_TITLE");
+    var loginProfile = User.Identity.GetLoginProfile();
+}
+
+<div class="main-content bg-1 padding-top-30 padding-bottom-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.Partial("_UserMenu", loginProfile)
+
+                <h3>
+                    <i class="fas fa-user-cog"></i>
+                    @Html.Localized("SELLER_ASSISTANT_TITLE")
+                </h3>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" value="@Model.Data.Email" disabled="disabled" />
+                        </div>
+                        @if (Model.Data.IsEnabled)
+                        {
+                            <div class="form-group">
+                                <div>
+                                    <i class="fa fa-circle" style="color: #64dd17"></i>
+                                    @Html.Localized("SELLER_ASSISTANT_ENABLED")
+                                </div>
+                            </div>
+                            using (Html.BeginForm("Disable", "ManageAssistant"))
+                            {
+                                <button type="submit" class="btn btn-default">
+                                    @Html.LocalizedString("SELLER_ASSISTANT_DISABLE")
+                                </button>
+                            }
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <div>
+                                    <i class="fa fa-circle" style="color: #ff6e40"></i>
+                                    @Html.Localized("SELLER_ASSISTANT_DISABLED")
+                                </div>
+                            </div>
+                            using (Html.BeginForm("Enable", "ManageAssistant"))
+                            {
+                                <button type="submit" class="btn btn-default">
+                                    @Html.LocalizedString("SELLER_ASSISTANT_ENABLE")
+                                </button>
+                            }
+                        }
+                    </div>
+                </div>
+
+                @Html.Localized("SELLER_ASSISTANT_PERMISSIONS_TITLE", "h3")
+
+                <p>
+                    <a href="javascript:void(0)" id="checkAllPermissions">@Request.GetLocalizedString("SELLER_ASSISTANT_PERMISSIONS_ENABLE_ALL")</a> |
+                    <a href="javascript:void(0)" id="uncheckAllPermissions">@Request.GetLocalizedString("SELLER_ASSISTANT_PERMISSIONS_DISABLE_ALL")</a>
+                </p>
+
+                @using (Html.BeginForm())
+                {
+                    <div class="row">
+                        @Html.HiddenFor(model => model.Data.Email)
+                        @Html.HiddenFor(model => model.Data.IsEnabled)
+                        @for (var i = 0; i < Model.Data.Permissions.Count; i++)
+                        {
+                            <div class="col-sm-6 col-md-4">
+                                <div class="panel panel-default seller-assistant-permission-box">
+                                    <div class="panel-body">
+                                        @Html.HiddenFor(model => Model.Data.Permissions[i].SubjectLabel)
+                                        @Html.Localized(Model.Data.Permissions[i].SubjectLabel, "strong")
+                                        <div class="checkbox seller-assistant-permission-view">
+                                            <label>
+                                                @Html.HiddenFor(model => Model.Data.Permissions[i].ViewPermissionName)
+                                                @Html.CheckBoxFor(model => Model.Data.Permissions[i].CanView)
+                                                @Request.GetLocalizedString("SELLER_ASSISTANT_PERMISSIONS_VIEW")
+                                            </label>
+                                        </div>
+                                        <div class="checkbox seller-assistant-permission-edit">
+                                            <label>
+                                                @Html.HiddenFor(model => Model.Data.Permissions[i].EditPermissionName)
+                                                @Html.CheckBoxFor(model => Model.Data.Permissions[i].CanEdit)
+                                                @Request.GetLocalizedString("SELLER_ASSISTANT_PERMISSIONS_EDIT")
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <button class="btn btn-primary btn-lg">
+                        <i class="fas fa-check"></i>
+                        @Html.Localized("SELLER_ASSISTANT_PERMISSIONS_SAVE")
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>ManageAssistantIndex.init()</script>
+}

@@ -1,0 +1,150 @@
+﻿@using System.Globalization
+@using Domain.StoreModule.Entities;
+@using Application.Modules.Products;
+@using Domain.Modules.StoreModule.Entities
+@using Presentation.Globalization
+
+@model  IProductDetailsToSelectPeriodViewModel
+
+@{
+    var config = MaaSConfig.Current;
+    var bmIsRental = config.Product.BusinessModel.Rental.Enabled;
+    var bmRentalIsShift = bmIsRental && config.Product.BusinessModel.Rental.RentalPeriodMode == RentalPeriodMode.Shifts;
+    var bmRentalIsGridView = bmIsRental && !bmRentalIsShift && config.Product.BusinessModel.Rental.GridView.Enabled && (Model.RentalPeriodUnit == RentalPeriodUnit.Hour || Model.RentalPeriodUnit == RentalPeriodUnit.Minute);
+    var showQtyBox = config.Product.BusinessModel.Rental.QuantityEnabled;
+
+    DateTime startDate;
+
+    if (ViewBag.StartDate == null)
+    {
+        startDate = DateTime.Today;
+    }
+    else
+    {
+        startDate = (DateTime) ViewBag.StartDate;
+    }
+
+    if (ViewBag.HideDateTimeEnd == null)
+    {
+        ViewBag.HideDateTimeEnd = false;
+    }
+
+    if (ViewBag.ForceSelectPeriod == null)
+    {
+        ViewBag.ForceSelectPeriod = false;
+    }
+
+    if (ViewBag.ShowDiscount == null)
+    {
+        ViewBag.ShowDiscount = true;
+    }
+
+    if (ViewBag.Quantity == null)
+    {
+        ViewBag.Quantity = 1;
+    }
+
+    var rentalStartDateTime = string.Empty;
+    if (ViewBag.RentalStartDateTime != null)
+    {
+        rentalStartDateTime = ViewBag.RentalStartDateTime;
+    }
+
+    var rentalEndDateTime = string.Empty;
+    if (ViewBag.RentalEndDateTime != null)
+    {
+        rentalEndDateTime = ViewBag.RentalEndDateTime;
+    }
+}
+
+@Html.Hidden("RentalStartDate", string.Empty)
+@Html.Hidden("RentalStartTime", string.Empty)
+@Html.Hidden("RentalStartDateTime", rentalStartDateTime)
+
+@Html.Hidden("RentalEndDate", string.Empty)
+@Html.Hidden("RentalEndTime", string.Empty)
+@Html.Hidden("RentalEndDateTime", rentalEndDateTime)
+
+@Html.Hidden("ProductAvailabilityId", string.Empty)
+
+@if (bmIsRental)
+{
+    if (bmRentalIsShift)
+    {
+        <div class="js-rental-calendar-loading"><p><i class="fas fa-spinner fa-spin"></i>&nbsp;@Request.GetLocalizedString("RENTAL_CALENDAR_LOADING")</p></div>
+        <div class="js-rental-calendar" data-starting-url="@Url.Action("RentalCalendar", "Products", new { productId = Model.Product.Id, year = startDate.Year, month = startDate.Month, day = startDate.Day, ignoreOrderProductId = ViewBag.IgnoreOrderProductId, ignoreOrderProductRentalInfoId = ViewBag.IgnoreOrderProductRentalInfoId, quantity = ViewBag.Quantity, productAvailabilityId = ViewBag.ProductAvailabilityId, forceSelectPeriod = ViewBag.ForceSelectPeriod, showDiscount = ViewBag.ShowDiscount, start = ViewBag.StartDate?.ToString("yyyy-MM-dd"), time = ViewBag.StartTime })" style="margin-bottom: 10px"></div>
+    }
+    else if (bmRentalIsGridView)
+    {
+        <div class="js-rental-grid-loading" style="visibility: hidden"><p><i class="fas fa-spinner fa-spin"></i>&nbsp;@Request.GetLocalizedString("RENTAL_GRID_LOADING")</p></div>
+        <div class="js-rental-grid" 
+             data-starting-url="@Url.Action("RentalGrid", "Products", new { productId = Model.Product.Id, year = startDate.Year, month = startDate.Month, day = startDate.Day, ignoreOrderProductId = ViewBag.IgnoreOrderProductId, ignoreOrderProductRentalInfoId = ViewBag.IgnoreOrderProductRentalInfoId, quantity = ViewBag.Quantity, productAvailabilityId = ViewBag.ProductAvailabilityId, forceSelectPeriod = ViewBag.ForceSelectPeriod, showDiscount = ViewBag.ShowDiscount, start = ViewBag.StartDate?.ToString("yyyy-MM-dd"), time = ViewBag.StartTime })" 
+             data-auto-loading-disabled="@(ViewBag.DisableGridViewAutoLoading == true? "1" : "0")"
+             style="margin-bottom: 10px"></div>
+    }
+    else
+    {
+        <div id="rentalFromTo" class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    @Html.Localized("RENTAL_FROM_DATE", "strong", new { @class = "text-muted" }):
+                    <input name="RentalStartDateTime" type="text" class="form-control" placeholder="@Request.GetLocalizedString("CLICK_PICK_DATE")" readonly="readonly" />
+                </div>
+            </div>
+
+            @if (Model.IsFixedRental)
+            {
+                <div class="col-xs-12 col-md-6">
+                    @Html.Localized("CART_ITEM_RENTAL_PERIOD", "strong")
+                    <p>
+                        @Model.Product.RentalSettings.MinRentalPeriod
+                        <span class="text-lowercase">@Request.GetLocalizedString(Model.Product.RentalSettings.RentalPeriodUnit.GetValueOrDefault())</span>
+                    </p>
+                </div>
+            }
+            else if (!ViewBag.HideDateTimeEnd)
+            {
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        @Html.Localized("RENTAL_UNTIL_DATE", "strong", new { @class = "text-muted" }):
+                        <input name="RentalEndDateTime" type="text" class="form-control" placeholder="@Request.GetLocalizedString("CLICK_PICK_DATE")" readonly="readonly" />
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div style="overflow: hidden" class="js-datepicker-start-container">
+            <div class="form-group">
+                <div id="rentalDateTimeStartPicker"></div>
+            </div>
+        </div>
+
+        <div style="overflow: hidden" class="js-datepicker-end-container">
+            <div class="form-group">
+                <div id="rentalDateTimeEndPicker"></div>
+            </div>
+        </div>
+
+        <p id="btnValidateAvailabiliy">
+            @Html.Localized("CHECK_AVAILABILITY", "a", new { href = "#" })
+        </p>
+    }
+
+    <p id="validateAvailabilityLoader" style="display: none">
+        <i class="fa fa-spinner fa-spin"></i>
+        @Html.Localized("CHECKING_AVAILABILITY", "span", new { @class = "text-muted" })
+    </p>
+
+    if (showQtyBox)
+    {
+        <p id="actualAvailabilityInfo" class="text-info" style="display: none">
+            <i class="fa fa-info-circle"></i>
+            <span>Até 2 unidade(s) disponível(is)</span>
+        </p>
+    }
+
+    <div id="unavailableAlertBox" class="alert alert-danger" style="display: none">
+        <i class="fa fa-ban"></i>
+        <span>Não há disponibilidade para esta data. Tente a partir de 12/02 às 19:00</span>
+    </div>
+}

@@ -1,0 +1,168 @@
+﻿@using Presentation.Helpers
+@model IEnumerable<Domain.Entities.CreditsPack>
+
+@{
+    ViewBag.Title = "Pacotes de Créditos";
+
+    var config = MaaSConfig.Current;
+}
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-cubes"></i>
+        @ViewBag.Title
+    </h1>
+</section>
+
+<section class="content container-fluid">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-body table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Créditos</th>
+                            @if (config.Quote.LeadSales.CreditsExpire)
+                            {
+                                <th>Validade (dias)</th>
+                            }
+                            <th>Preço</th>
+                            <th style="width:84px">Acões</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr data-id="@item.Id">
+                                <td data-order="@Dt.Order(item.Name)">
+                                    @item.Name
+                                </td>
+                                <td data-order="@Dt.Order(item.Description)">
+                                    @(item.Description?.Truncate(255) ?? "(Sem descrição)")
+                                </td>
+                                <td data-order="@Dt.Order(item.CreditsAmount)">
+                                    @item.CreditsAmount
+                                </td>
+                                @if (config.Quote.LeadSales.CreditsExpire)
+                                {
+                                    <td data-order="@Dt.Order(item.ValidityDays.GetValueOrDefault())">
+                                        @item.ValidityDays.GetValueOrDefault()
+                                    </td>
+                                }
+                                <td data-order="@Dt.Order(item.Price)">
+                                    @config.DefaultCurrency @item.Price.RoundTo2Places()
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-primary js-update-pack" data-id="@item.Id"><i class="fa fa-wrench"></i></button>
+                                    <button class="btn btn-sm btn-danger js-delete-pack" data-name="@item.Name"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="text-center"><button class="btn btn-success js-create-pack"><i class="fa fa-plus"></i> Novo Pacote de Créditos</button></div>
+            </div>
+        </div>
+    </div>
+
+    @*Modal - Confirmação de exclusão*@
+    <div class="modal fade" tabindex="-1" role="dialog" id="confirmModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Confirmar exclusão</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza que deseja excluir o pacote "<span id="delete-pack-name">NOME</span>"?</p>
+                </div>
+                <div class="modal-footer">
+                    @using (Html.BeginForm("DeletePack", "Credits", FormMethod.Post))
+                    {
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        @Html.Hidden("packId", "", new { @class = "js-modal-packId" })
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Novo pacote*@
+    <div class="modal fade" tabindex="-1" role="dialog" id="newPackModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Novo pacote</h4>
+                </div>
+                @using (Html.BeginForm("CreatePack", "Credits", FormMethod.Post))
+                {
+                    <div class="modal-body">
+                        @Html.Partial("_NewPackForm", new CreditsPackViewModel())
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Criar pacote</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    @*Editar pacote*@
+    <div class="modal fade" tabindex="-1" role="dialog" id="editModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Editar pacote</h4>
+                </div>
+                @using (Html.BeginForm("UpdatePack", "Credits", FormMethod.Post))
+                {
+                    <div class="modal-body" id="js-edit-form">
+                        @*@Html.Partial("_UpdatePackForm", new CreditsPackViewModel())*@
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</section>
+
+@section scripts
+{
+    <script>DataTableCustom.create(null, { "paging": false, "searching": false })</script>
+    <script>
+        $('.js-delete-pack').on('click', function (e) {
+            var id = $(this).parent().parent().attr('data-id');
+            var name = $(this).attr('data-name');
+            $('.js-modal-packId').val(id);
+            $('#delete-pack-name').text(name);
+            $('#confirmModal').modal('show');
+        });
+
+        $('.js-create-pack').on('click', function (e) {
+            $('#newPackModal').modal('show');
+        });
+
+        $('.js-update-pack').on('click', function (e) {
+            var id = $(this).attr('data-id');
+
+            $.ajax({
+                url: '/admin/credits/updatepack/?packId='+ id,
+                type: 'GET',
+                success: function (data) {
+                    $('#js-edit-form').html(data);
+                    $('#editModal').modal('show');
+                }
+            });
+        });
+    </script>
+}

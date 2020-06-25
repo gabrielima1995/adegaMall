@@ -1,0 +1,14 @@
+﻿@model Presentation.Models.ProductViewModels.CartWithExtraInfo
+
+@if (MaaSConfig.Current.Product.Order.ExtraInfoField.Enabled)
+{
+    using (Html.BeginForm("IndexCartWithViewModel", "Cart", FormMethod.Post, new { id = "cartExtraInfo" }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExtraInfo)
+            @Html.TextAreaFor(model => model.ExtraInfo, new { @class = "form-control", placeholder = Request.GetLocalizedString("ORDER_EXTRA_INFO_PLACEHOLDER") })
+            @Html.HiddenFor(model => model.ExtraInfoRequired)
+            @Html.ValidationMessageFor(model => model.ExtraInfo, null, new { @class = "text-danger" })
+        </div>
+    }
+}

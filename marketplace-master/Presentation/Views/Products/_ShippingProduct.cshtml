@@ -1,0 +1,77 @@
+﻿@using Domain.Entities.StoreModule
+@model ShippingInfosVM
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@if (Model.ShowAnyShipping)
+{
+    <ul class="product-freight-list list-unstyled m-b-md">
+        @if (Model.ShowPrivateFleet)
+        {
+            <li>
+                <strong>@Request.GetLocalizedString("PRODUCT_PRIVATE_FLEET_METHOD_LABEL"):</strong>
+                @config.DefaultCurrency
+                @Model.PrivateFleetCost.DisplayDecimal(2)
+            </li>
+        }
+
+        @if (Model.ShowPostalExpress)
+        {
+            <li>
+                <strong>@Html.Localized("PRODUCT_SEDEX_METHOD_LABEL"):</strong>
+                @config.DefaultCurrency
+                @Model.PostalExpressCost.DisplayDecimal(2)
+                @DisplayDeliveryDate(Model.DeliveryDateSedex)
+            </li>
+        }
+
+        @if (Model.ShowPostalRegular)
+        {
+            <li>
+                <strong>@Html.Localized("PRODUCT_PAC_METHOD_LABEL"):</strong>
+                @config.DefaultCurrency
+                @Model.PostalRegularCost.DisplayDecimal(2)
+                @DisplayDeliveryDate(Model.DeliveryDatePac)
+            </li>
+        }
+
+        @if (Model.ShowOnSitePickup)
+        {
+            <li>
+                <strong>@Html.Localized("PRODUCT_ON_SITE_PICKUP_METHOD_LABEL"):</strong>
+                @config.DefaultCurrency
+                @Model.OnSitePickupCost.DisplayDecimal(2)
+            </li>
+        }
+
+        @if (Model.ShowNoShipping)
+        {
+            <li>
+                <strong>@Html.Localized("PRODUCT_NO_SHIPPING_METHOD_LABEL")</strong>
+                @config.DefaultCurrency
+                @Model.NoShippingCost.DisplayDecimal(2)
+            </li>
+        }
+
+        @if (Model.ShowAnyShippingWithCharge && config.Product.BusinessModel.Rental.Enabled && config.Product.ShippingMode == ShippingMode.PerProduct)
+        {
+            <li>
+                <span>
+                    @Html.Localized((Model.Product.RentalSettings.ChargeDoubleShipping ?? false)
+                        ? "CHARGE_DOUBLE_SHIPPING_MESSAGE"
+                        : "NO_CHARGE_DOUBLE_SHIPPING_MESSAGE")
+                </span>
+            </li>
+        }
+    </ul>
+}
+
+@helper DisplayDeliveryDate(DateTime? date)
+{
+    if (date.HasValue)
+    {
+        @:(@Html.Localized("CART_SHIPPING_DAYS_LABEL_SHORT") @date.Value.ToShortDateString())
+    }
+}

@@ -1,0 +1,41 @@
+﻿@model  OrderProductViewModel
+
+@{
+    var viewPathFmt = "~/Views/Products/{0}.cshtml";
+    var quantity = 1;
+
+    var vd = new ViewDataDictionary
+    {
+        { "Quantity", quantity },
+        { "ForceSelectPeriod", true },
+        { "ProductAvailabilityId", Model.OrderProduct.RentalInfo.ProductAvailability_Id },
+        { "ShowDiscount", false }
+    };
+}
+
+<div class="modal fade js-confirm-new-period-rental" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Request.GetLocalizedString("ORDER_BUYER_NEW_PERIOD_PRODUCT_RENTAL_TITLE_MODAL")</h4>
+            </div>
+            @using (Html.BeginForm("NewRentalProductPeriod", "MyOrders", FormMethod.Post))
+            {
+                @Html.Hidden("OrderProductId", Model.Id)
+                @Html.Hidden("OrderId", Model.Order.Id)
+                @Html.Hidden("ProductId", Model.Product.Id)
+                @Html.Hidden("Quantity", quantity)
+                @Html.Hidden("IsFixedRental", Model.IsFixedRental)
+
+                <div class="modal-body">
+                    @Html.Partial(string.Format(viewPathFmt, "_RentalSelectPeriod"), Model, vd)
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-warning js-page-action-button">@Request.GetLocalizedString("CONFIRM_SIGN_BUTTON")</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

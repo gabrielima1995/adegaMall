@@ -1,0 +1,8 @@
+﻿@{
+    var config = MaaSConfig.Current;
+}
+
+@if (config.EcommerceProducts.Enabled)
+{
+    @:@Html.Action("Products", "EcommerceHome")
+}

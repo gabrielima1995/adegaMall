@@ -1,0 +1,113 @@
+﻿@using Domain.DTO
+@model BusinessConfigViewModel
+
+@{
+    ViewBag.Title = Request.GetLocalizedString("ADMIN_CUSTOMIZE_OTHERS_TITLE");
+}
+
+<section class="content-header"></section>
+
+<section class="content container-fluid">
+
+    @Html.Partial("_CustomizeMenu", 5)
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-6 col-lg-offset-3 text-center">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Configurar opções de pagamento</h4>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Payment", "NewCustomize", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                <h4>Configurar taxas de comissão da Marketplace</h4>
+                                <hr />
+                                <div class="form-group">
+                                    <div class="col-xs-6 text-right">
+                                        @Html.LabelFor(x => x.GlobalFeePercent)
+                                    </div>
+                                    <div class="input-group col-xs-4">
+                                        @Html.TextBoxFor(x => x.GlobalFeePercent, new { @class = "form-control" })
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                    @Html.ValidationMessageFor(x => x.GlobalFeePercent, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-6 text-right">
+                                        @Html.LabelFor(x => x.GlobalFeeFixed)
+                                    </div>
+                                    <div class="input-group col-xs-4">
+                                        <span class="input-group-addon">R$</span>
+                                        @Html.TextBoxFor(x => x.GlobalFeeFixed, new { @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(x => x.GlobalFeeFixed, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label>@Html.CheckBoxFor(x => x.AllowCustomFees) Permitir taxas personalizadas por vendedor </label>
+                                    @Html.ValidationMessageFor(x => x.AllowCustomFees, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <h4>Configurar meios de pagamento</h4>
+                                <hr />
+                                <div class="form-group">
+                                    <label>@Html.CheckBoxFor(x => x.AllowBoleto) Permitir pagamento por boleto bancário </label>
+                                    @Html.ValidationMessageFor(x => x.AllowBoleto, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label>@Html.CheckBoxFor(x => x.AllowCreditCard) Permitir pagamento por cartão de crédito </label>
+                                    @Html.ValidationMessageFor(x => x.AllowCreditCard, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        @Html.LabelFor(x => x.MaxInstallments)
+                                    </div>
+                                    <div class="input-group col-xs-4">
+                                        @Html.TextBoxFor(x => x.MaxInstallments, new { step = "1", min = "1", max = "12", type = "number", @class = "form-control" })
+                                        <span class="input-group-addon"><i class="fa fa-times"></i></span>
+                                    </div>
+                                    @Html.ValidationMessageFor(x => x.MaxInstallments, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        @Html.LabelFor(x => x.MinInstallmentValue)
+                                    </div>
+                                    <div class="input-group col-xs-4">
+                                        <span class="input-group-addon">R$</span>
+                                        @Html.TextBoxFor(x => x.MinInstallmentValue, new { @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(x => x.MinInstallmentValue, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        @Html.LabelFor(x => x.MinOrderValue)
+                                    </div>
+                                    <div class="input-group col-xs-4">
+                                        <span class="input-group-addon">R$</span>
+                                        @Html.TextBoxFor(x => x.MinOrderValue, new { @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(x => x.MinOrderValue, "", new { @class = "text-danger" })
+                                </div>
+                                @if (MaaSConfig.Current.Product.Enabled)
+                                {
+                                    <div class="form-group">
+                                        <label>@Html.CheckBoxFor(x => x.AllowInstallmentsPerProduct) Permitir configurar parcelamento por produto</label>
+                                        @Html.ValidationMessageFor(x => x.AllowInstallmentsPerProduct, "", new { @class = "text-danger" })
+                                    </div>
+                                }
+                            </div>
+                            <div class="text-center">
+                                <hr />
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Aplicar</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

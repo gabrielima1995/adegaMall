@@ -1,0 +1,72 @@
+﻿@model Application.Sellers.SellerRegisterViewModel
+
+@{
+    var config = MaaSConfig.Current;
+}
+
+@using (Html.BeginForm("Seller", "Register", new { lang = Request.GetCurrentLang(), returnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "margin-top-15", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group field-with-icon">
+        <div>
+            <i class="fa fa-user" aria-hidden="true"></i>
+            @Html.TextBoxFor(i => i.Name, new { @class = "form-control", placeholder = Request.GetLocalizedString("COMPLETE_NAME_INPUT") })
+        </div>
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+
+    if (config.Seller.Phone.Enabled)
+    {
+        <div class="form-group field-with-icon">
+            <div>
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                @Html.TextBoxFor(i => i.PhoneNumber, new { @class = "form-control", placeholder = Request.GetLocalizedString("PHONE_INPUT"), type = "phone" })
+            </div>
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            @Html.HiddenFor(i => i.PhoneNumberRequired)
+        </div>
+    }
+
+    <div class="form-group field-with-icon">
+        <div>
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            @Html.TextBoxFor(i => i.Email, new { @class = "form-control", placeholder = Request.GetLocalizedString("EMAIL_INPUT"), type = "email" })
+        </div>
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.PasswordFor(i => i.Password, new { @class = "form-control margin-bottom-5", placeholder = Request.GetLocalizedString("PASSWORD_INPUT") })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = Request.GetLocalizedString("CONFIRM_PASSWORD_INPUT") })
+        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+    </div>
+
+    if (config.Enterprise.TermsOfUseUrl != null)
+    {
+        <div class="checkbox text-center">
+            <small>
+                <label>
+                    @Html.CheckBoxFor(i => i.Terms)
+                    @Html.Localized("AGREE_TERMS_USE_TEXT") @Html.Localized("TERMS_USE_LINK", "a", new {href = config.Enterprise.TermsOfUseUrl, target = "_blank", @class = "underline"})
+                </label>
+            </small>
+            @Html.ValidationMessageFor(model => model.Terms, "", new {@class = "text-danger"})
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            @Html.Hidden("Terms", true)
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.Localized("SAVE_CHANGES_BUTTON", "button", new { type = "submit", @class = "btn btn-primary btn-block" })
+    </div>
+}

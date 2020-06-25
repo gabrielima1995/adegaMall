@@ -1,0 +1,43 @@
+﻿@model Application.Modules.Products.ProductEditorViewModel
+
+@{ 
+    var config = MaaSConfig.Current;
+}
+
+@if (!Model.ShowByBasePrice)
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price)
+        <div class="input-group">
+            <span class="input-group-addon">@config.DefaultCurrency</span>
+            @Html.TextBoxFor(i => i.Price, new { @class = "form-control js-money", placeholder = Request.GetLocalizedString("PRODUCT_PRICE_INPUT") })
+        </div>
+        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        @Html.HiddenFor(i => i.PriceRequired)
+
+        @if (config.Product.BusinessModel.Rental.Enabled)
+        {
+            <small class="help-block js-product-type-1-hide @(!Model.IsPackageType ? "" : "hide")">@string.Format(Request.GetLocalizedString("PRODUCT_PRICE_RENTALPERIOD_INFO"), Model.GetRentalPeriodString(), Request.GetLocalizedString(Model.RentalPeriodLabel))</small>
+            <small class="help-block js-product-type-1-show @(Model.IsPackageType ? "" : "hide")">@Request.GetLocalizedString("PRODUCT_PRICE_RENTALPERIOD_PACKAGE_INFO")</small>
+        }
+    </div>
+}
+else
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.BasePrice)
+        <div class="input-group">
+            <span class="input-group-addon">@config.DefaultCurrency</span>
+            @Html.TextBoxFor(i => i.BasePrice, new { @class = "form-control js-money", placeholder = Request.GetLocalizedString("PRODUCT_BASEPRICE_INPUT") })
+        </div>
+        @Html.ValidationMessageFor(model => model.BasePrice, "", new { @class = "text-danger" })
+        @Html.HiddenFor(i => i.BasePriceRequired)
+
+        @if (config.Product.BusinessModel.Rental.Enabled)
+        {
+            <small class="help-block js-product-type-1-hide @(!Model.IsPackageType ? "" : "hide")">@string.Format(Request.GetLocalizedString("PRODUCT_BASEPRICE_RENTALPERIOD_INFO"), Model.GetRentalPeriodString(), Request.GetLocalizedString(Model.RentalPeriodLabel))</small>
+            <small class="help-block js-product-type-1-show @(Model.IsPackageType ? "" : "hide")">@Request.GetLocalizedString("PRODUCT_PRICE_RENTALPERIOD_PACKAGE_INFO")</small>
+        }
+    </div>
+}
+
