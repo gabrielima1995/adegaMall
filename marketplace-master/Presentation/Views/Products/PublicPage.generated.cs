@@ -345,12 +345,13 @@ WriteLiteral("\r\n\r\n    <script>\r\n        var addToCartHidden = ");
             
             #line default
             #line hidden
-WriteLiteral(";\r\n        ProductPublicPage.init();\r\n    </script>\r\n\r\n");
+WriteLiteral(";\r\n        ProductPublicPage.init();\r\n\r\n        $(document).ready(function () {\r\n" +
+"            SearchImageLoader.loadImages();\r\n        });\r\n    </script>\r\n\r\n");
 
 WriteLiteral("    ");
 
             
-            #line 55 "..\..\Views\Products\PublicPage.cshtml"
+            #line 59 "..\..\Views\Products\PublicPage.cshtml"
 Write(Html.Partial("_RentalScript", Model));
 
             
@@ -361,7 +362,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 56 "..\..\Views\Products\PublicPage.cshtml"
+            #line 60 "..\..\Views\Products\PublicPage.cshtml"
 Write(Html.Partial("_ProductWishScript"));
 
             

@@ -50,6 +50,10 @@
     <script>
         var addToCartHidden = @(!Model.ShowAddToCart ? 1 : 0);
         ProductPublicPage.init();
+
+        $(document).ready(function () {
+            SearchImageLoader.loadImages();
+        });
     </script>
 
     @Html.Partial("_RentalScript", Model)
