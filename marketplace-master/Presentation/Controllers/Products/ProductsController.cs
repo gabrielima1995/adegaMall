@@ -217,15 +217,19 @@ namespace Presentation.Controllers.Products
             return View(model);
         }
 
-        public PartialViewResult LoadingShippingInfos(string id)
+        public ActionResult LoadingShippingInfos(string id)
         {
-            if (!TryResolveProductId(id, out Guid productId))
-                return null;
+            if (!TryResolveProductId(id, out Guid productId)) return new EmptyResult();
+            if (!User.Identity.IsAuthenticated) return new EmptyResult();
+            if (GetLoginProfile().CurrentPersonType != LoginProfilePersonType.Buyer) return new EmptyResult();
 
             var productInfo = productService.GetDetailsForPublicPage(productId);
             var sellerAddress = productInfo.Product.Store.Seller.Address;
+
             var buyer = buyerService.GetWithAddresses(GetPersonId());
-            var shippingAddress = buyer?.Address;
+            if (buyer == null) return new EmptyResult();
+
+            var shippingAddress = buyer.Address;
 
             var shippingInfos = new ShippingInfosVM(productInfo.Product, sellerAddress, shippingAddress,
                 shippingService.GetAdapter(ShippingMethod.ActualNoShipping),

@@ -36,16 +36,13 @@
         }
 
         function loadShippingInfosIfIsBuyer() {
-            var isBuyer = @User.Identity.GetLoginProfile().IsBuyer().ToJson();
-            if (isBuyer) {
-                var id = $(".js-product-shipping-loading").show().attr("data-product-id");
-                $.ajax({
-                    type: "GET",
-                    url: "@Url.ActionLocalized("LoadingShippingInfos", "Product")&id=" + id
-                }).done(function (response) {
-                    $(".js-product-shipping-loading").html(response);
-                });
-            }
+            var id = $(".js-product-shipping-loading").show().attr("data-product-id");
+            $.ajax({
+                type: "GET",
+                url: "@Url.ActionLocalized("LoadingShippingInfos", "Product")&id=" + id
+            }).done(function (response) {
+                $(".js-product-shipping-loading").html(response);
+            });
         }
 
         function addAndProceedToLogin() {
