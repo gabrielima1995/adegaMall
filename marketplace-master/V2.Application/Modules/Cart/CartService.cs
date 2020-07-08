@@ -756,7 +756,9 @@ namespace V2.Application.Modules
                             else
                                 cart.DeliveryDate = null;
                         }
-                        if (cart.ShippingMethod == ShippingMethod.PostalRegular || cart.ShippingMethod == ShippingMethod.PostalExpress || cart.ShippingMethod == ShippingMethod.AsapLog)
+
+                        if (cart.Sellers.Any() &&
+                            (cart.ShippingMethod == ShippingMethod.PostalRegular || cart.ShippingMethod == ShippingMethod.PostalExpress || cart.ShippingMethod == ShippingMethod.AsapLog))
                             cart.DeliveryDate = adapter.CalculateDeliveryDate(cart.Sellers.Max(x => x.SellerDeliveryDays));
                         else
                             cart.DeliveryDate = null;

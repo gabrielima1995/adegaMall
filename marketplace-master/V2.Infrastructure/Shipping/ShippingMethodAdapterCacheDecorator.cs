@@ -71,10 +71,19 @@ namespace V2.Infrastructure.Shipping
 
         public OperationResult<CorreiosShippingCollection> GetShippingForSeller(IEnumerable<ProductWithQty> products, Store store, Address shippingAddress)
         {
-            var key = GetCacheKey(nameof(GetShippingForSeller), new object[]
+            IEnumerable<object> GetVariablesCache()
             {
-                products.Select(p => p.Product.Id), products.Select(p => p.Quantity), store.SellerId, shippingAddress?.Id
-            });
+                foreach (var p in products)
+                {
+                    yield return p.Product.Id;
+                    yield return p.Quantity;
+                }
+
+                yield return store.SellerId;
+                yield return shippingAddress?.Id;
+            }
+
+            var key = GetCacheKey(nameof(GetShippingForSeller), GetVariablesCache().ToArray());
 
             if (cache.Get(key) == null)
             {
