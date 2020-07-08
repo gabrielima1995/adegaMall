@@ -15,7 +15,10 @@ namespace Domain.Entities
 {
     public class Seller : Person
     {
-        private Seller() { }
+        private Seller()
+        {
+        }
+
         public Seller(string userId, string email, bool requireModeration) : base(userId, email, requireModeration)
         {
         }
@@ -183,6 +186,7 @@ namespace Domain.Entities
         }
 
         public static Seller CreateAsDto() => new Seller();
+
         public override PersonType PersonType => PersonType.Seller;
     }
 }

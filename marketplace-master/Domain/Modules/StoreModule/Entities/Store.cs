@@ -30,6 +30,11 @@ namespace Domain.Entities.StoreModule
 
         public bool PacEnabled { get; set; }
 
+        //ASAP Log
+        public bool AsapLogEnabled { get; set; }
+        public string AsapLogUser { get; set; }
+        public string AsapLogPassword { get; set; }
+
         public DefaultShipping DefaultShipping { get; private set; } = new DefaultShipping();
 
         public IList<SingleFreightParameter> SingleFreightParams

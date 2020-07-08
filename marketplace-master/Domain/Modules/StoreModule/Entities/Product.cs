@@ -309,6 +309,8 @@ namespace Domain.Entities.StoreModule
             if (SedexEnabled)
                 methods.Add(ShippingMethod.PostalExpress);
 
+            methods.Add(ShippingMethod.AsapLog);
+
             return methods;
         }
 

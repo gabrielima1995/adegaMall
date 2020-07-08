@@ -32,6 +32,9 @@ namespace Domain.Services.StoreModule
                 current.PrivateFleetEnabled = store.PrivateFleetEnabled;
                 current.SedexEnabled = store.SedexEnabled;
                 current.PacEnabled = store.PacEnabled;
+                current.AsapLogEnabled = store.AsapLogEnabled;
+                current.AsapLogUser = store.AsapLogUser;
+                current.AsapLogPassword = store.AsapLogPassword;
 
                 current.SingleFreightParams.Clear();
                 foreach (var param in store.SingleFreightParams)

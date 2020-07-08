@@ -24,6 +24,15 @@ namespace Presentation.Models
         [DisplayNameLocalized("STORE_PAC_METHOD_LABEL")]
         public bool PacEnabled { get; set; }
 
+        [DisplayNameLocalized("STORE_ASAPLOG_METHOD_LABEL")]
+        public bool AsapLogEnabled { get; set; }
+
+        [DisplayNameLocalized("STORE_ASAPLOG_USER_LABEL")]
+        public string AsapLogUser { get; set; }
+
+        [DisplayNameLocalized("STORE_ASAPLOG_PASSWORD_LABEL")]
+        public string AsapLogPassword { get; set; }
+
         public string SellerId { get; set; }
         public List<SingleFreightParameterViewModel> SingleFreightParams { get; set; }
 
@@ -59,6 +68,9 @@ namespace Presentation.Models
             OnSitePickupEnabled = store.OnSitePickupEnabled;
             SedexEnabled = store.SedexEnabled;
             PacEnabled = store.PacEnabled;
+            AsapLogEnabled = store.AsapLogEnabled;
+            AsapLogUser = store.AsapLogUser;
+            AsapLogPassword = store.AsapLogPassword;
 
             DefaultShippingAmount = store.DefaultShipping.Amount;
             DefaultShippingDeliveryDays = store.DefaultShipping.DeliveryDays;
@@ -72,6 +84,9 @@ namespace Presentation.Models
             store.PrivateFleetEnabled = SingleFreightEnabled;
             store.SedexEnabled = SedexEnabled;
             store.PacEnabled = PacEnabled;
+            store.AsapLogEnabled = AsapLogEnabled;
+            store.AsapLogUser = AsapLogUser;
+            store.AsapLogPassword = AsapLogPassword;
 
             store.SingleFreightParams.Clear();
             if (SingleFreightEnabled)

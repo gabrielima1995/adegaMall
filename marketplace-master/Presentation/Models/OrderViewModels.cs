@@ -78,7 +78,7 @@ namespace Presentation.Models
             }
         }
 
-        public bool ShowDeliveryDate => Order.DeliveryDate != null && (Order.ShippingMethod == ShippingMethod.PostalExpress || Order.ShippingMethod == ShippingMethod.PostalRegular);
+        public bool ShowDeliveryDate => Order.DeliveryDate != null && (Order.ShippingMethod == ShippingMethod.PostalExpress || Order.ShippingMethod == ShippingMethod.PostalRegular || Order.ShippingMethod == ShippingMethod.AsapLog);
 
         public string DeliveryDate => Order.DeliveryDate?.ToShortDateString() ?? "";
 

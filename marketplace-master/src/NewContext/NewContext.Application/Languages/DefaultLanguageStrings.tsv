@@ -475,6 +475,7 @@ PORTFOLIO_ITEM_VIDEO_URL_REQUIRED	Url do vídeo é obrigatória
 PORTFOLIO_LINK	Portfólio
 POSTAL_EXPRESS_DELIVERY_TIME	Até 7 dias úteis após confirmação do pagamento
 POSTAL_REGULAR_DELIVERY_TIME	Até 15 dias úteis após confirmação do pagamento
+ASAPLOG_DELIVERY_TIME	Até {0} dias úteis
 PREF_PRICE_LABEL	Menor Preço
 PREF_QUALITY_LABEL	Maior Qualidade
 PRICE_PORTFOLIO_ITEM_INPUT	Preço
@@ -526,6 +527,9 @@ PRODUCT_PAC_METHOD_INPUT	PAC
 PRODUCT_PAC_METHOD_LABEL	PAC
 STORE_PAC_METHOD_LABEL	PAC
 STORE_SEDEX_METHOD_LABEL	Sedex
+STORE_ASAPLOG_METHOD_LABEL	AsapLog
+STORE_ASAPLOG_USER_LABEL	Usuário
+STORE_ASAPLOG_PASSWORD_LABEL	Senha
 PRODUCT_PAC_NOT_ENABLED	Esse produto não é entregue via PAC
 PRODUCT_PAYMENT_INFO_BOLETO_ENABLED	Pagamento com boleto está disponível.
 PRODUCT_PAYMENT_INFO_INSTALLMENTS	Pague este produto em até {0}x de {1} {2}.
@@ -694,6 +698,7 @@ SHIPPING_METHOD_NO_SHIPPING	Download
 SHIPPING_METHOD_ON_SITE_PICKUP	Retirada no local
 SHIPPING_METHOD_POSTAL_EXPRESS	Sedex
 SHIPPING_METHOD_POSTAL_REGULAR	PAC
+SHIPPING_METHOD_ASAPLOG	AsapLog
 SHIPPING_METHOD_PRIVATE_FLEET	Frota própria/privada
 SHIPPING_CORREIOS_ERROR_MESSAGE	O serviço dos correios encontra-se indisponível no momento. Tente novamente mais tarde.
 SIGN_BUTTON	Assine agora
@@ -709,6 +714,7 @@ STOCK	Estoque
 STORE_LINK	Minha loja
 STORE_NO_SHIPPING	O vendedor não entrega na sua região
 STORE_NO_SHIPPING_NOT_SUPPORTED	Método de entrega não suportado no modo de frete único por vendedor
+STORE_ASAPLOG_METHOD_INPUT	Integração com AsapLog
 STORE_ON_SITE_PICKUP_METHOD_INPUT	As compras podem ser retiradas no local
 STORE_ON_SITE_PICKUP_METHOD_LABEL	Retirada no local
 STORE_ON_SITE_PICKUP_NOT_ENABLED	Este vendedor não aceita retirada no local

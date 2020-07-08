@@ -29,6 +29,15 @@ namespace Application.Modules.Products.Store
         [DisplayNameLocalized("STORE_PAC_METHOD_LABEL")]
         public bool PacEnabled { get; set; }
 
+        [DisplayNameLocalized("STORE_ASAPLOG_METHOD_LABEL")]
+        public bool AsapLogEnabled { get; set; }
+
+        [DisplayNameLocalized("STORE_ASAPLOG_USER_LABEL")]
+        public string AsapLogUser { get; set; }
+
+        [DisplayNameLocalized("STORE_ASAPLOG_PASSWORD_LABEL")]
+        public string AsapLogPassword { get; set; }
+
         public StoreViewModel()
         {
             Products = new List<Product>();
@@ -64,6 +73,9 @@ namespace Application.Modules.Products.Store
             OnSitePickupEnabled = store.OnSitePickupEnabled;
             SedexEnabled = store.SedexEnabled;
             PacEnabled = store.PacEnabled;
+            AsapLogEnabled = store.AsapLogEnabled;
+            AsapLogUser = store.AsapLogUser;
+            AsapLogPassword = store.AsapLogPassword;
         }
 
         public Domain.Entities.StoreModule.Store Create()
@@ -91,6 +103,9 @@ namespace Application.Modules.Products.Store
             entity.OnSitePickupEnabled = OnSitePickupEnabled;
             entity.SedexEnabled = SedexEnabled;
             entity.PacEnabled = PacEnabled;
+            entity.AsapLogEnabled = AsapLogEnabled;
+            entity.AsapLogUser = AsapLogUser;
+            entity.AsapLogPassword = AsapLogPassword;
 
             #endregion
 
@@ -125,6 +140,9 @@ namespace Application.Modules.Products.Store
             store.OnSitePickupEnabled = OnSitePickupEnabled;
             store.SedexEnabled = SedexEnabled;
             store.PacEnabled = PacEnabled;
+            store.AsapLogEnabled = AsapLogEnabled;
+            store.AsapLogUser = AsapLogUser;
+            store.AsapLogPassword = AsapLogPassword;
 
             #endregion
         }

@@ -12,7 +12,7 @@ namespace Infrastructure.Shipping
     {
         private readonly ICache cache;
 
-		public ShippingService(ICache cache)
+        public ShippingService(ICache cache)
         {
             this.cache = cache;
         }
@@ -33,6 +33,8 @@ namespace Infrastructure.Shipping
                     return GetDecoratedAdapter(new SedexMethodAdapter());
                 case ShippingMethod.PostalRegular:
                     return GetDecoratedAdapter(new PacMethodAdapter());
+                case ShippingMethod.AsapLog:
+                    return GetDecoratedAdapter(new AsapLogMethodAdapter());
                 default:
                     throw new ArgumentOutOfRangeException();
             }

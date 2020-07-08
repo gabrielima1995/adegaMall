@@ -577,6 +577,10 @@
     <Compile Include="Migrations\202006250527125_ChangeProductVariant.Designer.cs">
       <DependentUpon>202006250527125_ChangeProductVariant.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007072234440_AddAsapLog.cs" />
+    <Compile Include="Migrations\202007072234440_AddAsapLog.Designer.cs">
+      <DependentUpon>202007072234440_AddAsapLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Data\MyDbConnection.cs" />
     <Compile Include="Data\Repositories\AdminReportRepository.cs" />
@@ -850,6 +854,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006250527125_ChangeProductVariant.resx">
       <DependentUpon>202006250527125_ChangeProductVariant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007072234440_AddAsapLog.resx">
+      <DependentUpon>202007072234440_AddAsapLog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

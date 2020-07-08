@@ -73,7 +73,7 @@ namespace V2.Infrastructure.Shipping
         {
             var key = GetCacheKey(nameof(GetShippingForSeller), new object[]
             {
-                products.Select(p => p.Product.Id), store.SellerId, shippingAddress.Id
+                products.Select(p => p.Product.Id), store.SellerId, shippingAddress?.Id
             });
 
             if (cache.Get(key) == null)

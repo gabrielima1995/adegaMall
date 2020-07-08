@@ -79,6 +79,7 @@ namespace Presentation.Models
         public AddressRegisterModel NewShippingAddress { get; set; }
 
         public bool IsShippingOut => HasProducts && (
+            SelectedShippingMethod == ShippingMethod.AsapLog ||
             SelectedShippingMethod == ShippingMethod.PostalRegular ||
             SelectedShippingMethod == ShippingMethod.PostalExpress ||
             SelectedShippingMethod == ShippingMethod.PrivateFleet);
@@ -161,6 +162,8 @@ namespace Presentation.Models
                         return cfg.SedexShipping.DeliveryTimeMessage.Enabled;
                     case ShippingMethod.PostalRegular:
                         return cfg.PACShipping.DeliveryTimeMessage.Enabled;
+                    case ShippingMethod.AsapLog:
+                        return cfg.AsapLogShipping.DeliveryTimeMessage.Enabled;
                     default:
                         throw new Exception($"Shipping method {method} is not recognized.");
                 }

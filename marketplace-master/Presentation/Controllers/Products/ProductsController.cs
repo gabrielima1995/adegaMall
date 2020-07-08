@@ -229,7 +229,8 @@ namespace Presentation.Controllers.Products
                 shippingService.GetAdapter(ShippingMethod.OnSitePickup),
                 shippingService.GetAdapter(ShippingMethod.PrivateFleet),
                 shippingService.GetAdapter(ShippingMethod.PostalExpress),
-                shippingService.GetAdapter(ShippingMethod.PostalRegular));
+                shippingService.GetAdapter(ShippingMethod.PostalRegular),
+                shippingService.GetAdapter(ShippingMethod.AsapLog));
 
             return PartialView("_ShippingProduct", shippingInfos);
         }

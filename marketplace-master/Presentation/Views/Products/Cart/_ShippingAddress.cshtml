@@ -98,6 +98,10 @@
             {
                 @Html.Localized("POSTAL_REGULAR_DELIVERY_TIME", "p")
             }
+            else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.AsapLog))
+            {
+                @Html.Localized("ASAPLOG_DELIVERY_TIME", "p")
+            }
             else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PrivateFleet))
             {
                 @Html.Localized("PRIVATE_FLEET_SHIPPING_DELIVERY_TIME", "p")
