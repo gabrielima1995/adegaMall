@@ -107,7 +107,9 @@ namespace Presentation.Models
         {
             var result = adapter.GetShippingForProduct(new ProductWithQty(Product), SellerAddress, ShippingAddress, chargeDoubleShipping);
             cost = result.OK ? result.Result.TotalShippingPrice : 0M;
-            if (adapter.GetMethod() == ShippingMethod.PostalExpress || adapter.GetMethod() == ShippingMethod.PostalRegular || adapter.GetMethod() == ShippingMethod.AsapLog)
+
+            if (result.OK &&
+                (adapter.GetMethod() == ShippingMethod.PostalExpress || adapter.GetMethod() == ShippingMethod.PostalRegular || adapter.GetMethod() == ShippingMethod.AsapLog))
                 deliveryDate = adapter.CalculateDeliveryDate(result.Result.TotalDeliveryDays);
             else
                 deliveryDate = null;

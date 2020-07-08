@@ -224,7 +224,8 @@ namespace Presentation.Controllers.Products
 
             var productInfo = productService.GetDetailsForPublicPage(productId);
             var sellerAddress = productInfo.Product.Store.Seller.Address;
-            var shippingAddress = buyerService.GetWithAddresses(GetPersonId()).Address;
+            var buyer = buyerService.GetWithAddresses(GetPersonId());
+            var shippingAddress = buyer?.Address;
 
             var shippingInfos = new ShippingInfosVM(productInfo.Product, sellerAddress, shippingAddress,
                 shippingService.GetAdapter(ShippingMethod.ActualNoShipping),
