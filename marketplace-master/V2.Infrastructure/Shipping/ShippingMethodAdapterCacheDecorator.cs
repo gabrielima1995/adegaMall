@@ -61,7 +61,7 @@ namespace V2.Infrastructure.Shipping
             {
                 var value = wrappedAdapter.GetShippingForProduct(product, sellerAddress, shippingAddress, chargeDoubleShipping);
                 if (value.Result == null || !value.Result.Any(item => item.ResultType == CorreiosResultType.CommunicationError))
-                    cache.Add(key, value, TimeSpan.FromMinutes(15), CacheTimeoutType.Sliding);
+                    cache.Add(key, value, TimeSpan.FromMinutes(5), CacheTimeoutType.Sliding);
 
                 else return value;
             }
@@ -73,13 +73,13 @@ namespace V2.Infrastructure.Shipping
         {
             var key = GetCacheKey(nameof(GetShippingForSeller), new object[]
             {
-                products.Select(p => p.Product.Id), store.SellerId, shippingAddress?.Id
+                products.Select(p => p.Product.Id), products.Select(p => p.Quantity), store.SellerId, shippingAddress?.Id
             });
 
             if (cache.Get(key) == null)
             {
                 var value = wrappedAdapter.GetShippingForSeller(products, store, shippingAddress);
-                cache.Add(key, value, TimeSpan.FromMinutes(15), CacheTimeoutType.Sliding);
+                cache.Add(key, value, TimeSpan.FromMinutes(5), CacheTimeoutType.Sliding);
             }
 
             return cache.Get(key) as OperationResult<CorreiosShippingCollection>;

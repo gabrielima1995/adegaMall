@@ -44,6 +44,7 @@ namespace Presentation.Controllers.Products
         private readonly IPersonRepository personRepository;
         private readonly IRepository<ProductCategory> productCategoryRepository;
         private readonly IRepository<ProductVariant> productVariantRepository;
+        private readonly BuyerService buyerService;
 
         public ProductsController(
             ITimeZoneProvider userTimeZoneProvider,
@@ -59,7 +60,8 @@ namespace Presentation.Controllers.Products
             ProductSmartSearchAppService searchAppService,
             IPersonRepository personRepository,
             IRepository<ProductCategory> productCategoryRepository,
-            IRepository<ProductVariant> productVariantRepository)
+            IRepository<ProductVariant> productVariantRepository,
+            BuyerService buyerService)
         {
             this.userTimeZoneProvider = userTimeZoneProvider;
             this.cartService = cartService;
@@ -75,6 +77,7 @@ namespace Presentation.Controllers.Products
             this.personRepository = personRepository;
             this.productCategoryRepository = productCategoryRepository;
             this.productVariantRepository = productVariantRepository;
+            this.buyerService = buyerService;
         }
 
         [DonutOutputCache(CacheProfile = "CategoryPage")]
@@ -221,7 +224,7 @@ namespace Presentation.Controllers.Products
 
             var productInfo = productService.GetDetailsForPublicPage(productId);
             var sellerAddress = productInfo.Product.Store.Seller.Address;
-            var shippingAddress = personRepository.GetById(GetPersonId()).Address;
+            var shippingAddress = buyerService.GetWithAddresses(GetPersonId()).Address;
 
             var shippingInfos = new ShippingInfosVM(productInfo.Product, sellerAddress, shippingAddress,
                 shippingService.GetAdapter(ShippingMethod.ActualNoShipping),

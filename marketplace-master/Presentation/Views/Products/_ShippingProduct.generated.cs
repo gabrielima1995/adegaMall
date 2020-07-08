@@ -50,14 +50,14 @@ namespace ASP
     public partial class _Views_Products__ShippingProduct_cshtml : System.Web.Mvc.WebViewPage<ShippingInfosVM>
     {
 
-#line 71 "..\..\Views\Products\_ShippingProduct.cshtml"
+#line 81 "..\..\Views\Products\_ShippingProduct.cshtml"
 public System.Web.WebPages.HelperResult DisplayDeliveryDate(DateTime? date)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 72 "..\..\Views\Products\_ShippingProduct.cshtml"
+#line 82 "..\..\Views\Products\_ShippingProduct.cshtml"
  
     if (date.HasValue)
     {
@@ -70,7 +70,7 @@ WriteLiteralTo(__razor_helper_writer, "        ");
 WriteLiteralTo(__razor_helper_writer, "(");
 
 
-#line 75 "..\..\Views\Products\_ShippingProduct.cshtml"
+#line 85 "..\..\Views\Products\_ShippingProduct.cshtml"
 WriteTo(__razor_helper_writer, Html.Localized("CART_SHIPPING_DAYS_LABEL_SHORT"));
 
 
@@ -79,7 +79,7 @@ WriteTo(__razor_helper_writer, Html.Localized("CART_SHIPPING_DAYS_LABEL_SHORT"))
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 75 "..\..\Views\Products\_ShippingProduct.cshtml"
+#line 85 "..\..\Views\Products\_ShippingProduct.cshtml"
                                WriteTo(__razor_helper_writer, date.Value.ToShortDateString());
 
 
@@ -88,7 +88,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, ")\r\n");
 
 
-#line 76 "..\..\Views\Products\_ShippingProduct.cshtml"
+#line 86 "..\..\Views\Products\_ShippingProduct.cshtml"
     }
 
 
@@ -96,7 +96,7 @@ WriteLiteralTo(__razor_helper_writer, ")\r\n");
 #line hidden
 });
 
-#line 77 "..\..\Views\Products\_ShippingProduct.cshtml"
+#line 87 "..\..\Views\Products\_ShippingProduct.cshtml"
 }
 #line default
 #line hidden
@@ -328,7 +328,7 @@ WriteLiteral("\r\n");
             #line hidden
             
             #line 40 "..\..\Views\Products\_ShippingProduct.cshtml"
-         if (Model.ShowOnSitePickup)
+         if (Model.ShowAsapLog)
         {
 
             
@@ -338,7 +338,7 @@ WriteLiteral("            <li>\r\n                <strong>");
 
             
             #line 43 "..\..\Views\Products\_ShippingProduct.cshtml"
-                   Write(Html.Localized("PRODUCT_ON_SITE_PICKUP_METHOD_LABEL"));
+                   Write(Html.Localized("PRODUCT_ASAPLOG_METHOD_LABEL"));
 
             
             #line default
@@ -360,7 +360,18 @@ WriteLiteral("                ");
 
             
             #line 45 "..\..\Views\Products\_ShippingProduct.cshtml"
-           Write(Model.OnSitePickupCost.DisplayDecimal(2));
+           Write(Model.AsapLogCost.DisplayDecimal(2));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 46 "..\..\Views\Products\_ShippingProduct.cshtml"
+           Write(DisplayDeliveryDate(Model.DeliveryDateAsapLog));
 
             
             #line default
@@ -368,7 +379,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </li>\r\n");
 
             
-            #line 47 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 48 "..\..\Views\Products\_ShippingProduct.cshtml"
         }
 
             
@@ -377,14 +388,14 @@ WriteLiteral("\r\n            </li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 49 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 50 "..\..\Views\Products\_ShippingProduct.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 49 "..\..\Views\Products\_ShippingProduct.cshtml"
-         if (Model.ShowNoShipping)
+            #line 50 "..\..\Views\Products\_ShippingProduct.cshtml"
+         if (Model.ShowOnSitePickup)
         {
 
             
@@ -393,18 +404,18 @@ WriteLiteral("\r\n");
 WriteLiteral("            <li>\r\n                <strong>");
 
             
-            #line 52 "..\..\Views\Products\_ShippingProduct.cshtml"
-                   Write(Html.Localized("PRODUCT_NO_SHIPPING_METHOD_LABEL"));
+            #line 53 "..\..\Views\Products\_ShippingProduct.cshtml"
+                   Write(Html.Localized("PRODUCT_ON_SITE_PICKUP_METHOD_LABEL"));
 
             
             #line default
             #line hidden
-WriteLiteral("</strong>\r\n");
+WriteLiteral(":</strong>\r\n");
 
 WriteLiteral("                ");
 
             
-            #line 53 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 54 "..\..\Views\Products\_ShippingProduct.cshtml"
            Write(config.DefaultCurrency);
 
             
@@ -415,8 +426,8 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 54 "..\..\Views\Products\_ShippingProduct.cshtml"
-           Write(Model.NoShippingCost.DisplayDecimal(2));
+            #line 55 "..\..\Views\Products\_ShippingProduct.cshtml"
+           Write(Model.OnSitePickupCost.DisplayDecimal(2));
 
             
             #line default
@@ -424,7 +435,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </li>\r\n");
 
             
-            #line 56 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 57 "..\..\Views\Products\_ShippingProduct.cshtml"
         }
 
             
@@ -433,13 +444,69 @@ WriteLiteral("\r\n            </li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 58 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 59 "..\..\Views\Products\_ShippingProduct.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 58 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 59 "..\..\Views\Products\_ShippingProduct.cshtml"
+         if (Model.ShowNoShipping)
+        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <li>\r\n                <strong>");
+
+            
+            #line 62 "..\..\Views\Products\_ShippingProduct.cshtml"
+                   Write(Html.Localized("PRODUCT_NO_SHIPPING_METHOD_LABEL"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</strong>\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 63 "..\..\Views\Products\_ShippingProduct.cshtml"
+           Write(config.DefaultCurrency);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 64 "..\..\Views\Products\_ShippingProduct.cshtml"
+           Write(Model.NoShippingCost.DisplayDecimal(2));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            </li>\r\n");
+
+            
+            #line 66 "..\..\Views\Products\_ShippingProduct.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 68 "..\..\Views\Products\_ShippingProduct.cshtml"
+        
+            
+            #line default
+            #line hidden
+            
+            #line 68 "..\..\Views\Products\_ShippingProduct.cshtml"
          if (Model.ShowAnyShippingWithCharge && config.Product.BusinessModel.Rental.Enabled && config.Product.ShippingMode == ShippingMode.PerProduct)
         {
 
@@ -451,7 +518,7 @@ WriteLiteral("            <li>\r\n                <span>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 62 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 72 "..\..\Views\Products\_ShippingProduct.cshtml"
                Write(Html.Localized((Model.Product.RentalSettings.ChargeDoubleShipping ?? false)
                         ? "CHARGE_DOUBLE_SHIPPING_MESSAGE"
                         : "NO_CHARGE_DOUBLE_SHIPPING_MESSAGE"));
@@ -462,7 +529,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </span>\r\n            </li>\r\n");
 
             
-            #line 67 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 77 "..\..\Views\Products\_ShippingProduct.cshtml"
         }
 
             
@@ -471,7 +538,7 @@ WriteLiteral("\r\n                </span>\r\n            </li>\r\n");
 WriteLiteral("    </ul>\r\n");
 
             
-            #line 69 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 79 "..\..\Views\Products\_ShippingProduct.cshtml"
 }
 
             

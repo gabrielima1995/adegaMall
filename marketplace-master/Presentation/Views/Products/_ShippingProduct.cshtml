@@ -37,6 +37,16 @@
             </li>
         }
 
+        @if (Model.ShowAsapLog)
+        {
+            <li>
+                <strong>@Html.Localized("PRODUCT_ASAPLOG_METHOD_LABEL"):</strong>
+                @config.DefaultCurrency
+                @Model.AsapLogCost.DisplayDecimal(2)
+                @DisplayDeliveryDate(Model.DeliveryDateAsapLog)
+            </li>
+        }
+
         @if (Model.ShowOnSitePickup)
         {
             <li>

@@ -50,6 +50,12 @@
       <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Polly, Version=7.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Polly.7.2.1\lib\net472\Polly.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.ComponentModel.Primitives, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -74,7 +80,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiProviders\ApiErrorMessage.cs" />
+    <Compile Include="ApiProviders\ApiResponse.cs" />
+    <Compile Include="ApiProviders\ApiResourceBase.cs" />
+    <Compile Include="ApiProviders\EmptyResult.cs" />
     <Compile Include="AppRole.cs" />
+    <Compile Include="AsapLog\AsapLogCredentials.cs" />
+    <Compile Include="AsapLog\ConsultaFrete\ConsultaFreteRequest.cs" />
+    <Compile Include="AsapLog\ConsultaFrete\ConsultaFreteResponse.cs" />
+    <Compile Include="AsapLog\ConsultaFrete\IAsapLogConsultaFreteProvider.cs" />
     <Compile Include="AssemblyExtensions.cs" />
     <Compile Include="Base64.cs" />
     <Compile Include="ConnectionString.cs" />
@@ -86,6 +100,7 @@
     <Compile Include="Geography\GeoCoordinateExtensions.cs" />
     <Compile Include="Geography\UnitOfLength.cs" />
     <Compile Include="ImgHelper.cs" />
+    <Compile Include="Json\IJsonProvider.cs" />
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="MarketplaceTimeZone.cs" />
     <Compile Include="DynamicEqualityComprarer.cs" />
@@ -107,9 +122,13 @@
     <Compile Include="PagingResult.cs" />
     <Compile Include="PasswordGenerator.cs" />
     <Compile Include="PhoneNumberValidator.cs" />
+    <Compile Include="Polly\HttpPolicyExtensions.cs" />
+    <Compile Include="Polly\HttpPolicyHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadOnlyCollectionExtensions.cs" />
     <Compile Include="SelectExtensions.cs" />
+    <Compile Include="Settings\ResilienceStrategySettings.cs" />
+    <Compile Include="Settings\EndpointSettings.cs" />
     <Compile Include="SHA1.cs" />
     <Compile Include="SimpleMapper.cs" />
     <Compile Include="StringHelpersAndExtensions.cs" />
@@ -125,6 +144,7 @@
       <Name>Infra.Crosscutting.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

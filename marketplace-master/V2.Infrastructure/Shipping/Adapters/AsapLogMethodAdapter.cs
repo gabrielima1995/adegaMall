@@ -3,9 +3,11 @@ using Domain.DTO;
 using Domain.Entities;
 using Domain.Entities.StoreModule;
 using Domain.Interfaces;
-using Domain.StoreModule.Entities;
 using Framework;
+using Framework.AsapLog;
+using Framework.AsapLog.ConsultaFrete;
 using Infra.Crosscutting.Globalization;
+using Infrastructure;
 using Nager.Date;
 using Nager.Date.Extensions;
 using System;
@@ -13,6 +15,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Unity;
 
 namespace V2.Infrastructure.Shipping.Adapters
 {
@@ -27,7 +30,13 @@ namespace V2.Infrastructure.Shipping.Adapters
 
         public override OperationResult<CorreiosShippingCollection> GetShippingForProduct(ProductWithQty product, Address sellerAddress, Address shippingAddress, bool chargeDoubleShipping)
         {
-            // não implementado
+            if (product.Product.Store.AsapLogEnabled)
+            {
+                var products = new[] { product };
+
+                return GetShipping(products, product.Product.Store, product.Product.Store?.Seller?.PublicProfileName, sellerAddress, shippingAddress, chargeDoubleShipping);
+            }
+
             return CorreiosShippingCollection.Empty();
         }
 
@@ -55,7 +64,7 @@ namespace V2.Infrastructure.Shipping.Adapters
 
                     foreach (var batch in deliveryBatches)
                     {
-                        var batchShipping = GetShipping(batch, store.Seller.PublicProfileName, store.Seller.Address, shippingAddress, store.RentalSettings.ChargeDoubleShipping);
+                        var batchShipping = GetShipping(batch, store, store.Seller.PublicProfileName, store.Seller.Address, shippingAddress, store.RentalSettings.ChargeDoubleShipping);
 
                         if (batchShipping.IsFailure) allErrors.Merge(batchShipping.Errors);
                         else shippingCollection = shippingCollection.Merge(batchShipping.Result);
@@ -72,7 +81,7 @@ namespace V2.Infrastructure.Shipping.Adapters
             return CorreiosShippingCollection.Empty();
         }
 
-        private OperationResult<CorreiosShippingCollection> GetShipping(IEnumerable<ProductWithQty> items, string sellerName, Address origin, Address destination, bool? StorechargeDoubleShipping)
+        private OperationResult<CorreiosShippingCollection> GetShipping(IEnumerable<ProductWithQty> items, Store store, string sellerName, Address origin, Address destination, bool? StorechargeDoubleShipping)
         {
             if (destination == null)
                 return new ErrorDictionary("", CultureInfo.CurrentCulture.GetStringLocalized("NO_SHIPPING_ADDRESS"));
@@ -96,7 +105,44 @@ namespace V2.Infrastructure.Shipping.Adapters
 
             var chargeDoubleShipping = config.Product.BusinessModel.Rental.Enabled && (StorechargeDoubleShipping ?? false);
 
-            //var correiosResult = correios.CalculatePACShipping(itemsCorreios, origin, destination);
+            var itensFrete = GetItemsFrete(items);
+
+            var pacote = new PacoteFrete(itensFrete);
+
+            var credentials = new AsapLogCredentials
+            {
+                Usuario = store.AsapLogUser,
+                Senha = store.AsapLogPassword
+            };
+
+            if (!credentials.IsValid()) return new ErrorDictionary("", "Usuário e senha AsapLog inválidos");
+
+            var request = new ConsultaFreteRequest
+            {
+                Cep = destination.ZipCode,
+                Peso = Math.Round((decimal)pacote.Peso, 1, MidpointRounding.ToEven),
+                Valor = Math.Round(pacote.Valor, 2, MidpointRounding.ToEven),
+                Altura = (int)Math.Ceiling(pacote.Altura),
+                Profundidade = (int)Math.Ceiling(pacote.Comprimento),
+                Largura = (int)Math.Ceiling(pacote.Largura)
+            };
+
+            var provider = UnityIocContainer.Instance.Resolve<IAsapLogConsultaFreteProvider>();
+
+            var response = provider.ConsultaFreteAsync(credentials, request)
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
+
+            if (response.IsFailure)
+            {
+                var errorMessage = $"AsapLog: {string.Join(". ", response.Errors.Select(i => i.Message))}";
+
+                // todo: asaplog notificar problema
+                return new ErrorDictionary("", errorMessage);
+            }
+
+            var result = response.Result;
 
             var correiosDtoCollection = new List<CorreiosShippingDto>();
 
@@ -106,12 +152,32 @@ namespace V2.Infrastructure.Shipping.Adapters
                     items.ElementAt(i).Product.Id,
                     "Processamento com sucesso",
                     "0",
-                    config.Product.ShippingMode == ShippingMode.PerProduct || i == 0 ? 10 : 0m, // todo: asap colocar valor do frete
+                    config.Product.ShippingMode == ShippingMode.PerProduct || i == 0 ? result.Preco : 0m,
                     resultType: Domain.StoreModule.Entities.CorreiosResultType.Success,
-                    deliveryDays: 2)); // todo: asap colocar quantidade de dias
+                    deliveryDays: result.PrazoMaximo));
             }
 
             return new CorreiosShippingCollection(correiosDtoCollection, chargeDoubleShipping);
+        }
+
+        private List<ItemFrete> GetItemsFrete(IEnumerable<ProductWithQty> products)
+        {
+            var items = new List<ItemFrete>(products.Sum(x => x.Quantity));
+
+            foreach (var item in products)
+            {
+                for (var i = 0; i < item.Quantity; i++)
+                {
+                    items.Add(new ItemFrete(
+                        (double)item.Product.Weight,
+                        item.Product.BasePrice.GetValueOrDefault(0),
+                        (double)item.Product.Length,
+                        (double)item.Product.Width,
+                        (double)item.Product.Height));
+                }
+            }
+
+            return items;
         }
 
         //private CorreiosShippingCollection ApplyDefaultShippingForCommunicationErrors(CorreiosShippingCollection collection, IEnumerable<ProductWithQty> products, Store store)
@@ -158,8 +224,6 @@ namespace V2.Infrastructure.Shipping.Adapters
             var date = DateTime.Today;
 
             Enum.TryParse(Regex.Replace(CultureInfo.CurrentCulture.GetCurrentLang().ToUpper(), ".*-", ""), out CountryCode countryCode);
-
-            date = date.AddDays(1);
 
             if (DateSystem.IsPublicHoliday(date, countryCode) || date.IsWeekend(countryCode))
                 date = SumDayForShippingOrReceive(date, countryCode);

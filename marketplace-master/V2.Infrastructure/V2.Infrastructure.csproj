@@ -148,6 +148,7 @@
     <Compile Include="Data\SqlDbConnection.cs" />
     <Compile Include="Data\MyDbConnection.cs" />
     <Compile Include="DbEntityValidationExceptionHelper.cs" />
+    <Compile Include="Json\JsonProvider.cs" />
     <Compile Include="Messages\DatabaseTemplateEngine.cs" />
     <Compile Include="Modules\Customization\Queries\PlatformCustomizationQueries.cs" />
     <Compile Include="Modules\Finance\MoipPaymentGateway.cs" />
@@ -212,6 +213,8 @@
     <Compile Include="Shipping\CorreioShippingResult.cs" />
     <Compile Include="Shipping\CorreiosPostalService.cs" />
     <Compile Include="Shipping\CorreiosShippingHelper.cs" />
+    <Compile Include="Shipping\ItemFrete.cs" />
+    <Compile Include="Shipping\PacoteFrete.cs" />
     <Compile Include="Shipping\ShippingMethodAdapterCacheDecorator.cs" />
     <Compile Include="Shipping\ShippingService.cs" />
     <Compile Include="TimeZoneProvider.cs" />

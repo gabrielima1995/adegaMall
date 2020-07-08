@@ -29,6 +29,7 @@ namespace Presentation.Models
         public bool ShowAsapLog { get; private set; }
         public DateTime? DeliveryDatePac { get; private set; }
         public DateTime? DeliveryDateSedex { get; private set; }
+        public DateTime? DeliveryDateAsapLog { get; private set; }
         public bool ShowAnyShipping => ShowActualNoShipping || ShowNoShipping || ShowOnSitePickup || ShowPrivateFleet || ShowPostalExpress || ShowPostalRegular || ShowAsapLog;
         public bool ShowAnyShippingWithCharge => ShowPrivateFleet || ShowPostalExpress || ShowPostalRegular || ShowAsapLog;
 
@@ -47,7 +48,7 @@ namespace Presentation.Models
 
             var config = MaaSConfig.Current;
 
-            if (shippingAddress != null && config.Product.ShippingMode == ShippingMode.PerProduct && config.Product.SomeShippingMethodEnabled)
+            if (shippingAddress != null && config.Product.SomeShippingMethodEnabled)
             {
                 var chargeDoubleShipping =
                     config.Product.BusinessModel.Rental.Enabled &&
@@ -97,6 +98,7 @@ namespace Presentation.Models
                 {
                     ShowAsapLog = GetShipping(asapLogAdapter, out var asapLogCost, out var deliveryDate, chargeDoubleShipping);
                     AsapLogCost = asapLogCost;
+                    DeliveryDateAsapLog = deliveryDate;
                 }
             }
         }

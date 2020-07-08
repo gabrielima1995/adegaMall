@@ -13,11 +13,18 @@ using Domain.Modules.Products.StockManagement;
 using Domain.Modules.Products.Variants;
 using Domain.Services.StoreModule;
 using Domain.StoreModule.Interfaces;
+using Framework.AsapLog.ConsultaFrete;
+using Framework.Json;
+using HttpClientFactoryLite;
+using Infra.Crosscutting.AsapLog.ConsultaFrete;
 using Infrastructure.Data.Repositories;
 using Infrastructure.Shipping;
+using System;
 using Unity;
+using Unity.Lifetime;
 using V2.Application.Modules.StoreModule;
 using V2.Application.Modules.StoreModule.Queries;
+using V2.Infrastructure.Json;
 using V2.Infrastructure.Modules.Search;
 using V2.Infrastructure.Modules.StoreModule.Queries;
 
@@ -27,7 +34,19 @@ namespace V2.Infrastructure.Bootstrapper.Internals
     {
         public void Register(IUnityContainer container)
         {
+            var httpClientFactory = new HttpClientFactory();
+
+            httpClientFactory.Register("asaplog", builder => builder
+                // Configure HttpClient before it's returned
+                .ConfigureHttpClient(c => { })
+                // Set HttpMessageHandler lifetime
+                .SetHandlerLifetime(TimeSpan.FromMinutes(10)));
+
             container
+                .RegisterInstance<IHttpClientFactory>(httpClientFactory, new SingletonLifetimeManager())
+                .RegisterType<IJsonProvider, JsonProvider>()
+                .RegisterType<IAsapLogConsultaFreteProvider, AsapLogConsultaFreteProvider>()
+
                 // Store
                 .RegisterType<StoreService>()
                 .RegisterType<IStoreAppService, StoreAppService>()
