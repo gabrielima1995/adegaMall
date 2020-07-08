@@ -677,7 +677,7 @@ WriteLiteral("                            </div>\r\n");
             
             #line 110 "..\..\Views\Products\_ProductMainBoard.cshtml"
 
-                            if (Model.ShowAnyShipping && isBuyer)
+                            if (Model.ShowAnyShipping)
                             {
 
             
@@ -720,24 +720,24 @@ WriteLiteral(" class=\"product-sold-by\"");
 
 WriteLiteral(">\r\n                            <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 6963), Tuple.Create("\"", 7017)
+WriteAttribute("src", Tuple.Create(" src=\"", 6952), Tuple.Create("\"", 7006)
             
             #line 119 "..\..\Views\Products\_ProductMainBoard.cshtml"
-, Tuple.Create(Tuple.Create("", 6969), Tuple.Create<System.Object, System.Int32>(Model.Product.Store.Seller.GetAvatarUrl(50, 50)
+, Tuple.Create(Tuple.Create("", 6958), Tuple.Create<System.Object, System.Int32>(Model.Product.Store.Seller.GetAvatarUrl(50, 50)
             
             #line default
             #line hidden
-, 6969), false)
+, 6958), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 7018), Tuple.Create("\"", 7069)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 7007), Tuple.Create("\"", 7058)
             
             #line 119 "..\..\Views\Products\_ProductMainBoard.cshtml"
-             , Tuple.Create(Tuple.Create("", 7024), Tuple.Create<System.Object, System.Int32>(Model.Product.Store.Seller.PublicProfileName
+             , Tuple.Create(Tuple.Create("", 7013), Tuple.Create<System.Object, System.Int32>(Model.Product.Store.Seller.PublicProfileName
             
             #line default
             #line hidden
-, 7024), false)
+, 7013), false)
 );
 
 WriteLiteral(" class=\"img-circle\"");
@@ -804,14 +804,14 @@ WriteLiteral(" -\r\n                                    <a");
 
 WriteLiteral(" class=\"text-primary\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 7807), Tuple.Create("\"", 7908)
+WriteAttribute("href", Tuple.Create(" href=\"", 7796), Tuple.Create("\"", 7897)
             
             #line 127 "..\..\Views\Products\_ProductMainBoard.cshtml"
-, Tuple.Create(Tuple.Create("", 7814), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Overview","UserRating", new { sellerId = Model.Product.Store_SellerId })
+, Tuple.Create(Tuple.Create("", 7803), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Overview","UserRating", new { sellerId = Model.Product.Store_SellerId })
             
             #line default
             #line hidden
-, 7814), false)
+, 7803), false)
 );
 
 WriteLiteral(">");
