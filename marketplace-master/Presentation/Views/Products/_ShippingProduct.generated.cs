@@ -111,7 +111,7 @@ WriteLiteralTo(__razor_helper_writer, ")\r\n");
   
     var config = MaaSConfig.Current;
 
-    var saveLocal = ViewBag.ZipCode != null && ViewBag.ZipCode != "";
+    var hasZipCode = ViewBag.ZipCode != null && ViewBag.ZipCode != "";
 
             
             #line default
@@ -123,7 +123,7 @@ WriteLiteral("@media (min-width: 768px) {\r\n        .zipcode-form input {\r\n  
 
             
             #line 18 "..\..\Views\Products\_ShippingProduct.cshtml"
- if (saveLocal)
+ if (hasZipCode)
 {
 
             
@@ -171,14 +171,14 @@ WriteLiteral(" type=\"text\"");
 
 WriteLiteral(" class=\"form-control js-zipcode\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 675), Tuple.Create("\"", 699)
+WriteAttribute("value", Tuple.Create(" value=\"", 677), Tuple.Create("\"", 701)
             
             #line 28 "..\..\Views\Products\_ShippingProduct.cshtml"
-               , Tuple.Create(Tuple.Create("", 683), Tuple.Create<System.Object, System.Int32>(ViewBag.ZipCode
+               , Tuple.Create(Tuple.Create("", 685), Tuple.Create<System.Object, System.Int32>(ViewBag.ZipCode
             
             #line default
             #line hidden
-, 683), false)
+, 685), false)
 );
 
 WriteLiteral(" placeholder=\"_____-__\"");
@@ -193,7 +193,7 @@ WriteLiteral(">OK</button>\r\n</form>\r\n\r\n");
 
             
             #line 34 "..\..\Views\Products\_ShippingProduct.cshtml"
- if (Model.ShowAnyShipping)
+ if (Model != null && Model.ShowAnyShipping)
 {
 
             
@@ -615,7 +615,7 @@ WriteLiteral("    </ul>\r\n");
             
             #line 105 "..\..\Views\Products\_ShippingProduct.cshtml"
 }
-else
+else if(hasZipCode)
 {
 
             

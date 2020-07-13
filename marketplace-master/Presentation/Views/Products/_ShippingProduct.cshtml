@@ -4,7 +4,7 @@
 @{
     var config = MaaSConfig.Current;
 
-    var saveLocal = ViewBag.ZipCode != null && ViewBag.ZipCode != "";
+    var hasZipCode = ViewBag.ZipCode != null && ViewBag.ZipCode != "";
 }
 
 <style>
@@ -15,7 +15,7 @@
     }
 </style>
 
-@if (saveLocal)
+@if (hasZipCode)
 {
     <script>
         localStorage.setItem("zipCode", "@ViewBag.ZipCode");
@@ -31,7 +31,7 @@
     <button type="submit" class="btn btn-primary">OK</button>
 </form>
 
-@if (Model.ShowAnyShipping)
+@if (Model != null && Model.ShowAnyShipping)
 {
     <ul class="product-freight-list list-unstyled m-b-md m-t-md">
         @if (Model.ShowPrivateFleet)
@@ -103,7 +103,7 @@
         }
     </ul>
 }
-else
+else if(hasZipCode)
 {
     <p>Região não atendida.</p>
 }
