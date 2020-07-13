@@ -47,6 +47,8 @@ namespace Domain.Entities
 
         public bool HasCityAndState => !string.IsNullOrWhiteSpace(CityAndState);
 
+        public bool HasZipCode => !string.IsNullOrEmpty(ZipCode);
+
         public bool HasFullAddress
         {
             get
@@ -85,13 +87,13 @@ namespace Domain.Entities
             if (HasFullAddress)
             {
                 var additionalInfo = !string.IsNullOrWhiteSpace(AdditionalInfo) ? $", {AdditionalInfo}" : "";
-                return $"{Street}, {Number} {additionalInfo} - {Neighborhood}, {CityAndState} - " + ZipCode;
+                return $"{Street}, {Number} {additionalInfo} - {Neighborhood}, {CityAndState} - {ZipCode}";
             }
 
             if (HasCityAndState)
-                return $"{CityAndState}";
+                return $"{CityAndState} - {ZipCode}";
 
-            return "";
+            return $"{ZipCode}";
         }
     }
 }

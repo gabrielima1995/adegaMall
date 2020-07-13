@@ -676,39 +676,6 @@ WriteLiteral("                            </div>\r\n");
 
             
             #line 110 "..\..\Views\Products\_ProductMainBoard.cshtml"
-
-                            if (Model.ShowAnyShipping)
-                            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                <div");
-
-WriteLiteral(" class=\"js-product-shipping-loading m-b-md\"");
-
-WriteLiteral(" data-product-id=\"");
-
-            
-            #line 113 "..\..\Views\Products\_ProductMainBoard.cshtml"
-                                                                                            Write(Model.Product.Id);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\"");
-
-WriteLiteral(" style=\"display: none\"");
-
-WriteLiteral(">\r\n                                    <p><i");
-
-WriteLiteral(" class=\"fas fa-spinner fa-spin\"");
-
-WriteLiteral("></i></p>\r\n                                </div>\r\n");
-
-            
-            #line 116 "..\..\Views\Products\_ProductMainBoard.cshtml"
-                            }
                         }
 
             
@@ -720,24 +687,24 @@ WriteLiteral(" class=\"product-sold-by\"");
 
 WriteLiteral(">\r\n                            <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 6952), Tuple.Create("\"", 7006)
+WriteAttribute("src", Tuple.Create(" src=\"", 6569), Tuple.Create("\"", 6623)
             
-            #line 119 "..\..\Views\Products\_ProductMainBoard.cshtml"
-, Tuple.Create(Tuple.Create("", 6958), Tuple.Create<System.Object, System.Int32>(Model.Product.Store.Seller.GetAvatarUrl(50, 50)
+            #line 112 "..\..\Views\Products\_ProductMainBoard.cshtml"
+, Tuple.Create(Tuple.Create("", 6575), Tuple.Create<System.Object, System.Int32>(Model.Product.Store.Seller.GetAvatarUrl(50, 50)
             
             #line default
             #line hidden
-, 6958), false)
+, 6575), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 7007), Tuple.Create("\"", 7058)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 6624), Tuple.Create("\"", 6675)
             
-            #line 119 "..\..\Views\Products\_ProductMainBoard.cshtml"
-             , Tuple.Create(Tuple.Create("", 7013), Tuple.Create<System.Object, System.Int32>(Model.Product.Store.Seller.PublicProfileName
+            #line 112 "..\..\Views\Products\_ProductMainBoard.cshtml"
+             , Tuple.Create(Tuple.Create("", 6630), Tuple.Create<System.Object, System.Int32>(Model.Product.Store.Seller.PublicProfileName
             
             #line default
             #line hidden
-, 7013), false)
+, 6630), false)
 );
 
 WriteLiteral(" class=\"img-circle\"");
@@ -749,7 +716,7 @@ WriteLiteral(" height=\"50\"");
 WriteLiteral(" />\r\n                            <small>");
 
             
-            #line 120 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 113 "..\..\Views\Products\_ProductMainBoard.cshtml"
                               Write(Request.GetLocalizedString("CART_ITEM_SOLD_AND_DELIVERED_BY"));
 
             
@@ -758,7 +725,7 @@ WriteLiteral(" />\r\n                            <small>");
 WriteLiteral("</small>\r\n                            <br />\r\n                            <span>");
 
             
-            #line 122 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 115 "..\..\Views\Products\_ProductMainBoard.cshtml"
                              Write(Model.Product.Store.Seller.PublicProfileName);
 
             
@@ -767,7 +734,7 @@ WriteLiteral("</small>\r\n                            <br />\r\n                
 WriteLiteral(" (");
 
             
-            #line 122 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 115 "..\..\Views\Products\_ProductMainBoard.cshtml"
                                                                             Write(Html.Localized("PROFILE_URL_LABEL", "a", new { href = Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.Product.Store.Seller.FriendlyUrl }) }));
 
             
@@ -776,13 +743,13 @@ WriteLiteral(" (");
 WriteLiteral(")</span>\r\n");
 
             
-            #line 123 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 116 "..\..\Views\Products\_ProductMainBoard.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 123 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 116 "..\..\Views\Products\_ProductMainBoard.cshtml"
                              if (config.Seller.UserRatings.Enabled)
                             {
 
@@ -794,7 +761,7 @@ WriteLiteral("                                <p>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 126 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 119 "..\..\Views\Products\_ProductMainBoard.cshtml"
                                Write(Html.Partial("_RatingStars", Model.SellerRatingAverage));
 
             
@@ -804,20 +771,20 @@ WriteLiteral(" -\r\n                                    <a");
 
 WriteLiteral(" class=\"text-primary\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 7796), Tuple.Create("\"", 7897)
+WriteAttribute("href", Tuple.Create(" href=\"", 7413), Tuple.Create("\"", 7514)
             
-            #line 127 "..\..\Views\Products\_ProductMainBoard.cshtml"
-, Tuple.Create(Tuple.Create("", 7803), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Overview","UserRating", new { sellerId = Model.Product.Store_SellerId })
+            #line 120 "..\..\Views\Products\_ProductMainBoard.cshtml"
+, Tuple.Create(Tuple.Create("", 7420), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Overview","UserRating", new { sellerId = Model.Product.Store_SellerId })
             
             #line default
             #line hidden
-, 7803), false)
+, 7420), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 127 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 120 "..\..\Views\Products\_ProductMainBoard.cshtml"
                                                                                                                                                              Write(Model.SellerRatingsCount);
 
             
@@ -826,7 +793,7 @@ WriteLiteral(">");
 WriteLiteral(" ");
 
             
-            #line 127 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 120 "..\..\Views\Products\_ProductMainBoard.cshtml"
                                                                                                                                                                                        Write(Request.GetLocalizedString("RATINGS_COUNT"));
 
             
@@ -835,7 +802,7 @@ WriteLiteral(" ");
 WriteLiteral("</a>\r\n                                </p>\r\n");
 
             
-            #line 129 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 122 "..\..\Views\Products\_ProductMainBoard.cshtml"
                             }
 
             
@@ -844,13 +811,13 @@ WriteLiteral("</a>\r\n                                </p>\r\n");
 WriteLiteral("                        </div>\r\n\r\n");
 
             
-            #line 132 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 125 "..\..\Views\Products\_ProductMainBoard.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 132 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 125 "..\..\Views\Products\_ProductMainBoard.cshtml"
                          if (config.Product.BusinessModel.Rental.Enabled)
                         {
                             if (!string.IsNullOrEmpty(Model.Product.RentalSettings.AvailabilityWarning))
@@ -882,7 +849,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 140 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 133 "..\..\Views\Products\_ProductMainBoard.cshtml"
                                        Write(Model.Product.RentalSettings.AvailabilityWarning);
 
             
@@ -892,7 +859,7 @@ WriteLiteral("\r\n                                        </div>\r\n            
 "     </div>\r\n                                </div>\r\n");
 
             
-            #line 144 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 137 "..\..\Views\Products\_ProductMainBoard.cshtml"
                             }
 
                             if (Model.Product.RentalSettings.MinRentalAmount.GetValueOrDefault() > 0m)
@@ -924,7 +891,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 152 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 145 "..\..\Views\Products\_ProductMainBoard.cshtml"
                                        Write(Request.GetLocalizedString("PRODUCT_MIN_RENTAL_AMOUNT_IS_X", $"{Model.Product.RentalSettings.MinRentalAmount.Value.DisplayCurrency()}"));
 
             
@@ -934,7 +901,7 @@ WriteLiteral("\r\n                                        </div>\r\n            
 "     </div>\r\n                                </div>\r\n");
 
             
-            #line 156 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 149 "..\..\Views\Products\_ProductMainBoard.cshtml"
                             }
                         }
 
@@ -944,16 +911,15 @@ WriteLiteral("\r\n                                        </div>\r\n            
 WriteLiteral("\r\n\r\n");
 
             
-            #line 160 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 153 "..\..\Views\Products\_ProductMainBoard.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 160 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 153 "..\..\Views\Products\_ProductMainBoard.cshtml"
                          if (config.Product.Price.Enabled && Model.Product.Price.HasValue)
                         {
-
 
             
             #line default
@@ -967,7 +933,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                ");
 
             
-            #line 164 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 156 "..\..\Views\Products\_ProductMainBoard.cshtml"
                            Write(Html.Partial("_ProductAddToCart", Model));
 
             
@@ -976,7 +942,7 @@ WriteLiteral("                                ");
 WriteLiteral("\r\n                            </div>\r\n");
 
             
-            #line 166 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 158 "..\..\Views\Products\_ProductMainBoard.cshtml"
 
                             if (config.Payment.Enabled && config.Layout.PaymentMethodsDisplay.ShowInProductDetailsScreen.Enabled)
                             {
@@ -987,36 +953,82 @@ WriteLiteral("\r\n                            </div>\r\n");
 WriteLiteral("                                <hr />\r\n");
 
             
-            #line 170 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 162 "..\..\Views\Products\_ProductMainBoard.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 170 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 162 "..\..\Views\Products\_ProductMainBoard.cshtml"
                            Write(Html.Localized("ACCEPTED_PAYMENT_METHODS_TEXT", "small"));
 
             
             #line default
             #line hidden
             
-            #line 170 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 162 "..\..\Views\Products\_ProductMainBoard.cshtml"
                                                                                          
                                 
             
             #line default
             #line hidden
             
-            #line 171 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 163 "..\..\Views\Products\_ProductMainBoard.cshtml"
                            Write(Html.Partial("_AcceptedPaymentMethods"));
 
             
             #line default
             #line hidden
             
-            #line 171 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 163 "..\..\Views\Products\_ProductMainBoard.cshtml"
                                                                         
                             }
+                        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 167 "..\..\Views\Products\_ProductMainBoard.cshtml"
+                        
+            
+            #line default
+            #line hidden
+            
+            #line 167 "..\..\Views\Products\_ProductMainBoard.cshtml"
+                         if (Model.ShowAnyShipping)
+                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                            <div");
+
+WriteLiteral(" class=\"js-product-shipping-loading m-b-md\"");
+
+WriteLiteral(" data-product-id=\"");
+
+            
+            #line 169 "..\..\Views\Products\_ProductMainBoard.cshtml"
+                                                                                        Write(Model.Product.Id);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\"");
+
+WriteLiteral(" style=\"display: none\"");
+
+WriteLiteral(">\r\n                                <p><i");
+
+WriteLiteral(" class=\"fas fa-spinner fa-spin\"");
+
+WriteLiteral("></i></p>\r\n                            </div>\r\n");
+
+            
+            #line 172 "..\..\Views\Products\_ProductMainBoard.cshtml"
                         }
 
             
@@ -1025,13 +1037,13 @@ WriteLiteral("                                <hr />\r\n");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 176 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 175 "..\..\Views\Products\_ProductMainBoard.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 176 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 175 "..\..\Views\Products\_ProductMainBoard.cshtml"
                          if (MaaSConfig.Current.SocialMedia.EnableShareButtons)
                         {
 
@@ -1051,7 +1063,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 180 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 179 "..\..\Views\Products\_ProductMainBoard.cshtml"
                                Write(Html.Localized("SOCIAL_SHARE_PRODUCT_LABEL", "strong"));
 
             
@@ -1065,7 +1077,7 @@ WriteLiteral("></div>\r\n                                </div>\r\n             
 "v>\r\n");
 
             
-            #line 184 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 183 "..\..\Views\Products\_ProductMainBoard.cshtml"
                         }
 
             

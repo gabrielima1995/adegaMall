@@ -10,16 +10,33 @@ namespace Application.Addresses
         {
             StreetAndNumber,
             Street,
-            City
+            City,
+            ZipCode
         }
 
         public static void UpdateLocation(this IGeocoder geocoder, Domain.Entities.Address address)
         {
-            if (address != null && (address.HasFullAddress || address.HasCityAndState))
+            if (address != null && (address.HasFullAddress || address.HasCityAndState || address.HasZipCode))
             {
-                var precisionModes = address.HasFullAddress
-                    ? new[] { AddressPrecision.StreetAndNumber, AddressPrecision.Street, AddressPrecision.City }
-                    : new[] { AddressPrecision.City };
+                AddressPrecision[] precisionModes;
+
+                if (address.HasFullAddress)
+                {
+                    precisionModes = new[]
+                    {
+                        AddressPrecision.StreetAndNumber,
+                        AddressPrecision.Street,
+                        AddressPrecision.City
+                    };
+                }
+                else if (address.HasCityAndState)
+                {
+                    precisionModes = new[] { AddressPrecision.City };
+                }
+                else
+                {
+                    precisionModes = new[] { AddressPrecision.ZipCode };
+                }
 
                 foreach (var p in precisionModes)
                 {
@@ -47,12 +64,19 @@ namespace Application.Addresses
                     case AddressPrecision.StreetAndNumber:
                         addr = $"{address.Street}, {address.Number}, {address.CityAndState}, {address.ZipCode}, Brasil";
                         break;
+
                     case AddressPrecision.Street:
                         addr = $"{address.Street}, {address.CityAndState}, {address.ZipCode}, Brasil";
                         break;
+
                     case AddressPrecision.City:
                         addr = $"{address.CityAndState}, {address.ZipCode}, Brasil";
                         break;
+
+                    case AddressPrecision.ZipCode:
+                        addr = $"{address.ZipCode}, Brasil";
+                        break;
+
                     default:
                         throw new InvalidOperationException($"Application.Addresses.AddressHelper.GetAddressForGeocoding: precision {precision} is not supported.");
                 }
@@ -64,6 +88,11 @@ namespace Application.Addresses
             {
                 var addr = $"{address.CityAndState}, Brasil".ReplaceAccents();
                 return addr.Trim();
+            }
+
+            if (address.HasZipCode)
+            {
+                return $"{address.ZipCode}, Brasil".ReplaceAccents().Trim();
             }
 
             return "";

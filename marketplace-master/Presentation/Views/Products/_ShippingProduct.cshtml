@@ -3,11 +3,37 @@
 
 @{
     var config = MaaSConfig.Current;
+
+    var saveLocal = ViewBag.ZipCode != null && ViewBag.ZipCode != "";
 }
+
+<style>
+    @@media (min-width: 768px) {
+        .zipcode-form input {
+            width: 100px;
+        }
+    }
+</style>
+
+@if (saveLocal)
+{
+    <script>
+        localStorage.setItem("zipCode", "@ViewBag.ZipCode");
+    </script>
+}
+
+<form class="form-inline zipcode-form">
+    <div class="form-group">
+        <label for="zipCode" style="margin-right: 10px;">Calcular frete e prazo</label>
+        <input id="zipCode" name="zipCode" type="text" class="form-control js-zipcode" value="@ViewBag.ZipCode" placeholder="_____-__" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">OK</button>
+</form>
 
 @if (Model.ShowAnyShipping)
 {
-    <ul class="product-freight-list list-unstyled m-b-md">
+    <ul class="product-freight-list list-unstyled m-b-md m-t-md">
         @if (Model.ShowPrivateFleet)
         {
             <li>
@@ -76,6 +102,10 @@
             </li>
         }
     </ul>
+}
+else
+{
+    <p>Região não atendida.</p>
 }
 
 @helper DisplayDeliveryDate(DateTime? date)
