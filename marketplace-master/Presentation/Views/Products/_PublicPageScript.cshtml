@@ -42,14 +42,16 @@
             var id = $productShippingWrapper.attr("data-product-id");
             var zipCode = $zipCodeInput.val() || localStorage.getItem("zipCode") || "";
 
-            if (zipCode.length !== 9) {
+            $productShippingWrapper.show();
+
+            if (zipCode.length !== 9 && $productShippingWrapper.html().trim() !== "") {
                 $productShippingWrapper.find(".product-freight-list").remove();
                 $productShippingWrapper.find(".js-error-message").remove();
                 $productShippingWrapper.append('<p class="js-error-message">Informe um CEP válido</p>');
                 return false;
             }
 
-            $productShippingWrapper.show().html('<p><i class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;Calculando frete e prazo</p>');
+            $productShippingWrapper.html('<p><i class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;Calculando frete e prazo</p>');
 
             $.ajax({
                 type: "GET",

@@ -1021,14 +1021,10 @@ WriteLiteral("\"");
 
 WriteLiteral(" style=\"display: none\"");
 
-WriteLiteral(">\r\n                                <p><i");
-
-WriteLiteral(" class=\"fas fa-spinner fa-spin\"");
-
-WriteLiteral("></i></p>\r\n                            </div>\r\n");
+WriteLiteral("></div>\r\n");
 
             
-            #line 172 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 170 "..\..\Views\Products\_ProductMainBoard.cshtml"
                         }
 
             
@@ -1037,13 +1033,13 @@ WriteLiteral("></i></p>\r\n                            </div>\r\n");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 175 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 173 "..\..\Views\Products\_ProductMainBoard.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 175 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 173 "..\..\Views\Products\_ProductMainBoard.cshtml"
                          if (MaaSConfig.Current.SocialMedia.EnableShareButtons)
                         {
 
@@ -1063,7 +1059,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 179 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 177 "..\..\Views\Products\_ProductMainBoard.cshtml"
                                Write(Html.Localized("SOCIAL_SHARE_PRODUCT_LABEL", "strong"));
 
             
@@ -1077,7 +1073,7 @@ WriteLiteral("></div>\r\n                                </div>\r\n             
 "v>\r\n");
 
             
-            #line 183 "..\..\Views\Products\_ProductMainBoard.cshtml"
+            #line 181 "..\..\Views\Products\_ProductMainBoard.cshtml"
                         }
 
             

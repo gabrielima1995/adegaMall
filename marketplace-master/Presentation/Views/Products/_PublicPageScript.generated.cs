@@ -80,17 +80,18 @@ WriteLiteral("\r\n\r\n<script>\r\n    var ProductPublicPage = (function () {\r\n
 "fosIfIsBuyer() {\r\n            var $zipCodeInput = $(\'.zipcode-form input\');\r\n   " +
 "         var id = $productShippingWrapper.attr(\"data-product-id\");\r\n            " +
 "var zipCode = $zipCodeInput.val() || localStorage.getItem(\"zipCode\") || \"\";\r\n\r\n " +
-"           if (zipCode.length !== 9) {\r\n                $productShippingWrapper." +
-"find(\".product-freight-list\").remove();\r\n                $productShippingWrapper" +
-".find(\".js-error-message\").remove();\r\n                $productShippingWrapper.ap" +
-"pend(\'<p class=\"js-error-message\">Informe um CEP válido</p>\');\r\n                " +
-"return false;\r\n            }\r\n\r\n            $productShippingWrapper.show().html(" +
-"\'<p><i class=\"fas fa-spinner fa-spin\"></i>&nbsp;&nbsp;Calculando frete e prazo</" +
-"p>\');\r\n\r\n            $.ajax({\r\n                type: \"GET\",\r\n                url" +
-": \"");
+"           $productShippingWrapper.show();\r\n\r\n            if (zipCode.length !==" +
+" 9 && $productShippingWrapper.html().trim() !== \"\") {\r\n                $productS" +
+"hippingWrapper.find(\".product-freight-list\").remove();\r\n                $product" +
+"ShippingWrapper.find(\".js-error-message\").remove();\r\n                $productShi" +
+"ppingWrapper.append(\'<p class=\"js-error-message\">Informe um CEP válido</p>\');\r\n " +
+"               return false;\r\n            }\r\n\r\n            $productShippingWrapp" +
+"er.html(\'<p><i class=\"fas fa-spinner fa-spin\"></i>&nbsp;&nbsp;Calculando frete e" +
+" prazo</p>\');\r\n\r\n            $.ajax({\r\n                type: \"GET\",\r\n           " +
+"     url: \"");
 
             
-            #line 56 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 58 "..\..\Views\Products\_PublicPageScript.cshtml"
                  Write(Url.ActionLocalized("LoadingShippingInfos", "Product"));
 
             
@@ -134,7 +135,7 @@ WriteLiteral("&id=\" + id + \"&zipCode=\" + zipCode\r\n            }).done(funct
 "ref\", \"");
 
             
-            #line 111 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 113 "..\..\Views\Products\_PublicPageScript.cshtml"
                                                  Write(Url.ActionLocalized("Login", "Account"));
 
             
@@ -157,7 +158,7 @@ WriteLiteral(@""");
             $.get(""");
 
             
-            #line 125 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 127 "..\..\Views\Products\_PublicPageScript.cshtml"
               Write(Url.Action("DoubleFreightWarning", "Products", new { productId = productId }));
 
             
@@ -177,7 +178,7 @@ WriteLiteral(@""", function (html) {
                 var isBuyer = ");
 
             
-            #line 136 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 138 "..\..\Views\Products\_PublicPageScript.cshtml"
                          Write(User.Identity.GetLoginProfile().IsBuyer().ToJson());
 
             
@@ -218,7 +219,7 @@ WriteLiteral(";\r\n\r\n                if (isBuyer) {\r\n                    var
 "f (data.ok) {\r\n                                toastr.success(\"");
 
             
-            #line 186 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 188 "..\..\Views\Products\_PublicPageScript.cshtml"
                                            Write(Request.GetLocalizedString("CART_ITEM_ADDED_MESSAGE"));
 
             
@@ -242,7 +243,7 @@ WriteLiteral(@""");
             $.get(""/cart/countProducts/?lang=");
 
             
-            #line 201 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 203 "..\..\Views\Products\_PublicPageScript.cshtml"
                                         Write(Request.GetCurrentLang());
 
             
