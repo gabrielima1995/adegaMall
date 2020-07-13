@@ -1,4 +1,4 @@
-(function ($, MaaS) {
+﻿(function ($, MaaS) {
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -124,6 +124,9 @@
             }
         });
 
+        //MODAL MAIOR DE IDADE
+        modalEighteenYearsOld();
+
         function checkToggle($this) {
             var tipo = $this.attr('toggle');
 
@@ -140,6 +143,30 @@
             } else {
                 $('.owl-nav').attr('style', '');
             }
-        };
+        }
+
+        function modalEighteenYearsOld() {
+            if (localStorage.getItem("maiordeidade") === "sim") return;
+
+            swal({
+                title: "Você tem mais de 18 anos?",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonText: "Não",
+                confirmButtonText: "Sim",
+                closeOnConfirm: true,
+                closeOnCancel: false,
+                allowEscapeKey: false,
+                allowClickOutside: false
+            }, function (value) {
+                if (!value) {
+                    window.location = "http://www.abrabe.org.br/responsabilidade-social/autorregulamentacao-publicitaria/";
+                    return false;
+                }
+
+                localStorage.setItem("maiordeidade", "sim");
+                return true;
+            });
+        }
     });
 })(window.jQuery, window.MaaS || {});
