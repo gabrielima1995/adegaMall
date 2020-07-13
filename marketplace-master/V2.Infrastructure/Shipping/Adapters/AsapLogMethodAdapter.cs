@@ -225,6 +225,8 @@ namespace V2.Infrastructure.Shipping.Adapters
 
             Enum.TryParse(Regex.Replace(CultureInfo.CurrentCulture.GetCurrentLang().ToUpper(), ".*-", ""), out CountryCode countryCode);
 
+            date = date.AddDays(1);
+
             if (DateSystem.IsPublicHoliday(date, countryCode) || date.IsWeekend(countryCode))
                 date = SumDayForShippingOrReceive(date, countryCode);
 
