@@ -794,36 +794,9 @@ WriteLiteral("                        </ul>\r\n                    </div>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("            </div>\r\n        </div>\r\n\r\n        <hr>\r\n\r\n        <div");
+WriteLiteral("            </div>\r\n        </div>\r\n\r\n        ");
 
-WriteLiteral(" class=\"row\"");
-
-WriteLiteral(">\r\n            <div");
-
-WriteLiteral(" class=\"col-xs-12 text-right\"");
-
-WriteLiteral(">\r\n                <a");
-
-WriteLiteral(" href=\"http://ideianoar.com.br\"");
-
-WriteLiteral(" title=\"Ideia no ar - Plataforma de Marketplace\"");
-
-WriteLiteral(">\r\n                    <img");
-
-WriteAttribute("src", Tuple.Create(" src=\"", 6937), Tuple.Create("\"", 6986)
-            
-            #line 148 "..\..\Views\Shared\_Footer.cshtml"
-, Tuple.Create(Tuple.Create("", 6943), Tuple.Create<System.Object, System.Int32>(MaaSConfig.Current.Layout.Images.PoweredBy
-            
-            #line default
-            #line hidden
-, 6943), false)
-);
-
-WriteLiteral(" alt=\"Desenvolvido por Ideia no Ar\"");
-
-WriteLiteral(">\r\n                </a>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n" +
-"<!-- /FOOTER -->");
+WriteLiteral("\r\n    </div>\r\n</div>\r\n<!-- /FOOTER -->");
 
         }
     }
