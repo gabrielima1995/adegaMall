@@ -92,7 +92,7 @@ WriteLiteral("\r\n");
     bool moderationIsEnable = ViewBag.ModerationIsEnable == null ? true : ViewBag.ModerationIsEnable;
 
     var blockChangesBirthDate = moderationIsEnable && !requireModeration && config.Buyer.DateOfBirth.BlockChangesAfterApprovedInModeration;
-    var blockChangesDocumentNumber = moderationIsEnable && !requireModeration && config.Buyer.DocumentNumber.BlockChangesAfterApprovedInModeration;
+    var blockChangesDocumentNumber = config.Buyer.DocumentNumber.BlockChangesAfterApprovedInModeration;
 
     if (ViewBag.AllFields == null)
     {
@@ -168,24 +168,24 @@ WriteLiteral(" class=\"foto-perfil visible-xs visible-sm m-b-md\"");
 
 WriteLiteral(">\r\n            <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1949), Tuple.Create("\"", 1983)
+WriteAttribute("src", Tuple.Create(" src=\"", 1905), Tuple.Create("\"", 1939)
             
             #line 47 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 1955), Tuple.Create<System.Object, System.Int32>(loginProfile.GetAvatarUrl()
+, Tuple.Create(Tuple.Create("", 1911), Tuple.Create<System.Object, System.Int32>(loginProfile.GetAvatarUrl()
             
             #line default
             #line hidden
-, 1955), false)
+, 1911), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 1984), Tuple.Create("\"", 2008)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 1940), Tuple.Create("\"", 1964)
             
             #line 47 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 1990), Tuple.Create<System.Object, System.Int32>(loginProfile.Name
+, Tuple.Create(Tuple.Create("", 1946), Tuple.Create<System.Object, System.Int32>(loginProfile.Name
             
             #line default
             #line hidden
-, 1990), false)
+, 1946), false)
 );
 
 WriteLiteral(">\r\n            <a");
@@ -449,14 +449,14 @@ WriteLiteral(" class=\"form-group flex-valign\"");
 
 WriteLiteral(">\r\n                <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 3971), Tuple.Create("\"", 4016)
+WriteAttribute("src", Tuple.Create(" src=\"", 3927), Tuple.Create("\"", 3972)
             
             #line 99 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 3977), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.AvatarUrl, 255)
+, Tuple.Create(Tuple.Create("", 3933), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.AvatarUrl, 255)
             
             #line default
             #line hidden
-, 3977), false)
+, 3933), false)
 );
 
 WriteLiteral(" alt=\"\"");
@@ -560,14 +560,14 @@ WriteLiteral("\r\n");
             #line hidden
             
             #line 116 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-                   Write(Html.TextBoxFor(i => i.DocumentNumber, new { @class = "form-control" + (config.Buyer.DocumentNumber.AllowFreeText ? "" : " js-cpfcnpj"), disabled = "disabled" }));
+                   Write(Html.TextBoxFor(i => i.DocumentNumber, new { @class = "form-control" + (config.Buyer.DocumentNumber.AllowFreeText ? "" : " js-cpf"), disabled = "disabled" }));
 
             
             #line default
             #line hidden
             
             #line 116 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-                                                                                                                                                                                          
+                                                                                                                                                                                      
                         
             
             #line default
@@ -591,14 +591,14 @@ WriteLiteral("\r\n");
             #line hidden
             
             #line 121 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-                   Write(Html.TextBoxFor(i => i.DocumentNumber, new { @class = "form-control" + (config.Buyer.DocumentNumber.AllowFreeText ? "" : " js-cpfcnpj"), placeholder = Request.GetLocalizedString("DOCUMENT_NUMBER_INPUT_BUYER") }));
+                   Write(Html.TextBoxFor(i => i.DocumentNumber, new { @class = "form-control" + (config.Buyer.DocumentNumber.AllowFreeText ? "" : " js-cpf"), placeholder = Request.GetLocalizedString("DOCUMENT_NUMBER_INPUT_BUYER") }));
 
             
             #line default
             #line hidden
             
             #line 121 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                        
                     }
 
             
@@ -801,38 +801,38 @@ WriteLiteral("                    ");
             #line hidden
 WriteLiteral("\r\n                    <select");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 6945), Tuple.Create("\"", 6970)
+WriteAttribute("id", Tuple.Create(" id=\"", 6893), Tuple.Create("\"", 6918)
             
             #line 156 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 6950), Tuple.Create<System.Object, System.Int32>(nameof(Model.Genre)
+, Tuple.Create(Tuple.Create("", 6898), Tuple.Create<System.Object, System.Int32>(nameof(Model.Genre)
             
             #line default
             #line hidden
-, 6950), false)
+, 6898), false)
 );
 
-WriteAttribute("name", Tuple.Create(" name=\"", 6971), Tuple.Create("\"", 6998)
+WriteAttribute("name", Tuple.Create(" name=\"", 6919), Tuple.Create("\"", 6946)
             
             #line 156 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 6978), Tuple.Create<System.Object, System.Int32>(nameof(Model.Genre)
+, Tuple.Create(Tuple.Create("", 6926), Tuple.Create<System.Object, System.Int32>(nameof(Model.Genre)
             
             #line default
             #line hidden
-, 6978), false)
+, 6926), false)
 );
 
 WriteLiteral(" class=\"form-control js-select\"");
 
 WriteLiteral(">\r\n                        <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7064), Tuple.Create("\"", 7083)
+WriteAttribute("value", Tuple.Create(" value=\"", 7012), Tuple.Create("\"", 7031)
             
             #line 157 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 7072), Tuple.Create<System.Object, System.Int32>(Genre.Male
+, Tuple.Create(Tuple.Create("", 7020), Tuple.Create<System.Object, System.Int32>(Genre.Male
             
             #line default
             #line hidden
-, 7072), false)
+, 7020), false)
 );
 
 WriteLiteral(" ");
@@ -855,14 +855,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</option>\r\n                        <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7221), Tuple.Create("\"", 7242)
+WriteAttribute("value", Tuple.Create(" value=\"", 7169), Tuple.Create("\"", 7190)
             
             #line 158 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 7229), Tuple.Create<System.Object, System.Int32>(Genre.Female
+, Tuple.Create(Tuple.Create("", 7177), Tuple.Create<System.Object, System.Int32>(Genre.Female
             
             #line default
             #line hidden
-, 7229), false)
+, 7177), false)
 );
 
 WriteLiteral(" ");
@@ -885,14 +885,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</option>\r\n                        <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7384), Tuple.Create("\"", 7404)
+WriteAttribute("value", Tuple.Create(" value=\"", 7332), Tuple.Create("\"", 7352)
             
             #line 159 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 7392), Tuple.Create<System.Object, System.Int32>(Genre.Other
+, Tuple.Create(Tuple.Create("", 7340), Tuple.Create<System.Object, System.Int32>(Genre.Other
             
             #line default
             #line hidden
-, 7392), false)
+, 7340), false)
 );
 
 WriteLiteral(" ");

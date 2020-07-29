@@ -17,7 +17,7 @@ namespace Infra.Crosscutting.AsapLog
         protected AsapLogApiResourceBase(
             HttpClient client,
             IJsonProvider jsonProvider)
-            : base(client)
+            : base(client, AsapLogger.Instance)
         {
             _jsonProvider = jsonProvider;
         }

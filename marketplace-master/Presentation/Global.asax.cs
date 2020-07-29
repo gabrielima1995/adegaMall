@@ -1,5 +1,4 @@
 ﻿using ExpressiveAnnotations.MvcUnobtrusive.Providers;
-using Infrastructure;
 using Presentation.Globalization;
 using Presentation.Helpers.CustomModelBinders;
 using SqlServerTypes;
@@ -70,8 +69,13 @@ namespace Presentation
 
         private void ReportError(Exception ex)
         {
-            var reportingService = UnityConfig.Resolve<ErrorReportingService>();
-            reportingService.ReportError(ex);
+            MarketplaceLogger.Instance.Information("Error: " + ex.Message);
+            if (ex.InnerException != null)
+                MarketplaceLogger.Instance.Information("Inner: " + ex.InnerException.Message);
+            MarketplaceLogger.Instance.Information("StackTrace: " + ex.StackTrace);
+
+            //var reportingService = UnityConfig.Resolve<ErrorReportingService>();
+            //reportingService.ReportError(ex);
         }
 
         protected void SetResponseCompression()
