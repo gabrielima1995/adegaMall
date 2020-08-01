@@ -213,6 +213,8 @@ WriteAttribute("src", Tuple.Create(" src=\"", 1151), Tuple.Create("\"", 1180)
 
 WriteLiteral(" style=\"width:auto;height:auto;\"");
 
+WriteLiteral(" class=\"center-block\"");
+
 WriteLiteral(" />\r\n                    </a>\r\n                </div>\r\n");
 
             
