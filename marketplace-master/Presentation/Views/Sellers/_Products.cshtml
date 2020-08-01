@@ -43,17 +43,17 @@
                         {
                             @Html.Partial("_ProductWishButtonCard", product)
                         }
-                
-                        @if (!string.IsNullOrEmpty(paisBadge))
-                        {
-                            <div class="card-country-badge">
-                                <img src="/assets/images/paises/@(paisBadge).png?w=25&h=25"/>
-                            </div>
-                        }
 
                         <a href="@productUrl" title="@product.Title" class="card-product-img-link">
                             <img src="~/assets/images/product-img-placeholder.jpg" data-src="@product.GetCoverImageUrl(ProductImageSize.SM)" alt="@product.Title" class="js-load-img" />
                         </a>
+
+                        @if (!string.IsNullOrEmpty(paisBadge))
+                        {
+                            <div class="card-country-badge">
+                                <img src="/assets/images/paises/@(paisBadge).png?w=25&h=25" />
+                            </div>
+                        }
 
                         <h5 class="card-product-title">@product.Title</h5>
 
