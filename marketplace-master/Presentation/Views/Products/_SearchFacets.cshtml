@@ -26,7 +26,7 @@
                             @foreach (var item in group.Items)
                             {
                                 i++;
-                                <li class="@(i > minItems ? "hidden" : string.Empty)">
+                                <li class="@(i > minItems && !item.Selected ? "hidden" : string.Empty)">
                                     <div class="checkbox">
                                         <label>
                                             <input type="checkbox" name="f" value="@item.VariantId" @(item.Selected ? "checked" : "")> @item.Value

@@ -228,10 +228,10 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                <li");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1109), Tuple.Create("\"", 1158)
+WriteAttribute("class", Tuple.Create(" class=\"", 1109), Tuple.Create("\"", 1176)
             
             #line 29 "..\..\Views\Products\_SearchFacets.cshtml"
-, Tuple.Create(Tuple.Create("", 1117), Tuple.Create<System.Object, System.Int32>(i > minItems ? "hidden" : string.Empty
+, Tuple.Create(Tuple.Create("", 1117), Tuple.Create<System.Object, System.Int32>(i > minItems && !item.Selected ? "hidden" : string.Empty
             
             #line default
             #line hidden
@@ -249,14 +249,14 @@ WriteLiteral(" type=\"checkbox\"");
 
 WriteLiteral(" name=\"f\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1346), Tuple.Create("\"", 1369)
+WriteAttribute("value", Tuple.Create(" value=\"", 1364), Tuple.Create("\"", 1387)
             
             #line 32 "..\..\Views\Products\_SearchFacets.cshtml"
-   , Tuple.Create(Tuple.Create("", 1354), Tuple.Create<System.Object, System.Int32>(item.VariantId
+   , Tuple.Create(Tuple.Create("", 1372), Tuple.Create<System.Object, System.Int32>(item.VariantId
             
             #line default
             #line hidden
-, 1354), false)
+, 1372), false)
 );
 
 WriteLiteral(" ");
