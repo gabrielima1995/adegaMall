@@ -47,6 +47,14 @@
             }
         });
 
+        $('.header-search input')
+            .focus(function() {
+                $('.header-search').addClass('active');
+            })
+            .blur(function () {
+                $('.header-search').removeClass('active');
+            });
+
         //EDIT PORTFOLIO
         $('[data-toggle="toggle"]').change(function () {
             checkToggle($(this));

@@ -24,7 +24,7 @@ else
         var productUrl = Url.ActionLocalized("PublicPage", "Products", new { id = product.FriendlyUrl });
         var paisBadge = product.GetPaisBadge();
 
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="card equal-height">
                 @if (price.DisplayShortPrice.HasAnyPrice)
                 {

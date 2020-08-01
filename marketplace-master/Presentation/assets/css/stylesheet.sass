@@ -90,7 +90,7 @@ img.avatar
     @include transition(150ms)
   .logo
     max-height: 85px
-  .row
+  .links-row
     display: flex
     align-items: center
     .links
@@ -102,7 +102,7 @@ img.avatar
       justify-content: flex-end
       li
         display: inline-block
-        margin-right: $default_margin*2
+        padding: 0 1rem
         &:last-child
           margin-right: 0
   .my-account-handler
@@ -568,7 +568,8 @@ $arrow_spacing: -30px
     text-align: center
     display: flex
     justify-content: center
-    margin-top: $default_margin*2
+    margin-top: 15px
+    margin-bottom: 15px
   .owl-next, .owl-prev
     right: 0
     left: 0
@@ -587,6 +588,8 @@ $arrow_spacing: -30px
       border-radius: 100%
       top: 0
       left: 0
+  .owl-item .card
+    margin-bottom: 3px
 
 .panel-white, .panel-white .panel-heading
   border-color: #dddddd
@@ -1267,3 +1270,126 @@ dl.dl-inverted
 a.action-disabled-for-assistant, button.action-disabled-for-assistant
   opacity: 0.5 !important
   cursor: default !important
+
+.header-content
+  display: flex;
+  box-sizing: border-box
+  -webkit-box-align: center
+  align-items: center
+  flex-flow: row wrap
+
+.header-content-left
+  width: 24.99%
+  margin-left: 0%
+  padding-left: 8px
+  padding-right: 1px
+  max-width: 89%
+  flex: 0 0 89%
+
+  .media-content-wrapper
+    display: flex
+    -webkit-box-align: center
+    align-items: center
+
+    .media-figure
+      -webkit-box-flex: 0
+      flex: 0 0 auto
+
+    .media-content
+      -webkit-box-flex: 1
+      flex: 1 1 auto
+      min-width: 0
+      padding-left: 15px
+
+.header-nav
+  position: relative
+
+  .header-search
+    position: absolute
+    margin-top: 0
+    top: -20px
+    right: 0
+    width: 100%
+
+    &.active
+      width: 100%
+
+    form
+      border-radius: 4px
+      padding: .5rem 1rem
+      border: 1px solid #d1d1d1
+      background-color: white
+      display: flex
+      -webkit-box-align: center
+      align-items: center
+      position: relative
+
+      .input-wrapper
+        width: 100%
+
+      input
+        display: inline-block;
+        border: none;
+        outline: none;
+        font-family: inherit;
+        color: #000;
+        width: 100%;
+        padding: .5rem
+        padding-right: 1rem;
+        padding-left: 1rem;
+
+.header-links
+  display: flex
+  box-sizing: border-box
+  align-items: flex-start
+  flex-flow: row wrap
+
+  .links-row
+    padding-left: 8px
+    padding-right: 8px
+
+.header-content-right
+  width: 11%
+  margin-left: 0%
+  max-width: 100%
+  padding-left: 8px
+  padding-right: 1px
+  box-sizing: border-box
+  align-self: auto
+
+  .links-row
+    display: inherit
+
+@media (min-width: 768px)
+  .header-content-left
+    max-width: 65%
+    flex: 0 0 65%
+
+  .header-content-right
+    width: 35%
+
+  .header-nav .header-search
+    width: 45%
+    top: -10px
+
+@media (min-width: 992px)
+  .header-content-left
+    max-width: 73%
+    flex: 0 0 73%
+
+  .header-content-right
+    width: 27%
+
+  .header-nav .header-search
+    width: 37%
+
+@media (min-width: 1200px)
+  .header-content-left
+    max-width: 77%
+    flex: 0 0 77%
+
+  .header-content-right
+    width: 23%
+
+  .header-nav .header-search
+    width: 37%

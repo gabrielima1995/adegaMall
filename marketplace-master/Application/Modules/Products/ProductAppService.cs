@@ -291,7 +291,8 @@ namespace Application.Modules.Products
             var queryable = productService.Query(
                 x => x.Images,
                 x => x.Store,
-                x => x.Store.Seller);
+                x => x.Store.Seller,
+                x => x.Variants);
 
             if (product.Category != null)
                 queryable = queryable

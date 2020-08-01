@@ -12,6 +12,8 @@ namespace Domain.Entities
 
         public DateTime? ExpiresAt { get; set; }
 
+        public int Order { get; set; }
+
         public Banner()
         {
             Id = Guid.NewGuid();

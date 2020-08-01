@@ -581,6 +581,10 @@
     <Compile Include="Migrations\202007072234440_AddAsapLog.Designer.cs">
       <DependentUpon>202007072234440_AddAsapLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008011304481_OrderForBanners.cs" />
+    <Compile Include="Migrations\202008011304481_OrderForBanners.Designer.cs">
+      <DependentUpon>202008011304481_OrderForBanners.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Data\MyDbConnection.cs" />
     <Compile Include="Data\Repositories\AdminReportRepository.cs" />
@@ -857,6 +861,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007072234440_AddAsapLog.resx">
       <DependentUpon>202007072234440_AddAsapLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008011304481_OrderForBanners.resx">
+      <DependentUpon>202008011304481_OrderForBanners.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
