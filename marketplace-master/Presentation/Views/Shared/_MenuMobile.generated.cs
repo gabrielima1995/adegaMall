@@ -144,10 +144,27 @@ WriteLiteral("\r\n            </li>\r\n");
             
             #line default
             #line hidden
+WriteLiteral("\r\n");
+
 WriteLiteral("        ");
 
             
-            #line 30 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 31 "..\..\Views\Shared\_MenuMobile.cshtml"
+   Write(Html.Action("MenuCategorias", "Home", new { mobile = true }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n\r\n");
+
+            
+            #line 33 "..\..\Views\Shared\_MenuMobile.cshtml"
+        
+            
+            #line default
+            #line hidden
+            
+            #line 33 "..\..\Views\Shared\_MenuMobile.cshtml"
          foreach (var link in config.AdditionalLinks)
         {
             if ((link?.Enabled).GetValueOrDefault())
@@ -165,7 +182,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 35 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 38 "..\..\Views\Shared\_MenuMobile.cshtml"
                Write(Html.Localized(link.Label, "a", new { href = link.Url, @class = "item-menu" }));
 
             
@@ -174,7 +191,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </li>\r\n");
 
             
-            #line 37 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 40 "..\..\Views\Shared\_MenuMobile.cshtml"
             }
         }
 
@@ -184,7 +201,7 @@ WriteLiteral("\r\n                </li>\r\n");
 WriteLiteral("        ");
 
             
-            #line 39 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 42 "..\..\Views\Shared\_MenuMobile.cshtml"
          if (!User.Identity.GetLoginProfile().IsBuyer() && config.Search.QuotesSearch.Enabled)
         {
 
@@ -200,7 +217,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 42 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 45 "..\..\Views\Shared\_MenuMobile.cshtml"
            Write(Html.Localized("QUOTE_SEARCH_MENU_LABEL", "a", new { href = Url.ActionLocalized("Search", "Quotes") }));
 
             
@@ -209,7 +226,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </li>\r\n");
 
             
-            #line 44 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 47 "..\..\Views\Shared\_MenuMobile.cshtml"
         }
 
             
@@ -218,7 +235,7 @@ WriteLiteral("\r\n            </li>\r\n");
 WriteLiteral("        ");
 
             
-            #line 45 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 48 "..\..\Views\Shared\_MenuMobile.cshtml"
          if (isAuthenticated)
         {
             if (isUser)
@@ -236,7 +253,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 50 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 53 "..\..\Views\Shared\_MenuMobile.cshtml"
                Write(Html.Localized("MY_ACCOUNT_LINK", "a", new { href = Url.ActionLocalized("Index", "Manage") }));
 
             
@@ -248,14 +265,14 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" id=\"loginProfileName\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2203), Tuple.Create("\"", 2229)
+WriteAttribute("value", Tuple.Create(" value=\"", 2278), Tuple.Create("\"", 2304)
             
-            #line 51 "..\..\Views\Shared\_MenuMobile.cshtml"
-, Tuple.Create(Tuple.Create("", 2211), Tuple.Create<System.Object, System.Int32>(loginProfile.Name
+            #line 54 "..\..\Views\Shared\_MenuMobile.cshtml"
+, Tuple.Create(Tuple.Create("", 2286), Tuple.Create<System.Object, System.Int32>(loginProfile.Name
             
             #line default
             #line hidden
-, 2211), false)
+, 2286), false)
 );
 
 WriteLiteral(" />\r\n                    <input");
@@ -264,14 +281,14 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" id=\"loginProfileEmail\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2298), Tuple.Create("\"", 2325)
+WriteAttribute("value", Tuple.Create(" value=\"", 2373), Tuple.Create("\"", 2400)
             
-            #line 52 "..\..\Views\Shared\_MenuMobile.cshtml"
-, Tuple.Create(Tuple.Create("", 2306), Tuple.Create<System.Object, System.Int32>(loginProfile.Email
+            #line 55 "..\..\Views\Shared\_MenuMobile.cshtml"
+, Tuple.Create(Tuple.Create("", 2381), Tuple.Create<System.Object, System.Int32>(loginProfile.Email
             
             #line default
             #line hidden
-, 2306), false)
+, 2381), false)
 );
 
 WriteLiteral(" />\r\n                    <input");
@@ -280,20 +297,20 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" id=\"loginProfilePhone\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2394), Tuple.Create("\"", 2427)
+WriteAttribute("value", Tuple.Create(" value=\"", 2469), Tuple.Create("\"", 2502)
             
-            #line 53 "..\..\Views\Shared\_MenuMobile.cshtml"
-, Tuple.Create(Tuple.Create("", 2402), Tuple.Create<System.Object, System.Int32>(loginProfile.PhoneNumber
+            #line 56 "..\..\Views\Shared\_MenuMobile.cshtml"
+, Tuple.Create(Tuple.Create("", 2477), Tuple.Create<System.Object, System.Int32>(loginProfile.PhoneNumber
             
             #line default
             #line hidden
-, 2402), false)
+, 2477), false)
 );
 
 WriteLiteral(" />\r\n                </li>\r\n");
 
             
-            #line 55 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 58 "..\..\Views\Shared\_MenuMobile.cshtml"
             }
             else if (isAdmin)
             {
@@ -307,20 +324,20 @@ WriteLiteral(" class=\"mobile-menu-admin\"");
 
 WriteLiteral(">\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2587), Tuple.Create("\"", 2656)
+WriteAttribute("href", Tuple.Create(" href=\"", 2662), Tuple.Create("\"", 2731)
             
-            #line 59 "..\..\Views\Shared\_MenuMobile.cshtml"
-, Tuple.Create(Tuple.Create("", 2594), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Sellers", new {area = "Admin"})
+            #line 62 "..\..\Views\Shared\_MenuMobile.cshtml"
+, Tuple.Create(Tuple.Create("", 2669), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Sellers", new {area = "Admin"})
             
             #line default
             #line hidden
-, 2594), false)
+, 2669), false)
 );
 
 WriteLiteral(">Painel Admin</a>\r\n                </li>\r\n");
 
             
-            #line 61 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 64 "..\..\Views\Shared\_MenuMobile.cshtml"
             }
         }
         else
@@ -338,7 +355,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 66 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 69 "..\..\Views\Shared\_MenuMobile.cshtml"
            Write(Html.Localized("LOGIN_LINK", "a", new { href = Url.ActionLocalized("Login", "Account") }));
 
             
@@ -347,13 +364,13 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </li>\r\n");
 
             
-            #line 68 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 71 "..\..\Views\Shared\_MenuMobile.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 83 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 86 "..\..\Views\Shared\_MenuMobile.cshtml"
                
         }
 
@@ -363,13 +380,13 @@ WriteLiteral("\r\n            </li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 86 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 89 "..\..\Views\Shared\_MenuMobile.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 86 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 89 "..\..\Views\Shared\_MenuMobile.cshtml"
          if (config.Product.Enabled && isAuthenticated && loginProfile.IsBuyer())
         {
 
@@ -378,37 +395,47 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("            <li");
 
-WriteLiteral(" class=\"mobile-menu-cart\"");
+WriteLiteral(" class=\"mobile-menu-cart btnCart\"");
 
 WriteLiteral(">\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3940), Tuple.Create("\"", 3984)
+WriteAttribute("href", Tuple.Create(" href=\"", 4023), Tuple.Create("\"", 4067)
             
-            #line 89 "..\..\Views\Shared\_MenuMobile.cshtml"
-, Tuple.Create(Tuple.Create("", 3947), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Cart")
+            #line 92 "..\..\Views\Shared\_MenuMobile.cshtml"
+, Tuple.Create(Tuple.Create("", 4030), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Cart")
             
             #line default
             #line hidden
-, 3947), false)
+, 4030), false)
 );
 
 WriteLiteral(" class=\"menu-btn menu-btn-cart\"");
 
-WriteLiteral(">\r\n");
+WriteLiteral(" title=\"Ver carrinho de compras\"");
+
+WriteLiteral(">\r\n                    <i");
+
+WriteLiteral(" class=\"fa fa-shopping-cart\"");
+
+WriteLiteral("></i>\r\n");
 
 WriteLiteral("                    ");
 
             
-            #line 90 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 94 "..\..\Views\Shared\_MenuMobile.cshtml"
                Write(Html.Localized("CART_BUTTON"));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </a>\r\n            </li>\r\n");
+WriteLiteral("\r\n                    <span");
+
+WriteLiteral(" class=\"badge js-cart-qty\"");
+
+WriteLiteral(">0</span>\r\n                </a>\r\n            </li>\r\n");
 
             
-            #line 93 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 98 "..\..\Views\Shared\_MenuMobile.cshtml"
         }
 
             
@@ -417,13 +444,13 @@ WriteLiteral("\r\n                </a>\r\n            </li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 95 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 100 "..\..\Views\Shared\_MenuMobile.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 95 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 100 "..\..\Views\Shared\_MenuMobile.cshtml"
          if (Request.IsAuthenticated)
         {
 
@@ -437,13 +464,13 @@ WriteLiteral(" class=\"mobile-menu-logoff\"");
 WriteLiteral(">\r\n");
 
             
-            #line 98 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 103 "..\..\Views\Shared\_MenuMobile.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 98 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 103 "..\..\Views\Shared\_MenuMobile.cshtml"
                  using (Html.BeginForm("LogOff", "Account", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { id = "logoutForm" }))
                 {
                     
@@ -451,14 +478,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 100 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 105 "..\..\Views\Shared\_MenuMobile.cshtml"
                Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 100 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 105 "..\..\Views\Shared\_MenuMobile.cshtml"
                                             
 
 
@@ -476,7 +503,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 103 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 108 "..\..\Views\Shared\_MenuMobile.cshtml"
                    Write(Html.Localized("LOGOUT_LINK", "span"));
 
             
@@ -485,7 +512,7 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </a>\r\n");
 
             
-            #line 105 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 110 "..\..\Views\Shared\_MenuMobile.cshtml"
                 }
 
             
@@ -494,7 +521,7 @@ WriteLiteral("\r\n                    </a>\r\n");
 WriteLiteral("            </li>\r\n");
 
             
-            #line 107 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 112 "..\..\Views\Shared\_MenuMobile.cshtml"
         }
 
             
@@ -503,13 +530,13 @@ WriteLiteral("            </li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 109 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 114 "..\..\Views\Shared\_MenuMobile.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 109 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 114 "..\..\Views\Shared\_MenuMobile.cshtml"
          if (LanguagesHelper.ActiveLanguages.Count > 1)
         {
             foreach (var lang in LanguagesHelper.ActiveLanguages)
@@ -524,39 +551,35 @@ WriteLiteral(" class=\"mobile-menu-lang\"");
 
 WriteLiteral(">\r\n                    <a");
 
-WriteLiteral(" href=\"\"");
-
-WriteLiteral("></a>\r\n                    <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 4939), Tuple.Create("\"", 4992)
+WriteAttribute("href", Tuple.Create(" href=\"", 5136), Tuple.Create("\"", 5189)
             
-            #line 115 "..\..\Views\Shared\_MenuMobile.cshtml"
-, Tuple.Create(Tuple.Create("", 4946), Tuple.Create<System.Object, System.Int32>(currentUrl.GetNewUrlLocalized(lang.Specifier)
+            #line 119 "..\..\Views\Shared\_MenuMobile.cshtml"
+, Tuple.Create(Tuple.Create("", 5143), Tuple.Create<System.Object, System.Int32>(currentUrl.GetNewUrlLocalized(lang.Specifier)
             
             #line default
             #line hidden
-, 4946), false)
+, 5143), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 4993), Tuple.Create("\"", 5017)
+WriteAttribute("title", Tuple.Create(" title=\"", 5190), Tuple.Create("\"", 5214)
             
-            #line 115 "..\..\Views\Shared\_MenuMobile.cshtml"
-    , Tuple.Create(Tuple.Create("", 5001), Tuple.Create<System.Object, System.Int32>(lang.NativeName
+            #line 119 "..\..\Views\Shared\_MenuMobile.cshtml"
+    , Tuple.Create(Tuple.Create("", 5198), Tuple.Create<System.Object, System.Int32>(lang.NativeName
             
             #line default
             #line hidden
-, 5001), false)
+, 5198), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 5018), Tuple.Create("\"", 5053)
-, Tuple.Create(Tuple.Create("", 5026), Tuple.Create("mobile-lang-", 5026), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 5215), Tuple.Create("\"", 5250)
+, Tuple.Create(Tuple.Create("", 5223), Tuple.Create("mobile-lang-", 5223), true)
             
-            #line 115 "..\..\Views\Shared\_MenuMobile.cshtml"
-                                         , Tuple.Create(Tuple.Create("", 5038), Tuple.Create<System.Object, System.Int32>(lang.Specifier
+            #line 119 "..\..\Views\Shared\_MenuMobile.cshtml"
+                                         , Tuple.Create(Tuple.Create("", 5235), Tuple.Create<System.Object, System.Int32>(lang.Specifier
             
             #line default
             #line hidden
-, 5038), false)
+, 5235), false)
 );
 
 WriteLiteral(">\r\n                        <img");
@@ -565,30 +588,30 @@ WriteLiteral(" width=\"30\"");
 
 WriteLiteral(" height=\"20\"");
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 5108), Tuple.Create("\"", 5130)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 5305), Tuple.Create("\"", 5327)
             
-            #line 116 "..\..\Views\Shared\_MenuMobile.cshtml"
-, Tuple.Create(Tuple.Create("", 5114), Tuple.Create<System.Object, System.Int32>(lang.NativeName
+            #line 120 "..\..\Views\Shared\_MenuMobile.cshtml"
+, Tuple.Create(Tuple.Create("", 5311), Tuple.Create<System.Object, System.Int32>(lang.NativeName
             
             #line default
             #line hidden
-, 5114), false)
+, 5311), false)
 );
 
-WriteAttribute("src", Tuple.Create(" src=\"", 5131), Tuple.Create("\"", 5152)
+WriteAttribute("src", Tuple.Create(" src=\"", 5328), Tuple.Create("\"", 5349)
             
-            #line 116 "..\..\Views\Shared\_MenuMobile.cshtml"
-, Tuple.Create(Tuple.Create("", 5137), Tuple.Create<System.Object, System.Int32>(lang.FlagImage
+            #line 120 "..\..\Views\Shared\_MenuMobile.cshtml"
+, Tuple.Create(Tuple.Create("", 5334), Tuple.Create<System.Object, System.Int32>(lang.FlagImage
             
             #line default
             #line hidden
-, 5137), false)
+, 5334), false)
 );
 
 WriteLiteral(" />\r\n                    </a>\r\n                </li>\r\n");
 
             
-            #line 119 "..\..\Views\Shared\_MenuMobile.cshtml"
+            #line 123 "..\..\Views\Shared\_MenuMobile.cshtml"
             }
         }
 

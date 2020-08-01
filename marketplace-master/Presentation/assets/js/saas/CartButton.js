@@ -20,8 +20,8 @@
     }
 
     function init() {
-        //_button = $('#btnCart').hide();
-        _button = $('#btnCart');
+        //_button = $('.btnCart').hide();
+        _button = $('.btnCart');
         _productsCountBadge = _button.find('.js-cart-qty');
         countProducts();
     }

@@ -27,6 +27,9 @@
                 @Html.Localized("BLOG_LINK", "a", new { href = blogUrl })
             </li>
         }
+
+        @Html.Action("MenuCategorias", "Home", new { mobile = true })
+
         @foreach (var link in config.AdditionalLinks)
         {
             if ((link?.Enabled).GetValueOrDefault())
@@ -85,9 +88,11 @@
 
         @if (config.Product.Enabled && isAuthenticated && loginProfile.IsBuyer())
         {
-            <li class="mobile-menu-cart">
-                <a href="@Url.ActionLocalized("Index", "Cart")" class="menu-btn menu-btn-cart">
+            <li class="mobile-menu-cart btnCart">
+                <a href="@Url.ActionLocalized("Index", "Cart")" class="menu-btn menu-btn-cart" title="Ver carrinho de compras">
+                    <i class="fa fa-shopping-cart"></i>
                     @Html.Localized("CART_BUTTON")
+                    <span class="badge js-cart-qty">0</span>
                 </a>
             </li>
         }
@@ -111,7 +116,6 @@
             foreach (var lang in LanguagesHelper.ActiveLanguages)
             {
                 <li class="mobile-menu-lang">
-                    <a href=""></a>
                     <a href="@currentUrl.GetNewUrlLocalized(lang.Specifier)" title="@lang.NativeName" class="mobile-lang-@lang.Specifier">
                         <img width="30" height="20" alt="@lang.NativeName" src="@lang.FlagImage" />
                     </a>

@@ -60,6 +60,19 @@
             checkToggle($(this));
         });
 
+        //SUBMENU
+        $(document).ready(function () {
+            $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                var $parent = $(this).parent();
+
+                $parent.siblings().removeClass('open');
+                $parent.toggleClass('open');
+            });
+        });
+
         //MENU MOBILE
         $('.abre-menu').click(function (e) {
             e.preventDefault();

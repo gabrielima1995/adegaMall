@@ -257,6 +257,9 @@
     <Compile Include="Modules\Portfolio\Categories\ICategoryAppService.cs" />
     <Compile Include="CreditCards\CreditCardModel.cs" />
     <Compile Include="Home\SellersSearchHomeViewModel.cs" />
+    <Compile Include="Modules\Products\CategoryMenu.cs" />
+    <Compile Include="Modules\Products\CategoryMenuAppService.cs" />
+    <Compile Include="Modules\Products\CategoryMenuItem.cs" />
     <Compile Include="Modules\Products\Categories\IProductCategoryAppService.cs" />
     <Compile Include="Modules\Products\Categories\ProductCategoryAppService.cs" />
     <Compile Include="Modules\Products\Categories\ProductCategoryViewModel.cs" />

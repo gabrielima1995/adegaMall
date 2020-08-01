@@ -87,28 +87,32 @@ namespace Presentation.Controllers.Products
         }
 
         [DonutOutputCache(CacheProfile = "CategoryPage")]
-        [Route("categoria/{categorySlug}")]
-        [Route("categoria/{categorySlug}/pais/{variantSlug}")]
+        [Route("categoria/{categorySlug}", Name = "CategoryPageRoute")]
+        [Route("categoria/{categorySlug}/{variantTypeSlug}/{variantSlug}", Name = "SubcategoryPageRoute")]
         public ActionResult CategoryPage(SearchRequestViewModel request)
         {
-            if (!string.IsNullOrEmpty(request.VariantSlug))
+            if (!string.IsNullOrEmpty(request.CategorySlug))
             {
-                var variant = productVariantRepository.Get(i => i.Slug == request.VariantSlug);
-
-                if (variant != null)
-                {
-                    ViewBag.Title = $"Vinhos: {variant.Name}";
-                    ViewBag.Description = $"Descubra vinhos do país {variant.Name}";
-                }
-            }
-            else if (!string.IsNullOrEmpty(request.CategorySlug))
-            {
-                var category = productCategoryRepository.Get(i => i.Slug == request.CategorySlug);
+                var category = productCategoryRepository.Get(
+                    i => i.Slug == request.CategorySlug);
 
                 if (category != null)
                 {
-                    ViewBag.Title = $"Categoria: {category.Name}";
-                    ViewBag.Description = $"Descubra bebidas da categoria {category.Name}";
+                    ViewBag.Title = $"{category.Name}";
+                    ViewBag.Description = $"Encontre as melhores bebidas de {category.Name.ToLower()}";
+                }
+
+                if (!string.IsNullOrEmpty(request.VariantSlug))
+                {
+                    var variant = productVariantRepository.Get(
+                        i => i.Slug == request.VariantSlug,
+                        x => x.Type);
+
+                    if (variant != null)
+                    {
+                        ViewBag.Title += $" por {variant.Type.Name.ToLower()} - {variant.Name}";
+                        ViewBag.Description += $" por {variant.Type.Name.ToLower()} - {variant.Name}";
+                    }
                 }
             }
 
