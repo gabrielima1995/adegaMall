@@ -59,10 +59,11 @@
         <div class="row results-number">
             <div class="col-xs-12 text-center"><strong>@Model.Total</strong> @Html.Localized("PRODUCTS_FOUND_COUNT")</div>
         </div>
+        
         <div class="row">
             @if (Model.Results.Any())
             {
-                <div class="col-xs-8 col-sm-3 pull-right">
+                <div class="col-xs-12 col-sm-4 col-md-3 pull-right">
                     @using (Html.BeginForm("Search", "Products", FormMethod.Get))
                     {
                         @QueryParamsAsHiddenFields(except: "sortType")
@@ -73,11 +74,13 @@
                 </div>
             }
         </div>
+        
         <div class="row">
-            <div class="search-result-facets col-xs-12 col-sm-3">
+            <div class="search-result-facets col-xs-12 col-sm-4 col-md-3">
                 @Html.Partial("_SearchFacets", Model)
             </div>
-            <div class="search-result-cards col-xs-12 col-sm-9">
+
+            <div class="search-result-cards col-xs-12 col-sm-8 col-md-9">
                 <div id="js-result-wrapper" class="row">
                     @Html.Partial("_SearchResult", Model)
                 </div>
@@ -123,6 +126,12 @@
         $(document).ready(function () {
             Globalize.loadCldr.then(function () {
                 ProductSearch.init();
+            });
+
+            $('.facets-load-more').click(function () {
+                var $this = $(this);
+                $this.parent().siblings().removeClass('hidden');
+                $this.parent().remove();
             });
         });
     </script>
