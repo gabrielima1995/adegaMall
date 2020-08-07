@@ -27,7 +27,7 @@ namespace Application.Modules.Products.Orders.EventHandlers
 
         public void Handle(OrderStatusChangedEvent domainEvent)
         {
-            if (domainEvent.Order.Status != OrderStatus.PendingPayment)
+            if (domainEvent.NewStatus != OrderStatus.PendingPayment)
                 return;
 
             var sellerResult = SendToSeller(domainEvent);
@@ -86,7 +86,7 @@ namespace Application.Modules.Products.Orders.EventHandlers
             return new OrderProcessingPaymentMessageModel
             {
                 OrderId = order.Id.Substring(),
-                OrderStatus = order.Status.GetDescriptionLocalized(lang),
+                OrderStatus = domainEvent.NewStatus.GetDescriptionLocalized(lang),
                 SellerName = order.Seller.AlternativeName ?? order.Seller.Name,
                 BuyerName = order.Buyer.Name,
                 BuyerPhone = order.Buyer.Phone,

@@ -23,7 +23,7 @@ namespace Application.Modules.Products.Orders.EventHandlers
 
         public void Handle(OrderStatusChangedEvent domainEvent)
         {
-            if (domainEvent.Order.Status != OrderStatus.CompletedPayment)
+            if (domainEvent.NewStatus != OrderStatus.CompletedPayment)
                 return;
 
             if (domainEvent.Order.ShippingMethod.NotIn(ShippingMethod.NoShipping, ShippingMethod.ActualNoShipping))

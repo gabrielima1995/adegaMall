@@ -15,7 +15,7 @@ namespace Application.Modules.Products.Orders.EventHandlers
     {
         public void Handle(OrderStatusChangedEvent domainEvent)
         {
-            if (domainEvent.Order.Status != OrderStatus.PendingPayment)
+            if (domainEvent.NewStatus != OrderStatus.PendingPayment)
                 return;
 
             var config = MaaSConfig.Current;
@@ -28,7 +28,7 @@ namespace Application.Modules.Products.Orders.EventHandlers
                     {
                         BuyerName = order.Buyer.Name,
                         OrderId = order.Id.DisplayShortGuid(),
-                        OrderStatus = order.Status.GetDescriptionLocalized(lang),
+                        OrderStatus = domainEvent.NewStatus.GetDescriptionLocalized(lang),
                         SellerName = order.Seller.AlternativeName ?? order.Seller.Name,
                         Links = order.Products.Where(i => !string.IsNullOrWhiteSpace(i.NoShippingUrl)).Select(i => i.NoShippingUrl),
                         Amount = config.DefaultCurrency + " " + order.Amount.ToStringLocalized(lang),

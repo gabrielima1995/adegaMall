@@ -24,7 +24,7 @@ namespace Application.Modules.Products.Orders.EventHandlers
 
         public void Handle(OrderStatusChangedEvent domainEvent)
         {
-            if (domainEvent.Order.Status != OrderStatus.Canceled)
+            if (domainEvent.NewStatus != OrderStatus.Canceled)
                 return;
 
             if (domainEvent.ActingPerson?.Id == null)

@@ -14,10 +14,10 @@ namespace Application.Modules.Products.Orders.EventHandlers
     {
         public void Handle(OrderStatusChangedEvent domainEvent)
         {
-            if (domainEvent.Order.Status == OrderStatus.AwaitingDelivery)
+            if (domainEvent.NewStatus == OrderStatus.AwaitingDelivery)
                 SendMessageForDelivery(domainEvent);
 
-            else if (domainEvent.Order.Status == OrderStatus.AwaitingPickup)
+            else if (domainEvent.NewStatus == OrderStatus.AwaitingPickup)
                 SendMessageForPickup(domainEvent);
         }
 
