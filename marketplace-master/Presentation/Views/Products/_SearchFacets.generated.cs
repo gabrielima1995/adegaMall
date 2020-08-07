@@ -141,10 +141,10 @@ WriteLiteral("        <form");
 
 WriteLiteral(" id=\"frmFacets\"");
 
-WriteAttribute("action", Tuple.Create(" action=\"", 489), Tuple.Create("\"", 510)
+WriteAttribute("action", Tuple.Create(" action=\"", 489), Tuple.Create("\"", 516)
             
             #line 15 "..\..\Views\Products\_SearchFacets.cshtml"
-, Tuple.Create(Tuple.Create("", 498), Tuple.Create<System.Object, System.Int32>(Request.Url
+, Tuple.Create(Tuple.Create("", 498), Tuple.Create<System.Object, System.Int32>(ViewBag.Canonical
             
             #line default
             #line hidden
@@ -228,14 +228,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                <li");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1109), Tuple.Create("\"", 1176)
+WriteAttribute("class", Tuple.Create(" class=\"", 1115), Tuple.Create("\"", 1182)
             
             #line 29 "..\..\Views\Products\_SearchFacets.cshtml"
-, Tuple.Create(Tuple.Create("", 1117), Tuple.Create<System.Object, System.Int32>(i > minItems && !item.Selected ? "hidden" : string.Empty
+, Tuple.Create(Tuple.Create("", 1123), Tuple.Create<System.Object, System.Int32>(i > minItems && !item.Selected ? "hidden" : string.Empty
             
             #line default
             #line hidden
-, 1117), false)
+, 1123), false)
 );
 
 WriteLiteral(">\r\n                                    <div");
@@ -249,14 +249,14 @@ WriteLiteral(" type=\"checkbox\"");
 
 WriteLiteral(" name=\"f\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1364), Tuple.Create("\"", 1387)
+WriteAttribute("value", Tuple.Create(" value=\"", 1370), Tuple.Create("\"", 1393)
             
             #line 32 "..\..\Views\Products\_SearchFacets.cshtml"
-   , Tuple.Create(Tuple.Create("", 1372), Tuple.Create<System.Object, System.Int32>(item.VariantId
+   , Tuple.Create(Tuple.Create("", 1378), Tuple.Create<System.Object, System.Int32>(item.VariantId
             
             #line default
             #line hidden
-, 1372), false)
+, 1378), false)
 );
 
 WriteLiteral(" ");

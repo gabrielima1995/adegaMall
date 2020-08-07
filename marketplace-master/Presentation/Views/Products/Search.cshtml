@@ -5,6 +5,7 @@
 
 @{
     ViewBag.Title = ViewBag.Title ?? Request.GetLocalizedString("PRODUCT_SEARCH_TITLE");
+    ViewBag.Canonical = Request.Canonical();
     var heroEnabled = MaaSConfig.Current.HeroUnit.Enabled;
     var bannerEnabled = MaaSConfig.Current.Banners.Enabled;
 }
@@ -64,13 +65,12 @@
             @if (Model.Results.Any())
             {
                 <div class="col-xs-12 col-sm-4 col-md-3 pull-right">
-                    @using (Html.BeginForm("Search", "Products", FormMethod.Get))
-                    {
+                    <form action="@ViewBag.Canonical" method="get">
                         @QueryParamsAsHiddenFields(except: "sortType")
                         <div class="form-group">
                             @Html.DropDownList("SortType", null, new { id = "ddlSortType", @class = "form-control" })
                         </div>
-                    }
+                    </form>
                 </div>
             }
         </div>

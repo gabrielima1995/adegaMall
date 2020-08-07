@@ -12,7 +12,7 @@
                 @Html.Localized("SEARCH_FILTERS_FACETS")
             </a>
         </div>
-        <form id="frmFacets" action="@Request.Url" method="get" class="search-result-facets-form hidden-xs">
+        <form id="frmFacets" action="@ViewBag.Canonical" method="get" class="search-result-facets-form hidden-xs">
             @QueryParamsAsHiddenFields()
 
             <div class="list-group">

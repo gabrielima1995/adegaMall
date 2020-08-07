@@ -112,6 +112,7 @@ WriteLiteral("\r\n");
             #line 6 "..\..\Views\Products\Search.cshtml"
   
     ViewBag.Title = ViewBag.Title ?? Request.GetLocalizedString("PRODUCT_SEARCH_TITLE");
+    ViewBag.Canonical = Request.Canonical();
     var heroEnabled = MaaSConfig.Current.HeroUnit.Enabled;
     var bannerEnabled = MaaSConfig.Current.Banners.Enabled;
 
@@ -127,7 +128,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 14 "..\..\Views\Products\Search.cshtml"
+            #line 15 "..\..\Views\Products\Search.cshtml"
 Write(Styles.Render("~/Content/datetime-picker"));
 
             
@@ -142,7 +143,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 29 "..\..\Views\Products\Search.cshtml"
+            #line 30 "..\..\Views\Products\Search.cshtml"
  if (!heroEnabled && bannerEnabled)
 {
     
@@ -150,14 +151,14 @@ WriteLiteral("\r\n\r\n");
             #line default
             #line hidden
             
-            #line 31 "..\..\Views\Products\Search.cshtml"
+            #line 32 "..\..\Views\Products\Search.cshtml"
 Write(Html.Partial("~/Views/Home/_Banners.cshtml"));
 
             
             #line default
             #line hidden
             
-            #line 31 "..\..\Views\Products\Search.cshtml"
+            #line 32 "..\..\Views\Products\Search.cshtml"
                                                  
 }
 
@@ -175,13 +176,13 @@ WriteLiteral(" class=\"container\"");
 WriteLiteral(">\r\n");
 
             
-            #line 36 "..\..\Views\Products\Search.cshtml"
+            #line 37 "..\..\Views\Products\Search.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Views\Products\Search.cshtml"
+            #line 37 "..\..\Views\Products\Search.cshtml"
          if (Model.FilteredBySeller != null)
         {
 
@@ -206,26 +207,26 @@ WriteLiteral(" class=\"panel-body\"");
 
 WriteLiteral(">\r\n                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1242), Tuple.Create("\"", 1352)
+WriteAttribute("href", Tuple.Create(" href=\"", 1288), Tuple.Create("\"", 1398)
             
-            #line 42 "..\..\Views\Products\Search.cshtml"
-, Tuple.Create(Tuple.Create("", 1249), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.FilteredBySeller.FriendlyUrl })
+            #line 43 "..\..\Views\Products\Search.cshtml"
+, Tuple.Create(Tuple.Create("", 1295), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.FilteredBySeller.FriendlyUrl })
             
             #line default
             #line hidden
-, 1249), false)
+, 1295), false)
 );
 
 WriteLiteral(">\r\n                                <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1392), Tuple.Create("\"", 1450)
+WriteAttribute("src", Tuple.Create(" src=\"", 1438), Tuple.Create("\"", 1496)
             
-            #line 43 "..\..\Views\Products\Search.cshtml"
-, Tuple.Create(Tuple.Create("", 1398), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.FilteredBySeller.Avatar, 80)
+            #line 44 "..\..\Views\Products\Search.cshtml"
+, Tuple.Create(Tuple.Create("", 1444), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.FilteredBySeller.Avatar, 80)
             
             #line default
             #line hidden
-, 1398), false)
+, 1444), false)
 );
 
 WriteLiteral(" alt=\"\"");
@@ -240,7 +241,7 @@ WriteLiteral(" />\r\n                            </a>\r\n                       
 "                         <h4>");
 
             
-            #line 46 "..\..\Views\Products\Search.cshtml"
+            #line 47 "..\..\Views\Products\Search.cshtml"
                                Write(Model.FilteredBySeller.PublicProfileName);
 
             
@@ -251,7 +252,7 @@ WriteLiteral("</h4>\r\n");
 WriteLiteral("                                ");
 
             
-            #line 47 "..\..\Views\Products\Search.cshtml"
+            #line 48 "..\..\Views\Products\Search.cshtml"
                            Write(Html.Localized("PRODUCT_SEARCH_FILTERED_BY_SELLER", "p"));
 
             
@@ -259,14 +260,14 @@ WriteLiteral("                                ");
             #line hidden
 WriteLiteral("\r\n                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1827), Tuple.Create("\"", 1876)
+WriteAttribute("href", Tuple.Create(" href=\"", 1873), Tuple.Create("\"", 1922)
             
-            #line 48 "..\..\Views\Products\Search.cshtml"
-, Tuple.Create(Tuple.Create("", 1834), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Search", "Products")
+            #line 49 "..\..\Views\Products\Search.cshtml"
+, Tuple.Create(Tuple.Create("", 1880), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Search", "Products")
             
             #line default
             #line hidden
-, 1834), false)
+, 1880), false)
 );
 
 WriteLiteral(">\r\n                                    <i");
@@ -278,7 +279,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 50 "..\..\Views\Products\Search.cshtml"
+            #line 51 "..\..\Views\Products\Search.cshtml"
                                Write(Html.Localized("REMOVE_FILTER"));
 
             
@@ -289,7 +290,7 @@ WriteLiteral("\r\n                                </a>\r\n                      
 "           </div>\r\n");
 
             
-            #line 57 "..\..\Views\Products\Search.cshtml"
+            #line 58 "..\..\Views\Products\Search.cshtml"
         }
 
             
@@ -306,7 +307,7 @@ WriteLiteral(" class=\"col-xs-12 text-center\"");
 WriteLiteral("><strong>");
 
             
-            #line 60 "..\..\Views\Products\Search.cshtml"
+            #line 61 "..\..\Views\Products\Search.cshtml"
                                                   Write(Model.Total);
 
             
@@ -315,7 +316,7 @@ WriteLiteral("><strong>");
 WriteLiteral("</strong> ");
 
             
-            #line 60 "..\..\Views\Products\Search.cshtml"
+            #line 61 "..\..\Views\Products\Search.cshtml"
                                                                         Write(Html.Localized("PRODUCTS_FOUND_COUNT"));
 
             
@@ -328,13 +329,13 @@ WriteLiteral(" class=\"row\"");
 WriteLiteral(">\r\n");
 
             
-            #line 64 "..\..\Views\Products\Search.cshtml"
+            #line 65 "..\..\Views\Products\Search.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 64 "..\..\Views\Products\Search.cshtml"
+            #line 65 "..\..\Views\Products\Search.cshtml"
              if (Model.Results.Any())
             {
 
@@ -345,22 +346,24 @@ WriteLiteral("                <div");
 
 WriteLiteral(" class=\"col-xs-12 col-sm-4 col-md-3 pull-right\"");
 
+WriteLiteral(">\r\n                    <form");
+
+WriteAttribute("action", Tuple.Create(" action=\"", 2620), Tuple.Create("\"", 2647)
+            
+            #line 68 "..\..\Views\Products\Search.cshtml"
+, Tuple.Create(Tuple.Create("", 2629), Tuple.Create<System.Object, System.Int32>(ViewBag.Canonical
+            
+            #line default
+            #line hidden
+, 2629), false)
+);
+
+WriteLiteral(" method=\"get\"");
+
 WriteLiteral(">\r\n");
 
-            
-            #line 67 "..\..\Views\Products\Search.cshtml"
-                    
-            
-            #line default
-            #line hidden
-            
-            #line 67 "..\..\Views\Products\Search.cshtml"
-                     using (Html.BeginForm("Search", "Products", FormMethod.Get))
-                    {
-                        
-            
-            #line default
-            #line hidden
+WriteLiteral("                        ");
+
             
             #line 69 "..\..\Views\Products\Search.cshtml"
                    Write(QueryParamsAsHiddenFields(except: "sortType"));
@@ -368,14 +371,7 @@ WriteLiteral(">\r\n");
             
             #line default
             #line hidden
-            
-            #line 69 "..\..\Views\Products\Search.cshtml"
-                                                                      
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        <div");
+WriteLiteral("\r\n                        <div");
 
 WriteLiteral(" class=\"form-group\"");
 
@@ -390,16 +386,8 @@ WriteLiteral("                            ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                        </div>\r\n");
-
-            
-            #line 73 "..\..\Views\Products\Search.cshtml"
-                    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                </div>\r\n");
+WriteLiteral("\r\n                        </div>\r\n                    </form>\r\n                </" +
+"div>\r\n");
 
             
             #line 75 "..\..\Views\Products\Search.cshtml"
