@@ -1,4 +1,5 @@
 ﻿@using Application.Helpers
+@using Domain.Entities.StoreModule
 @using Presentation.Helpers
 @model Presentation.Areas.Admin.Views.Sellers.SellerModel
 
@@ -28,13 +29,13 @@
         {
             <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                    <b>Vendas</b> <a class="pull-right">@Model.Seller.Orders.Count</a>
+                    <b>Vendas</b> <a class="pull-right">@Model.Seller.Orders.Count(i => i.Status != OrderStatus.Canceled)</a>
                 </li>
                 <li class="list-group-item">
                     <b>Total</b>
                     <a class="pull-right">
                         @config.DefaultCurrency
-                        @(Model.Seller.Orders.Sum(x => x.Amount).DisplayDecimal(2))
+                        @(Model.Seller.Orders.Where(i => i.Status != OrderStatus.Canceled).Sum(x => x.Amount).DisplayDecimal(2))
                     </a>
                 </li>
 
@@ -164,7 +165,7 @@
                     {
                         @Html.Hidden("sellerguid", Model.Id.ToString())
                         <button type="submit" class="btn btn-success btn-sm" name="isApproved" id="isApproved" value="true"><i class="fa fa-check-circle"></i> Aprovar cadastro</button>
-                        <button type="submit" class="btn btn-danger btn-sm"  name="isApproved" id="isApproved" value="false"><i class="fa fa-check-circle"></i> Reprovar cadastro</button>
+                        <button type="submit" class="btn btn-danger btn-sm" name="isApproved" id="isApproved" value="false"><i class="fa fa-check-circle"></i> Reprovar cadastro</button>
                         <hr />
                     }
                 }
