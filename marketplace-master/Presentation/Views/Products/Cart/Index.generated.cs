@@ -100,6 +100,8 @@ WriteLiteral(@"'
             }).done(function (response) {
                 isDone = true;
                 $("".js-cart-loading"").html(response);
+                CitiesScript.init();
+                MaaS.initPlugins();
             });
 
             var timeoutMessagesContainer = $("".js-cart-loading center"");
@@ -108,7 +110,7 @@ WriteLiteral(@"'
                     timeoutMessagesContainer.append($(""<p>"").text(""");
 
             
-            #line 34 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 36 "..\..\Views\Products\Cart\Index.cshtml"
                                                               Write(Html.LocalizedString("CART_LOADING_WAIT_MSG_1"));
 
             
@@ -119,7 +121,7 @@ WriteLiteral("\"));\r\n                    window.setTimeout(function () {\r\n  
 "\"<p>\").text(\"");
 
             
-            #line 37 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 39 "..\..\Views\Products\Cart\Index.cshtml"
                                                                       Write(Html.LocalizedString("CART_LOADING_WAIT_MSG_2"));
 
             
@@ -127,16 +129,16 @@ WriteLiteral("\"));\r\n                    window.setTimeout(function () {\r\n  
             #line hidden
 WriteLiteral("\"));\r\n                        }\r\n                    }, waitTimeForError);\r\n     " +
 "           }\r\n            }, waitTimeForMessage);\r\n\r\n        })(window.jQuery);\r" +
-"\n    </script>\r\n");
+"\n    </script>\r\n\r\n");
 
             
-            #line 45 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 48 "..\..\Views\Products\Cart\Index.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 45 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 48 "..\..\Views\Products\Cart\Index.cshtml"
      if (config.Product.Order.ExtraInfoField.Enabled)
     {
 
@@ -153,7 +155,7 @@ WriteLiteral(@"        <script>
 ");
 
             
-            #line 54 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 57 "..\..\Views\Products\Cart\Index.cshtml"
     }
 
             
@@ -173,7 +175,7 @@ WriteLiteral(@"
                 $.redirect('");
 
             
-            #line 66 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 69 "..\..\Views\Products\Cart\Index.cshtml"
                        Write(Url.ActionLocalized("ChangeQuantity", "Cart"));
 
             
@@ -192,7 +194,7 @@ WriteLiteral(@"', { id: product, quantity: quantity, stockVariant: stockVariant,
                 $.redirect('");
 
             
-            #line 76 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 79 "..\..\Views\Products\Cart\Index.cshtml"
                        Write(Url.ActionLocalized("RemoveItem", "Cart"));
 
             
@@ -209,7 +211,7 @@ WriteLiteral(@"', { id: product, stockVariant: stockVariant, productAvailability
                 $.redirect('");
 
             
-            #line 84 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 87 "..\..\Views\Products\Cart\Index.cshtml"
                        Write(Url.ActionLocalized("ChooseShippingMethod", "Cart"));
 
             
@@ -228,7 +230,7 @@ WriteLiteral(@"', { method: $this.find('input').val() });
                $.redirect('");
 
             
-            #line 94 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 97 "..\..\Views\Products\Cart\Index.cshtml"
                       Write(Url.ActionLocalized("ChooseShippingAddress", "Cart"));
 
             
@@ -255,7 +257,7 @@ WriteLiteral(@"', { id: $this.find('input').val() });
             var chooseShippingAddressUrl = '");
 
             
-            #line 112 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 115 "..\..\Views\Products\Cart\Index.cshtml"
                                        Write(Url.ActionLocalized("ChooseShippingAddress", "Cart"));
 
             
@@ -264,7 +266,7 @@ WriteLiteral(@"', { id: $this.find('input').val() });
 WriteLiteral("\';\r\n            var openNewShippingAddressModal = ");
 
             
-            #line 113 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 116 "..\..\Views\Products\Cart\Index.cshtml"
                                           Write(ViewBag.OpenNewShippingAddressModal ? "true" : "false");
 
             
@@ -273,7 +275,7 @@ WriteLiteral("\';\r\n            var openNewShippingAddressModal = ");
 WriteLiteral(";\r\n            CitiesScript.init(\'");
 
             
-            #line 114 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 117 "..\..\Views\Products\Cart\Index.cshtml"
                           Write(Request.GetLocalizedString("CITY_AND_STATE_INPUT"));
 
             
@@ -285,7 +287,7 @@ WriteLiteral("\');\r\n            CartShippingAddress.init(chooseShippingAddress
 });
 
             
-            #line 120 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 123 "..\..\Views\Products\Cart\Index.cshtml"
 Write(Html.Partial("~/Views/Products/Cart/_ModalShippingWarning.cshtml"));
 
             
