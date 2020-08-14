@@ -16,6 +16,7 @@ namespace Presentation.Models
 
         public bool IsShippingOut => Cart != null && (
             Cart.ShippingMethod == ShippingMethod.AsapLog ||
+            Cart.ShippingMethod == ShippingMethod.TotalExpress ||
             Cart.ShippingMethod == ShippingMethod.PostalExpress ||
             Cart.ShippingMethod == ShippingMethod.PostalRegular ||
             Cart.ShippingMethod == ShippingMethod.PrivateFleet);

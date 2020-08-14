@@ -181,7 +181,7 @@ WriteLiteral("                </div>\r\n\r\n");
             #line hidden
             
             #line 33 "..\..\Views\Products\Store\_Products.cshtml"
-                 if (config.Product.GetShippingMethodsEnabled().HasAny(ShippingMethod.PostalRegular, ShippingMethod.PostalExpress, ShippingMethod.AsapLog))
+                 if (config.Product.GetShippingMethodsEnabled().HasAny(ShippingMethod.PostalRegular, ShippingMethod.PostalExpress, ShippingMethod.AsapLog, ShippingMethod.TotalExpress))
                 {
 
             
@@ -283,14 +283,14 @@ WriteLiteral("                        <i");
 
 WriteLiteral(" class=\"fas fa-info-circle js-tooltip\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 2496), Tuple.Create("\"", 2561)
+WriteAttribute("title", Tuple.Create(" title=\"", 2525), Tuple.Create("\"", 2590)
             
             #line 49 "..\..\Views\Products\Store\_Products.cshtml"
-, Tuple.Create(Tuple.Create("", 2504), Tuple.Create<System.Object, System.Int32>(Html.LocalizedString("STORE_DEFAULT_SHIPPING_SETUP_TIP")
+, Tuple.Create(Tuple.Create("", 2533), Tuple.Create<System.Object, System.Int32>(Html.LocalizedString("STORE_DEFAULT_SHIPPING_SETUP_TIP")
             
             #line default
             #line hidden
-, 2504), false)
+, 2533), false)
 );
 
 WriteLiteral("></i>\r\n                    </div>\r\n");

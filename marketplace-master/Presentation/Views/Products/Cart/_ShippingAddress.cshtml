@@ -104,6 +104,10 @@
                 {
                     @Html.Localized("ASAPLOG_DELIVERY_TIME", "p", null, Model.TotalDeliveryDays)
                 }
+                else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.TotalExpress))
+                {
+                    @Html.Localized("TOTALEXPRESS_DELIVERY_TIME", "p", null, Model.TotalDeliveryDays)
+                }
                 else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PrivateFleet))
                 {
                     @Html.Localized("PRIVATE_FLEET_SHIPPING_DELIVERY_TIME", "p")

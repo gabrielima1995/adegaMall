@@ -35,13 +35,19 @@ namespace Domain.Entities.StoreModule
         /// AsapLog
         /// </summary>
         [DescriptionLocalized("SHIPPING_METHOD_ASAPLOG")]
-        AsapLog = 10
+        AsapLog = 10,
+
+        /// <summary>
+        /// Total Express
+        /// </summary>
+        [DescriptionLocalized("SHIPPING_METHOD_TOTALEXPRESS")]
+        TotalExpress = 11
     }
 
     public static class ShippingMethodExtensions
     {
         public static bool IsPhysicalDelivery(this ShippingMethod method) => method.NotIn(ShippingMethod.NoShipping, ShippingMethod.ActualNoShipping);
-        public static bool IsShippingOut(this ShippingMethod method) => method.In(ShippingMethod.PrivateFleet, ShippingMethod.PostalExpress, ShippingMethod.PostalRegular, ShippingMethod.AsapLog);
+        public static bool IsShippingOut(this ShippingMethod method) => method.In(ShippingMethod.PrivateFleet, ShippingMethod.PostalExpress, ShippingMethod.PostalRegular, ShippingMethod.AsapLog, ShippingMethod.TotalExpress);
     }
 
     public static class ShippingMethodHelpers

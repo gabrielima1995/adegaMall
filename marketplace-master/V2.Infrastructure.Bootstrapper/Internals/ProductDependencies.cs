@@ -20,6 +20,8 @@ using Infra.Crosscutting.AsapLog.ConsultaFrete;
 using Infrastructure.Data.Repositories;
 using Infrastructure.Shipping;
 using System;
+using Framework.TotalExpress.ConsultaFrete;
+using Infra.Crosscutting.TotalExpress.ConsultaFrete;
 using Unity;
 using Unity.Lifetime;
 using V2.Application.Modules.StoreModule;
@@ -46,6 +48,7 @@ namespace V2.Infrastructure.Bootstrapper.Internals
                 .RegisterInstance<IHttpClientFactory>(httpClientFactory, new SingletonLifetimeManager())
                 .RegisterType<IJsonProvider, JsonProvider>()
                 .RegisterType<IAsapLogConsultaFreteProvider, AsapLogConsultaFreteProvider>()
+                .RegisterType<ITotalExpressConsultaFreteProvider, TotalExpressConsultaFreteProvider>()
 
                 // Store
                 .RegisterType<StoreService>()

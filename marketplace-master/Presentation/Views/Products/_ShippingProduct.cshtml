@@ -73,6 +73,16 @@
             </li>
         }
 
+        @if (Model.ShowTotalExpress)
+        {
+            <li>
+                <strong>@Html.Localized("PRODUCT_TOTALEXPRESS_METHOD_LABEL"):</strong>
+                @config.DefaultCurrency
+                @Model.TotalExpressCost.DisplayDecimal(2)
+                @DisplayDeliveryDate(Model.DeliveryDateTotalExpress)
+            </li>
+        }
+
         @if (Model.ShowOnSitePickup)
         {
             <li>
@@ -103,7 +113,7 @@
         }
     </ul>
 }
-else if(hasZipCode)
+else if (hasZipCode)
 {
     <p>Região não atendida.</p>
 }

@@ -19,6 +19,7 @@ namespace Presentation.Models
         public decimal PostalExpressCost { get; set; }
         public decimal PostalRegularCost { get; set; }
         public decimal AsapLogCost { get; private set; }
+        public decimal TotalExpressCost { get; private set; }
 
         public bool ShowActualNoShipping { get; private set; }
         public bool ShowNoShipping { get; private set; }
@@ -27,11 +28,13 @@ namespace Presentation.Models
         public bool ShowPostalExpress { get; private set; }
         public bool ShowPostalRegular { get; private set; }
         public bool ShowAsapLog { get; private set; }
+        public bool ShowTotalExpress { get; private set; }
         public DateTime? DeliveryDatePac { get; private set; }
         public DateTime? DeliveryDateSedex { get; private set; }
         public DateTime? DeliveryDateAsapLog { get; private set; }
-        public bool ShowAnyShipping => ShowActualNoShipping || ShowNoShipping || ShowOnSitePickup || ShowPrivateFleet || ShowPostalExpress || ShowPostalRegular || ShowAsapLog;
-        public bool ShowAnyShippingWithCharge => ShowPrivateFleet || ShowPostalExpress || ShowPostalRegular || ShowAsapLog;
+        public DateTime? DeliveryDateTotalExpress { get; private set; }
+        public bool ShowAnyShipping => ShowActualNoShipping || ShowNoShipping || ShowOnSitePickup || ShowPrivateFleet || ShowPostalExpress || ShowPostalRegular || ShowAsapLog || ShowTotalExpress;
+        public bool ShowAnyShippingWithCharge => ShowPrivateFleet || ShowPostalExpress || ShowPostalRegular || ShowAsapLog || ShowTotalExpress;
 
         public ShippingInfosVM(Product product, Address sellerAddress, Address shippingAddress,
             IShippingMethodAdapter actualNoShippingAdapter,
@@ -40,7 +43,8 @@ namespace Presentation.Models
             IShippingMethodAdapter privateFleetAdapter,
             IShippingMethodAdapter postalExpressAdapter,
             IShippingMethodAdapter postalRegularAdapter,
-            IShippingMethodAdapter asapLogAdapter)
+            IShippingMethodAdapter asapLogAdapter,
+            IShippingMethodAdapter totalExpressAdapter)
         {
             Product = product;
             SellerAddress = sellerAddress;
@@ -100,6 +104,13 @@ namespace Presentation.Models
                     AsapLogCost = asapLogCost;
                     DeliveryDateAsapLog = deliveryDate;
                 }
+
+                if (config.Product.TotalExpressShipping.Enabled)
+                {
+                    ShowTotalExpress = GetShipping(totalExpressAdapter, out var totalExpressCost, out var deliveryDate, chargeDoubleShipping);
+                    TotalExpressCost = totalExpressCost;
+                    DeliveryDateTotalExpress = deliveryDate;
+                }
             }
         }
 
@@ -109,7 +120,7 @@ namespace Presentation.Models
             cost = result.OK ? result.Result.TotalShippingPrice : 0M;
 
             if (result.OK &&
-                (adapter.GetMethod() == ShippingMethod.PostalExpress || adapter.GetMethod() == ShippingMethod.PostalRegular || adapter.GetMethod() == ShippingMethod.AsapLog))
+                (adapter.GetMethod() == ShippingMethod.PostalExpress || adapter.GetMethod() == ShippingMethod.PostalRegular || adapter.GetMethod() == ShippingMethod.AsapLog || adapter.GetMethod() == ShippingMethod.TotalExpress))
                 deliveryDate = adapter.CalculateDeliveryDate(result.Result.TotalDeliveryDays);
             else
                 deliveryDate = null;

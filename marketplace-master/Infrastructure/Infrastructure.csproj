@@ -585,6 +585,10 @@
     <Compile Include="Migrations\202008011304481_OrderForBanners.Designer.cs">
       <DependentUpon>202008011304481_OrderForBanners.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008132031518_AddTotalExpress.cs" />
+    <Compile Include="Migrations\202008132031518_AddTotalExpress.Designer.cs">
+      <DependentUpon>202008132031518_AddTotalExpress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Data\MyDbConnection.cs" />
     <Compile Include="Data\Repositories\AdminReportRepository.cs" />
@@ -864,6 +868,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008011304481_OrderForBanners.resx">
       <DependentUpon>202008011304481_OrderForBanners.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008132031518_AddTotalExpress.resx">
+      <DependentUpon>202008132031518_AddTotalExpress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

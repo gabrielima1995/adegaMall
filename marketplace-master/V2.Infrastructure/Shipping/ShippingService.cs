@@ -35,6 +35,8 @@ namespace Infrastructure.Shipping
                     return GetDecoratedAdapter(new PacMethodAdapter());
                 case ShippingMethod.AsapLog:
                     return GetDecoratedAdapter(new AsapLogMethodAdapter());
+                case ShippingMethod.TotalExpress:
+                    return GetDecoratedAdapter(new TotalExpressMethodAdapter());
                 default:
                     throw new ArgumentOutOfRangeException();
             }

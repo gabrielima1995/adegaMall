@@ -274,7 +274,8 @@ namespace Presentation.Controllers.Products
                     shippingService.GetAdapter(ShippingMethod.PrivateFleet),
                     shippingService.GetAdapter(ShippingMethod.PostalExpress),
                     shippingService.GetAdapter(ShippingMethod.PostalRegular),
-                    shippingService.GetAdapter(ShippingMethod.AsapLog));
+                    shippingService.GetAdapter(ShippingMethod.AsapLog),
+                    shippingService.GetAdapter(ShippingMethod.TotalExpress));
             }
 
             #endregion Get shipping infos

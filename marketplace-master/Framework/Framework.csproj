@@ -135,6 +135,10 @@
     <Compile Include="SHA1.cs" />
     <Compile Include="SimpleMapper.cs" />
     <Compile Include="StringHelpersAndExtensions.cs" />
+    <Compile Include="TotalExpress\ConsultaFrete\ITotalExpressConsultaFreteProvider.cs" />
+    <Compile Include="TotalExpress\ConsultaFrete\ConsultaFreteResponse.cs" />
+    <Compile Include="TotalExpress\ConsultaFrete\ConsultaFreteRequest.cs" />
+    <Compile Include="TotalExpress\TotalExpressCredentials.cs" />
     <Compile Include="UserOrPersonId.cs" />
   </ItemGroup>
   <ItemGroup>

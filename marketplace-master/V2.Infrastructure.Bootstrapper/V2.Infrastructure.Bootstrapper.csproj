@@ -177,6 +177,10 @@
       <Project>{7ba6b853-9df7-45b4-ab33-76dbc4524a60}</Project>
       <Name>Infra.Crosscutting.ExchangeRate</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Infra.Crosscutting.TotalExpress\Infra.Crosscutting.TotalExpress.csproj">
+      <Project>{FAC9346F-F91C-4B34-97C8-C2A139CCD367}</Project>
+      <Name>Infra.Crosscutting.TotalExpress</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infra.SmartSearchAdapter\Infra.SmartSearchAdapter.csproj">
       <Project>{A57A3FEB-5783-4FE5-85DD-C63457B6AACE}</Project>
       <Name>Infra.SmartSearchAdapter</Name>

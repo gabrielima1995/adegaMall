@@ -149,7 +149,7 @@ namespace V2.Application.Modules
                 {
                     shippingCollection = shippingCollection.Merge(shippingResult.Result);
                     item.Shipping = shippingResult.Result.TotalShippingPrice;
-                    if (cart.ShippingMethod == ShippingMethod.PostalRegular || cart.ShippingMethod == ShippingMethod.PostalExpress || cart.ShippingMethod == ShippingMethod.AsapLog)
+                    if (cart.ShippingMethod == ShippingMethod.PostalRegular || cart.ShippingMethod == ShippingMethod.PostalExpress || cart.ShippingMethod == ShippingMethod.AsapLog || cart.ShippingMethod == ShippingMethod.TotalExpress)
                         item.DeliveryDays = shippingResult.Result.TotalDeliveryDays;
                 }
 
@@ -633,6 +633,7 @@ namespace V2.Application.Modules
             var pac = true;
             var sedex = true;
             var asapLog = true;
+            var totalExpress = true;
             var privateFleet = true;
             var onSitePickup = true;
 
@@ -676,6 +677,9 @@ namespace V2.Application.Modules
                     if (!item.AsapLogEnabled || !config.Product.AsapLogShipping.Enabled)
                         asapLog = false;
 
+                    if (!item.TotalExpressEnabled || !config.Product.TotalExpressShipping.Enabled)
+                        totalExpress = false;
+
                     if (!item.PrivateFleetEnabled || !config.Product.PrivateFleetShipping.Enabled)
                         privateFleet = false;
 
@@ -689,6 +693,7 @@ namespace V2.Application.Modules
                 (cart.ShippingMethod == ShippingMethod.PostalRegular && pac) ||
                 (cart.ShippingMethod == ShippingMethod.PostalExpress && sedex) ||
                 (cart.ShippingMethod == ShippingMethod.AsapLog && asapLog) ||
+                (cart.ShippingMethod == ShippingMethod.TotalExpress && totalExpress) ||
                 (cart.ShippingMethod == ShippingMethod.PrivateFleet && privateFleet) ||
                 (cart.ShippingMethod == ShippingMethod.OnSitePickup && onSitePickup))
                 return;
@@ -703,6 +708,8 @@ namespace V2.Application.Modules
                 cart.ShippingMethod = ShippingMethod.PostalExpress;
             else if (asapLog)
                 cart.ShippingMethod = ShippingMethod.AsapLog;
+            else if (totalExpress)
+                cart.ShippingMethod = ShippingMethod.TotalExpress;
             else if (privateFleet)
                 cart.ShippingMethod = ShippingMethod.PrivateFleet;
             else if (onSitePickup)
@@ -723,7 +730,7 @@ namespace V2.Application.Modules
                     {
                         foreach (var seller in cart.Sellers) seller.SellerShipping = 0M;
                         cart.Shipping = cart.Items.Sum(x => x.Shipping);
-                        if ((cart.ShippingMethod == ShippingMethod.PostalRegular || cart.ShippingMethod == ShippingMethod.PostalExpress || cart.ShippingMethod == ShippingMethod.AsapLog) && !cart.IsEmpty)
+                        if ((cart.ShippingMethod == ShippingMethod.PostalRegular || cart.ShippingMethod == ShippingMethod.PostalExpress || cart.ShippingMethod == ShippingMethod.AsapLog || cart.ShippingMethod == ShippingMethod.TotalExpress) && !cart.IsEmpty)
                             cart.DeliveryDate = adapter.CalculateDeliveryDate(cart.Items.Max(x => x.DeliveryDays));
                         else
                             cart.DeliveryDate = null;
@@ -751,14 +758,14 @@ namespace V2.Application.Modules
 
                             cartSeller.SellerShipping = result.Result.TotalShippingPrice;
                             cart.Shipping += cartSeller.SellerShipping;
-                            if (cart.ShippingMethod == ShippingMethod.PostalRegular || cart.ShippingMethod == ShippingMethod.PostalExpress || cart.ShippingMethod == ShippingMethod.AsapLog)
+                            if (cart.ShippingMethod == ShippingMethod.PostalRegular || cart.ShippingMethod == ShippingMethod.PostalExpress || cart.ShippingMethod == ShippingMethod.AsapLog || cart.ShippingMethod == ShippingMethod.TotalExpress)
                                 cartSeller.SellerDeliveryDays = result.Result.TotalDeliveryDays;
                             else
                                 cart.DeliveryDate = null;
                         }
 
                         if (cart.Sellers.Any() &&
-                            (cart.ShippingMethod == ShippingMethod.PostalRegular || cart.ShippingMethod == ShippingMethod.PostalExpress || cart.ShippingMethod == ShippingMethod.AsapLog))
+                            (cart.ShippingMethod == ShippingMethod.PostalRegular || cart.ShippingMethod == ShippingMethod.PostalExpress || cart.ShippingMethod == ShippingMethod.AsapLog || cart.ShippingMethod == ShippingMethod.TotalExpress))
                             cart.DeliveryDate = adapter.CalculateDeliveryDate(cart.Sellers.Max(x => x.SellerDeliveryDays));
                         else
                             cart.DeliveryDate = null;

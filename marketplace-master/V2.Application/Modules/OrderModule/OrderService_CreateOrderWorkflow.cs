@@ -430,7 +430,7 @@ namespace Domain.Services.StoreModule
                     }
                 }
 
-                if (cart.ShippingMethod == ShippingMethod.PostalRegular || cart.ShippingMethod == ShippingMethod.PostalExpress || cart.ShippingMethod == ShippingMethod.AsapLog)
+                if (cart.ShippingMethod == ShippingMethod.PostalRegular || cart.ShippingMethod == ShippingMethod.PostalExpress || cart.ShippingMethod == ShippingMethod.AsapLog || cart.ShippingMethod == ShippingMethod.TotalExpress)
                     order.DeliveryDate = cart.DeliveryDate;
 
                 orders.Add(order);

@@ -30,7 +30,7 @@
                     }
                 </div>
 
-                @if (config.Product.GetShippingMethodsEnabled().HasAny(ShippingMethod.PostalRegular, ShippingMethod.PostalExpress, ShippingMethod.AsapLog))
+                @if (config.Product.GetShippingMethodsEnabled().HasAny(ShippingMethod.PostalRegular, ShippingMethod.PostalExpress, ShippingMethod.AsapLog, ShippingMethod.TotalExpress))
                 {
                     <div class="seller-store-default-shipping pull-left m-l-md">
                         <i class="fas fa-truck"></i>

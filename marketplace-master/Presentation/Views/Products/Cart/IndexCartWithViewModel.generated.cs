@@ -83,14 +83,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5017), Tuple.Create("\"", 5034)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5080), Tuple.Create("\"", 5097)
 
 #line 114 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
-, Tuple.Create(Tuple.Create("", 5024), Tuple.Create<System.Object, System.Int32>(searchUrl
+, Tuple.Create(Tuple.Create("", 5087), Tuple.Create<System.Object, System.Int32>(searchUrl
 
 #line default
 #line hidden
-, 5024), false)
+, 5087), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-default\"");
@@ -123,14 +123,14 @@ WriteLiteralTo(__razor_helper_writer, "\r\n        </a>\r\n");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5291), Tuple.Create("\"", 5338)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5354), Tuple.Create("\"", 5401)
 
 #line 121 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
-, Tuple.Create(Tuple.Create("", 5298), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Checkout", "Cart")
+, Tuple.Create(Tuple.Create("", 5361), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Checkout", "Cart")
 
 #line default
 #line hidden
-, 5298), false)
+, 5361), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-primary pull-right btn-cart-proceed-to-checkout\"");
@@ -512,7 +512,7 @@ WriteLiteral("</td>\r\n                                    </tr>\r\n");
 
             
             #line 74 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
-                                    if (Model.SelectedShippingMethod == ShippingMethod.PostalRegular || Model.SelectedShippingMethod == ShippingMethod.PostalExpress || Model.SelectedShippingMethod == ShippingMethod.AsapLog)
+                                    if (Model.SelectedShippingMethod == ShippingMethod.PostalRegular || Model.SelectedShippingMethod == ShippingMethod.PostalExpress || Model.SelectedShippingMethod == ShippingMethod.AsapLog || Model.SelectedShippingMethod == ShippingMethod.TotalExpress)
                                     {
 
             

@@ -33,6 +33,18 @@ namespace Presentation.Models
         [DisplayNameLocalized("STORE_ASAPLOG_PASSWORD_LABEL")]
         public string AsapLogPassword { get; set; }
 
+        [DisplayNameLocalized("STORE_TOTALEXPRESS_METHOD_LABEL")]
+        public bool TotalExpressEnabled { get; set; }
+
+        [DisplayNameLocalized("STORE_TOTALEXPRESS_USER_LABEL")]
+        public string TotalExpressUser { get; set; }
+
+        [DisplayNameLocalized("STORE_TOTALEXPRESS_PASSWORD_LABEL")]
+        public string TotalExpressPassword { get; set; }
+
+        [DisplayNameLocalized("STORE_TOTALEXPRESS_REID_LABEL")]
+        public string TotalExpressReid { get; set; }
+
         public string SellerId { get; set; }
         public List<SingleFreightParameterViewModel> SingleFreightParams { get; set; }
 
@@ -71,6 +83,10 @@ namespace Presentation.Models
             AsapLogEnabled = store.AsapLogEnabled;
             AsapLogUser = store.AsapLogUser;
             AsapLogPassword = store.AsapLogPassword;
+            TotalExpressEnabled = store.TotalExpressEnabled;
+            TotalExpressUser = store.TotalExpressUser;
+            TotalExpressPassword = store.TotalExpressPassword;
+            TotalExpressReid = store.TotalExpressReid;
 
             DefaultShippingAmount = store.DefaultShipping.Amount;
             DefaultShippingDeliveryDays = store.DefaultShipping.DeliveryDays;
@@ -87,6 +103,10 @@ namespace Presentation.Models
             store.AsapLogEnabled = AsapLogEnabled;
             store.AsapLogUser = AsapLogUser;
             store.AsapLogPassword = AsapLogPassword;
+            store.TotalExpressEnabled = TotalExpressEnabled;
+            store.TotalExpressUser = TotalExpressUser;
+            store.TotalExpressPassword = TotalExpressPassword;
+            store.TotalExpressReid = TotalExpressReid;
 
             store.SingleFreightParams.Clear();
             if (SingleFreightEnabled)

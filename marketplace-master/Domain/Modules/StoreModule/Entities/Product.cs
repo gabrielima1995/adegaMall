@@ -310,6 +310,7 @@ namespace Domain.Entities.StoreModule
                 methods.Add(ShippingMethod.PostalExpress);
 
             methods.Add(ShippingMethod.AsapLog);
+            methods.Add(ShippingMethod.TotalExpress);
 
             return methods;
         }

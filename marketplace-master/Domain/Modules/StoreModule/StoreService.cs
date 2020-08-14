@@ -35,6 +35,10 @@ namespace Domain.Services.StoreModule
                 current.AsapLogEnabled = store.AsapLogEnabled;
                 current.AsapLogUser = store.AsapLogUser;
                 current.AsapLogPassword = store.AsapLogPassword;
+                current.TotalExpressEnabled = store.TotalExpressEnabled;
+                current.TotalExpressUser = store.TotalExpressUser;
+                current.TotalExpressPassword = store.TotalExpressPassword;
+                current.TotalExpressReid = store.TotalExpressReid;
 
                 current.SingleFreightParams.Clear();
                 foreach (var param in store.SingleFreightParams)

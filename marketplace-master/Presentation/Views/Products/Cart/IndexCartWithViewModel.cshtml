@@ -71,7 +71,7 @@
                                         <td>@Html.Localized("CART_SHIPPING_LABEL")</td>
                                         <td class="text-right">@Model.FormattedCartShipping</td>
                                     </tr>
-                                    if (Model.SelectedShippingMethod == ShippingMethod.PostalRegular || Model.SelectedShippingMethod == ShippingMethod.PostalExpress || Model.SelectedShippingMethod == ShippingMethod.AsapLog)
+                                    if (Model.SelectedShippingMethod == ShippingMethod.PostalRegular || Model.SelectedShippingMethod == ShippingMethod.PostalExpress || Model.SelectedShippingMethod == ShippingMethod.AsapLog || Model.SelectedShippingMethod == ShippingMethod.TotalExpress)
                                     {
                                         <tr class="cart-shipping-days">
                                             <td>@Html.Localized("CART_SHIPPING_DAYS_LABEL")</td>

@@ -38,6 +38,18 @@ namespace Application.Modules.Products.Store
         [DisplayNameLocalized("STORE_ASAPLOG_PASSWORD_LABEL")]
         public string AsapLogPassword { get; set; }
 
+        [DisplayNameLocalized("STORE_TOTALEXPRESS_METHOD_LABEL")]
+        public bool TotalExpressEnabled { get; set; }
+
+        [DisplayNameLocalized("STORE_TOTALEXPRESS_USER_LABEL")]
+        public string TotalExpressUser { get; set; }
+
+        [DisplayNameLocalized("STORE_TOTALEXPRESS_PASSWORD_LABEL")]
+        public string TotalExpressPassword { get; set; }
+        
+        [DisplayNameLocalized("STORE_TOTALEXPRESS_REID_LABEL")]
+        public string TotalExpressReid { get; set; }
+
         public StoreViewModel()
         {
             Products = new List<Product>();
@@ -76,6 +88,10 @@ namespace Application.Modules.Products.Store
             AsapLogEnabled = store.AsapLogEnabled;
             AsapLogUser = store.AsapLogUser;
             AsapLogPassword = store.AsapLogPassword;
+            TotalExpressEnabled = store.TotalExpressEnabled;
+            TotalExpressUser = store.TotalExpressUser;
+            TotalExpressPassword = store.TotalExpressPassword;
+            TotalExpressReid = store.TotalExpressReid;
         }
 
         public Domain.Entities.StoreModule.Store Create()
@@ -106,6 +122,10 @@ namespace Application.Modules.Products.Store
             entity.AsapLogEnabled = AsapLogEnabled;
             entity.AsapLogUser = AsapLogUser;
             entity.AsapLogPassword = AsapLogPassword;
+            entity.TotalExpressEnabled = TotalExpressEnabled;
+            entity.TotalExpressUser = TotalExpressUser;
+            entity.TotalExpressPassword = TotalExpressPassword;
+            entity.TotalExpressReid = TotalExpressReid;
 
             #endregion
 
@@ -143,6 +163,10 @@ namespace Application.Modules.Products.Store
             store.AsapLogEnabled = AsapLogEnabled;
             store.AsapLogUser = AsapLogUser;
             store.AsapLogPassword = AsapLogPassword;
+            store.TotalExpressEnabled = TotalExpressEnabled;
+            store.TotalExpressUser = TotalExpressUser;
+            store.TotalExpressPassword = TotalExpressPassword;
+            store.TotalExpressReid = TotalExpressReid;
 
             #endregion
         }

@@ -84,6 +84,7 @@ namespace Presentation.Models
 
         public bool IsShippingOut => HasProducts && (
             SelectedShippingMethod == ShippingMethod.AsapLog ||
+            SelectedShippingMethod == ShippingMethod.TotalExpress ||
             SelectedShippingMethod == ShippingMethod.PostalRegular ||
             SelectedShippingMethod == ShippingMethod.PostalExpress ||
             SelectedShippingMethod == ShippingMethod.PrivateFleet);
@@ -168,6 +169,8 @@ namespace Presentation.Models
                         return cfg.PACShipping.DeliveryTimeMessage.Enabled;
                     case ShippingMethod.AsapLog:
                         return cfg.AsapLogShipping.DeliveryTimeMessage.Enabled;
+                    case ShippingMethod.TotalExpress:
+                        return cfg.TotalExpressShipping.DeliveryTimeMessage.Enabled;
                     default:
                         throw new Exception($"Shipping method {method} is not recognized.");
                 }
