@@ -221,6 +221,15 @@
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.RollingFile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.RollingFile.3.3.0\lib\net45\Serilog.Sinks.RollingFile.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -1221,6 +1230,7 @@
     <Compile Include="Helpers\WebHelpers\WebApiHelper.cs" />
     <Compile Include="Helpers\WishlistHelper.cs" />
     <Compile Include="HttpsRedirectModule.cs" />
+    <Compile Include="MarketplaceLogger.cs" />
     <Compile Include="Models\AdditionalProfileViewModels.cs" />
     <Compile Include="Models\ApiResultEnvelope.cs" />
     <Compile Include="Models\CanonicalUrlHelper.cs" />
@@ -2386,6 +2396,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lockout.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Shared\_MenuCategorias.generated.cs">
+      <DependentUpon>_MenuCategorias.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Views\Shared\_OrderTransactionWarrantyInfo.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2779,6 +2794,7 @@
     <Content Include="Areas\Admin\assets\js\saas\ProductTemplateCreateEdit.js" />
     <Content Include="Areas\Admin\assets\js\saas\SellerIncompleteProfile.js" />
     <Content Include="Areas\Admin\assets\js\select2.full.min.js" />
+    <Content Include="assets\css\bootstrap-submenu.css" />
     <Content Include="assets\css\fullcalendar-scheduler\core\main.css" />
     <Content Include="assets\css\fullcalendar-scheduler\resource-timeline\main.css" />
     <Content Include="assets\css\fullcalendar-scheduler\timeline\main.css" />
@@ -4843,6 +4859,10 @@
     <Content Include="Views\Manage\Profiles.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Profiles.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_MenuCategorias.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_MenuCategorias.generated.cs</LastGenOutput>
     </Content>
     <None Include="Views\Shared\_ProductWishButton.cshtml">
       <Generator>RazorGenerator</Generator>

@@ -30,6 +30,17 @@ namespace Domain.Entities.StoreModule
 
         public bool PacEnabled { get; set; }
 
+        //ASAP Log
+        public bool AsapLogEnabled { get; set; }
+        public string AsapLogUser { get; set; }
+        public string AsapLogPassword { get; set; }
+
+        //Total Express
+        public bool TotalExpressEnabled { get; set; }
+        public string TotalExpressUser { get; set; }
+        public string TotalExpressPassword { get; set; }
+        public string TotalExpressReid { get; set; }
+
         public DefaultShipping DefaultShipping { get; private set; } = new DefaultShipping();
 
         public IList<SingleFreightParameter> SingleFreightParams

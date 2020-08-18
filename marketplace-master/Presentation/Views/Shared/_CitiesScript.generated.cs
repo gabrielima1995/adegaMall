@@ -49,66 +49,75 @@ namespace ASP
         public override void Execute()
         {
 WriteLiteral(@"<script>
-    (function () {
-        Globalize.loadCldr.then(function () {
-            $('.js-city-select').each(function(e) {
-                var $citySelect = $(this);
-                var $citySelectContainer = $citySelect.parents('.js-city-select-container');
+    var CitiesScript = (function () {
+        function bind() {
+            Globalize.loadCldr.then(function () {
+                $('.js-city-select:not(.bind-complete)').each(function(e) {
+                    var $citySelect = $(this);
+                    var $citySelectContainer = $citySelect.parents('.js-city-select-container');
 
-                $citySelect.select2({
-                    ajax: {
-                        url: ""/api/v1/cities/search"",
-                        dataType: 'json',
-                        delay: 500,
-                        credentials: true,
-                        data: function (params) {
-                            return {
-                                query: params.term // search term
-                            };
+                    $citySelect.select2({
+                        ajax: {
+                            url: ""/api/v1/cities/search"",
+                            dataType: 'json',
+                            delay: 500,
+                            credentials: true,
+                            data: function (params) {
+                                return {
+                                    query: params.term // search term
+                                };
+                            },
+                            processResults: function (data, params) {
+                                return {
+                                    results: data
+                                };
+                            },
+                            cache: true
                         },
-                        processResults: function (data, params) {
-                            return {
-                                results: data
-                            };
-                        },
-                        cache: true
-                    },
-                    escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-                    minimumInputLength: 2,
-                    placeholder: '");
+                        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                        minimumInputLength: 2,
+                        placeholder: '");
 
             
-            #line 28 "..\..\Views\Shared\_CitiesScript.cshtml"
-                             Write(Request.GetLocalizedString("CITY_AND_STATE_INPUT"));
+            #line 29 "..\..\Views\Shared\_CitiesScript.cshtml"
+                                 Write(Request.GetLocalizedString("CITY_AND_STATE_INPUT"));
 
             
             #line default
             #line hidden
 WriteLiteral(@"',
-                    allowClear: true,
-                    templateSelection: function (data, container) {
-                        return data.text;
-                    },
-                    language: Globalize.current.patterns.lang,
-                    dropdownParent: $citySelectContainer
-                });
+                        allowClear: true,
+                        templateSelection: function (data, container) {
+                            return data.text;
+                        },
+                        language: Globalize.current.patterns.lang,
+                        dropdownParent: $citySelectContainer
+                    });
 
-                $('.select2-container').addClass('form-control');
+                    $('.select2-container').addClass('form-control');
 
-                $citySelect.on(""select2:select"", function(e) {
-                    $citySelectContainer.parent().find('.js-city-lat').val(e.params.data.lat || 0);
-                    $citySelectContainer.parent().find('.js-city-lng').val(e.params.data.lng || 0);
-                    $citySelectContainer.parent().find('input[name=CityAndState],select[name=CityAndState]').val($citySelect.val());
-                });
+                    $citySelect.on(""select2:select"", function(e) {
+                        $citySelectContainer.parent().find('.js-city-lat').val(e.params.data.lat || 0);
+                        $citySelectContainer.parent().find('.js-city-lng').val(e.params.data.lng || 0);
+                        $citySelectContainer.parent().find('input[name=CityAndState],select[name=CityAndState]').val($citySelect.val());
+                    });
 
-                $citySelect.on(""select2:unselect"", function (e) {
-                    $citySelectContainer.parent().find('.js-city-lat').val('');
-                    $citySelectContainer.parent().find('.js-city-lng').val('');
+                    $citySelect.on(""select2:unselect"", function (e) {
+                        $citySelectContainer.parent().find('.js-city-lat').val('');
+                        $citySelectContainer.parent().find('.js-city-lng').val('');
+                    });
+
+                    $citySelect.addClass(""bind-complete"");
                 });
             });
-        });
+        }
+
+        return { bind: bind };
+
     })();
-</script>");
+</script>
+
+<script>CitiesScript.bind()</script>");
 
         }
     }

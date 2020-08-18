@@ -141,6 +141,7 @@ namespace Presentation
                 "~/assets/css/bootstrap-panel-with-nav-tabs.css",
                 "~/assets/css/bootstrap-datepicker.min.css",
                 "~/assets/css/bootstrap-slider.min.css",
+                "~/assets/css/bootstrap-submenu.css",
                 "~/assets/css/owl.carousel.min.css",
                 "~/assets/css/toastr.min.css",
                 "~/assets/css/sweetalert.css",

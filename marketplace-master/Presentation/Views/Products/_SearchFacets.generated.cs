@@ -44,14 +44,14 @@ namespace ASP
     public partial class _Views_Products__SearchFacets_cshtml : System.Web.Mvc.WebViewPage<Application.Modules.Products.Search.SearchViewModel>
     {
 
-#line 47 "..\..\Views\Products\_SearchFacets.cshtml"
+#line 59 "..\..\Views\Products\_SearchFacets.cshtml"
 public System.Web.WebPages.HelperResult QueryParamsAsHiddenFields()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 48 "..\..\Views\Products\_SearchFacets.cshtml"
+#line 60 "..\..\Views\Products\_SearchFacets.cshtml"
  
     if (Request.QueryString != null)
     {
@@ -68,7 +68,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "                    ");
 
 
-#line 57 "..\..\Views\Products\_SearchFacets.cshtml"
+#line 69 "..\..\Views\Products\_SearchFacets.cshtml"
 WriteTo(__razor_helper_writer, Html.Hidden(key, value));
 
 
@@ -77,7 +77,7 @@ WriteTo(__razor_helper_writer, Html.Hidden(key, value));
 WriteLiteralTo(__razor_helper_writer, "\r\n");
 
 
-#line 58 "..\..\Views\Products\_SearchFacets.cshtml"
+#line 70 "..\..\Views\Products\_SearchFacets.cshtml"
                 }
             }
         }
@@ -88,7 +88,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n");
 #line hidden
 });
 
-#line 62 "..\..\Views\Products\_SearchFacets.cshtml"
+#line 74 "..\..\Views\Products\_SearchFacets.cshtml"
 }
 #line default
 #line hidden
@@ -104,6 +104,8 @@ WriteLiteralTo(__razor_helper_writer, "\r\n");
 {
     if (Model.Facets.Count > 0)
     {
+        var minItems = 6;
+
 
             
             #line default
@@ -116,7 +118,7 @@ WriteLiteral(">\r\n            <a");
 
 WriteLiteral(" href=\"javascript:void(0)\"");
 
-WriteLiteral(" class=\"btn btn-default\"");
+WriteLiteral(" class=\"btn btn-default btn-block\"");
 
 WriteLiteral(">\r\n                <i");
 
@@ -127,7 +129,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                ");
 
             
-            #line 10 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 12 "..\..\Views\Products\_SearchFacets.cshtml"
            Write(Html.Localized("SEARCH_FILTERS_FACETS"));
 
             
@@ -139,14 +141,14 @@ WriteLiteral("        <form");
 
 WriteLiteral(" id=\"frmFacets\"");
 
-WriteAttribute("action", Tuple.Create(" action=\"", 450), Tuple.Create("\"", 471)
+WriteAttribute("action", Tuple.Create(" action=\"", 489), Tuple.Create("\"", 516)
             
-            #line 13 "..\..\Views\Products\_SearchFacets.cshtml"
-, Tuple.Create(Tuple.Create("", 459), Tuple.Create<System.Object, System.Int32>(Request.Url
+            #line 15 "..\..\Views\Products\_SearchFacets.cshtml"
+, Tuple.Create(Tuple.Create("", 498), Tuple.Create<System.Object, System.Int32>(ViewBag.Canonical
             
             #line default
             #line hidden
-, 459), false)
+, 498), false)
 );
 
 WriteLiteral(" method=\"get\"");
@@ -158,7 +160,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("            ");
 
             
-            #line 14 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 16 "..\..\Views\Products\_SearchFacets.cshtml"
        Write(QueryParamsAsHiddenFields());
 
             
@@ -171,15 +173,17 @@ WriteLiteral(" class=\"list-group\"");
 WriteLiteral(">\r\n");
 
             
-            #line 17 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 19 "..\..\Views\Products\_SearchFacets.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 17 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 19 "..\..\Views\Products\_SearchFacets.cshtml"
                  foreach (var group in Model.Facets)
                 {
+                    var i = 0;
+
 
             
             #line default
@@ -195,7 +199,7 @@ WriteLiteral(" class=\"list-group-item-heading\"");
 WriteLiteral(">");
 
             
-            #line 20 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 24 "..\..\Views\Products\_SearchFacets.cshtml"
                                                        Write(group.Name);
 
             
@@ -208,20 +212,33 @@ WriteLiteral(" class=\"list-unstyled\"");
 WriteLiteral(">\r\n");
 
             
-            #line 22 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 26 "..\..\Views\Products\_SearchFacets.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 22 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 26 "..\..\Views\Products\_SearchFacets.cshtml"
                              foreach (var item in group.Items)
                             {
+                                i++;
 
             
             #line default
             #line hidden
-WriteLiteral("                                <li>\r\n                                    <div");
+WriteLiteral("                                <li");
+
+WriteAttribute("class", Tuple.Create(" class=\"", 1115), Tuple.Create("\"", 1182)
+            
+            #line 29 "..\..\Views\Products\_SearchFacets.cshtml"
+, Tuple.Create(Tuple.Create("", 1123), Tuple.Create<System.Object, System.Int32>(i > minItems && !item.Selected ? "hidden" : string.Empty
+            
+            #line default
+            #line hidden
+, 1123), false)
+);
+
+WriteLiteral(">\r\n                                    <div");
 
 WriteLiteral(" class=\"checkbox\"");
 
@@ -232,20 +249,20 @@ WriteLiteral(" type=\"checkbox\"");
 
 WriteLiteral(" name=\"f\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1185), Tuple.Create("\"", 1208)
+WriteAttribute("value", Tuple.Create(" value=\"", 1370), Tuple.Create("\"", 1393)
             
-            #line 27 "..\..\Views\Products\_SearchFacets.cshtml"
-   , Tuple.Create(Tuple.Create("", 1193), Tuple.Create<System.Object, System.Int32>(item.VariantId
+            #line 32 "..\..\Views\Products\_SearchFacets.cshtml"
+   , Tuple.Create(Tuple.Create("", 1378), Tuple.Create<System.Object, System.Int32>(item.VariantId
             
             #line default
             #line hidden
-, 1193), false)
+, 1378), false)
 );
 
 WriteLiteral(" ");
 
             
-            #line 27 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 32 "..\..\Views\Products\_SearchFacets.cshtml"
                                                                                                 Write(item.Selected ? "checked" : "");
 
             
@@ -254,7 +271,7 @@ WriteLiteral(" ");
 WriteLiteral("> ");
 
             
-            #line 27 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 32 "..\..\Views\Products\_SearchFacets.cshtml"
                                                                                                                                   Write(item.Value);
 
             
@@ -267,7 +284,7 @@ WriteLiteral(" class=\"badge\"");
 WriteLiteral(">");
 
             
-            #line 28 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 33 "..\..\Views\Products\_SearchFacets.cshtml"
                                                            Write(item.Quantity);
 
             
@@ -277,7 +294,47 @@ WriteLiteral("</span>\r\n                                        </label>\r\n   
 "              </div>\r\n                                </li>\r\n");
 
             
-            #line 32 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 37 "..\..\Views\Products\_SearchFacets.cshtml"
+                            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 39 "..\..\Views\Products\_SearchFacets.cshtml"
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 39 "..\..\Views\Products\_SearchFacets.cshtml"
+                             if (group.Items.Count > minItems)
+                            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                <li>\r\n                                    <a");
+
+WriteLiteral(" href=\"#\"");
+
+WriteLiteral(" class=\"facets-load-more\"");
+
+WriteLiteral(">");
+
+            
+            #line 42 "..\..\Views\Products\_SearchFacets.cshtml"
+                                                                    Write(Request.GetLocalizedString("SEARCH_LOAD_MORE_FACETS_LINK"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</a>\r\n                                </li>\r\n");
+
+            
+            #line 44 "..\..\Views\Products\_SearchFacets.cshtml"
                             }
 
             
@@ -286,7 +343,7 @@ WriteLiteral("</span>\r\n                                        </label>\r\n   
 WriteLiteral("                        </ul>\r\n                    </div>\r\n");
 
             
-            #line 35 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 47 "..\..\Views\Products\_SearchFacets.cshtml"
                 }
 
             
@@ -295,7 +352,7 @@ WriteLiteral("                        </ul>\r\n                    </div>\r\n");
 WriteLiteral("            </div>\r\n        </form>\r\n");
 
             
-            #line 38 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 50 "..\..\Views\Products\_SearchFacets.cshtml"
     }
     else
     {
@@ -314,7 +371,7 @@ WriteLiteral(" class=\"text-muted\"");
 WriteLiteral(">");
 
             
-            #line 42 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 54 "..\..\Views\Products\_SearchFacets.cshtml"
                               Write(Html.Localized("SEARCH_RESULTS_NO_FACETS"));
 
             
@@ -323,7 +380,7 @@ WriteLiteral(">");
 WriteLiteral("</em>\r\n        </div>\r\n");
 
             
-            #line 44 "..\..\Views\Products\_SearchFacets.cshtml"
+            #line 56 "..\..\Views\Products\_SearchFacets.cshtml"
     }
 }
 

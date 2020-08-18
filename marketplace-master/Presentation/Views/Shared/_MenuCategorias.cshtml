@@ -1,0 +1,45 @@
+﻿@model List<Application.Modules.Products.CategoryMenu>
+
+@{
+    var mobile = ViewBag.Mobile == true;
+
+    var itemMenuClass = mobile ? string.Empty : "item-menu";
+    var dropdownClass = mobile ? "mobile-menu-category" : "top-menu-category hidden-xs";
+}
+
+@foreach (var menu in Model)
+{
+    <li class="dropdown @dropdownClass">
+        <a href="#" class="@itemMenuClass dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <span>@menu.Category.Name</span>
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="/categoria/@menu.Category.Slug/" class="item-menu" title="@menu.Description">
+                    @menu.Title
+                </a>
+            </li>
+
+            @foreach (var item in menu.Items)
+            {
+                <li class="dropdown dropdown-submenu">
+                    <a href="#" class="item-menu dropdown-toggle" data-toggle="dropdown">
+                        @item.Title
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach (var variant in item.Variants)
+                        {
+                            <li>
+                                <a href="/categoria/@menu.Category.Slug/@item.VariantType.Slug/@variant.Slug/" class="item-menu"
+                                   title="@menu.Description @item.Title.ToLower() - @variant.Name">
+                                    @variant.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    </li>
+}

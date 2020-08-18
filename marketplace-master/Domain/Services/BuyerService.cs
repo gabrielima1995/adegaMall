@@ -143,7 +143,7 @@ namespace Domain.Services
             if (!DocumentNumberValidator.IsValidForBuyer(buyer.DocumentNumber))
                 return new OperationResult<Buyer>(
                     key: nameof(buyer.DocumentNumber),
-                    errors: Thread.CurrentThread.FormatStringLocalized("NOT_VALID_FIELD_ERROR", Thread.CurrentThread.GetStringLocalized("DOCUMENT_NUMBER_LABEL")));
+                    errors: Thread.CurrentThread.FormatStringLocalized("NOT_VALID_FIELD_ERROR", Thread.CurrentThread.GetStringLocalized("DOCUMENT_NUMBER_LABEL_BUYER")));
 
             return errors;
         }

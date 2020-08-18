@@ -32,7 +32,7 @@ namespace Application.Modules.Products.Orders.EventHandlers
 
         private bool ShouldIgnore(OrderStatusChangedEvent domainEvent)
         {
-            if (domainEvent.Order.Status != OrderStatus.CompletedPayment)
+            if (domainEvent.NewStatus != OrderStatus.CompletedPayment)
                 return true;
 
             if (domainEvent.Order.ShippingMethod.NotIn(ShippingMethod.NoShipping, ShippingMethod.ActualNoShipping))

@@ -1,4 +1,5 @@
-﻿using Application.Config;
+﻿using Application.Addresses;
+using Application.Config;
 using Application.Modules.Products;
 using Application.Modules.Products.Queries;
 using Application.Modules.Products.Search;
@@ -12,6 +13,7 @@ using Domain.Services;
 using Domain.Services.StoreModule;
 using Domain.StoreModule.Entities;
 using Framework;
+using Geocoding;
 using Newtonsoft.Json;
 using Presentation.Globalization;
 using Presentation.Models;
@@ -24,6 +26,7 @@ using System.Web.Mvc;
 using System.Web.SessionState;
 using V2.Application.Modules;
 using V2.Application.Modules.General.CustomFields;
+using Address = Domain.Entities.Address;
 
 namespace Presentation.Controllers.Products
 {
@@ -31,6 +34,7 @@ namespace Presentation.Controllers.Products
     public class ProductsController : BaseController
     {
         private readonly ITimeZoneProvider userTimeZoneProvider;
+        private readonly IGeocoder _geocoder;
         private readonly CartService cartService;
         private readonly IProductAppService productAppService;
         private readonly IProductQueries productQueries;
@@ -44,9 +48,11 @@ namespace Presentation.Controllers.Products
         private readonly IPersonRepository personRepository;
         private readonly IRepository<ProductCategory> productCategoryRepository;
         private readonly IRepository<ProductVariant> productVariantRepository;
+        private readonly BuyerService buyerService;
 
         public ProductsController(
             ITimeZoneProvider userTimeZoneProvider,
+            IGeocoder geocoder,
             CartService cartService,
             IProductAppService productAppService,
             IProductQueries productQueries,
@@ -59,9 +65,11 @@ namespace Presentation.Controllers.Products
             ProductSmartSearchAppService searchAppService,
             IPersonRepository personRepository,
             IRepository<ProductCategory> productCategoryRepository,
-            IRepository<ProductVariant> productVariantRepository)
+            IRepository<ProductVariant> productVariantRepository,
+            BuyerService buyerService)
         {
             this.userTimeZoneProvider = userTimeZoneProvider;
+            _geocoder = geocoder;
             this.cartService = cartService;
             this.productAppService = productAppService;
             this.productQueries = productQueries;
@@ -75,31 +83,36 @@ namespace Presentation.Controllers.Products
             this.personRepository = personRepository;
             this.productCategoryRepository = productCategoryRepository;
             this.productVariantRepository = productVariantRepository;
+            this.buyerService = buyerService;
         }
 
         [DonutOutputCache(CacheProfile = "CategoryPage")]
-        [Route("categoria/{categorySlug}")]
-        [Route("categoria/{categorySlug}/pais/{variantSlug}")]
+        [Route("categoria/{categorySlug}", Name = "CategoryPageRoute")]
+        [Route("categoria/{categorySlug}/{variantTypeSlug}/{variantSlug}", Name = "SubcategoryPageRoute")]
         public ActionResult CategoryPage(SearchRequestViewModel request)
         {
-            if (!string.IsNullOrEmpty(request.VariantSlug))
+            if (!string.IsNullOrEmpty(request.CategorySlug))
             {
-                var variant = productVariantRepository.Get(i => i.Slug == request.VariantSlug);
-
-                if (variant != null)
-                {
-                    ViewBag.Title = $"Vinhos: {variant.Name}";
-                    ViewBag.Description = $"Descubra vinhos do país {variant.Name}";
-                }
-            }
-            else if (!string.IsNullOrEmpty(request.CategorySlug))
-            {
-                var category = productCategoryRepository.Get(i => i.Slug == request.CategorySlug);
+                var category = productCategoryRepository.Get(
+                    i => i.Slug == request.CategorySlug);
 
                 if (category != null)
                 {
-                    ViewBag.Title = $"Categoria: {category.Name}";
-                    ViewBag.Description = $"Descubra bebidas da categoria {category.Name}";
+                    ViewBag.Title = $"{category.Name}";
+                    ViewBag.Description = $"Encontre as melhores bebidas de {category.Name.ToLower()}";
+                }
+
+                if (!string.IsNullOrEmpty(request.VariantSlug))
+                {
+                    var variant = productVariantRepository.Get(
+                        i => i.Slug == request.VariantSlug,
+                        x => x.Type);
+
+                    if (variant != null)
+                    {
+                        ViewBag.Title += $" por {variant.Type.Name.ToLower()} - {variant.Name}";
+                        ViewBag.Description += $" por {variant.Type.Name.ToLower()} - {variant.Name}";
+                    }
                 }
             }
 
@@ -214,22 +227,58 @@ namespace Presentation.Controllers.Products
             return View(model);
         }
 
-        public PartialViewResult LoadingShippingInfos(string id)
+        public ActionResult LoadingShippingInfos(string id, string zipCode)
         {
-            if (!TryResolveProductId(id, out Guid productId))
-                return null;
+            if (!TryResolveProductId(id, out Guid productId)) return new EmptyResult();
 
             var productInfo = productService.GetDetailsForPublicPage(productId);
             var sellerAddress = productInfo.Product.Store.Seller.Address;
-            var shippingAddress = personRepository.GetById(GetPersonId()).Address;
 
-            var shippingInfos = new ShippingInfosVM(productInfo.Product, sellerAddress, shippingAddress,
-                shippingService.GetAdapter(ShippingMethod.ActualNoShipping),
-                shippingService.GetAdapter(ShippingMethod.NoShipping),
-                shippingService.GetAdapter(ShippingMethod.OnSitePickup),
-                shippingService.GetAdapter(ShippingMethod.PrivateFleet),
-                shippingService.GetAdapter(ShippingMethod.PostalExpress),
-                shippingService.GetAdapter(ShippingMethod.PostalRegular));
+            Address shippingAddress = null;
+            ShippingInfosVM shippingInfos = null;
+
+            #region Get shipping address
+
+            if (string.IsNullOrEmpty(zipCode))
+            {
+                if (User.Identity.IsAuthenticated &&
+                    GetLoginProfile().CurrentPersonType == LoginProfilePersonType.Buyer)
+                {
+                    var buyer = buyerService.GetWithAddresses(GetPersonId());
+
+                    if (buyer != null) shippingAddress = buyer.Address;
+                }
+            }
+            else
+            {
+                shippingAddress = new Address
+                {
+                    ZipCode = zipCode
+                };
+
+                _geocoder.UpdateLocation(shippingAddress);
+            }
+
+            #endregion Get shipping address
+
+            #region Get shipping infos
+
+            if (shippingAddress != null && !shippingAddress.Location.IsEmpty)
+            {
+                ViewBag.ZipCode = shippingAddress.ZipCode;
+
+                shippingInfos = new ShippingInfosVM(productInfo.Product, sellerAddress, shippingAddress,
+                    shippingService.GetAdapter(ShippingMethod.ActualNoShipping),
+                    shippingService.GetAdapter(ShippingMethod.NoShipping),
+                    shippingService.GetAdapter(ShippingMethod.OnSitePickup),
+                    shippingService.GetAdapter(ShippingMethod.PrivateFleet),
+                    shippingService.GetAdapter(ShippingMethod.PostalExpress),
+                    shippingService.GetAdapter(ShippingMethod.PostalRegular),
+                    shippingService.GetAdapter(ShippingMethod.AsapLog),
+                    shippingService.GetAdapter(ShippingMethod.TotalExpress));
+            }
+
+            #endregion Get shipping infos
 
             return PartialView("_ShippingProduct", shippingInfos);
         }

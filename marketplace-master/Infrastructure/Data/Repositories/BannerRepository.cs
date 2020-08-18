@@ -17,20 +17,21 @@ namespace Infrastructure.Data.Repositories
 
         public List<Banner> ListActive()
         {
-            var cache = new CacheDefinition("__BannerRepository_ListActive", new TimeSpan(0, 30, 0));
+            var cache = new CacheDefinition("__BannerRepository_ListActive", new TimeSpan(0, 5, 0));
 
-            return CacheHelper.List(Context.Banners.Where(
-                x => !x.Deleted &&
-                (x.StartsAt == null || x.StartsAt <= DateTime.UtcNow) &&
-                (x.ExpiresAt == null || x.ExpiresAt >= DateTime.UtcNow)), cache);
+            return CacheHelper.List(Context.Banners
+                .AsNoTracking()
+                .Where(x => !x.Deleted &&
+                            (x.StartsAt == null || x.StartsAt <= DateTime.UtcNow) &&
+                            (x.ExpiresAt == null || x.ExpiresAt >= DateTime.UtcNow))
+                .OrderBy(i => i.Order), cache);
         }
 
         public List<Banner> ListForAdmin()
         {
             return CacheHelper.List(Context.Banners
                 .Where(x => !x.Deleted)
-                .OrderBy(x => x.StartsAt)
-                .OrderByDescending(x => x.ExpiresAt));
+                .OrderBy(i => i.Order));
         }
     }
 }

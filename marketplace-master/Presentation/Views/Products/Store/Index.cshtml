@@ -55,6 +55,75 @@
                                 </div>
                             }
 
+                            if (config.Product.AsapLogShipping.Enabled)
+                            {
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(i => i.AsapLogEnabled)
+                                                @Request.GetLocalizedString("STORE_ASAPLOG_METHOD_INPUT")
+                                            </label>
+                                            @Html.ValidationMessageFor(model => model.AsapLogEnabled, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="input-group form-group">
+                                            <span class="input-group-addon">Usuário</span>
+                                            @Html.TextBoxFor(model => model.AsapLogUser, new { @class = "form-control" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.AsapLogUser, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="input-group form-group">
+                                            <span class="input-group-addon">Senha</span>
+                                            @Html.TextBoxFor(model => model.AsapLogPassword, new { @class = "form-control", type = "password" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.AsapLogPassword, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            }
+
+                            if (config.Product.TotalExpressShipping.Enabled)
+                            {
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(i => i.TotalExpressEnabled)
+                                                @Request.GetLocalizedString("STORE_TOTALEXPRESS_METHOD_INPUT")
+                                            </label>
+                                            @Html.ValidationMessageFor(model => model.TotalExpressEnabled, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <div class="input-group form-group">
+                                            <span class="input-group-addon">Usuário</span>
+                                            @Html.TextBoxFor(model => model.TotalExpressUser, new { @class = "form-control" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.TotalExpressUser, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <div class="input-group form-group">
+                                            <span class="input-group-addon">Senha</span>
+                                            @Html.TextBoxFor(model => model.TotalExpressPassword, new { @class = "form-control", type = "password" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.TotalExpressPassword, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <div class="input-group form-group">
+                                            <span class="input-group-addon">Reid</span>
+                                            @Html.TextBoxFor(model => model.TotalExpressReid, new { @class = "form-control" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.TotalExpressReid, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            }
+
                             if (config.Product.PrivateFleetShipping.Enabled)
                             {
                                 <div class="row margin-bottom-10">

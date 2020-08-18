@@ -6,7 +6,7 @@
         _cityStatePlaceholder = cityStatePlaceholder;
 
         Globalize.loadCldr.then(function () {
-            var $citySelect = $('.js-city-select');
+            var $citySelect = $('.js-city-select:not(.bind-complete)');
             var $citySelectContainer = $('.js-city-select-container');
 
             $citySelect.select2({
@@ -49,11 +49,13 @@
                 $citySelectContainer.parent().find('.js-city-lat').val('');
                 $citySelectContainer.parent().find('.js-city-lng').val('');
             });
+
+            $citySelect.addClass("bind-complete");
         });
     }
-    
+
     return {
         init: init
     };
 
-}) ();
+})();

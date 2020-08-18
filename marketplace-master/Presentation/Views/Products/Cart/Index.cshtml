@@ -26,6 +26,8 @@
             }).done(function (response) {
                 isDone = true;
                 $(".js-cart-loading").html(response);
+                CitiesScript.init();
+                MaaS.initPlugins();
             });
 
             var timeoutMessagesContainer = $(".js-cart-loading center");
@@ -42,6 +44,7 @@
 
         })(window.jQuery);
     </script>
+
     @if (config.Product.Order.ExtraInfoField.Enabled)
     {
         <script>

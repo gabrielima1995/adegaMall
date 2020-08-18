@@ -1,4 +1,4 @@
-(function ($, MaaS) {
+﻿(function ($, MaaS) {
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -47,9 +47,30 @@
             }
         });
 
+        $('.header-search input')
+            .focus(function() {
+                $('.header-search').addClass('active');
+            })
+            .blur(function () {
+                $('.header-search').removeClass('active');
+            });
+
         //EDIT PORTFOLIO
         $('[data-toggle="toggle"]').change(function () {
             checkToggle($(this));
+        });
+
+        //SUBMENU
+        $(document).ready(function () {
+            $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                var $parent = $(this).parent();
+
+                $parent.siblings().removeClass('open');
+                $parent.toggleClass('open');
+            });
         });
 
         //MENU MOBILE
@@ -124,6 +145,9 @@
             }
         });
 
+        //MODAL MAIOR DE IDADE
+        modalEighteenYearsOld();
+
         function checkToggle($this) {
             var tipo = $this.attr('toggle');
 
@@ -140,6 +164,30 @@
             } else {
                 $('.owl-nav').attr('style', '');
             }
-        };
+        }
+
+        function modalEighteenYearsOld() {
+            if (localStorage.getItem("maiordeidade") === "sim") return;
+
+            swal({
+                title: "Você tem mais de 18 anos?",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonText: "Não",
+                confirmButtonText: "Sim",
+                closeOnConfirm: true,
+                closeOnCancel: false,
+                allowEscapeKey: false,
+                allowClickOutside: false
+            }, function (value) {
+                if (!value) {
+                    window.location = "http://www.abrabe.org.br/responsabilidade-social/autorregulamentacao-publicitaria/";
+                    return false;
+                }
+
+                localStorage.setItem("maiordeidade", "sim");
+                return true;
+            });
+        }
     });
 })(window.jQuery, window.MaaS || {});

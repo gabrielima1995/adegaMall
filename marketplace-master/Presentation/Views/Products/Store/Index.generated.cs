@@ -297,6 +297,309 @@ WriteLiteral("\r\n                                        </div>\r\n            
             #line 56 "..\..\Views\Products\Store\Index.cshtml"
                             }
 
+                            if (config.Product.AsapLogShipping.Enabled)
+                            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                <div");
+
+WriteLiteral(" class=\"row\"");
+
+WriteLiteral(">\r\n                                    <div");
+
+WriteLiteral(" class=\"col-xs-12\"");
+
+WriteLiteral(">\r\n                                        <div");
+
+WriteLiteral(" class=\"checkbox\"");
+
+WriteLiteral(">\r\n                                            <label>\r\n");
+
+WriteLiteral("                                                ");
+
+            
+            #line 64 "..\..\Views\Products\Store\Index.cshtml"
+                                           Write(Html.CheckBoxFor(i => i.AsapLogEnabled));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("                                                ");
+
+            
+            #line 65 "..\..\Views\Products\Store\Index.cshtml"
+                                           Write(Request.GetLocalizedString("STORE_ASAPLOG_METHOD_INPUT"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                            </label>\r\n");
+
+WriteLiteral("                                            ");
+
+            
+            #line 67 "..\..\Views\Products\Store\Index.cshtml"
+                                       Write(Html.ValidationMessageFor(model => model.AsapLogEnabled, "", new { @class = "text-danger" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                        </div>\r\n                               " +
+"     </div>\r\n                                </div>\r\n");
+
+WriteLiteral("                                <div");
+
+WriteLiteral(" class=\"row\"");
+
+WriteLiteral(">\r\n                                    <div");
+
+WriteLiteral(" class=\"col-xs-12 col-sm-6 col-md-4\"");
+
+WriteLiteral(">\r\n                                        <div");
+
+WriteLiteral(" class=\"input-group form-group\"");
+
+WriteLiteral(">\r\n                                            <span");
+
+WriteLiteral(" class=\"input-group-addon\"");
+
+WriteLiteral(">Usuário</span>\r\n");
+
+WriteLiteral("                                            ");
+
+            
+            #line 75 "..\..\Views\Products\Store\Index.cshtml"
+                                       Write(Html.TextBoxFor(model => model.AsapLogUser, new { @class = "form-control" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                        </div>\r\n");
+
+WriteLiteral("                                        ");
+
+            
+            #line 77 "..\..\Views\Products\Store\Index.cshtml"
+                                   Write(Html.ValidationMessageFor(model => model.AsapLogUser, "", new { @class = "text-danger" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                    </div>\r\n                                   " +
+" <div");
+
+WriteLiteral(" class=\"col-xs-12 col-sm-6 col-md-4\"");
+
+WriteLiteral(">\r\n                                        <div");
+
+WriteLiteral(" class=\"input-group form-group\"");
+
+WriteLiteral(">\r\n                                            <span");
+
+WriteLiteral(" class=\"input-group-addon\"");
+
+WriteLiteral(">Senha</span>\r\n");
+
+WriteLiteral("                                            ");
+
+            
+            #line 82 "..\..\Views\Products\Store\Index.cshtml"
+                                       Write(Html.TextBoxFor(model => model.AsapLogPassword, new { @class = "form-control", type = "password" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                        </div>\r\n");
+
+WriteLiteral("                                        ");
+
+            
+            #line 84 "..\..\Views\Products\Store\Index.cshtml"
+                                   Write(Html.ValidationMessageFor(model => model.AsapLogPassword, "", new { @class = "text-danger" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                    </div>\r\n                                </d" +
+"iv>\r\n");
+
+            
+            #line 87 "..\..\Views\Products\Store\Index.cshtml"
+                            }
+
+                            if (config.Product.TotalExpressShipping.Enabled)
+                            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                <div");
+
+WriteLiteral(" class=\"row\"");
+
+WriteLiteral(">\r\n                                    <div");
+
+WriteLiteral(" class=\"col-xs-12\"");
+
+WriteLiteral(">\r\n                                        <div");
+
+WriteLiteral(" class=\"checkbox\"");
+
+WriteLiteral(">\r\n                                            <label>\r\n");
+
+WriteLiteral("                                                ");
+
+            
+            #line 95 "..\..\Views\Products\Store\Index.cshtml"
+                                           Write(Html.CheckBoxFor(i => i.TotalExpressEnabled));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("                                                ");
+
+            
+            #line 96 "..\..\Views\Products\Store\Index.cshtml"
+                                           Write(Request.GetLocalizedString("STORE_TOTALEXPRESS_METHOD_INPUT"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                            </label>\r\n");
+
+WriteLiteral("                                            ");
+
+            
+            #line 98 "..\..\Views\Products\Store\Index.cshtml"
+                                       Write(Html.ValidationMessageFor(model => model.TotalExpressEnabled, "", new { @class = "text-danger" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                        </div>\r\n                               " +
+"     </div>\r\n                                </div>\r\n");
+
+WriteLiteral("                                <div");
+
+WriteLiteral(" class=\"row\"");
+
+WriteLiteral(">\r\n                                    <div");
+
+WriteLiteral(" class=\"col-xs-12 col-sm-4 col-md-4\"");
+
+WriteLiteral(">\r\n                                        <div");
+
+WriteLiteral(" class=\"input-group form-group\"");
+
+WriteLiteral(">\r\n                                            <span");
+
+WriteLiteral(" class=\"input-group-addon\"");
+
+WriteLiteral(">Usuário</span>\r\n");
+
+WriteLiteral("                                            ");
+
+            
+            #line 106 "..\..\Views\Products\Store\Index.cshtml"
+                                       Write(Html.TextBoxFor(model => model.TotalExpressUser, new { @class = "form-control" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                        </div>\r\n");
+
+WriteLiteral("                                        ");
+
+            
+            #line 108 "..\..\Views\Products\Store\Index.cshtml"
+                                   Write(Html.ValidationMessageFor(model => model.TotalExpressUser, "", new { @class = "text-danger" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                    </div>\r\n                                   " +
+" <div");
+
+WriteLiteral(" class=\"col-xs-12 col-sm-4 col-md-4\"");
+
+WriteLiteral(">\r\n                                        <div");
+
+WriteLiteral(" class=\"input-group form-group\"");
+
+WriteLiteral(">\r\n                                            <span");
+
+WriteLiteral(" class=\"input-group-addon\"");
+
+WriteLiteral(">Senha</span>\r\n");
+
+WriteLiteral("                                            ");
+
+            
+            #line 113 "..\..\Views\Products\Store\Index.cshtml"
+                                       Write(Html.TextBoxFor(model => model.TotalExpressPassword, new { @class = "form-control", type = "password" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                        </div>\r\n");
+
+WriteLiteral("                                        ");
+
+            
+            #line 115 "..\..\Views\Products\Store\Index.cshtml"
+                                   Write(Html.ValidationMessageFor(model => model.TotalExpressPassword, "", new { @class = "text-danger" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                    </div>\r\n                                   " +
+" <div");
+
+WriteLiteral(" class=\"col-xs-12 col-sm-4 col-md-4\"");
+
+WriteLiteral(">\r\n                                        <div");
+
+WriteLiteral(" class=\"input-group form-group\"");
+
+WriteLiteral(">\r\n                                            <span");
+
+WriteLiteral(" class=\"input-group-addon\"");
+
+WriteLiteral(">Reid</span>\r\n");
+
+WriteLiteral("                                            ");
+
+            
+            #line 120 "..\..\Views\Products\Store\Index.cshtml"
+                                       Write(Html.TextBoxFor(model => model.TotalExpressReid, new { @class = "form-control" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                        </div>\r\n");
+
+WriteLiteral("                                        ");
+
+            
+            #line 122 "..\..\Views\Products\Store\Index.cshtml"
+                                   Write(Html.ValidationMessageFor(model => model.TotalExpressReid, "", new { @class = "text-danger" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                    </div>\r\n                                </d" +
+"iv>\r\n");
+
+            
+            #line 125 "..\..\Views\Products\Store\Index.cshtml"
+                            }
+
                             if (config.Product.PrivateFleetShipping.Enabled)
                             {
 
@@ -320,7 +623,7 @@ WriteLiteral(">\r\n                                            <label>\r\n");
 WriteLiteral("                                                ");
 
             
-            #line 64 "..\..\Views\Products\Store\Index.cshtml"
+            #line 133 "..\..\Views\Products\Store\Index.cshtml"
                                            Write(Html.CheckBoxFor(i => i.SingleFreightEnabled));
 
             
@@ -331,7 +634,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                                ");
 
             
-            #line 65 "..\..\Views\Products\Store\Index.cshtml"
+            #line 134 "..\..\Views\Products\Store\Index.cshtml"
                                            Write(Request.GetLocalizedString("STORE_SINGLE_FREIGHT_METHOD_INPUT"));
 
             
@@ -342,7 +645,7 @@ WriteLiteral("\r\n                                            </label>\r\n\r\n")
 WriteLiteral("                                            ");
 
             
-            #line 68 "..\..\Views\Products\Store\Index.cshtml"
+            #line 137 "..\..\Views\Products\Store\Index.cshtml"
                                        Write(Html.ValidationMessageFor(model => model.SingleFreightEnabled, "", new { @class = "text-danger" }));
 
             
@@ -353,15 +656,15 @@ WriteLiteral("\r\n                                        </div>\r\n\r\n        
 
 WriteLiteral(" class=\"js-single-freight\"");
 
-WriteAttribute("style", Tuple.Create(" style=\"", 3375), Tuple.Create("\"", 3440)
-, Tuple.Create(Tuple.Create("", 3383), Tuple.Create("display:", 3383), true)
+WriteAttribute("style", Tuple.Create(" style=\"", 8410), Tuple.Create("\"", 8475)
+, Tuple.Create(Tuple.Create("", 8418), Tuple.Create("display:", 8418), true)
             
-            #line 71 "..\..\Views\Products\Store\Index.cshtml"
-       , Tuple.Create(Tuple.Create(" ", 3391), Tuple.Create<System.Object, System.Int32>(Model.SingleFreightEnabled ? "block" : "none"
+            #line 140 "..\..\Views\Products\Store\Index.cshtml"
+       , Tuple.Create(Tuple.Create(" ", 8426), Tuple.Create<System.Object, System.Int32>(Model.SingleFreightEnabled ? "block" : "none"
             
             #line default
             #line hidden
-, 3392), false)
+, 8427), false)
 );
 
 WriteLiteral(">\r\n                                            <div");
@@ -371,13 +674,13 @@ WriteLiteral(" class=\"js-single-freight-params-container\"");
 WriteLiteral(">\r\n");
 
             
-            #line 73 "..\..\Views\Products\Store\Index.cshtml"
+            #line 142 "..\..\Views\Products\Store\Index.cshtml"
                                                 
             
             #line default
             #line hidden
             
-            #line 73 "..\..\Views\Products\Store\Index.cshtml"
+            #line 142 "..\..\Views\Products\Store\Index.cshtml"
                                                  foreach (var sfp in Model.SingleFreightParams)
                                                 {
                                                     
@@ -385,14 +688,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 75 "..\..\Views\Products\Store\Index.cshtml"
+            #line 144 "..\..\Views\Products\Store\Index.cshtml"
                                                Write(Html.Partial(string.Format(viewPathFmt, "_SingleFreightParameter"), sfp));
 
             
             #line default
             #line hidden
             
-            #line 75 "..\..\Views\Products\Store\Index.cshtml"
+            #line 144 "..\..\Views\Products\Store\Index.cshtml"
                                                                                                                              
                                                 }
 
@@ -404,7 +707,7 @@ WriteLiteral("                                            </div>\r\n\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 79 "..\..\Views\Products\Store\Index.cshtml"
+            #line 148 "..\..\Views\Products\Store\Index.cshtml"
                                        Write(Html.ValidationMessageFor(model => model.SingleFreightParams, "", new { @class = "text-danger" }));
 
             
@@ -414,17 +717,17 @@ WriteLiteral("\r\n\r\n                                            <button");
 
 WriteLiteral(" type=\"button\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 4129), Tuple.Create("\"", 4271)
-, Tuple.Create(Tuple.Create("", 4137), Tuple.Create("btn", 4137), true)
-, Tuple.Create(Tuple.Create(" ", 4140), Tuple.Create("btn-default", 4141), true)
-, Tuple.Create(Tuple.Create(" ", 4152), Tuple.Create("js-single-freight-param-add-button", 4153), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 9164), Tuple.Create("\"", 9306)
+, Tuple.Create(Tuple.Create("", 9172), Tuple.Create("btn", 9172), true)
+, Tuple.Create(Tuple.Create(" ", 9175), Tuple.Create("btn-default", 9176), true)
+, Tuple.Create(Tuple.Create(" ", 9187), Tuple.Create("js-single-freight-param-add-button", 9188), true)
             
-            #line 81 "..\..\Views\Products\Store\Index.cshtml"
-                                           , Tuple.Create(Tuple.Create(" ", 4187), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreEdit)
+            #line 150 "..\..\Views\Products\Store\Index.cshtml"
+                                           , Tuple.Create(Tuple.Create(" ", 9222), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreEdit)
             
             #line default
             #line hidden
-, 4188), false)
+, 9223), false)
 );
 
 WriteLiteral(">\r\n                                                <i");
@@ -436,7 +739,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                                                ");
 
             
-            #line 83 "..\..\Views\Products\Store\Index.cshtml"
+            #line 152 "..\..\Views\Products\Store\Index.cshtml"
                                            Write(Request.GetLocalizedString("STORE_SINGLE_FREIGHT_PARAM_ADD_BUTTON"));
 
             
@@ -447,7 +750,7 @@ WriteLiteral("\r\n                                            </button>\r\n     
 "                      </div>\r\n");
 
             
-            #line 89 "..\..\Views\Products\Store\Index.cshtml"
+            #line 158 "..\..\Views\Products\Store\Index.cshtml"
                             }
 
                             if (config.Product.SedexShipping.Enabled || config.Product.PACShipping.Enabled)
@@ -463,13 +766,13 @@ WriteLiteral(" class=\"row\"");
 WriteLiteral(">\r\n");
 
             
-            #line 94 "..\..\Views\Products\Store\Index.cshtml"
+            #line 163 "..\..\Views\Products\Store\Index.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 94 "..\..\Views\Products\Store\Index.cshtml"
+            #line 163 "..\..\Views\Products\Store\Index.cshtml"
                                      if (config.Product.SedexShipping.Enabled)
                                     {
 
@@ -489,7 +792,7 @@ WriteLiteral(">\r\n                                                <label>\r\n")
 WriteLiteral("                                                    ");
 
             
-            #line 99 "..\..\Views\Products\Store\Index.cshtml"
+            #line 168 "..\..\Views\Products\Store\Index.cshtml"
                                                Write(Html.CheckBoxFor(i => i.SedexEnabled));
 
             
@@ -500,7 +803,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                                    ");
 
             
-            #line 100 "..\..\Views\Products\Store\Index.cshtml"
+            #line 169 "..\..\Views\Products\Store\Index.cshtml"
                                                Write(Html.DisplayNameFor(model => model.SedexEnabled));
 
             
@@ -511,7 +814,7 @@ WriteLiteral("\r\n                                                </label>\r\n\r
 WriteLiteral("                                                ");
 
             
-            #line 103 "..\..\Views\Products\Store\Index.cshtml"
+            #line 172 "..\..\Views\Products\Store\Index.cshtml"
                                            Write(Html.ValidationMessageFor(model => model.SedexEnabled, "", new { @class = "text-danger" }));
 
             
@@ -521,7 +824,7 @@ WriteLiteral("\r\n                                            </div>\r\n        
 "             </div>\r\n");
 
             
-            #line 106 "..\..\Views\Products\Store\Index.cshtml"
+            #line 175 "..\..\Views\Products\Store\Index.cshtml"
                                     }
 
             
@@ -530,13 +833,13 @@ WriteLiteral("\r\n                                            </div>\r\n        
 WriteLiteral("\r\n");
 
             
-            #line 108 "..\..\Views\Products\Store\Index.cshtml"
+            #line 177 "..\..\Views\Products\Store\Index.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 108 "..\..\Views\Products\Store\Index.cshtml"
+            #line 177 "..\..\Views\Products\Store\Index.cshtml"
                                      if (config.Product.PACShipping.Enabled)
                                     {
 
@@ -556,7 +859,7 @@ WriteLiteral(">\r\n                                                <label>\r\n")
 WriteLiteral("                                                    ");
 
             
-            #line 113 "..\..\Views\Products\Store\Index.cshtml"
+            #line 182 "..\..\Views\Products\Store\Index.cshtml"
                                                Write(Html.CheckBoxFor(i => i.PacEnabled));
 
             
@@ -567,7 +870,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                                    ");
 
             
-            #line 114 "..\..\Views\Products\Store\Index.cshtml"
+            #line 183 "..\..\Views\Products\Store\Index.cshtml"
                                                Write(Html.DisplayNameFor(model => model.PacEnabled));
 
             
@@ -578,7 +881,7 @@ WriteLiteral("\r\n                                                </label>\r\n\r
 WriteLiteral("                                                ");
 
             
-            #line 117 "..\..\Views\Products\Store\Index.cshtml"
+            #line 186 "..\..\Views\Products\Store\Index.cshtml"
                                            Write(Html.ValidationMessageFor(model => model.PacEnabled, "", new { @class = "text-danger" }));
 
             
@@ -588,7 +891,7 @@ WriteLiteral("\r\n                                            </div>\r\n        
 "             </div>\r\n");
 
             
-            #line 120 "..\..\Views\Products\Store\Index.cshtml"
+            #line 189 "..\..\Views\Products\Store\Index.cshtml"
                                     }
 
             
@@ -597,7 +900,7 @@ WriteLiteral("\r\n                                            </div>\r\n        
 WriteLiteral("                                </div>\r\n");
 
             
-            #line 122 "..\..\Views\Products\Store\Index.cshtml"
+            #line 191 "..\..\Views\Products\Store\Index.cshtml"
                             }
 
 
@@ -617,7 +920,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 126 "..\..\Views\Products\Store\Index.cshtml"
+            #line 195 "..\..\Views\Products\Store\Index.cshtml"
                                Write(Html.Localized("SAVE_CHANGES_BUTTON", "button", new { type = "submit", @class = $"btn btn-primary btn-block {Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreEdit)}" }));
 
             
@@ -626,7 +929,7 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n                                </div>\r\n                            </div>\r\n");
 
             
-            #line 129 "..\..\Views\Products\Store\Index.cshtml"
+            #line 198 "..\..\Views\Products\Store\Index.cshtml"
                         }
 
             
@@ -635,7 +938,7 @@ WriteLiteral("\r\n                                </div>\r\n                    
 WriteLiteral("                    </div>\r\n");
 
             
-            #line 131 "..\..\Views\Products\Store\Index.cshtml"
+            #line 200 "..\..\Views\Products\Store\Index.cshtml"
                 }
 
             
@@ -650,7 +953,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 139 "..\..\Views\Products\Store\Index.cshtml"
+            #line 208 "..\..\Views\Products\Store\Index.cshtml"
 Write(Scripts.Render("~/bundles/datatable"));
 
             
@@ -659,7 +962,7 @@ Write(Scripts.Render("~/bundles/datatable"));
 WriteLiteral("\r\n\r\n    <script>\r\n        var addSingleFreightParamUrl = \'");
 
             
-            #line 142 "..\..\Views\Products\Store\Index.cshtml"
+            #line 211 "..\..\Views\Products\Store\Index.cshtml"
                                    Write(Url.ActionLocalized("AddSingleFreightParam", "Store"));
 
             
@@ -668,7 +971,7 @@ WriteLiteral("\r\n\r\n    <script>\r\n        var addSingleFreightParamUrl = \'"
 WriteLiteral("\';\r\n        var singleFreightEnabledSelector = \'#");
 
             
-            #line 143 "..\..\Views\Products\Store\Index.cshtml"
+            #line 212 "..\..\Views\Products\Store\Index.cshtml"
                                          Write(nameof(Model.SingleFreightEnabled));
 
             
@@ -679,7 +982,7 @@ WriteLiteral("\';\r\n        StoreSingleFreightParams.init(addSingleFreightParam
 " ");
 
             
-            #line 148 "..\..\Views\Products\Store\Index.cshtml"
+            #line 217 "..\..\Views\Products\Store\Index.cshtml"
                           Write(config.Product.Stock.HideCurrentStock.Enabled.ToString().ToLower());
 
             

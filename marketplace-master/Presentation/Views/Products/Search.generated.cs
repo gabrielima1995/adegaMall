@@ -55,14 +55,14 @@ namespace ASP
     public partial class _Views_Products_Search_cshtml : System.Web.Mvc.WebViewPage<Application.Modules.Products.Search.SearchViewModel>
     {
 
-#line 89 "..\..\Views\Products\Search.cshtml"
+#line 99 "..\..\Views\Products\Search.cshtml"
 public System.Web.WebPages.HelperResult QueryParamsAsHiddenFields(params string[] except)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 90 "..\..\Views\Products\Search.cshtml"
+#line 100 "..\..\Views\Products\Search.cshtml"
  
     foreach (var key in Request.QueryString.AllKeys.Except(except, StringComparer.OrdinalIgnoreCase))
     {
@@ -77,7 +77,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "                ");
 
 
-#line 97 "..\..\Views\Products\Search.cshtml"
+#line 107 "..\..\Views\Products\Search.cshtml"
 WriteTo(__razor_helper_writer, Html.Hidden(key, value));
 
 
@@ -86,7 +86,7 @@ WriteTo(__razor_helper_writer, Html.Hidden(key, value));
 WriteLiteralTo(__razor_helper_writer, "\r\n");
 
 
-#line 98 "..\..\Views\Products\Search.cshtml"
+#line 108 "..\..\Views\Products\Search.cshtml"
             }
         }
     }
@@ -96,7 +96,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n");
 #line hidden
 });
 
-#line 101 "..\..\Views\Products\Search.cshtml"
+#line 111 "..\..\Views\Products\Search.cshtml"
 }
 #line default
 #line hidden
@@ -111,7 +111,10 @@ WriteLiteral("\r\n");
             
             #line 6 "..\..\Views\Products\Search.cshtml"
   
-    ViewBag.Title = ViewBag.Title ??  Request.GetLocalizedString("PRODUCT_SEARCH_TITLE");
+    ViewBag.Title = ViewBag.Title ?? Request.GetLocalizedString("PRODUCT_SEARCH_TITLE");
+    ViewBag.Canonical = Request.Canonical();
+    var heroEnabled = MaaSConfig.Current.HeroUnit.Enabled;
+    var bannerEnabled = MaaSConfig.Current.Banners.Enabled;
 
             
             #line default
@@ -125,7 +128,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 12 "..\..\Views\Products\Search.cshtml"
+            #line 15 "..\..\Views\Products\Search.cshtml"
 Write(Styles.Render("~/Content/datetime-picker"));
 
             
@@ -135,47 +138,34 @@ WriteLiteral("\r\n");
 
 });
 
-WriteLiteral("\r\n\r\n<div");
+WriteLiteral("\r\n\r\n");
 
-WriteLiteral(" class=\"bg-image-1 banner padding-top-60 padding-bottom-60\"");
-
-WriteLiteral(">\r\n    <div");
-
-WriteLiteral(" class=\"container\"");
-
-WriteLiteral(">\r\n        <div");
-
-WriteLiteral(" class=\"row\"");
-
-WriteLiteral(">\r\n            <div");
-
-WriteLiteral(" class=\"col-xs-12 col-md-8 col-md-offset-2\"");
-
-WriteLiteral(">\r\n                <h1");
-
-WriteLiteral(" class=\"highlight text-center h2\"");
-
-WriteLiteral(">");
+WriteLiteral("\r\n\r\n");
 
             
-            #line 20 "..\..\Views\Products\Search.cshtml"
-                                                Write(ViewBag.Title);
+            #line 30 "..\..\Views\Products\Search.cshtml"
+ if (!heroEnabled && bannerEnabled)
+{
+    
+            
+            #line default
+            #line hidden
+            
+            #line 32 "..\..\Views\Products\Search.cshtml"
+Write(Html.Partial("~/Views/Home/_Banners.cshtml"));
 
             
             #line default
             #line hidden
-WriteLiteral("</h1>\r\n");
-
-WriteLiteral("                ");
-
             
-            #line 21 "..\..\Views\Products\Search.cshtml"
-           Write(Html.Partial("_SearchFilters", Model));
+            #line 32 "..\..\Views\Products\Search.cshtml"
+                                                 
+}
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div");
+WriteLiteral("\r\n<div");
 
 WriteLiteral(" class=\"main-content bg1\"");
 
@@ -186,13 +176,13 @@ WriteLiteral(" class=\"container\"");
 WriteLiteral(">\r\n");
 
             
-            #line 29 "..\..\Views\Products\Search.cshtml"
+            #line 37 "..\..\Views\Products\Search.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 29 "..\..\Views\Products\Search.cshtml"
+            #line 37 "..\..\Views\Products\Search.cshtml"
          if (Model.FilteredBySeller != null)
         {
 
@@ -217,26 +207,26 @@ WriteLiteral(" class=\"panel-body\"");
 
 WriteLiteral(">\r\n                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 986), Tuple.Create("\"", 1096)
+WriteAttribute("href", Tuple.Create(" href=\"", 1288), Tuple.Create("\"", 1398)
             
-            #line 35 "..\..\Views\Products\Search.cshtml"
-, Tuple.Create(Tuple.Create("", 993), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.FilteredBySeller.FriendlyUrl })
+            #line 43 "..\..\Views\Products\Search.cshtml"
+, Tuple.Create(Tuple.Create("", 1295), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.FilteredBySeller.FriendlyUrl })
             
             #line default
             #line hidden
-, 993), false)
+, 1295), false)
 );
 
 WriteLiteral(">\r\n                                <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1136), Tuple.Create("\"", 1194)
+WriteAttribute("src", Tuple.Create(" src=\"", 1438), Tuple.Create("\"", 1496)
             
-            #line 36 "..\..\Views\Products\Search.cshtml"
-, Tuple.Create(Tuple.Create("", 1142), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.FilteredBySeller.Avatar, 80)
+            #line 44 "..\..\Views\Products\Search.cshtml"
+, Tuple.Create(Tuple.Create("", 1444), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.FilteredBySeller.Avatar, 80)
             
             #line default
             #line hidden
-, 1142), false)
+, 1444), false)
 );
 
 WriteLiteral(" alt=\"\"");
@@ -251,7 +241,7 @@ WriteLiteral(" />\r\n                            </a>\r\n                       
 "                         <h4>");
 
             
-            #line 39 "..\..\Views\Products\Search.cshtml"
+            #line 47 "..\..\Views\Products\Search.cshtml"
                                Write(Model.FilteredBySeller.PublicProfileName);
 
             
@@ -262,7 +252,7 @@ WriteLiteral("</h4>\r\n");
 WriteLiteral("                                ");
 
             
-            #line 40 "..\..\Views\Products\Search.cshtml"
+            #line 48 "..\..\Views\Products\Search.cshtml"
                            Write(Html.Localized("PRODUCT_SEARCH_FILTERED_BY_SELLER", "p"));
 
             
@@ -270,14 +260,14 @@ WriteLiteral("                                ");
             #line hidden
 WriteLiteral("\r\n                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1571), Tuple.Create("\"", 1620)
+WriteAttribute("href", Tuple.Create(" href=\"", 1873), Tuple.Create("\"", 1922)
             
-            #line 41 "..\..\Views\Products\Search.cshtml"
-, Tuple.Create(Tuple.Create("", 1578), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Search", "Products")
+            #line 49 "..\..\Views\Products\Search.cshtml"
+, Tuple.Create(Tuple.Create("", 1880), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Search", "Products")
             
             #line default
             #line hidden
-, 1578), false)
+, 1880), false)
 );
 
 WriteLiteral(">\r\n                                    <i");
@@ -289,7 +279,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 43 "..\..\Views\Products\Search.cshtml"
+            #line 51 "..\..\Views\Products\Search.cshtml"
                                Write(Html.Localized("REMOVE_FILTER"));
 
             
@@ -300,7 +290,7 @@ WriteLiteral("\r\n                                </a>\r\n                      
 "           </div>\r\n");
 
             
-            #line 50 "..\..\Views\Products\Search.cshtml"
+            #line 58 "..\..\Views\Products\Search.cshtml"
         }
 
             
@@ -317,7 +307,7 @@ WriteLiteral(" class=\"col-xs-12 text-center\"");
 WriteLiteral("><strong>");
 
             
-            #line 53 "..\..\Views\Products\Search.cshtml"
+            #line 61 "..\..\Views\Products\Search.cshtml"
                                                   Write(Model.Total);
 
             
@@ -326,26 +316,26 @@ WriteLiteral("><strong>");
 WriteLiteral("</strong> ");
 
             
-            #line 53 "..\..\Views\Products\Search.cshtml"
+            #line 61 "..\..\Views\Products\Search.cshtml"
                                                                         Write(Html.Localized("PRODUCTS_FOUND_COUNT"));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n        </div>\r\n        <div");
+WriteLiteral("</div>\r\n        </div>\r\n        \r\n        <div");
 
 WriteLiteral(" class=\"row\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 56 "..\..\Views\Products\Search.cshtml"
+            #line 65 "..\..\Views\Products\Search.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 56 "..\..\Views\Products\Search.cshtml"
+            #line 65 "..\..\Views\Products\Search.cshtml"
              if (Model.Results.Any())
             {
 
@@ -354,39 +344,34 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                <div");
 
-WriteLiteral(" class=\"col-xs-8 col-sm-3 pull-right\"");
+WriteLiteral(" class=\"col-xs-12 col-sm-4 col-md-3 pull-right\"");
+
+WriteLiteral(">\r\n                    <form");
+
+WriteAttribute("action", Tuple.Create(" action=\"", 2620), Tuple.Create("\"", 2647)
+            
+            #line 68 "..\..\Views\Products\Search.cshtml"
+, Tuple.Create(Tuple.Create("", 2629), Tuple.Create<System.Object, System.Int32>(ViewBag.Canonical
+            
+            #line default
+            #line hidden
+, 2629), false)
+);
+
+WriteLiteral(" method=\"get\"");
 
 WriteLiteral(">\r\n");
 
+WriteLiteral("                        ");
+
             
-            #line 59 "..\..\Views\Products\Search.cshtml"
-                    
-            
-            #line default
-            #line hidden
-            
-            #line 59 "..\..\Views\Products\Search.cshtml"
-                     using (Html.BeginForm("Search", "Products", FormMethod.Get))
-                    {
-                        
-            
-            #line default
-            #line hidden
-            
-            #line 61 "..\..\Views\Products\Search.cshtml"
+            #line 69 "..\..\Views\Products\Search.cshtml"
                    Write(QueryParamsAsHiddenFields(except: "sortType"));
 
             
             #line default
             #line hidden
-            
-            #line 61 "..\..\Views\Products\Search.cshtml"
-                                                                      
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        <div");
+WriteLiteral("\r\n                        <div");
 
 WriteLiteral(" class=\"form-group\"");
 
@@ -395,52 +380,44 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 63 "..\..\Views\Products\Search.cshtml"
+            #line 71 "..\..\Views\Products\Search.cshtml"
                        Write(Html.DropDownList("SortType", null, new { id = "ddlSortType", @class = "form-control" }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                        </div>\r\n");
+WriteLiteral("\r\n                        </div>\r\n                    </form>\r\n                </" +
+"div>\r\n");
 
             
-            #line 65 "..\..\Views\Products\Search.cshtml"
-                    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                </div>\r\n");
-
-            
-            #line 67 "..\..\Views\Products\Search.cshtml"
+            #line 75 "..\..\Views\Products\Search.cshtml"
             }
 
             
             #line default
             #line hidden
-WriteLiteral("        </div>\r\n        <div");
+WriteLiteral("        </div>\r\n        \r\n        <div");
 
 WriteLiteral(" class=\"row\"");
 
 WriteLiteral(">\r\n            <div");
 
-WriteLiteral(" class=\"search-result-facets col-xs-12 col-sm-3\"");
+WriteLiteral(" class=\"search-result-facets col-xs-12 col-sm-4 col-md-3\"");
 
 WriteLiteral(">\r\n");
 
 WriteLiteral("                ");
 
             
-            #line 71 "..\..\Views\Products\Search.cshtml"
+            #line 80 "..\..\Views\Products\Search.cshtml"
            Write(Html.Partial("_SearchFacets", Model));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n            <div");
+WriteLiteral("\r\n            </div>\r\n\r\n            <div");
 
-WriteLiteral(" class=\"search-result-cards col-xs-12 col-sm-9\"");
+WriteLiteral(" class=\"search-result-cards col-xs-12 col-sm-8 col-md-9\"");
 
 WriteLiteral(">\r\n                <div");
 
@@ -453,7 +430,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 75 "..\..\Views\Products\Search.cshtml"
+            #line 85 "..\..\Views\Products\Search.cshtml"
                Write(Html.Partial("_SearchResult", Model));
 
             
@@ -490,7 +467,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 80 "..\..\Views\Products\Search.cshtml"
+            #line 90 "..\..\Views\Products\Search.cshtml"
                        Write(Html.Localized("LOADING_TEXT", "span", new { @class = "sr-only" }));
 
             
@@ -510,7 +487,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 106 "..\..\Views\Products\Search.cshtml"
+            #line 116 "..\..\Views\Products\Search.cshtml"
 Write(Scripts.Render("~/bundles/scripts/datetime-picker"));
 
             
@@ -521,7 +498,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 107 "..\..\Views\Products\Search.cshtml"
+            #line 117 "..\..\Views\Products\Search.cshtml"
 Write(Scripts.Render("~/bundles/scripts/maps-addons"));
 
             
@@ -532,7 +509,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 108 "..\..\Views\Products\Search.cshtml"
+            #line 118 "..\..\Views\Products\Search.cshtml"
 Write(Html.Partial("_GoogleMapsScript"));
 
             
@@ -541,13 +518,13 @@ Write(Html.Partial("_GoogleMapsScript"));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 110 "..\..\Views\Products\Search.cshtml"
+            #line 120 "..\..\Views\Products\Search.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 110 "..\..\Views\Products\Search.cshtml"
+            #line 120 "..\..\Views\Products\Search.cshtml"
      if (MaaSConfig.Current.Search.Enabled && MaaSConfig.Current.Search.SearchFields.Location)
     {
 
@@ -557,20 +534,33 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("        <script>GoogleMapsAutocomplete.initNoLocation()</script>\r\n");
 
             
-            #line 113 "..\..\Views\Products\Search.cshtml"
+            #line 123 "..\..\Views\Products\Search.cshtml"
     }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    <script>\r\n        $(document).ready(function () {\r\n            Globalize.lo" +
-"adCldr.then(function () {\r\n                ProductSearch.init();\r\n            })" +
-";\r\n        });\r\n    </script>\r\n\r\n");
+WriteLiteral(@"
+    <script>
+        $(document).ready(function () {
+            Globalize.loadCldr.then(function () {
+                ProductSearch.init();
+            });
+
+            $('.facets-load-more').click(function () {
+                var $this = $(this);
+                $this.parent().siblings().removeClass('hidden');
+                $this.parent().remove();
+            });
+        });
+    </script>
+
+");
 
 WriteLiteral("    ");
 
             
-            #line 123 "..\..\Views\Products\Search.cshtml"
+            #line 139 "..\..\Views\Products\Search.cshtml"
 Write(Html.Partial("_ProductWishScript"));
 
             

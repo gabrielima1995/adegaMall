@@ -107,13 +107,6 @@
                                     </small>
                                 }
                             </div>
-
-                            if (Model.ShowAnyShipping && isBuyer)
-                            {
-                                <div class="js-product-shipping-loading m-b-md" data-product-id="@Model.Product.Id" style="display: none">
-                                    <p><i class="fas fa-spinner fa-spin"></i></p>
-                                </div>
-                            }
                         }
                         <div class="product-sold-by">
                             <img src="@Model.Product.Store.Seller.GetAvatarUrl(50, 50)" alt="@Model.Product.Store.Seller.PublicProfileName" class="img-circle" width="50" height="50" />
@@ -159,7 +152,6 @@
 
                         @if (config.Product.Price.Enabled && Model.Product.Price.HasValue)
                         {
-
                             <div class="margin-top-10 margin-bottom-10">
                                 @Html.Partial("_ProductAddToCart", Model)
                             </div>
@@ -170,6 +162,11 @@
                                 @Html.Localized("ACCEPTED_PAYMENT_METHODS_TEXT", "small")
                                 @Html.Partial("_AcceptedPaymentMethods")
                             }
+                        }
+
+                        @if (Model.ShowAnyShipping)
+                        {
+                            <div class="js-product-shipping-loading m-b-md" data-product-id="@Model.Product.Id" style="display: none"></div>
                         }
 
 

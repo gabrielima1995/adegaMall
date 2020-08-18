@@ -3,8 +3,10 @@
     var isMobile = window.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     console.log('plugins.js | isMobile = ' + isMobile);
 
-    MaaS.initPlugins = function () {
-        $('.js-date, .date')
+    MaaS.initPlugins = function ($container) {
+        $container = $container || $(document);
+
+        $container.find('.js-date, .date')
             .each(function () {
                 var $this = $(this);
 
@@ -20,7 +22,7 @@
                 if (isMobile) setDateMask($(this));
             });
 
-        $('.js-time, .time')
+        $container.find('.js-time, .time')
             .each(function () {
                 if (!isMobile) {
                     var $this = $(this);
@@ -34,7 +36,7 @@
                 if (isMobile) setTimeMask($(this));
             });
 
-        $('.js-mask')
+        $container.find('.js-mask')
             .each(function () {
                 if (!isMobile) {
                     var $this = $(this);
@@ -52,7 +54,7 @@
                 }
             });
 
-        $('.js-decimal')
+        $container.find('.js-decimal')
             .each(function () {
                 var $this = $(this);
                 var mask = Globalize.current.patterns.decimal;
@@ -64,9 +66,9 @@
                 $this.mask(mask, { reverse: true });
             });
 
-        $('.js-money').mask(Globalize.current.patterns.money, { reverse: true });
+        $container.find('.js-money').mask(Globalize.current.patterns.money, { reverse: true });
 
-        $('.js-zipcode')
+        $container.find('.js-zipcode')
             .each(function () {
                 var $this = $(this);
                 if (!isMobile) $this.mask('00000-000');
@@ -78,7 +80,7 @@
                 if (isMobile) setZipCodeMask($(this));
             });
 
-        $('.js-cpf')
+        $container.find('.js-cpf')
             .each(function () {
                 if (!isMobile) {
                     var $this = $(this);
@@ -98,7 +100,7 @@
                 if (isMobile) setCpfCnpjMask($(this, false, true));
             });
 
-        $('.js-cnpj')
+        $container.find('.js-cnpj')
             .each(function () {
                 if (!isMobile) {
                     var $this = $(this);
@@ -118,7 +120,7 @@
                 if (isMobile) setCpfCnpjMask($(this, true, false));
             });
 
-        $('.js-cpfcnpj')
+        $container.find('.js-cpfcnpj')
             .each(function () {
                 if (!isMobile) {
                     var $this = $(this);
@@ -138,7 +140,7 @@
                 if (isMobile) setCpfCnpjMask($(this, false, false));
             });
 
-        $('.js-digits')
+        $container.find('.js-digits')
             .each(function () {
                 var $this = $(this);
                 var digits = parseInt($this.attr('maxlength') || 0);
@@ -149,7 +151,7 @@
                 }
             });
 
-        $('.js-credit-card')
+        $container.find('.js-credit-card')
             .each(function () {
                 var $this = $(this);
                 setCreditCardMask($this);
@@ -167,11 +169,11 @@
                 if (isMobile) setCreditCardMask($(this));
             });
 
-        $('.js-select').select2({ language: Globalize.current.patterns.lang });
+        $container.find('.js-select').select2({ language: Globalize.current.patterns.lang });
 
-        autosize($('textarea'));
+        autosize($container.find('textarea'));
 
-        $('[data-toggle="tooltip"]').tooltip();
+        $container.find('[data-toggle="tooltip"]').tooltip();
     };
 
     function fixMask(e, callback) {

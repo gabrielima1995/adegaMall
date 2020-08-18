@@ -25,7 +25,7 @@ namespace Application.Modules.Products.Orders.EventHandlers
 
         public void Handle(OrderStatusChangedEvent domainEvent)
         {
-            if (domainEvent.Order.Status != OrderStatus.DeliveryOnTheWay)
+            if (domainEvent.NewStatus != OrderStatus.DeliveryOnTheWay)
                 return;
 
             var order = domainEvent.Order;

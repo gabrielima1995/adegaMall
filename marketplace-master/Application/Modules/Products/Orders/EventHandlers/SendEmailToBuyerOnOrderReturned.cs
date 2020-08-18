@@ -13,7 +13,7 @@ namespace Application.Modules.Products.Orders.EventHandlers
     {
         public void Handle(OrderStatusChangedEvent domainEvent)
         {
-            if (domainEvent.Order.Status != OrderStatus.Returned)
+            if (domainEvent.NewStatus != OrderStatus.Returned)
                 return;
 
             var order = domainEvent.Order;

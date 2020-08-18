@@ -148,6 +148,7 @@
     <Compile Include="Data\SqlDbConnection.cs" />
     <Compile Include="Data\MyDbConnection.cs" />
     <Compile Include="DbEntityValidationExceptionHelper.cs" />
+    <Compile Include="Json\JsonProvider.cs" />
     <Compile Include="Messages\DatabaseTemplateEngine.cs" />
     <Compile Include="Modules\Customization\Queries\PlatformCustomizationQueries.cs" />
     <Compile Include="Modules\Finance\MoipPaymentGateway.cs" />
@@ -201,7 +202,9 @@
     <Compile Include="Modules\Finance\Queries\TransferJournalQueries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\StoreModule\Queries\CartQueries.cs" />
+    <Compile Include="Shipping\Adapters\TotalExpressMethodAdapter.cs" />
     <Compile Include="Shipping\Adapters\ActualNoShippingMethodAdapter.cs" />
+    <Compile Include="Shipping\Adapters\AsapLogMethodAdapter.cs" />
     <Compile Include="Shipping\Adapters\CorreiosMethodAdapter.cs" />
     <Compile Include="Shipping\Adapters\NoShippingMethodAdapter.cs" />
     <Compile Include="Shipping\Adapters\OnSitePickupMethodAdapter.cs" />
@@ -211,6 +214,8 @@
     <Compile Include="Shipping\CorreioShippingResult.cs" />
     <Compile Include="Shipping\CorreiosPostalService.cs" />
     <Compile Include="Shipping\CorreiosShippingHelper.cs" />
+    <Compile Include="Shipping\ItemFrete.cs" />
+    <Compile Include="Shipping\PacoteFrete.cs" />
     <Compile Include="Shipping\ShippingMethodAdapterCacheDecorator.cs" />
     <Compile Include="Shipping\ShippingService.cs" />
     <Compile Include="TimeZoneProvider.cs" />

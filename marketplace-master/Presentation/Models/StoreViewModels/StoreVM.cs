@@ -24,6 +24,27 @@ namespace Presentation.Models
         [DisplayNameLocalized("STORE_PAC_METHOD_LABEL")]
         public bool PacEnabled { get; set; }
 
+        [DisplayNameLocalized("STORE_ASAPLOG_METHOD_LABEL")]
+        public bool AsapLogEnabled { get; set; }
+
+        [DisplayNameLocalized("STORE_ASAPLOG_USER_LABEL")]
+        public string AsapLogUser { get; set; }
+
+        [DisplayNameLocalized("STORE_ASAPLOG_PASSWORD_LABEL")]
+        public string AsapLogPassword { get; set; }
+
+        [DisplayNameLocalized("STORE_TOTALEXPRESS_METHOD_LABEL")]
+        public bool TotalExpressEnabled { get; set; }
+
+        [DisplayNameLocalized("STORE_TOTALEXPRESS_USER_LABEL")]
+        public string TotalExpressUser { get; set; }
+
+        [DisplayNameLocalized("STORE_TOTALEXPRESS_PASSWORD_LABEL")]
+        public string TotalExpressPassword { get; set; }
+
+        [DisplayNameLocalized("STORE_TOTALEXPRESS_REID_LABEL")]
+        public string TotalExpressReid { get; set; }
+
         public string SellerId { get; set; }
         public List<SingleFreightParameterViewModel> SingleFreightParams { get; set; }
 
@@ -59,6 +80,13 @@ namespace Presentation.Models
             OnSitePickupEnabled = store.OnSitePickupEnabled;
             SedexEnabled = store.SedexEnabled;
             PacEnabled = store.PacEnabled;
+            AsapLogEnabled = store.AsapLogEnabled;
+            AsapLogUser = store.AsapLogUser;
+            AsapLogPassword = store.AsapLogPassword;
+            TotalExpressEnabled = store.TotalExpressEnabled;
+            TotalExpressUser = store.TotalExpressUser;
+            TotalExpressPassword = store.TotalExpressPassword;
+            TotalExpressReid = store.TotalExpressReid;
 
             DefaultShippingAmount = store.DefaultShipping.Amount;
             DefaultShippingDeliveryDays = store.DefaultShipping.DeliveryDays;
@@ -72,6 +100,13 @@ namespace Presentation.Models
             store.PrivateFleetEnabled = SingleFreightEnabled;
             store.SedexEnabled = SedexEnabled;
             store.PacEnabled = PacEnabled;
+            store.AsapLogEnabled = AsapLogEnabled;
+            store.AsapLogUser = AsapLogUser;
+            store.AsapLogPassword = AsapLogPassword;
+            store.TotalExpressEnabled = TotalExpressEnabled;
+            store.TotalExpressUser = TotalExpressUser;
+            store.TotalExpressPassword = TotalExpressPassword;
+            store.TotalExpressReid = TotalExpressReid;
 
             store.SingleFreightParams.Clear();
             if (SingleFreightEnabled)

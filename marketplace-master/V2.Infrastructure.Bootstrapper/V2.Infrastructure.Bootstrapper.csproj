@@ -46,6 +46,9 @@
     <Reference Include="Geocoding, Version=3.6.0.0, Culture=neutral, PublicKeyToken=7c714700b88674c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Geocoding.net.3.6.1\lib\net40\Geocoding.dll</HintPath>
     </Reference>
+    <Reference Include="HttpClientFactoryLite, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HttpClientFactoryLite.0.4.0\lib\netstandard2.0\HttpClientFactoryLite.dll</HintPath>
+    </Reference>
     <Reference Include="MediatR, Version=8.0.1.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
       <HintPath>..\packages\MediatR.8.0.1\lib\net461\MediatR.dll</HintPath>
     </Reference>
@@ -166,9 +169,17 @@
       <Project>{4ee4ab58-e674-4fde-8aa9-b5a901954c07}</Project>
       <Name>Infra.BatchImportAdapter</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Infra.Crosscutting.AsapLog\Infra.Crosscutting.AsapLog.csproj">
+      <Project>{1B96E599-DD78-433D-8309-D961318CCA58}</Project>
+      <Name>Infra.Crosscutting.AsapLog</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infra.Crosscutting.ExchangeRate\Infra.Crosscutting.ExchangeRate.csproj">
       <Project>{7ba6b853-9df7-45b4-ab33-76dbc4524a60}</Project>
       <Name>Infra.Crosscutting.ExchangeRate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infra.Crosscutting.TotalExpress\Infra.Crosscutting.TotalExpress.csproj">
+      <Project>{FAC9346F-F91C-4B34-97C8-C2A139CCD367}</Project>
+      <Name>Infra.Crosscutting.TotalExpress</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infra.SmartSearchAdapter\Infra.SmartSearchAdapter.csproj">
       <Project>{A57A3FEB-5783-4FE5-85DD-C63457B6AACE}</Project>

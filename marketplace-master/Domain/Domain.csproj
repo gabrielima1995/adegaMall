@@ -167,6 +167,8 @@
     <Compile Include="Config\Modules\BatchImportConfig.cs" />
     <Compile Include="Config\Modules\GeneralQuoteConfig.cs" />
     <Compile Include="Config\Modules\PortfolioItemQuoteConfig.cs" />
+    <Compile Include="Config\Modules\Product\AsapLogShippingConfig.cs" />
+    <Compile Include="Config\Modules\Product\TotalExpressShippingConfig.cs" />
     <Compile Include="Config\Modules\Product\CorreiosContractConfig.cs" />
     <Compile Include="Config\Modules\Product\RentalFixedPeriodForAllProductsConfig.cs" />
     <Compile Include="Config\Modules\Product\ProductTemplatesConfig.cs" />

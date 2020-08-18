@@ -77,7 +77,7 @@ WriteLiteral(@"
     }
 
     .paises-list .pais-container {
-        max-width: calc(25% - 1px)
+        max-width: calc(33% - 1px)
     }
 
     .pais-container .pais-link {
@@ -190,7 +190,7 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                    <div");
 
-WriteLiteral(" class=\"col-xs-3 col-sm-2 pais-container\"");
+WriteLiteral(" class=\"col-xs-4 col-sm-2 pais-container\"");
 
 WriteLiteral(">\r\n                        <a");
 

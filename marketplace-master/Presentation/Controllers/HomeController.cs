@@ -2,16 +2,21 @@
 using DevTrends.MvcDonutCaching;
 using System;
 using System.Web.Mvc;
+using Application.Modules.Products;
 
 namespace Presentation.Controllers
 {
     public class HomeController : Controller
     {
         private readonly HomeAppService homeAppService;
+        private readonly CategoryMenuAppService categoryMenuAppService;
 
-        public HomeController(HomeAppService homeAppService)
+        public HomeController(
+            HomeAppService homeAppService,
+            CategoryMenuAppService categoryMenuAppService)
         {
             this.homeAppService = homeAppService;
+            this.categoryMenuAppService = categoryMenuAppService;
         }
 
         [DonutOutputCache(CacheProfile = "Home")]
@@ -32,6 +37,16 @@ namespace Presentation.Controllers
         {
             var ex = new Exception("This is a test exception.", new Exception("And this is the inner exception."));
             throw ex;
+        }
+
+        [DonutOutputCache(CacheProfile = "CategoryMenu")]
+        public PartialViewResult MenuCategorias(bool mobile = false)
+        {
+            ViewBag.Mobile = mobile;
+
+            var menu = categoryMenuAppService.Get();
+
+            return PartialView("_MenuCategorias", menu);
         }
     }
 }

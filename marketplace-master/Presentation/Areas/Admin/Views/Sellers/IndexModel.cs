@@ -7,6 +7,7 @@ using Presentation.Areas.Admin.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Entities.StoreModule;
 
 namespace Presentation.Areas.Admin.Views.Sellers
 {
@@ -62,8 +63,8 @@ namespace Presentation.Areas.Admin.Views.Sellers
             model.Email = seller.Email;
             model.CityState = seller.Address?.CityAndState;
             model.HasActiveSubscription = seller.HasSubscription && seller.IsValidSubscription;
-            model.OrdersCount = seller.Orders.Count;
-            model.OrdersTotalAmount = seller.Orders.Sum(x => x.Amount);
+            model.OrdersCount = seller.Orders.Count(i => i.Status != OrderStatus.Canceled);
+            model.OrdersTotalAmount = seller.Orders.Where(i => i.Status != OrderStatus.Canceled).Sum(x => x.Amount);
             model.QuotesCount = seller.Quotes.Count;
             model.RegisteredAt = seller.CreatedAt;
             model.ModifiedAt = seller.ModifiedAt;

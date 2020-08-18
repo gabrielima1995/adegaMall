@@ -54,7 +54,7 @@ namespace ASP
         }
         public override void Execute()
         {
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
             
             #line 5 "..\..\Views\Sellers\PublicProfile.cshtml"
@@ -77,11 +77,11 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n");
+WriteLiteral("\n\n");
 
 DefineSection("styles", () => {
 
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
             
             #line 24 "..\..\Views\Sellers\PublicProfile.cshtml"
@@ -128,11 +128,11 @@ WriteLiteral("\r\n");
             #line hidden
 });
 
-WriteLiteral("\r\n<div");
+WriteLiteral("\n<div");
 
 WriteLiteral(" class=\"main-content bg-1 padding-top-30 padding-bottom-0\"");
 
-WriteLiteral(">\r\n");
+WriteLiteral(">\n");
 
 WriteLiteral("    ");
 
@@ -143,7 +143,7 @@ Write(Html.Partial("_ProfileInfos", Model));
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n");
+WriteLiteral("\n\n");
 
             
             #line 34 "..\..\Views\Sellers\PublicProfile.cshtml"
@@ -174,7 +174,7 @@ WriteLiteral("\r\n\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
             
             #line 39 "..\..\Views\Sellers\PublicProfile.cshtml"
@@ -205,7 +205,7 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
             
             #line 44 "..\..\Views\Sellers\PublicProfile.cshtml"
@@ -236,7 +236,7 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
 WriteLiteral("    ");
 
@@ -247,7 +247,7 @@ Write(Html.Partial("_ProfileContact", Model));
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n");
+WriteLiteral("\n\n");
 
 WriteLiteral("    ");
 
@@ -258,11 +258,11 @@ Write(Html.Partial("_ProfileMap", Model));
             
             #line default
             #line hidden
-WriteLiteral("\r\n</div>\r\n\r\n");
+WriteLiteral("\n</div>\n\n");
 
 DefineSection("plugins", () => {
 
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
             
             #line 56 "..\..\Views\Sellers\PublicProfile.cshtml"
@@ -295,7 +295,7 @@ WriteLiteral("\r\n");
             #line hidden
 });
 
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
 DefineSection("scripts", () => {
 
@@ -318,6 +318,8 @@ WriteLiteral(@"
 
                         $iframe.attr('src', $iframe.attr('src'));
                     });
+
+                SearchImageLoader.loadImages();
             });
         })(window.jQuery);
     </script>
@@ -327,33 +329,33 @@ WriteLiteral(@"
 WriteLiteral("    ");
 
             
-            #line 85 "..\..\Views\Sellers\PublicProfile.cshtml"
+            #line 87 "..\..\Views\Sellers\PublicProfile.cshtml"
 Write(Html.Partial("_ProfileMapScript", Model));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
 WriteLiteral("    ");
 
             
-            #line 86 "..\..\Views\Sellers\PublicProfile.cshtml"
+            #line 88 "..\..\Views\Sellers\PublicProfile.cshtml"
 Write(Html.Partial("_ProductWishScript"));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n");
+WriteLiteral("\n\n");
 
             
-            #line 88 "..\..\Views\Sellers\PublicProfile.cshtml"
+            #line 90 "..\..\Views\Sellers\PublicProfile.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 88 "..\..\Views\Sellers\PublicProfile.cshtml"
+            #line 90 "..\..\Views\Sellers\PublicProfile.cshtml"
      if (Model.Visualization.ShowScheduleTimeline)
     {
         
@@ -361,14 +363,14 @@ WriteLiteral("\r\n\r\n");
             #line default
             #line hidden
             
-            #line 90 "..\..\Views\Sellers\PublicProfile.cshtml"
+            #line 92 "..\..\Views\Sellers\PublicProfile.cshtml"
    Write(Html.Partial("_ScheduleTimelineScript"));
 
             
             #line default
             #line hidden
             
-            #line 90 "..\..\Views\Sellers\PublicProfile.cshtml"
+            #line 92 "..\..\Views\Sellers\PublicProfile.cshtml"
                                                 
     }
 

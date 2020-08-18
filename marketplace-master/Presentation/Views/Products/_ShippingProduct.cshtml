@@ -3,11 +3,37 @@
 
 @{
     var config = MaaSConfig.Current;
+
+    var hasZipCode = ViewBag.ZipCode != null && ViewBag.ZipCode != "";
 }
 
-@if (Model.ShowAnyShipping)
+<style>
+    @@media (min-width: 768px) {
+        .zipcode-form input {
+            width: 100px;
+        }
+    }
+</style>
+
+@if (hasZipCode)
 {
-    <ul class="product-freight-list list-unstyled m-b-md">
+    <script>
+        localStorage.setItem("zipCode", "@ViewBag.ZipCode");
+    </script>
+}
+
+<form class="form-inline zipcode-form">
+    <div class="form-group">
+        <label for="zipCode" style="margin-right: 10px;">Calcular frete e prazo</label>
+        <input id="zipCode" name="zipCode" type="text" class="form-control js-zipcode" value="@ViewBag.ZipCode" placeholder="_____-__" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">OK</button>
+</form>
+
+@if (Model != null && Model.ShowAnyShipping)
+{
+    <ul class="product-freight-list list-unstyled m-b-md m-t-md">
         @if (Model.ShowPrivateFleet)
         {
             <li>
@@ -34,6 +60,26 @@
                 @config.DefaultCurrency
                 @Model.PostalRegularCost.DisplayDecimal(2)
                 @DisplayDeliveryDate(Model.DeliveryDatePac)
+            </li>
+        }
+
+        @if (Model.ShowAsapLog)
+        {
+            <li>
+                <strong>@Html.Localized("PRODUCT_ASAPLOG_METHOD_LABEL"):</strong>
+                @config.DefaultCurrency
+                @Model.AsapLogCost.DisplayDecimal(2)
+                @DisplayDeliveryDate(Model.DeliveryDateAsapLog)
+            </li>
+        }
+
+        @if (Model.ShowTotalExpress)
+        {
+            <li>
+                <strong>@Html.Localized("PRODUCT_TOTALEXPRESS_METHOD_LABEL"):</strong>
+                @config.DefaultCurrency
+                @Model.TotalExpressCost.DisplayDecimal(2)
+                @DisplayDeliveryDate(Model.DeliveryDateTotalExpress)
             </li>
         }
 
@@ -66,6 +112,10 @@
             </li>
         }
     </ul>
+}
+else if (hasZipCode)
+{
+    <p>Região não atendida.</p>
 }
 
 @helper DisplayDeliveryDate(DateTime? date)

@@ -177,16 +177,17 @@ namespace V2.Infrastructure.Shipping.Adapters
             return new CorreiosShippingCollection(correiosDtoCollection, chargeDoubleShipping);
         }
 
-        private ReadOnlyCollection<CorreiosItemEnvio> GetItemsCorreios(IEnumerable<ProductWithQty> products)
+        private ReadOnlyCollection<ItemFrete> GetItemsCorreios(IEnumerable<ProductWithQty> products)
         {
-            var listaCorreio = new List<CorreiosItemEnvio>(products.Sum(x => x.Quantity));
+            var listaCorreio = new List<ItemFrete>(products.Sum(x => x.Quantity));
 
             foreach (var item in products)
             {
                 for (var i = 0; i < item.Quantity; i++)
                 {
-                    listaCorreio.Add(new CorreiosItemEnvio(
+                    listaCorreio.Add(new ItemFrete(
                         (double)item.Product.Weight,
+                        item.Product.BasePrice.GetValueOrDefault(0),
                         (double)item.Product.Length,
                         (double)item.Product.Width,
                         (double)item.Product.Height));

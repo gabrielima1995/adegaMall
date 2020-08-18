@@ -142,6 +142,16 @@ namespace Domain.Entities.StoreModule
                                 if (p.PACEnabled && !list.Contains(ShippingMethod.PostalRegular))
                                     list.Add(ShippingMethod.PostalRegular);
                                 break;
+
+                            case ShippingMethod.AsapLog:
+                                if (!list.Contains(ShippingMethod.AsapLog))
+                                    list.Add(ShippingMethod.AsapLog);
+                                break;
+
+                            case ShippingMethod.TotalExpress:
+                                if (!list.Contains(ShippingMethod.TotalExpress))
+                                    list.Add(ShippingMethod.TotalExpress);
+                                break;
                         }
                     }
                 }
@@ -169,6 +179,16 @@ namespace Domain.Entities.StoreModule
                             case ShippingMethod.PostalRegular:
                                 if (s.PacEnabled && !list.Contains(ShippingMethod.PostalRegular))
                                     list.Add(ShippingMethod.PostalRegular);
+                                break;
+
+                            case ShippingMethod.AsapLog:
+                                if (s.AsapLogEnabled && !list.Contains(ShippingMethod.AsapLog))
+                                    list.Add(ShippingMethod.AsapLog);
+                                break;
+
+                            case ShippingMethod.TotalExpress:
+                                if (s.TotalExpressEnabled && !list.Contains(ShippingMethod.TotalExpress))
+                                    list.Add(ShippingMethod.TotalExpress);
                                 break;
                         }
                     }

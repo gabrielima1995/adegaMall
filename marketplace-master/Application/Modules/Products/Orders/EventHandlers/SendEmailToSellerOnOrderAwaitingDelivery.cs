@@ -25,10 +25,10 @@ namespace Application.Modules.Products.Orders.EventHandlers
 
         public void Handle(OrderStatusChangedEvent domainEvent)
         {
-            if (domainEvent.Order.Status == OrderStatus.AwaitingDelivery)
+            if (domainEvent.NewStatus == OrderStatus.AwaitingDelivery)
                 SendMessageForDelivery(domainEvent);
 
-            else if (domainEvent.Order.Status == OrderStatus.AwaitingPickup)
+            else if (domainEvent.NewStatus == OrderStatus.AwaitingPickup)
                 SendMessageForPickup(domainEvent);
         }
 
@@ -115,12 +115,12 @@ namespace Application.Modules.Products.Orders.EventHandlers
 
         private const string sql = @"
             SELECT
-	            TheOrder.Id OrderId,
-	            Buyer.FullName BuyerName,
-	            ISNULL(Seller.AlternativeName, Seller.FullName) SellerName,
-	            Seller.Email SellerEmail,
-	            ShippingAddress.*,
-	            SellerAddress.*
+                TheOrder.Id OrderId,
+                Buyer.FullName BuyerName,
+                ISNULL(Seller.AlternativeName, Seller.FullName) SellerName,
+                Seller.Email SellerEmail,
+                ShippingAddress.*,
+                SellerAddress.*
             FROM [Order] TheOrder
             INNER JOIN Person Buyer ON TheOrder.Buyer_Id = Buyer.Id
             INNER JOIN Person Seller ON TheOrder.Seller_Id = Seller.Id

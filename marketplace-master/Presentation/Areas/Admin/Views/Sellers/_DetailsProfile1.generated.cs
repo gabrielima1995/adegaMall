@@ -35,11 +35,17 @@ namespace ASP
     
     #line default
     #line hidden
+    
+    #line 2 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+    using Domain.Entities.StoreModule;
+    
+    #line default
+    #line hidden
     using Presentation;
     using Presentation.Areas.Admin.Models;
     using Presentation.Globalization;
     
-    #line 2 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+    #line 3 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
     using Presentation.Helpers;
     
     #line default
@@ -50,14 +56,14 @@ namespace ASP
     public partial class _Areas_Admin_Views_Sellers__DetailsProfile_cshtml : System.Web.Mvc.WebViewPage<Presentation.Areas.Admin.Views.Sellers.SellerModel>
     {
 
-#line 299 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 300 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
 public System.Web.WebPages.HelperResult ChangeStatus()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 300 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 301 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
  
 
 
@@ -66,13 +72,13 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "    <center>\r\n");
 
 
-#line 302 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 303 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
         
 
 #line default
 #line hidden
 
-#line 302 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 303 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
          if (Model.Seller.Enabled)
         {
 
@@ -118,13 +124,13 @@ WriteLiteralTo(__razor_helper_writer, ">O vendedor não poderá mais acessar a p
 "o, se desejar.</p>\r\n");
 
 
-#line 312 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 313 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                 
 
 #line default
 #line hidden
 
-#line 312 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 313 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                  using (Html.BeginForm("ChangeEnabled", "Sellers", FormMethod.Post, new { role = "form", id = "frmChangeStatus" }))
                 {
                     
@@ -132,42 +138,42 @@ WriteLiteralTo(__razor_helper_writer, ">O vendedor não poderá mais acessar a p
 #line default
 #line hidden
 
-#line 314 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 315 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
 WriteTo(__razor_helper_writer, Html.AntiForgeryToken());
 
 
 #line default
 #line hidden
 
-#line 314 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 315 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                             
                     
 
 #line default
 #line hidden
 
-#line 315 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 316 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
 WriteTo(__razor_helper_writer, Html.Hidden("Id", Model.Seller.Id));
 
 
 #line default
 #line hidden
 
-#line 315 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 316 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                        
                     
 
 #line default
 #line hidden
 
-#line 316 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 317 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
 WriteTo(__razor_helper_writer, Html.Hidden("Enabled", Boolean.FalseString));
 
 
 #line default
 #line hidden
 
-#line 316 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 317 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                                 
 
 
@@ -196,7 +202,7 @@ WriteLiteralTo(__razor_helper_writer, " id=\"btnCancelChangeStatus\"");
 WriteLiteralTo(__razor_helper_writer, ">voltar</a>\r\n");
 
 
-#line 319 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 320 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                 }
 
 
@@ -205,7 +211,7 @@ WriteLiteralTo(__razor_helper_writer, ">voltar</a>\r\n");
 WriteLiteralTo(__razor_helper_writer, "            </div>\r\n");
 
 
-#line 321 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 322 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
         }
         else
         {
@@ -250,13 +256,13 @@ WriteLiteralTo(__razor_helper_writer, " class=\"text-muted\"");
 WriteLiteralTo(__razor_helper_writer, ">O vendedor terá seu acesso à plataforma reestabelecido.</p>\r\n");
 
 
-#line 332 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 333 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                 
 
 #line default
 #line hidden
 
-#line 332 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 333 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                  using (Html.BeginForm("ChangeEnabled", "Sellers", FormMethod.Post, new { role = "form", id = "frmChangeStatus" }))
                 {
                     
@@ -264,42 +270,42 @@ WriteLiteralTo(__razor_helper_writer, ">O vendedor terá seu acesso à plataform
 #line default
 #line hidden
 
-#line 334 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 335 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
 WriteTo(__razor_helper_writer, Html.AntiForgeryToken());
 
 
 #line default
 #line hidden
 
-#line 334 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 335 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                             
                     
 
 #line default
 #line hidden
 
-#line 335 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 336 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
 WriteTo(__razor_helper_writer, Html.Hidden("Id", Model.Seller.Id));
 
 
 #line default
 #line hidden
 
-#line 335 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 336 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                        
                     
 
 #line default
 #line hidden
 
-#line 336 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 337 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
 WriteTo(__razor_helper_writer, Html.Hidden("Enabled", Boolean.TrueString));
 
 
 #line default
 #line hidden
 
-#line 336 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 337 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                                
 
 
@@ -328,7 +334,7 @@ WriteLiteralTo(__razor_helper_writer, " id=\"btnCancelChangeStatus\"");
 WriteLiteralTo(__razor_helper_writer, ">voltar</a>\r\n");
 
 
-#line 339 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 340 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                 }
 
 
@@ -337,7 +343,7 @@ WriteLiteralTo(__razor_helper_writer, ">voltar</a>\r\n");
 WriteLiteralTo(__razor_helper_writer, "            </div>\r\n");
 
 
-#line 341 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 342 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
         }
 
 
@@ -346,14 +352,14 @@ WriteLiteralTo(__razor_helper_writer, "            </div>\r\n");
 WriteLiteralTo(__razor_helper_writer, "    </center>\r\n");
 
 
-#line 343 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 344 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 343 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+#line 344 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
 }
 #line default
 #line hidden
@@ -364,7 +370,7 @@ WriteLiteralTo(__razor_helper_writer, "    </center>\r\n");
         public override void Execute()
         {
             
-            #line 5 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 6 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
   
     var config = MaaSConfig.Current;
     double averageRating = 0;
@@ -388,14 +394,14 @@ WriteLiteral(">\r\n        <img");
 
 WriteLiteral(" class=\"profile-user-img img-responsive img-circle\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 448), Tuple.Create("\"", 497)
+WriteAttribute("src", Tuple.Create(" src=\"", 484), Tuple.Create("\"", 533)
             
-            #line 16 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
-, Tuple.Create(Tuple.Create("", 454), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.Seller.Avatar, 128)
+            #line 17 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+, Tuple.Create(Tuple.Create("", 490), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.Seller.Avatar, 128)
             
             #line default
             #line hidden
-, 454), false)
+, 490), false)
 );
 
 WriteLiteral(" alt=\"\"");
@@ -409,7 +415,7 @@ WriteLiteral(" class=\"profile-username text-center\"");
 WriteLiteral(">");
 
             
-            #line 18 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 19 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                             Write(Html.DisplayFor(model => Model.Seller.FullName));
 
             
@@ -418,13 +424,13 @@ WriteLiteral(">");
 WriteLiteral("</h3>\r\n\r\n");
 
             
-            #line 20 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 21 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 20 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 21 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
          if (Model.Seller.Enabled)
         {
 
@@ -437,14 +443,14 @@ WriteLiteral(" class=\"text-muted text-center\"");
 
 WriteLiteral(">\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 765), Tuple.Create("\"", 876)
+WriteAttribute("href", Tuple.Create(" href=\"", 801), Tuple.Create("\"", 912)
             
-            #line 23 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
-, Tuple.Create(Tuple.Create("", 772), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.Seller.FriendlyUrl, area = "" })
+            #line 24 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+, Tuple.Create(Tuple.Create("", 808), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("PublicProfile", "Sellers", new { nickname = Model.Seller.FriendlyUrl, area = "" })
             
             #line default
             #line hidden
-, 772), false)
+, 808), false)
 );
 
 WriteLiteral(" target=\"_blank\"");
@@ -452,7 +458,7 @@ WriteLiteral(" target=\"_blank\"");
 WriteLiteral(">acessar perfil público</a>\r\n            </p>\r\n");
 
             
-            #line 25 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 26 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
         }
 
             
@@ -461,13 +467,13 @@ WriteLiteral(">acessar perfil público</a>\r\n            </p>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 27 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 28 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 27 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 28 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
          if (config.Product.Enabled)
         {
 
@@ -489,8 +495,8 @@ WriteLiteral(" class=\"pull-right\"");
 WriteLiteral(">");
 
             
-            #line 31 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
-                                                   Write(Model.Seller.Orders.Count);
+            #line 32 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+                                                   Write(Model.Seller.Orders.Count(i => i.Status != OrderStatus.Canceled));
 
             
             #line default
@@ -508,7 +514,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 36 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 37 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                    Write(config.DefaultCurrency);
 
             
@@ -519,8 +525,8 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 37 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
-                    Write(Model.Seller.Orders.Sum(x => x.Amount).DisplayDecimal(2));
+            #line 38 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+                    Write(Model.Seller.Orders.Where(i => i.Status != OrderStatus.Canceled).Sum(x => x.Amount).DisplayDecimal(2));
 
             
             #line default
@@ -528,7 +534,7 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </a>\r\n                </li>\r\n\r\n            </ul>\r\n");
 
             
-            #line 42 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 43 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
             if (config.Payment.Common.EnableCustomFeesByVendor)
             {
 
@@ -551,7 +557,7 @@ WriteLiteral(" class=\"pull-right\"");
 WriteLiteral(">");
 
             
-            #line 47 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 48 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                           Write(Model.Seller.OverrideGlobalPaymentFees.GetValueOrDefault() ? "SIM" : "NÃO");
 
             
@@ -569,7 +575,7 @@ WriteLiteral(" class=\"pull-right\"");
 WriteLiteral(">");
 
             
-            #line 51 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 52 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                           Write(Model.Seller.IsSellerLiable() ? "SIM" : "NÃO");
 
             
@@ -586,7 +592,7 @@ WriteLiteral(" class=\"pull-right\"");
 WriteLiteral(">");
 
             
-            #line 55 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 56 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                          Write(Model.Seller.GetCurrentPaymentPercentFee().DisplayDecimal(2));
 
             
@@ -603,7 +609,7 @@ WriteLiteral(" class=\"pull-right\"");
 WriteLiteral(">");
 
             
-            #line 59 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 60 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                          Write(config.DefaultCurrency);
 
             
@@ -612,7 +618,7 @@ WriteLiteral(">");
 WriteLiteral(" ");
 
             
-            #line 59 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 60 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                                  Write(Model.Seller.GetCurrentPaymentAmountFee().DisplayDecimal(2));
 
             
@@ -633,7 +639,7 @@ WriteLiteral(" id=\"btnEditFeeForm\"");
 WriteLiteral(">Editar Taxas</a>\r\n                    </li>\r\n                </ul>\r\n");
 
             
-            #line 65 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 66 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
             }
         }
 
@@ -643,7 +649,7 @@ WriteLiteral(">Editar Taxas</a>\r\n                    </li>\r\n                
 WriteLiteral("        ");
 
             
-            #line 67 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 68 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
          if (config.Quote.Enabled)
         {
 
@@ -657,13 +663,13 @@ WriteLiteral(" class=\"list-group list-group-unbordered\"");
 WriteLiteral(">\r\n");
 
             
-            #line 70 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 71 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 70 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 71 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                  if (config.Quote.LeadSales.Enabled)
                 {
 
@@ -687,7 +693,7 @@ WriteLiteral(" class=\"fa fa-plus-square\"");
 WriteLiteral("></i> ");
 
             
-            #line 73 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 74 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                                                                                     Write(Model.Seller.LeadSalesProfile?.TotalAvailableCredits ?? 0);
 
             
@@ -696,7 +702,7 @@ WriteLiteral("></i> ");
 WriteLiteral("</a>\r\n                    </li>\r\n");
 
             
-            #line 75 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 76 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                 }
 
             
@@ -713,7 +719,7 @@ WriteLiteral(" class=\"pull-right\"");
 WriteLiteral(">");
 
             
-            #line 77 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 78 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                        Write(Model.Seller.Quotes.Count);
 
             
@@ -722,7 +728,7 @@ WriteLiteral(">");
 WriteLiteral("</a>\r\n                </li>\r\n            </ul>\r\n");
 
             
-            #line 80 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 81 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
         }
 
             
@@ -731,7 +737,7 @@ WriteLiteral("</a>\r\n                </li>\r\n            </ul>\r\n");
 WriteLiteral("        ");
 
             
-            #line 81 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 82 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
          if (config.Seller.UserRatings.Enabled)
         {
 
@@ -749,13 +755,13 @@ WriteLiteral(" class=\"list-group-item text-center\"");
 WriteLiteral(">\r\n");
 
             
-            #line 85 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 86 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 85 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 86 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                      for (int i = 0; i < 5; i++)
                     {
                         if (averageRating - i >= 0.9)
@@ -771,7 +777,7 @@ WriteLiteral(" class=\"fa fa-star rating-star\"");
 WriteLiteral("></i>\r\n");
 
             
-            #line 90 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 91 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                         }
                         else if (averageRating - i >= 0.5)
                         {
@@ -786,7 +792,7 @@ WriteLiteral(" class=\"fa fa-star-half-o rating-star\"");
 WriteLiteral("></i>\r\n");
 
             
-            #line 94 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 95 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                         }
                         else
                         {
@@ -801,7 +807,7 @@ WriteLiteral(" class=\"fa fa-star-o rating-star\"");
 WriteLiteral("></i>\r\n");
 
             
-            #line 98 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 99 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                         }
                     }
 
@@ -811,7 +817,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                    | ");
 
             
-            #line 100 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 101 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                  Write(averageRating.ToString("0.00"));
 
             
@@ -820,7 +826,7 @@ WriteLiteral("                    | ");
 WriteLiteral(" | ");
 
             
-            #line 100 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 101 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                    Write(ViewData["RatingsCount"]);
 
             
@@ -829,7 +835,7 @@ WriteLiteral(" | ");
 WriteLiteral(" avaliações\r\n                </li>\r\n\r\n            </ul>\r\n");
 
             
-            #line 104 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 105 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
         }
 
             
@@ -838,7 +844,7 @@ WriteLiteral(" avaliações\r\n                </li>\r\n\r\n            </ul>\r\
 WriteLiteral("        ");
 
             
-            #line 105 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 106 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
          if (config.Payment.Common.EnableCustomFeesByVendor)
         {
 
@@ -856,13 +862,13 @@ WriteLiteral(" style=\"display:none\"");
 WriteLiteral(">\r\n");
 
             
-            #line 108 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 109 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 108 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 109 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                  using (Html.BeginForm("ChangeFees", "Sellers", FormMethod.Post, new { role = "form", id = "frmEditFees" }))
                 {
                     
@@ -870,28 +876,28 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 110 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 111 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 110 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 111 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                             
                     
             
             #line default
             #line hidden
             
-            #line 111 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 112 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                Write(Html.Hidden("Id", Model.Seller.Id));
 
             
             #line default
             #line hidden
             
-            #line 111 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 112 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                        
 
             
@@ -935,7 +941,7 @@ WriteLiteral(" value=\"true\"");
 WriteLiteral(" ");
 
             
-            #line 118 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 119 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                                                                                                                    Write(Model.Seller.OverrideGlobalPaymentFees.GetValueOrDefault() ? "checked" : "");
 
             
@@ -965,7 +971,7 @@ WriteLiteral(" value=\"false\"");
 WriteLiteral(" ");
 
             
-            #line 122 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 123 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                                                                                                                    Write(Model.Seller.OverrideGlobalPaymentFees.GetValueOrDefault() ? "" : "checked");
 
             
@@ -1006,7 +1012,7 @@ WriteLiteral(" value=\"true\"");
 WriteLiteral(" ");
 
             
-            #line 131 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 132 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                                                                                                 Write(Model.Seller.CustomIsLiable.GetValueOrDefault() ? "checked" : "");
 
             
@@ -1036,7 +1042,7 @@ WriteLiteral(" value=\"false\"");
 WriteLiteral(" ");
 
             
-            #line 135 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 136 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                                                                                                 Write(Model.Seller.CustomIsLiable.GetValueOrDefault() ? "" : "checked");
 
             
@@ -1052,7 +1058,7 @@ WriteLiteral(">\r\n                            <b>Comissão %</b>\r\n");
 WriteLiteral("                            ");
 
             
-            #line 141 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 142 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                        Write(Html.TextBox("customPaymentFeePercent", Model.Seller.CustomPaymentFeePercent, new { @class = "form-control fee-input-form", style = "width:50%; margin:auto" }));
 
             
@@ -1067,7 +1073,7 @@ WriteLiteral(">\r\n                            <b>Comissão Fixa</b>\r\n");
 WriteLiteral("                            ");
 
             
-            #line 145 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 146 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                        Write(Html.TextBox("customPaymentFeeAmount", Model.Seller.CustomPaymentFeeAmount, new { @class = "form-control fee-input-form", style = "width:50%; margin:auto" }));
 
             
@@ -1094,7 +1100,7 @@ WriteLiteral(" id=\"btn-cancel-modify-fee\"");
 WriteLiteral(">Cancelar</a>\r\n");
 
             
-            #line 150 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 151 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                 }
 
             
@@ -1103,7 +1109,7 @@ WriteLiteral(">Cancelar</a>\r\n");
 WriteLiteral("                <br />\r\n            </div>\r\n");
 
             
-            #line 153 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 154 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
         }
 
             
@@ -1112,7 +1118,7 @@ WriteLiteral("                <br />\r\n            </div>\r\n");
 WriteLiteral("        ");
 
             
-            #line 154 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 155 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
          if (config.Seller.Moderation.Enabled)
         {
 
@@ -1122,13 +1128,13 @@ WriteLiteral("        ");
 WriteLiteral("            <center>\r\n");
 
             
-            #line 157 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 158 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 157 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 158 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                  if (Model.Seller.RequireModeration.GetValueOrDefault() || Model.Seller.RequireModeration == null)
                 {
 
@@ -1147,7 +1153,7 @@ WriteLiteral("></i>\r\n                        Vendedor aguardando moderação\r
 " </p>\r\n");
 
             
-            #line 163 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 164 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                     using (Html.BeginForm("ApproveModeration", "Sellers", FormMethod.Post))
                     {
                         
@@ -1155,14 +1161,14 @@ WriteLiteral("></i>\r\n                        Vendedor aguardando moderação\r
             #line default
             #line hidden
             
-            #line 165 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 166 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                    Write(Html.Hidden("sellerguid", Model.Id.ToString()));
 
             
             #line default
             #line hidden
             
-            #line 165 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 166 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                                        
 
             
@@ -1192,7 +1198,7 @@ WriteLiteral(" type=\"submit\"");
 
 WriteLiteral(" class=\"btn btn-danger btn-sm\"");
 
-WriteLiteral("  name=\"isApproved\"");
+WriteLiteral(" name=\"isApproved\"");
 
 WriteLiteral(" id=\"isApproved\"");
 
@@ -1207,7 +1213,7 @@ WriteLiteral("></i> Reprovar cadastro</button>\r\n");
 WriteLiteral("                        <hr />\r\n");
 
             
-            #line 169 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 170 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                     }
                 }
                 else
@@ -1217,14 +1223,14 @@ WriteLiteral("                        <hr />\r\n");
             #line default
             #line hidden
             
-            #line 173 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 174 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                Write(ChangeStatus());
 
             
             #line default
             #line hidden
             
-            #line 173 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 174 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                    
                 }
 
@@ -1234,7 +1240,7 @@ WriteLiteral("                        <hr />\r\n");
 WriteLiteral("            </center>\r\n");
 
             
-            #line 176 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 177 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
         }
         else
         {
@@ -1243,14 +1249,14 @@ WriteLiteral("            </center>\r\n");
             #line default
             #line hidden
             
-            #line 179 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 180 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
        Write(ChangeStatus());
 
             
             #line default
             #line hidden
             
-            #line 179 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 180 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                            
         }
 
@@ -1260,7 +1266,7 @@ WriteLiteral("            </center>\r\n");
 WriteLiteral("    </div>\r\n</div>\r\n\r\n");
 
             
-            #line 184 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 185 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
  if (config.Quote.LeadSales.Enabled)
 {
 
@@ -1290,13 +1296,13 @@ WriteLiteral(" class=\"box-body\"");
 WriteLiteral(">\r\n");
 
             
-            #line 191 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 192 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 191 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 192 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
              using (Html.BeginForm("AddCredits", "Sellers", FormMethod.Post, new { @class = "" }))
             {
 
@@ -1310,7 +1316,7 @@ WriteLiteral(" class=\"row\"");
 WriteLiteral(">\r\n                    <span>");
 
             
-            #line 194 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 195 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                      Write(Html.Hidden("sellerId", Model.Seller.Id));
 
             
@@ -1325,7 +1331,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 196 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 197 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                    Write(Html.Label("Quantidade"));
 
             
@@ -1336,7 +1342,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 197 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 198 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                    Write(Html.TextBox("amount", 0, new { type = "number", min = "1", max = "999", @class = "form-control" }));
 
             
@@ -1345,13 +1351,13 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </div>\r\n");
 
             
-            #line 199 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 200 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 199 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 200 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                      if (config.Quote.LeadSales.CreditsExpire)
                     {
 
@@ -1367,7 +1373,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 202 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 203 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                        Write(Html.Label("Validade (dias)"));
 
             
@@ -1378,7 +1384,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                            ");
 
             
-            #line 203 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 204 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                        Write(Html.TextBox("duration", config.Quote.LeadSales.CreditsDefaultDuration, new { type = "number", min = "1", max = "999", @class = "form-control" }));
 
             
@@ -1387,7 +1393,7 @@ WriteLiteral("                            ");
 WriteLiteral("\r\n                        </div>\r\n");
 
             
-            #line 205 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 206 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                     }
 
             
@@ -1410,7 +1416,7 @@ WriteLiteral(" class=\"fa fa-plus\"");
 WriteLiteral("></i> Adicionar créditos</button></div>\r\n");
 
             
-            #line 208 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 209 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
             }
 
             
@@ -1419,7 +1425,7 @@ WriteLiteral("></i> Adicionar créditos</button></div>\r\n");
 WriteLiteral("        </div>\r\n    </div>\r\n");
 
             
-            #line 211 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 212 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
 }
 
             
@@ -1452,7 +1458,7 @@ WriteLiteral(" class=\"text-muted\"");
 WriteLiteral(">");
 
             
-            #line 219 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 220 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                           Write(Model.Seller.Address == null ? "-" : Model.Seller.Address.ToString());
 
             
@@ -1469,7 +1475,7 @@ WriteLiteral(" class=\"list-unstyled\"");
 WriteLiteral(">\r\n            <li>");
 
             
-            #line 224 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 225 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
            Write(Html.DisplayFor(model => Model.Seller.Email));
 
             
@@ -1478,13 +1484,13 @@ WriteLiteral(">\r\n            <li>");
 WriteLiteral("</li>\r\n");
 
             
-            #line 225 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 226 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 225 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 226 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
              if (config.Seller.Phone.Enabled && Model.Seller.PhoneNumber != null)
             {
 
@@ -1494,7 +1500,7 @@ WriteLiteral("</li>\r\n");
 WriteLiteral("                <li>");
 
             
-            #line 227 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 228 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                Write(Html.DisplayFor(model => Model.Seller.PhoneNumber));
 
             
@@ -1503,7 +1509,7 @@ WriteLiteral("                <li>");
 WriteLiteral("</li>\r\n");
 
             
-            #line 228 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 229 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
             }
 
             
@@ -1520,13 +1526,13 @@ WriteLiteral(" class=\"list-unstyled\"");
 WriteLiteral(">\r\n");
 
             
-            #line 234 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 235 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 234 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 235 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
              if (config.Seller.DateOfBirth.Enabled)
             {
 
@@ -1540,7 +1546,7 @@ WriteLiteral(" class=\"text-muted\"");
 WriteLiteral(">");
 
             
-            #line 236 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 237 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                                  Write(Html.DisplayFor(model => Model.Seller.DateOfBirth));
 
             
@@ -1549,7 +1555,7 @@ WriteLiteral(">");
 WriteLiteral("</span></li>\r\n");
 
             
-            #line 237 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 238 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
             }
 
             
@@ -1558,7 +1564,7 @@ WriteLiteral("</span></li>\r\n");
 WriteLiteral("            ");
 
             
-            #line 238 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 239 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
              if (config.Seller.DocumentNumber.Enabled)
             {
 
@@ -1572,7 +1578,7 @@ WriteLiteral(" class=\"text-muted\"");
 WriteLiteral(">");
 
             
-            #line 240 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 241 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                                 Write(Html.DisplayFor(model => Model.Seller.DocumentNumber));
 
             
@@ -1581,7 +1587,7 @@ WriteLiteral(">");
 WriteLiteral("</span></li>\r\n");
 
             
-            #line 241 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 242 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
             }
 
             
@@ -1590,7 +1596,7 @@ WriteLiteral("</span></li>\r\n");
 WriteLiteral("            ");
 
             
-            #line 242 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 243 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
              if (config.Seller.Genre.Enabled)
             {
 
@@ -1604,7 +1610,7 @@ WriteLiteral(" class=\"text-muted\"");
 WriteLiteral(">");
 
             
-            #line 244 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 245 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                            Write(Html.DisplayFor(model => Model.Seller.Genre));
 
             
@@ -1613,7 +1619,7 @@ WriteLiteral(">");
 WriteLiteral("</span></li>\r\n");
 
             
-            #line 245 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 246 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
             }
 
             
@@ -1626,7 +1632,7 @@ WriteLiteral(" class=\"text-muted\"");
 WriteLiteral(">");
 
             
-            #line 246 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 247 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                            Write(Html.DisplayFor(model => Model.Seller.CreatedAt));
 
             
@@ -1635,13 +1641,13 @@ WriteLiteral(">");
 WriteLiteral("</span></li>\r\n        </ul>\r\n\r\n");
 
             
-            #line 249 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 250 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 249 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 250 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
          if (config.CustomFields.Seller.Enabled && Model.CustomFieldDefinitions != null)
         {
 
@@ -1663,13 +1669,13 @@ WriteLiteral(" class=\"list-unstyled\"");
 WriteLiteral(">\r\n");
 
             
-            #line 254 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 255 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 254 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 255 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                  foreach (var field in Model.CustomFieldDefinitions)
                 {
                     if (Model.CustomFields.ContainsKey(field.Key.ToString()))
@@ -1682,7 +1688,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        <li>\r\n                            <span>");
 
             
-            #line 260 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 261 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                              Write(field.Value.Name);
 
             
@@ -1691,13 +1697,13 @@ WriteLiteral("                        <li>\r\n                            <span>
 WriteLiteral("</span>:\r\n");
 
             
-            #line 261 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 262 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 261 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 262 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                              if (CustomFieldHelper.IsLink(value))
                             {
 
@@ -1706,14 +1712,14 @@ WriteLiteral("</span>:\r\n");
             #line hidden
 WriteLiteral("                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 13143), Tuple.Create("\"", 13156)
+WriteAttribute("href", Tuple.Create(" href=\"", 13262), Tuple.Create("\"", 13275)
             
-            #line 263 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
-, Tuple.Create(Tuple.Create("", 13150), Tuple.Create<System.Object, System.Int32>(value
+            #line 264 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+, Tuple.Create(Tuple.Create("", 13269), Tuple.Create<System.Object, System.Int32>(value
             
             #line default
             #line hidden
-, 13150), false)
+, 13269), false)
 );
 
 WriteLiteral("><i");
@@ -1723,7 +1729,7 @@ WriteLiteral(" class=\"fa fa-paperclip\"");
 WriteLiteral("></i> ");
 
             
-            #line 263 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 264 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                                                             Write(Request.GetLocalizedString("CUSTOM_FIELD_VIEW_FILE"));
 
             
@@ -1732,7 +1738,7 @@ WriteLiteral("></i> ");
 WriteLiteral("</a>\r\n");
 
             
-            #line 264 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 265 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                             }
                             else
                             {
@@ -1743,7 +1749,7 @@ WriteLiteral("</a>\r\n");
 WriteLiteral("                                <span>");
 
             
-            #line 267 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 268 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                                  Write(CustomFieldHelper.LocalizeField(value, Request.GetCurrentLang()));
 
             
@@ -1752,7 +1758,7 @@ WriteLiteral("                                <span>");
 WriteLiteral("</span>\r\n");
 
             
-            #line 268 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 269 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                             }
 
             
@@ -1761,7 +1767,7 @@ WriteLiteral("</span>\r\n");
 WriteLiteral("                        </li>\r\n");
 
             
-            #line 270 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 271 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
                     }
                 }
 
@@ -1771,7 +1777,7 @@ WriteLiteral("                        </li>\r\n");
 WriteLiteral("            </ul>\r\n");
 
             
-            #line 273 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 274 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
         }
 
             
@@ -1780,7 +1786,7 @@ WriteLiteral("            </ul>\r\n");
 WriteLiteral("    </div>\r\n</div>\r\n\r\n");
 
             
-            #line 277 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 278 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
  if (Model.Seller.Enabled)
 {
 
@@ -1818,14 +1824,14 @@ WriteLiteral(" class=\"text-muted\"");
 WriteLiteral(">\r\n                Esta função é fornecida para que você possa dar <u>suporte</u>" +
 " ao vendedor.\r\n            </p>\r\n            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 14283), Tuple.Create("\"", 14369)
+WriteAttribute("href", Tuple.Create(" href=\"", 14402), Tuple.Create("\"", 14488)
             
-            #line 291 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
-, Tuple.Create(Tuple.Create("", 14290), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("SignInAsSeller", "Sellers", new { id = Model.Seller.Id })
+            #line 292 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+, Tuple.Create(Tuple.Create("", 14409), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("SignInAsSeller", "Sellers", new { id = Model.Seller.Id })
             
             #line default
             #line hidden
-, 14290), false)
+, 14409), false)
 );
 
 WriteLiteral(">\r\n                <i");
@@ -1836,7 +1842,7 @@ WriteLiteral("></i>\r\n                login com a conta do vendedor\r\n        
 "/div>\r\n    </div>\r\n");
 
             
-            #line 297 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
+            #line 298 "..\..\Areas\Admin\Views\Sellers\_DetailsProfile.cshtml"
 }
 
             

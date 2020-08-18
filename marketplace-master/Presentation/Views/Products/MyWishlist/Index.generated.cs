@@ -192,13 +192,14 @@ WriteLiteral("\r\n");
 
 DefineSection("scripts", () => {
 
-WriteLiteral("\r\n    <script>\r\n        SearchLoaderOnScroll.init(function () {\r\n\r\n        });\r\n " +
-"   </script>\r\n\r\n");
+WriteLiteral("\r\n    <script>\r\n        SearchLoaderOnScroll.init(function () {\r\n\r\n        });\r\n\r" +
+"\n        $(document).ready(function() {\r\n            SearchImageLoader.loadImage" +
+"s();\r\n        });\r\n    </script>\r\n\r\n");
 
 WriteLiteral("    ");
 
             
-            #line 56 "..\..\Views\Products\MyWishlist\Index.cshtml"
+            #line 60 "..\..\Views\Products\MyWishlist\Index.cshtml"
 Write(Html.Partial("_ProductWishScript"));
 
             

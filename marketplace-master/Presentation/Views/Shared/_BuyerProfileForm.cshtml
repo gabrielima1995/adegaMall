@@ -22,7 +22,7 @@
     bool moderationIsEnable = ViewBag.ModerationIsEnable == null ? true : ViewBag.ModerationIsEnable;
 
     var blockChangesBirthDate = moderationIsEnable && !requireModeration && config.Buyer.DateOfBirth.BlockChangesAfterApprovedInModeration;
-    var blockChangesDocumentNumber = moderationIsEnable && !requireModeration && config.Buyer.DocumentNumber.BlockChangesAfterApprovedInModeration;
+    var blockChangesDocumentNumber = config.Buyer.DocumentNumber.BlockChangesAfterApprovedInModeration;
 
     if (ViewBag.AllFields == null)
     {
@@ -113,12 +113,12 @@
                     @Html.LabelFor(i => i.DocumentNumber)
                     @if (blockChangesDocumentNumber && (Model.DocumentNumber != null && !documentNumberInvalid))
                     {
-                        @Html.TextBoxFor(i => i.DocumentNumber, new { @class = "form-control" + (config.Buyer.DocumentNumber.AllowFreeText ? "" : " js-cpfcnpj"), disabled = "disabled" })
+                        @Html.TextBoxFor(i => i.DocumentNumber, new { @class = "form-control" + (config.Buyer.DocumentNumber.AllowFreeText ? "" : " js-cpf"), disabled = "disabled" })
                         @Html.HiddenFor(i => i.DocumentNumber)
                     }
                     else
                     {
-                        @Html.TextBoxFor(i => i.DocumentNumber, new { @class = "form-control" + (config.Buyer.DocumentNumber.AllowFreeText ? "" : " js-cpfcnpj"), placeholder = Request.GetLocalizedString("DOCUMENT_NUMBER_INPUT_BUYER") })
+                        @Html.TextBoxFor(i => i.DocumentNumber, new { @class = "form-control" + (config.Buyer.DocumentNumber.AllowFreeText ? "" : " js-cpf"), placeholder = Request.GetLocalizedString("DOCUMENT_NUMBER_INPUT_BUYER") })
                     }
                     @Html.ValidationMessageFor(model => model.DocumentNumber, "", new { @class = "text-danger" })
                     @Html.HiddenFor(i => i.DocumentNumberRequired)

@@ -12,6 +12,7 @@
         var $multiplier;
         var $productAvailabilityId;
         var $customFields;
+        var $productShippingWrapper;
 
         function init() {
             $quantity = $('#Quantity');
@@ -19,6 +20,7 @@
             $rentalEndDateTime = $('[name="RentalEndDateTime"]');
             $productAvailabilityId = $('#ProductAvailabilityId');
             $customFields = $('.js-customfield');
+            $productShippingWrapper = $(".js-product-shipping-loading");
 
             handleAddItemClick();
             handleMultiplierChange();
@@ -36,16 +38,31 @@
         }
 
         function loadShippingInfosIfIsBuyer() {
-            var isBuyer = @User.Identity.GetLoginProfile().IsBuyer().ToJson();
-            if (isBuyer) {
-                var id = $(".js-product-shipping-loading").show().attr("data-product-id");
-                $.ajax({
-                    type: "GET",
-                    url: "@Url.ActionLocalized("LoadingShippingInfos", "Product")&id=" + id
-                }).done(function (response) {
-                    $(".js-product-shipping-loading").html(response);
-                });
+            var $zipCodeInput = $('.zipcode-form input');
+            var id = $productShippingWrapper.attr("data-product-id");
+            var zipCode = $zipCodeInput.val() || localStorage.getItem("zipCode") || "";
+
+            $productShippingWrapper.show();
+
+            if (zipCode.length !== 9 && $productShippingWrapper.html().trim() !== "") {
+                $productShippingWrapper.find(".product-freight-list").remove();
+                $productShippingWrapper.find(".js-error-message").remove();
+                $productShippingWrapper.append('<p class="js-error-message">Informe um CEP válido</p>');
+                return false;
             }
+
+            $productShippingWrapper.html('<p><i class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;Calculando frete e prazo</p>');
+
+            $.ajax({
+                type: "GET",
+                url: "@Url.ActionLocalized("LoadingShippingInfos", "Product")&id=" + id + "&zipCode=" + zipCode
+            }).done(function (response) {
+                $productShippingWrapper.html(response);
+                MaaS.initPlugins();
+                $productShippingWrapper.find('.zipcode-form').submit(loadShippingInfosIfIsBuyer);
+            });
+
+            return false;
         }
 
         function addAndProceedToLogin() {

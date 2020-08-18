@@ -64,6 +64,10 @@ namespace Presentation.Models
 
         public string CartDeliveryDays => cart.DeliveryDate?.ToShortDateString() ?? "";
 
+        public int? TotalDeliveryDays => cart.ShippingMode == ShippingMode.PerStore 
+            ? cart.Sellers.Max(x => x.SellerDeliveryDays) + 2
+            : cart.StockAndShippingValidation.Result?.TotalDeliveryDays + 2;
+
         public bool HasCartErrors => errors.Any();
 
         public bool HasProducts => !cart.IsEmpty;
@@ -79,6 +83,8 @@ namespace Presentation.Models
         public AddressRegisterModel NewShippingAddress { get; set; }
 
         public bool IsShippingOut => HasProducts && (
+            SelectedShippingMethod == ShippingMethod.AsapLog ||
+            SelectedShippingMethod == ShippingMethod.TotalExpress ||
             SelectedShippingMethod == ShippingMethod.PostalRegular ||
             SelectedShippingMethod == ShippingMethod.PostalExpress ||
             SelectedShippingMethod == ShippingMethod.PrivateFleet);
@@ -161,6 +167,10 @@ namespace Presentation.Models
                         return cfg.SedexShipping.DeliveryTimeMessage.Enabled;
                     case ShippingMethod.PostalRegular:
                         return cfg.PACShipping.DeliveryTimeMessage.Enabled;
+                    case ShippingMethod.AsapLog:
+                        return cfg.AsapLogShipping.DeliveryTimeMessage.Enabled;
+                    case ShippingMethod.TotalExpress:
+                        return cfg.TotalExpressShipping.DeliveryTimeMessage.Enabled;
                     default:
                         throw new Exception($"Shipping method {method} is not recognized.");
                 }

@@ -153,8 +153,9 @@ namespace Infrastructure.Data.Repositories
 
             return CacheHelper.List(Context.Set<Product>()
                 .Include(x => x.Category)
+                .Include(x => x.Variants)
                 .Where(x =>
-                    x.Deleted == false
+                    !x.Deleted
                     && x.Store_SellerId == sellerId
                     && (!MaaSConfig.Current.Product.CanPauseProducts || x.IsDisabled == null || x.IsDisabled == false)
                     && (x.IsBillingProduct == null || !x.IsBillingProduct.Value)

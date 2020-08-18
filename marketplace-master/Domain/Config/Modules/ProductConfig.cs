@@ -119,6 +119,16 @@ namespace Application.Config.Modules
         /// </summary>
         public PostalRegularShippingConfig PACShipping { get; set; } = new PostalRegularShippingConfig();
 
+        /// <summary>
+        /// Configuração de entrega AsapLog.
+        /// </summary>
+        public AsapLogShippingConfig AsapLogShipping { get; set; } = new AsapLogShippingConfig();
+
+        /// <summary>
+        /// Configuração de entrega Total Express.
+        /// </summary>
+        public TotalExpressShippingConfig TotalExpressShipping { get; set; } = new TotalExpressShippingConfig();
+
         public int CorreiosTimeoutSeconds { get; set; } = 6;
 
         /// <summary>
@@ -133,7 +143,7 @@ namespace Application.Config.Modules
         public bool SomeShippingMethodEnabled => GetShippingMethodsEnabled().Count > 0;
 
         [JsonIgnore]
-        public bool HasPhysicalShipping => GetShippingMethodsEnabled().Intersect(new[] { ShippingMethod.PostalExpress, ShippingMethod.PostalRegular, ShippingMethod.PrivateFleet }).Any();
+        public bool HasPhysicalShipping => GetShippingMethodsEnabled().Intersect(new[] { ShippingMethod.PostalExpress, ShippingMethod.PostalRegular, ShippingMethod.PrivateFleet, ShippingMethod.AsapLog, ShippingMethod.TotalExpress }).Any();
 
         /// <summary>
         /// Indica se somente um método de entrega está habilitado no módulo.
@@ -172,6 +182,12 @@ namespace Application.Config.Modules
 
                 if (PACShipping.Enabled)
                     list.Add(ShippingMethod.PostalRegular);
+
+                if (AsapLogShipping.Enabled)
+                    list.Add(ShippingMethod.AsapLog);
+
+                if (TotalExpressShipping.Enabled)
+                    list.Add(ShippingMethod.TotalExpress);
             }
             else if (ShippingMode == ShippingMode.PerStore)
             {
@@ -186,6 +202,12 @@ namespace Application.Config.Modules
 
                 if (PACShipping.Enabled)
                     list.Add(ShippingMethod.PostalRegular);
+
+                if (AsapLogShipping.Enabled)
+                    list.Add(ShippingMethod.AsapLog);
+
+                if (TotalExpressShipping.Enabled)
+                    list.Add(ShippingMethod.TotalExpress);
             }
 
             return list;

@@ -27,7 +27,7 @@ namespace Application.Modules.Products.Orders.EventHandlers
 
         public void Handle(OrderStatusChangedEvent domainEvent)
         {
-            if (domainEvent.Order.Status != OrderStatus.CompletedPayment)
+            if (domainEvent.NewStatus != OrderStatus.CompletedPayment)
                 return;
 
             var adminResult = SendToAdminIfEnabled(domainEvent);
