@@ -34,7 +34,7 @@ namespace Presentation.Models
 
         private List<Address> AddShippingAddressList(List<Address> shippingAddresses, Cart cart)
         {
-            if(cart.ShippingAddress!= null && !shippingAddresses.Contains(cart.ShippingAddress))
+            if (cart.ShippingAddress != null && !shippingAddresses.Contains(cart.ShippingAddress))
             {
                 shippingAddresses.Add(cart.ShippingAddress);
             }
@@ -58,13 +58,15 @@ namespace Presentation.Models
 
         public string FormattedCartItemsTotal => $"{currencySymbol} {cart.SubTotal.DisplayDecimal(2)}";
 
+        public string FormattedCartDiscount => cart.Discount == 0m ? "-" : $"-{currencySymbol} {cart.Discount.DisplayDecimal(2)}";
+
         public string FormattedCartShipping => cart.Shipping == 0m ? "-" : $"{currencySymbol} {cart.Shipping.DisplayDecimal(2)}";
 
         public string FormattedCartTotal => $"{currencySymbol} {cart.Amount.DisplayDecimal(2)}";
 
         public string CartDeliveryDays => cart.DeliveryDate?.ToShortDateString() ?? "";
 
-        public int? TotalDeliveryDays => cart.ShippingMode == ShippingMode.PerStore 
+        public int? TotalDeliveryDays => cart.ShippingMode == ShippingMode.PerStore
             ? cart.Sellers.Max(x => x.SellerDeliveryDays) + 2
             : cart.StockAndShippingValidation.Result?.TotalDeliveryDays + 2;
 
@@ -107,6 +109,10 @@ namespace Presentation.Models
         }
 
         public Cart GetCart() => cart;
+
+        public bool HasCoupon => cart.Coupon != null;
+
+        public string CouponCode => cart.Coupon?.Code ?? string.Empty;
 
         public IReadOnlyList<string> ListProductsNotSupporting(ShippingMethod method) => cart.Items.Where(item => !item.Product.SupportsShippingMethod(method)).Select(item => item.Product.Title).ToList();
 

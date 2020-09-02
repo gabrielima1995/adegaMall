@@ -515,6 +515,8 @@
     <Compile Include="Modules\StoreModule\CompleteProfile\SellerCompleteProfile.cs" />
     <Compile Include="Modules\StoreModule\Commands\EditProductAvailabilityCommand.cs" />
     <Compile Include="Modules\StoreModule\Commands\DeleteProductAvailabilityCommand.cs" />
+    <Compile Include="Modules\StoreModule\Coupons\Coupon.cs" />
+    <Compile Include="Modules\StoreModule\Coupons\ICouponRepository.cs" />
     <Compile Include="Modules\StoreModule\Entities\DefaultShipping.cs" />
     <Compile Include="Modules\StoreModule\Entities\ScheduleViewMode.cs" />
     <Compile Include="Modules\StoreModule\Entities\ProductAvailabilityMode.cs" />

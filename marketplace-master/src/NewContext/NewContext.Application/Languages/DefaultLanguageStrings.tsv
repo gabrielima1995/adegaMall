@@ -121,6 +121,7 @@ CART_ITEM_SUBTOTAL_LABEL	Subtotal
 CART_ITEM_TOTAL_LABEL	Valor Total
 CART_ITEM_UNIT_PRICE_LABEL	Valor Unitário
 CART_ITEMS_TOTAL	Total dos itens
+CART_DISCOUNT_LABEL	Desconto
 CART_MORE_PRODUCTS_BUTTON	Continuar comprando
 CART_NO_SHIPPING_ADDRESS	Parece que você ainda não cadastrou um endereço de entrega. Por favor visite seu perfil e complete seu cadastro para visualizar as informações de envio ou frete.
 CART_NOSHIPPING_INFO	Ao finalizar a compra, você receberá um email com as informações para download do seus produtos digitais, se houver
@@ -267,6 +268,7 @@ EDIT_PORTFOLIO_ITEM_LINK	Editar item do portfólio
 EDIT_PRODUCT_LINK	Editar produto
 EMAIL_ADDRESS_ERROR	O campo {0} não é um endereço de email válido.
 EMAIL_ALREADY_EXISTS_ERROR_MESSAGE	Este email já foi usado.
+BUYER_DOCUMENT_NUMBER_ALREADY_EXISTS_ERROR_MESSAGE	Este CPF já foi usado.
 EMAIL_INPUT	Email
 EMAIL_LABEL	Email
 EXTERNAL_LOGIN_FAILURE_ERROR	Falha ao fazer login com o provedor

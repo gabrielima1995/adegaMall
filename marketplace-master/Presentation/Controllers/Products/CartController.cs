@@ -374,6 +374,14 @@ namespace Presentation.Controllers.Products
             return RedirectToAction("Index", "Cart", new { lang = Request.GetCurrentLang() });
         }
 
+        [HttpPost]
+        public ActionResult ChooseCouponCode(string couponCode)
+        {
+            var buyerId = GetPersonId();
+            cartService.SetCoupon(buyerId, couponCode);
+            return RedirectToAction("Index", "Cart", new { lang = Request.GetCurrentLang() });
+        }
+
         public JsonResult CountProducts()
         {
             if (Request.IsAuthenticated)

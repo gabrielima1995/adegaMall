@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Domain.Modules.StoreModule.Coupons;
 
 namespace Domain.Entities.StoreModule
 {
@@ -20,6 +21,8 @@ namespace Domain.Entities.StoreModule
         public ShippingMode ShippingMode { get; set; }
         public decimal Shipping { get; set; }
         public DateTime? DeliveryDate { get; set; }
+        public Coupon Coupon { get; set; }
+        public decimal Discount { get; set; }
 
         /// <summary>
         /// Indica se o carrinho foi transformado em pedido.
@@ -33,14 +36,14 @@ namespace Domain.Entities.StoreModule
 
         public int TotalItems => Items?.Count ?? 0;
 
-        public bool IsEmpty => Items?.Count == 0;
+        public bool IsEmpty => TotalItems == 0;
 
         public decimal SubTotal => Items?.Sum(x => x.SubTotal) ?? 0M;
 
         /// <summary>
         /// Indica a soma total de itens + frete do carrinho.
         /// </summary>
-        public decimal Amount => SubTotal + Shipping;
+        public decimal Amount => SubTotal + Shipping - Discount;
 
         /// <summary>
         /// ID de sessão do usuário (AspNet SessionID).
@@ -273,7 +276,14 @@ namespace Domain.Entities.StoreModule
             {
                 foreach (var item in StockAndShippingValidation.Errors)
                 {
-                    errors.Add(item.Key, GlobalizationHelper.GetString("CART_PRODUCT_SHIPPING_ERROR"));
+                    if (item.Key == "INVALID_COUPON")
+                    {
+                        errors.Add(item.Key, item.Value);
+                    }
+                    else
+                    {
+                        errors.Add(item.Key, GlobalizationHelper.GetString("CART_PRODUCT_SHIPPING_ERROR"));
+                    }
                 }
             }
             return new OperationResult(errors);

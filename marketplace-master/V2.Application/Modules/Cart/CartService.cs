@@ -6,6 +6,7 @@ using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
 using Domain.Modules.QuoteBillingModule.Interfaces;
 using Domain.Modules.StoreModule;
+using Domain.Modules.StoreModule.Coupons;
 using Domain.Modules.StoreModule.Entities;
 using Domain.Services.StoreModule;
 using Domain.Validation;
@@ -35,6 +36,7 @@ namespace V2.Application.Modules
         private readonly IUnitOfWork unitOfWork;
         private readonly ICustomFieldAppService customFieldAppService;
         private readonly ICustomFieldRepository customFieldRepository;
+        private readonly ICouponRepository couponRepository;
 
         public CartService(
             RentalService rentalService,
@@ -47,7 +49,8 @@ namespace V2.Application.Modules
             IShippingService shippingService,
             IUnitOfWork uow,
             ICustomFieldAppService customFieldAppService,
-            ICustomFieldRepository customFieldRepository)
+            ICustomFieldRepository customFieldRepository,
+            ICouponRepository couponRepository)
         {
             this.rentalService = rentalService;
             _productAvailabilityService = productAvailabilityService;
@@ -60,6 +63,7 @@ namespace V2.Application.Modules
             unitOfWork = uow;
             this.customFieldAppService = customFieldAppService;
             this.customFieldRepository = customFieldRepository;
+            this.couponRepository = couponRepository;
         }
 
         public OperationResult<Cart> SetExtraInfo(string buyerId, string extraInfo)
@@ -159,12 +163,90 @@ namespace V2.Application.Modules
             var updateResult = UpdateCartShipping(cart);
             if (updateResult.Errors.HasErrors) errors.Merge(updateResult.Errors);
 
+            var validateCouponResult = ValidateCoupon(cart);
+            if (validateCouponResult.IsFailure) errors.Merge(validateCouponResult.Errors);
+
             var commitResult = unitOfWork.Save();
             if (!commitResult.OK) errors.Merge(commitResult.Errors);
 
             if ((commitResult.IsFailure && updateResult.IsFailure) || errors.HasErrors)
                 return errors;
             return new OperationResult<CorreiosShippingCollection>(shippingCollection);
+        }
+
+        private OperationResult ValidateCoupon(Cart cart)
+        {
+            void RemoveDiscount()
+            {
+                cart.Discount = decimal.Zero;
+            }
+
+            OperationResult InvalidCoupon()
+            {
+                RemoveDiscount();
+
+                return OperationResult.Fail("INVALID_COUPON", "Cupom inválido.");
+            }
+
+            if (cart.IsEmpty || cart.Coupon == null)
+            {
+                RemoveDiscount();
+
+                return OperationResult.Success;
+            }
+
+            var coupon = cart.Coupon;
+
+            void CalculateDiscount()
+            {
+                // somente produtos sem desconto
+                var items = cart.Items
+                    .Where(i =>
+                        i.Discount == 0 &&
+                        !i.Product.ProductPriceMapped.DisplayPrice.Discount.HasDiscount);
+
+                // cupom do vendedor, somente produtos dele
+                if (coupon.IsBySeller)
+                {
+                    items = items.Where(i => i.Product.Store_SellerId == coupon.SellerId);
+                }
+
+                var amount = items.Sum(i => i.SubTotal);
+
+                var discount = coupon.CalculateDiscount(amount);
+
+                cart.Discount = Math.Min(discount, amount);
+            }
+
+            if (!coupon.IsValid()) return InvalidCoupon();
+
+            switch (coupon.UseMode)
+            {
+                // primeira compra
+                case CouponUseMode.FirstOrder:
+                    var firstOrder = couponRepository.IsFirstOrder(cart.Buyer.Id);
+                    if (!firstOrder) return InvalidCoupon();
+                    break;
+
+                // Uso único por usuário
+                case CouponUseMode.OneTimeByUser:
+                    var oneTimeByUser = couponRepository.IsOneTimeByUser(cart.Buyer.Id, coupon.Id);
+                    if (!oneTimeByUser) return InvalidCoupon();
+                    break;
+
+                // Uso único no marketplace
+                case CouponUseMode.OneTimeEver:
+                    var oneTimeEver = couponRepository.IsOneTimeEver(coupon.Id);
+                    if (!oneTimeEver) return InvalidCoupon();
+                    break;
+            }
+
+            if (coupon.IsDiscount)
+                CalculateDiscount();
+
+            cartRepository.Update(cart);
+
+            return OperationResult.Success;
         }
 
         public Cart Get(string buyerId)
@@ -190,10 +272,8 @@ namespace V2.Application.Modules
         {
             if (cart.AvailableShippingsMethods.Contains(cart.ShippingMethod))
                 return cart.ShippingMethod;
-
             else if (cart.AvailableShippingsMethods.Any())
                 return cart.AvailableShippingsMethods.First();
-
             else return cart.ShippingMethod;
         }
 
@@ -325,6 +405,32 @@ namespace V2.Application.Modules
             return OperationResult.Success;
         }
 
+        public OperationResult SetCoupon(string buyerId, string couponCode)
+        {
+            Coupon coupon = null;
+
+            if (!string.IsNullOrEmpty(couponCode))
+            {
+                coupon = couponRepository.GetByCode(couponCode);
+            }
+
+            var cart = Get(buyerId);
+            cart.Coupon = coupon;
+
+            if (cart.StockAndShippingValidation.IsFailure)
+            {
+                cart.StockAndShippingValidation.Errors.RemoveAll(i => i.Key == "INVALID_COUPON");
+            }
+
+            var updateCartResult = cartRepository.Update(cart, saveChanges: true);
+            if (!updateCartResult.OK) return updateCartResult.Errors;
+
+            var ensureResult = EnsureStockAndShipping(cart);
+            if (!ensureResult.OK) return ensureResult.Errors;
+
+            return OperationResult.Success;
+        }
+
         public OperationResult SetShippingMode(Cart cart, ShippingMode shippingMode)
         {
             cart.ShippingMode = shippingMode;
@@ -425,6 +531,10 @@ namespace V2.Application.Modules
                 cartCustomFieldViewModel.Id = item.Id;
                 customFieldAppService.StoreCustomFields(cartCustomFieldViewModel);
             }
+
+            var validateCouponResult = ValidateCoupon(cart);
+            if (validateCouponResult.IsFailure) return validateCouponResult.Errors;
+
             var commitResult = unitOfWork.Save();
             if (!commitResult.OK) return commitResult.Errors;
 
@@ -778,6 +888,5 @@ namespace V2.Application.Modules
             cartRepository.Update(cart);
             return errors;
         }
-
     }
 }

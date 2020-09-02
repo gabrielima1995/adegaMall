@@ -1048,22 +1048,84 @@ WriteLiteral("</td>\r\n                            </tr>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("                        <tr>\r\n                            <td");
+WriteLiteral("                        ");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=\"", 12299), Tuple.Create("\"", 12317)
             
-            #line 209 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
-, Tuple.Create(Tuple.Create("", 12309), Tuple.Create<System.Object, System.Int32>(colSpan
+            #line 208 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+                         if (Model.Order.Discount > 0)
+                        {
+
             
             #line default
             #line hidden
-, 12309), false)
+WriteLiteral("                            <tr>\r\n                                <td");
+
+WriteAttribute("colspan", Tuple.Create(" colspan=\"", 12390), Tuple.Create("\"", 12408)
+            
+            #line 211 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+, Tuple.Create(Tuple.Create("", 12400), Tuple.Create<System.Object, System.Int32>(colSpan
+            
+            #line default
+            #line hidden
+, 12400), false)
+);
+
+WriteLiteral("></td>\r\n                                <td>");
+
+            
+            #line 212 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+                               Write(Html.Localized("CART_DISCOUNT_LABEL"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n                                <td");
+
+WriteLiteral(" class=\"text-right\"");
+
+WriteLiteral(">-");
+
+            
+            #line 213 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+                                                   Write(config.DefaultCurrency);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 213 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+                                                                           Write(Model.Order.Discount.DisplayDecimal(2));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n                            </tr>\r\n");
+
+            
+            #line 215 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+                        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        <tr>\r\n                            <td");
+
+WriteAttribute("colspan", Tuple.Create(" colspan=\"", 12747), Tuple.Create("\"", 12765)
+            
+            #line 217 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+, Tuple.Create(Tuple.Create("", 12757), Tuple.Create<System.Object, System.Int32>(colSpan
+            
+            #line default
+            #line hidden
+, 12757), false)
 );
 
 WriteLiteral("></td>\r\n                            <td>");
 
             
-            #line 210 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+            #line 218 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
                            Write(Html.Localized("CART_TOTAL_LABEL"));
 
             
@@ -1076,7 +1138,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral("><strong>");
 
             
-            #line 211 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+            #line 219 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
                                                       Write(config.DefaultCurrency);
 
             
@@ -1085,7 +1147,7 @@ WriteLiteral("><strong>");
 WriteLiteral(" ");
 
             
-            #line 211 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+            #line 219 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
                                                                               Write(Model.Order.Amount.DisplayDecimal(2));
 
             
@@ -1094,13 +1156,13 @@ WriteLiteral(" ");
 WriteLiteral("</strong></td>\r\n                        </tr>\r\n\r\n");
 
             
-            #line 214 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+            #line 222 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 214 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+            #line 222 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
                          if (Model.Order.Transaction?.RefundedAmount > 0M)
                         {
 
@@ -1109,20 +1171,20 @@ WriteLiteral("</strong></td>\r\n                        </tr>\r\n\r\n");
             #line hidden
 WriteLiteral("                            <tr>\r\n                                <td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=\"", 12741), Tuple.Create("\"", 12759)
+WriteAttribute("colspan", Tuple.Create(" colspan=\"", 13189), Tuple.Create("\"", 13207)
             
-            #line 217 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
-, Tuple.Create(Tuple.Create("", 12751), Tuple.Create<System.Object, System.Int32>(colSpan
+            #line 225 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+, Tuple.Create(Tuple.Create("", 13199), Tuple.Create<System.Object, System.Int32>(colSpan
             
             #line default
             #line hidden
-, 12751), false)
+, 13199), false)
 );
 
 WriteLiteral("></td>\r\n                                <td>");
 
             
-            #line 218 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+            #line 226 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
                                Write(Html.Localized("ORDER_REFUNDED_AMOUNT_LABEL"));
 
             
@@ -1135,7 +1197,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral("><strong>");
 
             
-            #line 219 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+            #line 227 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
                                                           Write(Model.Order.Transaction.RefundedAmount.DisplayCurrency());
 
             
@@ -1144,7 +1206,7 @@ WriteLiteral("><strong>");
 WriteLiteral("</strong></td>\r\n                            </tr>\r\n");
 
             
-            #line 221 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
+            #line 229 "..\..\Views\Products\MyOrders\_OrderDetailsProducts.cshtml"
                         }
 
             

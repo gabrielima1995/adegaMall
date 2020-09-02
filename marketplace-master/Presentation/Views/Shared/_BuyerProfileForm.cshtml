@@ -22,7 +22,7 @@
     bool moderationIsEnable = ViewBag.ModerationIsEnable == null ? true : ViewBag.ModerationIsEnable;
 
     var blockChangesBirthDate = moderationIsEnable && !requireModeration && config.Buyer.DateOfBirth.BlockChangesAfterApprovedInModeration;
-    var blockChangesDocumentNumber = config.Buyer.DocumentNumber.BlockChangesAfterApprovedInModeration;
+    var blockChangesDocumentNumber = !string.IsNullOrEmpty(Model.DocumentNumber);
 
     if (ViewBag.AllFields == null)
     {

@@ -57,7 +57,23 @@
             <div class="row">
                 @if (Model.HasProducts)
                 {
-                    <div class="col-sm-4" style="float: right">
+                    <div class="col-sm-6 col-md-5">
+                        <div class="panel panel-default">
+                            <form class="form-inline coupon-code-form">
+                                <div class="form-group">
+                                    <label for="coupon-code" style="margin-right: 10px;">Cupom de desconto</label>
+                                    <input id="coupon-code" name="coupon-code" type="text" class="form-control"
+                                           value="@Model.CouponCode" @(Model.HasCoupon ? "disabled" : string.Empty)>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">@(Model.HasCoupon ? "Remover" : "Aplicar")</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 hidden-sm"></div>
+
+                    <div class="col-sm-6 col-md-4">
                         <div class="panel panel-default">
                             <table class="table">
                                 @if (Model.Visualization.ShowShippingAmount)
@@ -65,6 +81,11 @@
                                     <tr class="cart-items-total">
                                         <td>@Html.Localized("CART_ITEMS_TOTAL")</td>
                                         <td class="text-right">@Model.FormattedCartItemsTotal</td>
+                                    </tr>
+
+                                    <tr class="cart-items-total">
+                                        <td>@Html.Localized("CART_DISCOUNT_LABEL")</td>
+                                        <td class="text-right">@Model.FormattedCartDiscount</td>
                                     </tr>
 
                                     <tr class="cart-shipping">

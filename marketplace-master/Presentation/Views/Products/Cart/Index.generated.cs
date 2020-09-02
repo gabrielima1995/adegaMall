@@ -222,6 +222,31 @@ WriteLiteral(@"', { method: $this.find('input').val() });
                 return false;
             });
 
+            $(document.body).on('submit', '.coupon-code-form', function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+
+                var $input = $this.find('input[name=""coupon-code""]');
+
+                if ($input.length === 0) return false;
+
+                var couponCode = $input[0].hasAttribute(""disabled"") ? """" : $input.val();
+
+                $.redirect('");
+
+            
+            #line 103 "..\..\Views\Products\Cart\Index.cshtml"
+                       Write(Url.ActionLocalized("ChooseCouponCode", "Cart"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"', { couponCode: couponCode });
+
+                return false;
+            });
+
             $(document.body).on('click', '.js-choose-shipping-address-button', function (e) {
                e.preventDefault();
 
@@ -230,7 +255,7 @@ WriteLiteral(@"', { method: $this.find('input').val() });
                $.redirect('");
 
             
-            #line 97 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 113 "..\..\Views\Products\Cart\Index.cshtml"
                       Write(Url.ActionLocalized("ChooseShippingAddress", "Cart"));
 
             
@@ -257,7 +282,7 @@ WriteLiteral(@"', { id: $this.find('input').val() });
             var chooseShippingAddressUrl = '");
 
             
-            #line 115 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 131 "..\..\Views\Products\Cart\Index.cshtml"
                                        Write(Url.ActionLocalized("ChooseShippingAddress", "Cart"));
 
             
@@ -266,7 +291,7 @@ WriteLiteral(@"', { id: $this.find('input').val() });
 WriteLiteral("\';\r\n            var openNewShippingAddressModal = ");
 
             
-            #line 116 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 132 "..\..\Views\Products\Cart\Index.cshtml"
                                           Write(ViewBag.OpenNewShippingAddressModal ? "true" : "false");
 
             
@@ -275,7 +300,7 @@ WriteLiteral("\';\r\n            var openNewShippingAddressModal = ");
 WriteLiteral(";\r\n            CitiesScript.init(\'");
 
             
-            #line 117 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 133 "..\..\Views\Products\Cart\Index.cshtml"
                           Write(Request.GetLocalizedString("CITY_AND_STATE_INPUT"));
 
             
@@ -287,7 +312,7 @@ WriteLiteral("\');\r\n            CartShippingAddress.init(chooseShippingAddress
 });
 
             
-            #line 123 "..\..\Views\Products\Cart\Index.cshtml"
+            #line 139 "..\..\Views\Products\Cart\Index.cshtml"
 Write(Html.Partial("~/Views/Products/Cart/_ModalShippingWarning.cshtml"));
 
             
