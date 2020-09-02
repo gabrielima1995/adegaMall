@@ -2123,3 +2123,4 @@ ADDITIONAL_PROFILE_POSSIBLE_FRAUD_ATTEMPT	O id do usuário não parece correto.
 ADDITIONAL_PROFILE_TYPE_DUPLICATE	Não é possível criar dois perfis do mesmo tipo.	
 ADDITIONAL_PROFILE_UNSUPPORTED_TYPE	Este tipo de perfil não pode ser adicionado.
 SEARCH_LOAD_MORE_FACETS_LINK	+ Ver mais
+SHIPPING_METHOD_DISCLAIMER	* A contar a partir da confirmação do pagamento do pedido

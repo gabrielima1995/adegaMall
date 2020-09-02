@@ -62,6 +62,12 @@ namespace Domain.Entities.StoreModule
         [NotMapped]
         public List<ShippingMethod> AvailableShippingsMethods { get; set; }
 
+        [NotMapped]
+        public decimal MinimumCost { get; set; }
+
+        [NotMapped]
+        public ShippingMethod MinimumCostShippingMethod { get; set; }
+
         public Cart()
         {
             Id = Guid.NewGuid();

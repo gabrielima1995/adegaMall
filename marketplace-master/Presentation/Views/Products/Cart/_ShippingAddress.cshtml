@@ -46,12 +46,24 @@
                             @Html.Hidden("shipping-method", shippingMethod)
                             @shippingMethod.GetDescriptionLocalized()
                         }
-                        else
+                        else if (Model.SelectedShippingMethod == shippingMethod ||
+                            (shippingMethod == ShippingMethod.NoShipping ||
+                                shippingMethod == ShippingMethod.ActualNoShipping ||
+                                shippingMethod == ShippingMethod.OnSitePickup) ||
+                                (Model.GetCart().MinimumCostShippingMethod == shippingMethod))
                         {
                             <div class="radio">
                                 <label class="js-choose-shipping-method-button">
                                     @Html.RadioButton("shipping-method", shippingMethod, Model.SelectedShippingMethod == shippingMethod)
-                                    @shippingMethod.GetDescriptionLocalized()
+                                    
+                                    @if (shippingMethod == ShippingMethod.AsapLog || shippingMethod == ShippingMethod.TotalExpress)
+                                    {
+                                        @:Expresso
+                                    }
+                                    else
+                                    {
+                                        @shippingMethod.GetDescriptionLocalized()
+                                    }
                                 </label>
                                 @{
                                     var products = Model.ListProductsNotSupporting(shippingMethod);
@@ -116,6 +128,8 @@
                         @Html.Localized("PRIVATE_FLEET_SHIPPING_DELIVERY_TIME")
                     </p>
                 }
+
+                @Html.Localized("SHIPPING_METHOD_DISCLAIMER")
             }
         }
 

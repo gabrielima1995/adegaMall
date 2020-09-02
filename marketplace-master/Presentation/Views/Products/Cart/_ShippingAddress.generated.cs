@@ -281,7 +281,11 @@ WriteLiteral("                    <li>\r\n");
             #line 47 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                                                      
                         }
-                        else
+                        else if (Model.SelectedShippingMethod == shippingMethod ||
+                            (shippingMethod == ShippingMethod.NoShipping ||
+                                shippingMethod == ShippingMethod.ActualNoShipping ||
+                                shippingMethod == ShippingMethod.OnSitePickup) ||
+                                (Model.GetCart().MinimumCostShippingMethod == shippingMethod))
                         {
 
             
@@ -300,33 +304,66 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 53 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 57 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                Write(Html.RadioButton("shipping-method", shippingMethod, Model.SelectedShippingMethod == shippingMethod));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("                                    ");
+WriteLiteral("\r\n                                    \r\n");
 
             
-            #line 54 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
-                               Write(shippingMethod.GetDescriptionLocalized());
+            #line 59 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+                                    
+            
+            #line default
+            #line hidden
+            
+            #line 59 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+                                     if (shippingMethod == ShippingMethod.AsapLog || shippingMethod == ShippingMethod.TotalExpress)
+                                    {
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                </label>\r\n");
+WriteLiteral("                                        ");
+
+WriteLiteral("Expresso\r\n");
 
             
-            #line 56 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 62 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+                                    }
+                                    else
+                                    {
+                                        
+            
+            #line default
+            #line hidden
+            
+            #line 65 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+                                   Write(shippingMethod.GetDescriptionLocalized());
+
+            
+            #line default
+            #line hidden
+            
+            #line 65 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+                                                                                 
+                                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                </label>\r\n");
+
+            
+            #line 68 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 56 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 68 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                   
                                     var products = Model.ListProductsNotSupporting(shippingMethod);
                                     if (products.Count > 0)
@@ -344,7 +381,7 @@ WriteLiteral(">\r\n                                            Não disponível 
 WriteLiteral("                                            ");
 
             
-            #line 62 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 74 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                        Write(string.Join(", ", products));
 
             
@@ -353,7 +390,7 @@ WriteLiteral("                                            ");
 WriteLiteral("\r\n                                        </small>\r\n");
 
             
-            #line 64 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 76 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                     }
                                 
             
@@ -362,13 +399,13 @@ WriteLiteral("\r\n                                        </small>\r\n");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 67 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 79 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 67 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 79 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                  if (shippingMethod == ShippingMethod.OnSitePickup)
                                 {
 
@@ -378,7 +415,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 69 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 81 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                  Write(Html.Localized("ON_SITE_PICKUP_CAN_BE_REVIEWED", "small", new { @class = "block", style = "padding-left: 21px" }));
 
             
@@ -387,7 +424,7 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n");
 
             
-            #line 70 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 82 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                 }
 
             
@@ -396,7 +433,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                            </div>\r\n");
 
             
-            #line 72 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 84 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                         }
 
             
@@ -405,7 +442,7 @@ WriteLiteral("                            </div>\r\n");
 WriteLiteral("                    </li>\r\n");
 
             
-            #line 74 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 86 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                 }
 
             
@@ -414,7 +451,7 @@ WriteLiteral("                    </li>\r\n");
 WriteLiteral("                ");
 
             
-            #line 75 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 87 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                  if (Model.AvailableShippingMethods.Count == 0)
                 {
 
@@ -424,7 +461,7 @@ WriteLiteral("                ");
 WriteLiteral("                    <li>");
 
             
-            #line 77 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 89 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                    Write(Html.Localized("CART_PRODUCT_SHIPPING_LABEL_ERROR", "p"));
 
             
@@ -433,7 +470,7 @@ WriteLiteral("                    <li>");
 WriteLiteral("</li>\r\n");
 
             
-            #line 78 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 90 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                 }
 
             
@@ -442,7 +479,7 @@ WriteLiteral("</li>\r\n");
 WriteLiteral("            </ul>\r\n");
 
             
-            #line 80 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 92 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
 
             if (Model.AvailableShippingMethods.Count > 0)
             {
@@ -453,14 +490,14 @@ WriteLiteral("            </ul>\r\n");
             #line default
             #line hidden
             
-            #line 85 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 97 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                Write(Html.Localized("ACTUAL_NO_SHIPPING_DELIVERY_TIME", "p"));
 
             
             #line default
             #line hidden
             
-            #line 85 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 97 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                                                             
                 }
                 if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.NoShipping))
@@ -470,14 +507,14 @@ WriteLiteral("            </ul>\r\n");
             #line default
             #line hidden
             
-            #line 89 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 101 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                Write(Html.Localized("NO_SHIPPING_DELIVERY_TIME", "p"));
 
             
             #line default
             #line hidden
             
-            #line 89 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 101 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                                                      
                 }
                 else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.OnSitePickup))
@@ -487,14 +524,14 @@ WriteLiteral("            </ul>\r\n");
             #line default
             #line hidden
             
-            #line 93 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 105 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                Write(Html.Localized("ON_SITE_PICKUP_DELIVERY_TIME", "p"));
 
             
             #line default
             #line hidden
             
-            #line 93 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 105 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                                                         
                 }
                 else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PostalExpress))
@@ -504,14 +541,14 @@ WriteLiteral("            </ul>\r\n");
             #line default
             #line hidden
             
-            #line 97 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 109 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                Write(Html.Localized("POSTAL_EXPRESS_DELIVERY_TIME", "p"));
 
             
             #line default
             #line hidden
             
-            #line 97 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 109 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                                                         
                 }
                 else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PostalRegular))
@@ -521,14 +558,14 @@ WriteLiteral("            </ul>\r\n");
             #line default
             #line hidden
             
-            #line 101 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 113 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                Write(Html.Localized("POSTAL_REGULAR_DELIVERY_TIME", "p"));
 
             
             #line default
             #line hidden
             
-            #line 101 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 113 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                                                         
                 }
                 else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.AsapLog))
@@ -538,14 +575,14 @@ WriteLiteral("            </ul>\r\n");
             #line default
             #line hidden
             
-            #line 105 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 117 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                Write(Html.Localized("ASAPLOG_DELIVERY_TIME", "p", null, Model.TotalDeliveryDays));
 
             
             #line default
             #line hidden
             
-            #line 105 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 117 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                                                                                 
                 }
                 else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.TotalExpress))
@@ -555,14 +592,14 @@ WriteLiteral("            </ul>\r\n");
             #line default
             #line hidden
             
-            #line 109 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 121 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                Write(Html.Localized("TOTALEXPRESS_DELIVERY_TIME", "p", null, Model.TotalDeliveryDays));
 
             
             #line default
             #line hidden
             
-            #line 109 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 121 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                                                                                      
                 }
                 else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PrivateFleet))
@@ -572,14 +609,14 @@ WriteLiteral("            </ul>\r\n");
             #line default
             #line hidden
             
-            #line 113 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 125 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                Write(Html.Localized("PRIVATE_FLEET_SHIPPING_DELIVERY_TIME", "p"));
 
             
             #line default
             #line hidden
             
-            #line 113 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 125 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                                                                 
 
             
@@ -590,7 +627,7 @@ WriteLiteral("                    <p>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 115 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 127 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                    Write(Html.Localized("DELIVERY_TIME_LABEL", "strong"));
 
             
@@ -601,7 +638,7 @@ WriteLiteral(":\r\n");
 WriteLiteral("                        ");
 
             
-            #line 116 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 128 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                    Write(Html.Localized("PRIVATE_FLEET_SHIPPING_DELIVERY_TIME"));
 
             
@@ -610,8 +647,23 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </p>\r\n");
 
             
-            #line 118 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 130 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                 }
+
+                
+            
+            #line default
+            #line hidden
+            
+            #line 132 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+           Write(Html.Localized("SHIPPING_METHOD_DISCLAIMER"));
+
+            
+            #line default
+            #line hidden
+            
+            #line 132 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+                                                             
             }
         }
 
@@ -623,7 +675,7 @@ WriteLiteral("\r\n");
 WriteLiteral("        ");
 
             
-            #line 122 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 136 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
    Write(Html.Partial(string.Format(viewPathFmt, "_ChargeDoubleShippingFullMessage"), Model.GetCart()));
 
             
@@ -634,7 +686,7 @@ WriteLiteral("\r\n");
 WriteLiteral("        ");
 
             
-            #line 123 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 137 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
    Write(Html.Partial(string.Format(viewPathFmt, "_RentalWithDifferentsDatesFullMessage"), Model.GetCart()));
 
             
@@ -643,13 +695,13 @@ WriteLiteral("        ");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 125 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 139 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 125 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 139 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
          if (!string.IsNullOrEmpty(Model.ShippingWarningMessage))
         {
 
@@ -665,7 +717,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 128 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 142 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
            Write(Html.Localized("CART_SHIPPING_WARNING_ALERT_LABEL", "p"));
 
             
@@ -678,7 +730,7 @@ WriteLiteral(" class=\"text-danger\"");
 WriteLiteral(">");
 
             
-            #line 129 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 143 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
                                   Write(Model.ShippingWarningMessage);
 
             
@@ -687,7 +739,7 @@ WriteLiteral(">");
 WriteLiteral("</p>\r\n            </div>\r\n");
 
             
-            #line 131 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
+            #line 145 "..\..\Views\Products\Cart\_ShippingAddress.cshtml"
         }
 
             

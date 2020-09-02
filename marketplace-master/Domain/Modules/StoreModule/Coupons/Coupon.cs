@@ -81,7 +81,7 @@ namespace Domain.Modules.StoreModule.Coupons
                 switch (BenefitType)
                 {
                     case CouponBenefitType.PercentDiscount:
-                        return Math.Round(amount * Value, 2, MidpointRounding.AwayFromZero);
+                        return Math.Round(amount * Value / 100, 2, MidpointRounding.AwayFromZero);
                     case CouponBenefitType.ValueDiscount:
                         return Value;
                     default:

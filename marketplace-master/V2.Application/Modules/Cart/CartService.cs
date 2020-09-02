@@ -256,11 +256,11 @@ namespace V2.Application.Modules
             if (cart.ShippingMode != config.Product.ShippingMode)
                 SetShippingMode(cart, config.Product.ShippingMode);
 
-            var availableShippingMethods = config.Product.GetShippingMethodsEnabled();
+            //var availableShippingMethods = config.Product.GetShippingMethodsEnabled();
             var availableShippingMethodsProduct = cart.GetAvailableShippingMethods();
-            var cartShippingModeIsAvailable = availableShippingMethods.Any(method => method == cart.ShippingMethod);
-            if (!cartShippingModeIsAvailable)
-                cart.ShippingMethod = availableShippingMethods.FirstOrDefault();
+            //var cartShippingModeIsAvailable = availableShippingMethods.Any(method => method == cart.ShippingMethod);
+            //if (!cartShippingModeIsAvailable)
+            //    cart.ShippingMethod = availableShippingMethods.FirstOrDefault();
 
             cart.AvailableShippingsMethods = GetAvailableShippingMethods(cart, availableShippingMethodsProduct);
             cart.ShippingMethod = SetAvailableShippingMethodOrDefault(cart);
@@ -281,20 +281,77 @@ namespace V2.Application.Modules
         {
             List<ShippingMethod> shippingsForCart = new List<ShippingMethod>();
             var selectedShipping = cart.ShippingMethod;
-            foreach (var item in cart.Items)
-            {
-                foreach (var shippingMethod in shippingMethods)
-                {
-                    cart.ShippingMethod = shippingMethod;
-                    var shippingResult = GetItemShipping(cart, new ProductWithQty(item.Product, item.Quantity, item.RentalInfo.StartDate));
+            cart.MinimumCost = decimal.MaxValue;
 
-                    if (!shippingResult.Errors.Any() && !shippingResult.Result.Any(x => x.ResultType == Domain.StoreModule.Entities.CorreiosResultType.Error))
+            if (cart.ShippingMode == ShippingMode.PerProduct)
+            {
+                foreach (var item in cart.Items)
+                {
+                    foreach (var shippingMethod in shippingMethods)
                     {
-                        if (!shippingsForCart.Contains(shippingMethod))
-                            shippingsForCart.Add(shippingMethod);
+                        cart.ShippingMethod = shippingMethod;
+                        var shippingResult = GetItemShipping(cart,
+                            new ProductWithQty(item.Product, item.Quantity, item.RentalInfo.StartDate));
+
+                        if (!shippingResult.Errors.Any() && !shippingResult.Result.Any(x =>
+                                x.ResultType == Domain.StoreModule.Entities.CorreiosResultType.Error))
+                        {
+                            if (!shippingsForCart.Contains(shippingMethod))
+                            {
+                                shippingsForCart.Add(shippingMethod);
+                            }
+                        }
                     }
                 }
             }
+            else
+            {
+                foreach (var cartSeller in cart.Sellers)
+                {
+                    foreach (var shippingMethod in shippingMethods)
+                    {
+                        cart.ShippingMethod = shippingMethod;
+                        var products = cart.Items
+                            .Where(p => p.Product.Store_SellerId == cartSeller.Seller.Id)
+                            .Select(i => new ProductWithQty(i.Product, i.Quantity, i.RentalInfo.StartDate))
+                            .ToList();
+
+                        var adapter = shippingService.GetAdapter(cart.ShippingMethod);
+
+                        var shippingResult = adapter.GetShippingForSeller(
+                            products,
+                            cartSeller.Seller.Store,
+                            cart.ShippingAddress);
+
+                        if (!shippingResult.Errors.Any() && !shippingResult.Result.Any(x =>
+                                x.ResultType == Domain.StoreModule.Entities.CorreiosResultType.Error))
+                        {
+                            if (!shippingsForCart.Contains(shippingMethod))
+                            {
+                                if ((shippingMethod != ShippingMethod.NoShipping &&
+                                    shippingMethod != ShippingMethod.ActualNoShipping &&
+                                    shippingMethod != ShippingMethod.OnSitePickup) ||
+                                    ((shippingMethod == ShippingMethod.PostalExpress || shippingMethod == ShippingMethod.PostalRegular) &&
+                                     shippingResult.Result.TotalShippingPrice > 0))
+                                {
+                                    cart.MinimumCost = Math.Min(cart.MinimumCost,
+                                        shippingResult.Result.TotalShippingPrice);
+
+                                    if (cart.MinimumCost == shippingResult.Result.TotalShippingPrice)
+                                    {
+                                        shippingsForCart.Insert(0, shippingMethod);
+                                        cart.MinimumCostShippingMethod = shippingMethod;
+                                        continue;
+                                    }
+                                }
+
+                                shippingsForCart.Add(shippingMethod);
+                            }
+                        }
+                    }
+                }
+            }
+
             cart.ShippingMethod = selectedShipping;
             return shippingsForCart;
         }

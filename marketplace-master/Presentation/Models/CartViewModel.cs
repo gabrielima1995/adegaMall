@@ -67,8 +67,8 @@ namespace Presentation.Models
         public string CartDeliveryDays => cart.DeliveryDate?.ToShortDateString() ?? "";
 
         public int? TotalDeliveryDays => cart.ShippingMode == ShippingMode.PerStore
-            ? cart.Sellers.Max(x => x.SellerDeliveryDays) + 2
-            : cart.StockAndShippingValidation.Result?.TotalDeliveryDays + 2;
+            ? cart.Sellers.Max(x => x.SellerDeliveryDays)
+            : cart.StockAndShippingValidation.Result?.TotalDeliveryDays;
 
         public bool HasCartErrors => errors.Any();
 
