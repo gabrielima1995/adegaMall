@@ -108,7 +108,7 @@ namespace Presentation.Models
                     if (ShowPostalRegular) MinimumCost = Math.Min(MinimumCost, PostalRegularCost);
                 }
 
-                if (config.Product.AsapLogShipping.Enabled)
+                if (config.Product.AsapLogShipping.Enabled && product.Store.AsapLogEnabled)
                 {
                     ShowAsapLog = GetShipping(asapLogAdapter, out var asapLogCost, out var deliveryDate, out var deliveryDaysAsapLog, chargeDoubleShipping);
                     AsapLogCost = asapLogCost;
@@ -118,7 +118,7 @@ namespace Presentation.Models
                     if (ShowAsapLog) MinimumCost = Math.Min(MinimumCost, AsapLogCost);
                 }
 
-                if (config.Product.TotalExpressShipping.Enabled)
+                if (config.Product.TotalExpressShipping.Enabled && product.Store.TotalExpressEnabled)
                 {
                     ShowTotalExpress = GetShipping(totalExpressAdapter, out var totalExpressCost, out var deliveryDate, out var deliveryDaysTotalExpress, chargeDoubleShipping);
                     TotalExpressCost = totalExpressCost;
