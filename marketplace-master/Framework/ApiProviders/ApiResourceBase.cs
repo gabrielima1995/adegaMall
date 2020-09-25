@@ -99,19 +99,19 @@ namespace Framework.ApiProviders
             {
                 stopWatch.Start();
 
-                using (response = await ConfigurePolicy(endpointSettings)
+                response = await ConfigurePolicy(endpointSettings)
                     .ExecuteAsync(SendAsync)
-                    .ConfigureAwait(false))
-                {
-                    if (response.IsSuccessStatusCode)
-                        return await ApiResponse<TResult>
-                            .SuccessAsync(response, ParseSuccessResponseAsync<TResult>)
-                            .ConfigureAwait(false);
+                    .ConfigureAwait(false);
 
-                    return await ApiResponse<TResult>.FailureAsync(response,
-                            errorResponseProcessor ?? ParseErrorResponseAsync)
+                if (response.IsSuccessStatusCode)
+                    return await ApiResponse<TResult>
+                        .SuccessAsync(response, ParseSuccessResponseAsync<TResult>)
                         .ConfigureAwait(false);
-                }
+
+                return await ApiResponse<TResult>
+                    .FailureAsync(response,
+                        errorResponseProcessor ?? ParseErrorResponseAsync)
+                    .ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -123,6 +123,8 @@ namespace Framework.ApiProviders
                 stopWatch.Stop();
 
                 await LogAsync(request, response, stopWatch.ElapsedMilliseconds, ex);
+
+                response?.Dispose();
             }
         }
 
