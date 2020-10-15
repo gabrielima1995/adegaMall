@@ -80,6 +80,7 @@
             CONVERT(BIT, (CASE
                 WHEN Products.ProductTemplateId IS NOT NULL THEN 1 ELSE 0
                 END)) HasTemplate,
+             Products.ProductTemplateId TemplateId,
 
             Products.NoShippingEnabled,
             Products.ActualNoShippingEnabled,
@@ -207,6 +208,7 @@ SELECT
     HasStock,
     IsDisabled,
     HasTemplate,
+    TemplateId,
     NoShippingEnabled,
     ActualNoShippingEnabled,
     OnSitePickupEnabled,

@@ -5,7 +5,7 @@ namespace Infra.SmartSearchAdapter.Products
 {
     public class ProductSearchDomain : SearchDomain
     {
-        public ProductSearchDomain() : base("ProductV20200401", fields)
+        public ProductSearchDomain() : base("ProductV20201001", fields)
         {
         }
 
@@ -26,6 +26,7 @@ namespace Infra.SmartSearchAdapter.Products
             new Field("HasStock", FieldType.Bool),
             new Field("IsDisabled", FieldType.Bool),
             new Field("HasTemplate", FieldType.Bool),
+            new Field("TemplateId", FieldType.Text, FieldRelevance.Normal, enableSearching: true),
             new Field("NoShippingEnabled", FieldType.Bool),
             new Field("ActualNoShippingEnabled", FieldType.Bool),
             new Field("OnSitePickupEnabled", FieldType.Bool),
