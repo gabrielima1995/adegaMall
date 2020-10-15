@@ -80,6 +80,7 @@ namespace V2.Infrastructure.Bootstrapper.Internals
 
                 // Order, cart, checkout
                 .RegisterType<OrderService_Obsolete>()
+                .RegisterType<OrderService>()
                 .RegisterType<OrderTransaction>()
                 .RegisterType<OrderTransactionService>()
                 .RegisterType<ICartQueries, CartQueries>()
