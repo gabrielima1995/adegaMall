@@ -8,6 +8,9 @@
     ViewBag.Title = Request.GetLocalizedString("MY_STORE_TITLE");
     var config = MaaSConfig.Current;
     var loginProfile = User.Identity.GetLoginProfile();
+
+    decimal percentFee = ViewBag.PercentFee ?? 20M;
+    decimal amountFee = ViewBag.AmountFee ?? 0M;
 }
 
 @section styles
@@ -26,8 +29,8 @@
                 @if (config.Payment.Enabled)
                 {
                     <div class="seller-store-fees m-b-sm">
-                        <strong>@Html.Localized("MY_FEES_TITLE")</strong>: 20% + R$ 0,00
-                        @if (false)
+                        @Html.Localized("MY_FEES_TITLE", "strong"): @percentFee.ToString("N0")% + @amountFee.DisplayCurrency()
+                        @if (ViewBag.IsLiable)
                         {
                             <br />
                             <strong>Chargeback Compartilhado</strong>
@@ -73,7 +76,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <center>
-                                Ops... Não há mais modelos aqui. Parece que você já adicinou à sua vitrine todos os que estavam disponíveis.
+                                Ops... Não há mais modelos aqui. Parece que você já adicionou à sua vitrine todos os que estavam disponíveis.
                             </center>
                         </div>
                     </div>
