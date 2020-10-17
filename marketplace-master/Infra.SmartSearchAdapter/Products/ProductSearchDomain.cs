@@ -12,10 +12,10 @@ namespace Infra.SmartSearchAdapter.Products
         private static readonly IField[] fields = new[]
         {
             new Field("Id", FieldType.Literal),
-            new Field("Title", FieldType.Text, FieldRelevance.High, enableSearching: true, enableSorting: true),
+            new Field("Title", FieldType.Text, FieldRelevance.Higher, enableSearching: true, enableSorting: true),
             new Field("Description", FieldType.Text, FieldRelevance.High, enableSearching: true),
             new Field("Specifications", FieldType.Text, FieldRelevance.High, enableSearching: true),
-            new Field("CustomId", FieldType.Text, FieldRelevance.High, enableSearching: true),
+            new Field("CustomId", FieldType.Text, FieldRelevance.Normal, enableSearching: true),
             new Field("CoverImageUrl", FieldType.Literal),
             new Field("FriendlyUrl", FieldType.Literal),
             new Field("CreatedAt", FieldType.Date, FieldRelevance.Normal, enableSorting: true),
@@ -35,12 +35,12 @@ namespace Infra.SmartSearchAdapter.Products
             new Field("PrivateFleetEnabled", FieldType.Bool),
 
             new Field("CategoryId", FieldType.Int, FieldRelevance.Normal, enableSearching: true),
-            new Field("CategoryName", FieldType.Text, FieldRelevance.High, enableSearching: true),
+            new Field("CategoryName", FieldType.Text, FieldRelevance.Higher, enableSearching: true),
             new Field("CategorySlug", FieldType.Text, FieldRelevance.Normal, enableSearching: true),
 
             new Field("SellerId", FieldType.Literal),
             new Field("SellerNickname", FieldType.Literal),
-            new Field("SellerProfileName", FieldType.Text, FieldRelevance.High, enableSearching: true),
+            new Field("SellerProfileName", FieldType.Text, FieldRelevance.Higher, enableSearching: true),
             new Field("SellerFriendlyUrl", FieldType.Literal),
             new Field("SellerCreatedAt", FieldType.Date, FieldRelevance.Normal, enableSorting: true),
 
