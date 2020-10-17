@@ -266,6 +266,7 @@ namespace Presentation.Controllers.Products
             var seller = _sellerRepository.Get(sellerId);
             ViewBag.AmountFee = seller.GetCurrentPaymentAmountFee();
             ViewBag.PercentFee = seller.GetCurrentPaymentPercentFee();
+            ViewBag.IsLiable = seller.IsSellerLiable();
 
             return View(string.Format(ViewPathFmt, "Templates"), model);
         }

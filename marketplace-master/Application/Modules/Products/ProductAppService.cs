@@ -285,7 +285,11 @@ namespace Application.Modules.Products
 
         public IList<Product> GetRelatedProducts(Guid productId, IEnumerable<Guid> sellerProductsIds)
         {
-            var config = MaaSConfig.Current;
+            var requireSellerGatewayId = MaaSConfig.Current.Payment.Enabled;
+            var requireSellerActiveMembership = MaaSConfig.Current.Subscription.IsRequired;
+            var undergoingValidation = MaaSConfig.Current.Payment.PagarMe.UndergoingValidation;
+            var validationEmail = MaaSConfig.Current.Payment.PagarMe.ValidationAccountEmail;
+
             var product = productRepository.GetById(productId);
 
             var queryable = productService.Query(
@@ -301,20 +305,63 @@ namespace Application.Modules.Products
             return queryable
                 .Where(x =>
                     x.Id != product.Id &&
+                    x.Deleted == false &&
+                    (!MaaSConfig.Current.Product.CanPauseProducts || x.IsDisabled == null || !x.IsDisabled.Value) &&
                     x.Store.Seller.Enabled && x.Store.Seller.RequireModeration != true &&
                     x.IsBillingProduct != true &&
                     (x.CurrentStock > 0 || x.NoShippingEnabled) &&
-                    x.Deleted == false &&
-                    (!config.Subscription.IsRequired ||
-                        (x.Store.Seller.Subscription != null &&
-                        (x.Store.Seller.Subscription.Status == SubscriptionStatus.Trialing ||
-                            x.Store.Seller.Subscription.Status == SubscriptionStatus.Paid ||
-                            x.Store.Seller.Subscription.Status == SubscriptionStatus.PendingPayment))) &&
+                    (!requireSellerGatewayId || x.Store.Seller.SupplierGatewayId != null) &&
+                    (!requireSellerActiveMembership || (undergoingValidation && x.Store.Seller.Email != validationEmail)
+                       || (x.Store.Seller.Subscription != null
+                           && (x.Store.Seller.Subscription.Status == SubscriptionStatus.Trialing || x.Store.Seller.Subscription.Status == SubscriptionStatus.Paid || x.Store.Seller.Subscription.Status == SubscriptionStatus.PendingPayment))) &&
                     !sellerProductsIds.Contains(x.Id))
                 .Take(24)
                 .ToList()
                 .Where(x => x.Store.Seller.SellerCompleteProfileMapped.IsComplete)
                 .Take(8)
+                .ToList();
+        }
+
+        public IList<Product> GetAnotherProductsTemplate(Guid productId, Guid templateId)
+        {
+            var requireSellerGatewayId = MaaSConfig.Current.Payment.Enabled;
+            var requireSellerActiveMembership = MaaSConfig.Current.Subscription.IsRequired;
+            var undergoingValidation = MaaSConfig.Current.Payment.PagarMe.UndergoingValidation;
+            var validationEmail = MaaSConfig.Current.Payment.PagarMe.ValidationAccountEmail;
+
+            var queryable = productService.Query(
+                x => x.Images,
+                x => x.Store,
+                x => x.Store.Seller,
+                x => x.Variants);
+
+            var product = queryable.FirstOrDefault(x => x.Id == productId);
+
+            var anothers = queryable
+                .Where(x =>
+                    x.Id != productId &&
+                    x.Deleted == false &&
+                    x.ProductTemplateId == templateId &&
+                    (!MaaSConfig.Current.Product.CanPauseProducts || x.IsDisabled == null || !x.IsDisabled.Value) &&
+                    x.Store.Seller.Enabled && x.Store.Seller.RequireModeration != true &&
+                    x.IsBillingProduct != true &&
+                    (x.CurrentStock > 0 || x.NoShippingEnabled) &&
+                    (!requireSellerGatewayId || x.Store.Seller.SupplierGatewayId != null) &&
+                    (!requireSellerActiveMembership || (undergoingValidation && x.Store.Seller.Email != validationEmail)
+                       || (x.Store.Seller.Subscription != null
+                           && (x.Store.Seller.Subscription.Status == SubscriptionStatus.Trialing || x.Store.Seller.Subscription.Status == SubscriptionStatus.Paid || x.Store.Seller.Subscription.Status == SubscriptionStatus.PendingPayment))))
+                .OrderBy(x => x.BasePrice)
+                .Take(10)
+                .ToList()
+                .Where(x => x.Store.Seller.SellerCompleteProfileMapped.IsComplete)
+                .Take(2)
+                .ToList();
+
+            anothers.Add(product);
+
+            return anothers
+                .OrderBy(x => x.BasePrice)
+                .ThenBy(x => x.Store.Seller.PublicProfileName)
                 .ToList();
         }
     }

@@ -179,7 +179,7 @@
                     {
                         <div class="form-group">
                             @Html.Localized("CART_ITEM_QUANTITY_LABEL", "strong", new { @class = "text-muted" }):
-                            <div class="input-group">
+                            <div class="input-group" style="max-width: 401px">
                                 @Html.TextBox("Quantity", 1, new { @class = "form-control input-lg", type = "number", min = 1 })
                                 <div class="input-group-btn">@AddToCartButton()</div>
                             </div>

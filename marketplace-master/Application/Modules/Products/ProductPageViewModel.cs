@@ -36,6 +36,8 @@ namespace Application.Modules.Products
 
         public IList<Product> RelatedProducts { get; set; }
 
+        public IList<Product> AnotherProductsTemplate { get; set; }
+
         public int? Multiplier { get; set; }
 
         public CustomFieldEntityType EntityType => CustomFieldEntityType.Product;

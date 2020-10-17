@@ -186,6 +186,17 @@ namespace Presentation.Controllers.Products
             if (MaaSConfig.Current.Product.ShowRelatedProducts)
                 model.RelatedProducts = productAppService.GetRelatedProducts(productInfo.Product.Id, new[] { productInfo.Product.Id });
 
+            if (model.Product.HasTemplate)
+            {
+                model.AnotherProductsTemplate = productAppService.GetAnotherProductsTemplate(
+                    model.Product.Id,
+                    model.Product.ProductTemplateId.GetValueOrDefault());
+            }
+            else
+            {
+                model.AnotherProductsTemplate = new List<Product>(0);
+            }
+
             if (MaaSConfig.Current.CustomFields.Product.Enabled)
                 customFieldAppService.ReadCustomFieldsToViewModel(model);
 

@@ -143,6 +143,8 @@ namespace Domain.Entities.StoreModule
 
         public Guid? ProductTemplateId { get; set; }
 
+        public bool HasTemplate => ProductTemplateId.HasValue;
+
         public int? MaxInstallments
         {
             get
