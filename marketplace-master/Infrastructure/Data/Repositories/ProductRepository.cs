@@ -189,6 +189,20 @@ namespace Infrastructure.Data.Repositories
                 .ToList();
         }
 
+        public List<Product> ListWithoutTemplate()
+        {
+            return Context.Set<Product>()
+                .Include(t => t.Category)
+                .Include(t => t.Images)
+                .Include(t => t.Variants)
+                .Include(t => t.Variants.Select(v => v.Type))
+                .Where(i => !i.Deleted)
+                .Where(x => (!MaaSConfig.Current.Product.CanPauseProducts || x.IsDisabled == null || !x.IsDisabled.Value))
+                .Where(i => i.IsBillingProduct == null || !i.IsBillingProduct.Value)
+                .Where(i => !i.ProductTemplateId.HasValue)
+                .ToList();
+        }
+
         #region Event handlers
 
         public void Handle(ProductAddedEvent domainEvent)

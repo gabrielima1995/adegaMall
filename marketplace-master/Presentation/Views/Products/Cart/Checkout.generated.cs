@@ -392,13 +392,13 @@ WriteLiteral("</td>\r\n                            </tr>\r\n");
             #line hidden
 WriteLiteral("                            <tr");
 
-WriteLiteral(" class=\"checkout-shipping\"");
+WriteLiteral(" class=\"checkout-items-total\"");
 
 WriteLiteral(">\r\n                                <td>");
 
             
             #line 73 "..\..\Views\Products\Cart\Checkout.cshtml"
-                               Write(Html.Localized("CART_SHIPPING_LABEL"));
+                               Write(Html.Localized("CART_DISCOUNT_LABEL"));
 
             
             #line default
@@ -417,7 +417,7 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 75 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                     if (Model.Cart.Shipping == 0)
+                                     if (Model.Cart.Discount == 0)
                                     {
 
             
@@ -432,33 +432,34 @@ WriteLiteral("-\r\n");
                                     }
                                     else
                                     {
-                                        
-            
-            #line default
-            #line hidden
-            
-            #line 81 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                   Write(config.DefaultCurrency);
 
             
             #line default
             #line hidden
+WriteLiteral("                                        ");
+
+WriteLiteral("-");
+
             
             #line 81 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                                                
-            
-            #line default
-            #line hidden
-            
-            #line 81 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                                           Write(Model.Cart.Shipping.DisplayDecimal(2));
+                                      Write(config.DefaultCurrency);
 
             
             #line default
             #line hidden
+WriteLiteral(" ");
+
             
             #line 81 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                                                                                      
+                                                              Write(Model.Cart.Discount.DisplayDecimal(2));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 82 "..\..\Views\Products\Cart\Checkout.cshtml"
                                     }
 
             
@@ -468,6 +469,89 @@ WriteLiteral("                                </td>\r\n                         
 
             
             #line 85 "..\..\Views\Products\Cart\Checkout.cshtml"
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                            <tr");
+
+WriteLiteral(" class=\"checkout-shipping\"");
+
+WriteLiteral(">\r\n                                <td>");
+
+            
+            #line 87 "..\..\Views\Products\Cart\Checkout.cshtml"
+                               Write(Html.Localized("CART_SHIPPING_LABEL"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n                                <td");
+
+WriteLiteral(" class=\"text-right\"");
+
+WriteLiteral(">\r\n");
+
+            
+            #line 89 "..\..\Views\Products\Cart\Checkout.cshtml"
+                                    
+            
+            #line default
+            #line hidden
+            
+            #line 89 "..\..\Views\Products\Cart\Checkout.cshtml"
+                                     if (Model.Cart.Shipping == 0)
+                                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                        ");
+
+WriteLiteral("-\r\n");
+
+            
+            #line 92 "..\..\Views\Products\Cart\Checkout.cshtml"
+                                    }
+                                    else
+                                    {
+                                        
+            
+            #line default
+            #line hidden
+            
+            #line 95 "..\..\Views\Products\Cart\Checkout.cshtml"
+                                   Write(config.DefaultCurrency);
+
+            
+            #line default
+            #line hidden
+            
+            #line 95 "..\..\Views\Products\Cart\Checkout.cshtml"
+                                                                
+            
+            #line default
+            #line hidden
+            
+            #line 95 "..\..\Views\Products\Cart\Checkout.cshtml"
+                                                           Write(Model.Cart.Shipping.DisplayDecimal(2));
+
+            
+            #line default
+            #line hidden
+            
+            #line 95 "..\..\Views\Products\Cart\Checkout.cshtml"
+                                                                                                      
+                                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                </td>\r\n                            </tr>\r\n");
+
+            
+            #line 99 "..\..\Views\Products\Cart\Checkout.cshtml"
 
                             if (Model.Cart.DeliveryDate != null)
                             {
@@ -483,7 +567,7 @@ WriteLiteral(" class=\"checkout-shipping-date\"");
 WriteLiteral(">\r\n                                    <td>");
 
             
-            #line 90 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 104 "..\..\Views\Products\Cart\Checkout.cshtml"
                                    Write(Html.Localized("CART_SHIPPING_DAYS_LABEL"));
 
             
@@ -496,7 +580,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral(">");
 
             
-            #line 91 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 105 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                       Write(date);
 
             
@@ -505,7 +589,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n                                </tr>\r\n");
 
             
-            #line 93 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 107 "..\..\Views\Products\Cart\Checkout.cshtml"
                             }
                         }
 
@@ -519,7 +603,7 @@ WriteLiteral(" class=\"checkout-grand-total\"");
 WriteLiteral(">\r\n                            <td>");
 
             
-            #line 97 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 111 "..\..\Views\Products\Cart\Checkout.cshtml"
                            Write(Html.Localized("CART_TOTAL_LABEL"));
 
             
@@ -532,7 +616,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral("><label>");
 
             
-            #line 98 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 112 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                      Write(config.DefaultCurrency);
 
             
@@ -541,7 +625,7 @@ WriteLiteral("><label>");
 WriteLiteral(" ");
 
             
-            #line 98 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 112 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                              Write(Model.Cart.Amount.DisplayDecimal(2));
 
             
@@ -552,7 +636,7 @@ WriteLiteral("</label></td>\r\n                        </tr>\r\n                
 WriteLiteral("                    ");
 
             
-            #line 102 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 116 "..\..\Views\Products\Cart\Checkout.cshtml"
                Write(Html.Partial(string.Format(viewPathFmt, "_ChargeDoubleShippingFullMessage"), Model.Cart));
 
             
@@ -575,7 +659,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 109 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 123 "..\..\Views\Products\Cart\Checkout.cshtml"
                        Write(Request.GetLocalizedString("CART_PAYMENT_TITLE"));
 
             
@@ -584,13 +668,13 @@ WriteLiteral("                            ");
 WriteLiteral("\r\n                        </div>\r\n");
 
             
-            #line 111 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 125 "..\..\Views\Products\Cart\Checkout.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 111 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 125 "..\..\Views\Products\Cart\Checkout.cshtml"
                          if (config.Payment.Enabled || Model.ShowOfflinePaymentOption)
                         {
                             if (config.Payment.Common.EnableTransactionWarranty)
@@ -616,7 +700,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 118 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 132 "..\..\Views\Products\Cart\Checkout.cshtml"
                                    Write(Html.Localized("TRANSACTION_WARRANTY_CART_REASSURANCE"));
 
             
@@ -626,7 +710,7 @@ WriteLiteral("\r\n                                    </div>\r\n                
 "iv>\r\n");
 
             
-            #line 121 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 135 "..\..\Views\Products\Cart\Checkout.cshtml"
                             }
 
 
@@ -636,7 +720,7 @@ WriteLiteral("\r\n                                    </div>\r\n                
 WriteLiteral("                            <fieldset ");
 
             
-            #line 123 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 137 "..\..\Views\Products\Cart\Checkout.cshtml"
                                   Write(ViewData.ModelState.IsValid ? "" : "disabled");
 
             
@@ -645,13 +729,13 @@ WriteLiteral("                            <fieldset ");
 WriteLiteral(" class=\"list-group\">\r\n");
 
             
-            #line 124 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 138 "..\..\Views\Products\Cart\Checkout.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 124 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 138 "..\..\Views\Products\Cart\Checkout.cshtml"
                                  if (!Model.ShowPaymentMethodOptions)
                                 {
 
@@ -661,7 +745,7 @@ WriteLiteral(" class=\"list-group\">\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 126 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 140 "..\..\Views\Products\Cart\Checkout.cshtml"
                                  Write(Html.HiddenFor(model => Model.Payment.Method, new { @class = "js-payment-method" }));
 
             
@@ -670,7 +754,7 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n");
 
             
-            #line 127 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 141 "..\..\Views\Products\Cart\Checkout.cshtml"
                                 }
 
             
@@ -679,13 +763,13 @@ WriteLiteral("\r\n");
 WriteLiteral("\r\n                                <!-- PGTO POR FORA DA PLATAFORMA -->\r\n");
 
             
-            #line 130 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 144 "..\..\Views\Products\Cart\Checkout.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 130 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 144 "..\..\Views\Products\Cart\Checkout.cshtml"
                                  if (Model.ShowOfflinePaymentOption)
                                 {
 
@@ -699,13 +783,13 @@ WriteLiteral(" class=\"list-group-item\"");
 WriteLiteral(">\r\n");
 
             
-            #line 133 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 147 "..\..\Views\Products\Cart\Checkout.cshtml"
                                         
             
             #line default
             #line hidden
             
-            #line 133 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 147 "..\..\Views\Products\Cart\Checkout.cshtml"
                                          if (Model.ShowPaymentMethodOptions)
                                         {
 
@@ -721,7 +805,7 @@ WriteLiteral(">\r\n                                                <label>\r\n")
 WriteLiteral("                                                    ");
 
             
-            #line 137 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 151 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                Write(Html.RadioButtonFor(model => Model.Payment.Method, PaymentMethod.Offline, new { @class = "js-payment-method-selector" }));
 
             
@@ -732,7 +816,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                                    ");
 
             
-            #line 138 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 152 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                Write(Html.Localized("CHECKOUT_PAY_OFFLINE_LABEL"));
 
             
@@ -742,7 +826,7 @@ WriteLiteral("\r\n                                                </label>\r\n  
 "                       </div>\r\n");
 
             
-            #line 141 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 155 "..\..\Views\Products\Cart\Checkout.cshtml"
                                         }
 
             
@@ -755,13 +839,13 @@ WriteLiteral(" id=\"offlinePaymentFields\"");
 WriteLiteral(">\r\n");
 
             
-            #line 143 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 157 "..\..\Views\Products\Cart\Checkout.cshtml"
                                             
             
             #line default
             #line hidden
             
-            #line 143 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 157 "..\..\Views\Products\Cart\Checkout.cshtml"
                                              using (Html.BeginForm("Checkout", "Cart", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form" }))
                                             {
                                                 
@@ -769,28 +853,28 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 145 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 159 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 145 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 159 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                         
                                                 
             
             #line default
             #line hidden
             
-            #line 146 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 160 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.ValidationSummary(true, "", new { @class = "text-danger" }));
 
             
             #line default
             #line hidden
             
-            #line 146 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 160 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                                                                  
 
             
@@ -800,57 +884,57 @@ WriteLiteral("                                                <input");
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 7516), Tuple.Create("\"", 7567)
+WriteAttribute("name", Tuple.Create(" name=\"", 8211), Tuple.Create("\"", 8262)
             
-            #line 147 "..\..\Views\Products\Cart\Checkout.cshtml"
-, Tuple.Create(Tuple.Create("", 7523), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
+            #line 161 "..\..\Views\Products\Cart\Checkout.cshtml"
+, Tuple.Create(Tuple.Create("", 8218), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
             
             #line default
             #line hidden
-, 7523), false)
+, 8218), false)
 );
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7568), Tuple.Create("\"", 7598)
+WriteAttribute("value", Tuple.Create(" value=\"", 8263), Tuple.Create("\"", 8293)
             
-            #line 147 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 7576), Tuple.Create<System.Object, System.Int32>(PaymentMethod.Offline
+            #line 161 "..\..\Views\Products\Cart\Checkout.cshtml"
+                                                , Tuple.Create(Tuple.Create("", 8271), Tuple.Create<System.Object, System.Int32>(PaymentMethod.Offline
             
             #line default
             #line hidden
-, 7576), false)
+, 8271), false)
 );
 
 WriteLiteral(" />\r\n");
 
             
-            #line 148 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 162 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                 
             
             #line default
             #line hidden
             
-            #line 148 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 162 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.Localized("CHECKOUT_PAY_OFFLINE_BUTTON", "button", new { type = "submit", @class = "btn btn-lg btn-primary btn-block" }));
 
             
             #line default
             #line hidden
             
-            #line 148 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 162 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                                                                                                                               
                                                 
             
             #line default
             #line hidden
             
-            #line 149 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 163 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.Localized("CHECKOUT_PAY_OFFLINE_DESCRIPTION", "small", new { @class = "text-muted help-bloc" }));
 
             
             #line default
             #line hidden
             
-            #line 149 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 163 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                                                                                                      
                                             }
 
@@ -861,7 +945,7 @@ WriteLiteral("                                        </div>\r\n                
 "   </div>\r\n");
 
             
-            #line 153 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 167 "..\..\Views\Products\Cart\Checkout.cshtml"
                                 }
 
             
@@ -870,13 +954,13 @@ WriteLiteral("                                        </div>\r\n                
 WriteLiteral("\r\n                                <!-- PGTO BOLETO -->\r\n");
 
             
-            #line 156 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 170 "..\..\Views\Products\Cart\Checkout.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 156 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 170 "..\..\Views\Products\Cart\Checkout.cshtml"
                                  if (Model.ShowBoletoPaymentOption)
                                 {
 
@@ -890,13 +974,13 @@ WriteLiteral(" class=\"list-group-item\"");
 WriteLiteral(">\r\n");
 
             
-            #line 159 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 173 "..\..\Views\Products\Cart\Checkout.cshtml"
                                         
             
             #line default
             #line hidden
             
-            #line 159 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 173 "..\..\Views\Products\Cart\Checkout.cshtml"
                                          if (Model.ShowPaymentMethodOptions)
                                         {
 
@@ -912,7 +996,7 @@ WriteLiteral(">\r\n                                                <label>\r\n")
 WriteLiteral("                                                    ");
 
             
-            #line 163 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 177 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                Write(Html.RadioButtonFor(model => Model.Payment.Method, PaymentMethod.Boleto, new { @class = "js-payment-method-selector" }));
 
             
@@ -923,7 +1007,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                                    ");
 
             
-            #line 164 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 178 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                Write(Html.Localized("CHECKOUT_PAY_WITH_BOLETO_BUTTON"));
 
             
@@ -933,7 +1017,7 @@ WriteLiteral("\r\n                                                </label>\r\n  
 "                       </div>\r\n");
 
             
-            #line 167 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 181 "..\..\Views\Products\Cart\Checkout.cshtml"
                                         }
 
             
@@ -946,13 +1030,13 @@ WriteLiteral(" id=\"boletoFields\"");
 WriteLiteral(">\r\n");
 
             
-            #line 169 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 183 "..\..\Views\Products\Cart\Checkout.cshtml"
                                             
             
             #line default
             #line hidden
             
-            #line 169 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 183 "..\..\Views\Products\Cart\Checkout.cshtml"
                                              using (Html.BeginForm("Checkout", "Cart", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form" }))
                                             {
                                                 
@@ -960,28 +1044,28 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 171 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 185 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 171 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 185 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                         
                                                 
             
             #line default
             #line hidden
             
-            #line 172 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 186 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.ValidationSummary(true, "", new { @class = "text-danger" }));
 
             
             #line default
             #line hidden
             
-            #line 172 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 186 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                                                                  
 
             
@@ -991,43 +1075,43 @@ WriteLiteral("                                                <input");
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 9545), Tuple.Create("\"", 9596)
+WriteAttribute("name", Tuple.Create(" name=\"", 10240), Tuple.Create("\"", 10291)
             
-            #line 173 "..\..\Views\Products\Cart\Checkout.cshtml"
-, Tuple.Create(Tuple.Create("", 9552), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
+            #line 187 "..\..\Views\Products\Cart\Checkout.cshtml"
+, Tuple.Create(Tuple.Create("", 10247), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
             
             #line default
             #line hidden
-, 9552), false)
+, 10247), false)
 );
 
-WriteAttribute("value", Tuple.Create(" value=\"", 9597), Tuple.Create("\"", 9626)
+WriteAttribute("value", Tuple.Create(" value=\"", 10292), Tuple.Create("\"", 10321)
             
-            #line 173 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 9605), Tuple.Create<System.Object, System.Int32>(PaymentMethod.Boleto
+            #line 187 "..\..\Views\Products\Cart\Checkout.cshtml"
+                                               , Tuple.Create(Tuple.Create("", 10300), Tuple.Create<System.Object, System.Int32>(PaymentMethod.Boleto
             
             #line default
             #line hidden
-, 9605), false)
+, 10300), false)
 );
 
 WriteLiteral(" />\r\n");
 
             
-            #line 174 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 188 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                 
             
             #line default
             #line hidden
             
-            #line 174 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 188 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.Localized("CHECKOUT_PAY_WITH_BOLETO_BUTTON", "button", new { type = "submit", @class = "btn btn-lg btn-primary btn-block" }));
 
             
             #line default
             #line hidden
             
-            #line 174 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 188 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                                                                                                                                   
                                             }
 
@@ -1038,7 +1122,7 @@ WriteLiteral("                                        </div>\r\n                
 "   </div>\r\n");
 
             
-            #line 178 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 192 "..\..\Views\Products\Cart\Checkout.cshtml"
                                 }
 
             
@@ -1047,13 +1131,13 @@ WriteLiteral("                                        </div>\r\n                
 WriteLiteral("\r\n                                <!-- PGTO CARTAO CREDITO -->\r\n");
 
             
-            #line 181 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 195 "..\..\Views\Products\Cart\Checkout.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 181 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 195 "..\..\Views\Products\Cart\Checkout.cshtml"
                                  if (Model.ShowCreditCardPaymentOption)
                                 {
 
@@ -1067,13 +1151,13 @@ WriteLiteral(" class=\"list-group-item\"");
 WriteLiteral(">\r\n");
 
             
-            #line 184 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 198 "..\..\Views\Products\Cart\Checkout.cshtml"
                                         
             
             #line default
             #line hidden
             
-            #line 184 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 198 "..\..\Views\Products\Cart\Checkout.cshtml"
                                          if (Model.ShowPaymentMethodOptions)
                                         {
 
@@ -1089,7 +1173,7 @@ WriteLiteral(">\r\n                                                <label>\r\n")
 WriteLiteral("                                                    ");
 
             
-            #line 188 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 202 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                Write(Html.RadioButtonFor(model => Model.Payment.Method, PaymentMethod.CreditCard, new { @class = "js-payment-method-selector" }));
 
             
@@ -1100,7 +1184,7 @@ WriteLiteral("\r\n                                                    Pagar com 
 "                        </div>\r\n");
 
             
-            #line 192 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 206 "..\..\Views\Products\Cart\Checkout.cshtml"
                                         }
 
             
@@ -1113,13 +1197,13 @@ WriteLiteral(" id=\"creditCardFields\"");
 WriteLiteral(">\r\n");
 
             
-            #line 194 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 208 "..\..\Views\Products\Cart\Checkout.cshtml"
                                             
             
             #line default
             #line hidden
             
-            #line 194 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 208 "..\..\Views\Products\Cart\Checkout.cshtml"
                                              if (config.Layout.PaymentMethodsDisplay.ShowInCheckoutScreen.Enabled)
                                             {
                                                 
@@ -1127,28 +1211,28 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 196 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 210 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.Localized("ACCEPTED_PAYMENT_METHODS_TEXT", "p"));
 
             
             #line default
             #line hidden
             
-            #line 196 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 210 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                                                      
                                                 
             
             #line default
             #line hidden
             
-            #line 197 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 211 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.Partial("_AcceptedPaymentMethods"));
 
             
             #line default
             #line hidden
             
-            #line 197 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 211 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                                         
 
             
@@ -1157,7 +1241,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                                <hr />\r\n");
 
             
-            #line 199 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 213 "..\..\Views\Products\Cart\Checkout.cshtml"
                                             }
 
             
@@ -1166,13 +1250,13 @@ WriteLiteral("                                                <hr />\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 201 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 215 "..\..\Views\Products\Cart\Checkout.cshtml"
                                             
             
             #line default
             #line hidden
             
-            #line 201 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 215 "..\..\Views\Products\Cart\Checkout.cshtml"
                                              using (Html.BeginForm("Checkout", "Cart", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form" }))
                                             {
                                                 
@@ -1180,28 +1264,28 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 203 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 217 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 203 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 217 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                         
                                                 
             
             #line default
             #line hidden
             
-            #line 204 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 218 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.ValidationSummary(true, "", new { @class = "text-danger" }));
 
             
             #line default
             #line hidden
             
-            #line 204 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 218 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                                                                  
 
             
@@ -1211,30 +1295,30 @@ WriteLiteral("                                                <input");
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 11884), Tuple.Create("\"", 11935)
+WriteAttribute("name", Tuple.Create(" name=\"", 12579), Tuple.Create("\"", 12630)
             
-            #line 205 "..\..\Views\Products\Cart\Checkout.cshtml"
-, Tuple.Create(Tuple.Create("", 11891), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
+            #line 219 "..\..\Views\Products\Cart\Checkout.cshtml"
+, Tuple.Create(Tuple.Create("", 12586), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
             
             #line default
             #line hidden
-, 11891), false)
+, 12586), false)
 );
 
-WriteAttribute("value", Tuple.Create(" value=\"", 11936), Tuple.Create("\"", 11969)
+WriteAttribute("value", Tuple.Create(" value=\"", 12631), Tuple.Create("\"", 12664)
             
-            #line 205 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                               , Tuple.Create(Tuple.Create("", 11944), Tuple.Create<System.Object, System.Int32>(PaymentMethod.CreditCard
+            #line 219 "..\..\Views\Products\Cart\Checkout.cshtml"
+                                               , Tuple.Create(Tuple.Create("", 12639), Tuple.Create<System.Object, System.Int32>(PaymentMethod.CreditCard
             
             #line default
             #line hidden
-, 11944), false)
+, 12639), false)
 );
 
 WriteLiteral(" />\r\n");
 
             
-            #line 206 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 220 "..\..\Views\Products\Cart\Checkout.cshtml"
 
                                                 if (config.Payment.PaymentGateway.Installments.MaxInstallments > 1 && Model.Cart.Amount < config.Payment.PaymentGateway.Installments.MinOrderAmount)
                                                 {
@@ -1247,7 +1331,7 @@ WriteLiteral("                                                    <p>\r\n");
 WriteLiteral("                                                        ");
 
             
-            #line 210 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 224 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                    Write(string.Format(Request.GetLocalizedString("INSTALLMENTS_ORDER_MIN_AMOUNT"), config.DefaultCurrency, config.Payment.PaymentGateway.Installments.MinOrderAmount));
 
             
@@ -1256,7 +1340,7 @@ WriteLiteral("                                                        ");
 WriteLiteral("\r\n                                                    </p>\r\n");
 
             
-            #line 212 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 226 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                 }
 
                                                 
@@ -1264,14 +1348,14 @@ WriteLiteral("\r\n                                                    </p>\r\n")
             #line default
             #line hidden
             
-            #line 214 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 228 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.Partial(string.Format(viewPathFmt, "_ProductCreditCardFields"), Model));
 
             
             #line default
             #line hidden
             
-            #line 214 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 228 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                                                                             
 
                                                 
@@ -1279,14 +1363,14 @@ WriteLiteral("\r\n                                                    </p>\r\n")
             #line default
             #line hidden
             
-            #line 216 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 230 "..\..\Views\Products\Cart\Checkout.cshtml"
                                            Write(Html.Localized("CHECKOUT_PAY_WITH_CREDIT_CARD_BUTTON", "button", new { type = "submit", @class = "btn btn-lg btn-primary btn-block" }));
 
             
             #line default
             #line hidden
             
-            #line 216 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 230 "..\..\Views\Products\Cart\Checkout.cshtml"
                                                                                                                                                                                        
                                             }
 
@@ -1297,7 +1381,7 @@ WriteLiteral("                                        </div>\r\n                
 "   </div>\r\n");
 
             
-            #line 220 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 234 "..\..\Views\Products\Cart\Checkout.cshtml"
                                 }
 
             
@@ -1306,7 +1390,7 @@ WriteLiteral("                                        </div>\r\n                
 WriteLiteral("                            </fieldset>\r\n");
 
             
-            #line 222 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 236 "..\..\Views\Products\Cart\Checkout.cshtml"
                         }
 
             
@@ -1320,7 +1404,7 @@ DefineSection("scripts", () => {
 WriteLiteral("\r\n    <script>\r\n        var chooseShippingAddressUrl = \'");
 
             
-            #line 234 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 248 "..\..\Views\Products\Cart\Checkout.cshtml"
                                    Write(Url.ActionLocalized("ChooseShippingAddress", "Cart"));
 
             
@@ -1329,7 +1413,7 @@ WriteLiteral("\r\n    <script>\r\n        var chooseShippingAddressUrl = \'");
 WriteLiteral("\';\r\n        var paymentMethodSelector = \'input[name=\"");
 
             
-            #line 235 "..\..\Views\Products\Cart\Checkout.cshtml"
+            #line 249 "..\..\Views\Products\Cart\Checkout.cshtml"
                                             Write(Html.NameFor(model => Model.Payment.Method));
 
             

@@ -59,6 +59,15 @@
         ORDER BY ProductVariantType.[Order], ProductVariantType.[Name]
         OFFSET 0 ROWS),
 
+    cteBestPriceProductsTemplate AS(
+        select Id,
+            BasePrice,
+            ProductTemplateId,
+            row_number() over(partition by ProductTemplateId order by BasePrice) rn
+        from Product
+        where ProductTemplateId is not null
+        group by ProductTemplateId, BasePrice, Id),
+
     cteProductsWithAggregatedData AS (
         SELECT
             Products.Id,
@@ -80,6 +89,10 @@
             CONVERT(BIT, (CASE
                 WHEN Products.ProductTemplateId IS NOT NULL THEN 1 ELSE 0
                 END)) HasTemplate,
+            CONVERT(BIT, (CASE
+                WHEN cteBestPrice.Id IS NOT NULL THEN 1 ELSE 0
+                END)) BestPrice,
+            Products.ProductTemplateId TemplateId,
 
             Products.NoShippingEnabled,
             Products.ActualNoShippingEnabled,
@@ -179,7 +192,8 @@
                     Seller.[Enabled] = 1 AND 
                     Products.Deleted = 0 AND
                     Products.IsDisabled = 0 AND
-                    (Products.IsBillingProduct IS NULL OR Products.IsBillingProduct = 0)
+                    (Products.IsBillingProduct IS NULL OR Products.IsBillingProduct = 0)AND
+                    (Products.ProductTemplateId IS NULL OR cteBestPrice.Id IS NOT NULL)
                 THEN 'add' ELSE 'del' END operation
         FROM Product Products 
             INNER JOIN ProductCategory Categ ON Categ.Id = Products.Category_Id
@@ -187,6 +201,10 @@
             INNER JOIN Person Seller ON Seller.Id = Store.SellerId
             LEFT JOIN [Address] Addr ON Seller.Address_Id = Addr.Id
             LEFT JOIN Subscription ON Seller.Id = Subscription.SellerId
+            LEFT JOIN cteBestPriceProductsTemplate cteBestPrice ON 
+                Products.ProductTemplateId IS NOT NULL AND 
+                cteBestPrice.Id = Products.Id AND
+                cteBestPrice.rn = 1
         WHERE
             (@productId IS NULL OR Products.Id = @productId) AND
             (@sellerId IS NULL OR Seller.Id = @sellerId))
@@ -207,6 +225,8 @@ SELECT
     HasStock,
     IsDisabled,
     HasTemplate,
+    BestPrice,
+    TemplateId,
     NoShippingEnabled,
     ActualNoShippingEnabled,
     OnSitePickupEnabled,

@@ -32,11 +32,11 @@ namespace Infrastructure.Data.Repositories
             {
                 Context.Set<TEntity>().Add(entity);
                 if (saveChanges) return SaveChanges();
-                return new OperationResult();
+                return OperationResult.Success;
             }
             catch (Exception ex)
             {
-                return new OperationResult("", ex.Message);
+                return OperationResult.Fail(ex.Message);
             }
         }
 
@@ -46,11 +46,11 @@ namespace Infrastructure.Data.Repositories
             {
                 Context.Entry(entity).State = EntityState.Modified;
                 if (saveChanges) return SaveChanges();
-                return new OperationResult();
+                return OperationResult.Success;
             }
             catch (Exception ex)
             {
-                return new OperationResult("", ex.Message);
+                return OperationResult.Fail(ex.Message);
             }
         }
 
@@ -60,11 +60,11 @@ namespace Infrastructure.Data.Repositories
             {
                 Context.Set<TEntity>().Remove(entity);
                 if (saveChanges) return SaveChanges();
-                return new OperationResult();
+                return OperationResult.Success;
             }
             catch (Exception ex)
             {
-                return new OperationResult("", ex.Message);
+                return OperationResult.Fail(ex.Message);
             }
         }
 
@@ -85,11 +85,11 @@ namespace Infrastructure.Data.Repositories
 
                 var fullErrorMessage = string.Join("; ", errorMessages);
                 var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
-                return new OperationResult("", exceptionMessage);
+                return OperationResult.Fail(exceptionMessage);
             }
             catch (Exception ex)
             {
-                return new OperationResult("", ex.Message);
+                return OperationResult.Fail(ex.Message);
             }
         }
     }
@@ -133,11 +133,11 @@ namespace Infrastructure.Data.Repositories
             {
                 Context.Set<TEntity>().Add(entity);
                 if (saveChanges) return SaveChanges();
-                return new OperationResult();
+                return OperationResult.Success;
             }
             catch (Exception ex)
             {
-                return new OperationResult("", ex.Message);
+                return OperationResult.Fail(ex.Message);
             }
         }
 
@@ -147,11 +147,11 @@ namespace Infrastructure.Data.Repositories
             {
                 Context.Entry(entity).State = EntityState.Modified;
                 if (saveChanges) return SaveChanges();
-                return new OperationResult();
+                return OperationResult.Success;
             }
             catch (Exception ex)
             {
-                return new OperationResult("", ex.Message);
+                return OperationResult.Fail(ex.Message);
             }
         }
 
@@ -161,11 +161,11 @@ namespace Infrastructure.Data.Repositories
             {
                 Context.Set<TEntity>().Remove(entity);
                 if (saveChanges) return SaveChanges();
-                return new OperationResult();
+                return OperationResult.Success;
             }
             catch (Exception ex)
             {
-                return new OperationResult("", ex.Message);
+                return OperationResult.Fail(ex.Message);
             }
         }
 
@@ -186,11 +186,11 @@ namespace Infrastructure.Data.Repositories
 
                 var fullErrorMessage = string.Join("; ", errorMessages);
                 var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
-                return new OperationResult("", exceptionMessage);
+                return OperationResult.Fail(exceptionMessage);
             }
             catch (Exception ex)
             {
-                return new OperationResult("", ex.Message);
+                return OperationResult.Fail(ex.Message);
             }
         }
     }

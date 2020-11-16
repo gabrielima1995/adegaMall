@@ -34,7 +34,7 @@
 @if (Model != null && Model.ShowAnyShipping)
 {
     <ul class="product-freight-list list-unstyled m-b-md m-t-md">
-        @if (Model.ShowPrivateFleet)
+        @if (Model.ShowPrivateFleet && Model.MinimumCost == Model.PrivateFleetCost)
         {
             <li>
                 <strong>@Request.GetLocalizedString("PRODUCT_PRIVATE_FLEET_METHOD_LABEL"):</strong>
@@ -43,7 +43,7 @@
             </li>
         }
 
-        @if (Model.ShowPostalExpress)
+        @if (Model.ShowPostalExpress && Model.MinimumCost == Model.PostalExpressCost)
         {
             <li>
                 <strong>@Html.Localized("PRODUCT_SEDEX_METHOD_LABEL"):</strong>
@@ -53,7 +53,7 @@
             </li>
         }
 
-        @if (Model.ShowPostalRegular)
+        @if (Model.ShowPostalRegular && Model.MinimumCost == Model.PostalRegularCost)
         {
             <li>
                 <strong>@Html.Localized("PRODUCT_PAC_METHOD_LABEL"):</strong>
@@ -63,23 +63,25 @@
             </li>
         }
 
-        @if (Model.ShowAsapLog)
+        @if (Model.ShowAsapLog && Model.MinimumCost == Model.AsapLogCost)
         {
             <li>
                 <strong>@Html.Localized("PRODUCT_ASAPLOG_METHOD_LABEL"):</strong>
                 @config.DefaultCurrency
                 @Model.AsapLogCost.DisplayDecimal(2)
-                @DisplayDeliveryDate(Model.DeliveryDateAsapLog)
+                @*@DisplayDeliveryDate(Model.DeliveryDateAsapLog)*@
+                @Html.Localized("ASAPLOG_DELIVERY_TIME", "p", null, Model.DeliveryDaysAsapLog)
             </li>
         }
 
-        @if (Model.ShowTotalExpress)
+        @if (Model.ShowTotalExpress && Model.MinimumCost == Model.TotalExpressCost)
         {
             <li>
                 <strong>@Html.Localized("PRODUCT_TOTALEXPRESS_METHOD_LABEL"):</strong>
                 @config.DefaultCurrency
                 @Model.TotalExpressCost.DisplayDecimal(2)
-                @DisplayDeliveryDate(Model.DeliveryDateTotalExpress)
+                @*@DisplayDeliveryDate(Model.DeliveryDateTotalExpress)*@
+                @Html.Localized("TOTALEXPRESS_DELIVERY_TIME", "p", null, Model.DeliveryDaysTotalExpress)
             </li>
         }
 
@@ -112,6 +114,8 @@
             </li>
         }
     </ul>
+
+    @Html.Localized("SHIPPING_METHOD_DISCLAIMER")
 }
 else if (hasZipCode)
 {

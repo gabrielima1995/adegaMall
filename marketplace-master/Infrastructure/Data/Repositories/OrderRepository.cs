@@ -23,6 +23,7 @@ namespace Infrastructure.Data.Repositories
         public Order GetDetails(Guid orderId)
         {
             var result = CacheHelper.Get(Context.Orders
+                .Include(x => x.Coupon)
                 .Include(x => x.Buyer)
                 .Include(x => x.Histories)
                 .Include(x => x.Histories.Select(h => h.Person))
@@ -48,6 +49,7 @@ namespace Infrastructure.Data.Repositories
         public List<Order> ListByCartId(Guid cartId)
         {
             return CacheHelper.List(Context.Orders
+                .Include(x => x.Coupon)
                 .Include(x => x.Transaction)
                 .Include(x => x.Buyer)
                 .Include(x => x.Seller)
@@ -66,6 +68,7 @@ namespace Infrastructure.Data.Repositories
             var cache = new CacheDefinition("__OrderRepository_ListForAdmin", new TimeSpan(0, 5, 0));
 
             return CacheHelper.List(Context.Orders
+                .Include(x => x.Coupon)
                 .Include(x => x.Buyer)
                 .Include(x => x.Seller)
                 .Include(x => x.Products)
@@ -113,6 +116,7 @@ namespace Infrastructure.Data.Repositories
         private IQueryable<OrderListing> QueryForPage(DateTime? startDate = null, DateTime? endDate = null, string sellerId = null, string buyerId = null)
         {
             return Context.Set<Order>()
+                .Include(x => x.Coupon)
                 .Include(x => x.Transaction)
                 .Include(x => x.Buyer)
                 .Include(x => x.Seller)

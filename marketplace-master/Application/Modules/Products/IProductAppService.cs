@@ -13,6 +13,8 @@ namespace Application.Modules.Products
 
         IList<Product> GetRelatedProducts(Guid productId, IEnumerable<Guid> sellerProductsIds);
 
+        IList<Product> GetAnotherProductsTemplate(Guid productId, Guid templateId);
+
         //ProductPageViewModel GetProductPage(Guid id);
     }
 }

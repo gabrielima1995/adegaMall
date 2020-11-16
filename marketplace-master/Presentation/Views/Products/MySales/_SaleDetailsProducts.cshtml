@@ -54,100 +54,109 @@
                     <tbody>
                         @foreach (var item in Model.Products)
                         {
-                        <tr>
-                            <td>
-                                <img src="@ProductsHelper.GetImageUrl(item.Image, ProductImageSize.XS)" alt="@item.FullItemName" />
-                            </td>
-                            <td>
-                                <span>@item.FullItemName</span>
+                            <tr>
+                                <td>
+                                    <img src="@ProductsHelper.GetImageUrl(item.Image, ProductImageSize.XS)" alt="@item.FullItemName" />
+                                </td>
+                                <td>
+                                    <span>@item.FullItemName</span>
 
-                                @if (Model.Order.IsRental)
-                                {
-                                    for (var i = 0; i < item.RentalsInfo.Count; i++)
+                                    @if (Model.Order.IsRental)
                                     {
-                                        var rentalInfo = item.RentalsInfo[i];
-                                        <hr />
-
-                                        if (item.IsPackageProduct)
+                                        for (var i = 0; i < item.RentalsInfo.Count; i++)
                                         {
-                                            <span><b>@Request.GetLocalizedString("PRODUCT_PACKAGE_CREDITS_UNIT") @(i + 1) / @item.TotalPossibleRentals</b></span>
-                                            <br />
-                                        }
+                                            var rentalInfo = item.RentalsInfo[i];
+                                            <hr />
 
-                                        @Request.GetLocalizedString("CART_ITEM_RENTAL_PERIOD")
-                                        <span>
-                                            <b>@rentalInfo.StartDate.DisplayDateTime()</b> @Request.GetLocalizedString("CART_ITEM_RENTAL_PERIOD_UNTIL") <b>@rentalInfo.EndDate.DisplayDateTime()</b>
-                                        </span>
-                                    }
-                                }
-                            </td>
-                            @if (config.CustomFields.CartItem.Enabled && Model.CustomFields.Count != 0)
-                            {
-                                foreach (var itemValue in Model.CustomFields.Where(x => x.EntityId == item.Order.Id).ToList())
-                                {
-                                    if (itemValue.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ||
-                                        itemValue.Value.Equals("false", StringComparison.InvariantCultureIgnoreCase))
-                                    {
-                                        <td class="text-right">
+                                            if (item.IsPackageProduct)
+                                            {
+                                                <span><b>@Request.GetLocalizedString("PRODUCT_PACKAGE_CREDITS_UNIT") @(i + 1) / @item.TotalPossibleRentals</b></span>
+                                                <br />
+                                            }
+
+                                            @Request.GetLocalizedString("CART_ITEM_RENTAL_PERIOD")
                                             <span>
-                                                @{
-                                                    var booleanValue = itemValue.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ? Html.Localized("AFFIRMATIVE_LABEL") : Html.Localized("NEGATIVE_LABEL");
-                                                }
-                                                @booleanValue
+                                                <b>@rentalInfo.StartDate.DisplayDateTime()</b> @Request.GetLocalizedString("CART_ITEM_RENTAL_PERIOD_UNTIL") <b>@rentalInfo.EndDate.DisplayDateTime()</b>
                                             </span>
-                                        </td>
+                                        }
                                     }
-                                    else
+                                </td>
+                                @if (config.CustomFields.CartItem.Enabled && Model.CustomFields.Count != 0)
+                                {
+                                    foreach (var itemValue in Model.CustomFields.Where(x => x.EntityId == item.Order.Id).ToList())
+                                    {
+                                        if (itemValue.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ||
+                                            itemValue.Value.Equals("false", StringComparison.InvariantCultureIgnoreCase))
+                                        {
+                                            <td class="text-right">
+                                                <span>
+                                                    @{
+                                                        var booleanValue = itemValue.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ? Html.Localized("AFFIRMATIVE_LABEL") : Html.Localized("NEGATIVE_LABEL");
+                                                    }
+                                                    @booleanValue
+                                                </span>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-right">
+                                                <span>@itemValue.Value</span>
+                                            </td>
+                                        }
+                                    }
+                                    if (Model.CustomFields == null || Model.CustomFields.Count == 0)
                                     {
                                         <td class="text-right">
-                                            <span>@itemValue.Value</span>
+                                            <span></span>
                                         </td>
                                     }
                                 }
-                                if (Model.CustomFields == null || Model.CustomFields.Count == 0)
+                                @if (showQtyBox)
                                 {
                                     <td class="text-right">
-                                        <span></span>
+                                        <span>@item.Quantity.ToString("N0")</span>
                                     </td>
                                 }
-                            }
-                            @if (showQtyBox)
-                            {
                                 <td class="text-right">
-                                    <span>@item.Quantity.ToString("N0")</span>
+                                    <span>@config.DefaultCurrency @item.Price.DisplayDecimal(2)</span>
                                 </td>
-                            }
-                            <td class="text-right">
-                                <span>@config.DefaultCurrency @item.Price.DisplayDecimal(2)</span>
-                            </td>
-                            <td class="text-right">
-                                <span>@config.DefaultCurrency @item.SubTotal.DisplayDecimal(2)</span>
-                            </td>
-                            @if (showShipping)
-                            {
                                 <td class="text-right">
-                                    <span>@config.DefaultCurrency @item.Shipping.DisplayDecimal(2)</span>
+                                    <span>@config.DefaultCurrency @item.SubTotal.DisplayDecimal(2)</span>
                                 </td>
-                            }
-                            @if (showMultiplierBox)
-                            {
+                                @if (showShipping)
+                                {
+                                    <td class="text-right">
+                                        <span>@config.DefaultCurrency @item.Shipping.DisplayDecimal(2)</span>
+                                    </td>
+                                }
+                                @if (showMultiplierBox)
+                                {
+                                    <td class="text-right">
+                                        <span>@item.Multiplier x @config.DefaultCurrency @item.MultiplierPrice.DisplayDecimal(2)</span>
+                                    </td>
+                                }
                                 <td class="text-right">
-                                    <span>@item.Multiplier x @config.DefaultCurrency @item.MultiplierPrice.DisplayDecimal(2)</span>
+                                    <label>@config.DefaultCurrency @item.Amount.DisplayDecimal(2)</label>
                                 </td>
-                            }
-                            <td class="text-right">
-                                <label>@config.DefaultCurrency @item.Amount.DisplayDecimal(2)</label>
-                            </td>
-                        </tr>
+                            </tr>
                         }
                     </tbody>
                     <tfoot>
-                        @if (showShipping)
+                        @if (Model.Order.Shipping > 0)
                         {
                             <tr>
                                 <td colspan="@colSpan"></td>
                                 <td>@Html.Localized("CART_SHIPPING_LABEL")</td>
                                 <td class="text-right">@config.DefaultCurrency @Model.Order.Shipping.DisplayDecimal(2)</td>
+                            </tr>
+                        }
+
+                        @if (Model.Order.Discount > 0)
+                        {
+                            <tr>
+                                <td colspan="@colSpan"></td>
+                                <td>@Html.Localized("CART_DISCOUNT_LABEL")</td>
+                                <td class="text-right">-@config.DefaultCurrency @Model.Order.Discount.DisplayDecimal(2)</td>
                             </tr>
                         }
                         <tr>

@@ -73,6 +73,9 @@ WriteLiteral("\r\n");
     var config = MaaSConfig.Current;
     var loginProfile = User.Identity.GetLoginProfile();
 
+    decimal percentFee = ViewBag.PercentFee ?? 20M;
+    decimal amountFee = ViewBag.AmountFee ?? 0M;
+
             
             #line default
             #line hidden
@@ -85,7 +88,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 15 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 18 "..\..\Views\Products\Store\Templates.cshtml"
 Write(Styles.Render("~/Content/datatable"));
 
             
@@ -108,7 +111,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 20 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 23 "..\..\Views\Products\Store\Templates.cshtml"
    Write(Html.Partial("_ProfileInvisibleMessage", loginProfile));
 
             
@@ -127,7 +130,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 24 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 27 "..\..\Views\Products\Store\Templates.cshtml"
            Write(Html.Partial("_UserMenu", loginProfile));
 
             
@@ -138,7 +141,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 25 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 28 "..\..\Views\Products\Store\Templates.cshtml"
            Write(Html.Localized("MY_STORE_TITLE", "h3"));
 
             
@@ -147,13 +150,13 @@ WriteLiteral("                ");
 WriteLiteral("\r\n");
 
             
-            #line 26 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 29 "..\..\Views\Products\Store\Templates.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 26 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 29 "..\..\Views\Products\Store\Templates.cshtml"
                  if (config.Payment.Enabled)
                 {
 
@@ -164,26 +167,46 @@ WriteLiteral("                    <div");
 
 WriteLiteral(" class=\"seller-store-fees m-b-sm\"");
 
-WriteLiteral(">\r\n                        <strong>");
+WriteLiteral(">\r\n");
+
+WriteLiteral("                        ");
 
             
-            #line 29 "..\..\Views\Products\Store\Templates.cshtml"
-                           Write(Html.Localized("MY_FEES_TITLE"));
+            #line 32 "..\..\Views\Products\Store\Templates.cshtml"
+                   Write(Html.Localized("MY_FEES_TITLE", "strong"));
 
             
             #line default
             #line hidden
-WriteLiteral("</strong>: 20% + R$ 0,00\r\n");
+WriteLiteral(": ");
 
             
-            #line 30 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 32 "..\..\Views\Products\Store\Templates.cshtml"
+                                                               Write(percentFee.ToString("N0"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("% + ");
+
+            
+            #line 32 "..\..\Views\Products\Store\Templates.cshtml"
+                                                                                             Write(amountFee.DisplayCurrency());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 33 "..\..\Views\Products\Store\Templates.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 30 "..\..\Views\Products\Store\Templates.cshtml"
-                         if (false)
+            #line 33 "..\..\Views\Products\Store\Templates.cshtml"
+                         if (ViewBag.IsLiable)
                         {
 
             
@@ -194,7 +217,7 @@ WriteLiteral("                            <br />\r\n");
 WriteLiteral("                            <strong>Chargeback Compartilhado</strong>\r\n");
 
             
-            #line 34 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 37 "..\..\Views\Products\Store\Templates.cshtml"
                         }
 
             
@@ -203,7 +226,7 @@ WriteLiteral("                            <strong>Chargeback Compartilhado</stro
 WriteLiteral("                    </div>\r\n");
 
             
-            #line 36 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 39 "..\..\Views\Products\Store\Templates.cshtml"
                 }
 
             
@@ -220,13 +243,13 @@ WriteLiteral(" class=\"col-xs-12 col-md-7\"");
 WriteLiteral(">\r\n");
 
             
-            #line 40 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 43 "..\..\Views\Products\Store\Templates.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 40 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 43 "..\..\Views\Products\Store\Templates.cshtml"
                          if (!config.Product.Templates.ForceSellerToUseTemplates)
                         {
 
@@ -235,14 +258,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1398), Tuple.Create("\"", 1434)
+WriteAttribute("href", Tuple.Create(" href=\"", 1552), Tuple.Create("\"", 1588)
             
-            #line 42 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 1405), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Store")
+            #line 45 "..\..\Views\Products\Store\Templates.cshtml"
+, Tuple.Create(Tuple.Create("", 1559), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Store")
             
             #line default
             #line hidden
-, 1405), false)
+, 1559), false)
 );
 
 WriteLiteral(">\r\n                                <i");
@@ -254,7 +277,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                                ");
 
             
-            #line 44 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 47 "..\..\Views\Products\Store\Templates.cshtml"
                            Write(Html.Localized("STORE_BACK_TO_MAIN_LIST"));
 
             
@@ -263,7 +286,7 @@ WriteLiteral("                                ");
 WriteLiteral("\r\n                            </a>\r\n");
 
             
-            #line 46 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 49 "..\..\Views\Products\Store\Templates.cshtml"
                         }
 
             
@@ -280,13 +303,13 @@ WriteLiteral(" class=\"btn-group btn-group-justified m-b-md\"");
 WriteLiteral(">\r\n");
 
             
-            #line 51 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 54 "..\..\Views\Products\Store\Templates.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 51 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 54 "..\..\Views\Products\Store\Templates.cshtml"
                              if (Model.CurrentMode == "all")
                             {
 
@@ -295,14 +318,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1931), Tuple.Create("\"", 1971)
+WriteAttribute("href", Tuple.Create(" href=\"", 2085), Tuple.Create("\"", 2125)
             
-            #line 53 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 1938), Tuple.Create<System.Object, System.Int32>(Url.Action("Templates", "Store")
+            #line 56 "..\..\Views\Products\Store\Templates.cshtml"
+, Tuple.Create(Tuple.Create("", 2092), Tuple.Create<System.Object, System.Int32>(Url.Action("Templates", "Store")
             
             #line default
             #line hidden
-, 1938), false)
+, 2092), false)
 );
 
 WriteLiteral(" class=\"btn btn-default active\"");
@@ -310,7 +333,7 @@ WriteLiteral(" class=\"btn btn-default active\"");
 WriteLiteral(">Todos os itens (");
 
             
-            #line 53 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 56 "..\..\Views\Products\Store\Templates.cshtml"
                                                                                                                       Write(Model.AllItems.Count);
 
             
@@ -319,7 +342,7 @@ WriteLiteral(">Todos os itens (");
 WriteLiteral(")</a>\r\n");
 
             
-            #line 54 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 57 "..\..\Views\Products\Store\Templates.cshtml"
                             }
 
             
@@ -327,32 +350,32 @@ WriteLiteral(")</a>\r\n");
             #line hidden
 WriteLiteral("                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2109), Tuple.Create("\"", 2173)
+WriteAttribute("href", Tuple.Create(" href=\"", 2263), Tuple.Create("\"", 2327)
             
-            #line 55 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 2116), Tuple.Create<System.Object, System.Int32>(Url.Action("Templates", "Store", new { @mode = "mine" })
+            #line 58 "..\..\Views\Products\Store\Templates.cshtml"
+, Tuple.Create(Tuple.Create("", 2270), Tuple.Create<System.Object, System.Int32>(Url.Action("Templates", "Store", new { @mode = "mine" })
             
             #line default
             #line hidden
-, 2116), false)
+, 2270), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2174), Tuple.Create("\"", 2244)
-, Tuple.Create(Tuple.Create("", 2182), Tuple.Create("btn", 2182), true)
-, Tuple.Create(Tuple.Create(" ", 2185), Tuple.Create("btn-default", 2186), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 2328), Tuple.Create("\"", 2398)
+, Tuple.Create(Tuple.Create("", 2336), Tuple.Create("btn", 2336), true)
+, Tuple.Create(Tuple.Create(" ", 2339), Tuple.Create("btn-default", 2340), true)
             
-            #line 55 "..\..\Views\Products\Store\Templates.cshtml"
-                                      , Tuple.Create(Tuple.Create(" ", 2197), Tuple.Create<System.Object, System.Int32>(Css.If(Model.CurrentMode == "mine", "active")
+            #line 58 "..\..\Views\Products\Store\Templates.cshtml"
+                                      , Tuple.Create(Tuple.Create(" ", 2351), Tuple.Create<System.Object, System.Int32>(Css.If(Model.CurrentMode == "mine", "active")
             
             #line default
             #line hidden
-, 2198), false)
+, 2352), false)
 );
 
 WriteLiteral(">Meus produtos (");
 
             
-            #line 55 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 58 "..\..\Views\Products\Store\Templates.cshtml"
                                                                                                                                                                                  Write(Model.MyItems.Count);
 
             
@@ -360,32 +383,32 @@ WriteLiteral(">Meus produtos (");
             #line hidden
 WriteLiteral(")</a>\r\n                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2318), Tuple.Create("\"", 2387)
+WriteAttribute("href", Tuple.Create(" href=\"", 2472), Tuple.Create("\"", 2541)
             
-            #line 56 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 2325), Tuple.Create<System.Object, System.Int32>(Url.Action("Templates", "Store", new { @mode = "available" })
+            #line 59 "..\..\Views\Products\Store\Templates.cshtml"
+, Tuple.Create(Tuple.Create("", 2479), Tuple.Create<System.Object, System.Int32>(Url.Action("Templates", "Store", new { @mode = "available" })
             
             #line default
             #line hidden
-, 2325), false)
+, 2479), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2388), Tuple.Create("\"", 2463)
-, Tuple.Create(Tuple.Create("", 2396), Tuple.Create("btn", 2396), true)
-, Tuple.Create(Tuple.Create(" ", 2399), Tuple.Create("btn-default", 2400), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 2542), Tuple.Create("\"", 2617)
+, Tuple.Create(Tuple.Create("", 2550), Tuple.Create("btn", 2550), true)
+, Tuple.Create(Tuple.Create(" ", 2553), Tuple.Create("btn-default", 2554), true)
             
-            #line 56 "..\..\Views\Products\Store\Templates.cshtml"
-                                           , Tuple.Create(Tuple.Create(" ", 2411), Tuple.Create<System.Object, System.Int32>(Css.If(Model.CurrentMode == "available", "active")
+            #line 59 "..\..\Views\Products\Store\Templates.cshtml"
+                                           , Tuple.Create(Tuple.Create(" ", 2565), Tuple.Create<System.Object, System.Int32>(Css.If(Model.CurrentMode == "available", "active")
             
             #line default
             #line hidden
-, 2412), false)
+, 2566), false)
 );
 
 WriteLiteral(">Modelos (");
 
             
-            #line 56 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 59 "..\..\Views\Products\Store\Templates.cshtml"
                                                                                                                                                                                      Write(Model.AvailableItems.Count);
 
             
@@ -395,13 +418,13 @@ WriteLiteral(")</a>\r\n                        </div>\r\n                    </d
 "  </div>\r\n\r\n");
 
             
-            #line 61 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 64 "..\..\Views\Products\Store\Templates.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 61 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 64 "..\..\Views\Products\Store\Templates.cshtml"
                  if (Model.CurrentMode == "mine" && Model.MyItems.Count == 0)
                 {
 
@@ -420,7 +443,7 @@ WriteLiteral(">\r\n                            <center>\r\n                     
 "da não tem nenhum produto. Clique aqui para ");
 
             
-            #line 66 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 69 "..\..\Views\Products\Store\Templates.cshtml"
                                                                                Write(Html.ActionLink("criar a partir de um modelo", "Templates", "Store", new { @mode = "available" }));
 
             
@@ -430,7 +453,7 @@ WriteLiteral(".\r\n                            </center>\r\n                    
 "             </div>\r\n");
 
             
-            #line 70 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 73 "..\..\Views\Products\Store\Templates.cshtml"
                 }
                 else if (Model.CurrentMode == "available" && Model.AvailableItems.Count == 0)
                 {
@@ -448,14 +471,14 @@ WriteLiteral(" class=\"panel-body\"");
 
 WriteLiteral(@">
                             <center>
-                                Ops... Não há mais modelos aqui. Parece que você já adicinou à sua vitrine todos os que estavam disponíveis.
+                                Ops... Não há mais modelos aqui. Parece que você já adicionou à sua vitrine todos os que estavam disponíveis.
                             </center>
                         </div>
                     </div>
 ");
 
             
-            #line 80 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 83 "..\..\Views\Products\Store\Templates.cshtml"
                 }
                 else
                 {
@@ -483,7 +506,7 @@ WriteLiteral("></th>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 88 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 91 "..\..\Views\Products\Store\Templates.cshtml"
                                Write(Html.Localized("PRODUCT_TITLE_LABEL", "th"));
 
             
@@ -494,7 +517,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 89 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 92 "..\..\Views\Products\Store\Templates.cshtml"
                                Write(Html.Localized("PRODUCT_CATEGORY_LABEL", "th", new { width = "20%" }));
 
             
@@ -503,13 +526,13 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n");
 
             
-            #line 90 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 93 "..\..\Views\Products\Store\Templates.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 90 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 93 "..\..\Views\Products\Store\Templates.cshtml"
                                      if (Model.CurrentMode != "available")
                                     {
                                         
@@ -517,28 +540,28 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 92 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 95 "..\..\Views\Products\Store\Templates.cshtml"
                                    Write(Html.Localized("PRODUCT_PRICE_LABEL", "th", new { width = "15%" }));
 
             
             #line default
             #line hidden
             
-            #line 92 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 95 "..\..\Views\Products\Store\Templates.cshtml"
                                                                                                            
                                         
             
             #line default
             #line hidden
             
-            #line 93 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 96 "..\..\Views\Products\Store\Templates.cshtml"
                                    Write(Html.Localized("STOCK", "th", new { width = "15%" }));
 
             
             #line default
             #line hidden
             
-            #line 93 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 96 "..\..\Views\Products\Store\Templates.cshtml"
                                                                                              
                                     }
 
@@ -553,13 +576,13 @@ WriteLiteral("></th>\r\n                                </tr>\r\n               
 "d>\r\n                            <tbody>\r\n");
 
             
-            #line 99 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 102 "..\..\Views\Products\Store\Templates.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 99 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 102 "..\..\Views\Products\Store\Templates.cshtml"
                                  foreach (var item in Model.CurrentList)
                                 {
 
@@ -572,7 +595,7 @@ WriteLiteral("                                    <tr>\r\n                      
 WriteLiteral(" data-order=\"");
 
             
-            #line 102 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 105 "..\..\Views\Products\Store\Templates.cshtml"
                                                    Write(Dt.Order(item.Title));
 
             
@@ -583,13 +606,13 @@ WriteLiteral("\"");
 WriteLiteral(">\r\n");
 
             
-            #line 103 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 106 "..\..\Views\Products\Store\Templates.cshtml"
                                             
             
             #line default
             #line hidden
             
-            #line 103 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 106 "..\..\Views\Products\Store\Templates.cshtml"
                                              if (item.SellerProductId.HasValue)
                                             {
 
@@ -598,32 +621,32 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5092), Tuple.Create("\"", 5178)
+WriteAttribute("href", Tuple.Create(" href=\"", 5247), Tuple.Create("\"", 5333)
             
-            #line 105 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 5099), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("EditProduct", "Store", new { id = item.SellerProductId })
+            #line 108 "..\..\Views\Products\Store\Templates.cshtml"
+, Tuple.Create(Tuple.Create("", 5254), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("EditProduct", "Store", new { id = item.SellerProductId })
             
             #line default
             #line hidden
-, 5099), false)
+, 5254), false)
 );
 
 WriteLiteral(">\r\n                                                    <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 5238), Tuple.Create("\"", 5286)
+WriteAttribute("src", Tuple.Create(" src=\"", 5393), Tuple.Create("\"", 5441)
             
-            #line 106 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 5244), Tuple.Create<System.Object, System.Int32>(ImgHelper.Product(item.CoverImageUrl, 80)
+            #line 109 "..\..\Views\Products\Store\Templates.cshtml"
+, Tuple.Create(Tuple.Create("", 5399), Tuple.Create<System.Object, System.Int32>(ImgHelper.Product(item.CoverImageUrl, 80)
             
             #line default
             #line hidden
-, 5244), false)
+, 5399), false)
 );
 
 WriteLiteral(" />\r\n                                                </a>\r\n");
 
             
-            #line 108 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 111 "..\..\Views\Products\Store\Templates.cshtml"
                                             }
                                             else
                                             {
@@ -633,20 +656,20 @@ WriteLiteral(" />\r\n                                                </a>\r\n");
             #line hidden
 WriteLiteral("                                                <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 5542), Tuple.Create("\"", 5590)
+WriteAttribute("src", Tuple.Create(" src=\"", 5697), Tuple.Create("\"", 5745)
             
-            #line 111 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 5548), Tuple.Create<System.Object, System.Int32>(ImgHelper.Product(item.CoverImageUrl, 80)
+            #line 114 "..\..\Views\Products\Store\Templates.cshtml"
+, Tuple.Create(Tuple.Create("", 5703), Tuple.Create<System.Object, System.Int32>(ImgHelper.Product(item.CoverImageUrl, 80)
             
             #line default
             #line hidden
-, 5548), false)
+, 5703), false)
 );
 
 WriteLiteral(" />\r\n");
 
             
-            #line 112 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 115 "..\..\Views\Products\Store\Templates.cshtml"
                                             }
 
             
@@ -658,7 +681,7 @@ WriteLiteral("                                        </td>\r\n                 
 WriteLiteral(" data-order=\"");
 
             
-            #line 114 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 117 "..\..\Views\Products\Store\Templates.cshtml"
                                                    Write(Dt.Order(item.Title));
 
             
@@ -669,13 +692,13 @@ WriteLiteral("\"");
 WriteLiteral(">\r\n");
 
             
-            #line 115 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 118 "..\..\Views\Products\Store\Templates.cshtml"
                                             
             
             #line default
             #line hidden
             
-            #line 115 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 118 "..\..\Views\Products\Store\Templates.cshtml"
                                              if (item.SellerProductId.HasValue)
                                             {
 
@@ -684,14 +707,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5949), Tuple.Create("\"", 6035)
+WriteAttribute("href", Tuple.Create(" href=\"", 6104), Tuple.Create("\"", 6190)
             
-            #line 117 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 5956), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("EditProduct", "Store", new { id = item.SellerProductId })
+            #line 120 "..\..\Views\Products\Store\Templates.cshtml"
+, Tuple.Create(Tuple.Create("", 6111), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("EditProduct", "Store", new { id = item.SellerProductId })
             
             #line default
             #line hidden
-, 5956), false)
+, 6111), false)
 );
 
 WriteLiteral(">\r\n");
@@ -699,7 +722,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                                    ");
 
             
-            #line 118 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 121 "..\..\Views\Products\Store\Templates.cshtml"
                                                Write(Html.DisplayFor(model => item.Title));
 
             
@@ -708,7 +731,7 @@ WriteLiteral("                                                    ");
 WriteLiteral("\r\n                                                </a>\r\n");
 
             
-            #line 120 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 123 "..\..\Views\Products\Store\Templates.cshtml"
                                             }
                                             else
                                             {
@@ -717,14 +740,14 @@ WriteLiteral("\r\n                                                </a>\r\n");
             #line default
             #line hidden
             
-            #line 123 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 126 "..\..\Views\Products\Store\Templates.cshtml"
                                            Write(Html.DisplayFor(model => item.Title));
 
             
             #line default
             #line hidden
             
-            #line 123 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 126 "..\..\Views\Products\Store\Templates.cshtml"
                                                                                      
 
             
@@ -736,21 +759,21 @@ WriteLiteral(" class=\"block\"");
 
 WriteLiteral(">\r\n                                                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6540), Tuple.Create("\"", 6622)
+WriteAttribute("href", Tuple.Create(" href=\"", 6695), Tuple.Create("\"", 6777)
             
-            #line 125 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 6547), Tuple.Create<System.Object, System.Int32>(Url.Action("CreateProduct", "Store", new { templateId = item.TemplateId })
+            #line 128 "..\..\Views\Products\Store\Templates.cshtml"
+, Tuple.Create(Tuple.Create("", 6702), Tuple.Create<System.Object, System.Int32>(Url.Action("CreateProduct", "Store", new { templateId = item.TemplateId })
             
             #line default
             #line hidden
-, 6547), false)
+, 6702), false)
 );
 
 WriteLiteral(">Adicionar à minha vitrine</a>\r\n                                                <" +
 "/small>\r\n");
 
             
-            #line 127 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 130 "..\..\Views\Products\Store\Templates.cshtml"
                                             }
 
             
@@ -762,7 +785,7 @@ WriteLiteral("                                        </td>\r\n                 
 WriteLiteral(" data-order=\"");
 
             
-            #line 129 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 132 "..\..\Views\Products\Store\Templates.cshtml"
                                                    Write(Dt.Order(item.Category));
 
             
@@ -773,7 +796,7 @@ WriteLiteral("\"");
 WriteLiteral(">");
 
             
-            #line 129 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 132 "..\..\Views\Products\Store\Templates.cshtml"
                                                                              Write(Html.DisplayFor(model => item.Category));
 
             
@@ -782,13 +805,13 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n");
 
             
-            #line 130 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 133 "..\..\Views\Products\Store\Templates.cshtml"
                                         
             
             #line default
             #line hidden
             
-            #line 130 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 133 "..\..\Views\Products\Store\Templates.cshtml"
                                          if (Model.CurrentMode != "available")
                                         {
 
@@ -800,7 +823,7 @@ WriteLiteral("                                            <td");
 WriteLiteral(" data-order=\"");
 
             
-            #line 132 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 135 "..\..\Views\Products\Store\Templates.cshtml"
                                                        Write(Dt.Order(item.Price));
 
             
@@ -811,13 +834,13 @@ WriteLiteral("\"");
 WriteLiteral(">\r\n");
 
             
-            #line 133 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 136 "..\..\Views\Products\Store\Templates.cshtml"
                                                 
             
             #line default
             #line hidden
             
-            #line 133 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 136 "..\..\Views\Products\Store\Templates.cshtml"
                                                  if (item.Price != null)
                                                 {
                                                     if (item.Price.HasBasePrice)
@@ -827,14 +850,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 137 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 140 "..\..\Views\Products\Store\Templates.cshtml"
                                                    Write(Html.DisplayFor(model => item.Price.BasePrice.Value));
 
             
             #line default
             #line hidden
             
-            #line 137 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 140 "..\..\Views\Products\Store\Templates.cshtml"
                                                                                                              
                                                     }
                                                     else
@@ -844,14 +867,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 141 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 144 "..\..\Views\Products\Store\Templates.cshtml"
                                                    Write(Html.DisplayFor(model => item.Price.Price.Value));
 
             
             #line default
             #line hidden
             
-            #line 141 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 144 "..\..\Views\Products\Store\Templates.cshtml"
                                                                                                          
                                                     }
                                                 }
@@ -866,7 +889,7 @@ WriteLiteral("                                            <td");
 WriteLiteral(" data-order=\"");
 
             
-            #line 145 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 148 "..\..\Views\Products\Store\Templates.cshtml"
                                                        Write(Dt.Order(item.CurrentStock));
 
             
@@ -877,7 +900,7 @@ WriteLiteral("\"");
 WriteLiteral(">");
 
             
-            #line 145 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 148 "..\..\Views\Products\Store\Templates.cshtml"
                                                                                      Write(Html.DisplayFor(model => item.CurrentStock));
 
             
@@ -886,7 +909,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n");
 
             
-            #line 146 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 149 "..\..\Views\Products\Store\Templates.cshtml"
                                         }
 
             
@@ -897,7 +920,7 @@ WriteLiteral("                                        <td");
 WriteLiteral(" data-order=\"");
 
             
-            #line 147 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 150 "..\..\Views\Products\Store\Templates.cshtml"
                                                    Write(Dt.Order(item.Title));
 
             
@@ -908,13 +931,13 @@ WriteLiteral("\"");
 WriteLiteral(">\r\n");
 
             
-            #line 148 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 151 "..\..\Views\Products\Store\Templates.cshtml"
                                             
             
             #line default
             #line hidden
             
-            #line 148 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 151 "..\..\Views\Products\Store\Templates.cshtml"
                                              if (item.SellerProductId.HasValue)
                                             {
 
@@ -923,14 +946,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 8392), Tuple.Create("\"", 8480)
+WriteAttribute("href", Tuple.Create(" href=\"", 8547), Tuple.Create("\"", 8635)
             
-            #line 150 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 8399), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("DeleteProduct", "Store", new { id = item.SellerProductId })
+            #line 153 "..\..\Views\Products\Store\Templates.cshtml"
+, Tuple.Create(Tuple.Create("", 8554), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("DeleteProduct", "Store", new { id = item.SellerProductId })
             
             #line default
             #line hidden
-, 8399), false)
+, 8554), false)
 );
 
 WriteLiteral(" class=\"text-danger\"");
@@ -948,7 +971,7 @@ WriteLiteral(" style=\"font-size: 20px\"");
 WriteLiteral("></i>\r\n                                                </a>\r\n");
 
             
-            #line 153 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 156 "..\..\Views\Products\Store\Templates.cshtml"
                                             }
                                             else
                                             {
@@ -958,14 +981,14 @@ WriteLiteral("></i>\r\n                                                </a>\r\n"
             #line hidden
 WriteLiteral("                                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 8925), Tuple.Create("\"", 9016)
+WriteAttribute("href", Tuple.Create(" href=\"", 9080), Tuple.Create("\"", 9171)
             
-            #line 156 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 8932), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("CreateProduct", "Store", new { templateId = item.TemplateId })
+            #line 159 "..\..\Views\Products\Store\Templates.cshtml"
+, Tuple.Create(Tuple.Create("", 9087), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("CreateProduct", "Store", new { templateId = item.TemplateId })
             
             #line default
             #line hidden
-, 8932), false)
+, 9087), false)
 );
 
 WriteLiteral(" class=\"text-primary\"");
@@ -983,7 +1006,7 @@ WriteLiteral(" style=\"font-size: 24px\"");
 WriteLiteral("></i>\r\n                                                </a>\r\n");
 
             
-            #line 159 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 162 "..\..\Views\Products\Store\Templates.cshtml"
                                             }
 
             
@@ -993,7 +1016,7 @@ WriteLiteral("                                        </td>\r\n                 
 "  </tr>\r\n");
 
             
-            #line 162 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 165 "..\..\Views\Products\Store\Templates.cshtml"
                                 }
 
             
@@ -1003,7 +1026,7 @@ WriteLiteral("                            </tbody>\r\n                        </
 "           </div>\r\n");
 
             
-            #line 166 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 169 "..\..\Views\Products\Store\Templates.cshtml"
                 }
 
             
@@ -1018,7 +1041,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 174 "..\..\Views\Products\Store\Templates.cshtml"
+            #line 177 "..\..\Views\Products\Store\Templates.cshtml"
 Write(Scripts.Render("~/bundles/datatable"));
 
             

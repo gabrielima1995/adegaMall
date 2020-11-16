@@ -1,6 +1,7 @@
 ﻿using Application.Config;
 using Application.Helpers;
 using Domain.Entities;
+using Domain.Utils;
 using Framework;
 using Infra.Crosscutting.Globalization;
 using System;
@@ -99,7 +100,7 @@ namespace Presentation.Models
 
         public string AvatarUrl => ImgHelper.Avatar(Picture, 255);
 
-        public bool RequireModeration { get; set; } 
+        public bool RequireModeration { get; set; }
 
         [DisplayNameLocalized("TIME_ZONE_ID_LABEL")]
         public string PreferredTimeZoneId { get; set; } = TimeZones.Default.TimeZoneId;
@@ -152,7 +153,10 @@ namespace Presentation.Models
 
             buyer.DateOfBirth = DateOfBirth;
             buyer.Genre = Genre;
-            buyer.DocumentNumber = DocumentNumber;
+
+            if (string.IsNullOrEmpty(buyer.DocumentNumber) ||
+                !DocumentNumberValidator.IsValidForBuyer(buyer.DocumentNumber))
+                buyer.DocumentNumber = DocumentNumber;
 
             buyer.Address = buyer.Address ?? new Address();
 

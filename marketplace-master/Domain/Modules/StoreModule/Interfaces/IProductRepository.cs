@@ -27,5 +27,7 @@ namespace Domain.Interfaces.Repositories
         List<Product> ListByPrice();
 
         List<Product> ListByScheduleTimeline(Guid? productId, string sellerId);
+
+        List<Product> ListWithoutTemplate();
     }
 }

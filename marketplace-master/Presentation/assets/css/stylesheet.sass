@@ -824,6 +824,9 @@ textarea:focus
 .product-top-actions-bar
   text-transform: lowercase
 
+.product-info-left
+  margin-bottom: 19px
+
 .product-price
   margin-top: 30px
   margin-bottom: 20px
@@ -841,9 +844,9 @@ textarea:focus
     line-height: 30px
     position: relative
     .product-price-cents
-      position: absolute
+      position: relative
       font-size: 15px
-      top: -12px
+      top: -25px
       padding-left: 2px
   .product-price-specifications
     margin-top: 1rem
@@ -873,6 +876,55 @@ textarea:focus
 
 .product-section-icon
   width: 25px
+
+.product-anothers
+  padding: 0 15px
+
+.product-anothers-left
+  padding: 0
+
+.product-anothers-seller
+  position: relative
+  padding: 15px 9px 15px 19px
+  border: solid 1px #e0e0e0
+  margin-bottom: -1px
+  z-index: 2
+  background: #f2f2f2
+
+  &:hover, &:focus
+    background: #ddd
+
+  &.active
+    background: none
+
+  p
+    margin-bottom: 0
+
+  .product-another-price
+    font-weight: 600
+    font-size: 18px
+
+.product-anothers-right
+  border: solid 1px #e0e0e0
+  padding: 16px 19px
+  z-index: 1
+
+.zipcode-form
+  #zipCode
+    max-width: 101px
+
+@media (min-width: 992px)
+  .product-anothers
+    padding: 0 16px
+
+  .product-anothers-seller
+    margin-right: -1px
+    &.active
+      border-right: solid 1px #fff
+
+  .product-anothers-right
+    margin: 0
+    padding: 16px 24px
 
 .cart
   &.cart-item
@@ -1431,6 +1483,9 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 
   .menu .links-row .links li
     padding: 0 1rem
+
+.coupon-code-form
+  padding: 15px
 
 @media (min-width: 1200px)
   .header-content-left

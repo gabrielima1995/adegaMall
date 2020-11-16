@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 using System.Linq;
+using Domain.Modules.StoreModule.Coupons;
 
 namespace Domain.Entities.StoreModule
 {
@@ -131,6 +132,11 @@ namespace Domain.Entities.StoreModule
         }
 
         /// <summary>
+        /// Cupom de desconto usado no pedido.
+        /// </summary>
+        public Coupon Coupon { get; private set; }
+
+        /// <summary>
         /// Histórico do pedido.
         /// </summary>
         public IList<OrderHistory> Histories { get; set; }
@@ -210,7 +216,8 @@ namespace Domain.Entities.StoreModule
             Guid cartId, PaymentMethod method,
             Buyer buyer, Seller seller, Address shippingAddress,
             ShippingMethod shippingMethod, decimal shipping, ProductBusinessModel businessModel,
-            bool isRental)
+            bool isRental,
+            Coupon coupon, decimal discount)
             : this()
         {
             CartId = cartId;
@@ -230,6 +237,9 @@ namespace Domain.Entities.StoreModule
             ChangeStatus(OrderStatus.Processed);
 
             BusinessModel = businessModel;
+
+            Coupon = coupon;
+            Discount = discount;
 
             AddDomainEvent(new NewOrderRegisteredEvent(Id, Seller.Id, isRental));
         }

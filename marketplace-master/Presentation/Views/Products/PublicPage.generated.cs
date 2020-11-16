@@ -87,7 +87,44 @@ Write(Styles.Render("~/Content/datetime-picker"));
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral(@"
+
+    <style>
+        .loading {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+            .loading .loader {
+                left: 50%;
+                margin-left: -4em;
+                font-size: 10px;
+                border: .8em solid rgba(218, 219, 223, 1);
+                border-left: .8em solid rgba(58, 166, 165, 1);
+                animation: spin 1.1s infinite linear;
+                z-index: 10
+            }
+
+                .loading .loader, .loading .loader:after {
+                    border-radius: 50%;
+                    width: 8em;
+                    height: 8em;
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    margin-top: -4.05em;
+                }
+
+        ");
+
+WriteLiteral("@keyframes spin {\r\n            0% {\r\n                transform: rotate(360deg);\r\n" +
+"            }\r\n\r\n            100% {\r\n                transform: rotate(0deg);\r\n " +
+"           }\r\n        }\r\n    </style>\r\n");
 
 });
 
@@ -108,7 +145,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 21 "..\..\Views\Products\PublicPage.cshtml"
+            #line 63 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Partial("_ProductTopActions", Model));
 
             
@@ -119,7 +156,7 @@ WriteLiteral("\r\n");
 WriteLiteral("        ");
 
             
-            #line 22 "..\..\Views\Products\PublicPage.cshtml"
+            #line 64 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Partial("_ProductMainBoard", Model));
 
             
@@ -130,7 +167,7 @@ WriteLiteral("\r\n");
 WriteLiteral("        ");
 
             
-            #line 23 "..\..\Views\Products\PublicPage.cshtml"
+            #line 65 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Partial("_ProductInfos", Model));
 
             
@@ -141,7 +178,7 @@ WriteLiteral("\r\n");
 WriteLiteral("        ");
 
             
-            #line 24 "..\..\Views\Products\PublicPage.cshtml"
+            #line 66 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Partial("_RelatedSameSeller", Model));
 
             
@@ -152,7 +189,7 @@ WriteLiteral("\r\n");
 WriteLiteral("        ");
 
             
-            #line 25 "..\..\Views\Products\PublicPage.cshtml"
+            #line 67 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Partial("_RelatedOther", Model));
 
             
@@ -161,7 +198,7 @@ WriteLiteral("        ");
 WriteLiteral("\r\n    </div>\r\n</div>\r\n\r\n");
 
             
-            #line 29 "..\..\Views\Products\PublicPage.cshtml"
+            #line 71 "..\..\Views\Products\PublicPage.cshtml"
  if (!User.Identity.IsAuthenticated || !(User.Identity.GetLoginProfile()?.IsBuyer() ?? false))
 {
     using (Html.BeginForm("AddItemAndProceedToLogin", "Cart", FormMethod.Post, new { id = "frmAddAndProceedToLogin" }))
@@ -178,131 +215,131 @@ WriteLiteral(" name=\"id\"");
 
 WriteLiteral(" id=\"id\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1161), Tuple.Create("\"", 1186)
+WriteAttribute("value", Tuple.Create(" value=\"", 2313), Tuple.Create("\"", 2338)
             
-            #line 33 "..\..\Views\Products\PublicPage.cshtml"
-, Tuple.Create(Tuple.Create("", 1169), Tuple.Create<System.Object, System.Int32>(Model.Product.Id
+            #line 75 "..\..\Views\Products\PublicPage.cshtml"
+, Tuple.Create(Tuple.Create("", 2321), Tuple.Create<System.Object, System.Int32>(Model.Product.Id
             
             #line default
             #line hidden
-, 1169), false)
+, 2321), false)
 );
 
 WriteLiteral(" />\r\n");
 
             
-            #line 34 "..\..\Views\Products\PublicPage.cshtml"
+            #line 76 "..\..\Views\Products\PublicPage.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 34 "..\..\Views\Products\PublicPage.cshtml"
+            #line 76 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Hidden("cartCustomFieldIds"));
 
             
             #line default
             #line hidden
             
-            #line 34 "..\..\Views\Products\PublicPage.cshtml"
+            #line 76 "..\..\Views\Products\PublicPage.cshtml"
                                           
         
             
             #line default
             #line hidden
             
-            #line 35 "..\..\Views\Products\PublicPage.cshtml"
+            #line 77 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Hidden("cartCustomFieldsValues"));
 
             
             #line default
             #line hidden
             
-            #line 35 "..\..\Views\Products\PublicPage.cshtml"
+            #line 77 "..\..\Views\Products\PublicPage.cshtml"
                                               
         
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Views\Products\PublicPage.cshtml"
+            #line 78 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Hidden("quantity", 1));
 
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Views\Products\PublicPage.cshtml"
+            #line 78 "..\..\Views\Products\PublicPage.cshtml"
                                    
         
             
             #line default
             #line hidden
             
-            #line 37 "..\..\Views\Products\PublicPage.cshtml"
+            #line 79 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Hidden("rentalStartDateTime"));
 
             
             #line default
             #line hidden
             
-            #line 37 "..\..\Views\Products\PublicPage.cshtml"
+            #line 79 "..\..\Views\Products\PublicPage.cshtml"
                                            
         
             
             #line default
             #line hidden
             
-            #line 38 "..\..\Views\Products\PublicPage.cshtml"
+            #line 80 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Hidden("rentalEndDateTime"));
 
             
             #line default
             #line hidden
             
-            #line 38 "..\..\Views\Products\PublicPage.cshtml"
+            #line 80 "..\..\Views\Products\PublicPage.cshtml"
                                          
         
             
             #line default
             #line hidden
             
-            #line 39 "..\..\Views\Products\PublicPage.cshtml"
+            #line 81 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Hidden("multiplier", 0));
 
             
             #line default
             #line hidden
             
-            #line 39 "..\..\Views\Products\PublicPage.cshtml"
+            #line 81 "..\..\Views\Products\PublicPage.cshtml"
                                      
         
             
             #line default
             #line hidden
             
-            #line 40 "..\..\Views\Products\PublicPage.cshtml"
+            #line 82 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Hidden("stockVariant"));
 
             
             #line default
             #line hidden
             
-            #line 40 "..\..\Views\Products\PublicPage.cshtml"
+            #line 82 "..\..\Views\Products\PublicPage.cshtml"
                                     
         
             
             #line default
             #line hidden
             
-            #line 41 "..\..\Views\Products\PublicPage.cshtml"
+            #line 83 "..\..\Views\Products\PublicPage.cshtml"
    Write(Html.Hidden("productAvailabilityId"));
 
             
             #line default
             #line hidden
             
-            #line 41 "..\..\Views\Products\PublicPage.cshtml"
+            #line 83 "..\..\Views\Products\PublicPage.cshtml"
                                              
     }
 }
@@ -319,7 +356,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 47 "..\..\Views\Products\PublicPage.cshtml"
+            #line 89 "..\..\Views\Products\PublicPage.cshtml"
 Write(Scripts.Render("~/bundles/scripts/datetime-picker"));
 
             
@@ -330,7 +367,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 48 "..\..\Views\Products\PublicPage.cshtml"
+            #line 90 "..\..\Views\Products\PublicPage.cshtml"
 Write(Html.Action("PublicPageScript", new { productId = Model.Product.Id }));
 
             
@@ -339,19 +376,37 @@ Write(Html.Action("PublicPageScript", new { productId = Model.Product.Id }));
 WriteLiteral("\r\n\r\n    <script>\r\n        var addToCartHidden = ");
 
             
-            #line 51 "..\..\Views\Products\PublicPage.cshtml"
+            #line 93 "..\..\Views\Products\PublicPage.cshtml"
                           Write(!Model.ShowAddToCart ? 1 : 0);
 
             
             #line default
             #line hidden
-WriteLiteral(";\r\n        ProductPublicPage.init();\r\n\r\n        $(document).ready(function () {\r\n" +
-"            SearchImageLoader.loadImages();\r\n        });\r\n    </script>\r\n\r\n");
+WriteLiteral(@";
+        ProductPublicPage.init();
+
+        $(document).ready(function () {
+            SearchImageLoader.loadImages();
+
+            $(document).on('click','.product-anothers-seller:not(.active) a',
+                function(el) {
+                    $('.product-anothers-loading').addClass('loading');
+                });
+
+            $(document).on('click', '.product-anothers-seller.active a',
+                function (e) {
+                    e.preventDefault();
+                    return false;
+                });
+        });
+    </script>
+
+");
 
 WriteLiteral("    ");
 
             
-            #line 59 "..\..\Views\Products\PublicPage.cshtml"
+            #line 112 "..\..\Views\Products\PublicPage.cshtml"
 Write(Html.Partial("_RentalScript", Model));
 
             
@@ -362,7 +417,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 60 "..\..\Views\Products\PublicPage.cshtml"
+            #line 113 "..\..\Views\Products\PublicPage.cshtml"
 Write(Html.Partial("_ProductWishScript"));
 
             

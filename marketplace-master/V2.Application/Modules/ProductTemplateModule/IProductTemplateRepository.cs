@@ -6,7 +6,7 @@ namespace V2.Application.Modules.ProductTemplateModule
 {
     public interface IProductTemplateRepository
     {
-        OperationResult Add(ProductTemplate productTemplate);
+        OperationResult Add(ProductTemplate productTemplate, bool saveChanges = true);
         ProductTemplate Find(Guid id);
         OperationResult Remove(ProductTemplate productTemplate);
         OperationResult Update(ProductTemplate productTemplate);

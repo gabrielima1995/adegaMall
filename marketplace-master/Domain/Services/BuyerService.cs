@@ -37,6 +37,7 @@ namespace Domain.Services
         }
 
         public bool ExistsByEmail(string email, string ownerUserId = null) => _personService.ExistsByEmail(email, ownerUserId);
+        public bool ExistsByDocumentNumber(string documentNumber, string ownerUserId = null) => _personService.ExistsByDocumentNumber(documentNumber, ownerUserId);
         public Buyer GetById(string buyerId) => _buyerRepository.GetById(buyerId);
         public Buyer GetByEmail(string email) => _buyerRepository.GetByEmail(email);
 
@@ -133,12 +134,18 @@ namespace Domain.Services
             var errors = new ErrorDictionary();
 
             if (buyer == null)
-                errors.Add(nameof(buyer), GlobalizationHelper.FormatString("REQUIRED_ERROR", nameof(buyer)));
-            else
             {
-                if (ExistsByEmail(buyer.Email, buyer.UserId))
-                    errors.Add(nameof(buyer.Email), GlobalizationHelper.GetString("EMAIL_ALREADY_EXISTS_ERROR_MESSAGE"));
+                errors.Add(nameof(buyer), GlobalizationHelper.FormatString("REQUIRED_ERROR", nameof(buyer)));
+                return errors;
             }
+
+            if (ExistsByEmail(buyer.Email, buyer.UserId))
+                errors.Add(nameof(buyer.Email), GlobalizationHelper.GetString("EMAIL_ALREADY_EXISTS_ERROR_MESSAGE"));
+
+            if (!string.IsNullOrEmpty(buyer.DocumentNumber) &&
+                ExistsByDocumentNumber(buyer.DocumentNumber, buyer.UserId))
+                errors.Add(nameof(buyer.DocumentNumber),
+                    GlobalizationHelper.GetString("BUYER_DOCUMENT_NUMBER_ALREADY_EXISTS_ERROR_MESSAGE"));
 
             if (!DocumentNumberValidator.IsValidForBuyer(buyer.DocumentNumber))
                 return new OperationResult<Buyer>(

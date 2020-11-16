@@ -447,10 +447,10 @@ namespace Application.Modules.Products
             : this()
         {
             Categories = allCategories;
-            PrivateFleetEnabled = MaaSConfig.Current.Product.PrivateFleetShipping.Enabled;
-            PrivateFleetParams = MaaSConfig.Current.Product.PrivateFleetShipping.DefaultParams
-                .Select(i => new PrivateFleetParameterViewModel(i))
-                .ToList();
+            //PrivateFleetEnabled = MaaSConfig.Current.Product.PrivateFleetShipping.Enabled;
+            //PrivateFleetParams = MaaSConfig.Current.Product.PrivateFleetShipping.DefaultParams
+            //    .Select(i => new PrivateFleetParameterViewModel(i))
+            //    .ToList();
         }
 
         public ProductEditorViewModel(Product product, IList<ProductCategory> allCategories)

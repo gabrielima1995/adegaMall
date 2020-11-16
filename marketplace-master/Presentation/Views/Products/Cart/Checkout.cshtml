@@ -69,6 +69,20 @@
                                 <td class="text-right">@config.DefaultCurrency @Model.Cart.SubTotal.DisplayDecimal(2)</td>
                             </tr>
 
+                            <tr class="checkout-items-total">
+                                <td>@Html.Localized("CART_DISCOUNT_LABEL")</td>
+                                <td class="text-right">
+                                    @if (Model.Cart.Discount == 0)
+                                    {
+                                        @:-
+                                    }
+                                    else
+                                    {
+                                        @:-@config.DefaultCurrency @Model.Cart.Discount.DisplayDecimal(2)
+                                    }
+                                </td>
+                            </tr>
+
                             <tr class="checkout-shipping">
                                 <td>@Html.Localized("CART_SHIPPING_LABEL")</td>
                                 <td class="text-right">

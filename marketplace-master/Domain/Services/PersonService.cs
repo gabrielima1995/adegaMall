@@ -22,6 +22,11 @@ namespace Domain
             return Repository.Query().Any(person => person.Email == email && (ownerUserId == null || person.UserId != ownerUserId));
         }
 
+        public bool ExistsByDocumentNumber(string documentNumber, string ownerUserId = null)
+        {
+            return Repository.Query().Any(person => person.DocumentNumber == documentNumber && (ownerUserId == null || person.UserId != ownerUserId));
+        }
+
         public void SetUtmTagsIfNull(string username, string utmTags)
         {
             if (string.IsNullOrEmpty(utmTags))

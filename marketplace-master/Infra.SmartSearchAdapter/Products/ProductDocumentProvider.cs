@@ -128,6 +128,7 @@ namespace Infra.SmartSearchAdapter.Products
                     { "HasStock", (bool)doc.HasStock },
                     { "IsDisabled", (bool)doc.IsDisabled },
                     { "HasTemplate", (bool)doc.HasTemplate },
+                    { "TemplateId", (Guid?)doc.TemplateId },
                     { "NoShippingEnabled", (bool)doc.NoShippingEnabled },
                     { "ActualNoShippingEnabled", (bool)doc.ActualNoShippingEnabled },
                     { "OnSitePickupEnabled", (bool)doc.OnSitePickupEnabled },

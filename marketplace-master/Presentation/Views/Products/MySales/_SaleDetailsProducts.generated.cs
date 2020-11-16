@@ -317,35 +317,35 @@ WriteLiteral("</th>\r\n                        </tr>\r\n                    </th
             
             #line default
             #line hidden
-WriteLiteral("                        <tr>\r\n                            <td>\r\n                 " +
-"               <img");
+WriteLiteral("                            <tr>\r\n                                <td>\r\n         " +
+"                           <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 3109), Tuple.Create("\"", 3175)
+WriteAttribute("src", Tuple.Create(" src=\"", 3121), Tuple.Create("\"", 3187)
             
             #line 59 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-, Tuple.Create(Tuple.Create("", 3115), Tuple.Create<System.Object, System.Int32>(ProductsHelper.GetImageUrl(item.Image, ProductImageSize.XS)
+, Tuple.Create(Tuple.Create("", 3127), Tuple.Create<System.Object, System.Int32>(ProductsHelper.GetImageUrl(item.Image, ProductImageSize.XS)
             
             #line default
             #line hidden
-, 3115), false)
+, 3127), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 3176), Tuple.Create("\"", 3200)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 3188), Tuple.Create("\"", 3212)
             
             #line 59 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                             , Tuple.Create(Tuple.Create("", 3182), Tuple.Create<System.Object, System.Int32>(item.FullItemName
+                                 , Tuple.Create(Tuple.Create("", 3194), Tuple.Create<System.Object, System.Int32>(item.FullItemName
             
             #line default
             #line hidden
-, 3182), false)
+, 3194), false)
 );
 
-WriteLiteral(" />\r\n                            </td>\r\n                            <td>\r\n       " +
-"                         <span>");
+WriteLiteral(" />\r\n                                </td>\r\n                                <td>\r" +
+"\n                                    <span>");
 
             
             #line 62 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                 Write(item.FullItemName);
+                                     Write(item.FullItemName);
 
             
             #line default
@@ -354,37 +354,37 @@ WriteLiteral("</span>\r\n\r\n");
 
             
             #line 64 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                
+                                    
             
             #line default
             #line hidden
             
             #line 64 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                 if (Model.Order.IsRental)
-                                {
-                                    for (var i = 0; i < item.RentalsInfo.Count; i++)
+                                     if (Model.Order.IsRental)
                                     {
-                                        var rentalInfo = item.RentalsInfo[i];
+                                        for (var i = 0; i < item.RentalsInfo.Count; i++)
+                                        {
+                                            var rentalInfo = item.RentalsInfo[i];
 
             
             #line default
             #line hidden
-WriteLiteral("                                        <hr />\r\n");
+WriteLiteral("                                            <hr />\r\n");
 
             
             #line 70 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
 
-                                        if (item.IsPackageProduct)
-                                        {
+                                            if (item.IsPackageProduct)
+                                            {
 
             
             #line default
             #line hidden
-WriteLiteral("                                            <span><b>");
+WriteLiteral("                                                <span><b>");
 
             
             #line 73 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                Write(Request.GetLocalizedString("PRODUCT_PACKAGE_CREDITS_UNIT"));
+                                                    Write(Request.GetLocalizedString("PRODUCT_PACKAGE_CREDITS_UNIT"));
 
             
             #line default
@@ -393,7 +393,7 @@ WriteLiteral(" ");
 
             
             #line 73 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                                                                             Write(i + 1);
+                                                                                                                 Write(i + 1);
 
             
             #line default
@@ -402,43 +402,43 @@ WriteLiteral(" / ");
 
             
             #line 73 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                                                                                       Write(item.TotalPossibleRentals);
+                                                                                                                           Write(item.TotalPossibleRentals);
 
             
             #line default
             #line hidden
 WriteLiteral("</b></span>\r\n");
 
-WriteLiteral("                                            <br />\r\n");
+WriteLiteral("                                                <br />\r\n");
 
             
             #line 75 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                        }
+                                            }
 
-                                        
+                                            
             
             #line default
             #line hidden
             
             #line 77 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                   Write(Request.GetLocalizedString("CART_ITEM_RENTAL_PERIOD"));
+                                       Write(Request.GetLocalizedString("CART_ITEM_RENTAL_PERIOD"));
 
             
             #line default
             #line hidden
             
             #line 77 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                                                              
+                                                                                                  
 
             
             #line default
             #line hidden
-WriteLiteral("                                        <span>\r\n                                 " +
-"           <b>");
+WriteLiteral("                                            <span>\r\n                             " +
+"                   <b>");
 
             
             #line 79 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                          Write(rentalInfo.StartDate.DisplayDateTime());
+                                              Write(rentalInfo.StartDate.DisplayDateTime());
 
             
             #line default
@@ -447,7 +447,7 @@ WriteLiteral("</b> ");
 
             
             #line 79 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                                                      Write(Request.GetLocalizedString("CART_ITEM_RENTAL_PERIOD_UNTIL"));
+                                                                                          Write(Request.GetLocalizedString("CART_ITEM_RENTAL_PERIOD_UNTIL"));
 
             
             #line default
@@ -456,80 +456,105 @@ WriteLiteral(" <b>");
 
             
             #line 79 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                                                                                                                      Write(rentalInfo.EndDate.DisplayDateTime());
+                                                                                                                                                          Write(rentalInfo.EndDate.DisplayDateTime());
 
             
             #line default
             #line hidden
-WriteLiteral("</b>\r\n                                        </span>\r\n");
+WriteLiteral("</b>\r\n                                            </span>\r\n");
 
             
             #line 81 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                        }
                                     }
-                                }
 
             
             #line default
             #line hidden
-WriteLiteral("                            </td>\r\n");
+WriteLiteral("                                </td>\r\n");
 
             
             #line 84 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                            
+                                
             
             #line default
             #line hidden
             
             #line 84 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                             if (config.CustomFields.CartItem.Enabled && Model.CustomFields.Count != 0)
-                            {
-                                foreach (var itemValue in Model.CustomFields.Where(x => x.EntityId == item.Order.Id).ToList())
+                                 if (config.CustomFields.CartItem.Enabled && Model.CustomFields.Count != 0)
                                 {
-                                    if (itemValue.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ||
-                                        itemValue.Value.Equals("false", StringComparison.InvariantCultureIgnoreCase))
+                                    foreach (var itemValue in Model.CustomFields.Where(x => x.EntityId == item.Order.Id).ToList())
                                     {
+                                        if (itemValue.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ||
+                                            itemValue.Value.Equals("false", StringComparison.InvariantCultureIgnoreCase))
+                                        {
 
             
             #line default
             #line hidden
-WriteLiteral("                                        <td");
+WriteLiteral("                                            <td");
 
 WriteLiteral(" class=\"text-right\"");
 
-WriteLiteral(">\r\n                                            <span>\r\n");
+WriteLiteral(">\r\n                                                <span>\r\n");
 
             
             #line 93 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                
+                                                    
             
             #line default
             #line hidden
             
             #line 93 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                  
-                                                    var booleanValue = itemValue.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ? Html.Localized("AFFIRMATIVE_LABEL") : Html.Localized("NEGATIVE_LABEL");
-                                                
+                                                      
+                                                        var booleanValue = itemValue.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ? Html.Localized("AFFIRMATIVE_LABEL") : Html.Localized("NEGATIVE_LABEL");
+                                                    
             
             #line default
             #line hidden
 WriteLiteral("\r\n");
 
-WriteLiteral("                                                ");
+WriteLiteral("                                                    ");
 
             
             #line 96 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                           Write(booleanValue);
+                                               Write(booleanValue);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                            </span>\r\n                          " +
-"              </td>\r\n");
+WriteLiteral("\r\n                                                </span>\r\n                      " +
+"                      </td>\r\n");
 
             
             #line 99 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                        }
+                                        else
+                                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                            <td");
+
+WriteLiteral(" class=\"text-right\"");
+
+WriteLiteral(">\r\n                                                <span>");
+
+            
+            #line 103 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                                 Write(itemValue.Value);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n                                            </td>\r\n");
+
+            
+            #line 105 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                        }
                                     }
-                                    else
+                                    if (Model.CustomFields == null || Model.CustomFields.Count == 0)
                                     {
 
             
@@ -539,22 +564,22 @@ WriteLiteral("                                        <td");
 
 WriteLiteral(" class=\"text-right\"");
 
-WriteLiteral(">\r\n                                            <span>");
+WriteLiteral(">\r\n                                            <span></span>\r\n                   " +
+"                     </td>\r\n");
 
             
-            #line 103 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                             Write(itemValue.Value);
+            #line 112 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                    }
+                                }
 
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n                                        </td>\r\n");
+WriteLiteral("                                ");
 
             
-            #line 105 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                    }
-                                }
-                                if (Model.CustomFields == null || Model.CustomFields.Count == 0)
+            #line 114 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                 if (showQtyBox)
                                 {
 
             
@@ -564,105 +589,20 @@ WriteLiteral("                                    <td");
 
 WriteLiteral(" class=\"text-right\"");
 
-WriteLiteral(">\r\n                                        <span></span>\r\n                       " +
-"             </td>\r\n");
-
-            
-            #line 112 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                }
-                            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                            ");
-
-            
-            #line 114 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                             if (showQtyBox)
-                            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                <td");
-
-WriteLiteral(" class=\"text-right\"");
-
-WriteLiteral(">\r\n                                    <span>");
+WriteLiteral(">\r\n                                        <span>");
 
             
             #line 117 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                     Write(item.Quantity.ToString("N0"));
+                                         Write(item.Quantity.ToString("N0"));
 
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n                                </td>\r\n");
+WriteLiteral("</span>\r\n                                    </td>\r\n");
 
             
             #line 119 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                            <td");
-
-WriteLiteral(" class=\"text-right\"");
-
-WriteLiteral(">\r\n                                <span>");
-
-            
-            #line 121 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                 Write(config.DefaultCurrency);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
-
-            
-            #line 121 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                         Write(item.Price.DisplayDecimal(2));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</span>\r\n                            </td>\r\n                            <td");
-
-WriteLiteral(" class=\"text-right\"");
-
-WriteLiteral(">\r\n                                <span>");
-
-            
-            #line 124 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                 Write(config.DefaultCurrency);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
-
-            
-            #line 124 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                         Write(item.SubTotal.DisplayDecimal(2));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</span>\r\n                            </td>\r\n");
-
-            
-            #line 126 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                            
-            
-            #line default
-            #line hidden
-            
-            #line 126 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                             if (showShipping)
-                            {
+                                }
 
             
             #line default
@@ -674,7 +614,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral(">\r\n                                    <span>");
 
             
-            #line 129 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+            #line 121 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
                                      Write(config.DefaultCurrency);
 
             
@@ -683,8 +623,31 @@ WriteLiteral(">\r\n                                    <span>");
 WriteLiteral(" ");
 
             
-            #line 129 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                             Write(item.Shipping.DisplayDecimal(2));
+            #line 121 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                                             Write(item.Price.DisplayDecimal(2));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n                                </td>\r\n                                <" +
+"td");
+
+WriteLiteral(" class=\"text-right\"");
+
+WriteLiteral(">\r\n                                    <span>");
+
+            
+            #line 124 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                     Write(config.DefaultCurrency);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 124 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                                             Write(item.SubTotal.DisplayDecimal(2));
 
             
             #line default
@@ -692,31 +655,69 @@ WriteLiteral(" ");
 WriteLiteral("</span>\r\n                                </td>\r\n");
 
             
-            #line 131 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                            }
+            #line 126 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                
+            
+            #line default
+            #line hidden
+            
+            #line 126 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                 if (showShipping)
+                                {
 
             
             #line default
             #line hidden
-WriteLiteral("                            ");
-
-            
-            #line 132 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                             if (showMultiplierBox)
-                            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                <td");
+WriteLiteral("                                    <td");
 
 WriteLiteral(" class=\"text-right\"");
 
-WriteLiteral(">\r\n                                    <span>");
+WriteLiteral(">\r\n                                        <span>");
+
+            
+            #line 129 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                         Write(config.DefaultCurrency);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 129 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                                                 Write(item.Shipping.DisplayDecimal(2));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n                                    </td>\r\n");
+
+            
+            #line 131 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                ");
+
+            
+            #line 132 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                 if (showMultiplierBox)
+                                {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                    <td");
+
+WriteLiteral(" class=\"text-right\"");
+
+WriteLiteral(">\r\n                                        <span>");
 
             
             #line 135 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                     Write(item.Multiplier);
+                                         Write(item.Multiplier);
 
             
             #line default
@@ -725,7 +726,7 @@ WriteLiteral(" x ");
 
             
             #line 135 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                        Write(config.DefaultCurrency);
+                                                            Write(config.DefaultCurrency);
 
             
             #line default
@@ -734,29 +735,29 @@ WriteLiteral(" ");
 
             
             #line 135 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                                                Write(item.MultiplierPrice.DisplayDecimal(2));
+                                                                                    Write(item.MultiplierPrice.DisplayDecimal(2));
 
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n                                </td>\r\n");
+WriteLiteral("</span>\r\n                                    </td>\r\n");
 
             
             #line 137 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                            }
+                                }
 
             
             #line default
             #line hidden
-WriteLiteral("                            <td");
+WriteLiteral("                                <td");
 
 WriteLiteral(" class=\"text-right\"");
 
-WriteLiteral(">\r\n                                <label>");
+WriteLiteral(">\r\n                                    <label>");
 
             
             #line 139 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                  Write(config.DefaultCurrency);
+                                      Write(config.DefaultCurrency);
 
             
             #line default
@@ -765,12 +766,13 @@ WriteLiteral(" ");
 
             
             #line 139 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                                                          Write(item.Amount.DisplayDecimal(2));
+                                                              Write(item.Amount.DisplayDecimal(2));
 
             
             #line default
             #line hidden
-WriteLiteral("</label>\r\n                            </td>\r\n                        </tr>\r\n");
+WriteLiteral("</label>\r\n                                </td>\r\n                            </tr" +
+">\r\n");
 
             
             #line 142 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
@@ -789,7 +791,7 @@ WriteLiteral("                    </tbody>\r\n                    <tfoot>\r\n");
             #line hidden
             
             #line 145 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-                         if (showShipping)
+                         if (Model.Order.Shipping > 0)
                         {
 
             
@@ -797,14 +799,14 @@ WriteLiteral("                    </tbody>\r\n                    <tfoot>\r\n");
             #line hidden
 WriteLiteral("                            <tr>\r\n                                <td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=\"", 8251), Tuple.Create("\"", 8269)
+WriteAttribute("colspan", Tuple.Create(" colspan=\"", 8591), Tuple.Create("\"", 8609)
             
             #line 148 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-, Tuple.Create(Tuple.Create("", 8261), Tuple.Create<System.Object, System.Int32>(colSpan
+, Tuple.Create(Tuple.Create("", 8601), Tuple.Create<System.Object, System.Int32>(colSpan
             
             #line default
             #line hidden
-, 8261), false)
+, 8601), false)
 );
 
 WriteLiteral("></td>\r\n                                <td>");
@@ -847,22 +849,90 @@ WriteLiteral("</td>\r\n                            </tr>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("                        <tr>\r\n                            <td");
+WriteLiteral("\r\n");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=\"", 8607), Tuple.Create("\"", 8625)
             
             #line 154 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-, Tuple.Create(Tuple.Create("", 8617), Tuple.Create<System.Object, System.Int32>(colSpan
+                        
             
             #line default
             #line hidden
-, 8617), false)
+            
+            #line 154 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                         if (Model.Order.Discount > 0)
+                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                            <tr>\r\n                                <td");
+
+WriteAttribute("colspan", Tuple.Create(" colspan=\"", 9040), Tuple.Create("\"", 9058)
+            
+            #line 157 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+, Tuple.Create(Tuple.Create("", 9050), Tuple.Create<System.Object, System.Int32>(colSpan
+            
+            #line default
+            #line hidden
+, 9050), false)
+);
+
+WriteLiteral("></td>\r\n                                <td>");
+
+            
+            #line 158 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                               Write(Html.Localized("CART_DISCOUNT_LABEL"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n                                <td");
+
+WriteLiteral(" class=\"text-right\"");
+
+WriteLiteral(">-");
+
+            
+            #line 159 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                                   Write(config.DefaultCurrency);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 159 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                                                                           Write(Model.Order.Discount.DisplayDecimal(2));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n                            </tr>\r\n");
+
+            
+            #line 161 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+                        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        <tr>\r\n                            <td");
+
+WriteAttribute("colspan", Tuple.Create(" colspan=\"", 9397), Tuple.Create("\"", 9415)
+            
+            #line 163 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+, Tuple.Create(Tuple.Create("", 9407), Tuple.Create<System.Object, System.Int32>(colSpan
+            
+            #line default
+            #line hidden
+, 9407), false)
 );
 
 WriteLiteral("></td>\r\n                            <td>");
 
             
-            #line 155 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+            #line 164 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
                            Write(Html.Localized("CART_TOTAL_LABEL"));
 
             
@@ -875,7 +945,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral("><strong>");
 
             
-            #line 156 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+            #line 165 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
                                                       Write(config.DefaultCurrency);
 
             
@@ -884,7 +954,7 @@ WriteLiteral("><strong>");
 WriteLiteral(" ");
 
             
-            #line 156 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+            #line 165 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
                                                                               Write(Model.Order.Amount.DisplayDecimal(2));
 
             
@@ -893,13 +963,13 @@ WriteLiteral(" ");
 WriteLiteral("</strong></td>\r\n                        </tr>\r\n\r\n");
 
             
-            #line 159 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+            #line 168 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 159 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+            #line 168 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
                          if (Model.Order.Transaction?.RefundedAmount > 0M)
                         {
 
@@ -908,20 +978,20 @@ WriteLiteral("</strong></td>\r\n                        </tr>\r\n\r\n");
             #line hidden
 WriteLiteral("                            <tr>\r\n                                <td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=\"", 9049), Tuple.Create("\"", 9067)
+WriteAttribute("colspan", Tuple.Create(" colspan=\"", 9839), Tuple.Create("\"", 9857)
             
-            #line 162 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
-, Tuple.Create(Tuple.Create("", 9059), Tuple.Create<System.Object, System.Int32>(colSpan
+            #line 171 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+, Tuple.Create(Tuple.Create("", 9849), Tuple.Create<System.Object, System.Int32>(colSpan
             
             #line default
             #line hidden
-, 9059), false)
+, 9849), false)
 );
 
 WriteLiteral("></td>\r\n                                <td>");
 
             
-            #line 163 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+            #line 172 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
                                Write(Html.Localized("ORDER_REFUNDED_AMOUNT_LABEL"));
 
             
@@ -934,7 +1004,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral("><strong>");
 
             
-            #line 164 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+            #line 173 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
                                                           Write(Model.Order.Transaction.RefundedAmount.DisplayCurrency());
 
             
@@ -943,7 +1013,7 @@ WriteLiteral("><strong>");
 WriteLiteral("</strong></td>\r\n                            </tr>\r\n");
 
             
-            #line 166 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
+            #line 175 "..\..\Views\Products\MySales\_SaleDetailsProducts.cshtml"
                         }
 
             

@@ -789,6 +789,8 @@ WriteLiteral(":\r\n                            <div");
 
 WriteLiteral(" class=\"input-group\"");
 
+WriteLiteral(" style=\"max-width: 401px\"");
+
 WriteLiteral(">\r\n");
 
 WriteLiteral("                                ");
@@ -909,14 +911,14 @@ WriteLiteral("></span> ");
             #line hidden
 WriteLiteral("</span>\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 10153), Tuple.Create("\"", 10197)
+WriteAttribute("href", Tuple.Create(" href=\"", 10178), Tuple.Create("\"", 10222)
             
             #line 207 "..\..\Views\Products\_ProductAddToCart.cshtml"
-, Tuple.Create(Tuple.Create("", 10160), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Cart")
+, Tuple.Create(Tuple.Create("", 10185), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Cart")
             
             #line default
             #line hidden
-, 10160), false)
+, 10185), false)
 );
 
 WriteLiteral(" class=\"btn btn-default\"");

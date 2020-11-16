@@ -205,6 +205,14 @@
                                 <td class="text-right">@config.DefaultCurrency @Model.Order.Shipping.DisplayDecimal(2)</td>
                             </tr>
                         }
+                        @if (Model.Order.Discount > 0)
+                        {
+                            <tr>
+                                <td colspan="@colSpan"></td>
+                                <td>@Html.Localized("CART_DISCOUNT_LABEL")</td>
+                                <td class="text-right">-@config.DefaultCurrency @Model.Order.Discount.DisplayDecimal(2)</td>
+                            </tr>
+                        }
                         <tr>
                             <td colspan="@colSpan"></td>
                             <td>@Html.Localized("CART_TOTAL_LABEL")</td>

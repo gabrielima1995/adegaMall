@@ -62,6 +62,7 @@ namespace Infrastructure.Data.Repositories
         public Cart GetFull(string buyerId)
         {
             return CacheHelper.Get(Context.Carts
+                .Include(x => x.Coupon)
                 .Include(x => x.ShippingAddress)
                 .Include(x => x.Buyer)
                 .Include(x => x.Buyer.Address)

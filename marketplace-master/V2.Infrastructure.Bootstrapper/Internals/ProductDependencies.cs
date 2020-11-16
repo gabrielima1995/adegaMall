@@ -20,6 +20,7 @@ using Infra.Crosscutting.AsapLog.ConsultaFrete;
 using Infrastructure.Data.Repositories;
 using Infrastructure.Shipping;
 using System;
+using Domain.Modules.StoreModule.Coupons;
 using Framework.TotalExpress.ConsultaFrete;
 using Infra.Crosscutting.TotalExpress.ConsultaFrete;
 using Unity;
@@ -49,6 +50,7 @@ namespace V2.Infrastructure.Bootstrapper.Internals
                 .RegisterType<IJsonProvider, JsonProvider>()
                 .RegisterType<IAsapLogConsultaFreteProvider, AsapLogConsultaFreteProvider>()
                 .RegisterType<ITotalExpressConsultaFreteProvider, TotalExpressConsultaFreteProvider>()
+                .RegisterType<ICouponRepository, CouponRepository>()
 
                 // Store
                 .RegisterType<StoreService>()
@@ -78,6 +80,7 @@ namespace V2.Infrastructure.Bootstrapper.Internals
 
                 // Order, cart, checkout
                 .RegisterType<OrderService_Obsolete>()
+                .RegisterType<OrderService>()
                 .RegisterType<OrderTransaction>()
                 .RegisterType<OrderTransactionService>()
                 .RegisterType<ICartQueries, CartQueries>()

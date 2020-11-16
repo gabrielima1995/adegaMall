@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Framework;
 using V2.Application.Modules.General.CustomFields;
 using V2.Application.Modules.ProductTemplateModule;
 using V2.Application.Modules.SellerAssistantModule;
@@ -37,6 +38,7 @@ namespace Presentation.Controllers.Products
         private readonly DeleteLockAppCommandHandler _deleteLockAppCommandHandler;
         private readonly IProductTemplateStoreQueries productTemplateQueries;
         private readonly IStoreProductQueries _storeProductQueries;
+        private readonly IRepository<Seller> _sellerRepository;
 
         public StoreController(
             ProductCategoryService productCategoryService,
@@ -47,7 +49,8 @@ namespace Presentation.Controllers.Products
             ICustomFieldAppService customFieldAppService,
             DeleteLockAppCommandHandler deleteLockAppCommandHandler,
             IProductTemplateStoreQueries productTemplateQueries,
-            IStoreProductQueries storeProductQueries)
+            IStoreProductQueries storeProductQueries,
+            IRepository<Seller> sellerRepository)
         {
             _productCategoryService = productCategoryService;
             _productVariantService = productVariantService;
@@ -58,6 +61,7 @@ namespace Presentation.Controllers.Products
             _deleteLockAppCommandHandler = deleteLockAppCommandHandler;
             this.productTemplateQueries = productTemplateQueries;
             _storeProductQueries = storeProductQueries;
+            _sellerRepository = sellerRepository;
         }
 
         [RequireAssistantPermissions(SellerAssistantPermissions.StoreEdit)]
@@ -256,8 +260,14 @@ namespace Presentation.Controllers.Products
         public ActionResult Templates(string mode)
         {
             var sellerId = GetPersonId();
-            var templates = productTemplateQueries.ListStoreTemplates(sellerId, 0, 1000);
+            var templates = productTemplateQueries.ListStoreTemplates(sellerId, 0, 2000);
             var model = new StoreTemplatesViewModel(templates, mode);
+
+            var seller = _sellerRepository.Get(sellerId);
+            ViewBag.AmountFee = seller.GetCurrentPaymentAmountFee();
+            ViewBag.PercentFee = seller.GetCurrentPaymentPercentFee();
+            ViewBag.IsLiable = seller.IsSellerLiable();
+
             return View(string.Format(ViewPathFmt, "Templates"), model);
         }
 

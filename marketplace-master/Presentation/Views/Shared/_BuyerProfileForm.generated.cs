@@ -92,7 +92,7 @@ WriteLiteral("\r\n");
     bool moderationIsEnable = ViewBag.ModerationIsEnable == null ? true : ViewBag.ModerationIsEnable;
 
     var blockChangesBirthDate = moderationIsEnable && !requireModeration && config.Buyer.DateOfBirth.BlockChangesAfterApprovedInModeration;
-    var blockChangesDocumentNumber = config.Buyer.DocumentNumber.BlockChangesAfterApprovedInModeration;
+    var blockChangesDocumentNumber = !string.IsNullOrEmpty(Model.DocumentNumber);
 
     if (ViewBag.AllFields == null)
     {
@@ -168,24 +168,24 @@ WriteLiteral(" class=\"foto-perfil visible-xs visible-sm m-b-md\"");
 
 WriteLiteral(">\r\n            <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1905), Tuple.Create("\"", 1939)
+WriteAttribute("src", Tuple.Create(" src=\"", 1883), Tuple.Create("\"", 1917)
             
             #line 47 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 1911), Tuple.Create<System.Object, System.Int32>(loginProfile.GetAvatarUrl()
+, Tuple.Create(Tuple.Create("", 1889), Tuple.Create<System.Object, System.Int32>(loginProfile.GetAvatarUrl()
             
             #line default
             #line hidden
-, 1911), false)
+, 1889), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 1940), Tuple.Create("\"", 1964)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 1918), Tuple.Create("\"", 1942)
             
             #line 47 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 1946), Tuple.Create<System.Object, System.Int32>(loginProfile.Name
+, Tuple.Create(Tuple.Create("", 1924), Tuple.Create<System.Object, System.Int32>(loginProfile.Name
             
             #line default
             #line hidden
-, 1946), false)
+, 1924), false)
 );
 
 WriteLiteral(">\r\n            <a");
@@ -449,14 +449,14 @@ WriteLiteral(" class=\"form-group flex-valign\"");
 
 WriteLiteral(">\r\n                <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 3927), Tuple.Create("\"", 3972)
+WriteAttribute("src", Tuple.Create(" src=\"", 3905), Tuple.Create("\"", 3950)
             
             #line 99 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 3933), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.AvatarUrl, 255)
+, Tuple.Create(Tuple.Create("", 3911), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.AvatarUrl, 255)
             
             #line default
             #line hidden
-, 3933), false)
+, 3911), false)
 );
 
 WriteLiteral(" alt=\"\"");
@@ -801,38 +801,38 @@ WriteLiteral("                    ");
             #line hidden
 WriteLiteral("\r\n                    <select");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 6893), Tuple.Create("\"", 6918)
+WriteAttribute("id", Tuple.Create(" id=\"", 6871), Tuple.Create("\"", 6896)
             
             #line 156 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 6898), Tuple.Create<System.Object, System.Int32>(nameof(Model.Genre)
+, Tuple.Create(Tuple.Create("", 6876), Tuple.Create<System.Object, System.Int32>(nameof(Model.Genre)
             
             #line default
             #line hidden
-, 6898), false)
+, 6876), false)
 );
 
-WriteAttribute("name", Tuple.Create(" name=\"", 6919), Tuple.Create("\"", 6946)
+WriteAttribute("name", Tuple.Create(" name=\"", 6897), Tuple.Create("\"", 6924)
             
             #line 156 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 6926), Tuple.Create<System.Object, System.Int32>(nameof(Model.Genre)
+, Tuple.Create(Tuple.Create("", 6904), Tuple.Create<System.Object, System.Int32>(nameof(Model.Genre)
             
             #line default
             #line hidden
-, 6926), false)
+, 6904), false)
 );
 
 WriteLiteral(" class=\"form-control js-select\"");
 
 WriteLiteral(">\r\n                        <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7012), Tuple.Create("\"", 7031)
+WriteAttribute("value", Tuple.Create(" value=\"", 6990), Tuple.Create("\"", 7009)
             
             #line 157 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 7020), Tuple.Create<System.Object, System.Int32>(Genre.Male
+, Tuple.Create(Tuple.Create("", 6998), Tuple.Create<System.Object, System.Int32>(Genre.Male
             
             #line default
             #line hidden
-, 7020), false)
+, 6998), false)
 );
 
 WriteLiteral(" ");
@@ -855,14 +855,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</option>\r\n                        <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7169), Tuple.Create("\"", 7190)
+WriteAttribute("value", Tuple.Create(" value=\"", 7147), Tuple.Create("\"", 7168)
             
             #line 158 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 7177), Tuple.Create<System.Object, System.Int32>(Genre.Female
+, Tuple.Create(Tuple.Create("", 7155), Tuple.Create<System.Object, System.Int32>(Genre.Female
             
             #line default
             #line hidden
-, 7177), false)
+, 7155), false)
 );
 
 WriteLiteral(" ");
@@ -885,14 +885,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</option>\r\n                        <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7332), Tuple.Create("\"", 7352)
+WriteAttribute("value", Tuple.Create(" value=\"", 7310), Tuple.Create("\"", 7330)
             
             #line 159 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 7340), Tuple.Create<System.Object, System.Int32>(Genre.Other
+, Tuple.Create(Tuple.Create("", 7318), Tuple.Create<System.Object, System.Int32>(Genre.Other
             
             #line default
             #line hidden
-, 7340), false)
+, 7318), false)
 );
 
 WriteLiteral(" ");

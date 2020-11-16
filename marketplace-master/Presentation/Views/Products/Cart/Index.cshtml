@@ -89,6 +89,22 @@
                 return false;
             });
 
+            $(document.body).on('submit', '.coupon-code-form', function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+
+                var $input = $this.find('input[name="coupon-code"]');
+
+                if ($input.length === 0) return false;
+
+                var couponCode = $input[0].hasAttribute("disabled") ? "" : $input.val();
+
+                $.redirect('@Url.ActionLocalized("ChooseCouponCode", "Cart")', { couponCode: couponCode });
+
+                return false;
+            });
+
             $(document.body).on('click', '.js-choose-shipping-address-button', function (e) {
                e.preventDefault();
 
