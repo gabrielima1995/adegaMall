@@ -85,11 +85,10 @@ namespace Domain.Modules.StoreModule.Coupons
                     case CouponBenefitType.ValueDiscount:
                         return Value;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new NotImplementedException();
                 }
             }
-
-            return decimal.Zero;
+            throw new NotImplementedException();
         }
     }
 }

@@ -181,11 +181,11 @@ namespace V2.Application.Modules
                 cart.Discount = decimal.Zero;
             }
 
-            OperationResult InvalidCoupon()
+            OperationResult InvalidCoupon(string message)
             {
                 RemoveDiscount();
 
-                return OperationResult.Fail("INVALID_COUPON", "Cupom inválido.");
+                return OperationResult.Fail("INVALID_COUPON", message);
             }
 
             if (cart.IsEmpty || cart.Coupon == null)
@@ -197,7 +197,7 @@ namespace V2.Application.Modules
 
             var coupon = cart.Coupon;
 
-            void CalculateDiscount()
+            OperationResult CalculateDiscount()
             {
                 // somente produtos sem desconto
                 var items = cart.Items
@@ -216,33 +216,42 @@ namespace V2.Application.Modules
                 var discount = coupon.CalculateDiscount(amount);
 
                 cart.Discount = Math.Min(discount, amount);
+
+                if (cart.Discount == decimal.Zero)
+                    return InvalidCoupon("Cupom não pode ser aplicado para os produtos selecionados.");
+
+                return OperationResult.Success;
             }
 
-            if (!coupon.IsValid()) return InvalidCoupon();
+            if (!coupon.IsValid()) return InvalidCoupon("Cupom expirado.");
 
             switch (coupon.UseMode)
             {
                 // primeira compra
                 case CouponUseMode.FirstOrder:
                     var firstOrder = couponRepository.IsFirstOrder(cart.Buyer.Id);
-                    if (!firstOrder) return InvalidCoupon();
+                    if (!firstOrder) return InvalidCoupon("Cupom já utilizado.");
                     break;
 
                 // Uso único por usuário
                 case CouponUseMode.OneTimeByUser:
                     var oneTimeByUser = couponRepository.IsOneTimeByUser(cart.Buyer.Id, coupon.Id);
-                    if (!oneTimeByUser) return InvalidCoupon();
+                    if (!oneTimeByUser) return InvalidCoupon("Cupom já utilizado.");
                     break;
 
                 // Uso único no marketplace
                 case CouponUseMode.OneTimeEver:
                     var oneTimeEver = couponRepository.IsOneTimeEver(coupon.Id);
-                    if (!oneTimeEver) return InvalidCoupon();
+                    if (!oneTimeEver) return InvalidCoupon("Cupom já utilizado.");
                     break;
             }
 
+            var calculateResult = OperationResult.Success;
+
             if (coupon.IsDiscount)
-                CalculateDiscount();
+                calculateResult = CalculateDiscount();
+
+            if (calculateResult.IsFailure) return calculateResult;
 
             cartRepository.Update(cart);
 
