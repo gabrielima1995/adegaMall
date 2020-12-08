@@ -56,10 +56,10 @@ namespace ASP
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("\r\n\r\n");
 
             
-            #line 6 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+            #line 7 "..\..\Views\Products\_ShippingProductSimple.cshtml"
  if (Model != null && Model.ShowAnyShipping)
 {
 
@@ -69,7 +69,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    <span>");
 
             
-            #line 8 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+            #line 9 "..\..\Views\Products\_ShippingProductSimple.cshtml"
      Write(Model.MinimumCost.DisplayCurrency());
 
             
@@ -78,7 +78,28 @@ WriteLiteral("    <span>");
 WriteLiteral("</span>\r\n");
 
             
-            #line 9 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+            #line 10 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+
+    if (Model.DeliveryDays.HasValue)
+    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <span>- ");
+
+            
+            #line 13 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+           Write(Model.DeliveryDays);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" dias úteis</span>\r\n");
+
+            
+            #line 14 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+    }
 }
 else if (hasZipCode)
 {
@@ -89,7 +110,7 @@ else if (hasZipCode)
 WriteLiteral("    <span>-</span>\r\n");
 
             
-            #line 13 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+            #line 19 "..\..\Views\Products\_ShippingProductSimple.cshtml"
 }
 
             

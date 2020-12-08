@@ -3,9 +3,15 @@
 @{
     var hasZipCode = ViewBag.ZipCode != null && ViewBag.ZipCode != "";
 }
+
 @if (Model != null && Model.ShowAnyShipping)
 {
     <span>@Model.MinimumCost.DisplayCurrency()</span>
+
+    if (Model.DeliveryDays.HasValue)
+    {
+        <span>- @Model.DeliveryDays dias úteis</span>
+    }
 }
 else if (hasZipCode)
 {
