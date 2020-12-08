@@ -38,7 +38,7 @@
             <li>
                 @if (config.Product.Templates.Enabled && config.Product.Templates.ForceSellerToUseTemplates)
                 {
-                    <a href="@Url.ActionLocalized("Templates", "Store")" class="@Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreView, SellerAssistantPermissions.ProductsView)">
+                    <a href="@Url.ActionLocalized("Index", "Store")" class="@Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreView, SellerAssistantPermissions.ProductsView)">
                         <i class="fas fa-fw fa-cubes" aria-hidden="true"></i>
                         @Html.Localized("STORE_LINK", "strong")
                     </a>

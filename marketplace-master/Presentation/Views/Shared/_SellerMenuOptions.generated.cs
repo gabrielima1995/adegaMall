@@ -243,24 +243,24 @@ WriteLiteral("            <li>\r\n");
             #line hidden
 WriteLiteral("                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1987), Tuple.Create("\"", 2036)
+WriteAttribute("href", Tuple.Create(" href=\"", 1987), Tuple.Create("\"", 2032)
             
             #line 41 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 1994), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Templates", "Store")
+, Tuple.Create(Tuple.Create("", 1994), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Store")
             
             #line default
             #line hidden
 , 1994), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2037), Tuple.Create("\"", 2169)
+WriteAttribute("class", Tuple.Create(" class=\"", 2033), Tuple.Create("\"", 2165)
             
             #line 41 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 2045), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreView, SellerAssistantPermissions.ProductsView)
+, Tuple.Create(Tuple.Create("", 2041), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreView, SellerAssistantPermissions.ProductsView)
             
             #line default
             #line hidden
-, 2045), false)
+, 2041), false)
 );
 
 WriteLiteral(">\r\n                        <i");
@@ -293,24 +293,24 @@ WriteLiteral("\r\n                    </a>\r\n");
             #line hidden
 WriteLiteral("                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2425), Tuple.Create("\"", 2470)
+WriteAttribute("href", Tuple.Create(" href=\"", 2421), Tuple.Create("\"", 2466)
             
             #line 48 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 2432), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Store")
+, Tuple.Create(Tuple.Create("", 2428), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Store")
             
             #line default
             #line hidden
-, 2432), false)
+, 2428), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2471), Tuple.Create("\"", 2603)
+WriteAttribute("class", Tuple.Create(" class=\"", 2467), Tuple.Create("\"", 2599)
             
             #line 48 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 2479), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreView, SellerAssistantPermissions.ProductsView)
+, Tuple.Create(Tuple.Create("", 2475), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreView, SellerAssistantPermissions.ProductsView)
             
             #line default
             #line hidden
-, 2479), false)
+, 2475), false)
 );
 
 WriteLiteral(">\r\n                        <i");
@@ -397,24 +397,24 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("            <li>\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3242), Tuple.Create("\"", 3288)
+WriteAttribute("href", Tuple.Create(" href=\"", 3238), Tuple.Create("\"", 3284)
             
             #line 68 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 3249), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Quotes")
+, Tuple.Create(Tuple.Create("", 3245), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Quotes")
             
             #line default
             #line hidden
-, 3249), false)
+, 3245), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 3289), Tuple.Create("\"", 3424)
+WriteAttribute("class", Tuple.Create(" class=\"", 3285), Tuple.Create("\"", 3420)
             
             #line 68 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 3297), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.QuotesView, SellerAssistantPresentation.DisabledClass)
+, Tuple.Create(Tuple.Create("", 3293), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.QuotesView, SellerAssistantPresentation.DisabledClass)
             
             #line default
             #line hidden
-, 3297), false)
+, 3293), false)
 );
 
 WriteLiteral(">\r\n                    <i");
@@ -493,24 +493,24 @@ WriteLiteral("        ");
             #line hidden
 WriteLiteral("            <li>\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4063), Tuple.Create("\"", 4110)
+WriteAttribute("href", Tuple.Create(" href=\"", 4059), Tuple.Create("\"", 4106)
             
             #line 83 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 4070), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "MySales")
+, Tuple.Create(Tuple.Create("", 4066), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "MySales")
             
             #line default
             #line hidden
-, 4070), false)
+, 4066), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 4111), Tuple.Create("\"", 4245)
+WriteAttribute("class", Tuple.Create(" class=\"", 4107), Tuple.Create("\"", 4241)
             
             #line 83 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 4119), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.SalesView, SellerAssistantPresentation.DisabledClass)
+, Tuple.Create(Tuple.Create("", 4115), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.SalesView, SellerAssistantPresentation.DisabledClass)
             
             #line default
             #line hidden
-, 4119), false)
+, 4115), false)
 );
 
 WriteLiteral(">\r\n                    <i");
@@ -598,14 +598,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                    <li>\r\n                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5034), Tuple.Create("\"", 5086)
+WriteAttribute("href", Tuple.Create(" href=\"", 5030), Tuple.Create("\"", 5082)
             
             #line 104 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 5041), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Subscription")
+, Tuple.Create(Tuple.Create("", 5037), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Subscription")
             
             #line default
             #line hidden
-, 5041), false)
+, 5037), false)
 );
 
 WriteLiteral(">\r\n                            <i");
@@ -638,14 +638,14 @@ WriteLiteral("\r\n                        </a>\r\n                    </li>\r\n"
             #line hidden
 WriteLiteral("                    <li>\r\n                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5421), Tuple.Create("\"", 5470)
+WriteAttribute("href", Tuple.Create(" href=\"", 5417), Tuple.Create("\"", 5466)
             
             #line 113 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 5428), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index","Membership")
+, Tuple.Create(Tuple.Create("", 5424), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index","Membership")
             
             #line default
             #line hidden
-, 5428), false)
+, 5424), false)
 );
 
 WriteLiteral(">\r\n                            <i");
@@ -691,14 +691,14 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("                <li>\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5847), Tuple.Create("\"", 5902)
+WriteAttribute("href", Tuple.Create(" href=\"", 5843), Tuple.Create("\"", 5898)
             
             #line 124 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 5854), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "ManageAssistant")
+, Tuple.Create(Tuple.Create("", 5850), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "ManageAssistant")
             
             #line default
             #line hidden
-, 5854), false)
+, 5850), false)
 );
 
 WriteLiteral(">\r\n                        <i");
@@ -745,24 +745,24 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("                <li>\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6232), Tuple.Create("\"", 6282)
+WriteAttribute("href", Tuple.Create(" href=\"", 6228), Tuple.Create("\"", 6278)
             
             #line 134 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 6239), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Dashboard", "Manage")
+, Tuple.Create(Tuple.Create("", 6235), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Dashboard", "Manage")
             
             #line default
             #line hidden
-, 6239), false)
+, 6235), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 6283), Tuple.Create("\"", 6421)
+WriteAttribute("class", Tuple.Create(" class=\"", 6279), Tuple.Create("\"", 6417)
             
             #line 134 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
- , Tuple.Create(Tuple.Create("", 6291), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.DashboardView, SellerAssistantPresentation.DisabledClass)
+ , Tuple.Create(Tuple.Create("", 6287), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.DashboardView, SellerAssistantPresentation.DisabledClass)
             
             #line default
             #line hidden
-, 6291), false)
+, 6287), false)
 );
 
 WriteLiteral(">\r\n                        <i");
@@ -809,24 +809,24 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("                <li>\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6791), Tuple.Create("\"", 6839)
+WriteAttribute("href", Tuple.Create(" href=\"", 6787), Tuple.Create("\"", 6835)
             
             #line 144 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 6798), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Balance", "Manage")
+, Tuple.Create(Tuple.Create("", 6794), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Balance", "Manage")
             
             #line default
             #line hidden
-, 6798), false)
+, 6794), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 6840), Tuple.Create("\"", 6933)
+WriteAttribute("class", Tuple.Create(" class=\"", 6836), Tuple.Create("\"", 6929)
             
             #line 144 "..\..\Views\Shared\_SellerMenuOptions.cshtml"
-, Tuple.Create(Tuple.Create("", 6848), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.BalanceView)
+, Tuple.Create(Tuple.Create("", 6844), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.BalanceView)
             
             #line default
             #line hidden
-, 6848), false)
+, 6844), false)
 );
 
 WriteLiteral(">\r\n                        <i");
