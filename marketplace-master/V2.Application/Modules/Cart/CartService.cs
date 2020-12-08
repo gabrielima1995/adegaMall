@@ -199,11 +199,7 @@ namespace V2.Application.Modules
 
             OperationResult CalculateDiscount()
             {
-                // somente produtos sem desconto
-                var items = cart.Items
-                    .Where(i =>
-                        i.Discount == 0 &&
-                        !i.Product.ProductPriceMapped.DisplayPrice.Discount.HasDiscount);
+                IEnumerable<CartItem> items = cart.Items;
 
                 // cupom do vendedor, somente produtos dele
                 if (coupon.IsBySeller)
