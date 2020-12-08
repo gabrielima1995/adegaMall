@@ -26,7 +26,7 @@
 <div class="form-group">
     @Html.LabelFor(model => model.Banner.ActionUrl)
     <span class="text-required">*</span>
-    @Html.EditorFor(model => model.Banner.ActionUrl, new { htmlAttributes = new { @class = "form-control", placeholder = "BANNER_ACTION_URL_INPUT" } })
+    @Html.EditorFor(model => model.Banner.ActionUrl, new { htmlAttributes = new { @class = "form-control", placeholder = Request.GetLocalizedString("BANNER_ACTION_URL_INPUT") } })
     @Html.ValidationMessageFor(model => model.Banner.ActionUrl)
     <small class="help-block">@Request.GetLocalizedString("BANNER_ACTION_URL_TEXT")</small>
 </div>
@@ -49,3 +49,14 @@
 </div>
 
 <small class="help-block">@Request.GetLocalizedString("BANNER_DATES_TEXT")</small>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Banner.Order)
+            <span class="text-required">*</span>
+            @Html.EditorFor(model => model.Banner.Order, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Banner.Order)
+        </div>
+    </div>
+</div>

@@ -30,7 +30,7 @@ namespace Infrastructure.Caching
             if (value == null) return;
 
             var policy = new CacheItemPolicy { RemovedCallback = RemovedCallback };
-            
+
             if (timeoutType == CacheTimeoutType.Absolute) policy.AbsoluteExpiration = DateTime.UtcNow.Add(timeout);
             else if (timeoutType == CacheTimeoutType.Sliding) policy.SlidingExpiration = timeout;
 
@@ -47,7 +47,7 @@ namespace Infrastructure.Caching
             allKeys = null;
         }
 
-        public object Get(string key) => store.Get(key);
+        public object Get(string key) => Contains(key) ? store.Get(key) : null;
 
         public T Get<T>(string key) => (T)Get(key);
 

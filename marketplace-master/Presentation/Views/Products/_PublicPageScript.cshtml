@@ -62,6 +62,18 @@
                 $productShippingWrapper.find('.zipcode-form').submit(loadShippingInfosIfIsBuyer);
             });
 
+            $('.product-anothers-seller').each(function(i, el) {
+                var $this = $(el);
+                var productId = $this.data('product-id');
+
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.ActionLocalized("LoadingShippingInfos", "Product")&id=" + productId + "&zipCode=" + zipCode + "&simple=true"
+                }).done(function (response) {
+                    $this.find('.product-another-shipping').html('Frete: ' + response);
+                });
+            });
+
             return false;
         }
 

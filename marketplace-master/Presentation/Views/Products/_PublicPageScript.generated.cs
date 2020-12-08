@@ -97,45 +97,66 @@ WriteLiteral("\r\n\r\n<script>\r\n    var ProductPublicPage = (function () {\r\n
             
             #line default
             #line hidden
-WriteLiteral("&id=\" + id + \"&zipCode=\" + zipCode\r\n            }).done(function (response) {\r\n  " +
-"              $productShippingWrapper.html(response);\r\n                MaaS.init" +
-"Plugins();\r\n                $productShippingWrapper.find(\'.zipcode-form\').submit" +
-"(loadShippingInfosIfIsBuyer);\r\n            });\r\n\r\n            return false;\r\n   " +
-"     }\r\n\r\n        function addAndProceedToLogin() {\r\n            var btn = $(\'.j" +
-"s-cart-add-item\').button(\'loading\');\r\n            var $stockVariant = $(\'[name=\"" +
-"StockVariant\"]:checked\');\r\n            var $stockVariantDropdown = $(\'[name=\"Sto" +
-"ckVariant\"]\').find(\':selected\');\r\n            var quantity = $quantity.val();\r\n " +
-"           var rentalStartDateTime = $rentalStartDateTime.length >= 1 ? $rentalS" +
-"tartDateTime.val() : null;\r\n            var rentalEndDateTime = $rentalEndDateTi" +
-"me.length >= 1 ? $rentalEndDateTime.val() : null;\r\n            var stockVariant " +
-"= null;\r\n\r\n            if ($stockVariant.length === 1) {\r\n                stockV" +
-"ariant = $stockVariant.val();\r\n            }\r\n            else if ($stockVariant" +
-"Dropdown.length === 1) {\r\n                stockVariant = $stockVariantDropdown.v" +
-"al();\r\n            }\r\n\r\n            var productAvailabilityId = $productAvailabi" +
-"lityId.length >= 1 ? $productAvailabilityId.val() : \"\";\r\n            var idArray" +
-"CustomField = new Array();\r\n            var valuesArrayCustomField = new Array()" +
-";\r\n            $customFields.val() != null ? $.each($customFields, function () {" +
-" idArrayCustomField.push(this.name.replace(/.*\\[(.*)\\].*/g, \"$1\")) }) : \"\";\r\n   " +
-"         $customFields.val() != null ? $.each($customFields, function () {\r\n    " +
-"            if (this.type !== \"checkbox\")\r\n                    valuesArrayCustom" +
-"Field.push(this.value);\r\n                else valuesArrayCustomField.push(this.c" +
-"hecked);\r\n            }) : \"\";\r\n            var multiplier = 0;\r\n            if " +
-"($(\'#js-multiplier\').val()) {\r\n                multiplier = $(\'#js-multiplier\')." +
-"val();\r\n            }\r\n            var postUrl = $(\".js-cart-add-item\").attr(\"da" +
-"ta-url\");\r\n             $.ajax({\r\n                 type: \"POST\",\r\n              " +
-"   url: postUrl,\r\n                 data: {\r\n                        quantity: qu" +
-"antity,\r\n                        rentalStartDateTime: rentalStartDateTime,\r\n    " +
-"                    rentalEndDateTime: rentalEndDateTime,\r\n                     " +
-"   multiplier: multiplier,\r\n                        stockVariant: stockVariant,\r" +
-"\n                        productAvailabilityId: productAvailabilityId,\r\n        " +
-"                cartCustomFieldIds: JSON.stringify(idArrayCustomField),\r\n       " +
-"                 cartCustomFieldsValues: JSON.stringify(valuesArrayCustomField)\r" +
-"\n                    },\r\n                    success: function (data) {\r\n       " +
-"                 if (data.ok) {\r\n                            $(location).attr(\"h" +
-"ref\", \"");
+WriteLiteral(@"&id="" + id + ""&zipCode="" + zipCode
+            }).done(function (response) {
+                $productShippingWrapper.html(response);
+                MaaS.initPlugins();
+                $productShippingWrapper.find('.zipcode-form').submit(loadShippingInfosIfIsBuyer);
+            });
+
+            $('.product-anothers-seller').each(function(i, el) {
+                var $this = $(el);
+                var productId = $this.data('product-id');
+
+                $.ajax({
+                    type: ""GET"",
+                    url: """);
 
             
-            #line 113 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 71 "..\..\Views\Products\_PublicPageScript.cshtml"
+                     Write(Url.ActionLocalized("LoadingShippingInfos", "Product"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("&id=\" + productId + \"&zipCode=\" + zipCode + \"&simple=true\"\r\n                }).do" +
+"ne(function (response) {\r\n                    $this.find(\'.product-another-shipp" +
+"ing\').html(\'Frete: \' + response);\r\n                });\r\n            });\r\n\r\n     " +
+"       return false;\r\n        }\r\n\r\n        function addAndProceedToLogin() {\r\n  " +
+"          var btn = $(\'.js-cart-add-item\').button(\'loading\');\r\n            var $" +
+"stockVariant = $(\'[name=\"StockVariant\"]:checked\');\r\n            var $stockVarian" +
+"tDropdown = $(\'[name=\"StockVariant\"]\').find(\':selected\');\r\n            var quant" +
+"ity = $quantity.val();\r\n            var rentalStartDateTime = $rentalStartDateTi" +
+"me.length >= 1 ? $rentalStartDateTime.val() : null;\r\n            var rentalEndDa" +
+"teTime = $rentalEndDateTime.length >= 1 ? $rentalEndDateTime.val() : null;\r\n    " +
+"        var stockVariant = null;\r\n\r\n            if ($stockVariant.length === 1) " +
+"{\r\n                stockVariant = $stockVariant.val();\r\n            }\r\n         " +
+"   else if ($stockVariantDropdown.length === 1) {\r\n                stockVariant " +
+"= $stockVariantDropdown.val();\r\n            }\r\n\r\n            var productAvailabi" +
+"lityId = $productAvailabilityId.length >= 1 ? $productAvailabilityId.val() : \"\";" +
+"\r\n            var idArrayCustomField = new Array();\r\n            var valuesArray" +
+"CustomField = new Array();\r\n            $customFields.val() != null ? $.each($cu" +
+"stomFields, function () { idArrayCustomField.push(this.name.replace(/.*\\[(.*)\\]." +
+"*/g, \"$1\")) }) : \"\";\r\n            $customFields.val() != null ? $.each($customFi" +
+"elds, function () {\r\n                if (this.type !== \"checkbox\")\r\n            " +
+"        valuesArrayCustomField.push(this.value);\r\n                else valuesArr" +
+"ayCustomField.push(this.checked);\r\n            }) : \"\";\r\n            var multipl" +
+"ier = 0;\r\n            if ($(\'#js-multiplier\').val()) {\r\n                multipli" +
+"er = $(\'#js-multiplier\').val();\r\n            }\r\n            var postUrl = $(\".js" +
+"-cart-add-item\").attr(\"data-url\");\r\n             $.ajax({\r\n                 type" +
+": \"POST\",\r\n                 url: postUrl,\r\n                 data: {\r\n           " +
+"             quantity: quantity,\r\n                        rentalStartDateTime: r" +
+"entalStartDateTime,\r\n                        rentalEndDateTime: rentalEndDateTim" +
+"e,\r\n                        multiplier: multiplier,\r\n                        sto" +
+"ckVariant: stockVariant,\r\n                        productAvailabilityId: product" +
+"AvailabilityId,\r\n                        cartCustomFieldIds: JSON.stringify(idAr" +
+"rayCustomField),\r\n                        cartCustomFieldsValues: JSON.stringify" +
+"(valuesArrayCustomField)\r\n                    },\r\n                    success: f" +
+"unction (data) {\r\n                        if (data.ok) {\r\n                      " +
+"      $(location).attr(\"href\", \"");
+
+            
+            #line 125 "..\..\Views\Products\_PublicPageScript.cshtml"
                                                  Write(Url.ActionLocalized("Login", "Account"));
 
             
@@ -158,7 +179,7 @@ WriteLiteral(@""");
             $.get(""");
 
             
-            #line 127 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 139 "..\..\Views\Products\_PublicPageScript.cshtml"
               Write(Url.Action("DoubleFreightWarning", "Products", new { productId = productId }));
 
             
@@ -178,7 +199,7 @@ WriteLiteral(@""", function (html) {
                 var isBuyer = ");
 
             
-            #line 138 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 150 "..\..\Views\Products\_PublicPageScript.cshtml"
                          Write(User.Identity.GetLoginProfile().IsBuyer().ToJson());
 
             
@@ -219,7 +240,7 @@ WriteLiteral(";\r\n\r\n                if (isBuyer) {\r\n                    var
 "f (data.ok) {\r\n                                toastr.success(\"");
 
             
-            #line 188 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 200 "..\..\Views\Products\_PublicPageScript.cshtml"
                                            Write(Request.GetLocalizedString("CART_ITEM_ADDED_MESSAGE"));
 
             
@@ -243,7 +264,7 @@ WriteLiteral(@""");
             $.get(""/cart/countProducts/?lang=");
 
             
-            #line 203 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 215 "..\..\Views\Products\_PublicPageScript.cshtml"
                                         Write(Request.GetCurrentLang());
 
             

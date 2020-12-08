@@ -19,6 +19,7 @@ using Presentation.Globalization;
 using Presentation.Models;
 using Presentation.Models.ProductViewModels;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -49,6 +50,9 @@ namespace Presentation.Controllers.Products
         private readonly IRepository<ProductCategory> productCategoryRepository;
         private readonly IRepository<ProductVariant> productVariantRepository;
         private readonly BuyerService buyerService;
+
+        private static ConcurrentDictionary<string, Address> ceps =
+            new ConcurrentDictionary<string, Address>();
 
         public ProductsController(
             ITimeZoneProvider userTimeZoneProvider,
@@ -238,7 +242,7 @@ namespace Presentation.Controllers.Products
             return View(model);
         }
 
-        public ActionResult LoadingShippingInfos(string id, string zipCode)
+        public ActionResult LoadingShippingInfos(string id, string zipCode, bool simple = false)
         {
             if (!TryResolveProductId(id, out Guid productId)) return new EmptyResult();
 
@@ -262,12 +266,17 @@ namespace Presentation.Controllers.Products
             }
             else
             {
-                shippingAddress = new Address
+                shippingAddress = ceps.GetOrAdd(zipCode, (value) =>
                 {
-                    ZipCode = zipCode
-                };
+                    var a = new Address
+                    {
+                        ZipCode = zipCode
+                    };
 
-                _geocoder.UpdateLocation(shippingAddress);
+                    _geocoder.UpdateLocation(a);
+
+                    return a;
+                });
             }
 
             #endregion Get shipping address
@@ -290,6 +299,8 @@ namespace Presentation.Controllers.Products
             }
 
             #endregion Get shipping infos
+
+            if (simple) return PartialView("_ShippingProductSimple", shippingInfos);
 
             return PartialView("_ShippingProduct", shippingInfos);
         }

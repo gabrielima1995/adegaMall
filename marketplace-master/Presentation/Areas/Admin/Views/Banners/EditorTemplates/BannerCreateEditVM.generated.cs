@@ -203,7 +203,7 @@ WriteLiteral("    ");
 
             
             #line 29 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
-Write(Html.EditorFor(model => model.Banner.ActionUrl, new { htmlAttributes = new { @class = "form-control", placeholder = "BANNER_ACTION_URL_INPUT" } }));
+Write(Html.EditorFor(model => model.Banner.ActionUrl, new { htmlAttributes = new { @class = "form-control", placeholder = Request.GetLocalizedString("BANNER_ACTION_URL_INPUT") } }));
 
             
             #line default
@@ -331,7 +331,56 @@ WriteLiteral(">");
             
             #line default
             #line hidden
-WriteLiteral("</small>\r\n");
+WriteLiteral("</small>\r\n\r\n<div");
+
+WriteLiteral(" class=\"row\"");
+
+WriteLiteral(">\r\n    <div");
+
+WriteLiteral(" class=\"col-xs-12 col-sm-4\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 56 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+       Write(Html.LabelFor(model => model.Banner.Order));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            <span");
+
+WriteLiteral(" class=\"text-required\"");
+
+WriteLiteral(">*</span>\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 58 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+       Write(Html.EditorFor(model => model.Banner.Order, new { htmlAttributes = new { @class = "form-control" } }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 59 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+       Write(Html.ValidationMessageFor(model => model.Banner.Order));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </div>\r\n    </div>\r\n</div>\r\n");
 
         }
     }

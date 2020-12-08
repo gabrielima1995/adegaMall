@@ -51,7 +51,12 @@ namespace Domain.Services
         {
             banner.Deleted = true;
             banner.DeletedAt = DateTime.UtcNow;
-            return _bannerRepository.Update(banner, saveChanges: true);
+
+            var result = _bannerRepository.Update(banner, saveChanges: true);
+
+            _bannerRepository.PurgeCache();
+
+            return result;
         }
 
         public Banner PrepareNew()
@@ -100,7 +105,9 @@ namespace Domain.Services
                 if (!addResult.OK) return addResult;
             }
 
-            return new OperationResult();
+            _bannerRepository.PurgeCache();
+
+            return OperationResult.Success;
         }
 
         private void Sanitize(Banner banner)

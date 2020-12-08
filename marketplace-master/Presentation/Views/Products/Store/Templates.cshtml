@@ -87,7 +87,7 @@
                         <table class="store-templates table" id="tblTemplates">
                             <thead>
                                 <tr>
-                                    <th width="60"></th>
+                                    @*<th width="60"></th>*@
                                     @Html.Localized("PRODUCT_TITLE_LABEL", "th")
                                     @Html.Localized("PRODUCT_CATEGORY_LABEL", "th", new { width = "20%" })
                                     @if (Model.CurrentMode != "available")
@@ -102,7 +102,7 @@
                                 @foreach (var item in Model.CurrentList)
                                 {
                                     <tr>
-                                        <td data-order="@Dt.Order(item.Title)">
+                                        @*<td data-order="@Dt.Order(item.Title)">
                                             @if (item.SellerProductId.HasValue)
                                             {
                                                 <a href="@Url.ActionLocalized("EditProduct", "Store", new { id = item.SellerProductId })">
@@ -113,7 +113,7 @@
                                             {
                                                 <img src="@ImgHelper.Product(item.CoverImageUrl, 80)" />
                                             }
-                                        </td>
+                                        </td>*@
                                         <td data-order="@Dt.Order(item.Title)">
                                             @if (item.SellerProductId.HasValue)
                                             {

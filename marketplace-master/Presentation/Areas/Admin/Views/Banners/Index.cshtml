@@ -31,34 +31,36 @@
                             <th>URL do Clique</th>
                             <th width="100">Início</th>
                             <th width="100">Fim</th>
+                            <th width="50">Ordem</th>
                             <th width="50"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.Items)
                         {
-                            <tr>
-                                <td>
-                                    <a href="@Url.ActionLocalized("Edit", "Banners", new { id = item.Id })">
-                                        <img src="@item.ImageThumbSm" alt="@item.ImageUrl" />
+                        <tr>
+                            <td>
+                                <a href="@Url.ActionLocalized("Edit", "Banners", new { id = item.Id })">
+                                    <img src="@item.ImageThumbSm" alt="@item.ImageUrl" />
+                                </a>
+                            </td>
+                            <td>@Html.DisplayFor(model => item.ActionUrl)</td>
+                            <td>@Html.DisplayFor(model => item.StartsAt)</td>
+                            <td>@Html.DisplayFor(model => item.ExpiresAt)</td>
+                            <td>@Html.DisplayFor(model => item.Order)</td>
+                            <td>
+                                <center>
+                                    @using (Html.BeginForm("Delete", "Banners"))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("id", item.Id)
+                                    }
+                                    <a href="javascript:void(0)" class="text-danger js-btn-delete">
+                                        <i class="fa fa-trash"></i>
                                     </a>
-                                </td>
-                                <td>@Html.DisplayFor(model => item.ActionUrl)</td>
-                                <td>@Html.DisplayFor(model => item.StartsAt)</td>
-                                <td>@Html.DisplayFor(model => item.ExpiresAt)</td>
-                                <td>
-                                    <center>
-                                        @using (Html.BeginForm("Delete", "Banners"))
-                                        {
-                                            @Html.AntiForgeryToken()
-                                            @Html.Hidden("id", item.Id)
-                                        }
-                                        <a href="javascript:void(0)" class="text-danger js-btn-delete">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </center>
-                                </td>
-                            </tr>
+                                </center>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

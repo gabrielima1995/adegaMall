@@ -1,0 +1,13 @@
+﻿@model ShippingInfosVM
+
+@{
+    var hasZipCode = ViewBag.ZipCode != null && ViewBag.ZipCode != "";
+}
+@if (Model != null && Model.ShowAnyShipping)
+{
+    <span>@Model.MinimumCost.DisplayCurrency()</span>
+}
+else if (hasZipCode)
+{
+    <span>-</span>
+}

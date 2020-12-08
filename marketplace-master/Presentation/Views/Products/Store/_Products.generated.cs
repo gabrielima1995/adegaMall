@@ -207,12 +207,9 @@ WriteLiteral(" class=\"seller-store-products table\"");
 
 WriteLiteral(" id=\"tblProducts\"");
 
-WriteLiteral(">\r\n                <thead>\r\n                    <tr>\r\n                        <th" +
-"");
+WriteLiteral(">\r\n                <thead>\r\n                    <tr>\r\n                        ");
 
-WriteLiteral(" width=\"60\"");
-
-WriteLiteral("></th>\r\n");
+WriteLiteral("\r\n");
 
 WriteLiteral("                        ");
 

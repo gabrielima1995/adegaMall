@@ -53,6 +53,9 @@ namespace Presentation.Areas.Admin.Models
 
         public string ImageThumbLg => ImgHelper.BlobToCdn(ImageUrl, new { w = 300, h = 94, scale = "both", mode = "crop" });
 
+        [DisplayName("Ordem")]
+        public int Order { get; set; }
+
         public BannerVM()
         {
         }

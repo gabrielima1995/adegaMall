@@ -12,14 +12,14 @@
 
     function configureDataTable() {
         var columns = [];
-        columns.push({
-            "data": "coverImageUrl",
-            "render": function (data, type, row, meta) {
-                var custom = $("<img>").attr("src", data).attr("width", "80");
-                return $("<div>").append(custom).html();
-            },
-            "orderable": false
-        });
+        //columns.push({
+        //    "data": "coverImageUrl",
+        //    "render": function (data, type, row, meta) {
+        //        var custom = $("<img>").attr("src", data).attr("width", "80");
+        //        return $("<div>").append(custom).html();
+        //    },
+        //    "orderable": false
+        //});
         columns.push({
             "data": "title",
             "render": function (data, type, row, meta) {
