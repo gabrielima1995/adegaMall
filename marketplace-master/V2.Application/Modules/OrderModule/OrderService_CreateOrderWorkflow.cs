@@ -456,7 +456,7 @@ namespace Domain.Services.StoreModule
                 cart.ShippingMethod,
                 orderShipping,
                 GetBusinessModel(isRental), isRental,
-                cart.Coupon, cart.Discount)
+                cart.Coupon, cartSeller.SellerDiscount)
             {
                 ExtraInfo = cart.ExtraInfo
             };

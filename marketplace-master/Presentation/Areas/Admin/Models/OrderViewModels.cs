@@ -100,6 +100,7 @@ namespace Presentation.Areas.Admin.Models
 
             ProductsAmount = orderDetails.Order.SubTotal;
             ShippingAmount = orderDetails.Order.Shipping;
+            DiscountAmount = orderDetails.Order.Discount;
             TotalAmount = orderDetails.Order.Amount;
             this.timeZone = timeZone;
         }
@@ -130,6 +131,7 @@ namespace Presentation.Areas.Admin.Models
 
         public decimal ProductsAmount { get; }
         public decimal ShippingAmount { get; }
+        public decimal DiscountAmount { get; }
         public decimal TotalAmount { get; }
 
         public DateTime LocalizeDateTime(DateTime utcDateTime) => timeZone.ConvertTimeFromUtc(utcDateTime);

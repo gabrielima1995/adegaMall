@@ -19,6 +19,7 @@ namespace Domain.Entities.StoreModule
 
         public decimal SellerShipping { get; set; }
         public int SellerDeliveryDays { get; set; }
+        public decimal SellerDiscount { get; set; }
 
         public CartSeller()
         {

@@ -315,10 +315,19 @@ WriteLiteral("\r\n                <dt>Total dos Produtos</dt>\r\n               
             
             #line default
             #line hidden
-WriteLiteral("</dd>\r\n\r\n                <dt>Total do Frete</dt>\r\n                <dd>");
+WriteLiteral("</dd>\r\n\r\n                <dt>Total do Desconto</dt>\r\n                <dd>");
 
             
             #line 65 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+               Write(Html.DisplayFor(model => model.DiscountAmount));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</dd>\r\n\r\n                <dt>Total do Frete</dt>\r\n                <dd>");
+
+            
+            #line 68 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                Write(Html.DisplayFor(model => model.ShippingAmount));
 
             
@@ -327,7 +336,7 @@ WriteLiteral("</dd>\r\n\r\n                <dt>Total do Frete</dt>\r\n          
 WriteLiteral("</dd>\r\n\r\n                <dt>Total Final</dt>\r\n                <dd>");
 
             
-            #line 68 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 71 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                Write(Html.DisplayFor(model => model.TotalAmount));
 
             

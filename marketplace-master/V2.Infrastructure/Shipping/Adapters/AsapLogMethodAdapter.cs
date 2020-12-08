@@ -76,6 +76,8 @@ namespace V2.Infrastructure.Shipping.Adapters
                     //shippingCollection = ApplyDefaultShippingForCommunicationErrors(shippingCollection, products, store);
                     return shippingCollection;
                 }
+
+                return new ErrorDictionary(store.SellerId, CultureInfo.CurrentCulture.GetStringLocalized("STORE_ASAPLOG_NOT_ENABLED"));
             }
 
             return CorreiosShippingCollection.Empty();
@@ -143,6 +145,11 @@ namespace V2.Infrastructure.Shipping.Adapters
             }
 
             var result = response.Result;
+
+            if (result.Preco == decimal.Zero)
+            {
+                return new ErrorDictionary("", "Região não atendida.");
+            }
 
             var correiosDtoCollection = new List<CorreiosShippingDto>();
 

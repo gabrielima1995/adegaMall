@@ -200,19 +200,29 @@ namespace V2.Application.Modules
 
             OperationResult CalculateDiscount()
             {
-                IEnumerable<CartItem> items = cart.Items;
+                cart.Discount = decimal.Zero;
 
-                // cupom do vendedor, somente produtos dele
-                if (coupon.IsBySeller)
+                foreach (var cartSeller in cart.Sellers)
                 {
-                    items = items.Where(i => i.Product.Store_SellerId == coupon.SellerId);
+                    IEnumerable<CartItem> items = cart.Items;
+
+                    // cupom do vendedor, somente produtos dele
+                    if (coupon.IsBySeller)
+                    {
+                        items = items.Where(i => i.Product.Store_SellerId == coupon.SellerId);
+                    }
+
+                    var amount = items
+                        .Where(p => p.Product.Store_SellerId == cartSeller.Seller.Id)
+                        .Sum(i => i.SubTotal);
+                    var totalAmount = items
+                        .Sum(i => i.SubTotal);
+
+                    var discount = coupon.CalculateDiscount(amount, totalAmount);
+
+                    cartSeller.SellerDiscount = discount;
+                    cart.Discount += cartSeller.SellerDiscount;
                 }
-
-                var amount = items.Sum(i => i.SubTotal);
-
-                var discount = coupon.CalculateDiscount(amount);
-
-                cart.Discount = Math.Min(discount, amount);
 
                 if (cart.Discount == decimal.Zero)
                     return InvalidCoupon("Cupom não pode ser aplicado para os produtos selecionados.");
@@ -337,7 +347,7 @@ namespace V2.Application.Modules
                                 if ((shippingMethod != ShippingMethod.NoShipping &&
                                     shippingMethod != ShippingMethod.ActualNoShipping &&
                                     shippingMethod != ShippingMethod.OnSitePickup) ||
-                                    ((shippingMethod == ShippingMethod.PostalExpress || shippingMethod == ShippingMethod.PostalRegular) &&
+                                    ((shippingMethod == ShippingMethod.PostalExpress || shippingMethod == ShippingMethod.PostalRegular || shippingMethod == ShippingMethod.AsapLog || shippingMethod == ShippingMethod.TotalExpress) &&
                                      shippingResult.Result.TotalShippingPrice > 0))
                                 {
                                     cart.MinimumCost = Math.Min(cart.MinimumCost,
@@ -895,6 +905,7 @@ namespace V2.Application.Modules
             cart.Shipping = 0M;
 
             var errors = new ErrorDictionary();
+            var shippingMethod = cart.ShippingMethod;
             var adapter = shippingService.GetAdapter(cart.ShippingMethod);
 
             switch (cart.ShippingMode)
