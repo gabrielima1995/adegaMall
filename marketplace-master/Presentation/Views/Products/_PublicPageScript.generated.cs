@@ -128,42 +128,59 @@ WriteLiteral("&id=\" + productId + \"&zipCode=\" + zipCode + \"&simple=true\"\r\
 "});\r\n\r\n            return false;\r\n        }\r\n\r\n        function checkBestPrice()" +
 " {\r\n            var count = $(\'.product-anothers-seller\').length;\r\n            v" +
 "ar loaded = $(\'.product-anothers-seller[data-shipping-loading=\"0\"]\').length;\r\n\r\n" +
-"            if (count === loaded) {\r\n                console.log(\'carregou tudo\'" +
-")\r\n            }\r\n        }\r\n\r\n        function addAndProceedToLogin() {\r\n      " +
-"      var btn = $(\'.js-cart-add-item\').button(\'loading\');\r\n            var $stoc" +
-"kVariant = $(\'[name=\"StockVariant\"]:checked\');\r\n            var $stockVariantDro" +
-"pdown = $(\'[name=\"StockVariant\"]\').find(\':selected\');\r\n            var quantity " +
-"= $quantity.val();\r\n            var rentalStartDateTime = $rentalStartDateTime.l" +
-"ength >= 1 ? $rentalStartDateTime.val() : null;\r\n            var rentalEndDateTi" +
-"me = $rentalEndDateTime.length >= 1 ? $rentalEndDateTime.val() : null;\r\n        " +
-"    var stockVariant = null;\r\n\r\n            if ($stockVariant.length === 1) {\r\n " +
-"               stockVariant = $stockVariant.val();\r\n            }\r\n            e" +
-"lse if ($stockVariantDropdown.length === 1) {\r\n                stockVariant = $s" +
-"tockVariantDropdown.val();\r\n            }\r\n\r\n            var productAvailability" +
-"Id = $productAvailabilityId.length >= 1 ? $productAvailabilityId.val() : \"\";\r\n  " +
-"          var idArrayCustomField = new Array();\r\n            var valuesArrayCust" +
-"omField = new Array();\r\n            $customFields.val() != null ? $.each($custom" +
-"Fields, function () { idArrayCustomField.push(this.name.replace(/.*\\[(.*)\\].*/g," +
-" \"$1\")) }) : \"\";\r\n            $customFields.val() != null ? $.each($customFields" +
-", function () {\r\n                if (this.type !== \"checkbox\")\r\n                " +
-"    valuesArrayCustomField.push(this.value);\r\n                else valuesArrayCu" +
-"stomField.push(this.checked);\r\n            }) : \"\";\r\n            var multiplier " +
-"= 0;\r\n            if ($(\'#js-multiplier\').val()) {\r\n                multiplier =" +
-" $(\'#js-multiplier\').val();\r\n            }\r\n            var postUrl = $(\".js-car" +
-"t-add-item\").attr(\"data-url\");\r\n             $.ajax({\r\n                 type: \"P" +
-"OST\",\r\n                 url: postUrl,\r\n                 data: {\r\n               " +
-"         quantity: quantity,\r\n                        rentalStartDateTime: renta" +
-"lStartDateTime,\r\n                        rentalEndDateTime: rentalEndDateTime,\r\n" +
-"                        multiplier: multiplier,\r\n                        stockVa" +
-"riant: stockVariant,\r\n                        productAvailabilityId: productAvai" +
-"labilityId,\r\n                        cartCustomFieldIds: JSON.stringify(idArrayC" +
-"ustomField),\r\n                        cartCustomFieldsValues: JSON.stringify(val" +
-"uesArrayCustomField)\r\n                    },\r\n                    success: funct" +
-"ion (data) {\r\n                        if (data.ok) {\r\n                          " +
-"  $(location).attr(\"href\", \"");
+"            if (count === loaded) {\r\n                var pId = null;\r\n          " +
+"      var bestPrice = 0;\r\n                var bestDelivery = 0;\r\n\r\n             " +
+"   $(\'.product-anothers-seller\').each(function(i, el) {\r\n                    var" +
+" $this = $(el);\r\n\r\n                    $this.find(\'.product-best-option\').css(\'d" +
+"isplay\', \'none\');\r\n\r\n                    var ok = $this.find(\'[name=\"shipping-ok" +
+"\"]\').val() === \"1\";\r\n\r\n                    if (ok) {\r\n                        va" +
+"r price = parseFloat($this.find(\'[name=\"product-price\"]\').val());\r\n             " +
+"           var shipping = parseFloat($this.find(\'[name=\"shipping-cost\"]\').val())" +
+";\r\n                        var deliveryDays = parseInt($this.find(\'[name=\"delive" +
+"ry-days\"]\').val());\r\n\r\n                        if (pId === null || (bestPrice >=" +
+" price + shipping && bestDelivery >= deliveryDays)) {\r\n                         " +
+"   bestPrice = price + shipping;\r\n                            bestDelivery = del" +
+"iveryDays;\r\n                            pId = $this.data(\'product-id\');\r\n       " +
+"                 }\r\n                    }\r\n                });\r\n\r\n              " +
+"  if (pId) {\r\n                    $(\'.product-anothers-seller[data-product-id=\"\'" +
+" + pId + \'\"]\').each(function(i, el) {\r\n                        var $this = $(el)" +
+";\r\n\r\n                        $this.find(\'.product-best-option\').css(\'display\', \'" +
+"inherit\');\r\n                    });\r\n                }\r\n            }\r\n        }" +
+"\r\n\r\n        function addAndProceedToLogin() {\r\n            var btn = $(\'.js-cart" +
+"-add-item\').button(\'loading\');\r\n            var $stockVariant = $(\'[name=\"StockV" +
+"ariant\"]:checked\');\r\n            var $stockVariantDropdown = $(\'[name=\"StockVari" +
+"ant\"]\').find(\':selected\');\r\n            var quantity = $quantity.val();\r\n       " +
+"     var rentalStartDateTime = $rentalStartDateTime.length >= 1 ? $rentalStartDa" +
+"teTime.val() : null;\r\n            var rentalEndDateTime = $rentalEndDateTime.len" +
+"gth >= 1 ? $rentalEndDateTime.val() : null;\r\n            var stockVariant = null" +
+";\r\n\r\n            if ($stockVariant.length === 1) {\r\n                stockVariant" +
+" = $stockVariant.val();\r\n            }\r\n            else if ($stockVariantDropdo" +
+"wn.length === 1) {\r\n                stockVariant = $stockVariantDropdown.val();\r" +
+"\n            }\r\n\r\n            var productAvailabilityId = $productAvailabilityId" +
+".length >= 1 ? $productAvailabilityId.val() : \"\";\r\n            var idArrayCustom" +
+"Field = new Array();\r\n            var valuesArrayCustomField = new Array();\r\n   " +
+"         $customFields.val() != null ? $.each($customFields, function () { idArr" +
+"ayCustomField.push(this.name.replace(/.*\\[(.*)\\].*/g, \"$1\")) }) : \"\";\r\n         " +
+"   $customFields.val() != null ? $.each($customFields, function () {\r\n          " +
+"      if (this.type !== \"checkbox\")\r\n                    valuesArrayCustomField." +
+"push(this.value);\r\n                else valuesArrayCustomField.push(this.checked" +
+");\r\n            }) : \"\";\r\n            var multiplier = 0;\r\n            if ($(\'#j" +
+"s-multiplier\').val()) {\r\n                multiplier = $(\'#js-multiplier\').val();" +
+"\r\n            }\r\n            var postUrl = $(\".js-cart-add-item\").attr(\"data-url" +
+"\");\r\n             $.ajax({\r\n                 type: \"POST\",\r\n                 url" +
+": postUrl,\r\n                 data: {\r\n                        quantity: quantity" +
+",\r\n                        rentalStartDateTime: rentalStartDateTime,\r\n          " +
+"              rentalEndDateTime: rentalEndDateTime,\r\n                        mul" +
+"tiplier: multiplier,\r\n                        stockVariant: stockVariant,\r\n     " +
+"                   productAvailabilityId: productAvailabilityId,\r\n              " +
+"          cartCustomFieldIds: JSON.stringify(idArrayCustomField),\r\n             " +
+"           cartCustomFieldsValues: JSON.stringify(valuesArrayCustomField)\r\n     " +
+"               },\r\n                    success: function (data) {\r\n             " +
+"           if (data.ok) {\r\n                            $(location).attr(\"href\", " +
+"\"");
 
             
-            #line 141 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 171 "..\..\Views\Products\_PublicPageScript.cshtml"
                                                  Write(Url.ActionLocalized("Login", "Account"));
 
             
@@ -186,7 +203,7 @@ WriteLiteral(@""");
             $.get(""");
 
             
-            #line 155 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 185 "..\..\Views\Products\_PublicPageScript.cshtml"
               Write(Url.Action("DoubleFreightWarning", "Products", new { productId = productId }));
 
             
@@ -206,7 +223,7 @@ WriteLiteral(@""", function (html) {
                 var isBuyer = ");
 
             
-            #line 166 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 196 "..\..\Views\Products\_PublicPageScript.cshtml"
                          Write(User.Identity.GetLoginProfile().IsBuyer().ToJson());
 
             
@@ -247,7 +264,7 @@ WriteLiteral(";\r\n\r\n                if (isBuyer) {\r\n                    var
 "f (data.ok) {\r\n                                toastr.success(\"");
 
             
-            #line 216 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 246 "..\..\Views\Products\_PublicPageScript.cshtml"
                                            Write(Request.GetLocalizedString("CART_ITEM_ADDED_MESSAGE"));
 
             
@@ -271,7 +288,7 @@ WriteLiteral(@""");
             $.get(""/cart/countProducts/?lang=");
 
             
-            #line 231 "..\..\Views\Products\_PublicPageScript.cshtml"
+            #line 261 "..\..\Views\Products\_PublicPageScript.cshtml"
                                         Write(Request.GetCurrentLang());
 
             

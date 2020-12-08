@@ -89,7 +89,37 @@
             var loaded = $('.product-anothers-seller[data-shipping-loading="0"]').length;
 
             if (count === loaded) {
-                console.log('carregou tudo')
+                var pId = null;
+                var bestPrice = 0;
+                var bestDelivery = 0;
+
+                $('.product-anothers-seller').each(function(i, el) {
+                    var $this = $(el);
+
+                    $this.find('.product-best-option').css('display', 'none');
+
+                    var ok = $this.find('[name="shipping-ok"]').val() === "1";
+
+                    if (ok) {
+                        var price = parseFloat($this.find('[name="product-price"]').val());
+                        var shipping = parseFloat($this.find('[name="shipping-cost"]').val());
+                        var deliveryDays = parseInt($this.find('[name="delivery-days"]').val());
+
+                        if (pId === null || (bestPrice >= price + shipping && bestDelivery >= deliveryDays)) {
+                            bestPrice = price + shipping;
+                            bestDelivery = deliveryDays;
+                            pId = $this.data('product-id');
+                        }
+                    }
+                });
+
+                if (pId) {
+                    $('.product-anothers-seller[data-product-id="' + pId + '"]').each(function(i, el) {
+                        var $this = $(el);
+
+                        $this.find('.product-best-option').css('display', 'inherit');
+                    });
+                }
             }
         }
 
