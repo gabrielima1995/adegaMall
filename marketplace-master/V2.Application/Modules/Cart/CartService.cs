@@ -190,6 +190,7 @@ namespace V2.Application.Modules
 
             if (cart.IsEmpty || cart.Coupon == null)
             {
+                cart.Coupon = null;
                 RemoveDiscount();
 
                 return OperationResult.Success;
