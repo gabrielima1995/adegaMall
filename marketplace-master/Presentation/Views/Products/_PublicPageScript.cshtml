@@ -52,6 +52,10 @@
             }
 
             $productShippingWrapper.html('<p><i class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;Calculando frete e prazo</p>');
+            $('.product-anothers-seller[data-shipping-loading="0"]').each(function (i, el) {
+                var $this = $(el);
+                $this.attr('data-shipping-loading', '1');
+            });
 
             $.ajax({
                 type: "GET",
@@ -70,11 +74,23 @@
                     type: "GET",
                     url: "@Url.ActionLocalized("LoadingShippingInfos", "Product")&id=" + productId + "&zipCode=" + zipCode + "&simple=true"
                 }).done(function (response) {
-                    $this.find('.product-another-shipping').html('Frete: ' + response);
+                    $this.find('.product-another-shipping').html(response);
+                    $this.attr('data-shipping-loading', '0');
+
+                    checkBestPrice();
                 });
             });
 
             return false;
+        }
+
+        function checkBestPrice() {
+            var count = $('.product-anothers-seller').length;
+            var loaded = $('.product-anothers-seller[data-shipping-loading="0"]').length;
+
+            if (count === loaded) {
+                console.log('carregou tudo')
+            }
         }
 
         function addAndProceedToLogin() {

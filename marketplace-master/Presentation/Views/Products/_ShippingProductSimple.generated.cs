@@ -52,6 +52,9 @@ namespace ASP
             #line 3 "..\..\Views\Products\_ShippingProductSimple.cshtml"
   
     var hasZipCode = ViewBag.ZipCode != null && ViewBag.ZipCode != "";
+    var hasShipping = Model != null && Model.ShowAnyShipping;
+    var hasDeliveryDays = hasShipping && Model.DeliveryDays.HasValue;
+    var deliveryDays = hasDeliveryDays ? Model.DeliveryDays.Value : 0;
 
             
             #line default
@@ -59,18 +62,64 @@ namespace ASP
 WriteLiteral("\r\n\r\n");
 
             
-            #line 7 "..\..\Views\Products\_ShippingProductSimple.cshtml"
- if (Model != null && Model.ShowAnyShipping)
+            #line 10 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+ if (hasShipping)
 {
 
             
             #line default
             #line hidden
-WriteLiteral("    <span>");
+WriteLiteral("    <input");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" name=\"shipping-ok\"");
+
+WriteLiteral(" value=\"1\"");
+
+WriteLiteral(" />\r\n");
+
+WriteLiteral("    <input");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" name=\"shipping-cost\"");
+
+WriteAttribute("value", Tuple.Create(" value=\"", 438), Tuple.Create("\"", 464)
+            
+            #line 13 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+, Tuple.Create(Tuple.Create("", 446), Tuple.Create<System.Object, System.Int32>(Model.MinimumCost
+            
+            #line default
+            #line hidden
+, 446), false)
+);
+
+WriteLiteral(" />\r\n");
+
+WriteLiteral("    <input");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" name=\"delivery-days\"");
+
+WriteAttribute("value", Tuple.Create(" value=\"", 515), Tuple.Create("\"", 536)
+            
+            #line 14 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+, Tuple.Create(Tuple.Create("", 523), Tuple.Create<System.Object, System.Int32>(deliveryDays
+            
+            #line default
+            #line hidden
+, 523), false)
+);
+
+WriteLiteral(" />\r\n");
+
+WriteLiteral("    <span>Frete: ");
 
             
-            #line 9 "..\..\Views\Products\_ShippingProductSimple.cshtml"
-     Write(Model.MinimumCost.DisplayCurrency());
+            #line 15 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+            Write(Model.MinimumCost.DisplayCurrency());
 
             
             #line default
@@ -78,19 +127,21 @@ WriteLiteral("    <span>");
 WriteLiteral("</span>\r\n");
 
             
-            #line 10 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+            #line 16 "..\..\Views\Products\_ShippingProductSimple.cshtml"
 
-    if (Model.DeliveryDays.HasValue)
+    if (hasDeliveryDays)
     {
 
             
             #line default
             #line hidden
-WriteLiteral("        <span>- ");
+WriteLiteral("        <br />\r\n");
+
+WriteLiteral("        <span>Prazo: ");
 
             
-            #line 13 "..\..\Views\Products\_ShippingProductSimple.cshtml"
-           Write(Model.DeliveryDays);
+            #line 20 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+                Write(deliveryDays);
 
             
             #line default
@@ -98,7 +149,7 @@ WriteLiteral("        <span>- ");
 WriteLiteral(" dias úteis</span>\r\n");
 
             
-            #line 14 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+            #line 21 "..\..\Views\Products\_ShippingProductSimple.cshtml"
     }
 }
 else if (hasZipCode)
@@ -107,10 +158,39 @@ else if (hasZipCode)
             
             #line default
             #line hidden
-WriteLiteral("    <span>-</span>\r\n");
+WriteLiteral("    <input");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" name=\"shipping-ok\"");
+
+WriteLiteral(" value=\"0\"");
+
+WriteLiteral("/>\r\n");
+
+WriteLiteral("    <span>Região não atendida</span>\r\n");
 
             
-            #line 19 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+            #line 27 "..\..\Views\Products\_ShippingProductSimple.cshtml"
+}
+else
+{
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <input");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" name=\"shipping-ok\"");
+
+WriteLiteral(" value=\"0\"");
+
+WriteLiteral(" />\r\n");
+
+            
+            #line 31 "..\..\Views\Products\_ShippingProductSimple.cshtml"
 }
 
             

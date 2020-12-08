@@ -49,8 +49,9 @@
                                         var anotherUrl = Url.ActionLocalized("PublicPage", "Products", new { id = another.FriendlyUrl });
                                         var price = another.ProductPriceMapped;
 
-                                        <div class="product-anothers-seller @Css.If(another.Id == Model.Product.Id, "active")" data-product-id="@another.Id">
+                                        <div class="product-anothers-seller @Css.If(another.Id == Model.Product.Id, "active")" data-product-id="@another.Id" data-shipping-loading="1">
                                             <a href="@anotherUrl" title="@another.Title">
+                                                <input type="hidden" name="product-price" value="@price.BasePrice.Value"/>
                                                 <p class="text-muted">
                                                     <b>@another.Store.Seller.PublicProfileName</b>
                                                 </p>

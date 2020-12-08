@@ -124,7 +124,8 @@ namespace Presentation.Models
 
                 if (config.Product.AsapLogShipping.Enabled && product.Store.AsapLogEnabled)
                 {
-                    ShowAsapLog = GetShipping(asapLogAdapter, out var asapLogCost, out var deliveryDate, out var deliveryDaysAsapLog, chargeDoubleShipping);
+                    ShowAsapLog = GetShipping(asapLogAdapter, out var asapLogCost, out var deliveryDate, out var deliveryDaysAsapLog, chargeDoubleShipping) &&
+                                  asapLogCost > decimal.Zero;
                     AsapLogCost = asapLogCost;
                     DeliveryDateAsapLog = deliveryDate;
                     DeliveryDaysAsapLog = deliveryDaysAsapLog;
@@ -139,7 +140,8 @@ namespace Presentation.Models
 
                 if (config.Product.TotalExpressShipping.Enabled && product.Store.TotalExpressEnabled)
                 {
-                    ShowTotalExpress = GetShipping(totalExpressAdapter, out var totalExpressCost, out var deliveryDate, out var deliveryDaysTotalExpress, chargeDoubleShipping);
+                    ShowTotalExpress = GetShipping(totalExpressAdapter, out var totalExpressCost, out var deliveryDate, out var deliveryDaysTotalExpress, chargeDoubleShipping) &&
+                                       totalExpressCost > decimal.Zero;
                     TotalExpressCost = totalExpressCost;
                     DeliveryDateTotalExpress = deliveryDate;
                     DeliveryDaysTotalExpress = deliveryDaysTotalExpress;

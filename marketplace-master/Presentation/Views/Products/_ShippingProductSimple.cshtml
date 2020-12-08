@@ -2,18 +2,30 @@
 
 @{
     var hasZipCode = ViewBag.ZipCode != null && ViewBag.ZipCode != "";
+    var hasShipping = Model != null && Model.ShowAnyShipping;
+    var hasDeliveryDays = hasShipping && Model.DeliveryDays.HasValue;
+    var deliveryDays = hasDeliveryDays ? Model.DeliveryDays.Value : 0;
 }
 
-@if (Model != null && Model.ShowAnyShipping)
+@if (hasShipping)
 {
-    <span>@Model.MinimumCost.DisplayCurrency()</span>
+    <input type="hidden" name="shipping-ok" value="1" />
+    <input type="hidden" name="shipping-cost" value="@Model.MinimumCost" />
+    <input type="hidden" name="delivery-days" value="@deliveryDays" />
+    <span>Frete: @Model.MinimumCost.DisplayCurrency()</span>
 
-    if (Model.DeliveryDays.HasValue)
+    if (hasDeliveryDays)
     {
-        <span>- @Model.DeliveryDays dias úteis</span>
+        <br />
+        <span>Prazo: @deliveryDays dias úteis</span>
     }
 }
 else if (hasZipCode)
 {
-    <span>-</span>
+    <input type="hidden" name="shipping-ok" value="0"/>
+    <span>Região não atendida</span>
+}
+else
+{
+    <input type="hidden" name="shipping-ok" value="0" />
 }
