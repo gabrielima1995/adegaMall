@@ -1,4 +1,5 @@
-﻿using Domain.Entities.StoreModule;
+﻿using System;
+using Domain.Entities.StoreModule;
 using Framework;
 using System.Collections.Generic;
 
@@ -39,5 +40,7 @@ namespace Domain.Interfaces.Repositories
         OperationResult Update(CartSeller entity, bool saveChanges = false);
 
         OperationResult Delete(CartSeller entity, bool saveChanges = false);
+
+        List<Order> ListOrdersByCart(Guid cartId);
     }
 }

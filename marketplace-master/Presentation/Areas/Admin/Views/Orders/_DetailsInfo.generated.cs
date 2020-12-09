@@ -29,6 +29,12 @@ namespace ASP
     using System.Web.WebPages;
     using Application;
     using Application.Config;
+    
+    #line 1 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+    using Domain.Entities.StoreModule;
+    
+    #line default
+    #line hidden
     using Presentation;
     using Presentation.Areas.Admin.Models;
     using Presentation.Globalization;
@@ -61,7 +67,7 @@ WriteLiteral(" class=\"dl-inverted\"");
 WriteLiteral(">\r\n                <dt>Data do Pedido</dt>\r\n                <dd>");
 
             
-            #line 8 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 9 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                Write(Html.DisplayFor(model => model.OrderDate));
 
             
@@ -72,7 +78,7 @@ WriteLiteral("</dd>\r\n\r\n                <dt>Pagamento</dt>\r\n               
 WriteLiteral("                    ");
 
             
-            #line 12 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 13 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                Write(Model.PaymentMethodDescription);
 
             
@@ -81,13 +87,13 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 14 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 15 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 14 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 15 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                      if (Model.HasTransaction)
                     {
 
@@ -99,7 +105,7 @@ WriteLiteral("                        <span>\r\n                            |\r\
 WriteLiteral("                            ");
 
             
-            #line 18 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 19 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                        Write(Model.InstallmentsCount);
 
             
@@ -108,7 +114,7 @@ WriteLiteral("                            ");
 WriteLiteral(" ");
 
             
-            #line 18 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 19 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                                                 Write(Request.GetLocalizedString("INSTALLMENTS_COUNT"));
 
             
@@ -117,7 +123,7 @@ WriteLiteral(" ");
 WriteLiteral("\r\n                        </span>\r\n");
 
             
-            #line 20 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 21 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                     }
 
             
@@ -126,13 +132,13 @@ WriteLiteral("\r\n                        </span>\r\n");
 WriteLiteral("                </dd>\r\n\r\n                <dt>Status</dt>\r\n                <dd>\r\n");
 
             
-            #line 25 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 26 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 25 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 26 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                      if (Model.ShowButtonForCheckingTranStatus)
                     {
 
@@ -141,14 +147,14 @@ WriteLiteral("                </dd>\r\n\r\n                <dt>Status</dt>\r\n  
             #line hidden
 WriteLiteral("                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 862), Tuple.Create("\"", 946)
+WriteAttribute("href", Tuple.Create(" href=\"", 898), Tuple.Create("\"", 982)
             
-            #line 27 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
-, Tuple.Create(Tuple.Create("", 869), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("CheckTranStatus", "Orders", new { id = Model.OrderId })
+            #line 28 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+, Tuple.Create(Tuple.Create("", 905), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("CheckTranStatus", "Orders", new { id = Model.OrderId })
             
             #line default
             #line hidden
-, 869), false)
+, 905), false)
 );
 
 WriteLiteral(" title=\"Verifica o status atualizado da transação no Gateway\"");
@@ -160,7 +166,7 @@ WriteLiteral("                        ");
 WriteLiteral("&nbsp;\r\n");
 
             
-            #line 29 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 30 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                     }
 
             
@@ -169,7 +175,7 @@ WriteLiteral("&nbsp;\r\n");
 WriteLiteral("                    <span>");
 
             
-            #line 30 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 31 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                      Write(Model.StatusDescription);
 
             
@@ -178,13 +184,13 @@ WriteLiteral("                    <span>");
 WriteLiteral("</span>\r\n                </dd>\r\n\r\n");
 
             
-            #line 33 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 34 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 33 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 34 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                  if (Model.HasTransaction)
                 {
 
@@ -195,14 +201,14 @@ WriteLiteral("                    <dt>Transação</dt>\r\n");
 
 WriteLiteral("                    <dd>\r\n                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1330), Tuple.Create("\"", 1365)
+WriteAttribute("href", Tuple.Create(" href=\"", 1366), Tuple.Create("\"", 1401)
             
-            #line 37 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
-, Tuple.Create(Tuple.Create("", 1337), Tuple.Create<System.Object, System.Int32>(Model.GatewayTransactionUrl
+            #line 38 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+, Tuple.Create(Tuple.Create("", 1373), Tuple.Create<System.Object, System.Int32>(Model.GatewayTransactionUrl
             
             #line default
             #line hidden
-, 1337), false)
+, 1373), false)
 );
 
 WriteLiteral(" target=\"_blank\"");
@@ -210,7 +216,7 @@ WriteLiteral(" target=\"_blank\"");
 WriteLiteral(">Ver no Gateway</a>\r\n                    </dd>\r\n");
 
             
-            #line 39 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 40 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                 }
 
             
@@ -219,7 +225,7 @@ WriteLiteral(">Ver no Gateway</a>\r\n                    </dd>\r\n");
 WriteLiteral("\r\n                <dt>Envio</dt>\r\n                <dd>");
 
             
-            #line 42 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 43 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                Write(Model.ShippingMethodDescription);
 
             
@@ -228,13 +234,13 @@ WriteLiteral("\r\n                <dt>Envio</dt>\r\n                <dd>");
 WriteLiteral("</dd>\r\n\r\n");
 
             
-            #line 44 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 45 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 44 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 45 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                  if (Model.ShowShippingDetails)
                 {
                     if (Model.ShippingOut)
@@ -248,7 +254,7 @@ WriteLiteral("                        <dt>De</dt>\r\n");
 WriteLiteral("                        <dd>");
 
             
-            #line 49 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 50 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                        Write(Model.SellerAddress);
 
             
@@ -257,7 +263,7 @@ WriteLiteral("                        <dd>");
 WriteLiteral("</dd>\r\n");
 
             
-            #line 50 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 51 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
 
 
             
@@ -268,7 +274,7 @@ WriteLiteral("                        <dt>Para</dt>\r\n");
 WriteLiteral("                        <dd>");
 
             
-            #line 52 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 53 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                        Write(Model.ShippingAddress);
 
             
@@ -277,7 +283,7 @@ WriteLiteral("                        <dd>");
 WriteLiteral("</dd>\r\n");
 
             
-            #line 53 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 54 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                     }
                     else
                     {
@@ -290,7 +296,7 @@ WriteLiteral("                        <dt>Endereço de Coleta</dt>\r\n");
 WriteLiteral("                        <dd>");
 
             
-            #line 57 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 58 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                        Write(Model.ShippingAddress);
 
             
@@ -299,7 +305,7 @@ WriteLiteral("                        <dd>");
 WriteLiteral("</dd>\r\n");
 
             
-            #line 58 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 59 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                     }
                 }
 
@@ -309,7 +315,7 @@ WriteLiteral("</dd>\r\n");
 WriteLiteral("\r\n                <dt>Total dos Produtos</dt>\r\n                <dd>");
 
             
-            #line 62 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 63 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                Write(Html.DisplayFor(model => model.ProductsAmount));
 
             
@@ -318,7 +324,7 @@ WriteLiteral("\r\n                <dt>Total dos Produtos</dt>\r\n               
 WriteLiteral("</dd>\r\n\r\n                <dt>Total do Desconto</dt>\r\n                <dd>");
 
             
-            #line 65 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 66 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                Write(Html.DisplayFor(model => model.DiscountAmount));
 
             
@@ -327,7 +333,7 @@ WriteLiteral("</dd>\r\n\r\n                <dt>Total do Desconto</dt>\r\n       
 WriteLiteral("</dd>\r\n\r\n                <dt>Total do Frete</dt>\r\n                <dd>");
 
             
-            #line 68 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 69 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                Write(Html.DisplayFor(model => model.ShippingAmount));
 
             
@@ -336,13 +342,95 @@ WriteLiteral("</dd>\r\n\r\n                <dt>Total do Frete</dt>\r\n          
 WriteLiteral("</dd>\r\n\r\n                <dt>Total Final</dt>\r\n                <dd>");
 
             
-            #line 71 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            #line 72 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
                Write(Html.DisplayFor(model => model.TotalAmount));
 
             
             #line default
             #line hidden
-WriteLiteral("</dd>\r\n            </dl>\r\n        </div>\r\n    </div>\r\n</div>\r\n");
+WriteLiteral("</dd>\r\n            </dl>\r\n\r\n");
+
+            
+            #line 75 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+            
+            
+            #line default
+            #line hidden
+            
+            #line 75 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+             if (Model.Status == OrderStatus.Processed)
+            {
+                using (Html.BeginForm("Reprocess", "Orders", new { id = Model.OrderId }))
+                {
+                    
+            
+            #line default
+            #line hidden
+            
+            #line 79 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+               Write(Html.HiddenFor(model => model.CartId));
+
+            
+            #line default
+            #line hidden
+            
+            #line 79 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+                                                          
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                        ");
+
+            
+            #line 82 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+                   Write(Html.Label("Transação"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("                        ");
+
+            
+            #line 83 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+                   Write(Html.TextBox("TransactionGatewayId", null, new { @class = "form-control" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                    </div>\r\n");
+
+            
+            #line 85 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <button");
+
+WriteLiteral(" type=\"submit\"");
+
+WriteLiteral(">Reprocessar</button>\r\n");
+
+            
+            #line 87 "..\..\Areas\Admin\Views\Orders\_DetailsInfo.cshtml"
+                }
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        </div>\r\n    </div>\r\n</div>\r\n");
 
         }
     }

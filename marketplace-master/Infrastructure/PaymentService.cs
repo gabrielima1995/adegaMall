@@ -63,7 +63,7 @@ namespace Infrastructure
             if (paymentOptions.Method == PaymentMethod.CreditCard)
             {
                 if (!transaction.IsPaid() && !transaction.IsPendingPayment())
-                    return new OperationResult<ITransaction>(new ErrorDictionary("", transaction.Message));
+                    return new OperationResult<ITransaction>(new ErrorDictionary("", "Não foi possível processar o pagamento."));
             }
 
             return new OperationResult<ITransaction>(transaction);

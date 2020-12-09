@@ -1,4 +1,5 @@
-﻿@model OrderDetailsViewModel
+﻿@using Domain.Entities.StoreModule
+@model OrderDetailsViewModel
 
 <div class="box-body">
     <div class="row">
@@ -70,6 +71,21 @@
                 <dt>Total Final</dt>
                 <dd>@Html.DisplayFor(model => model.TotalAmount)</dd>
             </dl>
+
+            @if (Model.Status == OrderStatus.Processed)
+            {
+                using (Html.BeginForm("Reprocess", "Orders", new { id = Model.OrderId }))
+                {
+                    @Html.HiddenFor(model => model.CartId)
+
+                    <div class="form-group">
+                        @Html.Label("Transação")
+                        @Html.TextBox("TransactionGatewayId", null, new { @class = "form-control" })
+                    </div>
+
+                    <button type="submit">Reprocessar</button>
+                }
+            }
         </div>
     </div>
 </div>

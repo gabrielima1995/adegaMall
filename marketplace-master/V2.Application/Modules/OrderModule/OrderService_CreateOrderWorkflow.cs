@@ -9,6 +9,7 @@ using Domain.Modules.QuoteBillingModule.Interfaces;
 using Domain.StoreModule.Entities;
 using Framework;
 using PaymentIntegrator.Core.PaymentMethods;
+using PaymentIntegrator.Core.Payments;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -17,7 +18,7 @@ using V2.Application.Modules;
 
 namespace Domain.Services.StoreModule
 {
-    internal class OrderService_CreateOrderWorkflow
+    public class OrderService_CreateOrderWorkflow
     {
         private readonly MaaSConfig config = MaaSConfig.Current;
 
@@ -126,6 +127,63 @@ namespace Domain.Services.StoreModule
             return new OperationResult<List<Order>>(orders);
         }
 
+        public OperationResult Reprocess(Guid cartId, string transactionGatewayId)
+        {
+            var allOrders = cartRepository
+                .ListOrdersByCart(cartId)
+                .Where(i => i.Status == OrderStatus.Processed);
+
+            Cart cart = null;
+            var orders = new List<Order>();
+
+            var subTotal = decimal.Zero;
+
+            foreach (var order in allOrders)
+            {
+                if (cart == null) cart = order.Cart;
+
+                subTotal += order.SubTotal;
+
+                if (subTotal <= cart.SubTotal)
+                {
+                    orders.Add(order);
+                }
+                else
+                {
+                    subTotal -= order.SubTotal;
+                    break;
+                }
+            }
+
+            if (cart == null || cart.SubTotal != subTotal)
+                return new OperationResult("", "Valor dos pedidos diferente do valor do carrinho.");
+
+            var transactionResult = paymentService.GetTransaction(transactionGatewayId);
+            if (transactionResult.IsFailure) return transactionResult;
+
+            var transaction = transactionResult.Result;
+
+            if (transaction.Amount != cart.Amount)
+                return new OperationResult("", "Valor dos pedidos diferente do valor do pagamento na transação.");
+
+            var processPaymentResult = ProcessPaymentInternal(transaction, orders);
+            if (processPaymentResult.IsFailure)
+                return processPaymentResult.Errors;
+
+            cart.Completed = true;
+            cartRepository.Update(cart);
+
+            var saveResult = unitOfWork.Save();
+            if (saveResult.IsFailure)
+                return saveResult.Errors;
+
+            var sideEffectsResults = PropagateSideEffects(cart, orders);
+            if (sideEffectsResults.IsFailure)
+                return sideEffectsResults.Errors;
+
+            return new OperationResult<List<Order>>(orders);
+        }
+
         private OperationResult CheckAndPrepare(Cart cart, PaymentOptions paymentOptions)
         {
             var preparationErrors = new ErrorDictionary();
@@ -214,6 +272,12 @@ namespace Domain.Services.StoreModule
             if (paymentResult.IsFailure) return paymentResult.Errors;
 
             var transaction = paymentResult.Result;
+
+            return ProcessPaymentInternal(transaction, orders);
+        }
+
+        private OperationResult<OrderTransaction> ProcessPaymentInternal(ITransaction transaction, List<Order> orders)
+        {
             OrderTransaction orderTransaction = new OrderTransaction();
             if (transaction.IsMultiPayment)
             {

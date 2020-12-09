@@ -2,6 +2,7 @@
 using Domain.Interfaces.Repositories;
 using Framework;
 using Infrastructure.Data.Context;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -42,6 +43,23 @@ namespace Infrastructure.Data.Repositories
         public OperationResult Delete(CartSeller entity, bool saveChanges = false)
         {
             return Delete<CartSeller>(entity, saveChanges);
+        }
+
+        public List<Order> ListOrdersByCart(Guid cartId)
+        {
+            return Context.Orders
+                .Include(i => i.Cart)
+                .Include(i => i.Cart.Items)
+                .Include(i => i.Cart.Items.Select(j => j.Product))
+                .Include(i => i.Cart.Items.Select(j => j.Product.Store))
+                .Include(i => i.Seller)
+                .Include(i => i.Seller.Address)
+                .Include(i => i.Buyer)
+                .Include(i => i.Products)
+                .Include(i => i.ShippingAddress)
+                .Where(i => i.CartId == cartId)
+                .OrderByDescending(i => i.CreatedAt)
+                .ToList();
         }
 
         public Cart GetCartById(params object[] idValues)
