@@ -57,23 +57,23 @@ else
                         }
                         @if (showPackageCredit)
                         {
-                            <th class="cart cart-item cart-item-unit-price">@Html.Localized("CART_ITEM_PACKEGE_CREDIT_LABEL")</th>
+                            <th class="cart cart-item cart-item-unit-price hidden-xs">@Html.Localized("CART_ITEM_PACKEGE_CREDIT_LABEL")</th>
                         }
-                        <th class="cart cart-item cart-item-unit-price">@Html.Localized("CART_ITEM_UNIT_PRICE_LABEL")</th>
+                        <th class="cart cart-item cart-item-unit-price hidden-xs">@Html.Localized("CART_ITEM_UNIT_PRICE_LABEL")</th>
                         @if (showMultiplierBox)
                         {
-                            <th class="cart cart-item cart-item-additional-price text-right">@Html.Localized("CART_ADDITIONAL_PRICE_LABEL")</th>
+                            <th class="cart cart-item cart-item-additional-price text-right hidden-xs">@Html.Localized("CART_ADDITIONAL_PRICE_LABEL")</th>
                         }
-                        <th class="cart cart-item cart-item-subtotal">@Html.Localized("CART_ITEM_SUBTOTAL_LABEL")</th>
+                        <th class="cart cart-item cart-item-subtotal hidden-xs">@Html.Localized("CART_ITEM_SUBTOTAL_LABEL")</th>
                         @if (Model.Visualization.ShowShippingAmount)
                         {
-                            <th class="cart cart-item cart-item-shipping">@Html.Localized("CART_ITEM_SHIPPING_LABEL")</th>
+                            @*<th class="cart cart-item cart-item-shipping hidden-xs">@Html.Localized("CART_ITEM_SHIPPING_LABEL")</th>*@
                         }
                         @if (config.CustomFields.CartItem.Enabled && Model.CustomFields != null)
                         {
                             foreach (var item in Model.CustomFieldsNames)
                             {
-                                <th class="cart cart-item cart-item-customfield">@item</th>
+                                <th class="cart cart-item cart-item-customfield hidden-xs">@item</th>
                             }
                         }
                     </tr>
@@ -136,6 +136,27 @@ else
                                     </small>
                                 }
 
+                                <div class="visible-xs">
+                                    <hr />
+                                    <label>@Html.LocalizedString("CART_ITEM_UNIT_PRICE_LABEL"):</label>
+                                    <br />
+                                    <span class="@(item.Discount > 0 ? "discount-price" : "")">
+                                        @item.Price.DisplayCurrency()
+                                    </span>
+                                    @if (item.Discount > 0)
+                                    {
+                                        <br>
+                                        <span><b>@item.PriceWithDiscount.DisplayCurrency()</b></span>
+                                    }
+
+                                    <hr />
+                                    <label>@Html.LocalizedString("CART_ITEM_SUBTOTAL_LABEL"):</label>
+                                    <br />
+                                    <span>
+                                        @item.SubTotal.DisplayCurrency()
+                                    </span>
+                                </div>
+
                                 <br />
                                 <button type="button" class="js-remove-item btn btn-default btn-cart-item btn-xs">
                                     <i class="fa fa-trash"></i>
@@ -166,7 +187,7 @@ else
 
                             @if (showPackageCredit && item.Product.IsPackageType)
                             {
-                                <td class="cart cart-item cart-item-package-credit">
+                                <td class="cart cart-item cart-item-package-credit hidden-xs">
                                     <span>
                                         @{int? packageCredit = item.Product.PackageCredits * item.Quantity;}
                                         @packageCredit
@@ -175,40 +196,38 @@ else
                             }
                             else if (showPackageCredit)
                             {
-                                <td class="cart cart-item no-packge-credit">
+                                <td class="cart cart-item no-packge-credit hidden-xs">
                                     <span></span>
                                 </td>
                             }
 
-                            <td class="cart cart-item cart-item-unit-price">
+                            <td class="cart cart-item cart-item-unit-price hidden-xs">
                                 <span class="@(item.Discount > 0 ? "discount-price": "")">
-                                    @config.DefaultCurrency
-                                    @item.Price.DisplayDecimal(2)
+                                    @item.Price.DisplayCurrency()
                                 </span>
                                 @if (item.Discount > 0)
                                 {
                                     <br>
-                                    <span><b>@config.DefaultCurrency @item.PriceWithDiscount.DisplayDecimal(2)</b></span>
+                                    <span><b>@item.PriceWithDiscount.DisplayCurrency()</b></span>
                                 }
                             </td>
 
                             @if (showMultiplierBox)
                             {
-                                <td class="cart cart-item cart-item-additional-price">
+                                <td class="cart cart-item cart-item-additional-price hidden-xs">
                                     <span class="pull-right">@config.DefaultCurrency @item.Product.GetAdditionalPrice(item.Multiplier)</span>
                                 </td>
                             }
 
-                            <td class="cart cart-item cart-item-subtotal">
+                            <td class="cart cart-item cart-item-subtotal hidden-xs">
                                 <span>
-                                    @config.DefaultCurrency
-                                    @item.SubTotal.DisplayDecimal(2)
+                                    @item.SubTotal.DisplayCurrency()
                                 </span>
                             </td>
 
                             @if (Model.Visualization.ShowShippingAmount)
                             {
-                                <td class="cart cart-item cart-item-shipping">
+                                @*<td class="cart cart-item cart-item-shipping hidden-xs">
                                     @if (item.Shipping == 0)
                                     {
                                         @:-
@@ -216,8 +235,7 @@ else
                                     else
                                     {
                                         <span>
-                                            @config.DefaultCurrency
-                                            @item.Shipping.DisplayDecimal(2)
+                                            @item.Shipping.DisplayCurrency()
                                         </span>
 
                                         if (config.Product.BusinessModel.Rental.Enabled && config.Product.ShippingMode == ShippingMode.PerProduct)
@@ -230,7 +248,7 @@ else
                                             </span>
                                         }
                                     }
-                                </td>
+                                </td>*@
                             }
 
                             @if (config.CustomFields.CartItem.Enabled && Model.CustomFields.Count != 0)
@@ -240,7 +258,7 @@ else
                                     if (customfield.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ||
                                         customfield.Value.Equals("false", StringComparison.InvariantCultureIgnoreCase))
                                     {
-                                        <td class="cart cart-item cart-item-customfield">
+                                        <td class="cart cart-item cart-item-customfield hidden-xs">
                                             @{
                                                 var booleanValue = customfield.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ? Html.Localized("AFFIRMATIVE_LABEL") : Html.Localized("NEGATIVE_LABEL");
                                             }
@@ -249,7 +267,7 @@ else
                                     }
                                     else
                                     {
-                                        <td class="cart cart-item cart-item-customfield">@customfield.Value</td>
+                                        <td class="cart cart-item cart-item-customfield hidden-xs">@customfield.Value</td>
                                     }
                                 }
                             }

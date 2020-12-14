@@ -225,13 +225,13 @@ WriteLiteral("                        ");
             #line hidden
 WriteLiteral("                            <th");
 
-WriteLiteral(" class=\"cart cart-item cart-item-unit-price\"");
+WriteLiteral(" class=\"cart cart-item cart-item-unit-price hidden-xs\"");
 
 WriteLiteral(">");
 
             
             #line 60 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                                                       Write(Html.Localized("CART_ITEM_PACKEGE_CREDIT_LABEL"));
+                                                                                 Write(Html.Localized("CART_ITEM_PACKEGE_CREDIT_LABEL"));
 
             
             #line default
@@ -247,13 +247,13 @@ WriteLiteral("</th>\r\n");
             #line hidden
 WriteLiteral("                        <th");
 
-WriteLiteral(" class=\"cart cart-item cart-item-unit-price\"");
+WriteLiteral(" class=\"cart cart-item cart-item-unit-price hidden-xs\"");
 
 WriteLiteral(">");
 
             
             #line 62 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                                                   Write(Html.Localized("CART_ITEM_UNIT_PRICE_LABEL"));
+                                                                             Write(Html.Localized("CART_ITEM_UNIT_PRICE_LABEL"));
 
             
             #line default
@@ -276,13 +276,13 @@ WriteLiteral("</th>\r\n");
             #line hidden
 WriteLiteral("                            <th");
 
-WriteLiteral(" class=\"cart cart-item cart-item-additional-price text-right\"");
+WriteLiteral(" class=\"cart cart-item cart-item-additional-price text-right hidden-xs\"");
 
 WriteLiteral(">");
 
             
             #line 65 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                                                                        Write(Html.Localized("CART_ADDITIONAL_PRICE_LABEL"));
+                                                                                                  Write(Html.Localized("CART_ADDITIONAL_PRICE_LABEL"));
 
             
             #line default
@@ -298,13 +298,13 @@ WriteLiteral("</th>\r\n");
             #line hidden
 WriteLiteral("                        <th");
 
-WriteLiteral(" class=\"cart cart-item cart-item-subtotal\"");
+WriteLiteral(" class=\"cart cart-item cart-item-subtotal hidden-xs\"");
 
 WriteLiteral(">");
 
             
             #line 67 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                                                 Write(Html.Localized("CART_ITEM_SUBTOTAL_LABEL"));
+                                                                           Write(Html.Localized("CART_ITEM_SUBTOTAL_LABEL"));
 
             
             #line default
@@ -321,27 +321,13 @@ WriteLiteral("</th>\r\n");
             #line 68 "..\..\Views\Products\Cart\_CartItems.cshtml"
                          if (Model.Visualization.ShowShippingAmount)
                         {
-
+                            
             
             #line default
             #line hidden
-WriteLiteral("                            <th");
-
-WriteLiteral(" class=\"cart cart-item cart-item-shipping\"");
-
-WriteLiteral(">");
-
             
             #line 70 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                                                     Write(Html.Localized("CART_ITEM_SHIPPING_LABEL"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</th>\r\n");
-
-            
-            #line 71 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                                                                                                                                        
                         }
 
             
@@ -361,13 +347,13 @@ WriteLiteral("                        ");
             #line hidden
 WriteLiteral("                                <th");
 
-WriteLiteral(" class=\"cart cart-item cart-item-customfield\"");
+WriteLiteral(" class=\"cart cart-item cart-item-customfield hidden-xs\"");
 
 WriteLiteral(">");
 
             
             #line 76 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                                                            Write(item);
+                                                                                      Write(item);
 
             
             #line default
@@ -416,14 +402,14 @@ WriteLiteral(" data-id=\"");
             #line hidden
 WriteLiteral("\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 4247), Tuple.Create("\"", 4264)
+WriteAttribute("class", Tuple.Create(" class=\"", 4311), Tuple.Create("\"", 4328)
             
             #line 89 "..\..\Views\Products\Cart\_CartItems.cshtml"
-, Tuple.Create(Tuple.Create("", 4255), Tuple.Create<System.Object, System.Int32>(rowClass
+, Tuple.Create(Tuple.Create("", 4319), Tuple.Create<System.Object, System.Int32>(rowClass
             
             #line default
             #line hidden
-, 4255), false)
+, 4319), false)
 );
 
 WriteLiteral(" readonly=\"readonly\"");
@@ -434,46 +420,46 @@ WriteLiteral(" class=\"cart cart-item cart-item-image\"");
 
 WriteLiteral(">\r\n                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4395), Tuple.Create("\"", 4413)
+WriteAttribute("href", Tuple.Create(" href=\"", 4459), Tuple.Create("\"", 4477)
             
             #line 91 "..\..\Views\Products\Cart\_CartItems.cshtml"
-, Tuple.Create(Tuple.Create("", 4402), Tuple.Create<System.Object, System.Int32>(productUrl
+, Tuple.Create(Tuple.Create("", 4466), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 4402), false)
+, 4466), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 4414), Tuple.Create("\"", 4435)
+WriteAttribute("title", Tuple.Create(" title=\"", 4478), Tuple.Create("\"", 4499)
             
             #line 91 "..\..\Views\Products\Cart\_CartItems.cshtml"
-, Tuple.Create(Tuple.Create("", 4422), Tuple.Create<System.Object, System.Int32>(productTitle
+, Tuple.Create(Tuple.Create("", 4486), Tuple.Create<System.Object, System.Int32>(productTitle
             
             #line default
             #line hidden
-, 4422), false)
+, 4486), false)
 );
 
 WriteLiteral(">\r\n                                    <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 4479), Tuple.Create("\"", 4536)
+WriteAttribute("src", Tuple.Create(" src=\"", 4543), Tuple.Create("\"", 4600)
             
             #line 92 "..\..\Views\Products\Cart\_CartItems.cshtml"
-, Tuple.Create(Tuple.Create("", 4485), Tuple.Create<System.Object, System.Int32>(item.Product.GetCoverImageUrl(ProductImageSize.XS)
+, Tuple.Create(Tuple.Create("", 4549), Tuple.Create<System.Object, System.Int32>(item.Product.GetCoverImageUrl(ProductImageSize.XS)
             
             #line default
             #line hidden
-, 4485), false)
+, 4549), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 4537), Tuple.Create("\"", 4556)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 4601), Tuple.Create("\"", 4620)
             
             #line 92 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                        , Tuple.Create(Tuple.Create("", 4543), Tuple.Create<System.Object, System.Int32>(productTitle
+                        , Tuple.Create(Tuple.Create("", 4607), Tuple.Create<System.Object, System.Int32>(productTitle
             
             #line default
             #line hidden
-, 4543), false)
+, 4607), false)
 );
 
 WriteLiteral(" />\r\n                                </a>\r\n                            </td>\r\n   " +
@@ -506,24 +492,24 @@ WriteLiteral("                                ");
 WriteLiteral("\r\n                                <label>\r\n                                    <a" +
 "");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4977), Tuple.Create("\"", 4995)
+WriteAttribute("href", Tuple.Create(" href=\"", 5041), Tuple.Create("\"", 5059)
             
             #line 99 "..\..\Views\Products\Cart\_CartItems.cshtml"
-, Tuple.Create(Tuple.Create("", 4984), Tuple.Create<System.Object, System.Int32>(productUrl
+, Tuple.Create(Tuple.Create("", 5048), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 4984), false)
+, 5048), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 4996), Tuple.Create("\"", 5017)
+WriteAttribute("title", Tuple.Create(" title=\"", 5060), Tuple.Create("\"", 5081)
             
             #line 99 "..\..\Views\Products\Cart\_CartItems.cshtml"
-, Tuple.Create(Tuple.Create("", 5004), Tuple.Create<System.Object, System.Int32>(productTitle
+, Tuple.Create(Tuple.Create("", 5068), Tuple.Create<System.Object, System.Int32>(productTitle
             
             #line default
             #line hidden
-, 5004), false)
+, 5068), false)
 );
 
 WriteLiteral(">");
@@ -749,8 +735,105 @@ WriteLiteral("                                    </small>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                <br />\r\n                                <button" +
-"");
+WriteLiteral("\r\n                                <div");
+
+WriteLiteral(" class=\"visible-xs\"");
+
+WriteLiteral(">\r\n                                    <hr />\r\n                                  " +
+"  <label>");
+
+            
+            #line 141 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                                      Write(Html.LocalizedString("CART_ITEM_UNIT_PRICE_LABEL"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(":</label>\r\n                                    <br />\r\n                          " +
+"          <span");
+
+WriteAttribute("class", Tuple.Create(" class=\"", 7991), Tuple.Create("\"", 8043)
+            
+            #line 143 "..\..\Views\Products\Cart\_CartItems.cshtml"
+, Tuple.Create(Tuple.Create("", 7999), Tuple.Create<System.Object, System.Int32>(item.Discount > 0 ? "discount-price" : ""
+            
+            #line default
+            #line hidden
+, 7999), false)
+);
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                                        ");
+
+            
+            #line 144 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                                   Write(item.Price.DisplayCurrency());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                    </span>\r\n");
+
+            
+            #line 146 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                                    
+            
+            #line default
+            #line hidden
+            
+            #line 146 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                                     if (item.Discount > 0)
+                                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                        <br>\r\n");
+
+WriteLiteral("                                        <span><b>");
+
+            
+            #line 149 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                                            Write(item.PriceWithDiscount.DisplayCurrency());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</b></span>\r\n");
+
+            
+            #line 150 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                    <hr />\r\n                                   " +
+" <label>");
+
+            
+            #line 153 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                                      Write(Html.LocalizedString("CART_ITEM_SUBTOTAL_LABEL"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(":</label>\r\n                                    <br />\r\n                          " +
+"          <span>\r\n");
+
+WriteLiteral("                                        ");
+
+            
+            #line 156 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                                   Write(item.SubTotal.DisplayCurrency());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                    </span>\r\n                                </" +
+"div>\r\n\r\n                                <br />\r\n                                " +
+"<button");
 
 WriteLiteral(" type=\"button\"");
 
@@ -765,7 +848,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 142 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 163 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                Write(Request.GetLocalizedString("CART_ITEM_REMOVE_BUTTON"));
 
             
@@ -774,13 +857,13 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n                                </button>\r\n\r\n");
 
             
-            #line 145 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 166 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 145 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 166 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                  if (errors.Any())
                                 {
 
@@ -794,13 +877,13 @@ WriteLiteral(" class=\"cart-item-errors\"");
 WriteLiteral(">\r\n");
 
             
-            #line 148 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 169 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                         
             
             #line default
             #line hidden
             
-            #line 148 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 169 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                          foreach (var error in errors)
                                         {
 
@@ -814,7 +897,7 @@ WriteLiteral(" class=\"text-danger\"");
 WriteLiteral(">");
 
             
-            #line 150 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 171 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                                                Write(error);
 
             
@@ -823,7 +906,7 @@ WriteLiteral(">");
 WriteLiteral("</li>\r\n");
 
             
-            #line 151 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 172 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                         }
 
             
@@ -832,7 +915,7 @@ WriteLiteral("</li>\r\n");
 WriteLiteral("                                    </ul>\r\n");
 
             
-            #line 153 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 174 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                 }
 
             
@@ -841,13 +924,13 @@ WriteLiteral("                                    </ul>\r\n");
 WriteLiteral("                            </td>\r\n\r\n");
 
             
-            #line 156 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 177 "..\..\Views\Products\Cart\_CartItems.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 156 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 177 "..\..\Views\Products\Cart\_CartItems.cshtml"
                              if (showQtyBox)
                             {
 
@@ -864,14 +947,14 @@ WriteLiteral(" type=\"number\"");
 
 WriteLiteral(" name=\"Quantity\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 8730), Tuple.Create("\"", 8752)
+WriteAttribute("value", Tuple.Create(" value=\"", 9944), Tuple.Create("\"", 9966)
             
-            #line 159 "..\..\Views\Products\Cart\_CartItems.cshtml"
-, Tuple.Create(Tuple.Create("", 8738), Tuple.Create<System.Object, System.Int32>(item.Quantity
+            #line 180 "..\..\Views\Products\Cart\_CartItems.cshtml"
+, Tuple.Create(Tuple.Create("", 9952), Tuple.Create<System.Object, System.Int32>(item.Quantity
             
             #line default
             #line hidden
-, 8738), false)
+, 9952), false)
 );
 
 WriteLiteral(" class=\"form-control\"");
@@ -891,7 +974,7 @@ WriteLiteral("></i>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 162 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 183 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                    Write(Request.GetLocalizedString("CART_ITEM_CHANGE_QUANTITY_BUTTON"));
 
             
@@ -901,7 +984,7 @@ WriteLiteral("\r\n                                    </button>\r\n             
 "</td>\r\n");
 
             
-            #line 165 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 186 "..\..\Views\Products\Cart\_CartItems.cshtml"
                             }
 
             
@@ -910,13 +993,13 @@ WriteLiteral("\r\n                                    </button>\r\n             
 WriteLiteral("\r\n");
 
             
-            #line 167 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 188 "..\..\Views\Products\Cart\_CartItems.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 167 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 188 "..\..\Views\Products\Cart\_CartItems.cshtml"
                              if (showPackageCredit && item.Product.IsPackageType)
                             {
 
@@ -925,18 +1008,18 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("                                <td");
 
-WriteLiteral(" class=\"cart cart-item cart-item-package-credit\"");
+WriteLiteral(" class=\"cart cart-item cart-item-package-credit hidden-xs\"");
 
 WriteLiteral(">\r\n                                    <span>\r\n");
 
             
-            #line 171 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 192 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                         
             
             #line default
             #line hidden
             
-            #line 171 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 192 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                           int? packageCredit = item.Product.PackageCredits * item.Quantity;
             
             #line default
@@ -946,7 +1029,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 172 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 193 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                    Write(packageCredit);
 
             
@@ -956,7 +1039,7 @@ WriteLiteral("\r\n                                    </span>\r\n               
 "td>\r\n");
 
             
-            #line 175 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 196 "..\..\Views\Products\Cart\_CartItems.cshtml"
                             }
                             else if (showPackageCredit)
                             {
@@ -966,13 +1049,13 @@ WriteLiteral("\r\n                                    </span>\r\n               
             #line hidden
 WriteLiteral("                                <td");
 
-WriteLiteral(" class=\"cart cart-item no-packge-credit\"");
+WriteLiteral(" class=\"cart cart-item no-packge-credit hidden-xs\"");
 
 WriteLiteral(">\r\n                                    <span></span>\r\n                           " +
 "     </td>\r\n");
 
             
-            #line 181 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 202 "..\..\Views\Products\Cart\_CartItems.cshtml"
                             }
 
             
@@ -980,18 +1063,18 @@ WriteLiteral(">\r\n                                    <span></span>\r\n        
             #line hidden
 WriteLiteral("\r\n                            <td");
 
-WriteLiteral(" class=\"cart cart-item cart-item-unit-price\"");
+WriteLiteral(" class=\"cart cart-item cart-item-unit-price hidden-xs\"");
 
 WriteLiteral(">\r\n                                <span");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 10124), Tuple.Create("\"", 10175)
+WriteAttribute("class", Tuple.Create(" class=\"", 11368), Tuple.Create("\"", 11419)
             
-            #line 184 "..\..\Views\Products\Cart\_CartItems.cshtml"
-, Tuple.Create(Tuple.Create("", 10132), Tuple.Create<System.Object, System.Int32>(item.Discount > 0 ? "discount-price": ""
+            #line 205 "..\..\Views\Products\Cart\_CartItems.cshtml"
+, Tuple.Create(Tuple.Create("", 11376), Tuple.Create<System.Object, System.Int32>(item.Discount > 0 ? "discount-price": ""
             
             #line default
             #line hidden
-, 10132), false)
+, 11376), false)
 );
 
 WriteLiteral(">\r\n");
@@ -999,19 +1082,8 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 185 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                               Write(config.DefaultCurrency);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("                                    ");
-
-            
-            #line 186 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                               Write(item.Price.DisplayDecimal(2));
+            #line 206 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                               Write(item.Price.DisplayCurrency());
 
             
             #line default
@@ -1019,13 +1091,13 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n                                </span>\r\n");
 
             
-            #line 188 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 208 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 188 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 208 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                  if (item.Discount > 0)
                                 {
 
@@ -1037,17 +1109,8 @@ WriteLiteral("                                    <br>\r\n");
 WriteLiteral("                                    <span><b>");
 
             
-            #line 191 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                        Write(config.DefaultCurrency);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
-
-            
-            #line 191 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                                                Write(item.PriceWithDiscount.DisplayDecimal(2));
+            #line 211 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                                        Write(item.PriceWithDiscount.DisplayCurrency());
 
             
             #line default
@@ -1055,7 +1118,7 @@ WriteLiteral(" ");
 WriteLiteral("</b></span>\r\n");
 
             
-            #line 192 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 212 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                 }
 
             
@@ -1064,13 +1127,13 @@ WriteLiteral("</b></span>\r\n");
 WriteLiteral("                            </td>\r\n\r\n");
 
             
-            #line 195 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 215 "..\..\Views\Products\Cart\_CartItems.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 195 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 215 "..\..\Views\Products\Cart\_CartItems.cshtml"
                              if (showMultiplierBox)
                             {
 
@@ -1079,7 +1142,7 @@ WriteLiteral("                            </td>\r\n\r\n");
             #line hidden
 WriteLiteral("                                <td");
 
-WriteLiteral(" class=\"cart cart-item cart-item-additional-price\"");
+WriteLiteral(" class=\"cart cart-item cart-item-additional-price hidden-xs\"");
 
 WriteLiteral(">\r\n                                    <span");
 
@@ -1088,7 +1151,7 @@ WriteLiteral(" class=\"pull-right\"");
 WriteLiteral(">");
 
             
-            #line 198 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 218 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                                         Write(config.DefaultCurrency);
 
             
@@ -1097,7 +1160,7 @@ WriteLiteral(">");
 WriteLiteral(" ");
 
             
-            #line 198 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 218 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                                                                 Write(item.Product.GetAdditionalPrice(item.Multiplier));
 
             
@@ -1106,7 +1169,7 @@ WriteLiteral(" ");
 WriteLiteral("</span>\r\n                                </td>\r\n");
 
             
-            #line 200 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 220 "..\..\Views\Products\Cart\_CartItems.cshtml"
                             }
 
             
@@ -1114,26 +1177,15 @@ WriteLiteral("</span>\r\n                                </td>\r\n");
             #line hidden
 WriteLiteral("\r\n                            <td");
 
-WriteLiteral(" class=\"cart cart-item cart-item-subtotal\"");
+WriteLiteral(" class=\"cart cart-item cart-item-subtotal hidden-xs\"");
 
 WriteLiteral(">\r\n                                <span>\r\n");
 
 WriteLiteral("                                    ");
 
             
-            #line 204 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                               Write(config.DefaultCurrency);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("                                    ");
-
-            
-            #line 205 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                               Write(item.SubTotal.DisplayDecimal(2));
+            #line 224 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                               Write(item.SubTotal.DisplayCurrency());
 
             
             #line default
@@ -1141,127 +1193,22 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n                                </span>\r\n                            </td>\r\n\r\n");
 
             
-            #line 209 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 228 "..\..\Views\Products\Cart\_CartItems.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 209 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 228 "..\..\Views\Products\Cart\_CartItems.cshtml"
                              if (Model.Visualization.ShowShippingAmount)
                             {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                <td");
-
-WriteLiteral(" class=\"cart cart-item cart-item-shipping\"");
-
-WriteLiteral(">\r\n");
-
-            
-            #line 212 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                    
+                                
             
             #line default
             #line hidden
             
-            #line 212 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                     if (item.Shipping == 0)
-                                    {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                        ");
-
-WriteLiteral("-\r\n");
-
-            
-            #line 215 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                    }
-                                    else
-                                    {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                        <span>\r\n");
-
-WriteLiteral("                                            ");
-
-            
-            #line 219 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                       Write(config.DefaultCurrency);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("                                            ");
-
-            
-            #line 220 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                       Write(item.Shipping.DisplayDecimal(2));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                        </span>\r\n");
-
-            
-            #line 222 "..\..\Views\Products\Cart\_CartItems.cshtml"
-
-                                        if (config.Product.BusinessModel.Rental.Enabled && config.Product.ShippingMode == ShippingMode.PerProduct)
-                                        {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                            <br />\r\n");
-
-WriteLiteral("                                            <span");
-
-WriteAttribute("class", Tuple.Create(" class=\"", 12378), Tuple.Create("\"", 12474)
-, Tuple.Create(Tuple.Create("", 12386), Tuple.Create("text-", 12386), true)
-            
-            #line 226 "..\..\Views\Products\Cart\_CartItems.cshtml"
-, Tuple.Create(Tuple.Create("", 12391), Tuple.Create<System.Object, System.Int32>(item.Product.RentalSettings.ChargeDoubleShipping ?? false ? "success" : "danger"
-            
-            #line default
-            #line hidden
-, 12391), false)
-);
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                                                ");
-
-            
-            #line 227 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                           Write(Html.Localized((item.Product.RentalSettings.ChargeDoubleShipping ?? false)
-                                                    ? "CHARGE_DOUBLE_SHIPPING_MESSAGE"
-                                                    : "NO_CHARGE_DOUBLE_SHIPPING_MESSAGE"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                            </span>\r\n");
-
-            
-            #line 231 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                        }
-                                    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                </td>\r\n");
-
-            
-            #line 234 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 251 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                                       
                             }
 
             
@@ -1270,13 +1217,13 @@ WriteLiteral("                                </td>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 236 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 254 "..\..\Views\Products\Cart\_CartItems.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 236 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 254 "..\..\Views\Products\Cart\_CartItems.cshtml"
                              if (config.CustomFields.CartItem.Enabled && Model.CustomFields.Count != 0)
                             {
                                 foreach (var customfield in Model.CustomFields.Where(x => x.EntityId == item.Id).ToList())
@@ -1290,18 +1237,18 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("                                        <td");
 
-WriteLiteral(" class=\"cart cart-item cart-item-customfield\"");
+WriteLiteral(" class=\"cart cart-item cart-item-customfield hidden-xs\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 244 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 262 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                             
             
             #line default
             #line hidden
             
-            #line 244 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 262 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                               
                                                 var booleanValue = customfield.Value.Equals("true", StringComparison.InvariantCultureIgnoreCase) ? Html.Localized("AFFIRMATIVE_LABEL") : Html.Localized("NEGATIVE_LABEL");
                                             
@@ -1313,7 +1260,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 247 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 265 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                        Write(booleanValue);
 
             
@@ -1322,7 +1269,7 @@ WriteLiteral("                                            ");
 WriteLiteral("\r\n                                        </td>\r\n");
 
             
-            #line 249 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 267 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                     }
                                     else
                                     {
@@ -1332,13 +1279,13 @@ WriteLiteral("\r\n                                        </td>\r\n");
             #line hidden
 WriteLiteral("                                        <td");
 
-WriteLiteral(" class=\"cart cart-item cart-item-customfield\"");
+WriteLiteral(" class=\"cart cart-item cart-item-customfield hidden-xs\"");
 
 WriteLiteral(">");
 
             
-            #line 252 "..\..\Views\Products\Cart\_CartItems.cshtml"
-                                                                                    Write(customfield.Value);
+            #line 270 "..\..\Views\Products\Cart\_CartItems.cshtml"
+                                                                                              Write(customfield.Value);
 
             
             #line default
@@ -1346,7 +1293,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n");
 
             
-            #line 253 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 271 "..\..\Views\Products\Cart\_CartItems.cshtml"
                                     }
                                 }
                             }
@@ -1357,7 +1304,7 @@ WriteLiteral("</td>\r\n");
 WriteLiteral("                        </tr>\r\n");
 
             
-            #line 257 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 275 "..\..\Views\Products\Cart\_CartItems.cshtml"
                     }
 
             
@@ -1366,7 +1313,7 @@ WriteLiteral("                        </tr>\r\n");
 WriteLiteral("                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 262 "..\..\Views\Products\Cart\_CartItems.cshtml"
+            #line 280 "..\..\Views\Products\Cart\_CartItems.cshtml"
 }
             
             #line default
