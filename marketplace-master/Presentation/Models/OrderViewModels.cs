@@ -160,11 +160,17 @@ namespace Presentation.Models
         {
             get
             {
-                if (Order.Transaction == null)
+                if (Order.Transaction == null || Order.Status == OrderStatus.Canceled)
                     return null;
+
+                var tranAmount = Order.Transaction.Amount;
+                var tranPerc = Order.Amount / tranAmount;
+
+                var gatewayFee = Math.Round(Order.Transaction.GatewayFee * tranPerc, 2, MidpointRounding.ToEven);
+
                 if (MaaSConfig.Current.Payment.Moip.MarketplaceZeroCommission)
-                    return Order.Transaction.Amount - Order.Transaction.GatewayFee;
-                return Order.Transaction.Amount - Order.Transaction.StartupFee - (MaaSConfig.Current.Payment.Common.RecipientChargeProcessingFee ? Order.Transaction.GatewayFee : 0);
+                    return Order.Amount - gatewayFee;
+                return Order.Amount - Order.StartupFee - (MaaSConfig.Current.Payment.Common.RecipientChargeProcessingFee ? gatewayFee : 0);
             }
         }
 

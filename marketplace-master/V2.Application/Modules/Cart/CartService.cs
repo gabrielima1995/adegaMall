@@ -181,15 +181,16 @@ namespace V2.Application.Modules
                 cart.Discount = decimal.Zero;
             }
 
-            OperationResult InvalidCoupon()
+            OperationResult InvalidCoupon(string message)
             {
                 RemoveDiscount();
 
-                return OperationResult.Fail("INVALID_COUPON", "Cupom inválido.");
+                return OperationResult.Fail("INVALID_COUPON", message);
             }
 
             if (cart.IsEmpty || cart.Coupon == null)
             {
+                cart.Coupon = null;
                 RemoveDiscount();
 
                 return OperationResult.Success;
@@ -197,52 +198,67 @@ namespace V2.Application.Modules
 
             var coupon = cart.Coupon;
 
-            void CalculateDiscount()
+            OperationResult CalculateDiscount()
             {
-                // somente produtos sem desconto
-                var items = cart.Items
-                    .Where(i =>
-                        i.Discount == 0 &&
-                        !i.Product.ProductPriceMapped.DisplayPrice.Discount.HasDiscount);
+                cart.Discount = decimal.Zero;
 
-                // cupom do vendedor, somente produtos dele
-                if (coupon.IsBySeller)
+                foreach (var cartSeller in cart.Sellers)
                 {
-                    items = items.Where(i => i.Product.Store_SellerId == coupon.SellerId);
+                    IEnumerable<CartItem> items = cart.Items;
+
+                    // cupom do vendedor, somente produtos dele
+                    if (coupon.IsBySeller)
+                    {
+                        items = items.Where(i => i.Product.Store_SellerId == coupon.SellerId);
+                    }
+
+                    var amount = items
+                        .Where(p => p.Product.Store_SellerId == cartSeller.Seller.Id)
+                        .Sum(i => i.SubTotal);
+                    var totalAmount = items
+                        .Sum(i => i.SubTotal);
+
+                    var discount = coupon.CalculateDiscount(amount, totalAmount);
+
+                    cartSeller.SellerDiscount = discount;
+                    cart.Discount += cartSeller.SellerDiscount;
                 }
 
-                var amount = items.Sum(i => i.SubTotal);
+                if (cart.Discount == decimal.Zero)
+                    return InvalidCoupon("Cupom não pode ser aplicado para os produtos selecionados.");
 
-                var discount = coupon.CalculateDiscount(amount);
-
-                cart.Discount = Math.Min(discount, amount);
+                return OperationResult.Success;
             }
 
-            if (!coupon.IsValid()) return InvalidCoupon();
+            if (!coupon.IsValid()) return InvalidCoupon("Cupom expirado.");
 
             switch (coupon.UseMode)
             {
                 // primeira compra
                 case CouponUseMode.FirstOrder:
                     var firstOrder = couponRepository.IsFirstOrder(cart.Buyer.Id);
-                    if (!firstOrder) return InvalidCoupon();
+                    if (!firstOrder) return InvalidCoupon("Cupom já utilizado.");
                     break;
 
                 // Uso único por usuário
                 case CouponUseMode.OneTimeByUser:
                     var oneTimeByUser = couponRepository.IsOneTimeByUser(cart.Buyer.Id, coupon.Id);
-                    if (!oneTimeByUser) return InvalidCoupon();
+                    if (!oneTimeByUser) return InvalidCoupon("Cupom já utilizado.");
                     break;
 
                 // Uso único no marketplace
                 case CouponUseMode.OneTimeEver:
                     var oneTimeEver = couponRepository.IsOneTimeEver(coupon.Id);
-                    if (!oneTimeEver) return InvalidCoupon();
+                    if (!oneTimeEver) return InvalidCoupon("Cupom já utilizado.");
                     break;
             }
 
+            var calculateResult = OperationResult.Success;
+
             if (coupon.IsDiscount)
-                CalculateDiscount();
+                calculateResult = CalculateDiscount();
+
+            if (calculateResult.IsFailure) return calculateResult;
 
             cartRepository.Update(cart);
 
@@ -331,7 +347,7 @@ namespace V2.Application.Modules
                                 if ((shippingMethod != ShippingMethod.NoShipping &&
                                     shippingMethod != ShippingMethod.ActualNoShipping &&
                                     shippingMethod != ShippingMethod.OnSitePickup) ||
-                                    ((shippingMethod == ShippingMethod.PostalExpress || shippingMethod == ShippingMethod.PostalRegular) &&
+                                    ((shippingMethod == ShippingMethod.PostalExpress || shippingMethod == ShippingMethod.PostalRegular || shippingMethod == ShippingMethod.AsapLog || shippingMethod == ShippingMethod.TotalExpress) &&
                                      shippingResult.Result.TotalShippingPrice > 0))
                                 {
                                     cart.MinimumCost = Math.Min(cart.MinimumCost,
@@ -889,6 +905,7 @@ namespace V2.Application.Modules
             cart.Shipping = 0M;
 
             var errors = new ErrorDictionary();
+            var shippingMethod = cart.ShippingMethod;
             var adapter = shippingService.GetAdapter(cart.ShippingMethod);
 
             switch (cart.ShippingMode)

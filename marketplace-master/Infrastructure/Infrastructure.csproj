@@ -594,6 +594,14 @@
     <Compile Include="Migrations\202009020517483_AddCoupon.Designer.cs">
       <DependentUpon>202009020517483_AddCoupon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012081858280_SellerDiscount.cs" />
+    <Compile Include="Migrations\202012081858280_SellerDiscount.Designer.cs">
+      <DependentUpon>202012081858280_SellerDiscount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012091238014_AddCartInOrder.cs" />
+    <Compile Include="Migrations\202012091238014_AddCartInOrder.Designer.cs">
+      <DependentUpon>202012091238014_AddCartInOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Data\MyDbConnection.cs" />
     <Compile Include="Data\Repositories\AdminReportRepository.cs" />
@@ -879,6 +887,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009020517483_AddCoupon.resx">
       <DependentUpon>202009020517483_AddCoupon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012081858280_SellerDiscount.resx">
+      <DependentUpon>202012081858280_SellerDiscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012091238014_AddCartInOrder.resx">
+      <DependentUpon>202012091238014_AddCartInOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

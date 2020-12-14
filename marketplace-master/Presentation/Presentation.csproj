@@ -2006,6 +2006,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_SingleFreightParameter.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Products\_ShippingProductSimple.generated.cs">
+      <DependentUpon>_ShippingProductSimple.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Views\Products\_ShippingProduct.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -4863,6 +4868,10 @@
     <Content Include="Views\Shared\_MenuCategorias.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_MenuCategorias.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Products\_ShippingProductSimple.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ShippingProductSimple.generated.cs</LastGenOutput>
     </Content>
     <None Include="Views\Shared\_ProductWishButton.cshtml">
       <Generator>RazorGenerator</Generator>

@@ -52,7 +52,7 @@ else
             </div>
 
             <div class="product-editor-physical-content">
-                @if (shippingMethods.Has(ShippingMethod.ActualNoShipping))
+                @*@if (shippingMethods.Has(ShippingMethod.ActualNoShipping))
                 {
                     <div class="product-editor-shipping-noshipping checkbox">
                         <label>
@@ -146,7 +146,7 @@ else
                             </div>
                         </div>
                     }
-                </div>
+                </div>*@
 
                 @if (config.Product.BusinessModel.Rental.Enabled && config.Product.BusinessModel.Rental.ChargeDoubleShipping.Enabled)
                 {

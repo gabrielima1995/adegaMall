@@ -412,7 +412,7 @@ WriteLiteral(" class=\"fas fa-info-circle\"");
 
 WriteLiteral(" data-toggle=\"tooltip\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 4220), Tuple.Create("\"", 4331)
+WriteAttribute("title", Tuple.Create(" title=\"", 4220), Tuple.Create("\"", 4319)
 , Tuple.Create(Tuple.Create("", 4228), Tuple.Create("Já", 4228), true)
 , Tuple.Create(Tuple.Create(" ", 4230), Tuple.Create("descontada", 4231), true)
 , Tuple.Create(Tuple.Create(" ", 4241), Tuple.Create("a", 4242), true)
@@ -424,7 +424,7 @@ WriteAttribute("title", Tuple.Create(" title=\"", 4220), Tuple.Create("\"", 4331
 , Tuple.Create(Tuple.Create(" ", 4272), Tuple.Create("de", 4273), true)
             
             #line 75 "..\..\Views\Products\MySales\_SaleDetails.cshtml"
-                                                                   , Tuple.Create(Tuple.Create(" ", 4275), Tuple.Create<System.Object, System.Int32>(Model.Order.Transaction.StartupFee.DisplayCurrency()
+                                                                   , Tuple.Create(Tuple.Create(" ", 4275), Tuple.Create<System.Object, System.Int32>(Model.Order.StartupFee.DisplayCurrency()
             
             #line default
             #line hidden
@@ -803,14 +803,14 @@ WriteLiteral("</strong>\r\n");
             #line hidden
 WriteLiteral("                                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 8676), Tuple.Create("\"", 8701)
+WriteAttribute("href", Tuple.Create(" href=\"", 8664), Tuple.Create("\"", 8689)
             
             #line 143 "..\..\Views\Products\MySales\_SaleDetails.cshtml"
-, Tuple.Create(Tuple.Create("", 8683), Tuple.Create<System.Object, System.Int32>(customField.Value
+, Tuple.Create(Tuple.Create("", 8671), Tuple.Create<System.Object, System.Int32>(customField.Value
             
             #line default
             #line hidden
-, 8683), false)
+, 8671), false)
 );
 
 WriteLiteral(">");
@@ -931,14 +931,14 @@ WriteLiteral("                                ");
             #line hidden
 WriteLiteral("\r\n                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 9857), Tuple.Create("\"", 9941)
+WriteAttribute("href", Tuple.Create(" href=\"", 9845), Tuple.Create("\"", 9929)
             
             #line 165 "..\..\Views\Products\MySales\_SaleDetails.cshtml"
-, Tuple.Create(Tuple.Create("", 9864), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Details", "Quotes", new { id = Model.RelatedQuote.Id })
+, Tuple.Create(Tuple.Create("", 9852), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Details", "Quotes", new { id = Model.RelatedQuote.Id })
             
             #line default
             #line hidden
-, 9864), false)
+, 9852), false)
 );
 
 WriteLiteral(">");
@@ -1073,15 +1073,15 @@ WriteLiteral("                                            <li>\r\n              
 
 WriteLiteral(" href=\"#\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 11921), Tuple.Create("\"", 12024)
-, Tuple.Create(Tuple.Create("", 11929), Tuple.Create("js-change-status", 11929), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 11909), Tuple.Create("\"", 12012)
+, Tuple.Create(Tuple.Create("", 11917), Tuple.Create("js-change-status", 11917), true)
             
             #line 192 "..\..\Views\Products\MySales\_SaleDetails.cshtml"
-  , Tuple.Create(Tuple.Create(" ", 11945), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.SalesEdit)
+  , Tuple.Create(Tuple.Create(" ", 11933), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.SalesEdit)
             
             #line default
             #line hidden
-, 11946), false)
+, 11934), false)
 );
 
 WriteLiteral(" data-status=\"");

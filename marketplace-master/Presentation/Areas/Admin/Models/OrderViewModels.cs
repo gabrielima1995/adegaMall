@@ -58,6 +58,8 @@ namespace Presentation.Areas.Admin.Models
             Title = "Pedido #" + orderDetails.Order.Id.ToString().Substring(0, 8);
             ExtraInfo = orderDetails.Order.ExtraInfo;
 
+            CartId = orderDetails.Order.CartId;
+
             Buyer = orderDetails.Order.Buyer;
             Seller = orderDetails.Order.Seller;
             HistoryEntries = orderDetails.Order.Histories;
@@ -75,6 +77,7 @@ namespace Presentation.Areas.Admin.Models
                     SellerAddress = orderDetails.Order.Seller.Address.ToString();
             }
 
+            Status = orderDetails.Order.Status;
             StatusDescription = orderDetails.Order.Status.DisplayDescription();
 
             HasTransaction = orderDetails.Order.Transaction != null;
@@ -100,6 +103,7 @@ namespace Presentation.Areas.Admin.Models
 
             ProductsAmount = orderDetails.Order.SubTotal;
             ShippingAmount = orderDetails.Order.Shipping;
+            DiscountAmount = orderDetails.Order.Discount;
             TotalAmount = orderDetails.Order.Amount;
             this.timeZone = timeZone;
         }
@@ -108,6 +112,8 @@ namespace Presentation.Areas.Admin.Models
         public DateTime OrderDate { get; }
         public string Title { get; }
         public string ExtraInfo { get; set; }
+
+        public Guid? CartId { get; }
 
         public Buyer Buyer { get; }
         public Seller Seller { get; }
@@ -120,6 +126,7 @@ namespace Presentation.Areas.Admin.Models
         public string SellerAddress { get; }
         public string ShippingAddress { get; }
 
+        public OrderStatus Status { get; }
         public string StatusDescription { get; }
 
         public bool HasTransaction { get; }
@@ -130,6 +137,7 @@ namespace Presentation.Areas.Admin.Models
 
         public decimal ProductsAmount { get; }
         public decimal ShippingAmount { get; }
+        public decimal DiscountAmount { get; }
         public decimal TotalAmount { get; }
 
         public DateTime LocalizeDateTime(DateTime utcDateTime) => timeZone.ConvertTimeFromUtc(utcDateTime);

@@ -1339,40 +1339,13 @@ WriteLiteral("\r\n        </div>\r\n");
 
     if (ViewBag.AllFields || ViewBag.CompleteRegister)
     {
-
+        
             
             #line default
             #line hidden
-WriteLiteral("        <div");
-
-WriteLiteral(" class=\"form-group\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("            ");
-
             
-            #line 250 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-       Write(Html.LabelFor(model => model.PreferredTimeZoneId));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("            ");
-
-            
-            #line 251 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-       Write(Html.DropDownList("PreferredTimeZoneId", null, new { @class = "form-control" }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        </div>\r\n");
-
-            
-            #line 253 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 252 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+                
     }
 
 

@@ -139,148 +139,160 @@ WriteLiteral(">Fim</th>\r\n                            <th");
 
 WriteLiteral(" width=\"50\"");
 
+WriteLiteral(">Ordem</th>\r\n                            <th");
+
+WriteLiteral(" width=\"50\"");
+
 WriteLiteral("></th>\r\n                        </tr>\r\n                    </thead>\r\n            " +
 "        <tbody>\r\n");
 
             
-            #line 38 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+            #line 39 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 38 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+            #line 39 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
                          foreach (var item in Model.Items)
                         {
 
             
             #line default
             #line hidden
-WriteLiteral("                            <tr>\r\n                                <td>\r\n         " +
-"                           <a");
+WriteLiteral("                        <tr>\r\n                            <td>\r\n                 " +
+"               <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1296), Tuple.Create("\"", 1364)
-            
-            #line 42 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1303), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Edit", "Banners", new { id = item.Id })
-            
-            #line default
-            #line hidden
-, 1303), false)
-);
-
-WriteLiteral(">\r\n                                        <img");
-
-WriteAttribute("src", Tuple.Create(" src=\"", 1412), Tuple.Create("\"", 1436)
+WriteAttribute("href", Tuple.Create(" href=\"", 1339), Tuple.Create("\"", 1407)
             
             #line 43 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1418), Tuple.Create<System.Object, System.Int32>(item.ImageThumbSm
+, Tuple.Create(Tuple.Create("", 1346), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Edit", "Banners", new { id = item.Id })
             
             #line default
             #line hidden
-, 1418), false)
+, 1346), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 1437), Tuple.Create("\"", 1457)
+WriteLiteral(">\r\n                                    <img");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 1451), Tuple.Create("\"", 1475)
             
-            #line 43 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1443), Tuple.Create<System.Object, System.Int32>(item.ImageUrl
+            #line 44 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 1457), Tuple.Create<System.Object, System.Int32>(item.ImageThumbSm
             
             #line default
             #line hidden
-, 1443), false)
+, 1457), false)
 );
 
-WriteLiteral(" />\r\n                                    </a>\r\n                                </" +
-"td>\r\n                                <td>");
-
+WriteAttribute("alt", Tuple.Create(" alt=\"", 1476), Tuple.Create("\"", 1496)
             
-            #line 46 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
-                               Write(Html.DisplayFor(model => item.ActionUrl));
-
+            #line 44 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 1482), Tuple.Create<System.Object, System.Int32>(item.ImageUrl
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n                                <td>");
+, 1482), false)
+);
+
+WriteLiteral(" />\r\n                                </a>\r\n                            </td>\r\n   " +
+"                         <td>");
 
             
             #line 47 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
-                               Write(Html.DisplayFor(model => item.StartsAt));
+                           Write(Html.DisplayFor(model => item.ActionUrl));
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n                                <td>");
+WriteLiteral("</td>\r\n                            <td>");
 
             
             #line 48 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
-                               Write(Html.DisplayFor(model => item.ExpiresAt));
+                           Write(Html.DisplayFor(model => item.StartsAt));
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n                                <td>\r\n                                    " +
-"<center>\r\n");
+WriteLiteral("</td>\r\n                            <td>");
 
             
-            #line 51 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+            #line 49 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+                           Write(Html.DisplayFor(model => item.ExpiresAt));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n                            <td>");
+
+            
+            #line 50 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+                           Write(Html.DisplayFor(model => item.Order));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n                            <td>\r\n                                <center>" +
+"\r\n");
+
+            
+            #line 53 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+                                    
+            
+            #line default
+            #line hidden
+            
+            #line 53 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+                                     using (Html.BeginForm("Delete", "Banners"))
+                                    {
                                         
             
             #line default
             #line hidden
             
-            #line 51 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
-                                         using (Html.BeginForm("Delete", "Banners"))
-                                        {
-                                            
-            
-            #line default
-            #line hidden
-            
-            #line 53 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
-                                       Write(Html.AntiForgeryToken());
+            #line 55 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+                                   Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 53 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
-                                                                    
-                                            
+            #line 55 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+                                                                
+                                        
             
             #line default
             #line hidden
             
-            #line 54 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
-                                       Write(Html.Hidden("id", item.Id));
+            #line 56 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+                                   Write(Html.Hidden("id", item.Id));
 
             
             #line default
             #line hidden
             
-            #line 54 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
-                                                                       
-                                        }
+            #line 56 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+                                                                   
+                                    }
 
             
             #line default
             #line hidden
-WriteLiteral("                                        <a");
+WriteLiteral("                                    <a");
 
 WriteLiteral(" href=\"javascript:void(0)\"");
 
 WriteLiteral(" class=\"text-danger js-btn-delete\"");
 
-WriteLiteral(">\r\n                                            <i");
+WriteLiteral(">\r\n                                        <i");
 
 WriteLiteral(" class=\"fa fa-trash\"");
 
-WriteLiteral("></i>\r\n                                        </a>\r\n                            " +
-"        </center>\r\n                                </td>\r\n                      " +
-"      </tr>\r\n");
+WriteLiteral("></i>\r\n                                    </a>\r\n                                " +
+"</center>\r\n                            </td>\r\n                        </tr>\r\n");
 
             
-            #line 62 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+            #line 64 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
                         }
 
             
@@ -290,7 +302,7 @@ WriteLiteral("                    </tbody>\r\n                </table>\r\n      
 "   </div>\r\n");
 
             
-            #line 67 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+            #line 69 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
     }
     else
     {
@@ -305,7 +317,7 @@ WriteLiteral(" class=\"alert alert-warning\"");
 WriteLiteral(">\r\n            <span>Nenhum banner cadastrado.</span>\r\n        </div>\r\n");
 
             
-            #line 73 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
+            #line 75 "..\..\Areas\Admin\Views\Banners\Index.cshtml"
     }
 
             

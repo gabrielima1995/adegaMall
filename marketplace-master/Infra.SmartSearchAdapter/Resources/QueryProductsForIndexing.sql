@@ -90,8 +90,8 @@
                 WHEN Products.ProductTemplateId IS NOT NULL THEN 1 ELSE 0
                 END)) HasTemplate,
             CONVERT(BIT, (CASE
-                WHEN cteBestPrice.Id IS NOT NULL THEN 1 ELSE 0
-                END)) BestPrice,
+                WHEN Products.ProductTemplateId IS NULL OR cteBestPrice.Id IS NOT NULL THEN 1 ELSE 0
+                END)) IsBestPrice,
             Products.ProductTemplateId TemplateId,
 
             Products.NoShippingEnabled,
@@ -192,8 +192,7 @@
                     Seller.[Enabled] = 1 AND 
                     Products.Deleted = 0 AND
                     Products.IsDisabled = 0 AND
-                    (Products.IsBillingProduct IS NULL OR Products.IsBillingProduct = 0)AND
-                    (Products.ProductTemplateId IS NULL OR cteBestPrice.Id IS NOT NULL)
+                    (Products.IsBillingProduct IS NULL OR Products.IsBillingProduct = 0)
                 THEN 'add' ELSE 'del' END operation
         FROM Product Products 
             INNER JOIN ProductCategory Categ ON Categ.Id = Products.Category_Id
@@ -225,7 +224,7 @@ SELECT
     HasStock,
     IsDisabled,
     HasTemplate,
-    BestPrice,
+    IsBestPrice,
     TemplateId,
     NoShippingEnabled,
     ActualNoShippingEnabled,

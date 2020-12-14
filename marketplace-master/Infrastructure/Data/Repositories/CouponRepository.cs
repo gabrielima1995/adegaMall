@@ -23,19 +23,22 @@ namespace Infrastructure.Data.Repositories
         public bool IsFirstOrder(string buyerId)
         {
             return Context.Set<Order>()
+                .Where(i => i.Status != OrderStatus.Processed)
                 .Count(i => i.Buyer.Id == buyerId) == 0;
         }
 
         public bool IsOneTimeByUser(string buyerId, Guid couponId)
         {
             return Context.Set<Order>()
+                .Where(i => i.Status != OrderStatus.Processed)
                 .Count(i => i.Buyer.Id == buyerId && i.Coupon.Id == couponId) == 0;
         }
 
         public bool IsOneTimeEver(Guid couponId)
         {
             return Context.Set<Order>()
-                       .Count(i => i.Coupon.Id == couponId) == 0;
+                .Where(i => i.Status != OrderStatus.Processed)
+                .Count(i => i.Coupon.Id == couponId) == 0;
         }
     }
 }

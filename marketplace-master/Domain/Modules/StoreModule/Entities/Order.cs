@@ -171,6 +171,9 @@ namespace Domain.Entities.StoreModule
         /// </summary>
         public string OrderId => Id.ToString();
 
+        public Cart Cart { get; set; }
+
+        [ForeignKey("Cart")]
         public Guid? CartId { get; set; }
 
         public Guid? AntifraudTransactionId { get; set; }

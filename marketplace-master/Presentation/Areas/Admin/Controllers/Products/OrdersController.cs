@@ -16,15 +16,18 @@ namespace Presentation.Areas.Admin.Controllers.Products
         private readonly OrderService orderService;
         private readonly ITransferJournalQueries transferJournalQueries;
         private readonly ITimeZoneProvider timeZoneProvider;
+        private readonly OrderService_CreateOrderWorkflow workflow;
 
         public OrdersController(
             OrderService orderService,
             ITransferJournalQueries transferJournalQueries,
-            ITimeZoneProvider timeZoneProvider)
+            ITimeZoneProvider timeZoneProvider,
+            OrderService_CreateOrderWorkflow workflow)
         {
             this.orderService = orderService;
             this.transferJournalQueries = transferJournalQueries;
             this.timeZoneProvider = timeZoneProvider;
+            this.workflow = workflow;
         }
 
         public ActionResult Index()
@@ -95,6 +98,17 @@ namespace Presentation.Areas.Admin.Controllers.Products
 
             Response.SetCookie(periodCookie);
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Reprocess(Guid id, Guid cartId, string transactionGatewayId)
+        {
+            var operation = workflow.Reprocess(cartId, transactionGatewayId);
+
+            if (operation.IsFailure)
+                ModelState.AddErrors(operation.Errors);
+
+            return RedirectToAction("Details", new { id });
         }
     }
 }

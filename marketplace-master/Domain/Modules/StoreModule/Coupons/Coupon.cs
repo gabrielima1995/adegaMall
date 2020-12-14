@@ -74,7 +74,7 @@ namespace Domain.Modules.StoreModule.Coupons
                    (TotalMaxUse == -1 || TotalMaxUse > TotalUse);
         }
 
-        public decimal CalculateDiscount(decimal amount)
+        public decimal CalculateDiscount(decimal amount, decimal totalAmount)
         {
             if (IsDiscount)
             {
@@ -83,13 +83,12 @@ namespace Domain.Modules.StoreModule.Coupons
                     case CouponBenefitType.PercentDiscount:
                         return Math.Round(amount * Value / 100, 2, MidpointRounding.AwayFromZero);
                     case CouponBenefitType.ValueDiscount:
-                        return Value;
+                        return Math.Min(Value * (amount / totalAmount), amount);
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new NotImplementedException();
                 }
             }
-
-            return decimal.Zero;
+            throw new NotImplementedException();
         }
     }
 }

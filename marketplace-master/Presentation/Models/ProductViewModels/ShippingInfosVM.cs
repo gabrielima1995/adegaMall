@@ -21,6 +21,7 @@ namespace Presentation.Models
         public decimal AsapLogCost { get; private set; }
         public decimal TotalExpressCost { get; private set; }
         public decimal MinimumCost { get; private set; } = decimal.MaxValue;
+        public int? DeliveryDays { get; private set; }
 
         public bool ShowActualNoShipping { get; private set; }
         public bool ShowNoShipping { get; private set; }
@@ -73,19 +74,26 @@ namespace Presentation.Models
                     NoShippingCost = noShippingCost;
                 }
 
-                if (config.Product.OnSitePickupShipping.Enabled && product.OnSitePickupEnabled)
+                if (config.Product.OnSitePickupShipping.Enabled && product.Store.OnSitePickupEnabled)
                 {
                     ShowOnSitePickup = GetShipping(onSitePickupAdapter, out var onSitePickupCost, out var deliveryDate, out var _, chargeDoubleShipping);
                     OnSitePickupCost = onSitePickupCost;
+
+                    if (ShowOnSitePickup)
+                    {
+                        MinimumCost = Math.Min(MinimumCost, OnSitePickupCost);
+                    }
                 }
 
-                if (config.Product.PrivateFleetShipping.Enabled && product.PrivateFleetEnabled)
+                if (config.Product.PrivateFleetShipping.Enabled && product.Store.PrivateFleetEnabled)
                 {
                     ShowPrivateFleet = GetShipping(privateFleetAdapter, out var privateFleetCost, out var deliveryDate, out var _, chargeDoubleShipping);
                     PrivateFleetCost = privateFleetCost;
 
-                    if (ShowPrivateFleet) MinimumCost = Math.Min(MinimumCost, PrivateFleetCost);
-
+                    if (ShowPrivateFleet)
+                    {
+                        MinimumCost = Math.Min(MinimumCost, PrivateFleetCost);
+                    }
                 }
 
                 if (config.Product.SedexShipping.Enabled && product.SedexEnabled)
@@ -95,7 +103,10 @@ namespace Presentation.Models
                     PostalExpressCost = postalExpressCost;
                     DeliveryDateSedex = deliveryDate;
 
-                    if (ShowPostalExpress) MinimumCost = Math.Min(MinimumCost, PostalExpressCost);
+                    if (ShowPostalExpress)
+                    {
+                        MinimumCost = Math.Min(MinimumCost, PostalExpressCost);
+                    }
                 }
 
                 if (config.Product.PACShipping.Enabled && product.PACEnabled)
@@ -105,27 +116,42 @@ namespace Presentation.Models
                     PostalRegularCost = postalRegularCost;
                     DeliveryDatePac = deliveryDate;
 
-                    if (ShowPostalRegular) MinimumCost = Math.Min(MinimumCost, PostalRegularCost);
+                    if (ShowPostalRegular)
+                    {
+                        MinimumCost = Math.Min(MinimumCost, PostalRegularCost);
+                    }
                 }
 
                 if (config.Product.AsapLogShipping.Enabled && product.Store.AsapLogEnabled)
                 {
-                    ShowAsapLog = GetShipping(asapLogAdapter, out var asapLogCost, out var deliveryDate, out var deliveryDaysAsapLog, chargeDoubleShipping);
+                    ShowAsapLog = GetShipping(asapLogAdapter, out var asapLogCost, out var deliveryDate, out var deliveryDaysAsapLog, chargeDoubleShipping) &&
+                                  asapLogCost > decimal.Zero;
                     AsapLogCost = asapLogCost;
                     DeliveryDateAsapLog = deliveryDate;
                     DeliveryDaysAsapLog = deliveryDaysAsapLog;
 
-                    if (ShowAsapLog) MinimumCost = Math.Min(MinimumCost, AsapLogCost);
+                    if (ShowAsapLog)
+                    {
+                        MinimumCost = Math.Min(MinimumCost, AsapLogCost);
+
+                        if (MinimumCost == AsapLogCost) DeliveryDays = deliveryDaysAsapLog;
+                    }
                 }
 
                 if (config.Product.TotalExpressShipping.Enabled && product.Store.TotalExpressEnabled)
                 {
-                    ShowTotalExpress = GetShipping(totalExpressAdapter, out var totalExpressCost, out var deliveryDate, out var deliveryDaysTotalExpress, chargeDoubleShipping);
+                    ShowTotalExpress = GetShipping(totalExpressAdapter, out var totalExpressCost, out var deliveryDate, out var deliveryDaysTotalExpress, chargeDoubleShipping) &&
+                                       totalExpressCost > decimal.Zero;
                     TotalExpressCost = totalExpressCost;
                     DeliveryDateTotalExpress = deliveryDate;
                     DeliveryDaysTotalExpress = deliveryDaysTotalExpress;
 
-                    if (ShowTotalExpress) MinimumCost = Math.Min(MinimumCost, TotalExpressCost);
+                    if (ShowTotalExpress)
+                    {
+                        MinimumCost = Math.Min(MinimumCost, TotalExpressCost);
+
+                        if (MinimumCost == TotalExpressCost) DeliveryDays = deliveryDaysTotalExpress;
+                    }
                 }
             }
         }

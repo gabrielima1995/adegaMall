@@ -733,6 +733,8 @@ STORE_PAC_NOT_SUPPORTED	PAC não é suportado no modo de frete único por vended
 STORE_PRIVATE_FLEET_NOT_ENABLED	Este vendedor não realiza envio dos produtos por frota privada
 STORE_SEDEX_NOT_ENABLED	Este vendedor não realiza envio dos produtos por Sedex
 STORE_PAC_NOT_ENABLED	Este vendedor não realiza envio dos produtos por PAC
+STORE_ASAPLOG_NOT_ENABLED	Este vendedor não realiza envio dos produtos por ASAP Log
+STORE_TOTALEXPRESS_NOT_ENABLED	Este vendedor não realiza envio dos produtos por Total Express
 STORE_SEDEX_NOT_SUPPORTED	Sedex não é suportado no modo de frete único por vendedor
 STORE_SETTINGS_TITLE	Configurações da loja
 STORE_SINGLE_FREIGHT_METHOD_INPUT	Para entrega, cada compra gera um valor de frete unificado

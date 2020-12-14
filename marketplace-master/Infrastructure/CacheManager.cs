@@ -29,7 +29,7 @@ namespace Infrastructure
 
         public void Remove(string cacheKey)
         {
-            _cache.Remove(cacheKey);
+             _cache.Remove(cacheKey);
         }
     }
 }

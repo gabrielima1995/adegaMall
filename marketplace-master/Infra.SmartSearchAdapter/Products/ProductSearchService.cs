@@ -86,6 +86,8 @@ namespace Infra.SmartSearchAdapter.Products
 
             #endregion Filtros referentes às configurações do Marketplace
 
+            filters.Add(new ValueFilter("IsBestPrice", true));
+
             if (request.CategoryId.HasValue)
                 filters.Add(new ValueFilter("CategoryId", request.CategoryId));
 
@@ -121,7 +123,13 @@ namespace Infra.SmartSearchAdapter.Products
             #region Filtros referentes à entrada do usuário
 
             if (!string.IsNullOrEmpty(request.SellerId))
+            {
                 filters.Add(new ValueFilter("SellerId", request.SellerId));
+            }
+            else
+            {
+                filters.Add(new ValueFilter("IsBestPrice", true));
+            }
 
             if (request.Category.HasValue)
                 filters.Add(new ValueFilter("CategoryId", request.Category.Value));
@@ -350,6 +358,8 @@ namespace Infra.SmartSearchAdapter.Products
                 filters.Add(new ValueFilter("HasPaymentGatewayAccount", true));
 
             #endregion Filtros referentes às configurações do Marketplace
+
+            filters.Add(new ValueFilter("IsBestPrice", true));
 
             #region Filtros referentes à entrada do usuário
 

@@ -8,5 +8,7 @@ namespace Domain.Interfaces.Repositories
         List<Banner> ListActive();
 
         List<Banner> ListForAdmin();
+
+        void PurgeCache();
     }
 }

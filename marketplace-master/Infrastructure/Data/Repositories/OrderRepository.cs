@@ -65,7 +65,7 @@ namespace Infrastructure.Data.Repositories
 
         public List<Order> ListForAdmin()
         {
-            var cache = new CacheDefinition("__OrderRepository_ListForAdmin", new TimeSpan(0, 5, 0));
+            var cache = new CacheDefinition("__OrderRepository_ListForAdmin", new TimeSpan(0, 0, 25));
 
             return CacheHelper.List(Context.Orders
                 .Include(x => x.Coupon)

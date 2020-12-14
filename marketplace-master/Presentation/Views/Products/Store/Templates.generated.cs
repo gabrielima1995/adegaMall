@@ -497,11 +497,9 @@ WriteLiteral(" class=\"store-templates table\"");
 WriteLiteral(" id=\"tblTemplates\"");
 
 WriteLiteral(">\r\n                            <thead>\r\n                                <tr>\r\n   " +
-"                                 <th");
+"                                 ");
 
-WriteLiteral(" width=\"60\"");
-
-WriteLiteral("></th>\r\n");
+WriteLiteral("\r\n");
 
 WriteLiteral("                                    ");
 
@@ -590,93 +588,9 @@ WriteLiteral("></th>\r\n                                </tr>\r\n               
             #line default
             #line hidden
 WriteLiteral("                                    <tr>\r\n                                       " +
-" <td");
+" ");
 
-WriteLiteral(" data-order=\"");
-
-            
-            #line 105 "..\..\Views\Products\Store\Templates.cshtml"
-                                                   Write(Dt.Order(item.Title));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\"");
-
-WriteLiteral(">\r\n");
-
-            
-            #line 106 "..\..\Views\Products\Store\Templates.cshtml"
-                                            
-            
-            #line default
-            #line hidden
-            
-            #line 106 "..\..\Views\Products\Store\Templates.cshtml"
-                                             if (item.SellerProductId.HasValue)
-                                            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                                <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 5247), Tuple.Create("\"", 5333)
-            
-            #line 108 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 5254), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("EditProduct", "Store", new { id = item.SellerProductId })
-            
-            #line default
-            #line hidden
-, 5254), false)
-);
-
-WriteLiteral(">\r\n                                                    <img");
-
-WriteAttribute("src", Tuple.Create(" src=\"", 5393), Tuple.Create("\"", 5441)
-            
-            #line 109 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 5399), Tuple.Create<System.Object, System.Int32>(ImgHelper.Product(item.CoverImageUrl, 80)
-            
-            #line default
-            #line hidden
-, 5399), false)
-);
-
-WriteLiteral(" />\r\n                                                </a>\r\n");
-
-            
-            #line 111 "..\..\Views\Products\Store\Templates.cshtml"
-                                            }
-                                            else
-                                            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                                <img");
-
-WriteAttribute("src", Tuple.Create(" src=\"", 5697), Tuple.Create("\"", 5745)
-            
-            #line 114 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 5703), Tuple.Create<System.Object, System.Int32>(ImgHelper.Product(item.CoverImageUrl, 80)
-            
-            #line default
-            #line hidden
-, 5703), false)
-);
-
-WriteLiteral(" />\r\n");
-
-            
-            #line 115 "..\..\Views\Products\Store\Templates.cshtml"
-                                            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                        </td>\r\n                                  " +
-"      <td");
+WriteLiteral("\r\n                                        <td");
 
 WriteLiteral(" data-order=\"");
 
@@ -707,14 +621,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6104), Tuple.Create("\"", 6190)
+WriteAttribute("href", Tuple.Create(" href=\"", 6112), Tuple.Create("\"", 6198)
             
             #line 120 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 6111), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("EditProduct", "Store", new { id = item.SellerProductId })
+, Tuple.Create(Tuple.Create("", 6119), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("EditProduct", "Store", new { id = item.SellerProductId })
             
             #line default
             #line hidden
-, 6111), false)
+, 6119), false)
 );
 
 WriteLiteral(">\r\n");
@@ -759,14 +673,14 @@ WriteLiteral(" class=\"block\"");
 
 WriteLiteral(">\r\n                                                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6695), Tuple.Create("\"", 6777)
+WriteAttribute("href", Tuple.Create(" href=\"", 6703), Tuple.Create("\"", 6785)
             
             #line 128 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 6702), Tuple.Create<System.Object, System.Int32>(Url.Action("CreateProduct", "Store", new { templateId = item.TemplateId })
+, Tuple.Create(Tuple.Create("", 6710), Tuple.Create<System.Object, System.Int32>(Url.Action("CreateProduct", "Store", new { templateId = item.TemplateId })
             
             #line default
             #line hidden
-, 6702), false)
+, 6710), false)
 );
 
 WriteLiteral(">Adicionar à minha vitrine</a>\r\n                                                <" +
@@ -946,14 +860,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 8547), Tuple.Create("\"", 8635)
+WriteAttribute("href", Tuple.Create(" href=\"", 8555), Tuple.Create("\"", 8643)
             
             #line 153 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 8554), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("DeleteProduct", "Store", new { id = item.SellerProductId })
+, Tuple.Create(Tuple.Create("", 8562), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("DeleteProduct", "Store", new { id = item.SellerProductId })
             
             #line default
             #line hidden
-, 8554), false)
+, 8562), false)
 );
 
 WriteLiteral(" class=\"text-danger\"");
@@ -981,14 +895,14 @@ WriteLiteral("></i>\r\n                                                </a>\r\n"
             #line hidden
 WriteLiteral("                                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 9080), Tuple.Create("\"", 9171)
+WriteAttribute("href", Tuple.Create(" href=\"", 9088), Tuple.Create("\"", 9179)
             
             #line 159 "..\..\Views\Products\Store\Templates.cshtml"
-, Tuple.Create(Tuple.Create("", 9087), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("CreateProduct", "Store", new { templateId = item.TemplateId })
+, Tuple.Create(Tuple.Create("", 9095), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("CreateProduct", "Store", new { templateId = item.TemplateId })
             
             #line default
             #line hidden
-, 9087), false)
+, 9095), false)
 );
 
 WriteLiteral(" class=\"text-primary\"");
