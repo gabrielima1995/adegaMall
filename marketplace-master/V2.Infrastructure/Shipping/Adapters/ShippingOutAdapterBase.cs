@@ -26,14 +26,15 @@ namespace V2.Infrastructure.Shipping.Adapters
 
         public bool AcceptsTrackingCode => true;
 
-        public void ChangeStatusForNewOrder(Order order)
+        public void ChangeStatusForNewOrder(Order order, bool paymentUnderReview)
         {
-            bool deliveryAllowed = true;
+            if (!paymentUnderReview)
+            {
+                ChangeStatus(order, OrderStatus.PendingPayment);
 
-            ChangeStatus(order, OrderStatus.PendingPayment);
-
-            if (order.IsPaid)
-                ChangeStatusToOrderPaid(order, deliveryAllowed);
+                if (order.IsPaid)
+                    ChangeStatusToOrderPaid(order, true);
+            }
         }
 
         public void ChangeStatusToOrderPaid(Order order, bool deliveryAllowed = true)

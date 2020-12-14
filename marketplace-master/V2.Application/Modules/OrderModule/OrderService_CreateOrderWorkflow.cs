@@ -78,16 +78,16 @@ namespace Domain.Services.StoreModule
             if (createAndPayResults.IsFailure)
                 return createAndPayResults.Errors;
 
-            var orders = createAndPayResults.Result;
+            var (orders, paymentUnderReview) = createAndPayResults.Result;
 
-            var sideEffectsResults = PropagateSideEffects(cart, orders);
+            var sideEffectsResults = PropagateSideEffects(cart, orders, paymentUnderReview);
             if (sideEffectsResults.IsFailure)
                 return sideEffectsResults.Errors;
 
             return new OperationResult<List<Order>>(orders);
         }
 
-        public OperationResult<List<Order>> CreateOrdersAndPayInternal(Cart cart, PaymentOptions paymentOptions)
+        public OperationResult<(List<Order> orders, bool paymentUnderReview)> CreateOrdersAndPayInternal(Cart cart, PaymentOptions paymentOptions)
         {
             var preparationResult = CheckAndPrepare(cart, paymentOptions);
             if (preparationResult.IsFailure)
@@ -106,14 +106,20 @@ namespace Domain.Services.StoreModule
                     return billingResult.Errors;
             }
 
+            var paymentUnderReview = false;
+
             if (paymentOptions.HasPayment())
             {
                 var ordersWithPrice = orders.Where(x => x.Amount != 0).ToList();
-                if (ordersWithPrice != null)
+                var processPaymentResult = ProcessPayment(ordersWithPrice, cart.Buyer, paymentOptions);
+
+                if (processPaymentResult.IsFailure)
                 {
-                    var processPaymentResult = ProcessPayment(ordersWithPrice, cart.Buyer, paymentOptions);
-                    if (processPaymentResult.IsFailure)
+                    if (processPaymentResult.Errors.All(i => i.Key != "NOT_PAYED"))
                         return processPaymentResult.Errors;
+
+                    // pagamento com problema de antifraude.
+                    paymentUnderReview = true;
                 }
             }
 
@@ -124,7 +130,7 @@ namespace Domain.Services.StoreModule
             if (saveResult.IsFailure)
                 return saveResult.Errors;
 
-            return new OperationResult<List<Order>>(orders);
+            return new OperationResult<(List<Order>, bool)>((orders, paymentUnderReview));
         }
 
         public OperationResult Reprocess(Guid cartId, string transactionGatewayId)
@@ -177,7 +183,7 @@ namespace Domain.Services.StoreModule
             if (saveResult.IsFailure)
                 return saveResult.Errors;
 
-            var sideEffectsResults = PropagateSideEffects(cart, orders);
+            var sideEffectsResults = PropagateSideEffects(cart, orders, false);
             if (sideEffectsResults.IsFailure)
                 return sideEffectsResults.Errors;
 
@@ -308,30 +314,35 @@ namespace Domain.Services.StoreModule
             return orderTransaction;
         }
 
-        private OperationResult PropagateSideEffects(Cart cart, List<Order> orders)
+        private OperationResult PropagateSideEffects(Cart cart, List<Order> orders, bool paymentUnderReview)
         {
             var shippingMethodAdapter = shippingService.GetAdapter(cart.ShippingMethod);
 
             foreach (var order in orders)
             {
-                shippingMethodAdapter.ChangeStatusForNewOrder(order);
+                shippingMethodAdapter.ChangeStatusForNewOrder(order, paymentUnderReview);
 
-                if (config.Payment.Common.EnableTransactionWarranty && order.Amount != 0 && order.PaymentMethod == PaymentMethod.CreditCard /*quando o pgto é por boleto, isso é feito no webhook do pgto identificado*/)
-                    paymentService.ScheduleTransfersToSellersForWhenFundsAreAvailable(order);
+                if (!paymentUnderReview)
+                {
+                    if (config.Payment.Common.EnableTransactionWarranty && order.Amount != 0 && order.PaymentMethod == PaymentMethod.CreditCard /*quando o pgto é por boleto, isso é feito no webhook do pgto identificado*/)
+                        paymentService.ScheduleTransfersToSellersForWhenFundsAreAvailable(order);
+                }
             }
 
             var finishingErrors = new ErrorDictionary();
 
-            RegisterStockTransactions(cart, orders)
-                .OnSuccess(() => RegisterRecurringRental(orders))
+            RegisterStockTransactions(cart, orders, paymentUnderReview)
+                .OnSuccess(() => RegisterRecurringRental(orders, paymentUnderReview))
                 .OnSuccess(() => unitOfWork.Save())
                 .OnFailure(errors => finishingErrors.AddRange(errors));
 
             return finishingErrors;
         }
 
-        private OperationResult RegisterStockTransactions(Cart cart, List<Order> orders)
+        private OperationResult RegisterStockTransactions(Cart cart, List<Order> orders, bool paymentUnderReview)
         {
+            if(paymentUnderReview) return OperationResult.Success;
+
             if (config.Product.BusinessModel.Sale.Enabled && !config.Product.BusinessModel.Rental.Enabled)
             {
                 foreach (var item in cart.Items)
@@ -347,8 +358,10 @@ namespace Domain.Services.StoreModule
             return OperationResult.Success;
         }
 
-        private OperationResult RegisterRecurringRental(List<Order> orders)
+        private OperationResult RegisterRecurringRental(List<Order> orders, bool paymentUnderReview)
         {
+            if (paymentUnderReview) return OperationResult.Success;
+
             if (config.Product.BusinessModel.Rental.Enabled &&
                 config.Product.BusinessModel.Rental.ProductAvailability.Enabled &&
                 config.Product.BusinessModel.Rental.ProductAvailability.Recurring.Enabled)

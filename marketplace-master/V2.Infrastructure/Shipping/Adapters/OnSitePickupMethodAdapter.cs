@@ -23,12 +23,15 @@ namespace Infrastructure.Shipping.Adapters
             throw new InvalidOperationException("Shipping method 'OnSitePickUpMethodAdapter' does not have shipping days.");
         }
 
-        public void ChangeStatusForNewOrder(Order order)
+        public void ChangeStatusForNewOrder(Order order, bool paymentUnderReview)
         {
-            ChangeStatus(order, OrderStatus.PendingPayment);
+            if (!paymentUnderReview)
+            {
+                ChangeStatus(order, OrderStatus.PendingPayment);
 
-            if (order.IsPaid)
-                ChangeStatusToOrderPaid(order, true);
+                if (order.IsPaid)
+                    ChangeStatusToOrderPaid(order, true);
+            }
         }
 
         public void ChangeStatusToOrderPaid(Order order, bool deliveryAllowed = true)

@@ -11,7 +11,7 @@ namespace Domain.Interfaces
     {
         bool AcceptsTrackingCode { get; }
 
-        void ChangeStatusForNewOrder(Order order);
+        void ChangeStatusForNewOrder(Order order, bool paymentUnderReview);
 
         void ChangeStatusToOrderPaid(Order order, bool deliveryAllowed = true);
 

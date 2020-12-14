@@ -22,12 +22,15 @@ namespace Infrastructure.Shipping.Adapters
             throw new InvalidOperationException("Shipping method 'ActualNoShipping' does not have shipping days.");
         }
 
-        public void ChangeStatusForNewOrder(Order order)
+        public void ChangeStatusForNewOrder(Order order, bool paymentUnderReview)
         {
-            ChangeStatus(order, OrderStatus.PendingPayment);
+            if (!paymentUnderReview)
+            {
+                ChangeStatus(order, OrderStatus.PendingPayment);
 
-            if (order.IsPaid)
-                ChangeStatusToOrderPaid(order);
+                if (order.IsPaid)
+                    ChangeStatusToOrderPaid(order);
+            }
         }
 
         public void ChangeStatusToOrderPaid(Order order, bool deliveryAllowed = true)
