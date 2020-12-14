@@ -160,13 +160,19 @@
 
                         @*@if (config.Product.Enabled && isAuthenticated && loginProfile.IsBuyer())
             {*@
-                        <li class="top-menu-cart btnCart hidden-xs">
+                        <li class="top-menu-cart btnCart">
                             <a href="@Url.ActionLocalized("Index", "Cart")" class="menu-btn" title="Ver carrinho de compras">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span class="badge js-cart-qty">0</span>
                             </a>
                         </li>
                         @*}*@
+                        
+                        <li class="top-menu-login visible-xs">
+                            <a href="#" class="abre-menu item-menu text-right">
+                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                            </a>
+                        </li>
 
                         <li id="btn-addtohome" style="display: none">
                             <button class="btn btn-primary">Instalar</button>
@@ -186,7 +192,6 @@
                             </li>
                         }
                     </ul>
-                    <a href="#" class="abre-menu text-right"><span class="glyphicon glyphicon-menu-hamburger visible-xs" aria-hidden="true"></span></a>
                 </div>
             </div>
         </div>
