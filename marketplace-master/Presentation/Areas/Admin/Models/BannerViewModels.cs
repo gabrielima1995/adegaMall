@@ -32,9 +32,11 @@ namespace Presentation.Areas.Admin.Models
     {
         public Guid Id { get; set; }
 
-        [Url]
         [DisplayNameLocalized("BANNER_IMAGE_URL_LABEL")]
         public string ImageUrl { get; set; }
+
+        [DisplayNameLocalized("BANNER_MOBILE_IMAGE_URL_LABEL")]
+        public string MobileImageUrl { get; set; }
 
         [Url]
         [DisplayNameLocalized("BANNER_ACTION_URL_LABEL")]
@@ -49,9 +51,11 @@ namespace Presentation.Areas.Admin.Models
         [DisplayNameLocalized("BANNER_EXPIRES_AT_LABEL")]
         public DateTime? ExpiresAt { get; set; }
 
-        public string ImageThumbSm => ImgHelper.BlobToCdn(ImageUrl, new { w = 100, h = 32, scale = "both", mode = "crop" });
+        public string ImageThumbSm => ImgHelper.BlobToCdn(ImageUrl, new { w = 100, h = 27, scale = "both", mode = "crop" });
 
-        public string ImageThumbLg => ImgHelper.BlobToCdn(ImageUrl, new { w = 300, h = 94, scale = "both", mode = "crop" });
+        public string ImageThumbLg => ImgHelper.BlobToCdn(ImageUrl, new { w = 300, h = 82, scale = "both", mode = "crop" });
+
+        public string MobileImageThumbLg => ImgHelper.BlobToCdn(MobileImageUrl, new { w = 300, h = 212, scale = "both", mode = "crop" });
 
         [DisplayName("Ordem")]
         public int Order { get; set; }
@@ -65,9 +69,9 @@ namespace Presentation.Areas.Admin.Models
             Mapper.Map(banner, this);
         }
 
-        public Banner ToDomainModel()
+        public Banner ToDomainModel(Banner banner)
         {
-            return Mapper.Map<Banner>(this);
+            return Mapper.Map(this, banner);
         }
     }
 }

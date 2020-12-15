@@ -50,6 +50,17 @@ namespace ASP
         {
             
             #line 3 "..\..\Views\Banners\_Banners.cshtml"
+  
+    var id = Guid.NewGuid().Substring(); 
+    var bannerId = "banner-" + id;
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\t\r\n\r\n");
+
+            
+            #line 8 "..\..\Views\Banners\_Banners.cshtml"
  if (Model.HasBanners)
 {
 
@@ -58,7 +69,15 @@ namespace ASP
             #line hidden
 WriteLiteral("    <div");
 
-WriteLiteral(" id=\"banner-carousel\"");
+WriteAttribute("id", Tuple.Create(" id=\"", 147), Tuple.Create("\"", 161)
+            
+            #line 10 "..\..\Views\Banners\_Banners.cshtml"
+, Tuple.Create(Tuple.Create("", 152), Tuple.Create<System.Object, System.Int32>(bannerId
+            
+            #line default
+            #line hidden
+, 152), false)
+);
 
 WriteLiteral(" class=\"carousel slide\"");
 
@@ -67,13 +86,13 @@ WriteLiteral(" data-ride=\"carousel\"");
 WriteLiteral(">\r\n");
 
             
-            #line 6 "..\..\Views\Banners\_Banners.cshtml"
+            #line 11 "..\..\Views\Banners\_Banners.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 6 "..\..\Views\Banners\_Banners.cshtml"
+            #line 11 "..\..\Views\Banners\_Banners.cshtml"
          if (Model.ShowNavControls)
         {
 
@@ -87,13 +106,13 @@ WriteLiteral(" class=\"carousel-indicators\"");
 WriteLiteral(">\r\n");
 
             
-            #line 9 "..\..\Views\Banners\_Banners.cshtml"
+            #line 14 "..\..\Views\Banners\_Banners.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 9 "..\..\Views\Banners\_Banners.cshtml"
+            #line 14 "..\..\Views\Banners\_Banners.cshtml"
                  for (var i = 0; i < Model.Items.Count; i++)
                 {
 
@@ -102,33 +121,42 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                    <li");
 
-WriteLiteral(" data-target=\"#banner-carousel\"");
-
-WriteLiteral(" data-slide-to=\"");
+WriteLiteral(" data-target=\"#");
 
             
-            #line 11 "..\..\Views\Banners\_Banners.cshtml"
-                                                                 Write(i);
+            #line 16 "..\..\Views\Banners\_Banners.cshtml"
+                                 Write(bannerId);
 
             
             #line default
             #line hidden
 WriteLiteral("\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 374), Tuple.Create("\"", 407)
+WriteLiteral(" data-slide-to=\"");
+
             
-            #line 11 "..\..\Views\Banners\_Banners.cshtml"
-   , Tuple.Create(Tuple.Create("", 382), Tuple.Create<System.Object, System.Int32>(i == 0 ? "active" : ""
+            #line 16 "..\..\Views\Banners\_Banners.cshtml"
+                                                           Write(i);
+
             
             #line default
             #line hidden
-, 382), false)
+WriteLiteral("\"");
+
+WriteAttribute("class", Tuple.Create(" class=\"", 451), Tuple.Create("\"", 484)
+            
+            #line 16 "..\..\Views\Banners\_Banners.cshtml"
+, Tuple.Create(Tuple.Create("", 459), Tuple.Create<System.Object, System.Int32>(i == 0 ? "active" : ""
+            
+            #line default
+            #line hidden
+, 459), false)
 );
 
 WriteLiteral("></li>\r\n");
 
             
-            #line 12 "..\..\Views\Banners\_Banners.cshtml"
+            #line 17 "..\..\Views\Banners\_Banners.cshtml"
                 }
 
             
@@ -137,7 +165,7 @@ WriteLiteral("></li>\r\n");
 WriteLiteral("            </ol>\r\n");
 
             
-            #line 14 "..\..\Views\Banners\_Banners.cshtml"
+            #line 19 "..\..\Views\Banners\_Banners.cshtml"
         }
 
         
@@ -145,8 +173,8 @@ WriteLiteral("            </ol>\r\n");
             #line default
             #line hidden
             
-            #line 22 "..\..\Views\Banners\_Banners.cshtml"
-                
+            #line 27 "..\..\Views\Banners\_Banners.cshtml"
+                    
 
             
             #line default
@@ -160,13 +188,13 @@ WriteLiteral(" role=\"listbox\"");
 WriteLiteral(">\r\n");
 
             
-            #line 26 "..\..\Views\Banners\_Banners.cshtml"
+            #line 31 "..\..\Views\Banners\_Banners.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 26 "..\..\Views\Banners\_Banners.cshtml"
+            #line 31 "..\..\Views\Banners\_Banners.cshtml"
              for (var i = 0; i < Model.Items.Count; i++)
             {
                 var banner = Model.Items[i];
@@ -176,49 +204,65 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1031), Tuple.Create("\"", 1069)
-, Tuple.Create(Tuple.Create("", 1039), Tuple.Create("item", 1039), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1132), Tuple.Create("\"", 1170)
+, Tuple.Create(Tuple.Create("", 1140), Tuple.Create("item", 1140), true)
             
-            #line 29 "..\..\Views\Banners\_Banners.cshtml"
-, Tuple.Create(Tuple.Create("", 1043), Tuple.Create<System.Object, System.Int32>(i == 0 ? " active" : ""
+            #line 34 "..\..\Views\Banners\_Banners.cshtml"
+, Tuple.Create(Tuple.Create("", 1144), Tuple.Create<System.Object, System.Int32>(i == 0 ? " active" : ""
             
             #line default
             #line hidden
-, 1043), false)
+, 1144), false)
 );
 
 WriteLiteral(">\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1095), Tuple.Create("\"", 1119)
+WriteAttribute("href", Tuple.Create(" href=\"", 1196), Tuple.Create("\"", 1220)
             
-            #line 30 "..\..\Views\Banners\_Banners.cshtml"
-, Tuple.Create(Tuple.Create("", 1102), Tuple.Create<System.Object, System.Int32>(banner.ActionUrl
+            #line 35 "..\..\Views\Banners\_Banners.cshtml"
+, Tuple.Create(Tuple.Create("", 1203), Tuple.Create<System.Object, System.Int32>(banner.ActionUrl
             
             #line default
             #line hidden
-, 1102), false)
+, 1203), false)
 );
 
 WriteLiteral(">\r\n                        <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1151), Tuple.Create("\"", 1180)
+WriteAttribute("src", Tuple.Create(" src=\"", 1252), Tuple.Create("\"", 1281)
             
-            #line 31 "..\..\Views\Banners\_Banners.cshtml"
-, Tuple.Create(Tuple.Create("", 1157), Tuple.Create<System.Object, System.Int32>(banner.OptimizedImgUrl
+            #line 36 "..\..\Views\Banners\_Banners.cshtml"
+, Tuple.Create(Tuple.Create("", 1258), Tuple.Create<System.Object, System.Int32>(banner.OptimizedImgUrl
             
             #line default
             #line hidden
-, 1157), false)
+, 1258), false)
 );
 
 WriteLiteral(" style=\"width:auto;height:auto;\"");
 
-WriteLiteral(" class=\"center-block\"");
+WriteLiteral(" class=\"carousel-image-desktop center-block\"");
+
+WriteLiteral(" />\r\n                        <img");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 1391), Tuple.Create("\"", 1426)
+            
+            #line 37 "..\..\Views\Banners\_Banners.cshtml"
+, Tuple.Create(Tuple.Create("", 1397), Tuple.Create<System.Object, System.Int32>(banner.OptimizedMobileImgUrl
+            
+            #line default
+            #line hidden
+, 1397), false)
+);
+
+WriteLiteral(" style=\"width:auto;height:auto;\"");
+
+WriteLiteral(" class=\"carousel-image-mobile\"");
 
 WriteLiteral(" />\r\n                    </a>\r\n                </div>\r\n");
 
             
-            #line 34 "..\..\Views\Banners\_Banners.cshtml"
+            #line 40 "..\..\Views\Banners\_Banners.cshtml"
             }
 
             
@@ -227,13 +271,13 @@ WriteLiteral(" />\r\n                    </a>\r\n                </div>\r\n");
 WriteLiteral("        </div>\r\n\r\n");
 
             
-            #line 37 "..\..\Views\Banners\_Banners.cshtml"
+            #line 43 "..\..\Views\Banners\_Banners.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 37 "..\..\Views\Banners\_Banners.cshtml"
+            #line 43 "..\..\Views\Banners\_Banners.cshtml"
          if (Model.ShowNavControls)
         {
 
@@ -244,7 +288,16 @@ WriteLiteral("            <a");
 
 WriteLiteral(" class=\"left carousel-control\"");
 
-WriteLiteral(" href=\"#banner-carousel\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 1669), Tuple.Create("\"", 1686)
+, Tuple.Create(Tuple.Create("", 1676), Tuple.Create("#", 1676), true)
+            
+            #line 45 "..\..\Views\Banners\_Banners.cshtml"
+, Tuple.Create(Tuple.Create("", 1677), Tuple.Create<System.Object, System.Int32>(bannerId
+            
+            #line default
+            #line hidden
+, 1677), false)
+);
 
 WriteLiteral(" role=\"button\"");
 
@@ -266,7 +319,16 @@ WriteLiteral("            <a");
 
 WriteLiteral(" class=\"right carousel-control\"");
 
-WriteLiteral(" href=\"#banner-carousel\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 1929), Tuple.Create("\"", 1946)
+, Tuple.Create(Tuple.Create("", 1936), Tuple.Create("#", 1936), true)
+            
+            #line 49 "..\..\Views\Banners\_Banners.cshtml"
+, Tuple.Create(Tuple.Create("", 1937), Tuple.Create<System.Object, System.Int32>(bannerId
+            
+            #line default
+            #line hidden
+, 1937), false)
+);
 
 WriteLiteral(" role=\"button\"");
 
@@ -285,7 +347,7 @@ WriteLiteral(" class=\"sr-only\"");
 WriteLiteral(">Próximo</span>\r\n            </a>\r\n");
 
             
-            #line 47 "..\..\Views\Banners\_Banners.cshtml"
+            #line 53 "..\..\Views\Banners\_Banners.cshtml"
         }
 
             
@@ -294,7 +356,7 @@ WriteLiteral(">Próximo</span>\r\n            </a>\r\n");
 WriteLiteral("    </div>\r\n");
 
             
-            #line 49 "..\..\Views\Banners\_Banners.cshtml"
+            #line 55 "..\..\Views\Banners\_Banners.cshtml"
 }
 
             

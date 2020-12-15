@@ -602,6 +602,10 @@
     <Compile Include="Migrations\202012091238014_AddCartInOrder.Designer.cs">
       <DependentUpon>202012091238014_AddCartInOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012151935427_BannerMobile.cs" />
+    <Compile Include="Migrations\202012151935427_BannerMobile.Designer.cs">
+      <DependentUpon>202012151935427_BannerMobile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Data\MyDbConnection.cs" />
     <Compile Include="Data\Repositories\AdminReportRepository.cs" />
@@ -893,6 +897,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012091238014_AddCartInOrder.resx">
       <DependentUpon>202012091238014_AddCartInOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012151935427_BannerMobile.resx">
+      <DependentUpon>202012151935427_BannerMobile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

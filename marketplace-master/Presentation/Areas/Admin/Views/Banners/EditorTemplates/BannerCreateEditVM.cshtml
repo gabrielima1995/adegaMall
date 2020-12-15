@@ -5,6 +5,7 @@
 @if (Html.IsCurrent("Edit", "Banners"))
 {
     @Html.HiddenFor(model => model.Banner.ImageUrl)
+    @Html.HiddenFor(model => model.Banner.MobileImageUrl)
 }
 
 <div class="form-group">
@@ -14,12 +15,26 @@
     @Html.ValidationMessageFor(model => model.Banner.ImageUrl)
     <small class="help-block">
         @Request.GetLocalizedString("BANNER_IMAGE_URL_TEXT")
-        <a href="/assets/images/template-banner-1920-530.jpg" target="_blank">Template</a>
+        @*<a href="/assets/images/template-banner-1920-530.jpg" target="_blank">Template</a>*@
     </small>
 
     @if (Model.Banner.ImageUrl != null)
     {
         <p><img src="@Model.Banner.ImageThumbLg" alt="@Model.Banner.ImageUrl" /></p>
+    }
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Banner.MobileImageUrl)
+    <input type="file" name="bannermobileimage" />
+    @Html.ValidationMessageFor(model => model.Banner.MobileImageUrl)
+    <small class="help-block">
+        @Request.GetLocalizedString("BANNER_MOBILE_IMAGE_URL_TEXT")
+        @*<a href="/assets/images/template-banner-1920-530.jpg" target="_blank">Template</a>*@
+    </small>
+    @if (Model.Banner.MobileImageUrl != null)
+    {
+        <p><img src="@Model.Banner.MobileImageThumbLg" alt="@Model.Banner.MobileImageUrl" /></p>
     }
 </div>
 

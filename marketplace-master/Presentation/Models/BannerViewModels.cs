@@ -1,4 +1,5 @@
-﻿using Application.Helpers;
+﻿using System;
+using Application.Helpers;
 using Domain.Entities;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -26,9 +27,22 @@ namespace Presentation.Models
     }
 
     [NotMapped]
-    public class BannerItemVM : Banner
+    public class BannerItemVM
     {
-        public string OptimizedImgUrl => ImgHelper.BlobToCdn(ImageUrl, new { width = 1920, height = 530, mode = "crop", scale = "both" });
+        public Guid Id { get; set; }
+        public string ImageUrl { get; set; }
+        public string MobileImageUrl { get; set; }
+        public string ActionUrl { get; set; }
+        public DateTime? StartsAt { get; set; }
+        public DateTime? ExpiresAt { get; set; }
+
+        public string OptimizedImgUrl =>
+            ImgHelper.BlobToCdn(ImageUrl, new { width = 1920, height = 530, mode = "crop", scale = "both" });
+
+        public string OptimizedMobileImgUrl =>
+            !string.IsNullOrEmpty(MobileImageUrl)
+                ? ImgHelper.BlobToCdn(MobileImageUrl, new { width = 750, height = 530, mode = "crop", scale = "both" })
+                : ImgHelper.BlobToCdn(ImageUrl, new { width = 1320, height = 530, mode = "crop", scale = "both" });
 
         public BannerItemVM()
         {
@@ -40,6 +54,7 @@ namespace Presentation.Models
             StartsAt = domainModel.StartsAt;
             ExpiresAt = domainModel.ExpiresAt;
             ImageUrl = domainModel.ImageUrl;
+            MobileImageUrl = domainModel.MobileImageUrl;
             ActionUrl = domainModel.ActionUrl;
         }
     }

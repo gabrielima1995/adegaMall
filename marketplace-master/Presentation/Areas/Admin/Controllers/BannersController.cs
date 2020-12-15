@@ -4,6 +4,7 @@ using Presentation.Areas.Admin.Models;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using Domain.Entities;
 
 namespace Presentation.Areas.Admin.Controllers
 {
@@ -43,7 +44,12 @@ namespace Presentation.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = _bannerService.Create(viewModel.Banner.ToDomainModel(), GetFileUpload());
+                var banner = viewModel.Banner.ToDomainModel(new Banner());
+
+                var result = _bannerService.Create(
+                    banner, 
+                    GetFileUpload("bannerimage"),
+                    GetFileUpload("bannermobileimage"));
 
                 if (result.OK) return RedirectToAction("Index");
 
@@ -71,7 +77,15 @@ namespace Presentation.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = _bannerService.Update(viewModel.Banner.ToDomainModel(), GetFileUpload());
+                var banner = _bannerService.GetById(viewModel.Banner.Id);
+                if (banner == null) return HttpNotFound();
+
+                viewModel.Banner.ToDomainModel(banner);
+
+                var result = _bannerService.Update(
+                    banner,
+                    GetFileUpload("bannerimage"),
+                    GetFileUpload("bannermobileimage"));
 
                 if (result.OK) return RedirectToAction("Index");
 
@@ -96,16 +110,16 @@ namespace Presentation.Areas.Admin.Controllers
             ModelState.AddErrors(result);
             var viewModel = new BannerDeleteViewModel { Banner = new BannerVM(banner) };
 
-            return View(viewModel);
+            return RedirectToAction("Index");
         }
 
-        private FileUpload GetFileUpload()
+        private FileUpload GetFileUpload(string name)
         {
             if (Request.Files.Count > 0)
             {
-                var imgFile = Request.Files[0];
-                var fileUpload = new FileUpload(imgFile.InputStream, imgFile.FileName, imgFile.ContentType);
-                return fileUpload;
+                var imgFile = Request.Files.Get(name);
+                if (imgFile == null) return null;
+                return new FileUpload(imgFile.InputStream, imgFile.FileName, imgFile.ContentType);
             }
 
             return null;
