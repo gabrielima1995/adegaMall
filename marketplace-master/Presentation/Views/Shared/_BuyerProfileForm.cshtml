@@ -105,9 +105,9 @@
         }
     }
 
-    if (config.Buyer.DocumentNumber.Enabled || config.Payment.Enabled)
-    {
-        <div class="row">
+    <div class="row">
+        @if (config.Buyer.DocumentNumber.Enabled || config.Payment.Enabled)
+        {
             <div class="col-xs-12 col-sm-6">
                 <div class="form-group">
                     @Html.LabelFor(i => i.DocumentNumber)
@@ -124,10 +124,8 @@
                     @Html.HiddenFor(i => i.DocumentNumberRequired)
                 </div>
             </div>
-        </div>
-    }
+        }
 
-    <div class="row">
         @if (config.Buyer.DateOfBirth.Enabled)
         {
             <div class="col-xs-12 col-sm-6">
