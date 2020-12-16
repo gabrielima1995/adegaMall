@@ -174,6 +174,12 @@
         autosize($container.find('textarea'));
 
         $container.find('[data-toggle="tooltip"]').tooltip();
+
+        $container.find('.js-viacep')
+            .each(function() {
+                var $this = $(this);
+                setViaCep($this);
+            });
     };
 
     function fixMask(e, callback) {
@@ -228,4 +234,58 @@
         catch (e) { console.log("plugins.js -> unmask -> error:" + e); }
     }
 
+    function preencheFormulario(dados, $container) {
+        var logradouro = dados.logradouro || '';
+        var bairro = dados.bairro || '';
+        var cidadeEEstado = dados.localidade
+            ? dados.localidade + ' - ' + dados.uf
+            : '';
+
+        $container.find("input[name='Address']").val(logradouro);
+        $container.find("input[name='AddressNeighborhood']").val(bairro);
+        $container.find("select[name='CityAndState']")
+            .append('<option value="' + cidadeEEstado + '">' + cidadeEEstado + '</option>')
+            .val(cidadeEEstado)
+            .trigger('change.select2');
+        $container.find("input[name='CityAndState']").val(cidadeEEstado);
+    }
+
+    function setViaCep($elem) {
+        //Quando o campo cep perde o foco.
+        $elem.blur(function() {
+            var $this = $(this);
+            var $container = $this.parent().parent().parent().parent();
+
+            var val = $this.val();
+            if (!val) return;
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = val.replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep !== "") {
+                //Valida o formato do CEP.
+                if (/^[0-9]{8}$/.test(cep)) {
+                    //Consulta o webservice viacep.com.br/
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?",
+                        function(dados) {
+                            if (!("erro" in dados)) {
+                                preencheFormulario(dados, $container);
+                            } else {
+                                //cep pesquisado não foi encontrado.
+                                preencheFormulario({}, $container);
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                } else {
+                    //cep é inválido.
+                    preencheFormulario({}, $container);
+                    alert("CEP inválido.");
+                }
+            } else {
+                //cep sem valor, limpa formulário.
+                preencheFormulario({}, $container);
+            }
+        });
+    }
 })(window.jQuery, window.MaaS || {});

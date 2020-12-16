@@ -186,8 +186,8 @@
             <div class="col-xs-12 col-sm-4">
                 <div class="form-group">
                     @Html.LabelFor(i => i.AddressZipCode)
-                    @Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control" + (config.Buyer.AllowPlainTextZipCode ? "" : " js-zipcode"), placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") })
-                    @Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger js-viacep" })
+                    @Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control js-viacep" + (config.Buyer.AllowPlainTextZipCode ? "" : " js-zipcode"), placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") })
+                    @Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

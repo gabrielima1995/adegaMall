@@ -1043,7 +1043,7 @@ WriteLiteral("                    ");
 
             
             #line 189 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-               Write(Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control" + (config.Buyer.AllowPlainTextZipCode ? "" : " js-zipcode"), placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") }));
+               Write(Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control js-viacep" + (config.Buyer.AllowPlainTextZipCode ? "" : " js-zipcode"), placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") }));
 
             
             #line default
@@ -1054,7 +1054,7 @@ WriteLiteral("                    ");
 
             
             #line 190 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-               Write(Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger js-viacep" }));
+               Write(Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger" }));
 
             
             #line default

@@ -91,7 +91,7 @@ WriteLiteral(" class=\"row\"");
 
 WriteLiteral(">\r\n        <div");
 
-WriteLiteral(" class=\"col-xs-12 col-sm-9\"");
+WriteLiteral(" class=\"col-xs-12 col-sm-4\"");
 
 WriteLiteral(">\r\n            <div");
 
@@ -103,7 +103,7 @@ WriteLiteral("                ");
 
             
             #line 11 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
-           Write(Html.LabelFor(i => i.Address));
+           Write(Html.LabelFor(i => i.AddressZipCode));
 
             
             #line default
@@ -114,7 +114,7 @@ WriteLiteral("                ");
 
             
             #line 12 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
-           Write(Html.TextBoxFor(i => i.Address, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_INPUT") }));
+           Write(Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control js-zipcode js-viacep", placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") }));
 
             
             #line default
@@ -125,6 +125,60 @@ WriteLiteral("                ");
 
             
             #line 13 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+           Write(Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            </div>\r\n        </div>\r\n    </div>\r\n");
+
+            
+            #line 17 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div");
+
+WriteLiteral(" class=\"row\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"col-xs-12 col-sm-9\"");
+
+WriteLiteral(">\r\n            <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 21 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+           Write(Html.LabelFor(i => i.Address));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 22 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+           Write(Html.TextBoxFor(i => i.Address, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_INPUT") }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 23 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
            Write(Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" }));
 
             
@@ -143,7 +197,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 19 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 29 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
            Write(Html.LabelFor(i => i.AddressNumber));
 
             
@@ -154,7 +208,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 20 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 30 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
            Write(Html.TextBoxFor(i => i.AddressNumber, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_NUMBER_INPUT") }));
 
             
@@ -165,7 +219,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 21 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 31 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
            Write(Html.ValidationMessageFor(model => model.AddressNumber, "", new { @class = "text-danger" }));
 
             
@@ -174,7 +228,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 25 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 35 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
 
 
             
@@ -186,7 +240,7 @@ WriteLiteral(" class=\"row\"");
 
 WriteLiteral(">\r\n        <div");
 
-WriteLiteral(" class=\"col-xs-12 col-sm-4\"");
+WriteLiteral(" class=\"col-xs-12 col-sm-5\"");
 
 WriteLiteral(">\r\n            <div");
 
@@ -197,7 +251,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 29 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 39 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
            Write(Html.LabelFor(i => i.AddressAdditionalInfo));
 
             
@@ -208,7 +262,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 30 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 40 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
            Write(Html.TextBoxFor(i => i.AddressAdditionalInfo, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_ADDITIONAL_INFO_LABEL") }));
 
             
@@ -219,7 +273,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 31 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 41 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
            Write(Html.ValidationMessageFor(model => model.AddressAdditionalInfo, "", new { @class = "text-danger" }));
 
             
@@ -227,7 +281,7 @@ WriteLiteral("                ");
             #line hidden
 WriteLiteral("\r\n            </div>\r\n        </div>\r\n\r\n        <div");
 
-WriteLiteral(" class=\"col-xs-12 col-sm-4\"");
+WriteLiteral(" class=\"col-xs-12 col-sm-7\"");
 
 WriteLiteral(">\r\n            <div");
 
@@ -238,7 +292,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 37 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 47 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
            Write(Html.LabelFor(i => i.AddressNeighborhood));
 
             
@@ -249,7 +303,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 38 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 48 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
            Write(Html.TextBoxFor(i => i.AddressNeighborhood, new { @class = "form-control", placeholder = Request.GetLocalizedString("NEIGHBORHOOD_INPUT") }));
 
             
@@ -260,49 +314,8 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 39 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 49 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
            Write(Html.ValidationMessageFor(model => model.AddressNeighborhood, "", new { @class = "text-danger" }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n            </div>\r\n        </div>\r\n\r\n        <div");
-
-WriteLiteral(" class=\"col-xs-12 col-sm-4\"");
-
-WriteLiteral(">\r\n            <div");
-
-WriteLiteral(" class=\"form-group\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                ");
-
-            
-            #line 45 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
-           Write(Html.LabelFor(i => i.AddressZipCode));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("                ");
-
-            
-            #line 46 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
-           Write(Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control js-zipcode", placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("                ");
-
-            
-            #line 47 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
-           Write(Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger" }));
 
             
             #line default
@@ -310,7 +323,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 51 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 53 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
 
 
             
@@ -325,7 +338,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 53 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 55 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
    Write(Html.LabelFor(i => i.CityAndState));
 
             
@@ -336,7 +349,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("        ");
 
             
-            #line 55 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 57 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
    Write(Html.Partial("_CitiesSelect", Model));
 
             
@@ -345,7 +358,7 @@ WriteLiteral("        ");
 WriteLiteral("\r\n    </div>\r\n");
 
             
-            #line 57 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 59 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
 
 
             
@@ -360,7 +373,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 59 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 61 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
    Write(Html.Localized("SAVE_CHANGES_BUTTON", "button", new { type = "submit", @class = "btn btn-primary btn-block" }));
 
             
@@ -369,7 +382,7 @@ WriteLiteral("        ");
 WriteLiteral("\r\n    </div>\r\n");
 
             
-            #line 61 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
+            #line 63 "..\..\Views\Products\Cart\_NewShippingAddressForm.cshtml"
 }
             
             #line default
