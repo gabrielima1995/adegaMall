@@ -157,33 +157,33 @@ namespace Infra.SmartSearchAdapter.Products
                 if (latLngFilter != null) filters.Add(latLngFilter);
             }
 
-            var hasDateOptions =
-                request.OnlySatAndSun || request.OnlyMonToFri ||
-                request.OnlyMorning || request.OnlyAfternoon || request.OnlyNight;
+            //var hasDateOptions =
+            //    request.OnlySatAndSun || request.OnlyMonToFri ||
+            //    request.OnlyMorning || request.OnlyAfternoon || request.OnlyNight;
 
-            if (hasDateOptions)
-            {
-                var from = IntDateHelper.Convert(request.StartDate ?? DateTime.Today);
-                var to = IntDateHelper.Convert(request.EndDate ?? DateTime.Today.AddDays(365));
+            //if (hasDateOptions)
+            //{
+            //    var from = IntDateHelper.Convert(request.StartDate ?? DateTime.Today);
+            //    var to = IntDateHelper.Convert(request.EndDate ?? DateTime.Today.AddDays(365));
 
-                if (request.OnlySatAndSun)
-                    filters.Add(new RangeFilter("AvailableOnWeekends", from, to));
+            //    if (request.OnlySatAndSun)
+            //        filters.Add(new RangeFilter("AvailableOnWeekends", from, to));
 
-                else if (request.OnlyMonToFri)
-                    filters.Add(new RangeFilter("AvailableMondayToFriday", from, to));
+            //    else if (request.OnlyMonToFri)
+            //        filters.Add(new RangeFilter("AvailableMondayToFriday", from, to));
 
-                if ((request.OnlyMorning || request.OnlyAfternoon || request.OnlyNight) && !(request.OnlyMorning && request.OnlyAfternoon && request.OnlyNight))
-                {
-                    var periodFilters = new List<IFilter>();
+            //    if ((request.OnlyMorning || request.OnlyAfternoon || request.OnlyNight) && !(request.OnlyMorning && request.OnlyAfternoon && request.OnlyNight))
+            //    {
+            //        var periodFilters = new List<IFilter>();
 
-                    if (request.OnlyMorning) periodFilters.Add(new RangeFilter("AvailableMorning", from, to));
-                    if (request.OnlyAfternoon) periodFilters.Add(new RangeFilter("AvailableAfternoon", from, to));
-                    if (request.OnlyNight) periodFilters.Add(new RangeFilter("AvailableNight", from, to));
+            //        if (request.OnlyMorning) periodFilters.Add(new RangeFilter("AvailableMorning", from, to));
+            //        if (request.OnlyAfternoon) periodFilters.Add(new RangeFilter("AvailableAfternoon", from, to));
+            //        if (request.OnlyNight) periodFilters.Add(new RangeFilter("AvailableNight", from, to));
 
-                    if (periodFilters.Count == 1) filters.Add(periodFilters[0]);
-                    else filters.Add(new FilterGroup(GroupingClause.Or, periodFilters));
-                }
-            }
+            //        if (periodFilters.Count == 1) filters.Add(periodFilters[0]);
+            //        else filters.Add(new FilterGroup(GroupingClause.Or, periodFilters));
+            //    }
+            //}
 
             #endregion Filtros referentes à entrada do usuário
 
@@ -222,8 +222,8 @@ namespace Infra.SmartSearchAdapter.Products
             }
 
             sortOptions.Add(new SortOption("AverageRating", SortDirection.Descending));
-            sortOptions.Add(new SortOption("SellerCreatedAt", SortDirection.Ascending));
-            sortOptions.Add(new SortOption("UpdatedAt", SortDirection.Descending));
+            //sortOptions.Add(new SortOption("SellerCreatedAt", SortDirection.Ascending));
+            //sortOptions.Add(new SortOption("UpdatedAt", SortDirection.Descending));
 
             return sortOptions.ToArray();
         }

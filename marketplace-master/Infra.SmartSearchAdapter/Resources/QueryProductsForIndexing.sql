@@ -60,13 +60,19 @@
         OFFSET 0 ROWS),
 
     cteBestPriceProductsTemplate AS(
-        select Id,
-            BasePrice,
-            ProductTemplateId,
-            row_number() over(partition by ProductTemplateId order by BasePrice) rn
+        select 
+            Product.Id,
+            Product.BasePrice,
+            Product.ProductTemplateId,
+            row_number() over(partition by Product.ProductTemplateId order by Product.BasePrice) rn
         from Product
-        where ProductTemplateId is not null
-        group by ProductTemplateId, BasePrice, Id),
+        join Person Seller on Seller.Id = Product.Store_SellerId
+        where Product.ProductTemplateId IS NOT NULL AND
+            Seller.SupplierGatewayId IS NOT NULL AND
+            Seller.[Enabled] = 1 AND 
+            Product.Deleted = 0 AND
+            Product.IsDisabled = 0
+        group by Product.ProductTemplateId, Product.BasePrice, Product.Id),
 
     cteProductsWithAggregatedData AS (
         SELECT
