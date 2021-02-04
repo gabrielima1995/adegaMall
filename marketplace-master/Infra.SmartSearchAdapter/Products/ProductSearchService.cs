@@ -221,7 +221,7 @@ namespace Infra.SmartSearchAdapter.Products
                     break;
             }
 
-            sortOptions.Add(new SortOption("AverageRating", SortDirection.Descending));
+            //sortOptions.Add(new SortOption("AverageRating", SortDirection.Descending));
             //sortOptions.Add(new SortOption("SellerCreatedAt", SortDirection.Ascending));
             //sortOptions.Add(new SortOption("UpdatedAt", SortDirection.Descending));
 

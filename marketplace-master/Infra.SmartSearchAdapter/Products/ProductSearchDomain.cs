@@ -13,7 +13,7 @@ namespace Infra.SmartSearchAdapter.Products
         {
             new Field("Id", FieldType.Literal),
             new Field("Title", FieldType.Text, FieldRelevance.Higher, enableSearching: true, enableSorting: true),
-            new Field("Description", FieldType.Text, FieldRelevance.Normal, enableSearching: true),
+            new Field("Description", FieldType.Text, FieldRelevance.High, enableSearching: true),
             new Field("Specifications", FieldType.Text, FieldRelevance.Normal, enableSearching: true),
             new Field("CustomId", FieldType.Text),
             new Field("CoverImageUrl", FieldType.Literal),
