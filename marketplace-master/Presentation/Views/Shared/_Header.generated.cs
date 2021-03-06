@@ -83,7 +83,384 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<!-- MENU -->\r\n<div");
+WriteLiteral("\r\n\r\n<!-- STRIP -->\r\n<div");
+
+WriteLiteral(" class=\"strip\"");
+
+WriteLiteral(">\r\n    <div");
+
+WriteLiteral(" class=\"container\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"row\"");
+
+WriteLiteral(">\r\n            <div");
+
+WriteLiteral(" class=\"col-xs-12 strip-content-1\"");
+
+WriteLiteral(">\r\n                <div");
+
+WriteLiteral(" class=\"strip-text\"");
+
+WriteLiteral(">Olá, seja bem vindo ao maior marketplace de bebidas do Brasil!</div>\r\n\r\n        " +
+"        <div");
+
+WriteLiteral(" class=\"strip-links-wrapper\"");
+
+WriteLiteral(">\r\n                    <div");
+
+WriteLiteral(" class=\"strip-links\"");
+
+WriteLiteral(">\r\n");
+
+            
+            #line 28 "..\..\Views\Shared\_Header.cshtml"
+                        
+            
+            #line default
+            #line hidden
+            
+            #line 28 "..\..\Views\Shared\_Header.cshtml"
+                         if (!loginProfile.IsBuyer() && config.Search.QuotesSearch.Enabled)
+                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                            <a");
+
+WriteLiteral(" class=\"strip-link\"");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 1156), Tuple.Create("\"", 1203)
+            
+            #line 30 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 1163), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Search", "Quotes")
+            
+            #line default
+            #line hidden
+, 1163), false)
+);
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                                ");
+
+            
+            #line 31 "..\..\Views\Shared\_Header.cshtml"
+                           Write(Html.Localized("QUOTE_SEARCH_MENU_LABEL"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                            </a>\r\n");
+
+            
+            #line 33 "..\..\Views\Shared\_Header.cshtml"
+                        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 35 "..\..\Views\Shared\_Header.cshtml"
+                        
+            
+            #line default
+            #line hidden
+            
+            #line 35 "..\..\Views\Shared\_Header.cshtml"
+                         if (isAuthenticated)
+                        {
+                            if (isUser)
+                            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                <a");
+
+WriteLiteral(" class=\"strip-link\"");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 1545), Tuple.Create("\"", 1658)
+            
+            #line 39 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 1552), Tuple.Create<System.Object, System.Int32>(loginProfile.IsBuyer() ? Url.AddLang(config.Buyer.MainPageUrl) : Url.AddLang(config.Seller.MainPageUrl)
+            
+            #line default
+            #line hidden
+, 1552), false)
+);
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                                    ");
+
+            
+            #line 40 "..\..\Views\Shared\_Header.cshtml"
+                               Write(Html.Localized("MY_ACCOUNT_LINK"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                </a>\r\n");
+
+WriteLiteral("                                <input");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" id=\"loginProfileName\"");
+
+WriteAttribute("value", Tuple.Create(" value=\"", 1846), Tuple.Create("\"", 1872)
+            
+            #line 42 "..\..\Views\Shared\_Header.cshtml"
+  , Tuple.Create(Tuple.Create("", 1854), Tuple.Create<System.Object, System.Int32>(loginProfile.Name
+            
+            #line default
+            #line hidden
+, 1854), false)
+);
+
+WriteLiteral(" />\r\n");
+
+WriteLiteral("                                <input");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" id=\"loginProfileEmail\"");
+
+WriteAttribute("value", Tuple.Create(" value=\"", 1953), Tuple.Create("\"", 1980)
+            
+            #line 43 "..\..\Views\Shared\_Header.cshtml"
+   , Tuple.Create(Tuple.Create("", 1961), Tuple.Create<System.Object, System.Int32>(loginProfile.Email
+            
+            #line default
+            #line hidden
+, 1961), false)
+);
+
+WriteLiteral(" />\r\n");
+
+WriteLiteral("                                <input");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" id=\"loginProfilePhone\"");
+
+WriteAttribute("value", Tuple.Create(" value=\"", 2061), Tuple.Create("\"", 2094)
+            
+            #line 44 "..\..\Views\Shared\_Header.cshtml"
+   , Tuple.Create(Tuple.Create("", 2069), Tuple.Create<System.Object, System.Int32>(loginProfile.PhoneNumber
+            
+            #line default
+            #line hidden
+, 2069), false)
+);
+
+WriteLiteral(" />\r\n");
+
+            
+            #line 45 "..\..\Views\Shared\_Header.cshtml"
+                            }
+                            else if (isAdmin)
+                            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                <a");
+
+WriteLiteral(" class=\"strip-link\"");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 2262), Tuple.Create("\"", 2331)
+            
+            #line 48 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 2269), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Sellers", new {area = "Admin"})
+            
+            #line default
+            #line hidden
+, 2269), false)
+);
+
+WriteLiteral(">\r\n                                    <strong>Painel Admin</strong>\r\n           " +
+"                     </a>\r\n");
+
+            
+            #line 51 "..\..\Views\Shared\_Header.cshtml"
+                            }
+
+                            using (Html.BeginForm("LogOff", "Account", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { id = "logoutFormTop" }))
+                            {
+                                
+            
+            #line default
+            #line hidden
+            
+            #line 55 "..\..\Views\Shared\_Header.cshtml"
+                           Write(Html.AntiForgeryToken());
+
+            
+            #line default
+            #line hidden
+            
+            #line 55 "..\..\Views\Shared\_Header.cshtml"
+                                                        
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                <a");
+
+WriteLiteral(" class=\"strip-link\"");
+
+WriteLiteral(" href=\"javascript:document.getElementById(\'logoutFormTop\').submit()\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                                    ");
+
+            
+            #line 58 "..\..\Views\Shared\_Header.cshtml"
+                               Write(Html.Localized("LOGOUT_LINK", "strong"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                </a>\r\n");
+
+            
+            #line 60 "..\..\Views\Shared\_Header.cshtml"
+                            }
+                        }
+                        else
+                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                            <a");
+
+WriteLiteral(" class=\"strip-link\"");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 3129), Tuple.Create("\"", 3177)
+            
+            #line 64 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 3136), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Buyer", "Register")
+            
+            #line default
+            #line hidden
+, 3136), false)
+);
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                                ");
+
+            
+            #line 65 "..\..\Views\Shared\_Header.cshtml"
+                           Write(Html.Localized("BUYER_JOIN_BUTTON_FULL", "strong"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                            </a>\r\n");
+
+WriteLiteral("                            <a");
+
+WriteLiteral(" class=\"strip-link\"");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 3349), Tuple.Create("\"", 3396)
+            
+            #line 67 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 3356), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Login", "Account")
+            
+            #line default
+            #line hidden
+, 3356), false)
+);
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                                ");
+
+            
+            #line 68 "..\..\Views\Shared\_Header.cshtml"
+                           Write(Html.Localized("LOGIN_LINK", "strong"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                            </a>\r\n");
+
+            
+            #line 70 "..\..\Views\Shared\_Header.cshtml"
+                        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    </div>\r\n                    <div");
+
+WriteLiteral(" class=\"strip-social-links\"");
+
+WriteLiteral(">\r\n                        <a");
+
+WriteLiteral(" class=\"strip-social-link\"");
+
+WriteLiteral(" href=\"https://www.facebook.com/adegamall/\"");
+
+WriteLiteral(" title=\"Facebook da Adega Mall\"");
+
+WriteLiteral(">\r\n                            <i");
+
+WriteLiteral(" class=\"fab fa-facebook-square\"");
+
+WriteLiteral("></i>\r\n                        </a>\r\n                        <a");
+
+WriteLiteral(" class=\"strip-social-link\"");
+
+WriteLiteral(" href=\"https://www.instagram.com/adegamall/\"");
+
+WriteLiteral(" title=\"Instagram da Adega Mall\"");
+
+WriteLiteral(">\r\n                            <i");
+
+WriteLiteral(" class=\"fab fa-instagram\"");
+
+WriteLiteral("></i>\r\n                        </a>\r\n                    </div>\r\n                " +
+"</div>\r\n            </div>\r\n            <div");
+
+WriteLiteral(" class=\"col-xs-12 strip-content-2\"");
+
+WriteLiteral(">\r\n                <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 4209), Tuple.Create("\"", 4253)
+            
+            #line 83 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 4216), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Cart")
+            
+            #line default
+            #line hidden
+, 4216), false)
+);
+
+WriteLiteral(" class=\"cart-menu-btn\"");
+
+WriteLiteral(" title=\"Ver carrinho de compras\"");
+
+WriteLiteral(">\r\n                    <i");
+
+WriteLiteral(" class=\"fa fa-shopping-cart cart-icon\"");
+
+WriteLiteral("></i>\r\n                    <span");
+
+WriteLiteral(" class=\"badge js-cart-qty\"");
+
+WriteLiteral(">0</span>\r\n                </a>\r\n            </div>\r\n        </div>\r\n    </div>\r\n" +
+"</div>\r\n\r\n<!-- MENU -->\r\n<div");
 
 WriteLiteral(" class=\"menu\"");
 
@@ -109,36 +486,36 @@ WriteLiteral(" class=\"media-figure\"");
 
 WriteLiteral(">\r\n                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 907), Tuple.Create("\"", 951)
+WriteAttribute("href", Tuple.Create(" href=\"", 4796), Tuple.Create("\"", 4840)
             
-            #line 26 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 914), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Home")
+            #line 99 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 4803), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Home")
             
             #line default
             #line hidden
-, 914), false)
+, 4803), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 952), Tuple.Create("\"", 983)
+WriteAttribute("title", Tuple.Create(" title=\"", 4841), Tuple.Create("\"", 4872)
             
-            #line 26 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 960), Tuple.Create<System.Object, System.Int32>(config.ApplicationName
+            #line 99 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 4849), Tuple.Create<System.Object, System.Int32>(config.ApplicationName
             
             #line default
             #line hidden
-, 960), false)
+, 4849), false)
 );
 
 WriteLiteral(">\r\n");
 
             
-            #line 27 "..\..\Views\Shared\_Header.cshtml"
+            #line 100 "..\..\Views\Shared\_Header.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 27 "..\..\Views\Shared\_Header.cshtml"
+            #line 100 "..\..\Views\Shared\_Header.cshtml"
                              if (isHome)
                             {
 
@@ -147,32 +524,32 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1096), Tuple.Create("\"", 1132)
+WriteAttribute("src", Tuple.Create(" src=\"", 4985), Tuple.Create("\"", 5021)
             
-            #line 29 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 1102), Tuple.Create<System.Object, System.Int32>(CustomAssetsHelper.LogoHome()
+            #line 102 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 4991), Tuple.Create<System.Object, System.Int32>(CustomAssetsHelper.LogoHome()
             
             #line default
             #line hidden
-, 1102), false)
+, 4991), false)
 );
 
 WriteLiteral(" class=\"logo\"");
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 1146), Tuple.Create("\"", 1175)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 5035), Tuple.Create("\"", 5064)
             
-            #line 29 "..\..\Views\Shared\_Header.cshtml"
-            , Tuple.Create(Tuple.Create("", 1152), Tuple.Create<System.Object, System.Int32>(config.ApplicationName
+            #line 102 "..\..\Views\Shared\_Header.cshtml"
+            , Tuple.Create(Tuple.Create("", 5041), Tuple.Create<System.Object, System.Int32>(config.ApplicationName
             
             #line default
             #line hidden
-, 1152), false)
+, 5041), false)
 );
 
 WriteLiteral(">\r\n");
 
             
-            #line 30 "..\..\Views\Shared\_Header.cshtml"
+            #line 103 "..\..\Views\Shared\_Header.cshtml"
                             }
                             else
                             {
@@ -182,32 +559,32 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1311), Tuple.Create("\"", 1343)
+WriteAttribute("src", Tuple.Create(" src=\"", 5200), Tuple.Create("\"", 5232)
             
-            #line 33 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 1317), Tuple.Create<System.Object, System.Int32>(CustomAssetsHelper.Logo()
+            #line 106 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 5206), Tuple.Create<System.Object, System.Int32>(CustomAssetsHelper.Logo()
             
             #line default
             #line hidden
-, 1317), false)
+, 5206), false)
 );
 
 WriteLiteral(" class=\"logo\"");
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 1357), Tuple.Create("\"", 1386)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 5246), Tuple.Create("\"", 5275)
             
-            #line 33 "..\..\Views\Shared\_Header.cshtml"
-        , Tuple.Create(Tuple.Create("", 1363), Tuple.Create<System.Object, System.Int32>(config.ApplicationName
+            #line 106 "..\..\Views\Shared\_Header.cshtml"
+        , Tuple.Create(Tuple.Create("", 5252), Tuple.Create<System.Object, System.Int32>(config.ApplicationName
             
             #line default
             #line hidden
-, 1363), false)
+, 5252), false)
 );
 
 WriteLiteral(">\r\n");
 
             
-            #line 34 "..\..\Views\Shared\_Header.cshtml"
+            #line 107 "..\..\Views\Shared\_Header.cshtml"
                             }
 
             
@@ -230,14 +607,14 @@ WriteLiteral(">\r\n                                <form");
 
 WriteLiteral(" id=\"searchForm\"");
 
-WriteAttribute("action", Tuple.Create(" action=\"", 1688), Tuple.Create("\"", 1756)
+WriteAttribute("action", Tuple.Create(" action=\"", 5577), Tuple.Create("\"", 5645)
             
-            #line 40 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 1697), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Search", "Products", new {area = ""})
+            #line 113 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 5586), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Search", "Products", new {area = ""})
             
             #line default
             #line hidden
-, 1697), false)
+, 5586), false)
 );
 
 WriteLiteral(">\r\n                                    <i");
@@ -256,14 +633,14 @@ WriteLiteral(" type=\"text\"");
 
 WriteLiteral(" name=\"Product\"");
 
-WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 1983), Tuple.Create("\"", 2048)
+WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 5872), Tuple.Create("\"", 5937)
             
-            #line 43 "..\..\Views\Shared\_Header.cshtml"
-       , Tuple.Create(Tuple.Create("", 1997), Tuple.Create<System.Object, System.Int32>(Request.GetLocalizedString("PRODUCT_FILTER_INPUT")
+            #line 116 "..\..\Views\Shared\_Header.cshtml"
+       , Tuple.Create(Tuple.Create("", 5886), Tuple.Create<System.Object, System.Int32>(Request.GetLocalizedString("PRODUCT_FILTER_INPUT")
             
             #line default
             #line hidden
-, 1997), false)
+, 5886), false)
 );
 
 WriteLiteral(" />\r\n                                    </div>\r\n                                " +
@@ -285,13 +662,13 @@ WriteLiteral(">\r\n                                    ");
 WriteLiteral("\r\n");
 
             
-            #line 57 "..\..\Views\Shared\_Header.cshtml"
+            #line 130 "..\..\Views\Shared\_Header.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 57 "..\..\Views\Shared\_Header.cshtml"
+            #line 130 "..\..\Views\Shared\_Header.cshtml"
                                      if (blogUrl != null || (userConfig.BlogConfig.Enabled && !string.IsNullOrWhiteSpace(userConfig.BlogConfig.Address)))
                                     {
 
@@ -304,14 +681,14 @@ WriteLiteral(" class=\"top-menu-blog\"");
 
 WriteLiteral(">\r\n                                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3049), Tuple.Create("\"", 3064)
+WriteAttribute("href", Tuple.Create(" href=\"", 6938), Tuple.Create("\"", 6953)
             
-            #line 60 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 3056), Tuple.Create<System.Object, System.Int32>(blogUrl
+            #line 133 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 6945), Tuple.Create<System.Object, System.Int32>(blogUrl
             
             #line default
             #line hidden
-, 3056), false)
+, 6945), false)
 );
 
 WriteLiteral(" class=\"item-menu\"");
@@ -321,7 +698,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                                ");
 
             
-            #line 61 "..\..\Views\Shared\_Header.cshtml"
+            #line 134 "..\..\Views\Shared\_Header.cshtml"
                                            Write(Html.Localized("BLOG_LINK", "strong"));
 
             
@@ -331,7 +708,7 @@ WriteLiteral("\r\n                                            </a>\r\n          
 "           </li>\r\n");
 
             
-            #line 64 "..\..\Views\Shared\_Header.cshtml"
+            #line 137 "..\..\Views\Shared\_Header.cshtml"
                                     }
 
             
@@ -342,7 +719,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 66 "..\..\Views\Shared\_Header.cshtml"
+            #line 139 "..\..\Views\Shared\_Header.cshtml"
                                Write(Html.Action("MenuCategorias", "Home", new { mobile = false }));
 
             
@@ -351,13 +728,13 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 68 "..\..\Views\Shared\_Header.cshtml"
+            #line 141 "..\..\Views\Shared\_Header.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 68 "..\..\Views\Shared\_Header.cshtml"
+            #line 141 "..\..\Views\Shared\_Header.cshtml"
                                      foreach (var link in config.AdditionalLinks)
                                     {
                                         if ((link?.Enabled).GetValueOrDefault())
@@ -372,14 +749,14 @@ WriteLiteral(" class=\"top-menu-extra\"");
 
 WriteLiteral(">\r\n                                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3784), Tuple.Create("\"", 3800)
+WriteAttribute("href", Tuple.Create(" href=\"", 7673), Tuple.Create("\"", 7689)
             
-            #line 73 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 3791), Tuple.Create<System.Object, System.Int32>(link.Url
+            #line 146 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 7680), Tuple.Create<System.Object, System.Int32>(link.Url
             
             #line default
             #line hidden
-, 3791), false)
+, 7680), false)
 );
 
 WriteLiteral(" class=\"item-menu\"");
@@ -389,7 +766,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                                    ");
 
             
-            #line 74 "..\..\Views\Shared\_Header.cshtml"
+            #line 147 "..\..\Views\Shared\_Header.cshtml"
                                                Write(Html.Localized(link.Label, "strong"));
 
             
@@ -399,7 +776,7 @@ WriteLiteral("\r\n                                                </a>\r\n      
 "                   </li>\r\n");
 
             
-            #line 77 "..\..\Views\Shared\_Header.cshtml"
+            #line 150 "..\..\Views\Shared\_Header.cshtml"
                                         }
                                     }
 
@@ -420,341 +797,7 @@ WriteLiteral(">\r\n                    <ul");
 
 WriteLiteral(" class=\"links\"");
 
-WriteLiteral(">\r\n");
-
-            
-            #line 89 "..\..\Views\Shared\_Header.cshtml"
-                        
-            
-            #line default
-            #line hidden
-            
-            #line 89 "..\..\Views\Shared\_Header.cshtml"
-                         if (!User.Identity.GetLoginProfile().IsBuyer() && config.Search.QuotesSearch.Enabled)
-                        {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                            <li");
-
-WriteLiteral(" class=\"top-menu-quotesearch hidden-xs\"");
-
-WriteLiteral(">\r\n                                <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 4656), Tuple.Create("\"", 4703)
-            
-            #line 92 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 4663), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Search", "Quotes")
-            
-            #line default
-            #line hidden
-, 4663), false)
-);
-
-WriteLiteral(" class=\"item-menu\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                                    ");
-
-            
-            #line 93 "..\..\Views\Shared\_Header.cshtml"
-                               Write(Html.Localized("QUOTE_SEARCH_MENU_LABEL", "strong"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                </a>\r\n                            </li>\r\n");
-
-            
-            #line 96 "..\..\Views\Shared\_Header.cshtml"
-                        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        ");
-
-            
-            #line 97 "..\..\Views\Shared\_Header.cshtml"
-                         if (isAuthenticated)
-                        {
-                            if (isUser)
-                            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                <li");
-
-WriteLiteral(" class=\"top-menu-account hidden-xs\"");
-
-WriteLiteral(">\r\n                                    <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 5172), Tuple.Create("\"", 5285)
-            
-            #line 102 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 5179), Tuple.Create<System.Object, System.Int32>(loginProfile.IsBuyer() ? Url.AddLang(config.Buyer.MainPageUrl) : Url.AddLang(config.Seller.MainPageUrl)
-            
-            #line default
-            #line hidden
-, 5179), false)
-);
-
-WriteLiteral(" class=\"item-menu\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                                        ");
-
-            
-            #line 103 "..\..\Views\Shared\_Header.cshtml"
-                                   Write(Html.Localized("MY_ACCOUNT_LINK", "strong"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                        ");
-
-WriteLiteral("\r\n                                    </a>\r\n                                    <" +
-"input");
-
-WriteLiteral(" type=\"hidden\"");
-
-WriteLiteral(" id=\"loginProfileName\"");
-
-WriteAttribute("value", Tuple.Create(" value=\"", 5635), Tuple.Create("\"", 5661)
-            
-            #line 106 "..\..\Views\Shared\_Header.cshtml"
-      , Tuple.Create(Tuple.Create("", 5643), Tuple.Create<System.Object, System.Int32>(loginProfile.Name
-            
-            #line default
-            #line hidden
-, 5643), false)
-);
-
-WriteLiteral(" />\r\n                                    <input");
-
-WriteLiteral(" type=\"hidden\"");
-
-WriteLiteral(" id=\"loginProfileEmail\"");
-
-WriteAttribute("value", Tuple.Create(" value=\"", 5746), Tuple.Create("\"", 5773)
-            
-            #line 107 "..\..\Views\Shared\_Header.cshtml"
-       , Tuple.Create(Tuple.Create("", 5754), Tuple.Create<System.Object, System.Int32>(loginProfile.Email
-            
-            #line default
-            #line hidden
-, 5754), false)
-);
-
-WriteLiteral(" />\r\n                                    <input");
-
-WriteLiteral(" type=\"hidden\"");
-
-WriteLiteral(" id=\"loginProfilePhone\"");
-
-WriteAttribute("value", Tuple.Create(" value=\"", 5858), Tuple.Create("\"", 5891)
-            
-            #line 108 "..\..\Views\Shared\_Header.cshtml"
-       , Tuple.Create(Tuple.Create("", 5866), Tuple.Create<System.Object, System.Int32>(loginProfile.PhoneNumber
-            
-            #line default
-            #line hidden
-, 5866), false)
-);
-
-WriteLiteral(" />\r\n                                </li>\r\n");
-
-            
-            #line 110 "..\..\Views\Shared\_Header.cshtml"
-                            }
-                            else if (isAdmin)
-                            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                <li");
-
-WriteLiteral(" class=\"top-menu-admin hidden-xs\"");
-
-WriteLiteral(">\r\n                                    <a");
-
-WriteLiteral(" class=\"item-menu\"");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 6172), Tuple.Create("\"", 6241)
-            
-            #line 114 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 6179), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Sellers", new {area = "Admin"})
-            
-            #line default
-            #line hidden
-, 6179), false)
-);
-
-WriteLiteral(">\r\n                                        <strong>Painel Admin</strong>\r\n       " +
-"                             </a>\r\n                                </li>\r\n");
-
-            
-            #line 118 "..\..\Views\Shared\_Header.cshtml"
-                            }
-
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                            <li");
-
-WriteLiteral(" class=\"top-menu-logout hidden-xs\"");
-
-WriteLiteral(">\r\n");
-
-            
-            #line 121 "..\..\Views\Shared\_Header.cshtml"
-                                
-            
-            #line default
-            #line hidden
-            
-            #line 121 "..\..\Views\Shared\_Header.cshtml"
-                                 using (Html.BeginForm("LogOff", "Account", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { id = "logoutForm" }))
-                                {
-                                    
-            
-            #line default
-            #line hidden
-            
-            #line 123 "..\..\Views\Shared\_Header.cshtml"
-                               Write(Html.AntiForgeryToken());
-
-            
-            #line default
-            #line hidden
-            
-            #line 123 "..\..\Views\Shared\_Header.cshtml"
-                                                            
-
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                    <a");
-
-WriteLiteral(" href=\"javascript:document.getElementById(\'logoutForm\').submit()\"");
-
-WriteLiteral(" class=\"item-menu\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                                        ");
-
-            
-            #line 126 "..\..\Views\Shared\_Header.cshtml"
-                                   Write(Html.Localized("LOGOUT_LINK", "strong"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                    </a>\r\n");
-
-            
-            #line 128 "..\..\Views\Shared\_Header.cshtml"
-                                }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                            </li>\r\n");
-
-            
-            #line 130 "..\..\Views\Shared\_Header.cshtml"
-                        }
-                        else
-                        {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                            <li");
-
-WriteLiteral(" class=\"top-menu-login hidden-xs\"");
-
-WriteLiteral(">\r\n                                <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 7263), Tuple.Create("\"", 7311)
-            
-            #line 134 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 7270), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Buyer", "Register")
-            
-            #line default
-            #line hidden
-, 7270), false)
-);
-
-WriteLiteral(" class=\"item-menu\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                                    ");
-
-            
-            #line 135 "..\..\Views\Shared\_Header.cshtml"
-                               Write(Html.Localized("BUYER_JOIN_BUTTON_FULL", "strong"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                </a>\r\n                            </li>\r\n");
-
-WriteLiteral("                            <li");
-
-WriteLiteral(" class=\"top-menu-login hidden-xs\"");
-
-WriteLiteral(">\r\n                                <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 7596), Tuple.Create("\"", 7643)
-            
-            #line 139 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 7603), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Login", "Account")
-            
-            #line default
-            #line hidden
-, 7603), false)
-);
-
-WriteLiteral(" class=\"item-menu\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                                    ");
-
-            
-            #line 140 "..\..\Views\Shared\_Header.cshtml"
-                               Write(Html.Localized("LOGIN_LINK", "strong"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                </a>\r\n                            </li>\r\n");
-
-            
-            #line 143 "..\..\Views\Shared\_Header.cshtml"
-                            
-            
-            #line default
-            #line hidden
-            
-            #line 158 "..\..\Views\Shared\_Header.cshtml"
-                   
-                        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                        ");
+WriteLiteral(">\r\n                        \r\n\r\n                        ");
 
 WriteLiteral("\r\n                        <li");
 
@@ -762,14 +805,14 @@ WriteLiteral(" class=\"top-menu-cart btnCart\"");
 
 WriteLiteral(">\r\n                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 8969), Tuple.Create("\"", 9013)
+WriteAttribute("href", Tuple.Create(" href=\"", 8535), Tuple.Create("\"", 8579)
             
-            #line 164 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 8976), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Cart")
+            #line 167 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 8542), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Index", "Cart")
             
             #line default
             #line hidden
-, 8976), false)
+, 8542), false)
 );
 
 WriteLiteral(" class=\"menu-btn\"");
@@ -817,13 +860,13 @@ WriteLiteral(" class=\"btn btn-primary\"");
 WriteLiteral(">Instalar</button>\r\n                        </li>\r\n\r\n");
 
             
-            #line 181 "..\..\Views\Shared\_Header.cshtml"
+            #line 184 "..\..\Views\Shared\_Header.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 181 "..\..\Views\Shared\_Header.cshtml"
+            #line 184 "..\..\Views\Shared\_Header.cshtml"
                          if (LanguagesHelper.ActiveLanguages.Count > 1)
                         {
 
@@ -841,13 +884,13 @@ WriteLiteral(" class=\"lang-flags\"");
 WriteLiteral(">\r\n");
 
             
-            #line 185 "..\..\Views\Shared\_Header.cshtml"
+            #line 188 "..\..\Views\Shared\_Header.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 185 "..\..\Views\Shared\_Header.cshtml"
+            #line 188 "..\..\Views\Shared\_Header.cshtml"
                                      foreach (var lang in LanguagesHelper.ActiveLanguages)
                                     {
 
@@ -856,35 +899,35 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 10232), Tuple.Create("\"", 10285)
+WriteAttribute("href", Tuple.Create(" href=\"", 9798), Tuple.Create("\"", 9851)
             
-            #line 187 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 10239), Tuple.Create<System.Object, System.Int32>(currentUrl.GetNewUrlLocalized(lang.Specifier)
+            #line 190 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 9805), Tuple.Create<System.Object, System.Int32>(currentUrl.GetNewUrlLocalized(lang.Specifier)
             
             #line default
             #line hidden
-, 10239), false)
+, 9805), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 10286), Tuple.Create("\"", 10310)
+WriteAttribute("title", Tuple.Create(" title=\"", 9852), Tuple.Create("\"", 9876)
             
-            #line 187 "..\..\Views\Shared\_Header.cshtml"
-                       , Tuple.Create(Tuple.Create("", 10294), Tuple.Create<System.Object, System.Int32>(lang.NativeName
+            #line 190 "..\..\Views\Shared\_Header.cshtml"
+                        , Tuple.Create(Tuple.Create("", 9860), Tuple.Create<System.Object, System.Int32>(lang.NativeName
             
             #line default
             #line hidden
-, 10294), false)
+, 9860), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 10311), Tuple.Create("\"", 10339)
-, Tuple.Create(Tuple.Create("", 10319), Tuple.Create("lang-", 10319), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 9877), Tuple.Create("\"", 9905)
+, Tuple.Create(Tuple.Create("", 9885), Tuple.Create("lang-", 9885), true)
             
-            #line 187 "..\..\Views\Shared\_Header.cshtml"
-                                                     , Tuple.Create(Tuple.Create("", 10324), Tuple.Create<System.Object, System.Int32>(lang.Specifier
+            #line 190 "..\..\Views\Shared\_Header.cshtml"
+                                                      , Tuple.Create(Tuple.Create("", 9890), Tuple.Create<System.Object, System.Int32>(lang.Specifier
             
             #line default
             #line hidden
-, 10324), false)
+, 9890), false)
 );
 
 WriteLiteral(">\r\n                                            <img");
@@ -893,30 +936,30 @@ WriteLiteral(" width=\"30\"");
 
 WriteLiteral(" height=\"20\"");
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 10414), Tuple.Create("\"", 10436)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 9980), Tuple.Create("\"", 10002)
             
-            #line 188 "..\..\Views\Shared\_Header.cshtml"
-, Tuple.Create(Tuple.Create("", 10420), Tuple.Create<System.Object, System.Int32>(lang.NativeName
+            #line 191 "..\..\Views\Shared\_Header.cshtml"
+, Tuple.Create(Tuple.Create("", 9986), Tuple.Create<System.Object, System.Int32>(lang.NativeName
             
             #line default
             #line hidden
-, 10420), false)
+, 9986), false)
 );
 
-WriteAttribute("src", Tuple.Create(" src=\"", 10437), Tuple.Create("\"", 10458)
+WriteAttribute("src", Tuple.Create(" src=\"", 10003), Tuple.Create("\"", 10024)
             
-            #line 188 "..\..\Views\Shared\_Header.cshtml"
-                   , Tuple.Create(Tuple.Create("", 10443), Tuple.Create<System.Object, System.Int32>(lang.FlagImage
+            #line 191 "..\..\Views\Shared\_Header.cshtml"
+                   , Tuple.Create(Tuple.Create("", 10009), Tuple.Create<System.Object, System.Int32>(lang.FlagImage
             
             #line default
             #line hidden
-, 10443), false)
+, 10009), false)
 );
 
 WriteLiteral(" />\r\n                                        </a>\r\n");
 
             
-            #line 190 "..\..\Views\Shared\_Header.cshtml"
+            #line 193 "..\..\Views\Shared\_Header.cshtml"
                                     }
 
             
@@ -925,7 +968,7 @@ WriteLiteral(" />\r\n                                        </a>\r\n");
 WriteLiteral("                                </div>\r\n                            </li>\r\n");
 
             
-            #line 193 "..\..\Views\Shared\_Header.cshtml"
+            #line 196 "..\..\Views\Shared\_Header.cshtml"
                         }
 
             

@@ -16,6 +16,79 @@
     var blogUrl = userConfig.BlogConfig.GetBlogAddress();
 }
 
+<!-- STRIP -->
+<div class="strip">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 strip-content-1">
+                <div class="strip-text">Olá, seja bem vindo ao maior marketplace de bebidas do Brasil!</div>
+
+                <div class="strip-links-wrapper">
+                    <div class="strip-links">
+                        @if (!loginProfile.IsBuyer() && config.Search.QuotesSearch.Enabled)
+                        {
+                            <a class="strip-link" href="@Url.ActionLocalized("Search", "Quotes")">
+                                @Html.Localized("QUOTE_SEARCH_MENU_LABEL")
+                            </a>
+                        }
+
+                        @if (isAuthenticated)
+                        {
+                            if (isUser)
+                            {
+                                <a class="strip-link" href="@(loginProfile.IsBuyer() ? Url.AddLang(config.Buyer.MainPageUrl) : Url.AddLang(config.Seller.MainPageUrl))">
+                                    @Html.Localized("MY_ACCOUNT_LINK")
+                                </a>
+                                <input type="hidden" id="loginProfileName" value="@loginProfile.Name" />
+                                <input type="hidden" id="loginProfileEmail" value="@loginProfile.Email" />
+                                <input type="hidden" id="loginProfilePhone" value="@loginProfile.PhoneNumber" />
+                            }
+                            else if (isAdmin)
+                            {
+                                <a class="strip-link" href="@Url.ActionLocalized("Index", "Sellers", new {area = "Admin"})">
+                                    <strong>Painel Admin</strong>
+                                </a>
+                            }
+
+                            using (Html.BeginForm("LogOff", "Account", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { id = "logoutFormTop" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <a class="strip-link" href="javascript:document.getElementById('logoutFormTop').submit()">
+                                    @Html.Localized("LOGOUT_LINK", "strong")
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <a class="strip-link" href="@Url.ActionLocalized("Buyer", "Register")">
+                                @Html.Localized("BUYER_JOIN_BUTTON_FULL", "strong")
+                            </a>
+                            <a class="strip-link" href="@Url.ActionLocalized("Login", "Account")">
+                                @Html.Localized("LOGIN_LINK", "strong")
+                            </a>
+                        }
+                    </div>
+                    <div class="strip-social-links">
+                        <a class="strip-social-link" href="https://www.facebook.com/adegamall/" title="Facebook da Adega Mall">
+                            <i class="fab fa-facebook-square"></i>
+                        </a>
+                        <a class="strip-social-link" href="https://www.instagram.com/adegamall/" title="Instagram da Adega Mall">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 strip-content-2">
+                <a href="@Url.ActionLocalized("Index", "Cart")" class="cart-menu-btn" title="Ver carrinho de compras">
+                    <i class="fa fa-shopping-cart cart-icon"></i>
+                    <span class="badge js-cart-qty">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- MENU -->
 <div class="menu">
     <div class="container">
@@ -86,77 +159,7 @@
             <div class="header-content-right">
                 <div class="links-row">
                     <ul class="links">
-                        @if (!User.Identity.GetLoginProfile().IsBuyer() && config.Search.QuotesSearch.Enabled)
-                        {
-                            <li class="top-menu-quotesearch hidden-xs">
-                                <a href="@Url.ActionLocalized("Search", "Quotes")" class="item-menu">
-                                    @Html.Localized("QUOTE_SEARCH_MENU_LABEL", "strong")
-                                </a>
-                            </li>
-                        }
-                        @if (isAuthenticated)
-                        {
-                            if (isUser)
-                            {
-                                <li class="top-menu-account hidden-xs">
-                                    <a href="@(loginProfile.IsBuyer() ? Url.AddLang(config.Buyer.MainPageUrl) : Url.AddLang(config.Seller.MainPageUrl))" class="item-menu">
-                                        @Html.Localized("MY_ACCOUNT_LINK", "strong")
-                                        @*<span class="my-account-handler">@User.Identity.GetMyAccountHandler()</span>*@
-                                    </a>
-                                    <input type="hidden" id="loginProfileName" value="@loginProfile.Name" />
-                                    <input type="hidden" id="loginProfileEmail" value="@loginProfile.Email" />
-                                    <input type="hidden" id="loginProfilePhone" value="@loginProfile.PhoneNumber" />
-                                </li>
-                            }
-                            else if (isAdmin)
-                            {
-                                <li class="top-menu-admin hidden-xs">
-                                    <a class="item-menu" href="@Url.ActionLocalized("Index", "Sellers", new {area = "Admin"})">
-                                        <strong>Painel Admin</strong>
-                                    </a>
-                                </li>
-                            }
-
-                            <li class="top-menu-logout hidden-xs">
-                                @using (Html.BeginForm("LogOff", "Account", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { id = "logoutForm" }))
-                                {
-                                    @Html.AntiForgeryToken()
-
-                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="item-menu">
-                                        @Html.Localized("LOGOUT_LINK", "strong")
-                                    </a>
-                                }
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="top-menu-login hidden-xs">
-                                <a href="@Url.ActionLocalized("Buyer", "Register")" class="item-menu">
-                                    @Html.Localized("BUYER_JOIN_BUTTON_FULL", "strong")
-                                </a>
-                            </li>
-                            <li class="top-menu-login hidden-xs">
-                                <a href="@Url.ActionLocalized("Login", "Account")" class="item-menu">
-                                    @Html.Localized("LOGIN_LINK", "strong")
-                                </a>
-                            </li>
-                            @*<li class="top-menu-register-seller">
-                    <a href="@Url.ActionLocalized("Seller", "Register")" class="menu-btn menu-btn-register">
-                        @Html.Localized("SELLER_JOIN_BUTTON_1")
-                        @Html.Localized("SELLER_JOIN_BUTTON_2", "small", new { style = "text-transform: uppercase;" })
-                    </a>
-                </li>
-
-                if (config.Buyer.Enabled)
-                {
-                    <li class="top-menu-register-buyer">
-                        <a href="@Url.ActionLocalized("Buyer", "Register")" class="menu-btn menu-btn-register">
-                            @Html.Localized("BUYER_JOIN_BUTTON_1")
-                            @Html.Localized("BUYER_JOIN_BUTTON_2", "small", new { style = "text-transform: uppercase;" })
-                        </a>
-                    </li>
-                }*@
-                        }
+                        
 
                         @*@if (config.Product.Enabled && isAuthenticated && loginProfile.IsBuyer())
             {*@

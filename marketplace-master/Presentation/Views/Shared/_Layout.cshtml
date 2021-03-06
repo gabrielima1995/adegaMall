@@ -37,6 +37,9 @@
     }
     <title>@title</title>
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
     @RenderSection("structuredData", required: false)
 
     @Html.Partial("_MetaTags")
@@ -83,10 +86,10 @@
     <style>
         .hero-bg { background-image: url("@CustomAssetsHelper.HomeBackground()") }
         .preload * {
-          -webkit-transition: none !important;
-          -moz-transition: none !important;
-          -ms-transition: none !important;
-          -o-transition: none !important;
+            -webkit-transition: none !important;
+            -moz-transition: none !important;
+            -ms-transition: none !important;
+            -o-transition: none !important;
         }
     </style>
     @Html.Partial("_IntegrationHeader")
@@ -112,8 +115,8 @@
 
     @Html.Action("MenuMobile", "Common", true)
 
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-    <script>WebFont.load({ google: { families: ['Open Sans:300,400,700,800'] } })</script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+        <script>WebFont.load({ google: { families: ['Open Sans:300,400,700,800'] } })</script>*@
 
     <script>(function () { window.MaaS = window.MaaS || { lang: '@Request.GetCurrentLang()'} })()</script>
 

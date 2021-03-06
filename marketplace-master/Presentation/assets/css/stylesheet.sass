@@ -1513,3 +1513,87 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 
   .carousel-image-mobile
     display: none !important
+
+
+/*********/
+/* Strip */
+/*********/
+.strip 
+  background-color: #EAEAEA
+  font-size: 10px
+  padding: 8px 0
+
+.strip-text
+  float: left !important
+
+.strip-content-1
+  width: 80%
+  padding-right: 5px
+
+.strip-content-2
+  width: 20%
+  padding-right: 0
+  padding-left: 0
+
+.strip-links-wrapper
+  float: left !important
+  display: flex
+  align-items: center
+  margin-left: -10px
+
+  .strip-links
+    flex: 1;
+    font-weight: 700;
+    display: contents;
+
+  .strip-social-links
+    flex: 1
+    font-size: 18px
+    margin-top: 2px
+    margin-left: 2px
+
+.strip-links .strip-link
+  padding: 0 10px
+  display: inline
+  position: relative
+
+  &:after
+    content: '|'
+    position: absolute
+    right: -2px
+
+  &:last-child:after
+    content: ''
+
+.strip-social-link 
+  margin-left: 5px
+
+/* Tablet pra cima, inclusive*/
+@media (min-width: 768px) 
+  .strip 
+    font-size: 12px
+
+    & > .container 
+      padding-left: 6px
+      padding-right: 6px
+
+  .strip-content-1
+    width: 100%
+    padding-right: 15px
+
+  .strip-content-2 
+    display: none
+
+  .strip-links-wrapper 
+    float: right !important
+    margin-top: -5px
+
+/*************/
+/* Novo menu */
+/*************/
+.cart-menu-btn
+  .cart-icon
+    font-size: 36px
+
+  .badge
+    background-color: #e30613
