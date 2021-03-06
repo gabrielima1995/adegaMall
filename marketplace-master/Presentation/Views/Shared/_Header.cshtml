@@ -111,22 +111,17 @@
                         <div class="header-nav">
                             <div class="header-search">
                                 <form id="searchForm" action="@Url.ActionLocalized("Search", "Products", new {area = ""})">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
                                     <div class="input-wrapper">
                                         <input type="text" name="Product" placeholder="@Request.GetLocalizedString("PRODUCT_FILTER_INPUT")" />
                                     </div>
+                                    <i class="fa fa-search" aria-hidden="true"></i>
                                 </form>
                             </div>
                         </div>
 
-                        <div class="header-links">
+                        @*<div class="header-links">
                             <div class="links-row">
                                 <ul class="links hidden-xs">
-                                    @*<li class="top-menu-home">
-                                            <a href="@Url.ActionLocalized("Index", "Home")" class="item-menu">
-                                                @Html.Localized("HOME_LINK", "strong")
-                                            </a>
-                                        </li>*@
                                     @if (blogUrl != null || (userConfig.BlogConfig.Enabled && !string.IsNullOrWhiteSpace(userConfig.BlogConfig.Address)))
                                     {
                                         <li class="top-menu-blog">
@@ -151,7 +146,7 @@
                                     }
                                 </ul>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -159,23 +154,18 @@
             <div class="header-content-right">
                 <div class="links-row">
                     <ul class="links">
-                        
-
-                        @*@if (config.Product.Enabled && isAuthenticated && loginProfile.IsBuyer())
-            {*@
                         <li class="top-menu-cart btnCart">
-                            <a href="@Url.ActionLocalized("Index", "Cart")" class="menu-btn" title="Ver carrinho de compras">
-                                <i class="fa fa-shopping-cart"></i>
+                            <a href="@Url.ActionLocalized("Index", "Cart")" class="cart-menu-btn" title="Ver carrinho de compras">
+                                <i class="fa fa-shopping-cart cart-icon"></i>
                                 <span class="badge js-cart-qty">0</span>
                             </a>
                         </li>
-                        @*}*@
                         
-                        <li class="top-menu-login visible-xs">
+                        @*<li class="top-menu-login visible-xs">
                             <a href="#" class="abre-menu item-menu text-right">
                                 <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                             </a>
-                        </li>
+                        </li>*@
 
                         <li id="btn-addtohome" style="display: none">
                             <button class="btn btn-primary">Instalar</button>
