@@ -819,7 +819,30 @@ WriteLiteral("                                </div>\r\n                        
             #line default
             #line hidden
 WriteLiteral("                    </ul>\r\n                </div>\r\n            </div>\r\n        </" +
-"div>\r\n    </div>\r\n</div>\r\n<!-- /MENU -->");
+"div>\r\n    </div>\r\n</div>\r\n<div");
+
+WriteLiteral(" class=\"menu-category-wrapper\"");
+
+WriteLiteral(">\r\n    <div");
+
+WriteLiteral(" class=\"container\"");
+
+WriteLiteral(">\r\n        <ul");
+
+WriteLiteral(" class=\"menu-category\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 196 "..\..\Views\Shared\_Header.cshtml"
+       Write(Html.Action("MenuCategorias", "Home", new { mobile = true }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </ul>\r\n    </div>\r\n</div>\r\n<!-- /MENU -->");
 
         }
     }

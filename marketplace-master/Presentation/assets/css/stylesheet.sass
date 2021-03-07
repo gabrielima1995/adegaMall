@@ -1545,8 +1545,7 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 
   .strip-social-links
     flex: 1
-    font-size: 18px
-    margin-top: 2px
+    font-size: 20px
     margin-left: 2px
 
 .strip-links .strip-link
@@ -1568,7 +1567,7 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 /* Tablet pra cima, inclusive*/
 @media (min-width: 768px) 
   .strip 
-    font-size: 12px
+    font-size: 14px
 
     & > .container 
       padding-left: 6px
@@ -1585,15 +1584,53 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
     float: right !important
     margin-top: -5px
 
-.menu .logo
-  max-height: 55px !important
+    .strip-social-links
+      font-size: 24px
 
 /*************/
 /* Novo menu */
 /*************/
+.menu .logo
+  max-height: 55px !important
+
 .cart-menu-btn
   .cart-icon
     font-size: 36px
 
   .badge
     background-color: #e30613
+
+.menu-category-wrapper
+  background-color: #e30613
+  color: white
+
+  .menu-category
+    padding: 0
+    margin: 0
+    list-style: none
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .menu-category-item
+      padding: 1.6rem 2rem
+      display: inline-block
+
+      .menu-category-item-link
+        color: white
+        display: block
+        font-size: 14px
+        font-weight: 700
+
+/* Tablet pra cima, inclusive*/
+@media (min-width: 768px) 
+  .menu .logo
+    max-height: 75px !important
+
+  .menu-category-wrapper
+    .menu-category
+      .menu-category-item
+        padding: 2.4rem 3.3rem
+
+        .menu-category-item-link
+          font-size: 19px
