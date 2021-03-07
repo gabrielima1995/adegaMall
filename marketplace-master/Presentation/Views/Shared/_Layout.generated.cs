@@ -747,7 +747,7 @@ WriteLiteral("        <script>CookieConsentLoader.init()</script>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n    <script>EcommerceHome.init()</script>\r\n\r\n");
+WriteLiteral("\r\n    <script>EcommerceHome2.init();</script>\r\n\r\n");
 
             
             #line 148 "..\..\Views\Shared\_Layout.cshtml"
@@ -790,9 +790,9 @@ WriteLiteral("\r\n    <script>Main.init()</script>\r\n\r\n");
             #line hidden
 WriteLiteral("        <script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 5759), Tuple.Create("\"", 5797)
-, Tuple.Create(Tuple.Create("", 5765), Tuple.Create<System.Object, System.Int32>(Href("~/assets/js/PushNotifications.js")
-, 5765), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 5761), Tuple.Create("\"", 5799)
+, Tuple.Create(Tuple.Create("", 5767), Tuple.Create<System.Object, System.Int32>(Href("~/assets/js/PushNotifications.js")
+, 5767), false)
 );
 
 WriteLiteral("></script>\r\n");
