@@ -336,6 +336,8 @@ img.avatar
     padding: 8px 14px
     .glyphicon
       display: none
+    &:hover, &:active, &:focus
+      background-color: #e30613
   .card-country-badge
     position: absolute
     float: left
@@ -1555,7 +1557,7 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 /**********/
 /* custom */
 /**********/
-.paises-link h2
+.paises-link-wrapper
   padding-top: 15px
 
 .coupon-code-form
@@ -1769,6 +1771,9 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
   .banner
     flex: 1
 
+.banner-post-category
+  padding: 0
+
 @media (min-width: 426px)
   .carousel-image-desktop
     display: block !important
@@ -1788,6 +1793,9 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
   .banner-wrapper
     margin-top: 0
     flex-direction: row
+
+  .banner-post-category
+    margin-top: 10px
 
 /*************/
 /* Novo menu */

@@ -141,7 +141,7 @@ WriteLiteral(@"@media (max-width: 991px) {
 WriteLiteral("@media (min-width: 768px) {\r\n        .paises-list .pais-container {\r\n            " +
 "width: 14%;\r\n        }\r\n    }\r\n</style>\r\n\r\n<div");
 
-WriteLiteral(" class=\"container\"");
+WriteLiteral(" class=\"container paises-link\"");
 
 WriteLiteral(">\r\n    <div");
 
@@ -149,7 +149,7 @@ WriteLiteral(" class=\"row\"");
 
 WriteLiteral(">\r\n        <div");
 
-WriteLiteral(" class=\"col-xs-7 col-md-4\"");
+WriteLiteral(" class=\"col-xs-8\"");
 
 WriteLiteral(">\r\n            <a");
 
@@ -159,8 +159,32 @@ WriteLiteral(" class=\"paises-link\"");
 
 WriteLiteral(" title=\"Todos os vinhos\"");
 
-WriteLiteral(">\r\n                <h2>Vinhos por país</h2>\r\n            </a>\r\n        </div>\r\n  " +
-"  </div>\r\n\r\n    <div");
+WriteLiteral(">\r\n                <h2");
+
+WriteLiteral(" class=\"ecommerce-home-title\"");
+
+WriteLiteral(">Vinhos por país</h2>\r\n            </a>\r\n        </div>\r\n        <div");
+
+WriteLiteral(" class=\"col-xs-4 ecommerce-home-header-right\"");
+
+WriteLiteral(">\r\n            <a");
+
+WriteLiteral(" href=\"/categoria/vinhos/\"");
+
+WriteLiteral(" class=\"ecommerce-home-ver-tudo\"");
+
+WriteLiteral(" title=\"Ver todos os vinhos\"");
+
+WriteLiteral(">\r\n                Ver tudo\r\n            </a>\r\n        </div>\r\n    </div>\r\n    \r\n" +
+"    <div");
+
+WriteLiteral(" class=\"ecommerce-home-divider\"");
+
+WriteLiteral(">\r\n        <hr");
+
+WriteLiteral(" class=\"ecommerce-home-title-divider\"");
+
+WriteLiteral(" />\r\n    </div>\r\n\r\n    <div");
 
 WriteLiteral(" class=\"row\"");
 
@@ -175,13 +199,13 @@ WriteLiteral(" class=\"row\"");
 WriteLiteral(">\r\n");
 
             
-            #line 96 "..\..\Views\EcommerceHome\_Paises.cshtml"
+            #line 105 "..\..\Views\EcommerceHome\_Paises.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 96 "..\..\Views\EcommerceHome\_Paises.cshtml"
+            #line 105 "..\..\Views\EcommerceHome\_Paises.cshtml"
                  foreach (var item in Model)
                 {
 
@@ -194,26 +218,26 @@ WriteLiteral(" class=\"col-xs-4 col-sm-2 pais-container\"");
 
 WriteLiteral(">\r\n                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2221), Tuple.Create("\"", 2261)
-, Tuple.Create(Tuple.Create("", 2228), Tuple.Create("/categoria/vinhos/pais/", 2228), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 2589), Tuple.Create("\"", 2629)
+, Tuple.Create(Tuple.Create("", 2596), Tuple.Create("/categoria/vinhos/pais/", 2596), true)
             
-            #line 99 "..\..\Views\EcommerceHome\_Paises.cshtml"
-, Tuple.Create(Tuple.Create("", 2251), Tuple.Create<System.Object, System.Int32>(item.Slug
+            #line 108 "..\..\Views\EcommerceHome\_Paises.cshtml"
+, Tuple.Create(Tuple.Create("", 2619), Tuple.Create<System.Object, System.Int32>(item.Slug
             
             #line default
             #line hidden
-, 2251), false)
+, 2619), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 2262), Tuple.Create("\"", 2287)
-, Tuple.Create(Tuple.Create("", 2270), Tuple.Create("Vinhos", 2270), true)
+WriteAttribute("title", Tuple.Create(" title=\"", 2630), Tuple.Create("\"", 2655)
+, Tuple.Create(Tuple.Create("", 2638), Tuple.Create("Vinhos", 2638), true)
             
-            #line 99 "..\..\Views\EcommerceHome\_Paises.cshtml"
- , Tuple.Create(Tuple.Create(" ", 2276), Tuple.Create<System.Object, System.Int32>(item.Name
+            #line 108 "..\..\Views\EcommerceHome\_Paises.cshtml"
+ , Tuple.Create(Tuple.Create(" ", 2644), Tuple.Create<System.Object, System.Int32>(item.Name
             
             #line default
             #line hidden
-, 2277), false)
+, 2645), false)
 );
 
 WriteLiteral(" class=\"pais-link\"");
@@ -226,26 +250,26 @@ WriteLiteral(">\r\n                                <img");
 
 WriteLiteral(" class=\"pais-imagem\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 2430), Tuple.Create("\"", 2486)
-, Tuple.Create(Tuple.Create("", 2436), Tuple.Create("/assets/images/paises/", 2436), true)
+WriteAttribute("src", Tuple.Create(" src=\"", 2798), Tuple.Create("\"", 2854)
+, Tuple.Create(Tuple.Create("", 2804), Tuple.Create("/assets/images/paises/", 2804), true)
             
-            #line 101 "..\..\Views\EcommerceHome\_Paises.cshtml"
-     , Tuple.Create(Tuple.Create("", 2458), Tuple.Create<System.Object, System.Int32>(item.Slug
+            #line 110 "..\..\Views\EcommerceHome\_Paises.cshtml"
+     , Tuple.Create(Tuple.Create("", 2826), Tuple.Create<System.Object, System.Int32>(item.Slug
             
             #line default
             #line hidden
-, 2458), false)
-, Tuple.Create(Tuple.Create("", 2470), Tuple.Create(".png?w=100&h=100", 2470), true)
+, 2826), false)
+, Tuple.Create(Tuple.Create("", 2838), Tuple.Create(".png?w=100&h=100", 2838), true)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 2487), Tuple.Create("\"", 2503)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 2855), Tuple.Create("\"", 2871)
             
-            #line 101 "..\..\Views\EcommerceHome\_Paises.cshtml"
-                                       , Tuple.Create(Tuple.Create("", 2493), Tuple.Create<System.Object, System.Int32>(item.Name
+            #line 110 "..\..\Views\EcommerceHome\_Paises.cshtml"
+                                       , Tuple.Create(Tuple.Create("", 2861), Tuple.Create<System.Object, System.Int32>(item.Name
             
             #line default
             #line hidden
-, 2493), false)
+, 2861), false)
 );
 
 WriteLiteral(">\r\n                            </div>\r\n                            <div");
@@ -257,7 +281,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                ");
 
             
-            #line 104 "..\..\Views\EcommerceHome\_Paises.cshtml"
+            #line 113 "..\..\Views\EcommerceHome\_Paises.cshtml"
                            Write(item.Name);
 
             
@@ -267,7 +291,7 @@ WriteLiteral("\r\n                            </div>\r\n                        
 "       </div>\r\n");
 
             
-            #line 108 "..\..\Views\EcommerceHome\_Paises.cshtml"
+            #line 117 "..\..\Views\EcommerceHome\_Paises.cshtml"
                 }
 
             
