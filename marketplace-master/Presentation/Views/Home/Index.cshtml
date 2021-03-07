@@ -49,9 +49,26 @@
 
 @Html.Partial("_EcommerceHome_Products")
 
+    <div class="banner-wrapper">
+        <div class="banner">
+            <a href="https://blog.adegamall.com.br/">
+                <img src="/assets/images/banners/mobile3b.jpg?width=1500&height=600&mode=crop&scale=both" style="width:auto;height:auto;" class="banner-image-desktop" />
+                <img src="/assets/images/banners/mobile3b.jpg?width=750&height=300&mode=crop&scale=both" style="width:auto;height:auto;" class="banner-image-mobile" />
+            </a>
+        </div>
+        <div class="banner">
+            <a href="https://www.adegamall.com.br/categoria/vinhos/">
+                <img src="/assets/images/banners/mobile4a.jpg?width=1500&height=600&mode=crop&scale=both" style="width:auto;height:auto;" class="banner-image-desktop" />
+                <img src="/assets/images/banners/mobile4a.jpg?width=750&height=300&mode=crop&scale=both" style="width:auto;height:auto;" class="banner-image-mobile" />
+            </a>
+        </div>
+    </div>
+
 @Html.Partial("_HomeHowItWorks")
 
 @Html.Partial("_HomeBestSellers", Model.BestSellers, ViewData)
+
+@Html.Action("Paises", "EcommerceHome")
 
 @Html.Partial("_HomeCallSellers")
 

@@ -5,17 +5,25 @@
     var bannerId = "banner-" + id;
 }	
 
+<div class="banner-wrapper">
+    <div class="banner">
+        <a href="https://www.adegamall.com.br/product/atlantico-alentejano-750ml/?lang=pt-BR">
+            <img src="/assets/images/banners/mobile1.jpg?width=750&height=188&mode=crop&scale=both" style="width:auto;height:auto;" class="banner-image-mobile" />
+        </a>
+    </div>
+</div>
+
 @if (Model.HasBanners)
 {
     <div id="@bannerId" class="carousel slide" data-ride="carousel">
         @if (Model.ShowNavControls)
         {
-            <ol class="carousel-indicators">
+            @*<ol class="carousel-indicators">
                 @for (var i = 0; i < Model.Items.Count; i++)
                 {
                     <li data-target="#@bannerId" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
                 }
-            </ol>
+            </ol>*@
         }
 
         @*<div class="carousel-inner" role="listbox">
@@ -34,7 +42,7 @@
                 <div class="item@(i == 0 ? " active" : "")">
                     <a href="@banner.ActionUrl">
                         <img src="@banner.OptimizedImgUrl" style="width:auto;height:auto;" class="carousel-image-desktop center-block" />
-                        <img src="@banner.OptimizedMobileImgUrl" style="width:auto;height:auto;" class="carousel-image-mobile" />
+                        <img src="@banner.OptimizedMobileImgUrl" style="width:auto;height:auto;" class="carousel-image-mobile banner-image-mobile" />
                     </a>
                 </div>
             }

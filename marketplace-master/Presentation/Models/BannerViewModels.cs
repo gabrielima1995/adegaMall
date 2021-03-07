@@ -37,11 +37,11 @@ namespace Presentation.Models
         public DateTime? ExpiresAt { get; set; }
 
         public string OptimizedImgUrl =>
-            ImgHelper.BlobToCdn(ImageUrl, new { width = 1920, height = 530, mode = "crop", scale = "both" });
+            ImgHelper.BlobToCdn(ImageUrl, new { width = 2500, height = 1000, mode = "crop", scale = "both" });
 
         public string OptimizedMobileImgUrl =>
             !string.IsNullOrEmpty(MobileImageUrl)
-                ? ImgHelper.BlobToCdn(MobileImageUrl, new { width = 750, height = 530, mode = "crop", scale = "both" })
+                ? ImgHelper.BlobToCdn(MobileImageUrl, new { width = 750, height = 600, mode = "crop", scale = "both" })
                 : ImgHelper.BlobToCdn(ImageUrl, new { width = 1320, height = 530, mode = "crop", scale = "both" });
 
         public BannerItemVM()
