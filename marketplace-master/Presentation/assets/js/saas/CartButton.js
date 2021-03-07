@@ -1,5 +1,4 @@
 ﻿var CartButton = (function () {
-    var _button = null;
     var _productsCountBadge = null;
     var _countProdductsUrl = '/cart/countProducts';
 
@@ -8,21 +7,16 @@
             type: 'GET',
             url: _countProdductsUrl,
             success: function (data) {
-                //_button[data.hasProducts ? 'show' : 'hide']();
                 _productsCountBadge.text(data.productsCount);
             },
             error: function () {
-                //_button.show();
-                //_productsCountBadge.hide();
                 _productsCountBadge.text(0);
             }
         });
     }
 
     function init() {
-        //_button = $('.btnCart').hide();
-        _button = $('.btnCart');
-        _productsCountBadge = _button.find('.js-cart-qty');
+        _productsCountBadge = $('.js-cart-qty');
         countProducts();
     }
 

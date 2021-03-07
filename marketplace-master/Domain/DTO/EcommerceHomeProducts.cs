@@ -97,7 +97,7 @@ namespace Domain.DTO
                     if (ImageUrl.Contains($"/{type}/") && !ImageUrl.Contains("product-img-placeholder.jpg"))
                     {
                         var id = ImageUrl.Split(new string[] { $"/{type}/" }, StringSplitOptions.None)[1];
-                        var size = 330;
+                        var size = 450;
                         return ImgHelper.Avatar(MaaSConfig.Current.Environment.AppUrl + $"cloudimage/{type}/" + id, size);
                     }
                     if(ImageUrl.Contains("product-img-placeholder.jpg"))

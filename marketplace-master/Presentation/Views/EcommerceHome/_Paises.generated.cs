@@ -141,7 +141,7 @@ WriteLiteral(@"@media (max-width: 991px) {
 WriteLiteral("@media (min-width: 768px) {\r\n        .paises-list .pais-container {\r\n            " +
 "width: 14%;\r\n        }\r\n    }\r\n</style>\r\n\r\n<div");
 
-WriteLiteral(" class=\"container paises-link\"");
+WriteLiteral(" class=\"container paises-link-wrapper\"");
 
 WriteLiteral(">\r\n    <div");
 
@@ -218,26 +218,26 @@ WriteLiteral(" class=\"col-xs-4 col-sm-2 pais-container\"");
 
 WriteLiteral(">\r\n                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2589), Tuple.Create("\"", 2629)
-, Tuple.Create(Tuple.Create("", 2596), Tuple.Create("/categoria/vinhos/pais/", 2596), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 2597), Tuple.Create("\"", 2637)
+, Tuple.Create(Tuple.Create("", 2604), Tuple.Create("/categoria/vinhos/pais/", 2604), true)
             
             #line 108 "..\..\Views\EcommerceHome\_Paises.cshtml"
-, Tuple.Create(Tuple.Create("", 2619), Tuple.Create<System.Object, System.Int32>(item.Slug
+, Tuple.Create(Tuple.Create("", 2627), Tuple.Create<System.Object, System.Int32>(item.Slug
             
             #line default
             #line hidden
-, 2619), false)
+, 2627), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 2630), Tuple.Create("\"", 2655)
-, Tuple.Create(Tuple.Create("", 2638), Tuple.Create("Vinhos", 2638), true)
+WriteAttribute("title", Tuple.Create(" title=\"", 2638), Tuple.Create("\"", 2663)
+, Tuple.Create(Tuple.Create("", 2646), Tuple.Create("Vinhos", 2646), true)
             
             #line 108 "..\..\Views\EcommerceHome\_Paises.cshtml"
- , Tuple.Create(Tuple.Create(" ", 2644), Tuple.Create<System.Object, System.Int32>(item.Name
+ , Tuple.Create(Tuple.Create(" ", 2652), Tuple.Create<System.Object, System.Int32>(item.Name
             
             #line default
             #line hidden
-, 2645), false)
+, 2653), false)
 );
 
 WriteLiteral(" class=\"pais-link\"");
@@ -250,26 +250,26 @@ WriteLiteral(">\r\n                                <img");
 
 WriteLiteral(" class=\"pais-imagem\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 2798), Tuple.Create("\"", 2854)
-, Tuple.Create(Tuple.Create("", 2804), Tuple.Create("/assets/images/paises/", 2804), true)
+WriteAttribute("src", Tuple.Create(" src=\"", 2806), Tuple.Create("\"", 2862)
+, Tuple.Create(Tuple.Create("", 2812), Tuple.Create("/assets/images/paises/", 2812), true)
             
             #line 110 "..\..\Views\EcommerceHome\_Paises.cshtml"
-     , Tuple.Create(Tuple.Create("", 2826), Tuple.Create<System.Object, System.Int32>(item.Slug
+     , Tuple.Create(Tuple.Create("", 2834), Tuple.Create<System.Object, System.Int32>(item.Slug
             
             #line default
             #line hidden
-, 2826), false)
-, Tuple.Create(Tuple.Create("", 2838), Tuple.Create(".png?w=100&h=100", 2838), true)
+, 2834), false)
+, Tuple.Create(Tuple.Create("", 2846), Tuple.Create(".png?w=100&h=100", 2846), true)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 2855), Tuple.Create("\"", 2871)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 2863), Tuple.Create("\"", 2879)
             
             #line 110 "..\..\Views\EcommerceHome\_Paises.cshtml"
-                                       , Tuple.Create(Tuple.Create("", 2861), Tuple.Create<System.Object, System.Int32>(item.Name
+                                       , Tuple.Create(Tuple.Create("", 2869), Tuple.Create<System.Object, System.Int32>(item.Name
             
             #line default
             #line hidden
-, 2861), false)
+, 2869), false)
 );
 
 WriteLiteral(">\r\n                            </div>\r\n                            <div");

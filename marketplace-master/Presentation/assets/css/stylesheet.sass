@@ -341,8 +341,11 @@ img.avatar
   .card-country-badge
     position: absolute
     float: left
-    margin-left: 2.3rem
+    margin-left: 2rem
     margin-top: -5rem
+    img
+      width: 25px
+      height: 25px
 
 /* Tablet pra cima, inclusive*/
 @media (min-width: 768px) 
@@ -1662,7 +1665,7 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 /*********/
 .strip 
   background-color: #EAEAEA
-  font-size: 10px
+  font-size: 11px
   padding: 8px 0
 
 .strip-text
@@ -1671,18 +1674,20 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 
 .strip-content-1
   width: 80%
-  padding-right: 5px
+  padding-right: 15px
 
 .strip-content-2
   width: 20%
   padding-right: 0
   padding-left: 0
+  padding-top: 12px
 
 .strip-links-wrapper
   float: left !important
   display: flex
   align-items: center
   margin-left: -10px
+  font-size: 11px
 
   .strip-links
     flex: 1;
@@ -1691,7 +1696,7 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 
   .strip-social-links
     flex: 1
-    font-size: 20px
+    font-size: 22px
     margin-left: 2px
 
 .strip-links .strip-link
@@ -1731,6 +1736,7 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
   .strip-links-wrapper 
     float: right !important
     margin-top: -5px
+    font-size: 14px
 
     .strip-social-links
       font-size: 24px
@@ -1804,6 +1810,8 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
   max-height: 55px !important
 
 .cart-menu-btn
+  margin-top: 4px
+
   .cart-icon
     font-size: 36px
     color: #1a1a1a
@@ -1826,6 +1834,9 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
     .menu-category-item
       padding: 1.6rem 2rem
       display: inline-block
+
+      &:hover, &:focus, &:active
+        background-color: darken(#e30613, 4%)
 
       .menu-category-item-link
         color: white
