@@ -2803,6 +2803,13 @@
     <Content Include="assets\css\fullcalendar-scheduler\core\main.css" />
     <Content Include="assets\css\fullcalendar-scheduler\resource-timeline\main.css" />
     <Content Include="assets\css\fullcalendar-scheduler\timeline\main.css" />
+    <Content Include="assets\images\banners\desktop-banner2.png" />
+    <Content Include="assets\images\banners\desktop-banner5c.jpg" />
+    <Content Include="assets\images\banners\desktop-banner6a.jpg" />
+    <Content Include="assets\images\banners\mobile1.jpg" />
+    <Content Include="assets\images\banners\mobile3b.jpg" />
+    <Content Include="assets\images\banners\MOBILE4A.jpg" />
+    <Content Include="assets\images\banners\mobile5a.jpg" />
     <Content Include="assets\images\paises\africa-do-sul.png" />
     <Content Include="assets\images\paises\alemanha.png" />
     <Content Include="assets\images\paises\argentina.png" />

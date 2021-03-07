@@ -273,9 +273,17 @@ img.avatar
   .card-product-title
     font-weight: bold
     margin-bottom: 0
+    font-size: 13px
+
+    & ~ small
+      color: #1a1a1a
+      font-size: 13px
+
   .card-product-price
-    font-size: 22px
-    margin-top: 5px
+    font-size: 20px
+    margin-top: 2px
+    color: #1a1a1a
+    font-weight: bold
   .card-discount-badge
     position: absolute
     left: 0 !important
@@ -304,17 +312,30 @@ img.avatar
 
   .card-discount-price, .card-price-starting-from
     margin-bottom: -0.8rem
-    margin-top: 0.5rem
-    color: #777
+    margin-top: 0
+    color: #1a1a1a
+    font-size: 13px
+    small
+      font-size: 100%
   .card-price-starting-from
     text-transform: lowercase
   .card-discount-price-amount
     text-decoration: line-through
   .card-product-price-additional
     font-size: 1.4rem
-    color: #777
+    color: #1a1a1a
   .card-btn
-    margin-top: 2rem
+    margin-top: 1.5rem
+    border-radius: 0
+    border: none
+    background-color: #393939
+    color: white
+    text-transform: uppercase
+    font-size: 13px
+    font-weight: bold
+    padding: 8px 14px
+    .glyphicon
+      display: none
   .card-country-badge
     position: absolute
     float: left
@@ -324,10 +345,20 @@ img.avatar
 /* Tablet pra cima, inclusive*/
 @media (min-width: 768px) 
   .card
+    .card-product-title
+      font-size: 16px
+      & ~ small
+        font-size: 16px
+    .card-product-price
+      font-size: 22px
     .card-discount-badge
       top: 2px
       .label
         font-size: 14px
+    .card-discount-price
+      font-size: 16px
+    .card-btn
+      font-size: 16px
 
 //Outer Title
 .outer-title
@@ -1524,6 +1555,7 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 /**********/
 /* custom */
 /**********/
+
 .coupon-code-form
   padding: 15px
 
@@ -1559,8 +1591,11 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
     flex: 1
     max-width: 82px
 
+.ecommerce-home-title
+  font-size: 20px
+
 .ecommerce-home-ver-tudo
-  font-size: 13px
+  font-size: 12px
   font-weight: 700
   text-align: right
   text-transform: uppercase
@@ -1599,6 +1634,21 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
       top: 0
       left: 0
 
+.footer
+  padding: 0 0 25px
+  color: #636363
+  background-color: #1a1a1a
+
+  h4
+    color: #636363
+
+  .footer-links
+    list-style: inherit
+    li
+      line-height: 20px
+      a
+        margin-left: -5px
+        color: #636363
 
 @media (min-width: 426px)
   .carousel-image-desktop
@@ -1606,6 +1656,17 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 
   .carousel-image-mobile
     display: none !important
+
+/* Tablet pra cima, inclusive*/
+@media (min-width: 768px) 
+  .ecommerce-home-title
+    font-size: 22px
+
+  .ecommerce-home-ver-tudo
+    font-size: 13px
+
+  .footer
+    padding: 50px 0 25px
 
 
 /*********/
