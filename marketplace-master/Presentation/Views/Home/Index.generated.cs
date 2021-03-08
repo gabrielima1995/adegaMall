@@ -275,11 +275,11 @@ WriteLiteral("\r\n    </div>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("            \r\n");
 
             
             #line 46 "..\..\Views\Home\Index.cshtml"
-Write(Html.Partial("_HomeNearbyProducts"));
+Write(Html.Action("CardCategorias", "Home"));
 
             
             #line default
@@ -288,7 +288,7 @@ WriteLiteral("\r\n\r\n");
 
             
             #line 48 "..\..\Views\Home\Index.cshtml"
-Write(Html.Partial("_EcommerceHome_Search"));
+Write(Html.Partial("_HomeNearbyProducts"));
 
             
             #line default
@@ -297,6 +297,15 @@ WriteLiteral("\r\n\r\n");
 
             
             #line 50 "..\..\Views\Home\Index.cshtml"
+Write(Html.Partial("_EcommerceHome_Search"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n\r\n");
+
+            
+            #line 52 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_EcommerceHome_Products"));
 
             
@@ -365,7 +374,7 @@ WriteLiteral(" class=\"banner-image-mobile\"");
 WriteLiteral(" />\r\n            </a>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n");
 
             
-            #line 69 "..\..\Views\Home\Index.cshtml"
+            #line 71 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_HomeHowItWorks"));
 
             
@@ -374,7 +383,7 @@ Write(Html.Partial("_HomeHowItWorks"));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 71 "..\..\Views\Home\Index.cshtml"
+            #line 73 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_HomeBestSellers", Model.BestSellers, ViewData));
 
             
@@ -383,7 +392,7 @@ Write(Html.Partial("_HomeBestSellers", Model.BestSellers, ViewData));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 73 "..\..\Views\Home\Index.cshtml"
+            #line 75 "..\..\Views\Home\Index.cshtml"
 Write(Html.Action("Paises", "EcommerceHome"));
 
             
@@ -392,7 +401,7 @@ Write(Html.Action("Paises", "EcommerceHome"));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 75 "..\..\Views\Home\Index.cshtml"
+            #line 77 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_HomeCallSellers"));
 
             
@@ -401,7 +410,7 @@ Write(Html.Partial("_HomeCallSellers"));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 77 "..\..\Views\Home\Index.cshtml"
+            #line 79 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_HomeMiscArea"));
 
             
@@ -416,7 +425,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 81 "..\..\Views\Home\Index.cshtml"
+            #line 83 "..\..\Views\Home\Index.cshtml"
 Write(Scripts.Render("~/bundles/scripts/datetime-picker"));
 
             
@@ -427,7 +436,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 83 "..\..\Views\Home\Index.cshtml"
+            #line 85 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_SubCategoriesScript"));
 
             
@@ -438,7 +447,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 84 "..\..\Views\Home\Index.cshtml"
+            #line 86 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_CitiesScript"));
 
             
@@ -449,7 +458,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 85 "..\..\Views\Home\Index.cshtml"
+            #line 87 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_ProductWishScript"));
 
             
@@ -458,13 +467,13 @@ Write(Html.Partial("_ProductWishScript"));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 87 "..\..\Views\Home\Index.cshtml"
+            #line 89 "..\..\Views\Home\Index.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 87 "..\..\Views\Home\Index.cshtml"
+            #line 89 "..\..\Views\Home\Index.cshtml"
      if (MaaSConfig.Current.Search.Enabled)
     {
         if (MaaSConfig.Current.Search.SearchFields.Location)
@@ -474,14 +483,14 @@ WriteLiteral("\r\n\r\n");
             #line default
             #line hidden
             
-            #line 91 "..\..\Views\Home\Index.cshtml"
+            #line 93 "..\..\Views\Home\Index.cshtml"
        Write(Html.Partial("_GoogleMapsScript"));
 
             
             #line default
             #line hidden
             
-            #line 91 "..\..\Views\Home\Index.cshtml"
+            #line 93 "..\..\Views\Home\Index.cshtml"
                                               
 
             if (MaaSConfig.Current.Search.BrowserGeolocation)
@@ -493,7 +502,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("                <script>GoogleMapsAutocomplete.init()</script>\r\n");
 
             
-            #line 96 "..\..\Views\Home\Index.cshtml"
+            #line 98 "..\..\Views\Home\Index.cshtml"
             }
             else
             {
@@ -504,7 +513,7 @@ WriteLiteral("                <script>GoogleMapsAutocomplete.init()</script>\r\n
 WriteLiteral("                <script>GoogleMapsAutocomplete.initNoLocation()</script>\r\n");
 
             
-            #line 100 "..\..\Views\Home\Index.cshtml"
+            #line 102 "..\..\Views\Home\Index.cshtml"
             }
         }
 
@@ -517,7 +526,7 @@ WriteLiteral("        <script>\r\n            $(document).ready(function () {\r\
 "                });\r\n            });\r\n        </script>\r\n");
 
             
-            #line 110 "..\..\Views\Home\Index.cshtml"
+            #line 112 "..\..\Views\Home\Index.cshtml"
     }
 
             
@@ -526,13 +535,13 @@ WriteLiteral("        <script>\r\n            $(document).ready(function () {\r\
 WriteLiteral("\r\n");
 
             
-            #line 112 "..\..\Views\Home\Index.cshtml"
+            #line 114 "..\..\Views\Home\Index.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 112 "..\..\Views\Home\Index.cshtml"
+            #line 114 "..\..\Views\Home\Index.cshtml"
      if (MaaSConfig.Current.Product.Enabled && MaaSConfig.Current.NearbyProducts.Enabled)
     {
 
@@ -543,7 +552,7 @@ WriteLiteral("        <script>\r\n            $(document).ready(function () {\r\
 "arbyProducts.init();\r\n            });\r\n        </script>\r\n");
 
             
-            #line 119 "..\..\Views\Home\Index.cshtml"
+            #line 121 "..\..\Views\Home\Index.cshtml"
     }
 
             

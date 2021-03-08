@@ -1858,3 +1858,107 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 
         .menu-category-item-link
           font-size: 19px
+
+/*******************/
+/* Card categorias */
+/*******************/
+.card-categorias-wrapper
+  display: none
+  align-items: stretch
+  position: relative
+  margin-top: calc(200%/-25)
+  margin-bottom: 30px
+
+  .card-categorias-left
+    flex: 0 0 33%
+
+  .card-categorias-right
+    flex: 1 1 67%
+    display: flex
+    align-items: stretch
+    flex-wrap: wrap
+    border-right: 1px solid #eaeaea
+    border-top: 1px solid #eaeaea
+
+    .card-categoria-wrapper
+      flex: 0 0 50%
+      display: flex
+      background-color: white
+      padding: 9.75px 11.7px
+      border-left: 1px solid #eaeaea
+      border-bottom: 1px solid #eaeaea
+
+.card-categoria
+  display: flex
+  align-items: stretch
+
+  .card-categoria-left
+    flex: 0 0 50%
+    padding-top: 24.3px
+
+  .card-categoria-right
+    flex: 1 1 50%
+    align-self: center
+
+  .card-categoria-title
+    font-size: 14.3px
+   
+  .card-categoria-links
+    list-style: none
+    padding-inline-start: 0
+    line-height: 12px
+    
+    li
+      padding-bottom: 6.2px
+
+    .card-categoria-link
+      text-transform: uppercase
+      font-size: 12px
+
+/* Tablet pra cima, inclusive */
+@media (min-width: 768px) 
+  .card-categorias-wrapper
+    display: flex
+
+/* Tablet pra cima */
+/* 80% */
+@media (min-width: 769px) 
+  .card-categorias-wrapper
+    .card-categorias-right
+      .card-categoria-wrapper
+        padding: 12px 14.4px
+  
+  .card-categoria
+    .card-categoria-left
+      padding-top: 27.6px
+
+    .card-categoria-title
+      font-size: 17.6px
+
+    .card-categoria-links
+      li
+        padding-bottom: 10.4px
+
+      .card-categoria-link
+        font-size: 12.5px
+
+/* Laptop pra cima */
+@media (min-width: 1025px) 
+  .card-categorias-wrapper
+    .card-categorias-right
+      .card-categoria-wrapper
+        padding: 15px 18px
+
+  .card-categoria
+    .card-categoria-left
+      padding-top: 32px
+
+    .card-categoria-title
+      font-size: 22px
+
+    .card-categoria-links
+      li
+        padding-bottom: 16px
+
+      .card-categoria-link
+        font-size: 14px
