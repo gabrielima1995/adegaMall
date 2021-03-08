@@ -1842,7 +1842,7 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
     justify-content: center
 
     .menu-category-item
-      padding: 1.6rem 2rem
+      padding: 1.6rem 1.5rem
       display: inline-block
       cursor: pointer
       cursor: hand
@@ -1855,6 +1855,13 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
         display: block
         font-size: 14px
         font-weight: 700
+
+/* Mobile pra cima*/
+@media (min-width: 426px) 
+  .menu-category-wrapper
+    .menu-category
+      .menu-category-item
+        padding: 1.6rem 2rem
 
 /* Tablet pra cima, inclusive*/
 @media (min-width: 768px) 
@@ -1883,7 +1890,7 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
     padding: 0 9px
 
     .card-categoria-mobile-title
-      font-size: 11px
+      font-size: 10px
       margin-top: 12px
 
 .card-categorias-wrapper
