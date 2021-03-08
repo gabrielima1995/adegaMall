@@ -1,16 +1,43 @@
 ﻿@model List<Application.Modules.Products.CategoryMenu>
 
 @{
+    var imagesMobile = new[]
+    {
+"/assets/images/icones/icones-01.png",
+"/assets/images/icones/icones-02.png",
+"/assets/images/icones/icones-03.png",
+"/assets/images/icones/icones-04.png"
+};
+
     var images = new[]
     {
-        "https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/productimage/7384d121-kit-chileno.jpg",
-        "https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/2a54c29c-gin-taqueray.jpg",
-        "https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/7371055e-cerveja-six-shots.jpg",
-        "https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/9cd74dc6-obraprima-geleia-premium-pimenta.png"
-    };
+"https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/productimage/7384d121-kit-chileno.jpg",
+"https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/2a54c29c-gin-taqueray.jpg",
+"https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/7371055e-cerveja-six-shots.jpg",
+"https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/9cd74dc6-obraprima-geleia-premium-pimenta.png"
+};
 
+    var iMobile = 0;
     var i = 0;
 }
+
+<div class="container card-categorias-mobile-wrapper">
+    @foreach (var menu in Model)
+    {
+        var categoryUrl = $"/categoria/{menu.Category.Slug}/";
+        var categoryName = menu.Category.Name;
+        var imageMobileUrl = imagesMobile[iMobile++];
+
+        <div class="card-categoria-mobile">
+            <a href="@categoryUrl" title="@categoryName">
+                <img src="@(imageMobileUrl)?width=300&height=300&mode=crop&scale=both" style="width:auto;height:auto;" alt="@categoryName" />
+            </a>
+            <a href="@categoryUrl" title="@categoryName">
+                <h2 class="card-categoria-mobile-title">@categoryName</h2>
+            </a>
+        </div>
+    }
+</div>
 
 <div class="container card-categorias-wrapper">
     <div class="card-categorias-left">
@@ -41,7 +68,7 @@
                                     </a>
                                 </li>
                             }
-                            
+
                             <li>
                                 <a href="@categoryUrl" class="card-categoria-link" title="@menu.Description">
                                     @menu.Title

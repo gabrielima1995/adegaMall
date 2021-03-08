@@ -1862,6 +1862,20 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 /*******************/
 /* Card categorias */
 /*******************/
+.card-categorias-mobile-wrapper
+  display: flex
+  align-items: stretch
+  flex-wrap: wrap
+
+  .card-categoria-mobile
+    flex: 0 0 25%
+    text-align: center
+    padding: 0 9px
+
+    .card-categoria-mobile-title
+      font-size: 11px
+      margin-top: 12px
+
 .card-categorias-wrapper
   display: none
   align-items: stretch
@@ -1917,6 +1931,8 @@ a.action-disabled-for-assistant, button.action-disabled-for-assistant
 
 /* Tablet pra cima, inclusive */
 @media (min-width: 768px) 
+  .card-categorias-mobile-wrapper
+    display: none
   .card-categorias-wrapper
     display: flex
 

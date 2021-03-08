@@ -51,20 +51,148 @@ namespace ASP
             
             #line 3 "..\..\Views\Shared\_CardCategorias.cshtml"
   
+    var imagesMobile = new[]
+    {
+"/assets/images/icones/icones-01.png",
+"/assets/images/icones/icones-02.png",
+"/assets/images/icones/icones-03.png",
+"/assets/images/icones/icones-04.png"
+};
+
     var images = new[]
     {
-        "https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/productimage/7384d121-kit-chileno.jpg",
-        "https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/2a54c29c-gin-taqueray.jpg",
-        "https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/7371055e-cerveja-six-shots.jpg",
-        "https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/9cd74dc6-obraprima-geleia-premium-pimenta.png"
-    };
+"https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/productimage/7384d121-kit-chileno.jpg",
+"https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/2a54c29c-gin-taqueray.jpg",
+"https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/7371055e-cerveja-six-shots.jpg",
+"https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/9cd74dc6-obraprima-geleia-premium-pimenta.png"
+};
 
+    var iMobile = 0;
     var i = 0;
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n\r\n<div");
+
+WriteLiteral(" class=\"container card-categorias-mobile-wrapper\"");
+
+WriteLiteral(">\r\n");
+
+            
+            #line 25 "..\..\Views\Shared\_CardCategorias.cshtml"
+    
+            
+            #line default
+            #line hidden
+            
+            #line 25 "..\..\Views\Shared\_CardCategorias.cshtml"
+     foreach (var menu in Model)
+    {
+        var categoryUrl = $"/categoria/{menu.Category.Slug}/";
+        var categoryName = menu.Category.Name;
+        var imageMobileUrl = imagesMobile[iMobile++];
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <div");
+
+WriteLiteral(" class=\"card-categoria-mobile\"");
+
+WriteLiteral(">\r\n            <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 1084), Tuple.Create("\"", 1103)
+            
+            #line 32 "..\..\Views\Shared\_CardCategorias.cshtml"
+, Tuple.Create(Tuple.Create("", 1091), Tuple.Create<System.Object, System.Int32>(categoryUrl
+            
+            #line default
+            #line hidden
+, 1091), false)
+);
+
+WriteAttribute("title", Tuple.Create(" title=\"", 1104), Tuple.Create("\"", 1125)
+            
+            #line 32 "..\..\Views\Shared\_CardCategorias.cshtml"
+, Tuple.Create(Tuple.Create("", 1112), Tuple.Create<System.Object, System.Int32>(categoryName
+            
+            #line default
+            #line hidden
+, 1112), false)
+);
+
+WriteLiteral(">\r\n                <img");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 1149), Tuple.Create("\"", 1214)
+            
+            #line 33 "..\..\Views\Shared\_CardCategorias.cshtml"
+, Tuple.Create(Tuple.Create("", 1155), Tuple.Create<System.Object, System.Int32>(imageMobileUrl
+            
+            #line default
+            #line hidden
+, 1155), false)
+, Tuple.Create(Tuple.Create("", 1172), Tuple.Create("?width=300&height=300&mode=crop&scale=both", 1172), true)
+);
+
+WriteLiteral(" style=\"width:auto;height:auto;\"");
+
+WriteAttribute("alt", Tuple.Create(" alt=\"", 1247), Tuple.Create("\"", 1266)
+            
+            #line 33 "..\..\Views\Shared\_CardCategorias.cshtml"
+                                            , Tuple.Create(Tuple.Create("", 1253), Tuple.Create<System.Object, System.Int32>(categoryName
+            
+            #line default
+            #line hidden
+, 1253), false)
+);
+
+WriteLiteral(" />\r\n            </a>\r\n            <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 1304), Tuple.Create("\"", 1323)
+            
+            #line 35 "..\..\Views\Shared\_CardCategorias.cshtml"
+, Tuple.Create(Tuple.Create("", 1311), Tuple.Create<System.Object, System.Int32>(categoryUrl
+            
+            #line default
+            #line hidden
+, 1311), false)
+);
+
+WriteAttribute("title", Tuple.Create(" title=\"", 1324), Tuple.Create("\"", 1345)
+            
+            #line 35 "..\..\Views\Shared\_CardCategorias.cshtml"
+, Tuple.Create(Tuple.Create("", 1332), Tuple.Create<System.Object, System.Int32>(categoryName
+            
+            #line default
+            #line hidden
+, 1332), false)
+);
+
+WriteLiteral(">\r\n                <h2");
+
+WriteLiteral(" class=\"card-categoria-mobile-title\"");
+
+WriteLiteral(">");
+
+            
+            #line 36 "..\..\Views\Shared\_CardCategorias.cshtml"
+                                                   Write(categoryName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</h2>\r\n            </a>\r\n        </div>\r\n");
+
+            
+            #line 39 "..\..\Views\Shared\_CardCategorias.cshtml"
+    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n\r\n<div");
 
 WriteLiteral(" class=\"container card-categorias-wrapper\"");
 
@@ -91,13 +219,13 @@ WriteLiteral(" class=\"card-categorias-right\"");
 WriteLiteral(">\r\n");
 
             
-            #line 22 "..\..\Views\Shared\_CardCategorias.cshtml"
+            #line 49 "..\..\Views\Shared\_CardCategorias.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 22 "..\..\Views\Shared\_CardCategorias.cshtml"
+            #line 49 "..\..\Views\Shared\_CardCategorias.cshtml"
          foreach (var menu in Model)
         {
             var categoryUrl = $"/categoria/{menu.Category.Slug}/";
@@ -122,24 +250,24 @@ WriteLiteral(" class=\"card-categoria-left\"");
 
 WriteLiteral(">\r\n                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1356), Tuple.Create("\"", 1375)
+WriteAttribute("href", Tuple.Create(" href=\"", 2261), Tuple.Create("\"", 2280)
             
-            #line 31 "..\..\Views\Shared\_CardCategorias.cshtml"
-, Tuple.Create(Tuple.Create("", 1363), Tuple.Create<System.Object, System.Int32>(categoryUrl
+            #line 58 "..\..\Views\Shared\_CardCategorias.cshtml"
+, Tuple.Create(Tuple.Create("", 2268), Tuple.Create<System.Object, System.Int32>(categoryUrl
             
             #line default
             #line hidden
-, 1363), false)
+, 2268), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1376), Tuple.Create("\"", 1397)
+WriteAttribute("title", Tuple.Create(" title=\"", 2281), Tuple.Create("\"", 2302)
             
-            #line 31 "..\..\Views\Shared\_CardCategorias.cshtml"
-, Tuple.Create(Tuple.Create("", 1384), Tuple.Create<System.Object, System.Int32>(categoryName
+            #line 58 "..\..\Views\Shared\_CardCategorias.cshtml"
+, Tuple.Create(Tuple.Create("", 2289), Tuple.Create<System.Object, System.Int32>(categoryName
             
             #line default
             #line hidden
-, 1384), false)
+, 2289), false)
 );
 
 WriteLiteral(">\r\n                            <h2");
@@ -149,7 +277,7 @@ WriteLiteral(" class=\"card-categoria-title\"");
 WriteLiteral(">");
 
             
-            #line 32 "..\..\Views\Shared\_CardCategorias.cshtml"
+            #line 59 "..\..\Views\Shared\_CardCategorias.cshtml"
                                                         Write(categoryName);
 
             
@@ -162,13 +290,13 @@ WriteLiteral(" class=\"card-categoria-links\"");
 WriteLiteral(">\r\n");
 
             
-            #line 36 "..\..\Views\Shared\_CardCategorias.cshtml"
+            #line 63 "..\..\Views\Shared\_CardCategorias.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Views\Shared\_CardCategorias.cshtml"
+            #line 63 "..\..\Views\Shared\_CardCategorias.cshtml"
                              foreach (var item in menu.Items)
                             {
 
@@ -177,26 +305,26 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                <li>\r\n                                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1743), Tuple.Create("\"", 1762)
+WriteAttribute("href", Tuple.Create(" href=\"", 2648), Tuple.Create("\"", 2667)
             
-            #line 39 "..\..\Views\Shared\_CardCategorias.cshtml"
-, Tuple.Create(Tuple.Create("", 1750), Tuple.Create<System.Object, System.Int32>(categoryUrl
+            #line 66 "..\..\Views\Shared\_CardCategorias.cshtml"
+, Tuple.Create(Tuple.Create("", 2655), Tuple.Create<System.Object, System.Int32>(categoryUrl
             
             #line default
             #line hidden
-, 1750), false)
+, 2655), false)
 );
 
 WriteLiteral(" class=\"card-categoria-link\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1791), Tuple.Create("\"", 1810)
+WriteAttribute("title", Tuple.Create(" title=\"", 2696), Tuple.Create("\"", 2715)
             
-            #line 39 "..\..\Views\Shared\_CardCategorias.cshtml"
-              , Tuple.Create(Tuple.Create("", 1799), Tuple.Create<System.Object, System.Int32>(item.Title
+            #line 66 "..\..\Views\Shared\_CardCategorias.cshtml"
+              , Tuple.Create(Tuple.Create("", 2704), Tuple.Create<System.Object, System.Int32>(item.Title
             
             #line default
             #line hidden
-, 1799), false)
+, 2704), false)
 );
 
 WriteLiteral(">\r\n");
@@ -204,7 +332,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 40 "..\..\Views\Shared\_CardCategorias.cshtml"
+            #line 67 "..\..\Views\Shared\_CardCategorias.cshtml"
                                    Write(item.Title);
 
             
@@ -214,35 +342,34 @@ WriteLiteral("\r\n                                    </a>\r\n                  
 "\r\n");
 
             
-            #line 43 "..\..\Views\Shared\_CardCategorias.cshtml"
+            #line 70 "..\..\Views\Shared\_CardCategorias.cshtml"
                             }
 
             
             #line default
             #line hidden
-WriteLiteral("                            \r\n                            <li>\r\n                 " +
-"               <a");
+WriteLiteral("\r\n                            <li>\r\n                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2077), Tuple.Create("\"", 2096)
+WriteAttribute("href", Tuple.Create(" href=\"", 2954), Tuple.Create("\"", 2973)
             
-            #line 46 "..\..\Views\Shared\_CardCategorias.cshtml"
-, Tuple.Create(Tuple.Create("", 2084), Tuple.Create<System.Object, System.Int32>(categoryUrl
+            #line 73 "..\..\Views\Shared\_CardCategorias.cshtml"
+, Tuple.Create(Tuple.Create("", 2961), Tuple.Create<System.Object, System.Int32>(categoryUrl
             
             #line default
             #line hidden
-, 2084), false)
+, 2961), false)
 );
 
 WriteLiteral(" class=\"card-categoria-link\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 2125), Tuple.Create("\"", 2150)
+WriteAttribute("title", Tuple.Create(" title=\"", 3002), Tuple.Create("\"", 3027)
             
-            #line 46 "..\..\Views\Shared\_CardCategorias.cshtml"
-          , Tuple.Create(Tuple.Create("", 2133), Tuple.Create<System.Object, System.Int32>(menu.Description
+            #line 73 "..\..\Views\Shared\_CardCategorias.cshtml"
+          , Tuple.Create(Tuple.Create("", 3010), Tuple.Create<System.Object, System.Int32>(menu.Description
             
             #line default
             #line hidden
-, 2133), false)
+, 3010), false)
 );
 
 WriteLiteral(">\r\n");
@@ -250,7 +377,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 47 "..\..\Views\Shared\_CardCategorias.cshtml"
+            #line 74 "..\..\Views\Shared\_CardCategorias.cshtml"
                                Write(menu.Title);
 
             
@@ -263,56 +390,56 @@ WriteLiteral(" class=\"card-categoria-right\"");
 
 WriteLiteral(">\r\n                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2417), Tuple.Create("\"", 2436)
+WriteAttribute("href", Tuple.Create(" href=\"", 3294), Tuple.Create("\"", 3313)
             
-            #line 53 "..\..\Views\Shared\_CardCategorias.cshtml"
-, Tuple.Create(Tuple.Create("", 2424), Tuple.Create<System.Object, System.Int32>(categoryUrl
+            #line 80 "..\..\Views\Shared\_CardCategorias.cshtml"
+, Tuple.Create(Tuple.Create("", 3301), Tuple.Create<System.Object, System.Int32>(categoryUrl
             
             #line default
             #line hidden
-, 2424), false)
+, 3301), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 2437), Tuple.Create("\"", 2458)
+WriteAttribute("title", Tuple.Create(" title=\"", 3314), Tuple.Create("\"", 3335)
             
-            #line 53 "..\..\Views\Shared\_CardCategorias.cshtml"
-, Tuple.Create(Tuple.Create("", 2445), Tuple.Create<System.Object, System.Int32>(categoryName
+            #line 80 "..\..\Views\Shared\_CardCategorias.cshtml"
+, Tuple.Create(Tuple.Create("", 3322), Tuple.Create<System.Object, System.Int32>(categoryName
             
             #line default
             #line hidden
-, 2445), false)
+, 3322), false)
 );
 
 WriteLiteral(">\r\n                            <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 2494), Tuple.Create("\"", 2553)
+WriteAttribute("src", Tuple.Create(" src=\"", 3371), Tuple.Create("\"", 3430)
             
-            #line 54 "..\..\Views\Shared\_CardCategorias.cshtml"
-, Tuple.Create(Tuple.Create("", 2500), Tuple.Create<System.Object, System.Int32>(imageUrl
+            #line 81 "..\..\Views\Shared\_CardCategorias.cshtml"
+, Tuple.Create(Tuple.Create("", 3377), Tuple.Create<System.Object, System.Int32>(imageUrl
             
             #line default
             #line hidden
-, 2500), false)
-, Tuple.Create(Tuple.Create("", 2511), Tuple.Create("?width=450&height=450&mode=crop&scale=both", 2511), true)
+, 3377), false)
+, Tuple.Create(Tuple.Create("", 3388), Tuple.Create("?width=450&height=450&mode=crop&scale=both", 3388), true)
 );
 
 WriteLiteral(" style=\"width:auto;height:auto;\"");
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 2586), Tuple.Create("\"", 2605)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 3463), Tuple.Create("\"", 3482)
             
-            #line 54 "..\..\Views\Shared\_CardCategorias.cshtml"
-                                                  , Tuple.Create(Tuple.Create("", 2592), Tuple.Create<System.Object, System.Int32>(categoryName
+            #line 81 "..\..\Views\Shared\_CardCategorias.cshtml"
+                                                  , Tuple.Create(Tuple.Create("", 3469), Tuple.Create<System.Object, System.Int32>(categoryName
             
             #line default
             #line hidden
-, 2592), false)
+, 3469), false)
 );
 
 WriteLiteral(" />\r\n                        </a>\r\n                    </div>\r\n                </" +
 "div>\r\n            </div>\r\n");
 
             
-            #line 59 "..\..\Views\Shared\_CardCategorias.cshtml"
+            #line 86 "..\..\Views\Shared\_CardCategorias.cshtml"
         }
 
             
@@ -321,7 +448,7 @@ WriteLiteral(" />\r\n                        </a>\r\n                    </div>\
 WriteLiteral("    </div>\r\n</div>\r\n\r\n");
 
             
-            #line 63 "..\..\Views\Shared\_CardCategorias.cshtml"
+            #line 90 "..\..\Views\Shared\_CardCategorias.cshtml"
  foreach (var menu in Model)
 {
     
@@ -329,7 +456,7 @@ WriteLiteral("    </div>\r\n</div>\r\n\r\n");
             #line default
             #line hidden
             
-            #line 103 "..\..\Views\Shared\_CardCategorias.cshtml"
+            #line 130 "..\..\Views\Shared\_CardCategorias.cshtml"
                
 }
             
