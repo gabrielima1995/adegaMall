@@ -37,7 +37,7 @@ namespace Presentation.Models
         public DateTime? ExpiresAt { get; set; }
 
         public string OptimizedImgUrl =>
-            ImgHelper.BlobToCdn(ImageUrl, new { width = 2500, height = 1000, mode = "crop", scale = "both" });
+            ImgHelper.BlobToCdn(ImageUrl, new { width = 2560, height = 1024, mode = "crop", scale = "both" });
 
         public string OptimizedMobileImgUrl =>
             !string.IsNullOrEmpty(MobileImageUrl)
