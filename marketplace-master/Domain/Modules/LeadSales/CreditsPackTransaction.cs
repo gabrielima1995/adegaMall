@@ -10,6 +10,8 @@ namespace Domain.Entities
 
         public string Status { get; set; }
 
+        public string RefuseReason { get; set; }
+
         public string Message { get; set; }
 
         public decimal Amount { get; set; }
@@ -25,6 +27,8 @@ namespace Domain.Entities
         public decimal GatewayFee { get; set; }
 
         public decimal RefundedGatewayFee { get; set; }
+
+        public bool IsAntifraudRefuse() => false;
 
         public string PostbackUrl { get; set; }
 

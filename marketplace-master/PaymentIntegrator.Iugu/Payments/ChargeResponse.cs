@@ -12,6 +12,8 @@ namespace PaymentIntegrator.Iugu.Payments
 
         public string Status { get; set; }
 
+        public string RefuseReason { get; set; }
+
         public bool Success { get; set; }
 
         public string Message { get; set; }
@@ -29,6 +31,8 @@ namespace PaymentIntegrator.Iugu.Payments
         public decimal GatewayFee { get; set; }
 
         public decimal RefundedGatewayFee { get; private set; }
+
+        public bool IsAntifraudRefuse() => false;
 
         public string PostbackUrl { get; set; }
 

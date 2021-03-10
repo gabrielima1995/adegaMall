@@ -324,13 +324,14 @@ namespace Domain.Entities.StoreModule
         /// <param name="person">Pessoa responsável, quando for o caso.</param>
         /// <param name="additionalInfo">Observação.</param>
         /// <returns></returns>
-        public Order ChangeStatus(OrderStatus newStatus, Person person = null, string additionalInfo = null)
+        public Order ChangeStatus(OrderStatus newStatus, Person person = null, string additionalInfo = null, bool noThrowEvent = false)
         {
             if (Status != newStatus)
             {
                 Status = newStatus;
 
-                AddDomainEvent(new OrderStatusChangedEvent(this, newStatus, person, additionalInfo));
+                if(!noThrowEvent)
+                    AddDomainEvent(new OrderStatusChangedEvent(this, newStatus, person, additionalInfo));
                 AddHistoryMessage(additionalInfo, person);
 
                 if (newStatus == OrderStatus.CompletedPayment)

@@ -13,6 +13,8 @@ namespace PaymentIntegrator.Iugu.Invoices
 
         public string Status { get; set; }
 
+        public string RefuseReason { get; set; }
+
         public string Message { get; set; }
 
         [JsonProperty("total")]
@@ -36,6 +38,8 @@ namespace PaymentIntegrator.Iugu.Invoices
         public bool Refundable { get; set; }
 
         public decimal RefundedGatewayFee { get; set; }
+
+        public bool IsAntifraudRefuse() => false;
 
         [JsonProperty("notification_url")]
         public string PostbackUrl { get; set; }

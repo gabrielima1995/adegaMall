@@ -36,6 +36,7 @@ namespace Domain.Services.StoreModule
         private readonly IOrderTransactionRepository orderTransactionRepository;
         private readonly IQuoteBillingRepository quoteBillingRepository;
         private readonly IQuoteRepository quoteRepository;
+        private readonly IOrderRepository _orderRepository;
         private readonly IUnitOfWork unitOfWork;
 
         public OrderService_CreateOrderWorkflow(
@@ -53,6 +54,7 @@ namespace Domain.Services.StoreModule
             IOrderTransactionRepository orderTransactionRepository,
             IQuoteBillingRepository quoteBillingRepository,
             IQuoteRepository quoteRepository,
+            IOrderRepository orderRepository,
             IUnitOfWork unitOfWork)
         {
             this.createAndSaveOrders = createAndSaveOrders;
@@ -69,6 +71,7 @@ namespace Domain.Services.StoreModule
             this.orderTransactionRepository = orderTransactionRepository;
             this.quoteBillingRepository = quoteBillingRepository;
             this.quoteRepository = quoteRepository;
+            _orderRepository = orderRepository;
             this.unitOfWork = unitOfWork;
         }
 
@@ -115,8 +118,30 @@ namespace Domain.Services.StoreModule
 
                 if (processPaymentResult.IsFailure)
                 {
-                    if (processPaymentResult.Errors.All(i => i.Key != "NOT_PAYED"))
+                    // se não for antifraude
+                    if (processPaymentResult.Errors.All(i => i.Key != "ANTIFRAUD_REFUSE"))
+                    {
+                        var error = processPaymentResult.Errors
+                            .FirstOrDefault(i => i.Key == "ACQUIRER_REFUSE");
+
+                        var errorMessage = !error.Equals(default(KeyValuePair<string, string>))
+                            ? error.Value
+                            : "Falha ao processar o pagamento.";
+
+                        // Exclui os pedidos
+                        foreach (var order in orders)
+                        {
+                            order.ChangeStatus(OrderStatus.Canceled, order.Seller, errorMessage, true);
+
+                            _orderRepository.Update(order);
+                        }
+                        
+                        var saveCancelResult = unitOfWork.Save();
+                        if (saveCancelResult.IsFailure)
+                            return saveCancelResult.Errors;
+
                         return processPaymentResult.Errors;
+                    }
 
                     // pagamento com problema de antifraude.
                     paymentUnderReview = true;
@@ -284,6 +309,9 @@ namespace Domain.Services.StoreModule
 
         private OperationResult<OrderTransaction> ProcessPaymentInternal(ITransaction transaction, List<Order> orders)
         {
+            if (!transaction.IsPaid())
+                return new OperationResult<OrderTransaction>("", "Transação não está paga.");
+
             OrderTransaction orderTransaction = new OrderTransaction();
             if (transaction.IsMultiPayment)
             {
@@ -308,8 +336,7 @@ namespace Domain.Services.StoreModule
             }
 
             foreach (var order in orders)
-                if (transaction.IsPaid())
-                    order.IsPaid = true;
+                order.IsPaid = true;
 
             return orderTransaction;
         }
@@ -341,7 +368,7 @@ namespace Domain.Services.StoreModule
 
         private OperationResult RegisterStockTransactions(Cart cart, List<Order> orders, bool paymentUnderReview)
         {
-            if(paymentUnderReview) return OperationResult.Success;
+            if (paymentUnderReview) return OperationResult.Success;
 
             if (config.Product.BusinessModel.Sale.Enabled && !config.Product.BusinessModel.Rental.Enabled)
             {
