@@ -69,7 +69,7 @@ WriteLiteral("\r\n    \r\n");
             
             #line 9 "..\..\Views\Products\Cart\_RentalWithDifferentsDatesFullMessage.cshtml"
  if (config.Product.BusinessModel.Rental.Enabled && 
-     Model.Shipping != 0)
+     Model.ShippingTotal != 0)
 {
     if (Model.IsRentalWithDifferentsDates())
     {

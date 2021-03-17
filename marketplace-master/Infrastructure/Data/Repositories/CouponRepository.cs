@@ -30,7 +30,7 @@ namespace Infrastructure.Data.Repositories
         public bool IsOneTimeByUser(string buyerId, Guid couponId)
         {
             return Context.Set<Order>()
-                .Where(i => i.Status != OrderStatus.Processed)
+                .Where(i => i.Status != OrderStatus.Processed && i.Status != OrderStatus.Canceled)
                 .Count(i => i.Buyer.Id == buyerId && i.Coupon.Id == couponId) == 0;
         }
 

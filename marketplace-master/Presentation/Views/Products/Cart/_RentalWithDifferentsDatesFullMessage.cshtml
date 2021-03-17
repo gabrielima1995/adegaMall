@@ -7,7 +7,7 @@
 }
     
 @if (config.Product.BusinessModel.Rental.Enabled && 
-     Model.Shipping != 0)
+     Model.ShippingTotal != 0)
 {
     if (Model.IsRentalWithDifferentsDates())
     {

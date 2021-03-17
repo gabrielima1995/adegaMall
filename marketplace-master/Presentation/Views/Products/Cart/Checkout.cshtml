@@ -86,13 +86,13 @@
                             <tr class="checkout-shipping">
                                 <td>@Html.Localized("CART_SHIPPING_LABEL")</td>
                                 <td class="text-right">
-                                    @if (Model.Cart.Shipping == 0)
+                                    @if (Model.Cart.ShippingTotal == 0)
                                     {
                                         @:-
                                     }
                                     else
                                     {
-                                        @config.DefaultCurrency @Model.Cart.Shipping.DisplayDecimal(2)
+                                        @config.DefaultCurrency @Model.Cart.ShippingTotal.DisplayDecimal(2)
                                     }
                                 </td>
                             </tr>

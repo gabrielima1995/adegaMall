@@ -10,7 +10,7 @@ namespace Application.Modules.Products
         private const string VINHOS = "vinhos";
         private const string DESTILADOS = "destilados";
         private const string CERVEJAS = "cervejas";
-        private const string LICOROSOS = "licorosos";
+        private const string GOURMET = "gourmet";
 
         private const string POR_PRECO = "preco";
         private const string POR_PAIS = "pais";
@@ -18,7 +18,7 @@ namespace Application.Modules.Products
 
         public static readonly string[] CategoriesAllow =
         {
-            VINHOS, DESTILADOS, CERVEJAS, LICOROSOS
+            VINHOS, DESTILADOS, CERVEJAS, GOURMET
         };
 
         private static readonly string[] VariantTypesAllow =
@@ -144,7 +144,7 @@ namespace Application.Modules.Products
 
             #region Categoria Licorosos
 
-            var licorosos = categories.FirstOrDefault(i => i.Slug == LICOROSOS);
+            var licorosos = categories.FirstOrDefault(i => i.Slug == GOURMET);
 
             if (licorosos != null) menus.Add(new CategoryMenu(licorosos,
                 "Ver todos", $"Ver todos os {licorosos.Name.ToLower()}",

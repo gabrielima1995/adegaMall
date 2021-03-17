@@ -610,6 +610,10 @@
     <Compile Include="Migrations\202103101547399_OrderTransactionRefuseReason.Designer.cs">
       <DependentUpon>202103101547399_OrderTransactionRefuseReason.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103172151025_AddDeliveryDiscount.cs" />
+    <Compile Include="Migrations\202103172151025_AddDeliveryDiscount.Designer.cs">
+      <DependentUpon>202103172151025_AddDeliveryDiscount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Data\MyDbConnection.cs" />
     <Compile Include="Data\Repositories\AdminReportRepository.cs" />
@@ -907,6 +911,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103101547399_OrderTransactionRefuseReason.resx">
       <DependentUpon>202103101547399_OrderTransactionRefuseReason.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103172151025_AddDeliveryDiscount.resx">
+      <DependentUpon>202103172151025_AddDeliveryDiscount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

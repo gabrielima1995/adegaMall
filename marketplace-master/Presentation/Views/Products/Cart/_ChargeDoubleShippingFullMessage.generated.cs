@@ -70,7 +70,7 @@ WriteLiteral("\r\n    \r\n");
             #line 9 "..\..\Views\Products\Cart\_ChargeDoubleShippingFullMessage.cshtml"
  if (config.Product.BusinessModel.Rental.Enabled &&
         Model.ShippingMethod != ShippingMethod.OnSitePickup &&
-        Model.Shipping != 0 &&
+        Model.ShippingTotal != 0 &&
         config.Product.ShippingMode == ShippingMode.PerProduct)
 {
     if (Model.Items.All(i => i.Product.RentalSettings.ChargeDoubleShipping == true))

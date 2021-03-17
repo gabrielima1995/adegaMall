@@ -121,9 +121,24 @@ WriteLiteral("</span>\r\n        </a>\r\n    </li>\r\n");
             #line 50 "..\..\Views\Shared\_MenuCategorias.cshtml"
            
 }
+
             
             #line default
             #line hidden
+WriteLiteral("\r\n<li");
+
+WriteLiteral(" class=\"menu-category-item hidden-xs\"");
+
+WriteLiteral(">\r\n    <a");
+
+WriteLiteral(" href=\"/categoria/outras-bebidas/\"");
+
+WriteLiteral(" class=\"menu-category-item-link\"");
+
+WriteLiteral(" title=\"Ver todas as outras bebidas\"");
+
+WriteLiteral(">\r\n        <span>Outras bebidas</span>\r\n    </a>\r\n</li>");
+
         }
     }
 }

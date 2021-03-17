@@ -598,7 +598,7 @@ namespace Domain.Services.StoreModule
 
         private decimal CalculateOrderShipping(CartSeller cartSeller, List<List<CartItem>> deliveryList, List<CartItem> deliveryItem)
         {
-            return (cartSeller.SellerShipping / deliveryList.Count) + deliveryItem.Sum(x => x.Shipping);
+            return (cartSeller.SellerShippingTotal / deliveryList.Count) + deliveryItem.Sum(x => x.Shipping);
         }
 
         private decimal CalculateOrderInstallmentFeesForWirecard(Cart cart, PaymentOptions paymentOptions)

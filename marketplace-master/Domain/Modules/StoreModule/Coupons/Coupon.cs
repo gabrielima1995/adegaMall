@@ -7,7 +7,9 @@ namespace Domain.Modules.StoreModule.Coupons
     public enum CouponBenefitType
     {
         PercentDiscount = 0,
-        ValueDiscount = 1
+        ValueDiscount = 1,
+        DeliveryPercentDiscount = 2,
+        DeliveryValueDiscount = 3
     }
 
     public enum CouponUseMode
@@ -37,9 +39,17 @@ namespace Domain.Modules.StoreModule.Coupons
 
         public int TotalUse { get; private set; }
 
+        public int DistanceInKm { get; private set; }
+
+        public decimal MinOrderAmount { get; private set; }
+
         public bool IsDiscount =>
             BenefitType == CouponBenefitType.PercentDiscount ||
             BenefitType == CouponBenefitType.ValueDiscount;
+
+        public bool IsDeliveryDiscount =>
+            BenefitType == CouponBenefitType.DeliveryPercentDiscount ||
+            BenefitType == CouponBenefitType.DeliveryValueDiscount;
 
         public bool IsBySeller => !string.IsNullOrWhiteSpace(SellerId);
 
@@ -48,7 +58,8 @@ namespace Domain.Modules.StoreModule.Coupons
         }
 
         public Coupon(string code, string sellerId,
-            CouponBenefitType benefitType, decimal value, CouponUseMode useMode)
+            CouponBenefitType benefitType, decimal value, CouponUseMode useMode,
+            int distanceInKm, int minOrderAmount)
         {
             if (code == null) throw new ArgumentNullException(nameof(code));
             if (value <= 0) throw new ArgumentOutOfRangeException(nameof(value));
@@ -58,6 +69,8 @@ namespace Domain.Modules.StoreModule.Coupons
             BenefitType = benefitType;
             Value = value;
             UseMode = useMode;
+            DistanceInKm = distanceInKm;
+            MinOrderAmount = minOrderAmount;
         }
 
         public Coupon Update(bool enabled)
@@ -76,6 +89,8 @@ namespace Domain.Modules.StoreModule.Coupons
 
         public decimal CalculateDiscount(decimal amount, decimal totalAmount)
         {
+            if(amount == decimal.Zero || totalAmount == decimal.Zero) return decimal.Zero;
+
             if (IsDiscount)
             {
                 switch (BenefitType)
@@ -88,7 +103,28 @@ namespace Domain.Modules.StoreModule.Coupons
                         throw new NotImplementedException();
                 }
             }
-            throw new NotImplementedException();
+
+            throw new ArgumentException();
+        }
+
+        public decimal CalculateDeliveryDiscount(decimal deliveryAmount, decimal totalDeliveryAmount)
+        {
+            if (deliveryAmount == decimal.Zero || totalDeliveryAmount == decimal.Zero) return decimal.Zero;
+
+            if (IsDeliveryDiscount)
+            {
+                switch (BenefitType)
+                {
+                    case CouponBenefitType.DeliveryPercentDiscount:
+                        return Math.Round(deliveryAmount * Value / 100, 2, MidpointRounding.AwayFromZero);
+                    case CouponBenefitType.DeliveryValueDiscount:
+                        return Math.Min(Value * (deliveryAmount / totalDeliveryAmount), deliveryAmount);
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+
+            throw new ArgumentException();
         }
     }
 }

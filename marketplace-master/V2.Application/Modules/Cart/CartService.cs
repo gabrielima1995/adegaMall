@@ -202,20 +202,23 @@ namespace V2.Application.Modules
             {
                 cart.Discount = decimal.Zero;
 
+                IEnumerable<CartItem> items = cart.Items;
+
+                // cupom do vendedor, somente produtos dele
+                if (coupon.IsBySeller)
+                {
+                    items = items.Where(i => i.Product.Store_SellerId == coupon.SellerId);
+                }
+
+                var totalAmount = items.Sum(i => i.SubTotal);
+
+                if (totalAmount < coupon.MinOrderAmount)
+                    return InvalidCoupon($"Valor mínimo dos produtos não foi atingido para aplicar o cupom: {coupon.MinOrderAmount:C2}");
+
                 foreach (var cartSeller in cart.Sellers)
                 {
-                    IEnumerable<CartItem> items = cart.Items;
-
-                    // cupom do vendedor, somente produtos dele
-                    if (coupon.IsBySeller)
-                    {
-                        items = items.Where(i => i.Product.Store_SellerId == coupon.SellerId);
-                    }
-
                     var amount = items
                         .Where(p => p.Product.Store_SellerId == cartSeller.Seller.Id)
-                        .Sum(i => i.SubTotal);
-                    var totalAmount = items
                         .Sum(i => i.SubTotal);
 
                     var discount = coupon.CalculateDiscount(amount, totalAmount);
@@ -230,35 +233,93 @@ namespace V2.Application.Modules
                 return OperationResult.Success;
             }
 
+            OperationResult CalculateDeliveryDiscount()
+            {
+                cart.ShippingDiscount = decimal.Zero;
+
+                IEnumerable<CartItem> items = cart.Items;
+
+                // cupom do vendedor, somente produtos dele
+                if (coupon.IsBySeller)
+                {
+                    items = items.Where(i => i.Product.Store_SellerId == coupon.SellerId);
+                }
+
+                var totalAmount = items.Sum(i => i.SubTotal);
+
+                if (totalAmount < coupon.MinOrderAmount)
+                    return InvalidCoupon($"Valor mínimo dos produtos não foi atingido para aplicar o cupom: {coupon.MinOrderAmount:C2}");
+
+                foreach (var cartSeller in cart.Sellers)
+                {
+                    var shippingDiscount = coupon.CalculateDeliveryDiscount(cartSeller.SellerShipping, cart.Shipping);
+
+                    if (shippingDiscount > decimal.Zero && 
+                        coupon.DistanceInKm > decimal.Zero)
+                    {
+                        // verificar se todos os vendedores estão dentro do raio de frete gratis
+
+                        var origin = cartSeller.Seller.Address.Location;
+                        var destination = cart.ShippingAddress.Location;
+
+                        var distanceInKm = origin.Distance(destination) / 1000;
+
+                        if (distanceInKm > coupon.DistanceInKm)
+                            return InvalidCoupon("Cupom não disponível para sua localidade.");
+                    }
+
+                    cartSeller.SellerShippingDiscount = shippingDiscount;
+                    cart.ShippingDiscount += cartSeller.SellerShippingDiscount;
+                }
+
+                if (cart.ShippingDiscount == decimal.Zero)
+                    return InvalidCoupon("Cupom não pode ser aplicado para os produtos selecionados.");
+
+                return OperationResult.Success;
+            }
+
             if (!coupon.IsValid()) return InvalidCoupon("Cupom expirado.");
+
+            #region Use mode 
 
             switch (coupon.UseMode)
             {
                 // primeira compra
                 case CouponUseMode.FirstOrder:
                     var firstOrder = couponRepository.IsFirstOrder(cart.Buyer.Id);
-                    if (!firstOrder) return InvalidCoupon("Cupom já utilizado.");
+                    if (!firstOrder) return InvalidCoupon("Cupom já foi utilizado anteriormente.");
                     break;
 
                 // Uso único por usuário
                 case CouponUseMode.OneTimeByUser:
                     var oneTimeByUser = couponRepository.IsOneTimeByUser(cart.Buyer.Id, coupon.Id);
-                    if (!oneTimeByUser) return InvalidCoupon("Cupom já utilizado.");
+                    if (!oneTimeByUser) return InvalidCoupon("Cupom já foi utilizado anteriormente.");
                     break;
 
                 // Uso único no marketplace
                 case CouponUseMode.OneTimeEver:
                     var oneTimeEver = couponRepository.IsOneTimeEver(coupon.Id);
-                    if (!oneTimeEver) return InvalidCoupon("Cupom já utilizado.");
+                    if (!oneTimeEver) return InvalidCoupon("Cupom já foi utilizado anteriormente.");
                     break;
             }
 
-            var calculateResult = OperationResult.Success;
+            #endregion
+
+            #region Calculate
 
             if (coupon.IsDiscount)
-                calculateResult = CalculateDiscount();
+            {
+                var calculateResult = CalculateDiscount();
+                if (calculateResult.IsFailure) return calculateResult;
+            }
 
-            if (calculateResult.IsFailure) return calculateResult;
+            if (coupon.IsDeliveryDiscount)
+            {
+                var calculateResult = CalculateDeliveryDiscount();
+                if (calculateResult.IsFailure) return calculateResult;
+            }
+
+            #endregion
 
             cartRepository.Update(cart);
 

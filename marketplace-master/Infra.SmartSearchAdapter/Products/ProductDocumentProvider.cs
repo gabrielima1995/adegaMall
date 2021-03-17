@@ -49,7 +49,7 @@ namespace Infra.SmartSearchAdapter.Products
                         productId,
                         sellerId,
                         shippingPerStore = MaaSConfig.Current.Product.ShippingMode == ShippingMode.PerStore
-                    });
+                    }, commandTimeout: 300);
                     documentReader = new ProductDocumentReader(rentalSearchDocumentService, read);
                 }
             }

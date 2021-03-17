@@ -60,7 +60,7 @@ namespace Presentation.Models
 
         public string FormattedCartDiscount => cart.Discount == 0m ? "-" : $"-{currencySymbol} {cart.Discount.DisplayDecimal(2)}";
 
-        public string FormattedCartShipping => cart.Shipping == 0m ? "-" : $"{currencySymbol} {cart.Shipping.DisplayDecimal(2)}";
+        public string FormattedCartShipping => cart.ShippingTotal == 0m ? "-" : $"{currencySymbol} {cart.ShippingTotal.DisplayDecimal(2)}";
 
         public string FormattedCartTotal => $"{currencySymbol} {cart.Amount.DisplayDecimal(2)}";
 
