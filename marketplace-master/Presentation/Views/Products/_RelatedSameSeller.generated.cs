@@ -304,7 +304,7 @@ WriteAttribute("src", Tuple.Create(" src=\"", 2218), Tuple.Create("\"", 2272)
             #line default
             #line hidden
 , 2246), false)
-, Tuple.Create(Tuple.Create("", 2258), Tuple.Create(".png?w=25&h=25", 2258), true)
+, Tuple.Create(Tuple.Create("", 2258), Tuple.Create(".png?w=50&h=50", 2258), true)
 );
 
 WriteLiteral(" />\r\n                        </div>\r\n");

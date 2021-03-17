@@ -294,7 +294,7 @@ WriteLiteral("                            <tr>\r\n                              
             #line hidden
             
             #line 61 "..\..\Areas\Admin\Views\Dashboard\CartDetails.cshtml"
-                                                               Write((Model.Amount - Model.Shipping).RoundTo2Places());
+                                                               Write((Model.Amount - Model.ShippingTotal).RoundTo2Places());
 
             
             #line default

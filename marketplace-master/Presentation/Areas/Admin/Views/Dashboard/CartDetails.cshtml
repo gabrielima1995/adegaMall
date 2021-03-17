@@ -58,7 +58,7 @@
                                 <td><strong>Total</strong></td>
                                 <td>--</td>
                                 <td>--</td>
-                                <td><strong>@config.DefaultCurrency@((Model.Amount - Model.Shipping).RoundTo2Places())</strong></td>
+                                <td><strong>@config.DefaultCurrency@((Model.Amount - Model.ShippingTotal).RoundTo2Places())</strong></td>
                                 <td><strong>@Model.Items.Sum(x => x.Quantity)</strong></td>
                                 @if (config.Product.BusinessModel.Rental.Enabled)
                                 {

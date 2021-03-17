@@ -9,7 +9,7 @@ namespace Application.Modules.Products
     public enum ProductImageSize
     {
         XS = 150,
-        SM = 300,
+        SM = 450,
         MD = 600,
         LG = 1200
     }

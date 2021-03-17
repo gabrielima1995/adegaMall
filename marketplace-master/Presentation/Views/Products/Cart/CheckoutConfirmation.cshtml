@@ -1,6 +1,6 @@
 ﻿@model Presentation.Views.Products.Cart.CheckoutConfirmationViewModel
 
-@{ 
+@{
     ViewBag.Title = Request.GetLocalizedString(Model.IsPendingPayment ? "CHECKOUT_CONFIRMATION_PENDING_PAYMENT_TITLE" : "CHECKOUT_CONFIRMATION_TITLE");
 }
 
@@ -14,7 +14,7 @@
                             <i class="glyphicon glyphicon-ok"></i>
                             @ViewBag.Title
                         </h2>
-                        <hr/>
+                        <hr />
                         @Html.Localized(Model.IsPendingPayment ? "CHECKOUT_CONFIRMATION_PENDING_PAYMENT_MESSAGE" : "CHECKOUT_CONFIRMATION_MESSAGE", "p")
                         @Html.Localized("CHECKOUT_UPDATES_INFO", "p")
 
@@ -60,3 +60,34 @@
         </div>
     </div>
 </div>
+
+
+@section scripts{
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            executeTrackEcommerce();
+        });
+
+        function executeTrackEcommerce() {
+            if (window.gtag) {
+                trackEcommerce();
+            } else {
+                setTimeout(executeTrackEcommerce, 1000);
+            }
+        }
+
+        function trackEcommerce() {
+            console.log('Tracking ecommerce');
+
+            gtag('event', 'conversion', {
+                'send_to': 'AW-467456743/zBCpCLvU3uwBEOel894B',
+                'transaction_id': ''
+            });
+
+            console.log('Tracking ecommerce OK');
+        }
+    </script>
+}

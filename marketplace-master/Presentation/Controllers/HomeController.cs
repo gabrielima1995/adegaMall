@@ -48,5 +48,13 @@ namespace Presentation.Controllers
 
             return PartialView("_MenuCategorias", menu);
         }
+
+        [DonutOutputCache(CacheProfile = "CategoryMenu")]
+        public PartialViewResult CardCategorias()
+        {
+            var menu = categoryMenuAppService.Get();
+
+            return PartialView("_CardCategorias", menu);
+        }
     }
 }

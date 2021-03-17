@@ -148,14 +148,14 @@ Write(Html.ValidationSummary(true, "", new { @class = "text-danger" }));
             #line hidden
             
             #line 43 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-Write(Html.HiddenFor(model => model.RequireModeration,requireModeration));
+Write(Html.HiddenFor(model => model.RequireModeration, requireModeration));
 
             
             #line default
             #line hidden
             
             #line 43 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-                                                                       
+                                                                        
     if (isManagePage)
     {
 
@@ -168,24 +168,24 @@ WriteLiteral(" class=\"foto-perfil visible-xs visible-sm m-b-md\"");
 
 WriteLiteral(">\r\n            <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1883), Tuple.Create("\"", 1917)
+WriteAttribute("src", Tuple.Create(" src=\"", 1884), Tuple.Create("\"", 1918)
             
             #line 47 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 1889), Tuple.Create<System.Object, System.Int32>(loginProfile.GetAvatarUrl()
+, Tuple.Create(Tuple.Create("", 1890), Tuple.Create<System.Object, System.Int32>(loginProfile.GetAvatarUrl()
             
             #line default
             #line hidden
-, 1889), false)
+, 1890), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 1918), Tuple.Create("\"", 1942)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 1919), Tuple.Create("\"", 1943)
             
             #line 47 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 1924), Tuple.Create<System.Object, System.Int32>(loginProfile.Name
+, Tuple.Create(Tuple.Create("", 1925), Tuple.Create<System.Object, System.Int32>(loginProfile.Name
             
             #line default
             #line hidden
-, 1924), false)
+, 1925), false)
 );
 
 WriteLiteral(">\r\n            <a");
@@ -449,14 +449,14 @@ WriteLiteral(" class=\"form-group flex-valign\"");
 
 WriteLiteral(">\r\n                <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 3905), Tuple.Create("\"", 3950)
+WriteAttribute("src", Tuple.Create(" src=\"", 3906), Tuple.Create("\"", 3951)
             
             #line 99 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 3911), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.AvatarUrl, 255)
+, Tuple.Create(Tuple.Create("", 3912), Tuple.Create<System.Object, System.Int32>(ImgHelper.Avatar(Model.AvatarUrl, 255)
             
             #line default
             #line hidden
-, 3911), false)
+, 3912), false)
 );
 
 WriteLiteral(" alt=\"\"");
@@ -513,17 +513,31 @@ WriteLiteral("\r\n            </div>\r\n");
         }
     }
 
-    if (config.Buyer.DocumentNumber.Enabled || config.Payment.Enabled)
-    {
 
             
             #line default
             #line hidden
-WriteLiteral("        <div");
+WriteLiteral("    <div");
 
 WriteLiteral(" class=\"row\"");
 
-WriteLiteral(">\r\n            <div");
+WriteLiteral(">\r\n");
+
+            
+            #line 109 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+        
+            
+            #line default
+            #line hidden
+            
+            #line 109 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+         if (config.Buyer.DocumentNumber.Enabled || config.Payment.Enabled)
+        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <div");
 
 WriteLiteral(" class=\"col-xs-12 col-sm-6\"");
 
@@ -624,30 +638,25 @@ WriteLiteral("                    ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </div>\r\n            </div>\r\n        </div>\r\n");
+WriteLiteral("\r\n                </div>\r\n            </div>\r\n");
 
             
-            #line 128 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-    }
-
+            #line 127 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+        }
 
             
             #line default
             #line hidden
-WriteLiteral("    <div");
-
-WriteLiteral(" class=\"row\"");
-
-WriteLiteral(">\r\n");
+WriteLiteral("\r\n");
 
             
-            #line 131 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 129 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 131 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 129 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
          if (config.Buyer.DateOfBirth.Enabled)
         {
 
@@ -667,7 +676,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 135 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 133 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.LabelFor(i => i.DateOfBirth));
 
             
@@ -676,13 +685,13 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n");
 
             
-            #line 136 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 134 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 136 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 134 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                      if (blockChangesBirthDate)
                     {
                         
@@ -690,28 +699,28 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 138 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 136 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                    Write(Html.TextBoxFor(i => i.DateOfBirth, "{0:d}", new { @class = "form-control date no-picker", placeholder = Request.GetLocalizedString("DATE_OF_BIRTH_INPUT"), @disabled = "disabled" }));
 
             
             #line default
             #line hidden
             
-            #line 138 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 136 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                                                                                                                                                                                                               
                         
             
             #line default
             #line hidden
             
-            #line 139 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 137 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                    Write(Html.HiddenFor(Model => Model.DateOfBirth));
 
             
             #line default
             #line hidden
             
-            #line 139 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 137 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                                                                    
                     }
                     else
@@ -721,14 +730,14 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 143 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 141 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                    Write(Html.TextBoxFor(i => i.DateOfBirth, "{0:d}", new { @class = "form-control date no-picker", placeholder = Request.GetLocalizedString("DATE_OF_BIRTH_INPUT") }));
 
             
             #line default
             #line hidden
             
-            #line 143 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 141 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                                                                                                                                                                                       
                     }
 
@@ -738,7 +747,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 145 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 143 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" }));
 
             
@@ -749,7 +758,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 146 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 144 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.HiddenFor(i => i.DateOfBirthRequired));
 
             
@@ -758,7 +767,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </div>\r\n            </div>\r\n");
 
             
-            #line 149 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 147 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
         }
 
             
@@ -767,13 +776,13 @@ WriteLiteral("\r\n                </div>\r\n            </div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 151 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 149 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 151 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 149 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
          if (config.Buyer.Genre.Enabled)
         {
 
@@ -793,7 +802,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 155 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 153 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.LabelFor(i => i.Genre));
 
             
@@ -801,44 +810,44 @@ WriteLiteral("                    ");
             #line hidden
 WriteLiteral("\r\n                    <select");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 6871), Tuple.Create("\"", 6896)
+WriteAttribute("id", Tuple.Create(" id=\"", 6842), Tuple.Create("\"", 6867)
             
-            #line 156 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 6876), Tuple.Create<System.Object, System.Int32>(nameof(Model.Genre)
+            #line 154 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+, Tuple.Create(Tuple.Create("", 6847), Tuple.Create<System.Object, System.Int32>(nameof(Model.Genre)
             
             #line default
             #line hidden
-, 6876), false)
+, 6847), false)
 );
 
-WriteAttribute("name", Tuple.Create(" name=\"", 6897), Tuple.Create("\"", 6924)
+WriteAttribute("name", Tuple.Create(" name=\"", 6868), Tuple.Create("\"", 6895)
             
-            #line 156 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 6904), Tuple.Create<System.Object, System.Int32>(nameof(Model.Genre)
+            #line 154 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+, Tuple.Create(Tuple.Create("", 6875), Tuple.Create<System.Object, System.Int32>(nameof(Model.Genre)
             
             #line default
             #line hidden
-, 6904), false)
+, 6875), false)
 );
 
 WriteLiteral(" class=\"form-control js-select\"");
 
 WriteLiteral(">\r\n                        <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 6990), Tuple.Create("\"", 7009)
+WriteAttribute("value", Tuple.Create(" value=\"", 6961), Tuple.Create("\"", 6980)
             
-            #line 157 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 6998), Tuple.Create<System.Object, System.Int32>(Genre.Male
+            #line 155 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+, Tuple.Create(Tuple.Create("", 6969), Tuple.Create<System.Object, System.Int32>(Genre.Male
             
             #line default
             #line hidden
-, 6998), false)
+, 6969), false)
 );
 
 WriteLiteral(" ");
 
             
-            #line 157 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 155 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                                                 Write(Model.Genre == Genre.Male ? "selected" : "");
 
             
@@ -847,7 +856,7 @@ WriteLiteral(" ");
 WriteLiteral(">");
 
             
-            #line 157 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 155 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                                                                                               Write(Request.GetLocalizedString("MALE_GENRE_LABEL"));
 
             
@@ -855,20 +864,20 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</option>\r\n                        <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7147), Tuple.Create("\"", 7168)
+WriteAttribute("value", Tuple.Create(" value=\"", 7118), Tuple.Create("\"", 7139)
             
-            #line 158 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 7155), Tuple.Create<System.Object, System.Int32>(Genre.Female
+            #line 156 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+, Tuple.Create(Tuple.Create("", 7126), Tuple.Create<System.Object, System.Int32>(Genre.Female
             
             #line default
             #line hidden
-, 7155), false)
+, 7126), false)
 );
 
 WriteLiteral(" ");
 
             
-            #line 158 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 156 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                                                   Write(Model.Genre == Genre.Female ? "selected" : "");
 
             
@@ -877,7 +886,7 @@ WriteLiteral(" ");
 WriteLiteral(">");
 
             
-            #line 158 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 156 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                                                                                                   Write(Request.GetLocalizedString("FEMALE_GENRE_LABEL"));
 
             
@@ -885,20 +894,20 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</option>\r\n                        <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7310), Tuple.Create("\"", 7330)
+WriteAttribute("value", Tuple.Create(" value=\"", 7281), Tuple.Create("\"", 7301)
             
-            #line 159 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-, Tuple.Create(Tuple.Create("", 7318), Tuple.Create<System.Object, System.Int32>(Genre.Other
+            #line 157 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+, Tuple.Create(Tuple.Create("", 7289), Tuple.Create<System.Object, System.Int32>(Genre.Other
             
             #line default
             #line hidden
-, 7318), false)
+, 7289), false)
 );
 
 WriteLiteral(" ");
 
             
-            #line 159 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 157 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                                                  Write(Model.Genre == Genre.Other ? "selected" : "");
 
             
@@ -907,7 +916,7 @@ WriteLiteral(" ");
 WriteLiteral(">");
 
             
-            #line 159 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 157 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                                                                                                 Write(Request.GetLocalizedString("OTHER_GENRE_LABEL"));
 
             
@@ -918,7 +927,7 @@ WriteLiteral("</option>\r\n                    </select>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 161 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 159 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.ValidationMessageFor(model => model.Genre, "", new { @class = "text-danger" }));
 
             
@@ -929,7 +938,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 162 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 160 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.HiddenFor(i => i.GenreRequired));
 
             
@@ -938,7 +947,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </div>\r\n            </div>\r\n");
 
             
-            #line 165 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 163 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
         }
 
             
@@ -947,7 +956,7 @@ WriteLiteral("\r\n                </div>\r\n            </div>\r\n");
 WriteLiteral("    </div>\r\n");
 
             
-            #line 167 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 165 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
 
     if (config.CustomFields.Buyer.Enabled && Model.CustomFieldDefinitions != null && Model.CustomFieldDefinitions.Any())
     {
@@ -962,13 +971,13 @@ WriteLiteral(" class=\"row\"");
 WriteLiteral(">\r\n");
 
             
-            #line 171 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 169 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 171 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 169 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
              for (int i = 0; i < Model.CustomFieldDefinitions.Count; i++)
             {
                 ViewData["Index"] = i;
@@ -985,7 +994,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 175 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 173 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.Partial("_CustomFieldForms", Model, ViewData));
 
             
@@ -994,7 +1003,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                    <br />\r\n                </div>\r\n");
 
             
-            #line 178 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 176 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
             }
 
             
@@ -1005,11 +1014,65 @@ WriteLiteral("        </div>\r\n");
 WriteLiteral("        <hr />\r\n");
 
             
-            #line 181 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 179 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
     }
 
     if (Model.AddressEnabled)
     {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <div");
+
+WriteLiteral(" class=\"row\"");
+
+WriteLiteral(">\r\n            <div");
+
+WriteLiteral(" class=\"col-xs-12 col-sm-4\"");
+
+WriteLiteral(">\r\n                <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                    ");
+
+            
+            #line 186 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+               Write(Html.LabelFor(i => i.AddressZipCode));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("                    ");
+
+            
+            #line 187 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+               Write(Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control js-viacep" + (config.Buyer.AllowPlainTextZipCode ? "" : " js-zipcode"), placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("                    ");
+
+            
+            #line 188 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+               Write(Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                </div>\r\n            </div>\r\n        </div>\r\n");
+
+            
+            #line 192 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+
 
             
             #line default
@@ -1031,7 +1094,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 188 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 196 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.LabelFor(i => i.Address));
 
             
@@ -1042,7 +1105,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 189 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 197 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.TextBoxFor(i => i.Address, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_INPUT") }));
 
             
@@ -1053,7 +1116,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 190 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 198 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" }));
 
             
@@ -1064,7 +1127,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 191 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 199 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.HiddenFor(i => i.AddressRequired));
 
             
@@ -1083,7 +1146,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 197 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 205 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.LabelFor(i => i.AddressNumber));
 
             
@@ -1094,7 +1157,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 198 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 206 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.TextBoxFor(i => i.AddressNumber, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_NUMBER_INPUT") }));
 
             
@@ -1105,7 +1168,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 199 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 207 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
                Write(Html.ValidationMessageFor(model => model.AddressNumber, "", new { @class = "text-danger" }));
 
             
@@ -1114,7 +1177,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </div>\r\n            </div>\r\n        </div>\r\n");
 
             
-            #line 203 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
+            #line 211 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
 
 
             
@@ -1126,48 +1189,7 @@ WriteLiteral(" class=\"row\"");
 
 WriteLiteral(">\r\n            <div");
 
-WriteLiteral(" class=\"col-xs-12 col-sm-4\"");
-
-WriteLiteral(">\r\n                <div");
-
-WriteLiteral(" class=\"form-group\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                    ");
-
-            
-            #line 207 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-               Write(Html.LabelFor(i => i.AddressAdditionalInfo));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("                    ");
-
-            
-            #line 208 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-               Write(Html.TextBoxFor(i => i.AddressAdditionalInfo, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_ADDITIONAL_INFO_INPUT") }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("                    ");
-
-            
-            #line 209 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-               Write(Html.ValidationMessageFor(model => model.AddressAdditionalInfo, "", new { @class = "text-danger" }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                </div>\r\n            </div>\r\n\r\n            <div");
-
-WriteLiteral(" class=\"col-xs-12 col-sm-4\"");
+WriteLiteral(" class=\"col-xs-12 col-sm-5\"");
 
 WriteLiteral(">\r\n                <div");
 
@@ -1179,7 +1201,7 @@ WriteLiteral("                    ");
 
             
             #line 215 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-               Write(Html.LabelFor(i => i.AddressNeighborhood));
+               Write(Html.LabelFor(i => i.AddressAdditionalInfo));
 
             
             #line default
@@ -1190,7 +1212,7 @@ WriteLiteral("                    ");
 
             
             #line 216 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-               Write(Html.TextBoxFor(i => i.AddressNeighborhood, new { @class = "form-control", placeholder = Request.GetLocalizedString("NEIGHBORHOOD_INPUT") }));
+               Write(Html.TextBoxFor(i => i.AddressAdditionalInfo, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_ADDITIONAL_INFO_INPUT") }));
 
             
             #line default
@@ -1201,14 +1223,14 @@ WriteLiteral("                    ");
 
             
             #line 217 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-               Write(Html.ValidationMessageFor(model => model.AddressNeighborhood, "", new { @class = "text-danger" }));
+               Write(Html.ValidationMessageFor(model => model.AddressAdditionalInfo, "", new { @class = "text-danger" }));
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n                </div>\r\n            </div>\r\n\r\n            <div");
 
-WriteLiteral(" class=\"col-xs-12 col-sm-4\"");
+WriteLiteral(" class=\"col-xs-12 col-sm-7\"");
 
 WriteLiteral(">\r\n                <div");
 
@@ -1220,7 +1242,7 @@ WriteLiteral("                    ");
 
             
             #line 223 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-               Write(Html.LabelFor(i => i.AddressZipCode));
+               Write(Html.LabelFor(i => i.AddressNeighborhood));
 
             
             #line default
@@ -1231,7 +1253,7 @@ WriteLiteral("                    ");
 
             
             #line 224 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-               Write(Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control" + (config.Buyer.AllowPlainTextZipCode ? "" : " js-zipcode"), placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") }));
+               Write(Html.TextBoxFor(i => i.AddressNeighborhood, new { @class = "form-control", placeholder = Request.GetLocalizedString("NEIGHBORHOOD_INPUT") }));
 
             
             #line default
@@ -1242,7 +1264,7 @@ WriteLiteral("                    ");
 
             
             #line 225 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-               Write(Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger" }));
+               Write(Html.ValidationMessageFor(model => model.AddressNeighborhood, "", new { @class = "text-danger" }));
 
             
             #line default
@@ -1345,7 +1367,7 @@ WriteLiteral("\r\n        </div>\r\n");
             #line hidden
             
             #line 252 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
-                
+                    
     }
 
 
@@ -1372,6 +1394,7 @@ WriteLiteral("\r\n    </div>\r\n");
             
             #line 258 "..\..\Views\Shared\_BuyerProfileForm.cshtml"
 }
+
             
             #line default
             #line hidden

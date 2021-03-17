@@ -1,0 +1,131 @@
+﻿@model List<Application.Modules.Products.CategoryMenu>
+
+@{
+    var imagesMobile = new[]
+    {
+"/assets/images/icones/icones-01.png",
+"/assets/images/icones/icones-02.png",
+"/assets/images/icones/icones-03.png",
+"/assets/images/icones/icones-04.png"
+};
+
+    var images = new[]
+    {
+"https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/productimage/7384d121-kit-chileno.jpg",
+"https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/2a54c29c-gin-taqueray.jpg",
+"https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/7371055e-cerveja-six-shots.jpg",
+"https://d3mycmk9tx6oeh.cloudfront.net/cloudimage/producttemplateimage/9cd74dc6-obraprima-geleia-premium-pimenta.png"
+};
+
+    var iMobile = 0;
+    var i = 0;
+}
+
+<div class="container card-categorias-mobile-wrapper">
+    @foreach (var menu in Model)
+    {
+        var categoryUrl = $"/categoria/{menu.Category.Slug}/";
+        var categoryName = menu.Category.Name;
+        var imageMobileUrl = imagesMobile[iMobile++];
+
+        <div class="card-categoria-mobile">
+            <a href="@categoryUrl" title="@categoryName">
+                <img src="@(imageMobileUrl)?width=300&height=300&mode=crop&scale=both" style="width:auto;height:auto;" alt="@categoryName" />
+            </a>
+            <a href="@categoryUrl" title="@categoryName">
+                <h2 class="card-categoria-mobile-title">@categoryName</h2>
+            </a>
+        </div>
+    }
+</div>
+
+<div class="container card-categorias-wrapper">
+    <div class="card-categorias-left">
+        <a href="https://www.adegamall.com.br/product/atlantico-alentejano-750ml/?lang=pt-BR">
+            <img src="/assets/images/banners/desktop-banner2.png?width=375&height=525&mode=crop&scale=both" style="width:auto;height:auto;" />
+        </a>
+    </div>
+    <div class="card-categorias-right">
+        @foreach (var menu in Model)
+        {
+            var categoryUrl = $"/categoria/{menu.Category.Slug}/";
+            var categoryName = menu.Category.Name;
+            var imageUrl = images[i++];
+
+            <div class="card-categoria-wrapper">
+                <div class="card-categoria">
+                    <div class="card-categoria-left">
+                        <a href="@categoryUrl" title="@categoryName">
+                            <h2 class="card-categoria-title">@categoryName</h2>
+                        </a>
+
+                        <ul class="card-categoria-links">
+                            @foreach (var item in menu.Items)
+                            {
+                                <li>
+                                    <a href="@categoryUrl" class="card-categoria-link" title="@item.Title">
+                                        @item.Title
+                                    </a>
+                                </li>
+                            }
+
+                            <li>
+                                <a href="@categoryUrl" class="card-categoria-link" title="@menu.Description">
+                                    @menu.Title
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-categoria-right">
+                        <a href="@categoryUrl" title="@categoryName">
+                            <img src="@(imageUrl)?width=450&height=450&mode=crop&scale=both" style="width:auto;height:auto;" alt="@categoryName" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@foreach (var menu in Model)
+{
+    @*<li class="menu-category-item">
+            <a href="/categoria/@menu.Category.Slug/" class="menu-category-item-link" title="@menu.Description">
+                <span>@menu.Category.Name</span>
+            </a>
+        </li>
+
+        <li class="dropdown @dropdownClass">
+            <a href="#" class="@itemMenuClass dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span>@menu.Category.Name</span>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="/categoria/@menu.Category.Slug/" class="item-menu" title="@menu.Description">
+                        @menu.Title
+                    </a>
+                </li>
+
+                @foreach (var item in menu.Items)
+                {
+                    <li class="dropdown dropdown-submenu">
+                        <a href="#" class="item-menu dropdown-toggle" data-toggle="dropdown">
+                            @item.Title
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach (var variant in item.Variants)
+                            {
+                                <li>
+                                    <a href="/categoria/@menu.Category.Slug/@item.VariantType.Slug/@variant.Slug/" class="item-menu"
+                                       title="@menu.Description @item.Title.ToLower() - @variant.Name">
+                                        @variant.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </li>*@
+}

@@ -27,7 +27,7 @@
                 var productUrl = Url.ActionLocalized("PublicPage", "Products", new { id = product.FriendlyUrl });
                 var paisBadge = product.GetPaisBadge();
 
-                <div class="col-xs-12 col-sm-4 col-md-3">
+                <div class="col-xs-6 col-sm-4 col-md-3">
                     <div class="card equal-height">
                         @if (price.DisplayShortPrice.HasAnyPrice)
                         {
@@ -51,7 +51,7 @@
                         @if (!string.IsNullOrEmpty(paisBadge))
                         {
                             <div class="card-country-badge">
-                                <img src="/assets/images/paises/@(paisBadge).png?w=25&h=25" />
+                                <img src="/assets/images/paises/@(paisBadge).png?w=50&h=50" />
                             </div>
                         }
 

@@ -69,6 +69,20 @@ Write(Html.HiddenFor(model => model.Banner.ImageUrl));
             
             #line 7 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
                                                    
+    
+            
+            #line default
+            #line hidden
+            
+            #line 8 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+Write(Html.HiddenFor(model => model.Banner.MobileImageUrl));
+
+            
+            #line default
+            #line hidden
+            
+            #line 8 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+                                                         
 }
 
             
@@ -83,7 +97,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("    ");
 
             
-            #line 11 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 12 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
 Write(Html.LabelFor(model => model.Banner.ImageUrl));
 
             
@@ -104,7 +118,7 @@ WriteLiteral(" />\r\n");
 WriteLiteral("    ");
 
             
-            #line 14 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 15 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
 Write(Html.ValidationMessageFor(model => model.Banner.ImageUrl));
 
             
@@ -119,28 +133,24 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 16 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 17 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
    Write(Request.GetLocalizedString("BANNER_IMAGE_URL_TEXT"));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n        <a");
+WriteLiteral("\r\n        ");
 
-WriteLiteral(" href=\"/assets/images/template-banner-1920-530.jpg\"");
-
-WriteLiteral(" target=\"_blank\"");
-
-WriteLiteral(">Template</a>\r\n    </small>\r\n\r\n");
+WriteLiteral("\r\n    </small>\r\n\r\n");
 
             
-            #line 20 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 21 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 20 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 21 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
      if (Model.Banner.ImageUrl != null)
     {
 
@@ -149,30 +159,30 @@ WriteLiteral(">Template</a>\r\n    </small>\r\n\r\n");
             #line hidden
 WriteLiteral("        <p><img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 671), Tuple.Create("\"", 703)
+WriteAttribute("src", Tuple.Create(" src=\"", 734), Tuple.Create("\"", 766)
             
-            #line 22 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
-, Tuple.Create(Tuple.Create("", 677), Tuple.Create<System.Object, System.Int32>(Model.Banner.ImageThumbLg
+            #line 23 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+, Tuple.Create(Tuple.Create("", 740), Tuple.Create<System.Object, System.Int32>(Model.Banner.ImageThumbLg
             
             #line default
             #line hidden
-, 677), false)
+, 740), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 704), Tuple.Create("\"", 732)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 767), Tuple.Create("\"", 795)
             
-            #line 22 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
-, Tuple.Create(Tuple.Create("", 710), Tuple.Create<System.Object, System.Int32>(Model.Banner.ImageUrl
+            #line 23 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+, Tuple.Create(Tuple.Create("", 773), Tuple.Create<System.Object, System.Int32>(Model.Banner.ImageUrl
             
             #line default
             #line hidden
-, 710), false)
+, 773), false)
 );
 
 WriteLiteral(" /></p>\r\n");
 
             
-            #line 23 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 24 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
     }
 
             
@@ -187,7 +197,103 @@ WriteLiteral(">\r\n");
 WriteLiteral("    ");
 
             
-            #line 27 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 28 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+Write(Html.LabelFor(model => model.Banner.MobileImageUrl));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n    <input");
+
+WriteLiteral(" type=\"file\"");
+
+WriteLiteral(" name=\"bannermobileimage\"");
+
+WriteLiteral(" />\r\n");
+
+WriteLiteral("    ");
+
+            
+            #line 30 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+Write(Html.ValidationMessageFor(model => model.Banner.MobileImageUrl));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n    <small");
+
+WriteLiteral(" class=\"help-block\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("        ");
+
+            
+            #line 32 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+   Write(Request.GetLocalizedString("BANNER_MOBILE_IMAGE_URL_TEXT"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        ");
+
+WriteLiteral("\r\n    </small>\r\n");
+
+            
+            #line 35 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+    
+            
+            #line default
+            #line hidden
+            
+            #line 35 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+     if (Model.Banner.MobileImageUrl != null)
+    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <p><img");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 1308), Tuple.Create("\"", 1346)
+            
+            #line 37 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+, Tuple.Create(Tuple.Create("", 1314), Tuple.Create<System.Object, System.Int32>(Model.Banner.MobileImageThumbLg
+            
+            #line default
+            #line hidden
+, 1314), false)
+);
+
+WriteAttribute("alt", Tuple.Create(" alt=\"", 1347), Tuple.Create("\"", 1381)
+            
+            #line 37 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+, Tuple.Create(Tuple.Create("", 1353), Tuple.Create<System.Object, System.Int32>(Model.Banner.MobileImageUrl
+            
+            #line default
+            #line hidden
+, 1353), false)
+);
+
+WriteLiteral(" /></p>\r\n");
+
+            
+            #line 38 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n\r\n<div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("    ");
+
+            
+            #line 42 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
 Write(Html.LabelFor(model => model.Banner.ActionUrl));
 
             
@@ -202,7 +308,7 @@ WriteLiteral(">*</span>\r\n");
 WriteLiteral("    ");
 
             
-            #line 29 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 44 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
 Write(Html.EditorFor(model => model.Banner.ActionUrl, new { htmlAttributes = new { @class = "form-control", placeholder = Request.GetLocalizedString("BANNER_ACTION_URL_INPUT") } }));
 
             
@@ -213,7 +319,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 30 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 45 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
 Write(Html.ValidationMessageFor(model => model.Banner.ActionUrl));
 
             
@@ -226,7 +332,7 @@ WriteLiteral(" class=\"help-block\"");
 WriteLiteral(">");
 
             
-            #line 31 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 46 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
                          Write(Request.GetLocalizedString("BANNER_ACTION_URL_TEXT"));
 
             
@@ -249,7 +355,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("            ");
 
             
-            #line 37 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 52 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
        Write(Html.LabelFor(model => model.Banner.StartsAt));
 
             
@@ -260,7 +366,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 38 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 53 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
        Write(Html.EditorFor(model => model.Banner.StartsAt, new { htmlAttributes = new { @class = "form-control" } }));
 
             
@@ -271,7 +377,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 39 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 54 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
        Write(Html.ValidationMessageFor(model => model.Banner.StartsAt));
 
             
@@ -290,7 +396,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("            ");
 
             
-            #line 44 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 59 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
        Write(Html.LabelFor(model => model.Banner.ExpiresAt));
 
             
@@ -301,7 +407,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 45 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 60 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
        Write(Html.EditorFor(model => model.Banner.ExpiresAt, new { htmlAttributes = new { @class = "form-control" } }));
 
             
@@ -312,7 +418,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 46 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 61 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
        Write(Html.ValidationMessageFor(model => model.Banner.ExpiresAt));
 
             
@@ -325,7 +431,7 @@ WriteLiteral(" class=\"help-block\"");
 WriteLiteral(">");
 
             
-            #line 51 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 66 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
                      Write(Request.GetLocalizedString("BANNER_DATES_TEXT"));
 
             
@@ -348,7 +454,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("            ");
 
             
-            #line 56 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 71 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
        Write(Html.LabelFor(model => model.Banner.Order));
 
             
@@ -363,7 +469,7 @@ WriteLiteral(">*</span>\r\n");
 WriteLiteral("            ");
 
             
-            #line 58 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 73 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
        Write(Html.EditorFor(model => model.Banner.Order, new { htmlAttributes = new { @class = "form-control" } }));
 
             
@@ -374,7 +480,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 59 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
+            #line 74 "..\..\Areas\Admin\Views\Banners\EditorTemplates\BannerCreateEditVM.cshtml"
        Write(Html.ValidationMessageFor(model => model.Banner.Order));
 
             

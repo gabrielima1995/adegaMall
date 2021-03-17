@@ -132,7 +132,7 @@ WriteLiteral("</h4>\r\n        </div>\r\n\r\n");
             #line hidden
 WriteLiteral("            <div");
 
-WriteLiteral(" class=\"col-xs-12 col-sm-4 col-md-3\"");
+WriteLiteral(" class=\"col-xs-6 col-sm-4 col-md-3\"");
 
 WriteLiteral(">\r\n                <div");
 
@@ -216,33 +216,33 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1721), Tuple.Create("\"", 1739)
+WriteAttribute("href", Tuple.Create(" href=\"", 1720), Tuple.Create("\"", 1738)
             
             #line 45 "..\..\Views\Products\_RelatedOther.cshtml"
-, Tuple.Create(Tuple.Create("", 1728), Tuple.Create<System.Object, System.Int32>(productUrl
+, Tuple.Create(Tuple.Create("", 1727), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 1728), false)
+, 1727), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1740), Tuple.Create("\"", 1762)
+WriteAttribute("title", Tuple.Create(" title=\"", 1739), Tuple.Create("\"", 1761)
             
             #line 45 "..\..\Views\Products\_RelatedOther.cshtml"
-, Tuple.Create(Tuple.Create("", 1748), Tuple.Create<System.Object, System.Int32>(product.Title
+, Tuple.Create(Tuple.Create("", 1747), Tuple.Create<System.Object, System.Int32>(product.Title
             
             #line default
             #line hidden
-, 1748), false)
+, 1747), false)
 );
 
 WriteLiteral(" class=\"card-product-img-link\"");
 
 WriteLiteral(">\r\n                        <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1824), Tuple.Create("\"", 1873)
-, Tuple.Create(Tuple.Create("", 1830), Tuple.Create<System.Object, System.Int32>(Href("~/assets/images/product-img-placeholder.jpg")
-, 1830), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 1823), Tuple.Create("\"", 1872)
+, Tuple.Create(Tuple.Create("", 1829), Tuple.Create<System.Object, System.Int32>(Href("~/assets/images/product-img-placeholder.jpg")
+, 1829), false)
 );
 
 WriteLiteral(" data-src=\"");
@@ -256,14 +256,14 @@ WriteLiteral(" data-src=\"");
             #line hidden
 WriteLiteral("\"");
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 1932), Tuple.Create("\"", 1952)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 1931), Tuple.Create("\"", 1951)
             
             #line 46 "..\..\Views\Products\_RelatedOther.cshtml"
-                                                              , Tuple.Create(Tuple.Create("", 1938), Tuple.Create<System.Object, System.Int32>(product.Title
+                                                              , Tuple.Create(Tuple.Create("", 1937), Tuple.Create<System.Object, System.Int32>(product.Title
             
             #line default
             #line hidden
-, 1938), false)
+, 1937), false)
 );
 
 WriteLiteral(" class=\"js-load-img\"");
@@ -290,16 +290,16 @@ WriteLiteral(" class=\"card-country-badge\"");
 
 WriteLiteral(">\r\n                            <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 2179), Tuple.Create("\"", 2233)
-, Tuple.Create(Tuple.Create("", 2185), Tuple.Create("/assets/images/paises/", 2185), true)
+WriteAttribute("src", Tuple.Create(" src=\"", 2178), Tuple.Create("\"", 2232)
+, Tuple.Create(Tuple.Create("", 2184), Tuple.Create("/assets/images/paises/", 2184), true)
             
             #line 52 "..\..\Views\Products\_RelatedOther.cshtml"
-, Tuple.Create(Tuple.Create("", 2207), Tuple.Create<System.Object, System.Int32>(paisBadge
+, Tuple.Create(Tuple.Create("", 2206), Tuple.Create<System.Object, System.Int32>(paisBadge
             
             #line default
             #line hidden
-, 2207), false)
-, Tuple.Create(Tuple.Create("", 2219), Tuple.Create(".png?w=25&h=25", 2219), true)
+, 2206), false)
+, Tuple.Create(Tuple.Create("", 2218), Tuple.Create(".png?w=50&h=50", 2218), true)
 );
 
 WriteLiteral(" />\r\n                        </div>\r\n");
@@ -551,14 +551,14 @@ WriteLiteral(">&nbsp;</p>\r\n");
             #line hidden
 WriteLiteral("\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4808), Tuple.Create("\"", 4826)
+WriteAttribute("href", Tuple.Create(" href=\"", 4807), Tuple.Create("\"", 4825)
             
             #line 107 "..\..\Views\Products\_RelatedOther.cshtml"
-, Tuple.Create(Tuple.Create("", 4815), Tuple.Create<System.Object, System.Int32>(productUrl
+, Tuple.Create(Tuple.Create("", 4814), Tuple.Create<System.Object, System.Int32>(productUrl
             
             #line default
             #line hidden
-, 4815), false)
+, 4814), false)
 );
 
 WriteLiteral(" class=\"btn btn-default btn-round card-btn\"");

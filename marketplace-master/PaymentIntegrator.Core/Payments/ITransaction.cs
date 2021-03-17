@@ -19,6 +19,11 @@ namespace PaymentIntegrator.Core.Payments
         string Status { get; }
 
         /// <summary>
+        /// Motivo pelo qual a transação foi recusada.
+        /// </summary>
+        string RefuseReason { get; }
+
+        /// <summary>
         /// Mensagem detalhada da transação no gateway de pagamento.
         /// </summary>
         string Message { get; }
@@ -72,6 +77,11 @@ namespace PaymentIntegrator.Core.Payments
         /// Indica se a transação teve seu pagamento cancelado, negado ou revertido.
         /// </summary>
         bool IsPaymentCancelledOrRejected();
+
+        /// <summary>
+        /// Indica se a transação teve seu pagamento recusado pelo serviço de antifraude.
+        /// </summary>
+        bool IsAntifraudRefuse();
 
         /// <summary>
         /// URL do sistema que receberá notificações a cada mudança no status da transação.

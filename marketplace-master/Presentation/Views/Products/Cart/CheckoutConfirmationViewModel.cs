@@ -22,7 +22,8 @@ namespace Presentation.Views.Products.Cart
 
         public bool HasMultipleSellers => Orders.Count > 1;
         public bool IsBoleto => ReferenceOrder.PaymentMethod == PaymentMethod.Boleto;
+        public bool IsCreditCard => ReferenceOrder.PaymentMethod == PaymentMethod.CreditCard;
         public bool IsOfflinePayment => ReferenceOrder.PaymentMethod == PaymentMethod.Offline;
-        public bool IsPendingPayment => ReferenceOrder.IsPaid == false;
+        public bool IsPendingPayment => !ReferenceOrder.IsPaid;
     }
 }

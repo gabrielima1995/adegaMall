@@ -50,7 +50,7 @@ namespace ASP
         {
             
             #line 3 "..\..\Views\Products\Cart\CheckoutConfirmation.cshtml"
-   
+  
     ViewBag.Title = Request.GetLocalizedString(Model.IsPendingPayment ? "CHECKOUT_CONFIRMATION_PENDING_PAYMENT_TITLE" : "CHECKOUT_CONFIRMATION_TITLE");
 
             
@@ -95,7 +95,7 @@ WriteLiteral("                            ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                        </h2>\r\n                        <hr/>\r\n");
+WriteLiteral("\r\n                        </h2>\r\n                        <hr />\r\n");
 
 WriteLiteral("                        ");
 
@@ -368,7 +368,41 @@ WriteLiteral("</a>\r\n                            </li>\r\n");
             #line default
             #line hidden
 WriteLiteral("                    </ul>\r\n                </div>\r\n            </div>\r\n        </" +
-"div>\r\n    </div>\r\n</div>\r\n");
+"div>\r\n    </div>\r\n</div>\r\n\r\n\r\n");
+
+DefineSection("scripts", () => {
+
+WriteLiteral(@"
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            executeTrackEcommerce();
+        });
+
+        function executeTrackEcommerce() {
+            if (window.gtag) {
+                trackEcommerce();
+            } else {
+                setTimeout(executeTrackEcommerce, 1000);
+            }
+        }
+
+        function trackEcommerce() {
+            console.log('Tracking ecommerce');
+
+            gtag('event', 'conversion', {
+                'send_to': 'AW-467456743/zBCpCLvU3uwBEOel894B',
+                'transaction_id': ''
+            });
+
+            console.log('Tracking ecommerce OK');
+        }
+    </script>
+");
+
+});
 
         }
     }

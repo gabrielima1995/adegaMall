@@ -37,14 +37,14 @@ namespace Domain.Services
             return _bannerRepository.ListForAdmin();
         }
 
-        public OperationResult Create(Banner banner, FileUpload bannerImage)
+        public OperationResult Create(Banner banner, FileUpload bannerImage, FileUpload bannerMobileImage)
         {
-            return CreateUpdateInternal(banner, bannerImage, isUpdate: false);
+            return CreateUpdateInternal(banner, bannerImage, bannerMobileImage, isUpdate: false);
         }
 
-        public OperationResult Update(Banner banner, FileUpload bannerImage)
+        public OperationResult Update(Banner banner, FileUpload bannerImage, FileUpload bannerMobileImage)
         {
-            return CreateUpdateInternal(banner, bannerImage, isUpdate: true);
+            return CreateUpdateInternal(banner, bannerImage, bannerMobileImage, isUpdate: true);
         }
 
         public OperationResult Delete(Banner banner)
@@ -64,17 +64,17 @@ namespace Domain.Services
             return new Banner();
         }
 
-        public OperationResult ValidateForCreate(Banner banner, FileUpload bannerImage)
+        public OperationResult ValidateForCreate(Banner banner, FileUpload bannerImage, FileUpload bannerMobileImage)
         {
             return ValidateForCreateUpdateInternal(banner, bannerImage, false);
         }
 
-        public OperationResult ValidateForUpdate(Banner banner, FileUpload bannerImage)
+        public OperationResult ValidateForUpdate(Banner banner, FileUpload bannerImage, FileUpload bannerMobileImage)
         {
             return ValidateForCreateUpdateInternal(banner, bannerImage, true);
         }
 
-        private OperationResult CreateUpdateInternal(Banner banner, FileUpload bannerImage, bool isUpdate)
+        private OperationResult CreateUpdateInternal(Banner banner, FileUpload bannerImage, FileUpload bannerMobileImage, bool isUpdate)
         {
             Sanitize(banner);
 
@@ -87,6 +87,19 @@ namespace Domain.Services
                 {
                     var uri = _cloudStorage.UploadFile(CloudFileType.BannerImage.ToString(), bannerImage.FileName, bannerImage.ContentType, bannerImage.InputStream);
                     banner.ImageUrl = uri.ToString();
+                }
+                catch (Exception ex)
+                {
+                    return OperationResult.Fail("", ex.Message);
+                }
+            }
+
+            if (bannerMobileImage != null && bannerMobileImage.ContentLength > 0)
+            {
+                try
+                {
+                    var uri = _cloudStorage.UploadFile(CloudFileType.BannerImage.ToString(), bannerMobileImage.FileName, bannerMobileImage.ContentType, bannerMobileImage.InputStream);
+                    banner.MobileImageUrl = uri.ToString();
                 }
                 catch (Exception ex)
                 {

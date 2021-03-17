@@ -71,37 +71,33 @@ WriteLiteral("\r\n\r\n");
             #line hidden
 WriteLiteral("    <li");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 303), Tuple.Create("\"", 334)
-, Tuple.Create(Tuple.Create("", 311), Tuple.Create("dropdown", 311), true)
-            
-            #line 12 "..\..\Views\Shared\_MenuCategorias.cshtml"
-, Tuple.Create(Tuple.Create(" ", 319), Tuple.Create<System.Object, System.Int32>(dropdownClass
-            
-            #line default
-            #line hidden
-, 320), false)
-);
+WriteLiteral(" class=\"menu-category-item\"");
 
 WriteLiteral(">\r\n        <a");
 
-WriteLiteral(" href=\"#\"");
-
-WriteAttribute("class", Tuple.Create(" class=\"", 357), Tuple.Create("\"", 395)
+WriteAttribute("href", Tuple.Create(" href=\"", 343), Tuple.Create("\"", 381)
+, Tuple.Create(Tuple.Create("", 350), Tuple.Create("/categoria/", 350), true)
             
             #line 13 "..\..\Views\Shared\_MenuCategorias.cshtml"
-, Tuple.Create(Tuple.Create("", 365), Tuple.Create<System.Object, System.Int32>(itemMenuClass
+, Tuple.Create(Tuple.Create("", 361), Tuple.Create<System.Object, System.Int32>(menu.Category.Slug
             
             #line default
             #line hidden
-, 365), false)
-, Tuple.Create(Tuple.Create(" ", 379), Tuple.Create("dropdown-toggle", 380), true)
+, 361), false)
+, Tuple.Create(Tuple.Create("", 380), Tuple.Create("/", 380), true)
 );
 
-WriteLiteral(" data-toggle=\"dropdown\"");
+WriteLiteral(" class=\"menu-category-item-link\"");
 
-WriteLiteral(" aria-haspopup=\"true\"");
-
-WriteLiteral(" aria-expanded=\"true\"");
+WriteAttribute("title", Tuple.Create(" title=\"", 414), Tuple.Create("\"", 439)
+            
+            #line 13 "..\..\Views\Shared\_MenuCategorias.cshtml"
+          , Tuple.Create(Tuple.Create("", 422), Tuple.Create<System.Object, System.Int32>(menu.Description
+            
+            #line default
+            #line hidden
+, 422), false)
+);
 
 WriteLiteral(">\r\n            <span>");
 
@@ -112,204 +108,37 @@ WriteLiteral(">\r\n            <span>");
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n            <span");
-
-WriteLiteral(" class=\"caret\"");
-
-WriteLiteral("></span>\r\n        </a>\r\n        <ul");
-
-WriteLiteral(" class=\"dropdown-menu\"");
-
-WriteLiteral(">\r\n            <li>\r\n                <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 637), Tuple.Create("\"", 675)
-, Tuple.Create(Tuple.Create("", 644), Tuple.Create("/categoria/", 644), true)
-            
-            #line 19 "..\..\Views\Shared\_MenuCategorias.cshtml"
-, Tuple.Create(Tuple.Create("", 655), Tuple.Create<System.Object, System.Int32>(menu.Category.Slug
-            
-            #line default
-            #line hidden
-, 655), false)
-, Tuple.Create(Tuple.Create("", 674), Tuple.Create("/", 674), true)
-);
-
-WriteLiteral(" class=\"item-menu\"");
-
-WriteAttribute("title", Tuple.Create(" title=\"", 694), Tuple.Create("\"", 719)
-            
-            #line 19 "..\..\Views\Shared\_MenuCategorias.cshtml"
-    , Tuple.Create(Tuple.Create("", 702), Tuple.Create<System.Object, System.Int32>(menu.Description
-            
-            #line default
-            #line hidden
-, 702), false)
-);
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                    ");
+WriteLiteral("</span>\r\n        </a>\r\n    </li>\r\n");
 
             
-            #line 20 "..\..\Views\Shared\_MenuCategorias.cshtml"
-               Write(menu.Title);
+            #line 17 "..\..\Views\Shared\_MenuCategorias.cshtml"
 
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                </a>\r\n            </li>\r\n\r\n");
-
-            
-            #line 24 "..\..\Views\Shared\_MenuCategorias.cshtml"
-            
+    
             
             #line default
             #line hidden
             
-            #line 24 "..\..\Views\Shared\_MenuCategorias.cshtml"
-             foreach (var item in menu.Items)
-            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                <li");
-
-WriteLiteral(" class=\"dropdown dropdown-submenu\"");
-
-WriteLiteral(">\r\n                    <a");
-
-WriteLiteral(" href=\"#\"");
-
-WriteLiteral(" class=\"item-menu dropdown-toggle\"");
-
-WriteLiteral(" data-toggle=\"dropdown\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                        ");
-
-            
-            #line 28 "..\..\Views\Shared\_MenuCategorias.cshtml"
-                   Write(item.Title);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                    </a>\r\n                    <ul");
-
-WriteLiteral(" class=\"dropdown-menu\"");
-
-WriteLiteral(">\r\n");
-
-            
-            #line 31 "..\..\Views\Shared\_MenuCategorias.cshtml"
-                        
-            
-            #line default
-            #line hidden
-            
-            #line 31 "..\..\Views\Shared\_MenuCategorias.cshtml"
-                         foreach (var variant in item.Variants)
-                        {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                            <li>\r\n                                <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 1279), Tuple.Create("\"", 1354)
-, Tuple.Create(Tuple.Create("", 1286), Tuple.Create("/categoria/", 1286), true)
-            
-            #line 34 "..\..\Views\Shared\_MenuCategorias.cshtml"
-, Tuple.Create(Tuple.Create("", 1297), Tuple.Create<System.Object, System.Int32>(menu.Category.Slug
-            
-            #line default
-            #line hidden
-, 1297), false)
-, Tuple.Create(Tuple.Create("", 1316), Tuple.Create("/", 1316), true)
-            
-            #line 34 "..\..\Views\Shared\_MenuCategorias.cshtml"
-, Tuple.Create(Tuple.Create("", 1317), Tuple.Create<System.Object, System.Int32>(item.VariantType.Slug
-            
-            #line default
-            #line hidden
-, 1317), false)
-, Tuple.Create(Tuple.Create("", 1339), Tuple.Create("/", 1339), true)
-            
-            #line 34 "..\..\Views\Shared\_MenuCategorias.cshtml"
-               , Tuple.Create(Tuple.Create("", 1340), Tuple.Create<System.Object, System.Int32>(variant.Slug
-            
-            #line default
-            #line hidden
-, 1340), false)
-, Tuple.Create(Tuple.Create("", 1353), Tuple.Create("/", 1353), true)
-);
-
-WriteLiteral(" class=\"item-menu\"");
-
-WriteAttribute("title", Tuple.Create("\r\n                                   title=\"", 1373), Tuple.Create("\"", 1472)
-            
-            #line 35 "..\..\Views\Shared\_MenuCategorias.cshtml"
-, Tuple.Create(Tuple.Create("", 1417), Tuple.Create<System.Object, System.Int32>(menu.Description
-            
-            #line default
-            #line hidden
-, 1417), false)
-            
-            #line 35 "..\..\Views\Shared\_MenuCategorias.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1434), Tuple.Create<System.Object, System.Int32>(item.Title.ToLower()
-            
-            #line default
-            #line hidden
-, 1435), false)
-, Tuple.Create(Tuple.Create(" ", 1456), Tuple.Create("-", 1457), true)
-            
-            #line 35 "..\..\Views\Shared\_MenuCategorias.cshtml"
-   , Tuple.Create(Tuple.Create(" ", 1458), Tuple.Create<System.Object, System.Int32>(variant.Name
-            
-            #line default
-            #line hidden
-, 1459), false)
-);
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                                    ");
-
-            
-            #line 36 "..\..\Views\Shared\_MenuCategorias.cshtml"
-                               Write(variant.Name);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                </a>\r\n                            </li>\r\n");
-
-            
-            #line 39 "..\..\Views\Shared\_MenuCategorias.cshtml"
-                        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    </ul>\r\n                </li>\r\n");
-
-            
-            #line 42 "..\..\Views\Shared\_MenuCategorias.cshtml"
-            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        </ul>\r\n    </li>\r\n");
-
-            
-            #line 45 "..\..\Views\Shared\_MenuCategorias.cshtml"
+            #line 50 "..\..\Views\Shared\_MenuCategorias.cshtml"
+           
 }
+
             
             #line default
             #line hidden
+WriteLiteral("\r\n<li");
+
+WriteLiteral(" class=\"menu-category-item hidden-xs\"");
+
+WriteLiteral(">\r\n    <a");
+
+WriteLiteral(" href=\"/categoria/outras-bebidas/\"");
+
+WriteLiteral(" class=\"menu-category-item-link\"");
+
+WriteLiteral(" title=\"Ver todas as outras bebidas\"");
+
+WriteLiteral(">\r\n        <span>Outras bebidas</span>\r\n    </a>\r\n</li>");
+
         }
     }
 }

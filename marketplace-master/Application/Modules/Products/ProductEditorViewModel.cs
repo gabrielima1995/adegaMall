@@ -639,7 +639,7 @@ namespace Application.Modules.Products
             entity.Variants = variants;
             entity.FriendlyUrl = FriendlyUrl;
             entity.IsDisabled = DisableProduct;
-            entity.MaxInstallments = MaxInstallments ?? 1;
+            entity.MaxInstallments = MaxInstallments ?? 3;
             entity.ProductTemplateId = TemplateId;
 
             if (Id != null && Id != Guid.Empty)
@@ -752,7 +752,7 @@ namespace Application.Modules.Products
             entity.Weight = Weight;
             entity.FriendlyUrl = FriendlyUrl;
             entity.IsDisabled = DisableProduct;
-            entity.MaxInstallments = MaxInstallments ?? 1;
+            entity.MaxInstallments = MaxInstallments ?? 3;
 
             if (Id != null && Id != Guid.Empty)
                 entity.Id = Id;

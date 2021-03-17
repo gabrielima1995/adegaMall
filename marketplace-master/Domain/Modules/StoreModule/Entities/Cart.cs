@@ -23,6 +23,7 @@ namespace Domain.Entities.StoreModule
         public DateTime? DeliveryDate { get; set; }
         public Coupon Coupon { get; set; }
         public decimal Discount { get; set; }
+        public decimal ShippingDiscount { get; set; }
 
         /// <summary>
         /// Indica se o carrinho foi transformado em pedido.
@@ -40,10 +41,12 @@ namespace Domain.Entities.StoreModule
 
         public decimal SubTotal => Items?.Sum(x => x.SubTotal) ?? 0M;
 
+        public decimal ShippingTotal => Shipping - ShippingDiscount;
+
         /// <summary>
         /// Indica a soma total de itens + frete do carrinho.
         /// </summary>
-        public decimal Amount => SubTotal + Shipping - Discount;
+        public decimal Amount => SubTotal + ShippingTotal - Discount;
 
         /// <summary>
         /// ID de sessão do usuário (AspNet SessionID).

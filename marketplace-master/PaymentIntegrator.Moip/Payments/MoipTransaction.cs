@@ -14,6 +14,7 @@ namespace PaymentIntegrator.Moip.Payments
 
         public string TransactionId { get; private set; }
         public string Status { get; private set; }
+        public string RefuseReason { get; private set; }
         public string Message { get; private set; }
         public decimal Amount { get; private set; }
         public decimal RefundedAmount { get; private set; }
@@ -22,6 +23,7 @@ namespace PaymentIntegrator.Moip.Payments
         public string StartupSplitId { get; private set; }
         public decimal GatewayFee { get; private set; }
         public decimal RefundedGatewayFee { get; private set; }
+        public bool IsAntifraudRefuse() => false;
         public string PostbackUrl { get; private set; }
         public string BoletoUrl { get; private set; }
         public string BoletoBarCode { get; private set; }

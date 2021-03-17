@@ -15,6 +15,8 @@ namespace PaymentIntegrator.PagarMe.Payments
 
         public string Status { get; private set; }
 
+        public string RefuseReason { get; private set; }
+
         public string Message { get; private set; }
 
         public decimal Amount { get; private set; }
@@ -45,11 +47,64 @@ namespace PaymentIntegrator.PagarMe.Payments
 
         public bool IsMultiPayment => false;
 
+        private void CheckMessageGateway(string acquirerResponseCode)
+        {
+            // transação recusada
+            if (IsPaymentCancelledOrRejected() || !string.IsNullOrEmpty(RefuseReason))
+            {
+                // antifraude
+                if (IsAntifraudRefuse())
+                {
+                    Message = "Transação pendente de análise.";
+                }
+                // problema no cartão ou nos dados do cartão
+                else if (IsAcquirerRefuse())
+                {
+                    switch (acquirerResponseCode)
+                    {
+                        case "1000":
+                        case "1022":
+                            Message = "Transação não autorizada pela operadora do cartão.";
+                            break;
+
+                        case "1001":
+                            Message = "Cartão vencido ou data de vencimento do cartão incorreta.";
+                            break;
+
+                        case "1004":
+                            Message = "Cartão com restrição.";
+                            break;
+
+                        case "1011":
+                            Message = "Número do cartão inválido. Corrija os dados e tente novamente.";
+                            break;
+
+                        case "1016":
+                            Message = "Saldo insuficiente no cartão.";
+                            break;
+
+                        default:
+                            Message = $"Falha ao processar o pagamento ({acquirerResponseCode}).";
+                            break;
+                    }
+                }
+                // genérico
+                else
+                {
+                    Message = "Falha ao processar o pagamento.";
+                }
+            }
+        }
+
         public TransactionResponse(Transaction transaction)
         {
             TransactionId = transaction.Id;
             Status = transaction.Status.ToString();
-            Message = transaction.StatusReason;
+            RefuseReason = transaction.RefuseReason;
+            Message = transaction.RefuseReason ?? transaction.StatusReason;
+
+            CheckMessageGateway(transaction.AcquirerResponseCode);
+
             Amount = transaction.Amount / 100M;
             GatewayFee = transaction.Cost / 100M;
             PostbackUrl = transaction.PostbackUrl;
@@ -65,7 +120,11 @@ namespace PaymentIntegrator.PagarMe.Payments
         {
             TransactionId = transaction.Id;
             Status = transaction.Status.ToString();
+            RefuseReason = transaction.RefuseReason;
             Message = transaction.RefuseReason ?? transaction.StatusReason;
+
+            CheckMessageGateway(transaction.AcquirerResponseCode);
+
             Amount = transaction.Amount / 100M;
             GatewayFee = transaction.Cost / 100M;
             PostbackUrl = transaction.PostbackUrl;
@@ -108,6 +167,10 @@ namespace PaymentIntegrator.PagarMe.Payments
         public bool IsPendingPayment() => "waitingpayment".Equals(Status, StringComparison.OrdinalIgnoreCase) || "processing".Equals(Status, StringComparison.OrdinalIgnoreCase);
 
         public bool IsPaymentCancelledOrRejected() => "refused".Equals(Status, StringComparison.OrdinalIgnoreCase);
+
+        public bool IsAntifraudRefuse() => "antifraud".Equals(RefuseReason, StringComparison.OrdinalIgnoreCase);
+
+        public bool IsAcquirerRefuse() => "acquirer".Equals(RefuseReason, StringComparison.OrdinalIgnoreCase);
 
         public void SetRefundedValues(decimal refundedAmount, decimal refundedStartupFee, decimal refundedGatewayFee)
         {

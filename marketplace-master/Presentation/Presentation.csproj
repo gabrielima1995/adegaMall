@@ -2401,6 +2401,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lockout.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Shared\_CardCategorias.generated.cs">
+      <DependentUpon>_CardCategorias.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Views\Shared\_MenuCategorias.generated.cs">
       <DependentUpon>_MenuCategorias.cshtml</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2803,6 +2808,18 @@
     <Content Include="assets\css\fullcalendar-scheduler\core\main.css" />
     <Content Include="assets\css\fullcalendar-scheduler\resource-timeline\main.css" />
     <Content Include="assets\css\fullcalendar-scheduler\timeline\main.css" />
+    <Content Include="assets\images\banners\desktop-banner2.png" />
+    <Content Include="assets\images\banners\desktop-banner5c.jpg" />
+    <Content Include="assets\images\banners\desktop-banner6a.jpg" />
+    <Content Include="assets\images\banners\mobile1.jpg" />
+    <Content Include="assets\images\banners\mobile3b.jpg" />
+    <Content Include="assets\images\banners\MOBILE4A.jpg" />
+    <Content Include="assets\images\banners\mobile5a.jpg" />
+    <Content Include="assets\images\icones\icones-01.png" />
+    <Content Include="assets\images\icones\icones-02.png" />
+    <Content Include="assets\images\icones\icones-03.png" />
+    <Content Include="assets\images\icones\icones-04.png" />
+    <Content Include="assets\images\icones\icones-05.png" />
     <Content Include="assets\images\paises\africa-do-sul.png" />
     <Content Include="assets\images\paises\alemanha.png" />
     <Content Include="assets\images\paises\argentina.png" />
@@ -4872,6 +4889,10 @@
     <Content Include="Views\Products\_ShippingProductSimple.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_ShippingProductSimple.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_CardCategorias.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CardCategorias.generated.cs</LastGenOutput>
     </Content>
     <None Include="Views\Shared\_ProductWishButton.cshtml">
       <Generator>RazorGenerator</Generator>

@@ -6,6 +6,16 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="row">
+        <div class="col-xs-12 col-sm-4">
+            <div class="form-group">
+                @Html.LabelFor(i => i.AddressZipCode)
+                @Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control js-zipcode js-viacep", placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") })
+                @Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-xs-12 col-sm-9">
             <div class="form-group">
                 @Html.LabelFor(i => i.Address)
@@ -24,7 +34,7 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-xs-12 col-sm-5">
             <div class="form-group">
                 @Html.LabelFor(i => i.AddressAdditionalInfo)
                 @Html.TextBoxFor(i => i.AddressAdditionalInfo, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_ADDITIONAL_INFO_LABEL") })
@@ -32,19 +42,11 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-xs-12 col-sm-7">
             <div class="form-group">
                 @Html.LabelFor(i => i.AddressNeighborhood)
                 @Html.TextBoxFor(i => i.AddressNeighborhood, new { @class = "form-control", placeholder = Request.GetLocalizedString("NEIGHBORHOOD_INPUT") })
                 @Html.ValidationMessageFor(model => model.AddressNeighborhood, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-4">
-            <div class="form-group">
-                @Html.LabelFor(i => i.AddressZipCode)
-                @Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control js-zipcode", placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") })
-                @Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>

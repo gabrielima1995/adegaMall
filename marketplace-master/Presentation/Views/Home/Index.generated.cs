@@ -275,11 +275,11 @@ WriteLiteral("\r\n    </div>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("            \r\n");
 
             
             #line 46 "..\..\Views\Home\Index.cshtml"
-Write(Html.Partial("_HomeNearbyProducts"));
+Write(Html.Action("CardCategorias", "Home"));
 
             
             #line default
@@ -288,7 +288,7 @@ WriteLiteral("\r\n\r\n");
 
             
             #line 48 "..\..\Views\Home\Index.cshtml"
-Write(Html.Partial("_EcommerceHome_Search"));
+Write(Html.Partial("_HomeNearbyProducts"));
 
             
             #line default
@@ -297,7 +297,7 @@ WriteLiteral("\r\n\r\n");
 
             
             #line 50 "..\..\Views\Home\Index.cshtml"
-Write(Html.Partial("_EcommerceHome_Products"));
+Write(Html.Partial("_EcommerceHome_Search"));
 
             
             #line default
@@ -306,6 +306,75 @@ WriteLiteral("\r\n\r\n");
 
             
             #line 52 "..\..\Views\Home\Index.cshtml"
+Write(Html.Partial("_EcommerceHome_Products"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n\r\n<div");
+
+WriteLiteral(" class=\"container banner-post-category\"");
+
+WriteLiteral(">\r\n    <div");
+
+WriteLiteral(" class=\"banner-wrapper\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"banner\"");
+
+WriteLiteral(">\r\n            <a");
+
+WriteLiteral(" href=\"https://blog.adegamall.com.br/\"");
+
+WriteLiteral(">\r\n                <img");
+
+WriteLiteral(" src=\"/assets/images/banners/mobile3b.jpg?width=1500&height=600&mode=crop&scale=b" +
+"oth\"");
+
+WriteLiteral(" style=\"width:auto;height:auto;\"");
+
+WriteLiteral(" class=\"banner-image-desktop\"");
+
+WriteLiteral(" />\r\n                <img");
+
+WriteLiteral(" src=\"/assets/images/banners/mobile3b.jpg?width=750&height=300&mode=crop&scale=bo" +
+"th\"");
+
+WriteLiteral(" style=\"width:auto;height:auto;\"");
+
+WriteLiteral(" class=\"banner-image-mobile\"");
+
+WriteLiteral(" />\r\n            </a>\r\n        </div>\r\n        <div");
+
+WriteLiteral(" class=\"banner\"");
+
+WriteLiteral(">\r\n            <a");
+
+WriteLiteral(" href=\"https://www.adegamall.com.br/categoria/vinhos/\"");
+
+WriteLiteral(">\r\n                <img");
+
+WriteLiteral(" src=\"/assets/images/banners/mobile4a.jpg?width=1500&height=600&mode=crop&scale=b" +
+"oth\"");
+
+WriteLiteral(" style=\"width:auto;height:auto;\"");
+
+WriteLiteral(" class=\"banner-image-desktop\"");
+
+WriteLiteral(" />\r\n                <img");
+
+WriteLiteral(" src=\"/assets/images/banners/mobile4a.jpg?width=750&height=300&mode=crop&scale=bo" +
+"th\"");
+
+WriteLiteral(" style=\"width:auto;height:auto;\"");
+
+WriteLiteral(" class=\"banner-image-mobile\"");
+
+WriteLiteral(" />\r\n            </a>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n");
+
+            
+            #line 71 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_HomeHowItWorks"));
 
             
@@ -314,7 +383,7 @@ Write(Html.Partial("_HomeHowItWorks"));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 54 "..\..\Views\Home\Index.cshtml"
+            #line 73 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_HomeBestSellers", Model.BestSellers, ViewData));
 
             
@@ -323,7 +392,16 @@ Write(Html.Partial("_HomeBestSellers", Model.BestSellers, ViewData));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 56 "..\..\Views\Home\Index.cshtml"
+            #line 75 "..\..\Views\Home\Index.cshtml"
+Write(Html.Action("Paises", "EcommerceHome"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n\r\n");
+
+            
+            #line 77 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_HomeCallSellers"));
 
             
@@ -332,7 +410,7 @@ Write(Html.Partial("_HomeCallSellers"));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 58 "..\..\Views\Home\Index.cshtml"
+            #line 79 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_HomeMiscArea"));
 
             
@@ -347,7 +425,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 62 "..\..\Views\Home\Index.cshtml"
+            #line 83 "..\..\Views\Home\Index.cshtml"
 Write(Scripts.Render("~/bundles/scripts/datetime-picker"));
 
             
@@ -358,7 +436,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 64 "..\..\Views\Home\Index.cshtml"
+            #line 85 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_SubCategoriesScript"));
 
             
@@ -369,7 +447,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 65 "..\..\Views\Home\Index.cshtml"
+            #line 86 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_CitiesScript"));
 
             
@@ -380,7 +458,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 66 "..\..\Views\Home\Index.cshtml"
+            #line 87 "..\..\Views\Home\Index.cshtml"
 Write(Html.Partial("_ProductWishScript"));
 
             
@@ -389,13 +467,13 @@ Write(Html.Partial("_ProductWishScript"));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 68 "..\..\Views\Home\Index.cshtml"
+            #line 89 "..\..\Views\Home\Index.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 68 "..\..\Views\Home\Index.cshtml"
+            #line 89 "..\..\Views\Home\Index.cshtml"
      if (MaaSConfig.Current.Search.Enabled)
     {
         if (MaaSConfig.Current.Search.SearchFields.Location)
@@ -405,14 +483,14 @@ WriteLiteral("\r\n\r\n");
             #line default
             #line hidden
             
-            #line 72 "..\..\Views\Home\Index.cshtml"
+            #line 93 "..\..\Views\Home\Index.cshtml"
        Write(Html.Partial("_GoogleMapsScript"));
 
             
             #line default
             #line hidden
             
-            #line 72 "..\..\Views\Home\Index.cshtml"
+            #line 93 "..\..\Views\Home\Index.cshtml"
                                               
 
             if (MaaSConfig.Current.Search.BrowserGeolocation)
@@ -424,7 +502,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("                <script>GoogleMapsAutocomplete.init()</script>\r\n");
 
             
-            #line 77 "..\..\Views\Home\Index.cshtml"
+            #line 98 "..\..\Views\Home\Index.cshtml"
             }
             else
             {
@@ -435,7 +513,7 @@ WriteLiteral("                <script>GoogleMapsAutocomplete.init()</script>\r\n
 WriteLiteral("                <script>GoogleMapsAutocomplete.initNoLocation()</script>\r\n");
 
             
-            #line 81 "..\..\Views\Home\Index.cshtml"
+            #line 102 "..\..\Views\Home\Index.cshtml"
             }
         }
 
@@ -448,7 +526,7 @@ WriteLiteral("        <script>\r\n            $(document).ready(function () {\r\
 "                });\r\n            });\r\n        </script>\r\n");
 
             
-            #line 91 "..\..\Views\Home\Index.cshtml"
+            #line 112 "..\..\Views\Home\Index.cshtml"
     }
 
             
@@ -457,13 +535,13 @@ WriteLiteral("        <script>\r\n            $(document).ready(function () {\r\
 WriteLiteral("\r\n");
 
             
-            #line 93 "..\..\Views\Home\Index.cshtml"
+            #line 114 "..\..\Views\Home\Index.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 93 "..\..\Views\Home\Index.cshtml"
+            #line 114 "..\..\Views\Home\Index.cshtml"
      if (MaaSConfig.Current.Product.Enabled && MaaSConfig.Current.NearbyProducts.Enabled)
     {
 
@@ -474,7 +552,7 @@ WriteLiteral("        <script>\r\n            $(document).ready(function () {\r\
 "arbyProducts.init();\r\n            });\r\n        </script>\r\n");
 
             
-            #line 100 "..\..\Views\Home\Index.cshtml"
+            #line 121 "..\..\Views\Home\Index.cshtml"
     }
 
             

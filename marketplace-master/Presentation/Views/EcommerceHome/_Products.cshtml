@@ -14,26 +14,48 @@
     <div class="ecommerce-home-products">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-6 col-sm-8">
                     @if (!string.IsNullOrEmpty(category.CustomItemCategory?.Name))
                     {
-                        <h2>@category.CustomItemCategory.Name</h2>
+                        <h2 class="ecommerce-home-title">@category.CustomItemCategory.Name</h2>
                     }
                     else
                     {
-                        <a href="/categoria/@category.ProductCategory.Slug/" class="paises-link" title="Categoria: @category.ProductCategory.Name">
-                            <h2>@category.ProductCategory.Name</h2>
+                        <a href="/categoria/@category.ProductCategory.Slug/" title="Categoria: @category.ProductCategory.Name">
+                            <h2 class="ecommerce-home-title">@category.ProductCategory.Name</h2>
                         </a>
                     }
                 </div>
+                <div class="col-xs-6 col-sm-4 ecommerce-home-header-right">
+                    @if (string.IsNullOrEmpty(category.CustomItemCategory?.Name))
+                    {
+                        <a href="/categoria/@category.ProductCategory.Slug/" class="ecommerce-home-ver-tudo" title="Ver tudo da categoria: @category.ProductCategory.Name">
+                            Ver tudo
+                        </a>
+                    }
+
+                    <div class="carousel-nav">
+                        <div class="carousel-nav-button carousel-prev-button" aria-hidden="true">
+                            <span class="fas fa-angle-left carousel-nav-icon"></span>
+                        </div>
+                        <div class="carousel-nav-button carousel-next-button" aria-hidden="true">
+                            <span class="fas fa-angle-right carousel-nav-icon"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
+        <div class="ecommerce-home-divider">
+            <hr class="ecommerce-home-title-divider" />
+            <span class="ecommerce-home-title-space"></span>
+        </div>
 
             <div class="row">
                 @{
                     var homeItems = Model.GetProducts(category);
                 }
 
-                @if (((category.CustomItemCategory?.CarouselDisplay).GetValueOrDefault() || category.CustomItemCategory == null) && homeItems.Count >= 4)
+                @if (((category.CustomItemCategory?.CarouselDisplay).GetValueOrDefault() || category.CustomItemCategory == null) && homeItems.Count > 1)
                 {
                     <div class="col-xs-12">
                         <div class="carousel-sellers">
@@ -72,7 +94,7 @@
                                     @if (!string.IsNullOrEmpty(paisBadge))
                                     {
                                         <div class="card-country-badge">
-                                            <img src="/assets/images/paises/@(paisBadge).png?w=25&h=25" />
+                                            <img src="/assets/images/paises/@(paisBadge).png?w=50&h=50" />
                                         </div>
                                     }
 
@@ -153,7 +175,7 @@
                             continue;
                         }
 
-                        <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="col-xs-6 col-md-3">
                             <div class="card equal-height">
                                 @if (viewModel.IsProduct && prodPrice.DisplayShortPrice.HasAnyPrice)
                                 {
@@ -177,7 +199,7 @@
                                 @if (!string.IsNullOrEmpty(paisBadge))
                                 {
                                     <div class="card-country-badge">
-                                        <img src="/assets/images/paises/@(paisBadge).png?w=25&h=25" />
+                                        <img src="/assets/images/paises/@(paisBadge).png?w=50&h=50" />
                                     </div>
                                 }
 

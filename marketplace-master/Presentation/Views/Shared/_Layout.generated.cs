@@ -221,12 +221,25 @@ WriteLiteral("    <title>");
             
             #line default
             #line hidden
-WriteLiteral("</title>\r\n\r\n");
+WriteLiteral("</title>\r\n\r\n    <link");
+
+WriteLiteral(" rel=\"preconnect\"");
+
+WriteLiteral(" href=\"https://fonts.gstatic.com\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" href=\"https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=s" +
+"wap\"");
+
+WriteLiteral(" rel=\"stylesheet\"");
+
+WriteLiteral(">\r\n\r\n");
 
 WriteLiteral("    ");
 
             
-            #line 40 "..\..\Views\Shared\_Layout.cshtml"
+            #line 43 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("structuredData", required: false));
 
             
@@ -237,7 +250,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 42 "..\..\Views\Shared\_Layout.cshtml"
+            #line 45 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("_MetaTags"));
 
             
@@ -248,7 +261,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 43 "..\..\Views\Shared\_Layout.cshtml"
+            #line 46 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("_GoogleTagManagerHead"));
 
             
@@ -259,7 +272,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 44 "..\..\Views\Shared\_Layout.cshtml"
+            #line 47 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("_GoogleAnalyticsScript"));
 
             
@@ -268,13 +281,13 @@ Write(Html.Partial("_GoogleAnalyticsScript"));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 46 "..\..\Views\Shared\_Layout.cshtml"
+            #line 49 "..\..\Views\Shared\_Layout.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 46 "..\..\Views\Shared\_Layout.cshtml"
+            #line 49 "..\..\Views\Shared\_Layout.cshtml"
      if (MaaSConfig.Current.WebApp.IsEnabled)
     {
 
@@ -285,7 +298,7 @@ WriteLiteral("        <script>\r\n            if (\'serviceWorker\' in navigator
 "  navigator.serviceWorker.register(\'");
 
             
-            #line 50 "..\..\Views\Shared\_Layout.cshtml"
+            #line 53 "..\..\Views\Shared\_Layout.cshtml"
                                               Write(config.Environment.AppUrl + "serviceworker.js");
 
             
@@ -294,7 +307,7 @@ WriteLiteral("        <script>\r\n            if (\'serviceWorker\' in navigator
 WriteLiteral("\');\r\n            }\r\n        </script>\r\n");
 
             
-            #line 53 "..\..\Views\Shared\_Layout.cshtml"
+            #line 56 "..\..\Views\Shared\_Layout.cshtml"
 
         if (MaaSConfig.Current.WebApp.PushNotifications.Enabled)
         {
@@ -303,7 +316,7 @@ WriteLiteral("\');\r\n            }\r\n        </script>\r\n");
             #line default
             #line hidden
             
-            #line 56 "..\..\Views\Shared\_Layout.cshtml"
+            #line 59 "..\..\Views\Shared\_Layout.cshtml"
                                                                                             
 
             
@@ -336,7 +349,7 @@ WriteLiteral(@"            <script>
 ");
 
             
-            #line 71 "..\..\Views\Shared\_Layout.cshtml"
+            #line 74 "..\..\Views\Shared\_Layout.cshtml"
         }
     }
 
@@ -345,7 +358,7 @@ WriteLiteral(@"            <script>
             #line default
             #line hidden
             
-            #line 74 "..\..\Views\Shared\_Layout.cshtml"
+            #line 77 "..\..\Views\Shared\_Layout.cshtml"
                            
 
             
@@ -354,7 +367,7 @@ WriteLiteral(@"            <script>
 WriteLiteral("    ");
 
             
-            #line 75 "..\..\Views\Shared\_Layout.cshtml"
+            #line 78 "..\..\Views\Shared\_Layout.cshtml"
      if (MaaSConfig.Current.SocialMedia.EnableShareButtons)
     {
 
@@ -365,16 +378,16 @@ WriteLiteral("        <script");
 
 WriteLiteral(" type=\'text/javascript\'");
 
-WriteAttribute("src", Tuple.Create(" src=\'", 2969), Tuple.Create("\'", 3090)
-, Tuple.Create(Tuple.Create("", 2975), Tuple.Create("//platform-api.sharethis.com/js/sharethis.js#property=", 2975), true)
+WriteAttribute("src", Tuple.Create(" src=\'", 3147), Tuple.Create("\'", 3268)
+, Tuple.Create(Tuple.Create("", 3153), Tuple.Create("//platform-api.sharethis.com/js/sharethis.js#property=", 3153), true)
             
-            #line 77 "..\..\Views\Shared\_Layout.cshtml"
-                  , Tuple.Create(Tuple.Create("", 3029), Tuple.Create<System.Object, System.Int32>(config.SocialMedia.ShareThis_Id
+            #line 80 "..\..\Views\Shared\_Layout.cshtml"
+                  , Tuple.Create(Tuple.Create("", 3207), Tuple.Create<System.Object, System.Int32>(config.SocialMedia.ShareThis_Id
             
             #line default
             #line hidden
-, 3029), false)
-, Tuple.Create(Tuple.Create("", 3061), Tuple.Create("&product=inline-share-buttons", 3061), true)
+, 3207), false)
+, Tuple.Create(Tuple.Create("", 3239), Tuple.Create("&product=inline-share-buttons", 3239), true)
 );
 
 WriteLiteral(" async=\'async\'");
@@ -382,7 +395,7 @@ WriteLiteral(" async=\'async\'");
 WriteLiteral("></script>\r\n");
 
             
-            #line 78 "..\..\Views\Shared\_Layout.cshtml"
+            #line 81 "..\..\Views\Shared\_Layout.cshtml"
     }
 
             
@@ -393,7 +406,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 80 "..\..\Views\Shared\_Layout.cshtml"
+            #line 83 "..\..\Views\Shared\_Layout.cshtml"
 Write(Styles.Render("~/Content/css"));
 
             
@@ -404,7 +417,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 81 "..\..\Views\Shared\_Layout.cshtml"
+            #line 84 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("styles", required: false));
 
             
@@ -413,20 +426,21 @@ Write(RenderSection("styles", required: false));
 WriteLiteral("\r\n\r\n    <style>\r\n        .hero-bg { background-image: url(\"");
 
             
-            #line 84 "..\..\Views\Shared\_Layout.cshtml"
+            #line 87 "..\..\Views\Shared\_Layout.cshtml"
                                      Write(CustomAssetsHelper.HomeBackground());
 
             
             #line default
             #line hidden
-WriteLiteral("\") }\r\n        .preload * {\r\n          -webkit-transition: none !important;\r\n     " +
-"     -moz-transition: none !important;\r\n          -ms-transition: none !importan" +
-"t;\r\n          -o-transition: none !important;\r\n        }\r\n    </style>\r\n");
+WriteLiteral("\") }\r\n        .preload * {\r\n            -webkit-transition: none !important;\r\n   " +
+"         -moz-transition: none !important;\r\n            -ms-transition: none !im" +
+"portant;\r\n            -o-transition: none !important;\r\n        }\r\n    </style>\r\n" +
+"");
 
 WriteLiteral("    ");
 
             
-            #line 92 "..\..\Views\Shared\_Layout.cshtml"
+            #line 95 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("_IntegrationHeader"));
 
             
@@ -437,7 +451,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 94 "..\..\Views\Shared\_Layout.cshtml"
+            #line 97 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Raw(Html.Action("Head", "PlatformCustomization")));
 
             
@@ -445,15 +459,15 @@ Write(Html.Raw(Html.Action("Head", "PlatformCustomization")));
             #line hidden
 WriteLiteral("\r\n</head>\r\n\r\n<body");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 3656), Tuple.Create("\"", 3703)
-, Tuple.Create(Tuple.Create("", 3664), Tuple.Create("preload", 3664), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 3842), Tuple.Create("\"", 3889)
+, Tuple.Create(Tuple.Create("", 3850), Tuple.Create("preload", 3850), true)
             
-            #line 97 "..\..\Views\Shared\_Layout.cshtml"
-, Tuple.Create(Tuple.Create(" ", 3671), Tuple.Create<System.Object, System.Int32>(ViewBag.IsHome ? "home" : ""
+            #line 100 "..\..\Views\Shared\_Layout.cshtml"
+, Tuple.Create(Tuple.Create(" ", 3857), Tuple.Create<System.Object, System.Int32>(ViewBag.IsHome ? "home" : ""
             
             #line default
             #line hidden
-, 3672), false)
+, 3858), false)
 );
 
 WriteLiteral(">\r\n");
@@ -461,7 +475,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("    ");
 
             
-            #line 98 "..\..\Views\Shared\_Layout.cshtml"
+            #line 101 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Raw(Html.Action("BodyStart", "PlatformCustomization")));
 
             
@@ -472,7 +486,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 99 "..\..\Views\Shared\_Layout.cshtml"
+            #line 102 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("_GoogleTagManagerBody"));
 
             
@@ -487,7 +501,7 @@ WriteLiteral(" style=\"display:none\"");
 WriteLiteral(">");
 
             
-            #line 100 "..\..\Views\Shared\_Layout.cshtml"
+            #line 103 "..\..\Views\Shared\_Layout.cshtml"
                                                       Write(notificationToken);
 
             
@@ -504,13 +518,13 @@ WriteLiteral(" id=\"cookieConsentFormContainer\"");
 WriteLiteral("></div>\r\n\r\n");
 
             
-            #line 104 "..\..\Views\Shared\_Layout.cshtml"
+            #line 107 "..\..\Views\Shared\_Layout.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 104 "..\..\Views\Shared\_Layout.cshtml"
+            #line 107 "..\..\Views\Shared\_Layout.cshtml"
          if (!ViewBag.IsHome)
         {
             
@@ -518,14 +532,14 @@ WriteLiteral("></div>\r\n\r\n");
             #line default
             #line hidden
             
-            #line 106 "..\..\Views\Shared\_Layout.cshtml"
+            #line 109 "..\..\Views\Shared\_Layout.cshtml"
        Write(Html.Action("Header", "Common", true));
 
             
             #line default
             #line hidden
             
-            #line 106 "..\..\Views\Shared\_Layout.cshtml"
+            #line 109 "..\..\Views\Shared\_Layout.cshtml"
                                                   
         }
 
@@ -537,7 +551,7 @@ WriteLiteral("\r\n");
 WriteLiteral("        ");
 
             
-            #line 109 "..\..\Views\Shared\_Layout.cshtml"
+            #line 112 "..\..\Views\Shared\_Layout.cshtml"
    Write(RenderBody());
 
             
@@ -548,7 +562,7 @@ WriteLiteral("\r\n");
 WriteLiteral("        ");
 
             
-            #line 110 "..\..\Views\Shared\_Layout.cshtml"
+            #line 113 "..\..\Views\Shared\_Layout.cshtml"
    Write(Html.Action("Footer", "Common", true));
 
             
@@ -559,22 +573,18 @@ WriteLiteral("\r\n    </div>\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 113 "..\..\Views\Shared\_Layout.cshtml"
+            #line 116 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Action("MenuMobile", "Common", true));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n    <script");
+WriteLiteral("\r\n\r\n    ");
 
-WriteLiteral(" src=\"https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js\"");
-
-WriteLiteral("></script>\r\n    <script>WebFont.load({ google: { families: [\'Open Sans:300,400,70" +
-"0,800\'] } })</script>\r\n\r\n    <script>(function () { window.MaaS = window.MaaS ||" +
-" { lang: \'");
+WriteLiteral("\r\n\r\n    <script>(function () { window.MaaS = window.MaaS || { lang: \'");
 
             
-            #line 118 "..\..\Views\Shared\_Layout.cshtml"
+            #line 121 "..\..\Views\Shared\_Layout.cshtml"
                                                             Write(Request.GetCurrentLang());
 
             
@@ -585,7 +595,7 @@ WriteLiteral("\'} })()</script>\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 120 "..\..\Views\Shared\_Layout.cshtml"
+            #line 123 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/js"));
 
             
@@ -596,7 +606,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 122 "..\..\Views\Shared\_Layout.cshtml"
+            #line 125 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("_JavaScriptMessages"));
 
             
@@ -607,7 +617,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 124 "..\..\Views\Shared\_Layout.cshtml"
+            #line 127 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/globalize"));
 
             
@@ -618,7 +628,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 125 "..\..\Views\Shared\_Layout.cshtml"
+            #line 128 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jqueryval"));
 
             
@@ -629,7 +639,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 127 "..\..\Views\Shared\_Layout.cshtml"
+            #line 130 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("plugins", required: false));
 
             
@@ -640,7 +650,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 129 "..\..\Views\Shared\_Layout.cshtml"
+            #line 132 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/globalize_" + Request.GetCurrentLang()));
 
             
@@ -651,7 +661,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 130 "..\..\Views\Shared\_Layout.cshtml"
+            #line 133 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/scripts"));
 
             
@@ -662,7 +672,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 131 "..\..\Views\Shared\_Layout.cshtml"
+            #line 134 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/scripts/saas"));
 
             
@@ -673,7 +683,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 132 "..\..\Views\Shared\_Layout.cshtml"
+            #line 135 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             
@@ -684,7 +694,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 134 "..\..\Views\Shared\_Layout.cshtml"
+            #line 137 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("_Messages"));
 
             
@@ -695,7 +705,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 135 "..\..\Views\Shared\_Layout.cshtml"
+            #line 138 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("_FacebookScript"));
 
             
@@ -704,13 +714,13 @@ Write(Html.Partial("_FacebookScript"));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 137 "..\..\Views\Shared\_Layout.cshtml"
+            #line 140 "..\..\Views\Shared\_Layout.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 137 "..\..\Views\Shared\_Layout.cshtml"
+            #line 140 "..\..\Views\Shared\_Layout.cshtml"
      if (CookieConsent.AskCookieConsent())
     {
 
@@ -720,7 +730,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("        ");
 
             
-            #line 139 "..\..\Views\Shared\_Layout.cshtml"
+            #line 142 "..\..\Views\Shared\_Layout.cshtml"
      Write(Scripts.Render("~/assets/js/saas/CookieConsentLoader.js"));
 
             
@@ -731,22 +741,22 @@ WriteLiteral("\r\n");
 WriteLiteral("        <script>CookieConsentLoader.init()</script>\r\n");
 
             
-            #line 141 "..\..\Views\Shared\_Layout.cshtml"
+            #line 144 "..\..\Views\Shared\_Layout.cshtml"
     }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    <script>EcommerceHome.init()</script>\r\n\r\n");
+WriteLiteral("\r\n    <script>EcommerceHome2.init();</script>\r\n\r\n");
 
             
-            #line 145 "..\..\Views\Shared\_Layout.cshtml"
+            #line 148 "..\..\Views\Shared\_Layout.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 145 "..\..\Views\Shared\_Layout.cshtml"
+            #line 148 "..\..\Views\Shared\_Layout.cshtml"
      if (config.Product.Enabled && isAuthenticated && loginProfile.IsBuyer())
     {
 
@@ -756,7 +766,7 @@ WriteLiteral("\r\n    <script>EcommerceHome.init()</script>\r\n\r\n");
 WriteLiteral("        <script>CartButton.init()</script>\r\n");
 
             
-            #line 148 "..\..\Views\Shared\_Layout.cshtml"
+            #line 151 "..\..\Views\Shared\_Layout.cshtml"
     }
 
             
@@ -765,13 +775,13 @@ WriteLiteral("        <script>CartButton.init()</script>\r\n");
 WriteLiteral("\r\n    <script>Main.init()</script>\r\n\r\n");
 
             
-            #line 152 "..\..\Views\Shared\_Layout.cshtml"
+            #line 155 "..\..\Views\Shared\_Layout.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 152 "..\..\Views\Shared\_Layout.cshtml"
+            #line 155 "..\..\Views\Shared\_Layout.cshtml"
      if (config.WebApp.PushNotifications.IsEnabled && (User.Identity?.IsAuthenticated).GetValueOrDefault())
     {
 
@@ -780,15 +790,15 @@ WriteLiteral("\r\n    <script>Main.init()</script>\r\n\r\n");
             #line hidden
 WriteLiteral("        <script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 5565), Tuple.Create("\"", 5603)
-, Tuple.Create(Tuple.Create("", 5571), Tuple.Create<System.Object, System.Int32>(Href("~/assets/js/PushNotifications.js")
-, 5571), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 5761), Tuple.Create("\"", 5799)
+, Tuple.Create(Tuple.Create("", 5767), Tuple.Create<System.Object, System.Int32>(Href("~/assets/js/PushNotifications.js")
+, 5767), false)
 );
 
 WriteLiteral("></script>\r\n");
 
             
-            #line 155 "..\..\Views\Shared\_Layout.cshtml"
+            #line 158 "..\..\Views\Shared\_Layout.cshtml"
     }
 
             
@@ -799,7 +809,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 157 "..\..\Views\Shared\_Layout.cshtml"
+            #line 160 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("_IntegrationFooter"));
 
             
@@ -810,7 +820,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 158 "..\..\Views\Shared\_Layout.cshtml"
+            #line 161 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("_UserScriptsFooter"));
 
             
@@ -822,7 +832,7 @@ WriteLiteral("\r\n\r\n    <script>$(window).load(function () { $(\'body\').remov
 WriteLiteral("    ");
 
             
-            #line 161 "..\..\Views\Shared\_Layout.cshtml"
+            #line 164 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Raw(Html.Action("BodyEnd", "PlatformCustomization")));
 
             
@@ -833,7 +843,7 @@ WriteLiteral("\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 163 "..\..\Views\Shared\_Layout.cshtml"
+            #line 166 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.EmitRequiredScripts());
 
             
@@ -853,13 +863,13 @@ WriteLiteral(" crossorigin=\"anonymous\"");
 WriteLiteral(">\r\n\r\n");
 
             
-            #line 167 "..\..\Views\Shared\_Layout.cshtml"
+            #line 170 "..\..\Views\Shared\_Layout.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 167 "..\..\Views\Shared\_Layout.cshtml"
+            #line 170 "..\..\Views\Shared\_Layout.cshtml"
      if (config.Seller.Assistant.Enabled)
     {
 
@@ -869,7 +879,7 @@ WriteLiteral(">\r\n\r\n");
 WriteLiteral("        <script>DisableSellerAssistantActions.init(\"");
 
             
-            #line 169 "..\..\Views\Shared\_Layout.cshtml"
+            #line 172 "..\..\Views\Shared\_Layout.cshtml"
                                                Write(Html.LocalizedString("ACTION_DISABLED_FOR_SELLER_ASSISTANT"));
 
             
@@ -878,7 +888,7 @@ WriteLiteral("        <script>DisableSellerAssistantActions.init(\"");
 WriteLiteral("\")</script>\r\n");
 
             
-            #line 170 "..\..\Views\Shared\_Layout.cshtml"
+            #line 173 "..\..\Views\Shared\_Layout.cshtml"
     }
 
             

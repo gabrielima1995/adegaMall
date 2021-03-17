@@ -56,64 +56,26 @@ namespace ASP
     public partial class _Views_Products_Cart_IndexCartWithViewModel_cshtml : System.Web.Mvc.WebViewPage<Presentation.Models.CartViewModel>
     {
 
-#line 127 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+#line 131 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
 public System.Web.WebPages.HelperResult MainCartActions()
     {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 127 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+#line 131 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
     
 
 #line default
 #line hidden
 
-#line 128 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+#line 132 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
      
         var config = MaaSConfig.Current;
         var searchUrl = !MaaSConfig.Current.Search.Enabled ? Url.ActionLocalized("Index", "Home") :
             config.Search.SearchType == Domain.Config.General.SearchType.Product
                 ? Url.ActionLocalized("Search", "Products")
                 : Url.ActionLocalized("Index", "Search");
-
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "        <a");
-
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6291), Tuple.Create("\"", 6308)
-
-#line 135 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
-, Tuple.Create(Tuple.Create("", 6298), Tuple.Create<System.Object, System.Int32>(searchUrl
-
-#line default
-#line hidden
-, 6298), false)
-);
-
-WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-default\"");
-
-WriteLiteralTo(__razor_helper_writer, ">\r\n            <i");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"glyphicon glyphicon-chevron-left\"");
-
-WriteLiteralTo(__razor_helper_writer, "></i>\r\n");
-
-WriteLiteralTo(__razor_helper_writer, "            ");
-
-
-#line 137 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
-WriteTo(__razor_helper_writer, Request.GetLocalizedString("CART_MORE_PRODUCTS_BUTTON"));
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n        </a>\r\n");
-
-
-#line 139 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
 
         if (Model.HasProducts && !Model.HasCartErrors)
         {
@@ -123,17 +85,17 @@ WriteLiteralTo(__razor_helper_writer, "\r\n        </a>\r\n");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6565), Tuple.Create("\"", 6612)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6509), Tuple.Create("\"", 6556)
 
-#line 142 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
-, Tuple.Create(Tuple.Create("", 6572), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Checkout", "Cart")
+#line 141 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+, Tuple.Create(Tuple.Create("", 6516), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Checkout", "Cart")
 
 #line default
 #line hidden
-, 6572), false)
+, 6516), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-primary pull-right btn-cart-proceed-to-checkout\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-primary pull-right m-b-xs m-l-sm btn-cart-proceed-to-checkout\"");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"checkout\"");
 
@@ -146,7 +108,7 @@ WriteLiteralTo(__razor_helper_writer, "></i>\r\n");
 WriteLiteralTo(__razor_helper_writer, "                ");
 
 
-#line 144 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+#line 143 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
 WriteTo(__razor_helper_writer, Request.GetLocalizedString("CART_PROCEED_TO_PAYMENT_OF_AMOUNT"));
 
 
@@ -157,7 +119,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n");
 WriteLiteralTo(__razor_helper_writer, "                ");
 
 
-#line 145 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+#line 144 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
 WriteTo(__razor_helper_writer, Model.FormattedCartTotal);
 
 
@@ -166,15 +128,53 @@ WriteTo(__razor_helper_writer, Model.FormattedCartTotal);
 WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n");
 
 
-#line 147 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+#line 146 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
         }
+
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "        <a");
+
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6874), Tuple.Create("\"", 6891)
+
+#line 148 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+, Tuple.Create(Tuple.Create("", 6881), Tuple.Create<System.Object, System.Int32>(searchUrl
+
+#line default
+#line hidden
+, 6881), false)
+);
+
+WriteLiteralTo(__razor_helper_writer, " class=\"btn btn-default btn-cart-more-products pull-right\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n            <i");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"glyphicon glyphicon-chevron-left\"");
+
+WriteLiteralTo(__razor_helper_writer, "></i>\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "            ");
+
+
+#line 150 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+WriteTo(__razor_helper_writer, Request.GetLocalizedString("CART_MORE_PRODUCTS_BUTTON"));
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "\r\n        </a>\r\n");
+
+
+#line 152 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
     
 
 #line default
 #line hidden
 });
 
-#line 148 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+#line 152 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
 }
 #line default
 #line hidden
@@ -222,42 +222,51 @@ WriteLiteral(">\r\n                <div");
 
 WriteLiteral(" class=\"col-xs-12\"");
 
+WriteLiteral(">\r\n                    <div");
+
+WriteLiteral(" class=\"margin-bottom-15 clearfix\"");
+
+WriteLiteral(">\r\n                        <div");
+
+WriteLiteral(" class=\"pull-left\"");
+
 WriteLiteral(">\r\n");
 
-WriteLiteral("                    ");
+WriteLiteral("                            ");
 
             
-            #line 24 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
-               Write(Html.Localized("CART_TITLE", "h2", new { @class = "margin-bottom-30" }));
+            #line 26 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+                       Write(Html.Localized("CART_TITLE", "h2"));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n                    <div");
+WriteLiteral("\r\n                        </div>\r\n                        <div");
 
-WriteLiteral(" class=\"margin-bottom-15\"");
+WriteLiteral(" class=\"text-right\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                        ");
+WriteLiteral("                            ");
 
             
-            #line 27 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
-                   Write(MainCartActions());
+            #line 29 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+                       Write(MainCartActions());
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                    </div>\r\n                    <hr />\r\n\r\n");
+WriteLiteral("\r\n                        </div>\r\n                    </div>\r\n\r\n                 " +
+"   <hr />\r\n\r\n");
 
             
-            #line 31 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 35 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 31 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 35 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                      if (Model.HasValidationErrors)
                     {
 
@@ -273,7 +282,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 34 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 38 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                        Write(Html.Localized("CART_CORRECT_ERRORS_TO_PROCEED", "p"));
 
             
@@ -282,13 +291,13 @@ WriteLiteral("                            ");
 WriteLiteral("\r\n");
 
             
-            #line 35 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 39 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 35 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 39 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                              if (Model.HasCartErrors)
                             {
 
@@ -298,13 +307,13 @@ WriteLiteral("\r\n");
 WriteLiteral("                                <ul>\r\n");
 
             
-            #line 38 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 42 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 38 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 42 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                      foreach (var error in Model.CartErrors)
                                     {
 
@@ -314,7 +323,7 @@ WriteLiteral("                                <ul>\r\n");
 WriteLiteral("                                        <li>");
 
             
-            #line 40 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 44 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                        Write(error);
 
             
@@ -323,7 +332,7 @@ WriteLiteral("                                        <li>");
 WriteLiteral("</li>\r\n");
 
             
-            #line 41 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 45 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                     }
 
             
@@ -332,7 +341,7 @@ WriteLiteral("</li>\r\n");
 WriteLiteral("                                </ul>\r\n");
 
             
-            #line 43 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 47 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                             }
 
             
@@ -341,7 +350,7 @@ WriteLiteral("                                </ul>\r\n");
 WriteLiteral("                        </div>\r\n");
 
             
-            #line 45 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 49 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                     }
 
             
@@ -358,13 +367,13 @@ WriteLiteral(" class=\"col-xs-12\"");
 WriteLiteral(">\r\n");
 
             
-            #line 48 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 52 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 48 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 52 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                              if (Model.IsShippingOut || Model.SelectedShippingMethod.IsPhysicalDelivery())
                             {
                                 
@@ -372,14 +381,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 50 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 54 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                            Write(Html.Partial("~/Views/Products/Cart/_ShippingAddress.cshtml", Model));
 
             
             #line default
             #line hidden
             
-            #line 50 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 54 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                                                                                      
                             }
 
@@ -391,7 +400,7 @@ WriteLiteral("                        </div>\r\n                    </div>\r\n")
 WriteLiteral("                    ");
 
             
-            #line 54 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 58 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                Write(Html.Partial(string.Format(viewPathFmt, "_CartItems")));
 
             
@@ -404,13 +413,13 @@ WriteLiteral(" class=\"row\"");
 WriteLiteral(">\r\n");
 
             
-            #line 58 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 62 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 58 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 62 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                  if (Model.HasProducts)
                 {
 
@@ -449,20 +458,20 @@ WriteLiteral(" type=\"text\"");
 
 WriteLiteral(" class=\"form-control\"");
 
-WriteAttribute("value", Tuple.Create("\r\n                                           value=\"", 2697), Tuple.Create("\"", 2766)
+WriteAttribute("value", Tuple.Create("\r\n                                           value=\"", 2844), Tuple.Create("\"", 2913)
             
-            #line 66 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
-, Tuple.Create(Tuple.Create("", 2749), Tuple.Create<System.Object, System.Int32>(Model.CouponCode
+            #line 70 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+, Tuple.Create(Tuple.Create("", 2896), Tuple.Create<System.Object, System.Int32>(Model.CouponCode
             
             #line default
             #line hidden
-, 2749), false)
+, 2896), false)
 );
 
 WriteLiteral(" ");
 
             
-            #line 66 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 70 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                                                  Write(Model.HasCoupon ? "disabled" : string.Empty);
 
             
@@ -478,7 +487,7 @@ WriteLiteral(" class=\"btn btn-primary\"");
 WriteLiteral(">");
 
             
-            #line 69 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 73 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                                                           Write(Model.HasCoupon ? "Remover" : "Aplicar");
 
             
@@ -488,7 +497,7 @@ WriteLiteral("</button>\r\n                            </form>\r\n              
 "                   </div>\r\n");
 
             
-            #line 73 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 77 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
 
 
             
@@ -501,7 +510,7 @@ WriteLiteral(" class=\"col-md-3 hidden-sm\"");
 WriteLiteral("></div>\r\n");
 
             
-            #line 75 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 79 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
 
 
             
@@ -522,13 +531,13 @@ WriteLiteral(" class=\"table\"");
 WriteLiteral(">\r\n");
 
             
-            #line 79 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 83 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 79 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 83 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                  if (Model.Visualization.ShowShippingAmount)
                                 {
 
@@ -542,7 +551,7 @@ WriteLiteral(" class=\"cart-items-total\"");
 WriteLiteral(">\r\n                                        <td>");
 
             
-            #line 82 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 86 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                        Write(Html.Localized("CART_ITEMS_TOTAL"));
 
             
@@ -555,7 +564,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral(">");
 
             
-            #line 83 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 87 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                                           Write(Model.FormattedCartItemsTotal);
 
             
@@ -564,7 +573,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n                                    </tr>\r\n");
 
             
-            #line 85 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 89 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
 
 
             
@@ -577,7 +586,7 @@ WriteLiteral(" class=\"cart-items-total\"");
 WriteLiteral(">\r\n                                        <td>");
 
             
-            #line 87 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 91 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                        Write(Html.Localized("CART_DISCOUNT_LABEL"));
 
             
@@ -590,7 +599,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral(">");
 
             
-            #line 88 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 92 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                                           Write(Model.FormattedCartDiscount);
 
             
@@ -599,7 +608,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n                                    </tr>\r\n");
 
             
-            #line 90 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 94 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
 
 
             
@@ -612,7 +621,7 @@ WriteLiteral(" class=\"cart-shipping\"");
 WriteLiteral(">\r\n                                        <td>");
 
             
-            #line 92 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 96 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                        Write(Html.Localized("CART_SHIPPING_LABEL"));
 
             
@@ -625,7 +634,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral(">");
 
             
-            #line 93 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 97 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                                           Write(Model.FormattedCartShipping);
 
             
@@ -634,7 +643,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n                                    </tr>\r\n");
 
             
-            #line 95 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 99 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                     if (Model.SelectedShippingMethod == ShippingMethod.PostalRegular || Model.SelectedShippingMethod == ShippingMethod.PostalExpress || Model.SelectedShippingMethod == ShippingMethod.AsapLog || Model.SelectedShippingMethod == ShippingMethod.TotalExpress)
                                     {
 
@@ -648,7 +657,7 @@ WriteLiteral(" class=\"cart-shipping-days\"");
 WriteLiteral(">\r\n                                            <td>");
 
             
-            #line 98 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 102 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                            Write(Html.Localized("CART_SHIPPING_DAYS_LABEL"));
 
             
@@ -661,7 +670,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral(">");
 
             
-            #line 99 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 103 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                                               Write(Model.CartDeliveryDays);
 
             
@@ -670,7 +679,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n                                        </tr>\r\n");
 
             
-            #line 101 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 105 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                     }
                                 }
 
@@ -684,7 +693,7 @@ WriteLiteral(" class=\"cart-grand-total\"");
 WriteLiteral(">\r\n                                    <td>");
 
             
-            #line 104 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 108 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                    Write(Html.Localized("CART_TOTAL_LABEL"));
 
             
@@ -697,7 +706,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral("><strong>");
 
             
-            #line 105 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 109 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                                                               Write(Model.FormattedCartTotal);
 
             
@@ -707,7 +716,7 @@ WriteLiteral("</strong></td>\r\n                                </tr>\r\n       
 "  </table>\r\n                        </div>\r\n                    </div>\r\n");
 
             
-            #line 110 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 114 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                 }
 
             
@@ -718,7 +727,7 @@ WriteLiteral("            </div>\r\n\r\n");
 WriteLiteral("            ");
 
             
-            #line 113 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 117 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
        Write(Html.Partial(string.Format(viewPathFmt, "_ExtraInfoField"), new CartWithExtraInfo(Model.GetCart().ExtraInfo)));
 
             
@@ -727,13 +736,13 @@ WriteLiteral("            ");
 WriteLiteral("\r\n\r\n");
 
             
-            #line 115 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 119 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 115 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 119 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
              if (Model.HasProducts)
             {
 
@@ -753,7 +762,7 @@ WriteLiteral(">\r\n                        <hr />\r\n");
 WriteLiteral("                        ");
 
             
-            #line 120 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 124 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
                    Write(MainCartActions());
 
             
@@ -762,7 +771,7 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </div>\r\n                </div>\r\n");
 
             
-            #line 123 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 127 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
             }
 
             
@@ -773,7 +782,7 @@ WriteLiteral("        </div>\r\n    </div>\r\n\r\n");
 WriteLiteral("</div>\r\n\r\n");
 
             
-            #line 151 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
+            #line 155 "..\..\Views\Products\Cart\IndexCartWithViewModel.cshtml"
 Write(Html.Partial(string.Format(viewPathFmt, "_NewShippingAddressModal"), Model.NewShippingAddress));
 
             

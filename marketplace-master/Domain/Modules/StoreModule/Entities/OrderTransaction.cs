@@ -30,6 +30,8 @@ namespace Domain.Entities.StoreModule
         /// </summary>
         public string Status { get; set; }
 
+        public string RefuseReason { get; set; }
+
         /// <summary>
         /// Mensagem da transação no gateway de pagamento.
         /// </summary>
@@ -69,6 +71,8 @@ namespace Domain.Entities.StoreModule
         /// Valor estornado da taxa do gateway de pagamento.
         /// </summary>
         public decimal RefundedGatewayFee { get; set; }
+
+        public bool IsAntifraudRefuse() => false;
 
         /// <summary>
         /// URL do sistema que receberá notificações a cada mudança no status da transação.

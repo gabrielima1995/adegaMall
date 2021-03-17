@@ -501,7 +501,7 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 89 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                     if (Model.Cart.Shipping == 0)
+                                     if (Model.Cart.ShippingTotal == 0)
                                     {
 
             
@@ -535,14 +535,14 @@ WriteLiteral("-\r\n");
             #line hidden
             
             #line 95 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                                           Write(Model.Cart.Shipping.DisplayDecimal(2));
+                                                           Write(Model.Cart.ShippingTotal.DisplayDecimal(2));
 
             
             #line default
             #line hidden
             
             #line 95 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                                                                                      
+                                                                                                           
                                     }
 
             
@@ -884,24 +884,24 @@ WriteLiteral("                                                <input");
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 8211), Tuple.Create("\"", 8262)
+WriteAttribute("name", Tuple.Create(" name=\"", 8221), Tuple.Create("\"", 8272)
             
             #line 161 "..\..\Views\Products\Cart\Checkout.cshtml"
-, Tuple.Create(Tuple.Create("", 8218), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
+, Tuple.Create(Tuple.Create("", 8228), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
             
             #line default
             #line hidden
-, 8218), false)
+, 8228), false)
 );
 
-WriteAttribute("value", Tuple.Create(" value=\"", 8263), Tuple.Create("\"", 8293)
+WriteAttribute("value", Tuple.Create(" value=\"", 8273), Tuple.Create("\"", 8303)
             
             #line 161 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 8271), Tuple.Create<System.Object, System.Int32>(PaymentMethod.Offline
+                                                , Tuple.Create(Tuple.Create("", 8281), Tuple.Create<System.Object, System.Int32>(PaymentMethod.Offline
             
             #line default
             #line hidden
-, 8271), false)
+, 8281), false)
 );
 
 WriteLiteral(" />\r\n");
@@ -1075,24 +1075,24 @@ WriteLiteral("                                                <input");
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 10240), Tuple.Create("\"", 10291)
+WriteAttribute("name", Tuple.Create(" name=\"", 10250), Tuple.Create("\"", 10301)
             
             #line 187 "..\..\Views\Products\Cart\Checkout.cshtml"
-, Tuple.Create(Tuple.Create("", 10247), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
+, Tuple.Create(Tuple.Create("", 10257), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
             
             #line default
             #line hidden
-, 10247), false)
+, 10257), false)
 );
 
-WriteAttribute("value", Tuple.Create(" value=\"", 10292), Tuple.Create("\"", 10321)
+WriteAttribute("value", Tuple.Create(" value=\"", 10302), Tuple.Create("\"", 10331)
             
             #line 187 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                               , Tuple.Create(Tuple.Create("", 10300), Tuple.Create<System.Object, System.Int32>(PaymentMethod.Boleto
+                                               , Tuple.Create(Tuple.Create("", 10310), Tuple.Create<System.Object, System.Int32>(PaymentMethod.Boleto
             
             #line default
             #line hidden
-, 10300), false)
+, 10310), false)
 );
 
 WriteLiteral(" />\r\n");
@@ -1295,24 +1295,24 @@ WriteLiteral("                                                <input");
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 12579), Tuple.Create("\"", 12630)
+WriteAttribute("name", Tuple.Create(" name=\"", 12589), Tuple.Create("\"", 12640)
             
             #line 219 "..\..\Views\Products\Cart\Checkout.cshtml"
-, Tuple.Create(Tuple.Create("", 12586), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
+, Tuple.Create(Tuple.Create("", 12596), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
             
             #line default
             #line hidden
-, 12586), false)
+, 12596), false)
 );
 
-WriteAttribute("value", Tuple.Create(" value=\"", 12631), Tuple.Create("\"", 12664)
+WriteAttribute("value", Tuple.Create(" value=\"", 12641), Tuple.Create("\"", 12674)
             
             #line 219 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                               , Tuple.Create(Tuple.Create("", 12639), Tuple.Create<System.Object, System.Int32>(PaymentMethod.CreditCard
+                                               , Tuple.Create(Tuple.Create("", 12649), Tuple.Create<System.Object, System.Int32>(PaymentMethod.CreditCard
             
             #line default
             #line hidden
-, 12639), false)
+, 12649), false)
 );
 
 WriteLiteral(" />\r\n");

@@ -35,9 +35,9 @@ namespace V2.Infrastructure.Shipping
             return wrappedAdapter.ChangeStatus(order, newStatus, person, additionalInfo);
         }
 
-        public void ChangeStatusForNewOrder(Order order)
+        public void ChangeStatusForNewOrder(Order order, bool paymentUnderReview)
         {
-            wrappedAdapter.ChangeStatusForNewOrder(order);
+            wrappedAdapter.ChangeStatusForNewOrder(order, paymentUnderReview);
         }
 
         public void ChangeStatusToOrderPaid(Order order, bool deliveryAllowed = true)

@@ -1,25 +1,38 @@
 ﻿@model BannerListVM
 
+@{
+    var id = Guid.NewGuid().Substring(); 
+    var bannerId = "banner-" + id;
+}	
+
+<div class="banner-wrapper">
+    <div class="banner">
+        <a href="https://www.adegamall.com.br/product/atlantico-alentejano-750ml/?lang=pt-BR">
+            <img src="/assets/images/banners/mobile1.jpg?width=750&height=188&mode=crop&scale=both" style="width:auto;height:auto;" class="banner-image-mobile" />
+        </a>
+    </div>
+</div>
+
 @if (Model.HasBanners)
 {
-    <div id="banner-carousel" class="carousel slide" data-ride="carousel">
+    <div id="@bannerId" class="carousel principal-banner slide" data-ride="carousel">
         @if (Model.ShowNavControls)
         {
-            <ol class="carousel-indicators">
+            @*<ol class="carousel-indicators">
                 @for (var i = 0; i < Model.Items.Count; i++)
                 {
-                    <li data-target="#banner-carousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                    <li data-target="#@bannerId" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
                 }
-            </ol>
+            </ol>*@
         }
 
         @*<div class="carousel-inner" role="listbox">
-            @for (var i = 0; i < Model.Items.Count; i++)
-            {
-                var banner = Model.Items[i];
-                <a href="@banner.ActionUrl" class="item main-banner-item @(i == 0 ? "active" : "")" style="background-image: url(@banner.OptimizedImgUrl)"></a>
-            }
-        </div>*@
+                @for (var i = 0; i < Model.Items.Count; i++)
+                {
+                    var banner = Model.Items[i];
+                    <a href="@banner.ActionUrl" class="item main-banner-item @(i == 0 ? "active" : "")" style="background-image: url(@banner.OptimizedImgUrl)"></a>
+                }
+            </div>*@
 
 
         <div class="carousel-inner" role="listbox">
@@ -28,7 +41,8 @@
                 var banner = Model.Items[i];
                 <div class="item@(i == 0 ? " active" : "")">
                     <a href="@banner.ActionUrl">
-                        <img src="@banner.OptimizedImgUrl" style="width:auto;height:auto;" class="center-block" />
+                        <img src="@banner.OptimizedImgUrl" style="width:auto;height:auto;" class="carousel-image-desktop center-block" />
+                        <img src="@banner.OptimizedMobileImgUrl" style="width:auto;height:auto;" class="carousel-image-mobile banner-image-mobile" />
                     </a>
                 </div>
             }
@@ -36,11 +50,11 @@
 
         @if (Model.ShowNavControls)
         {
-            <a class="left carousel-control" href="#banner-carousel" role="button" data-slide="prev">
+            <a class="left carousel-control" href="#@bannerId" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 <span class="sr-only">Voltar</span>
             </a>
-            <a class="right carousel-control" href="#banner-carousel" role="button" data-slide="next">
+            <a class="right carousel-control" href="#@bannerId" role="button" data-slide="next">
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 <span class="sr-only">Próximo</span>
             </a>

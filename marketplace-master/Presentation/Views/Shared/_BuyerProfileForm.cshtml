@@ -40,7 +40,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @Html.HiddenFor(model => model.RequireModeration,requireModeration)
+    @Html.HiddenFor(model => model.RequireModeration, requireModeration)
     if (isManagePage)
     {
         <div class="foto-perfil visible-xs visible-sm m-b-md">
@@ -105,9 +105,9 @@
         }
     }
 
-    if (config.Buyer.DocumentNumber.Enabled || config.Payment.Enabled)
-    {
-        <div class="row">
+    <div class="row">
+        @if (config.Buyer.DocumentNumber.Enabled || config.Payment.Enabled)
+        {
             <div class="col-xs-12 col-sm-6">
                 <div class="form-group">
                     @Html.LabelFor(i => i.DocumentNumber)
@@ -124,10 +124,8 @@
                     @Html.HiddenFor(i => i.DocumentNumberRequired)
                 </div>
             </div>
-        </div>
-    }
+        }
 
-    <div class="row">
         @if (config.Buyer.DateOfBirth.Enabled)
         {
             <div class="col-xs-12 col-sm-6">
@@ -183,6 +181,16 @@
     if (Model.AddressEnabled)
     {
         <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    @Html.LabelFor(i => i.AddressZipCode)
+                    @Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control js-viacep" + (config.Buyer.AllowPlainTextZipCode ? "" : " js-zipcode"), placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") })
+                    @Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-xs-12 col-sm-9">
                 <div class="form-group">
                     @Html.LabelFor(i => i.Address)
@@ -202,7 +210,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-12 col-sm-4">
+            <div class="col-xs-12 col-sm-5">
                 <div class="form-group">
                     @Html.LabelFor(i => i.AddressAdditionalInfo)
                     @Html.TextBoxFor(i => i.AddressAdditionalInfo, new { @class = "form-control", placeholder = Request.GetLocalizedString("ADDRESS_ADDITIONAL_INFO_INPUT") })
@@ -210,19 +218,11 @@
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-4">
+            <div class="col-xs-12 col-sm-7">
                 <div class="form-group">
                     @Html.LabelFor(i => i.AddressNeighborhood)
                     @Html.TextBoxFor(i => i.AddressNeighborhood, new { @class = "form-control", placeholder = Request.GetLocalizedString("NEIGHBORHOOD_INPUT") })
                     @Html.ValidationMessageFor(model => model.AddressNeighborhood, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-4">
-                <div class="form-group">
-                    @Html.LabelFor(i => i.AddressZipCode)
-                    @Html.TextBoxFor(i => i.AddressZipCode, new { @class = "form-control" + (config.Buyer.AllowPlainTextZipCode ? "" : " js-zipcode"), placeholder = Request.GetLocalizedString("ZIPCODE_INPUT") })
-                    @Html.ValidationMessageFor(model => model.AddressZipCode, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -247,9 +247,9 @@
     if (ViewBag.AllFields || ViewBag.CompleteRegister)
     {
         @*<div class="form-group">
-            @Html.LabelFor(model => model.PreferredTimeZoneId)
-            @Html.DropDownList("PreferredTimeZoneId", null, new { @class = "form-control" })
-        </div>*@
+                @Html.LabelFor(model => model.PreferredTimeZoneId)
+                @Html.DropDownList("PreferredTimeZoneId", null, new { @class = "form-control" })
+            </div>*@
     }
 
     <div class="form-group">
