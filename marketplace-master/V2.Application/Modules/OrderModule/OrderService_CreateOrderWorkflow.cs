@@ -135,7 +135,7 @@ namespace Domain.Services.StoreModule
 
                             _orderRepository.Update(order);
                         }
-                        
+
                         var saveCancelResult = unitOfWork.Save();
                         if (saveCancelResult.IsFailure)
                             return saveCancelResult.Errors;
@@ -309,9 +309,6 @@ namespace Domain.Services.StoreModule
 
         private OperationResult<OrderTransaction> ProcessPaymentInternal(ITransaction transaction, List<Order> orders)
         {
-            if (!transaction.IsPaid())
-                return new OperationResult<OrderTransaction>("", "Transação não está paga.");
-
             OrderTransaction orderTransaction = new OrderTransaction();
             if (transaction.IsMultiPayment)
             {
@@ -336,7 +333,8 @@ namespace Domain.Services.StoreModule
             }
 
             foreach (var order in orders)
-                order.IsPaid = true;
+                if (transaction.IsPaid())
+                    order.IsPaid = true;
 
             return orderTransaction;
         }
