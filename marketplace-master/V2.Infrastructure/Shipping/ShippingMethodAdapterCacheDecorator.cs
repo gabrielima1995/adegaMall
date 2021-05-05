@@ -54,7 +54,7 @@ namespace V2.Infrastructure.Shipping
         {
             var key = GetCacheKey(nameof(GetShippingForProduct), new object[]
             {
-                product.Product.Id, sellerAddress.Id, shippingAddress?.Id, chargeDoubleShipping
+                product.Product.Id, sellerAddress.Id, shippingAddress?.Id, chargeDoubleShipping, product.Quantity
             });
 
             if (cache.Get(key) == null)

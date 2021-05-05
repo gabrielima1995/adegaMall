@@ -35,6 +35,8 @@ namespace Presentation.Models
         public DateTime? DeliveryDateSedex { get; private set; }
         public DateTime? DeliveryDateAsapLog { get; private set; }
         public DateTime? DeliveryDateTotalExpress { get; private set; }
+        public int DeliveryDaysPac { get; private set; }
+        public int DeliveryDaysSedex { get; private set; }
         public int DeliveryDaysAsapLog { get; private set; }
         public int DeliveryDaysTotalExpress { get; private set; }
         public bool ShowAnyShipping => ShowActualNoShipping || ShowNoShipping || ShowOnSitePickup || ShowPrivateFleet || ShowPostalExpress || ShowPostalRegular || ShowAsapLog || ShowTotalExpress;
@@ -87,7 +89,7 @@ namespace Presentation.Models
 
                 if (config.Product.PrivateFleetShipping.Enabled && product.Store.PrivateFleetEnabled)
                 {
-                    ShowPrivateFleet = GetShipping(privateFleetAdapter, out var privateFleetCost, out var deliveryDate, out var _, chargeDoubleShipping);
+                    ShowPrivateFleet = GetShipping(privateFleetAdapter, out var privateFleetCost, out var _, out var _, chargeDoubleShipping);
                     PrivateFleetCost = privateFleetCost;
 
                     if (ShowPrivateFleet)
@@ -96,29 +98,35 @@ namespace Presentation.Models
                     }
                 }
 
-                if (config.Product.SedexShipping.Enabled && product.SedexEnabled)
+                if (config.Product.SedexShipping.Enabled && product.Store.SedexEnabled)
                 {
-                    ShowPostalExpress = GetShipping(postalExpressAdapter, out var postalExpressCost, out var deliveryDate, out var _, chargeDoubleShipping);
+                    ShowPostalExpress = GetShipping(postalExpressAdapter, out var postalExpressCost, out var deliveryDate, out var deliveryDaysSedex, chargeDoubleShipping);
                     ShowPostalExpress = ShowPostalExpress && postalExpressCost > 0m;
                     PostalExpressCost = postalExpressCost;
                     DeliveryDateSedex = deliveryDate;
+                    DeliveryDaysSedex = deliveryDaysSedex;
 
                     if (ShowPostalExpress)
                     {
                         MinimumCost = Math.Min(MinimumCost, PostalExpressCost);
+
+                        if (MinimumCost == PostalExpressCost) DeliveryDays = deliveryDaysSedex;
                     }
                 }
 
-                if (config.Product.PACShipping.Enabled && product.PACEnabled)
+                if (config.Product.PACShipping.Enabled && product.Store.PacEnabled)
                 {
-                    ShowPostalRegular = GetShipping(postalRegularAdapter, out var postalRegularCost, out var deliveryDate, out var _, chargeDoubleShipping);
+                    ShowPostalRegular = GetShipping(postalRegularAdapter, out var postalRegularCost, out var deliveryDate, out var deliveryDaysPac, chargeDoubleShipping);
                     ShowPostalRegular = ShowPostalRegular && postalRegularCost > 0m;
                     PostalRegularCost = postalRegularCost;
                     DeliveryDatePac = deliveryDate;
+                    DeliveryDaysPac = deliveryDaysPac;
 
                     if (ShowPostalRegular)
                     {
                         MinimumCost = Math.Min(MinimumCost, PostalRegularCost);
+
+                        if (MinimumCost == PostalRegularCost) DeliveryDays = deliveryDaysPac;
                     }
                 }
 

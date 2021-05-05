@@ -52,19 +52,16 @@ namespace V2.Infrastructure.Shipping.Adapters
 
         public override OperationResult<CorreiosShippingCollection> GetShippingForProduct(ProductWithQty product, Address sellerAddress, Address shippingAddress, bool chargeDoubleShipping)
         {
-            if (config.Product.ShippingMode == ShippingMode.PerProduct)
+            if (UseSedex ? product.Product.Store.SedexEnabled : product.Product.Store.PacEnabled)
             {
-                if (UseSedex ? product.Product.SedexEnabled : product.Product.PACEnabled)
-                {
-                    var products = new[] { product };
-                    var shipping = GetShipping(products, product.Product.Store?.Seller?.PublicProfileName, sellerAddress, shippingAddress, chargeDoubleShipping).Result;
+                var products = new[] { product };
+                var shipping = GetShipping(products, product.Product.Store?.Seller?.PublicProfileName, sellerAddress, shippingAddress, chargeDoubleShipping).Result;
 
-                    shipping = ApplyDefaultShippingForCommunicationErrors(shipping, products, null);
-                    return shipping;
-                }
-                return new ErrorDictionary(product.Product.Id.ToString(), CultureInfo.CurrentCulture.GetStringLocalized(UseSedex ? "PRODUCT_SEDEX_NOT_ENABLED" : "PRODUCT_PAC_NOT_ENABLED"));
+                shipping = ApplyDefaultShippingForCommunicationErrors(shipping, products, null);
+                return shipping;
             }
-            else return new ErrorDictionary("", CultureInfo.CurrentCulture.GetStringLocalized(UseSedex ? "STORE_SEDEX_NOT_ENABLED" : "STORE_PAC_NOT_ENABLED"));
+
+            return CorreiosShippingCollection.Empty();
         }
 
         public override OperationResult<CorreiosShippingCollection> GetShippingForSeller(IEnumerable<ProductWithQty> products, Store store, Address shippingAddress)

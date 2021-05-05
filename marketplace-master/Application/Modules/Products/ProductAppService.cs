@@ -139,7 +139,8 @@ namespace Application.Modules.Products
 
         private bool CanDeliver(ProductWithPrice productWithPrice, SearchRequestViewModel request)
         {
-            if (productWithPrice.Product.SedexEnabled || productWithPrice.Product.PACEnabled)
+            if (productWithPrice.Product.SedexEnabled || productWithPrice.Product.PACEnabled ||
+                (productWithPrice.Product.Store?.SedexEnabled ?? false) || (productWithPrice.Product.Store?.PacEnabled ?? false))
                 return true;
 
             var shippingPerStore = MaaSConfig.Current.Product.ShippingMode == ShippingMode.PerStore;
