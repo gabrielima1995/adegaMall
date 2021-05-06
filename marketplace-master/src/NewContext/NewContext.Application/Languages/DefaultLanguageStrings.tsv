@@ -477,8 +477,8 @@ PORTFOLIO_ITEM_LIMIT_MESSAGE	Número de itens de portfolio excedido
 PORTFOLIO_ITEM_VIDEO_URL_INVALID	Informe uma url de vídeo válida. Sugerimos copiar e colar a url do navegador.
 PORTFOLIO_ITEM_VIDEO_URL_REQUIRED	Url do vídeo é obrigatória
 PORTFOLIO_LINK	Portfólio
-POSTAL_EXPRESS_DELIVERY_TIME	Até 7 dias úteis após confirmação do pagamento
-POSTAL_REGULAR_DELIVERY_TIME	Até 15 dias úteis após confirmação do pagamento
+POSTAL_EXPRESS_DELIVERY_TIME	Até {0} dias úteis
+POSTAL_REGULAR_DELIVERY_TIME	Até {0} dias úteis
 ASAPLOG_DELIVERY_TIME	Até {0} dias úteis
 TOTALEXPRESS_DELIVERY_TIME	Até {0} dias úteis
 PREF_PRICE_LABEL	Menor Preço

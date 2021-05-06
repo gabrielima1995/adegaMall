@@ -47,15 +47,17 @@
                             @shippingMethod.GetDescriptionLocalized()
                         }
                         else if (Model.SelectedShippingMethod == shippingMethod ||
-                            (shippingMethod == ShippingMethod.NoShipping ||
-                                shippingMethod == ShippingMethod.ActualNoShipping ||
-                                shippingMethod == ShippingMethod.OnSitePickup) ||
-                                (Model.GetCart().MinimumCostShippingMethod == shippingMethod))
+                                 (shippingMethod == ShippingMethod.NoShipping ||
+                                  shippingMethod == ShippingMethod.ActualNoShipping ||
+                                  shippingMethod == ShippingMethod.OnSitePickup ||
+                                  shippingMethod == ShippingMethod.PostalExpress ||
+                                  shippingMethod == ShippingMethod.PostalRegular) ||
+                                 (Model.GetCart().MinimumCostShippingMethod == shippingMethod))
                         {
                             <div class="radio">
                                 <label class="js-choose-shipping-method-button">
                                     @Html.RadioButton("shipping-method", shippingMethod, Model.SelectedShippingMethod == shippingMethod)
-                                    
+
                                     @if (shippingMethod == ShippingMethod.AsapLog || shippingMethod == ShippingMethod.TotalExpress)
                                     {
                                         @:Expresso
@@ -76,6 +78,46 @@
                                     }
                                 }
 
+                                @if (Model.AvailableShippingMethods.Count > 0)
+                                {
+                                    if (shippingMethod == ShippingMethod.ActualNoShipping && Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.ActualNoShipping))
+                                    {
+                                        @Html.Localized("ACTUAL_NO_SHIPPING_DELIVERY_TIME", "p")
+                                    }
+                                    if (shippingMethod == ShippingMethod.NoShipping && Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.NoShipping))
+                                    {
+                                        @Html.Localized("NO_SHIPPING_DELIVERY_TIME", "p")
+                                    }
+                                    else if (shippingMethod == ShippingMethod.OnSitePickup && Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.OnSitePickup))
+                                    {
+                                        @Html.Localized("ON_SITE_PICKUP_DELIVERY_TIME", "p")
+                                    }
+                                    else if (shippingMethod == ShippingMethod.PostalExpress && Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PostalExpress))
+                                    {
+                                        @Html.Localized("POSTAL_EXPRESS_DELIVERY_TIME", "p", null, Model.TotalDeliveryDays)
+                                    }
+                                    else if (shippingMethod == ShippingMethod.PostalRegular && Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PostalRegular))
+                                    {
+                                        @Html.Localized("POSTAL_REGULAR_DELIVERY_TIME", "p", null, Model.TotalDeliveryDays)
+                                    }
+                                    else if (shippingMethod == ShippingMethod.AsapLog && Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.AsapLog))
+                                    {
+                                        @Html.Localized("ASAPLOG_DELIVERY_TIME", "p", null, Model.TotalDeliveryDays)
+                                    }
+                                    else if (shippingMethod == ShippingMethod.TotalExpress && Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.TotalExpress))
+                                    {
+                                        @Html.Localized("TOTALEXPRESS_DELIVERY_TIME", "p", null, Model.TotalDeliveryDays)
+                                    }
+                                    else if (shippingMethod == ShippingMethod.PrivateFleet && Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PrivateFleet))
+                                    {
+                                        @Html.Localized("PRIVATE_FLEET_SHIPPING_DELIVERY_TIME", "p")
+                                        <p>
+                                            @Html.Localized("DELIVERY_TIME_LABEL", "strong"):
+                                            @Html.Localized("PRIVATE_FLEET_SHIPPING_DELIVERY_TIME")
+                                        </p>
+                                    }
+                                }
+
                                 @if (shippingMethod == ShippingMethod.OnSitePickup)
                                 {
                                     @:@Html.Localized("ON_SITE_PICKUP_CAN_BE_REVIEWED", "small", new { @class = "block", style = "padding-left: 21px" })
@@ -89,48 +131,8 @@
                     <li>@Html.Localized("CART_PRODUCT_SHIPPING_LABEL_ERROR", "p")</li>
                 }
             </ul>
-
-            if (Model.AvailableShippingMethods.Count > 0)
-            {
-                if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.ActualNoShipping))
-                {
-                    @Html.Localized("ACTUAL_NO_SHIPPING_DELIVERY_TIME", "p")
-                }
-                if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.NoShipping))
-                {
-                    @Html.Localized("NO_SHIPPING_DELIVERY_TIME", "p")
-                }
-                else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.OnSitePickup))
-                {
-                    @Html.Localized("ON_SITE_PICKUP_DELIVERY_TIME", "p")
-                }
-                else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PostalExpress))
-                {
-                    @Html.Localized("POSTAL_EXPRESS_DELIVERY_TIME", "p")
-                }
-                else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PostalRegular))
-                {
-                    @Html.Localized("POSTAL_REGULAR_DELIVERY_TIME", "p")
-                }
-                else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.AsapLog))
-                {
-                    @Html.Localized("ASAPLOG_DELIVERY_TIME", "p", null, Model.TotalDeliveryDays)
-                }
-                else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.TotalExpress))
-                {
-                    @Html.Localized("TOTALEXPRESS_DELIVERY_TIME", "p", null, Model.TotalDeliveryDays)
-                }
-                else if (Model.Visualization.ShouldShowDeliveryTimeMessageFor(ShippingMethod.PrivateFleet))
-                {
-                    @Html.Localized("PRIVATE_FLEET_SHIPPING_DELIVERY_TIME", "p")
-                    <p>
-                        @Html.Localized("DELIVERY_TIME_LABEL", "strong"):
-                        @Html.Localized("PRIVATE_FLEET_SHIPPING_DELIVERY_TIME")
-                    </p>
-                }
-
-                @Html.Localized("SHIPPING_METHOD_DISCLAIMER")
-            }
+            
+            @Html.Localized("SHIPPING_METHOD_DISCLAIMER")
         }
 
         @Html.Partial(string.Format(viewPathFmt, "_ChargeDoubleShippingFullMessage"), Model.GetCart())

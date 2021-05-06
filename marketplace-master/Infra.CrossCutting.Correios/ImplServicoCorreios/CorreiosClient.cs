@@ -62,7 +62,7 @@ namespace Infra.Crosscutting.Correios
             catch (Exception ex)
             {
                 if (ex is TimeoutException || ex is CommunicationException)
-                    result = CalcPrecoPrazoResponse.CommunicationError(request.Servicos, "SHIPPING_CORREIOS_ERROR_MESSAGE");
+                    result = CalcPrecoPrazoResponse.CommunicationError(request.Servicos, "SHIPPING_CORREIOS_ERROR_MESSAGE", ex.Message);
                 else
                     throw;
             }
@@ -111,7 +111,7 @@ namespace Infra.Crosscutting.Correios
             catch (Exception ex)
             {
                 if (ex is TimeoutException || ex is CommunicationException)
-                    result = CalcPrecoPrazoResponse.CommunicationError(request.Servicos, "SHIPPING_CORREIOS_ERROR_MESSAGE");
+                    result = CalcPrecoPrazoResponse.CommunicationError(request.Servicos, "SHIPPING_CORREIOS_ERROR_MESSAGE", ex.Message);
                 else
                     throw;
             }

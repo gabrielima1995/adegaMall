@@ -43,23 +43,25 @@
             </li>
         }
 
-        @if (Model.ShowPostalExpress && Model.MinimumCost == Model.PostalExpressCost)
+        @if (Model.ShowPostalExpress)
         {
             <li>
                 <strong>@Html.Localized("PRODUCT_SEDEX_METHOD_LABEL"):</strong>
                 @config.DefaultCurrency
                 @Model.PostalExpressCost.DisplayDecimal(2)
-                @DisplayDeliveryDate(Model.DeliveryDateSedex)
+                @*@DisplayDeliveryDate(Model.DeliveryDateSedex)*@
+                @Html.Localized("POSTAL_EXPRESS_DELIVERY_TIME", "p", null, Model.DeliveryDaysSedex)
             </li>
         }
 
-        @if (Model.ShowPostalRegular && Model.MinimumCost == Model.PostalRegularCost)
+        @if (Model.ShowPostalRegular)
         {
             <li>
                 <strong>@Html.Localized("PRODUCT_PAC_METHOD_LABEL"):</strong>
                 @config.DefaultCurrency
                 @Model.PostalRegularCost.DisplayDecimal(2)
-                @DisplayDeliveryDate(Model.DeliveryDatePac)
+                @*@DisplayDeliveryDate(Model.DeliveryDatePac)*@
+                @Html.Localized("POSTAL_REGULAR_DELIVERY_TIME", "p", null, Model.DeliveryDaysPac)
             </li>
         }
 
