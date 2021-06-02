@@ -92,19 +92,23 @@ namespace Domain.Services.StoreModule
 
         public OperationResult Update(ProductEditing model, string sellerId)
         {
-            var product = model.Id != Guid.Empty
-                ? GetById(model.Id)
-                : GetByRef(model.CustomId);
+            var product = model.Id != Guid.Empty ? GetById(model.Id) : GetByRef(model.CustomId);
 
-            var errors = new ErrorDictionary();
+            if (string.IsNullOrEmpty(sellerId) || sellerId != product.Store_SellerId)
+                return OperationResult.Fail("InvalidSeller", $"The provided authentication token is invalid or does not match the one for the seller to whom the product {product.Id} is registered.");
 
-            if (product.Store_SellerId != (sellerId ?? product.Store_SellerId))
-                errors.Add("", "Invalid seller.");
+            if (model.CustomId != null) product.CustomId = model.CustomId;
+            if (model.Price != null) product.SetPrice(model.Price.Value);
+            if (model.Title != null) product.Title = model.Title;
+            if (!string.IsNullOrEmpty(model.Description)) product.Description = model.Description;
+            if (!string.IsNullOrEmpty(model.Specifications)) product.Specifications = model.Specifications;
+            if (model.CurrentStock != null) product.CurrentStock = model.CurrentStock.Value;
 
             var updateResult = Update(product, null);
-            if (!updateResult.OK) errors.AddRange(updateResult.Errors);
+            if (updateResult.IsFailure)
+                return new OperationResult(updateResult.Errors);
 
-            return new OperationResult(errors);
+            return new OperationResult();
         }
 
         public UpdateFromExternalSourceResult UpdateFromExternalSource()

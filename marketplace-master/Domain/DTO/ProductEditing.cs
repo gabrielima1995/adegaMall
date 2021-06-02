@@ -8,15 +8,15 @@ namespace Domain.DTO
     {
         public Guid Id { get; set; }
 
-        [RequiredLocalized]
+        //[RequiredLocalized]
         [StringLengthLocalized(100)]
         public string Title { get; set; }
 
-        [RequiredLocalized]
+        //[RequiredLocalized]
         [StringLengthLocalized(8000)]
         public string Description { get; set; }
 
-        [RequiredIfLocalized("SpecificationsRequired")]
+        //[RequiredIfLocalized("SpecificationsRequired")]
         [StringLengthLocalized(8000)]
         public string Specifications { get; set; }
 
@@ -29,7 +29,7 @@ namespace Domain.DTO
         public bool PriceRequired => MaaSConfig.Current.Product.Price.IsRequired;
 
         [RangeLocalized(0D, 999999999D)]
-        public decimal CurrentStock { get; set; }
+        public decimal? CurrentStock { get; set; }
 
         [StringLengthLocalized(100)]
         public string CustomId { get; set; }
