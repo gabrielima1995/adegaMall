@@ -190,7 +190,7 @@ namespace Infrastructure.Data.Repositories
                     {
                         Id = p.Id,
                         CustomId = p.Product.CustomId,
-                        Name = p.FullItemName,
+                        Name = p.Item, //p.FullItemName,
                         UnitPrice = p.Price,
                         Quantity = p.Quantity,
                         ShippingPrice = p.Shipping
