@@ -1257,7 +1257,7 @@ WriteLiteral("\r\n");
             #line hidden
             
             #line 215 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                             using (Html.BeginForm("Checkout", "Cart", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form" }))
+                                             using (Html.BeginForm("Checkout", "Cart", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form", id = "checkout-credit-card-form" }))
                                             {
                                                 
             
@@ -1295,24 +1295,24 @@ WriteLiteral("                                                <input");
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 12589), Tuple.Create("\"", 12640)
+WriteAttribute("name", Tuple.Create(" name=\"", 12623), Tuple.Create("\"", 12674)
             
             #line 219 "..\..\Views\Products\Cart\Checkout.cshtml"
-, Tuple.Create(Tuple.Create("", 12596), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
+, Tuple.Create(Tuple.Create("", 12630), Tuple.Create<System.Object, System.Int32>(Html.NameFor(model => Model.Payment.Method)
             
             #line default
             #line hidden
-, 12596), false)
+, 12630), false)
 );
 
-WriteAttribute("value", Tuple.Create(" value=\"", 12641), Tuple.Create("\"", 12674)
+WriteAttribute("value", Tuple.Create(" value=\"", 12675), Tuple.Create("\"", 12708)
             
             #line 219 "..\..\Views\Products\Cart\Checkout.cshtml"
-                                               , Tuple.Create(Tuple.Create("", 12649), Tuple.Create<System.Object, System.Int32>(PaymentMethod.CreditCard
+                                               , Tuple.Create(Tuple.Create("", 12683), Tuple.Create<System.Object, System.Int32>(PaymentMethod.CreditCard
             
             #line default
             #line hidden
-, 12649), false)
+, 12683), false)
 );
 
 WriteLiteral(" />\r\n");

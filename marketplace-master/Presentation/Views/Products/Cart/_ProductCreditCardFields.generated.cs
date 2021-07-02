@@ -203,7 +203,7 @@ WriteLiteral("                ");
 
             
             #line 51 "..\..\Views\Products\Cart\_ProductCreditCardFields.cshtml"
-           Write(Html.TextBoxFor(i => i.Payment.CreditCard.Number, new { @class = "form-control js-credit-card", placeholder = Request.GetLocalizedString("CREDIT_CARD_NUMBER_INPUT_V2"), maxlength = 16 }));
+           Write(Html.TextBoxFor(i => i.Payment.CreditCard.Number, new { @class = "form-control js-credit-card", placeholder = Request.GetLocalizedString("CREDIT_CARD_NUMBER_INPUT_V2"), maxlength = 16, data_val_creditcardvalid = "Número de cartão de crédito inválido!" }));
 
             
             #line default

@@ -48,7 +48,7 @@
                 <span class="input-group-addon">
                     <img src="~/fonts/dialpad.svg" style="max-width: 13px;" />
                 </span>
-                @Html.TextBoxFor(i => i.Payment.CreditCard.Number, new { @class = "form-control js-credit-card", placeholder = Request.GetLocalizedString("CREDIT_CARD_NUMBER_INPUT_V2"), maxlength = 16 })
+                @Html.TextBoxFor(i => i.Payment.CreditCard.Number, new { @class = "form-control js-credit-card", placeholder = Request.GetLocalizedString("CREDIT_CARD_NUMBER_INPUT_V2"), maxlength = 16, data_val_creditcardvalid = "Número de cartão de crédito inválido!" })
             </div>
             @Html.ValidationMessageFor(model => model.Payment.CreditCard.Number, "", new { @class = "text-danger" })
         </div>

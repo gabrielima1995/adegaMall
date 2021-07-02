@@ -212,7 +212,7 @@
                                                 <hr />
                                             }
 
-                                            @using (Html.BeginForm("Checkout", "Cart", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form" }))
+                                            @using (Html.BeginForm("Checkout", "Cart", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { role = "form", id = "checkout-credit-card-form" }))
                                             {
                                                 @Html.AntiForgeryToken()
                                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
