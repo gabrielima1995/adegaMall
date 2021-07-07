@@ -94,6 +94,9 @@ namespace Domain.Services.StoreModule
         {
             var product = model.Id != Guid.Empty ? GetById(model.Id) : GetByRef(model.CustomId);
 
+            if(product == null)
+                return OperationResult.Fail("InvalidProduct", "Product not found.");
+
             if (string.IsNullOrEmpty(sellerId) || sellerId != product.Store_SellerId)
                 return OperationResult.Fail("InvalidSeller", $"The provided authentication token is invalid or does not match the one for the seller to whom the product {product.Id} is registered.");
 

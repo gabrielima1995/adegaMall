@@ -19,9 +19,11 @@ namespace Domain.DTO
         public string Number { get; set; }
 
         [DisplayNameLocalized("CREDIT_CARD_MONTH_LABEL")]
+        [RequiredLocalized]
         public int Month { get; set; }
 
         [DisplayNameLocalized("CREDIT_CARD_YEAR_LABEL")]
+        [RequiredLocalized]
         public int Year { get; set; }
 
         [DisplayNameLocalized("CREDIT_CARD_CVV_LABEL")]

@@ -4,7 +4,7 @@ using System.Web.Hosting;
 using Serilog;
 using Serilog.Core;
 
-namespace Presentation
+namespace Infrastructure
 {
     public static class MarketplaceLogger
     {

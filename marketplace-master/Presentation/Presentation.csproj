@@ -1230,7 +1230,6 @@
     <Compile Include="Helpers\WebHelpers\WebApiHelper.cs" />
     <Compile Include="Helpers\WishlistHelper.cs" />
     <Compile Include="HttpsRedirectModule.cs" />
-    <Compile Include="MarketplaceLogger.cs" />
     <Compile Include="Models\AdditionalProfileViewModels.cs" />
     <Compile Include="Models\ApiResultEnvelope.cs" />
     <Compile Include="Models\CanonicalUrlHelper.cs" />

@@ -3,6 +3,7 @@ using Domain.Interfaces.Repositories;
 using Framework;
 using System;
 using System.Web.Http;
+using Infrastructure;
 
 namespace Presentation.Controllers.API.v1
 {
@@ -12,13 +13,16 @@ namespace Presentation.Controllers.API.v1
     {
         private readonly IOrderRepository _orderRepository;
         private readonly ApiTokenAuthorizedProvider _authorizedProvider;
+        private readonly ErrorReportingService _errorReportingService;
 
         public OrdersApiV1Controller(
             IOrderRepository orderRepository,
-            ApiTokenAuthorizedProvider authorizedProvider)
+            ApiTokenAuthorizedProvider authorizedProvider,
+            ErrorReportingService errorReportingService)
         {
             _orderRepository = orderRepository;
             _authorizedProvider = authorizedProvider;
+            _errorReportingService = errorReportingService;
         }
 
         [Route("", Name = "Orders list")]
@@ -51,7 +55,7 @@ namespace Presentation.Controllers.API.v1
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                _errorReportingService.ReportError(ex);
 
                 return InternalServerError();
             }
@@ -80,18 +84,10 @@ namespace Presentation.Controllers.API.v1
             }
             catch (Exception ex)
             {
-                LogError(ex);
+                _errorReportingService.ReportError(ex);
 
                 return InternalServerError();
             }
-        }
-
-        private void LogError(Exception ex)
-        {
-            MarketplaceLogger.Instance.Information("Error: " + ex.Message);
-            if (ex.InnerException != null)
-                MarketplaceLogger.Instance.Information("Inner: " + ex.InnerException.Message);
-            MarketplaceLogger.Instance.Information("StackTrace: " + ex.StackTrace);
         }
     }
 }
