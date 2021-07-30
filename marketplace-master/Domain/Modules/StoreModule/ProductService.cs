@@ -6,6 +6,7 @@ using Domain.Events.StoreModule;
 using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
 using Domain.Modules.Products.StockManagement;
+using Domain.Modules.StoreModule.Price;
 using Framework;
 using System;
 using System.Collections.Generic;
@@ -94,14 +95,21 @@ namespace Domain.Services.StoreModule
         {
             var product = model.Id != Guid.Empty ? GetById(model.Id) : GetByRef(model.CustomId);
 
-            if(product == null)
+            if (product == null)
                 return OperationResult.Fail("InvalidProduct", "Product not found.");
 
             if (string.IsNullOrEmpty(sellerId) || sellerId != product.Store_SellerId)
                 return OperationResult.Fail("InvalidSeller", $"The provided authentication token is invalid or does not match the one for the seller to whom the product {product.Id} is registered.");
 
             if (model.CustomId != null) product.CustomId = model.CustomId;
-            if (model.Price != null) product.SetPrice(model.Price.Value);
+
+            if (model.Price != null)
+            {
+                var productPrice = ProductPrice.ByPrice(product, model.Price.GetValueOrDefault(), model.Price.GetValueOrDefault(), null);
+
+                product.SetPrice(productPrice);
+            }
+
             if (model.Title != null) product.Title = model.Title;
             if (!string.IsNullOrEmpty(model.Description)) product.Description = model.Description;
             if (!string.IsNullOrEmpty(model.Specifications)) product.Specifications = model.Specifications;

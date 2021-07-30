@@ -304,13 +304,14 @@ namespace Domain.Modules.Products.Orders
                     i => i.Reviews);
         }
 
-        public IList<Order> GetOrdersBySeller(string sellerId)
+        public IList<Order> GetOrdersBySeller(string sellerId, bool showCanceled)
         {
             return _orderRepository
                 .Query(
                     i => i.Products,
                     i => i.Buyer)
-                .Where(i => i.Seller.Id == sellerId)
+                .Where(i => i.Seller.Id == sellerId &&
+                      (showCanceled || i.Status != OrderStatus.Canceled))
                 .OrderByDescending(i => i.CreatedAt)
                 .ToList();
         }

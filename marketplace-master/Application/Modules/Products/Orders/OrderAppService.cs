@@ -58,9 +58,9 @@ namespace Application.Modules.Products.Orders
             return new MyOrdersViewModel(orders);
         }
 
-        public MySalesViewModel GetMySales(string sellerId)
+        public MySalesViewModel GetMySales(string sellerId, bool showCanceled)
         {
-            var orders = orderService.GetOrdersBySeller(sellerId);
+            var orders = orderService.GetOrdersBySeller(sellerId, showCanceled);
             return new MySalesViewModel(orders);
         }
 
