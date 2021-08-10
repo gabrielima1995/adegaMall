@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
+using Hangfire.Common;
 
 namespace Infrastructure.Logging
 {
@@ -17,6 +18,7 @@ namespace Infrastructure.Logging
             _cloudStorage = cloudStorage;
         }
 
+        [ProlongExpirationTime(0, 0, 30)]
         public void Save(ApiLogEntry entry)
         {
             var log = RequestReceivedApiLog.New(

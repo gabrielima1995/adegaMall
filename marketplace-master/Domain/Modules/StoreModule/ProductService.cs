@@ -101,23 +101,63 @@ namespace Domain.Services.StoreModule
             if (string.IsNullOrEmpty(sellerId) || sellerId != product.Store_SellerId)
                 return OperationResult.Fail("InvalidSeller", $"The provided authentication token is invalid or does not match the one for the seller to whom the product {product.Id} is registered.");
 
-            if (model.CustomId != null) product.CustomId = model.CustomId;
+            var changed = false;
 
-            if (model.Price != null)
+            if (model.CustomId != null && 
+                product.CustomId != model.CustomId)
             {
-                var productPrice = ProductPrice.ByPrice(product, model.Price.GetValueOrDefault(), model.Price.GetValueOrDefault(), null);
+                changed = true;
 
+                product.CustomId = model.CustomId;
+            }
+
+            if (model.Price != null &&
+                product.Price != model.Price.GetValueOrDefault())
+            {
+                changed = true;
+
+                var productPrice = ProductPrice.ByPrice(product, model.Price.GetValueOrDefault(), null, null);
                 product.SetPrice(productPrice);
             }
 
-            if (model.Title != null) product.Title = model.Title;
-            if (!string.IsNullOrEmpty(model.Description)) product.Description = model.Description;
-            if (!string.IsNullOrEmpty(model.Specifications)) product.Specifications = model.Specifications;
-            if (model.CurrentStock != null) product.CurrentStock = model.CurrentStock.Value;
+            if (model.Title != null &&
+                product.Title != model.Title)
+            {
+                changed = true;
 
-            var updateResult = Update(product, null);
-            if (updateResult.IsFailure)
-                return new OperationResult(updateResult.Errors);
+                product.Title = model.Title;
+            }
+
+            if (!string.IsNullOrEmpty(model.Description) &&
+                product.Description != model.Description)
+            {
+                changed = true;
+
+                product.Description = model.Description;
+            }
+
+            if (!string.IsNullOrEmpty(model.Specifications) &&
+                product.Specifications != model.Specifications)
+            {
+                changed = true;
+
+                product.Specifications = model.Specifications;
+            }
+
+            if (model.CurrentStock != null &&
+                product.CurrentStock != model.CurrentStock)
+            {
+                changed = true;
+
+                product.CurrentStock = model.CurrentStock.Value;
+            }
+
+            if (changed)
+            {
+                var updateResult = Update(product, null);
+                if (updateResult.IsFailure)
+                    return new OperationResult(updateResult.Errors);
+            }
 
             return new OperationResult();
         }

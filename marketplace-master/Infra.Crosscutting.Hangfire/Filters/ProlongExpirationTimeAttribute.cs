@@ -9,14 +9,26 @@ namespace Hangfire.Common
     /// </summary>
     public class ProlongExpirationTimeAttribute : JobFilterAttribute, IApplyStateFilter
     {
+        private readonly TimeSpan _deleteAfter = TimeSpan.FromDays(ConfigHelper.GetSetting("HANGFIRE:JOB:EXPIRATION:DAYS", 7));
+
+        public ProlongExpirationTimeAttribute()
+        {
+
+        }
+
+        public ProlongExpirationTimeAttribute(int days, int hours, int minutes, int seconds = 0)
+        {
+            _deleteAfter = new TimeSpan(days, hours, minutes, seconds);
+        }
+
         public void OnStateApplied(ApplyStateContext context, IWriteOnlyTransaction transaction)
         {
-            context.JobExpirationTimeout = TimeSpan.FromDays(ConfigHelper.GetSetting("HANGFIRE:JOB:EXPIRATION:DAYS", 7));
+            context.JobExpirationTimeout = _deleteAfter;
         }
 
         public void OnStateUnapplied(ApplyStateContext context, IWriteOnlyTransaction transaction)
         {
-            context.JobExpirationTimeout = TimeSpan.FromDays(ConfigHelper.GetSetting("HANGFIRE:JOB:EXPIRATION:DAYS", 7));
+            context.JobExpirationTimeout = _deleteAfter;
         }
     }
 }
