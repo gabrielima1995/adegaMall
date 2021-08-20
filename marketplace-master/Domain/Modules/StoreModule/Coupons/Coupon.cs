@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Entities.StoreModule;
 
 namespace Domain.Modules.StoreModule.Coupons
 {
@@ -29,6 +30,10 @@ namespace Domain.Modules.StoreModule.Coupons
         public string SellerId { get; private set; }
         public Seller Seller { get; private set; }
 
+        [ForeignKey("Product")]
+        public Guid? ProductId { get; private set; }
+        public Product Product { get; private set; }
+
         public CouponBenefitType BenefitType { get; private set; }
 
         public decimal Value { get; private set; }
@@ -53,11 +58,13 @@ namespace Domain.Modules.StoreModule.Coupons
 
         public bool IsBySeller => !string.IsNullOrWhiteSpace(SellerId);
 
+        public bool IsByProduct => ProductId.HasValue;
+
         protected Coupon()
         {
         }
 
-        public Coupon(string code, string sellerId,
+        public Coupon(string code, string sellerId, Guid? productId,
             CouponBenefitType benefitType, decimal value, CouponUseMode useMode,
             int distanceInKm, int minOrderAmount)
         {
@@ -66,6 +73,7 @@ namespace Domain.Modules.StoreModule.Coupons
 
             Code = code.ToUpper().Replace(" ", string.Empty);
             SellerId = sellerId;
+            ProductId = productId;
             BenefitType = benefitType;
             Value = value;
             UseMode = useMode;

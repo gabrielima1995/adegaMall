@@ -17,6 +17,7 @@ namespace Infrastructure.Data.Repositories
         {
             return Context.Set<Coupon>()
                 .Include(x => x.Seller)
+                .Include(x => x.Product)
                 .FirstOrDefault(i => i.Code == code);
         }
 

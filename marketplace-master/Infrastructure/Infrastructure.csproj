@@ -627,6 +627,10 @@
     <Compile Include="Migrations\202103172151025_AddDeliveryDiscount.Designer.cs">
       <DependentUpon>202103172151025_AddDeliveryDiscount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108201438076_AddCouponByProduct.cs" />
+    <Compile Include="Migrations\202108201438076_AddCouponByProduct.Designer.cs">
+      <DependentUpon>202108201438076_AddCouponByProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Data\MyDbConnection.cs" />
     <Compile Include="Data\Repositories\AdminReportRepository.cs" />
@@ -927,6 +931,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103172151025_AddDeliveryDiscount.resx">
       <DependentUpon>202103172151025_AddDeliveryDiscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108201438076_AddCouponByProduct.resx">
+      <DependentUpon>202108201438076_AddCouponByProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

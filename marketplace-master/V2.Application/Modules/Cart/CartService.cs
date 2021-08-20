@@ -210,6 +210,12 @@ namespace V2.Application.Modules
                     items = items.Where(i => i.Product.Store_SellerId == coupon.SellerId);
                 }
 
+                // cupom do produto, somente ele
+                if (coupon.IsByProduct)
+                {
+                    items = items.Where(i => i.Product.Id == coupon.ProductId);
+                }
+
                 var totalAmount = items.Sum(i => i.SubTotal);
 
                 if (totalAmount < coupon.MinOrderAmount)
@@ -243,6 +249,12 @@ namespace V2.Application.Modules
                 if (coupon.IsBySeller)
                 {
                     items = items.Where(i => i.Product.Store_SellerId == coupon.SellerId);
+                }
+
+                // cupom do produto, somente ele
+                if (coupon.IsByProduct)
+                {
+                    items = items.Where(i => i.Product.Id == coupon.ProductId);
                 }
 
                 var totalAmount = items.Sum(i => i.SubTotal);
@@ -284,7 +296,7 @@ namespace V2.Application.Modules
 
             switch (coupon.UseMode)
             {
-                // primeira compra
+                // Primeira compra
                 case CouponUseMode.FirstOrder:
                     var firstOrder = couponRepository.IsFirstOrder(cart.Buyer.Id);
                     if (!firstOrder) return InvalidCoupon("Cupom já foi utilizado anteriormente.");
