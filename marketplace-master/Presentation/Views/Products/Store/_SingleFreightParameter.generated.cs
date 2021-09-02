@@ -94,7 +94,7 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("        <div");
 
-WriteLiteral(" class=\"col-xs-12 col-sm-5 col-md-5\"");
+WriteLiteral(" class=\"col-xs-12 col-sm-3 col-md-3\"");
 
 WriteLiteral(">\r\n            <div");
 
@@ -152,7 +152,7 @@ WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
             #line hidden
 WriteLiteral("        <div");
 
-WriteLiteral(" class=\"col-xs-12 col-sm-5 col-md-5\"");
+WriteLiteral(" class=\"col-xs-12 col-sm-3 col-md-3\"");
 
 WriteLiteral(">\r\n            <div");
 
@@ -219,21 +219,88 @@ WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
             #line hidden
 WriteLiteral("        <div");
 
+WriteLiteral(" class=\"col-xs-12 col-sm-4 col-md-4\"");
+
+WriteLiteral(">\r\n            <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 37 "..\..\Views\Products\Store\_SingleFreightParameter.cshtml"
+           Write(Html.LabelFor(model => model.MinimumOrderAmount));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                <div");
+
+WriteLiteral(" class=\"input-group\"");
+
+WriteLiteral(">\r\n                    <span");
+
+WriteLiteral(" class=\"input-group-addon\"");
+
+WriteLiteral(">");
+
+            
+            #line 39 "..\..\Views\Products\Store\_SingleFreightParameter.cshtml"
+                                               Write(config.DefaultCurrency);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n");
+
+WriteLiteral("                    ");
+
+            
+            #line 40 "..\..\Views\Products\Store\_SingleFreightParameter.cshtml"
+               Write(Html.EditorFor(i => i.MinimumOrderAmount, new { htmlAttributes = new { @class = "form-control js-decimal", data_places = 2, placeholder = Request.GetLocalizedString("PRODUCT_SHIPPING_MIN_ORDER_AMOUNT_INPUT") } }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                </div>\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 42 "..\..\Views\Products\Store\_SingleFreightParameter.cshtml"
+           Write(Html.ValidationMessageFor(model => model.MinimumOrderAmount, "", new { @class = "text-danger" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
+
+            
+            #line 45 "..\..\Views\Products\Store\_SingleFreightParameter.cshtml"
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <div");
+
 WriteLiteral(" class=\"col-xs-12 col-sm-2 col-md-1 acoes\"");
 
 WriteLiteral(">\r\n            <a");
 
 WriteLiteral(" href=\"javascript:void(0);\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1710), Tuple.Create("\"", 1809)
-, Tuple.Create(Tuple.Create("", 1718), Tuple.Create("remover", 1718), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 2405), Tuple.Create("\"", 2504)
+, Tuple.Create(Tuple.Create("", 2413), Tuple.Create("remover", 2413), true)
             
-            #line 36 "..\..\Views\Products\Store\_SingleFreightParameter.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1725), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreEdit)
+            #line 47 "..\..\Views\Products\Store\_SingleFreightParameter.cshtml"
+, Tuple.Create(Tuple.Create(" ", 2420), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(loginProfile, SellerAssistantPermissions.StoreEdit)
             
             #line default
             #line hidden
-, 1726), false)
+, 2421), false)
 );
 
 WriteLiteral("><span");
@@ -243,7 +310,7 @@ WriteLiteral(" class=\"glyphicon glyphicon-minus-sign minus\"");
 WriteLiteral("></span></a>\r\n        </div>\r\n");
 
             
-            #line 38 "..\..\Views\Products\Store\_SingleFreightParameter.cshtml"
+            #line 49 "..\..\Views\Products\Store\_SingleFreightParameter.cshtml"
     }
 
             

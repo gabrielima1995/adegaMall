@@ -561,6 +561,8 @@ PRODUCT_SEDEX_NOT_ENABLED	Esse produto não é entregue via Sedex
 PRODUCT_SELLER_NO_SHIPPING	O vendedor não entrega este produto na sua região
 PRODUCT_SHIPPING_INPUT	Preço do frete
 PRODUCT_SHIPPING_LABEL	Preço do frete
+PRODUCT_SHIPPING_MIN_ORDER_AMOUNT_INPUT	Valor mínimo do pedido
+PRODUCT_SHIPPING_MIN_ORDER_AMOUNT_LABEL	Valor mínimo do pedido
 PRODUCT_SHIPPING_METHOD_LABEL	Método de entrega
 PRODUCT_SHIPPING_REQUIRED	Marque pelo menos um método de entrega
 PRODUCT_SPECIFICATIONS_INPUT	Especificações técnicas

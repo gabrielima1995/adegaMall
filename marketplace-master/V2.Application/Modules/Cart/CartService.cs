@@ -160,11 +160,16 @@ namespace V2.Application.Modules
                 cartRepository.Update(item);
             }
 
+            // calcula desconto normal
+            var validateCouponResult = ValidateCoupon(cart);
+            if (validateCouponResult.IsFailure) errors.Merge(validateCouponResult.Errors);
+
             var updateResult = UpdateCartShipping(cart);
             if (updateResult.Errors.HasErrors) errors.Merge(updateResult.Errors);
 
-            var validateCouponResult = ValidateCoupon(cart);
-            if (validateCouponResult.IsFailure) errors.Merge(validateCouponResult.Errors);
+            // calcula desconto de frete
+            var validateCouponResult2 = ValidateCoupon(cart);
+            if (validateCouponResult2.IsFailure) errors.Merge(validateCouponResult2.Errors);
 
             var commitResult = unitOfWork.Save();
             if (!commitResult.OK) errors.Merge(commitResult.Errors);
@@ -400,15 +405,18 @@ namespace V2.Application.Modules
                     foreach (var shippingMethod in shippingMethods)
                     {
                         cart.ShippingMethod = shippingMethod;
+
                         var products = cart.Items
                             .Where(p => p.Product.Store_SellerId == cartSeller.Seller.Id)
                             .Select(i => new ProductWithQty(i.Product, i.Quantity, i.RentalInfo.StartDate))
                             .ToList();
+                        var discount = cartSeller.SellerDiscount;
 
                         var adapter = shippingService.GetAdapter(cart.ShippingMethod);
 
                         var shippingResult = adapter.GetShippingForSeller(
                             products,
+                            discount,
                             cartSeller.Seller.Store,
                             cart.ShippingAddress);
 
@@ -1002,8 +1010,11 @@ namespace V2.Application.Modules
                                 .Select(i => new ProductWithQty(i.Product, i.Quantity, i.RentalInfo.StartDate))
                                 .ToList();
 
+                            var discount = cartSeller.SellerDiscount;
+
                             var result = adapter.GetShippingForSeller(
                                 products,
+                                discount,
                                 cartSeller.Seller.Store,
                                 cart.ShippingAddress);
 

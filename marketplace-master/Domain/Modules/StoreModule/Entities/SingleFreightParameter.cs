@@ -18,6 +18,11 @@ namespace Domain.Entities.StoreModule
         public decimal Shipping { get; set; }
 
         /// <summary>
+        /// Valor mínimo do pedido.
+        /// </summary>
+        public decimal MinimumOrderAmount { get; set; }
+
+        /// <summary>
         /// Loja associada.
         /// </summary>
         public Store Store { get; set; }
