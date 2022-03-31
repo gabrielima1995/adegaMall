@@ -49,16 +49,17 @@ namespace PaymentIntegrator.PagarMe.Payments
 
         private void CheckMessageGateway(string acquirerResponseCode)
         {
+            // antifraude
+            if (IsAntifraudRefuse())
+            {
+                Message = "Transação pendente de análise.";
+            }
+
             // transação recusada
             if (IsPaymentCancelledOrRejected() || !string.IsNullOrEmpty(RefuseReason))
             {
-                // antifraude
-                if (IsAntifraudRefuse())
-                {
-                    Message = "Transação pendente de análise.";
-                }
                 // problema no cartão ou nos dados do cartão
-                else if (IsAcquirerRefuse())
+                if (IsAcquirerRefuse())
                 {
                     switch (acquirerResponseCode)
                     {
@@ -119,7 +120,7 @@ namespace PaymentIntegrator.PagarMe.Payments
         public TransactionResponse(TransactionCustom transaction, IList<IOrder> orders)
         {
             TransactionId = transaction.Id;
-            Status = transaction.Status.ToString();
+            Status = transaction.Status;
             RefuseReason = transaction.RefuseReason;
             Message = transaction.RefuseReason ?? transaction.StatusReason;
 
@@ -168,7 +169,7 @@ namespace PaymentIntegrator.PagarMe.Payments
 
         public bool IsPaymentCancelledOrRejected() => "refused".Equals(Status, StringComparison.OrdinalIgnoreCase);
 
-        public bool IsAntifraudRefuse() => "antifraud".Equals(RefuseReason, StringComparison.OrdinalIgnoreCase);
+        public bool IsAntifraudRefuse() => "antifraud".Equals(RefuseReason, StringComparison.OrdinalIgnoreCase) || "analyzing".Equals(Status, StringComparison.OrdinalIgnoreCase);
 
         public bool IsAcquirerRefuse() => "acquirer".Equals(RefuseReason, StringComparison.OrdinalIgnoreCase);
 

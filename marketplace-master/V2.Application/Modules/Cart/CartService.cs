@@ -184,6 +184,13 @@ namespace V2.Application.Modules
             void RemoveDiscount()
             {
                 cart.Discount = decimal.Zero;
+                cart.ShippingDiscount = decimal.Zero;
+
+                foreach (var cartSeller in cart.Sellers)
+                {
+                    cartSeller.SellerDiscount = decimal.Zero;
+                    cartSeller.SellerShippingDiscount = decimal.Zero;
+                }
             }
 
             OperationResult InvalidCoupon(string message)
@@ -205,7 +212,7 @@ namespace V2.Application.Modules
 
             OperationResult CalculateDiscount()
             {
-                cart.Discount = decimal.Zero;
+                RemoveDiscount();
 
                 IEnumerable<CartItem> items = cart.Items;
 
@@ -246,7 +253,7 @@ namespace V2.Application.Modules
 
             OperationResult CalculateDeliveryDiscount()
             {
-                cart.ShippingDiscount = decimal.Zero;
+                RemoveDiscount();
 
                 IEnumerable<CartItem> items = cart.Items;
 

@@ -97,6 +97,7 @@ namespace Infrastructure.Data.Repositories
                 .Include(x => x.Items.Select(i => i.Product.Store.Seller.Address))
                 .Include(x => x.Sellers)
                 .Include(x => x.Sellers.Select(s => s.Seller))
+                .Include(x => x.Sellers.Select(s => s.Seller.Address))
                 .Include(x => x.Sellers.Select(s => s.Seller.Store))
                 .Include(x => x.Sellers.Select(s => s.Seller.Store.SingleFreightParams))
                 .Where(x => x.Buyer.Id == buyerId && !x.Completed));

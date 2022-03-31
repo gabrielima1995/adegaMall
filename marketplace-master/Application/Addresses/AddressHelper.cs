@@ -41,7 +41,12 @@ namespace Application.Addresses
                 foreach (var p in precisionModes)
                 {
                     var addressString = address.GetAddressForGeocoding(p);
-                    var list = geocoder.Geocode(addressString).ToList();
+                    var list = geocoder.GeocodeAsync(addressString)
+                        .ConfigureAwait(false)
+                        .GetAwaiter()
+                        .GetResult()
+                        .ToList();
+
                     if (!list.Any()) continue;
 
                     var result = list.First();
