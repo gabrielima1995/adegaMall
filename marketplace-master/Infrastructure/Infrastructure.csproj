@@ -43,6 +43,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Hangfire.Core, Version=1.7.24.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.7.24\lib\net46\Hangfire.Core.dll</HintPath>
+    </Reference>
     <Reference Include="MediatR, Version=8.0.1.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
       <HintPath>..\packages\MediatR.8.0.1\lib\net461\MediatR.dll</HintPath>
     </Reference>
@@ -76,6 +79,15 @@
     </Reference>
     <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.RollingFile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.RollingFile.3.3.0\lib\net45\Serilog.Sinks.RollingFile.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -225,6 +237,7 @@
     <Compile Include="Logging\WebhookLogRequest.cs" />
     <Compile Include="Logging\WebhookLogResponse.cs" />
     <Compile Include="Logging\WebhookLogService.cs" />
+    <Compile Include="MarketplaceLogger.cs" />
     <Compile Include="Migrations\201709131931197_V2_9_0_QuoteAnswers.cs" />
     <Compile Include="Migrations\201709131931197_V2_9_0_QuoteAnswers.Designer.cs">
       <DependentUpon>201709131931197_V2_9_0_QuoteAnswers.cs</DependentUpon>
@@ -614,6 +627,14 @@
     <Compile Include="Migrations\202103172151025_AddDeliveryDiscount.Designer.cs">
       <DependentUpon>202103172151025_AddDeliveryDiscount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108201438076_AddCouponByProduct.cs" />
+    <Compile Include="Migrations\202108201438076_AddCouponByProduct.Designer.cs">
+      <DependentUpon>202108201438076_AddCouponByProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109021420342_AddMinimumOrderAmount.cs" />
+    <Compile Include="Migrations\202109021420342_AddMinimumOrderAmount.Designer.cs">
+      <DependentUpon>202109021420342_AddMinimumOrderAmount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Data\MyDbConnection.cs" />
     <Compile Include="Data\Repositories\AdminReportRepository.cs" />
@@ -914,6 +935,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103172151025_AddDeliveryDiscount.resx">
       <DependentUpon>202103172151025_AddDeliveryDiscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108201438076_AddCouponByProduct.resx">
+      <DependentUpon>202108201438076_AddCouponByProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109021420342_AddMinimumOrderAmount.resx">
+      <DependentUpon>202109021420342_AddMinimumOrderAmount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

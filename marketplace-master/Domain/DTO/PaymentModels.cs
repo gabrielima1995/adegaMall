@@ -10,20 +10,25 @@ namespace Domain.DTO
     {
         [DisplayNameLocalized("CREDIT_CARD_FULLNAME_LABEL")]
         [StringLengthLocalized(50)]
+        [RequiredLocalized]
         public string FullName { get; set; }
 
         [DisplayNameLocalized("CREDIT_CARD_NUMBER_LABEL")]
-        [StringLengthLocalized(30)]
+        [StringLengthLocalized(19)]
+        [RequiredLocalized]
         public string Number { get; set; }
 
         [DisplayNameLocalized("CREDIT_CARD_MONTH_LABEL")]
+        [RequiredLocalized]
         public int Month { get; set; }
 
         [DisplayNameLocalized("CREDIT_CARD_YEAR_LABEL")]
+        [RequiredLocalized]
         public int Year { get; set; }
 
         [DisplayNameLocalized("CREDIT_CARD_CVV_LABEL")]
-        [StringLengthLocalized(4)]
+        [StringLengthLocalized(4, MinimumLength = 3)]
+        [RequiredLocalized]
         public string CVV { get; set; }
 
         [DisplayNameLocalized("CREDIT_CARD_DOCUMENT_LABEL")]

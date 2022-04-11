@@ -178,6 +178,7 @@
     <Compile Include="Config\Sections\NearbyProductsConfig.cs" />
     <Compile Include="DTO\CartCustomFieldsViewModel.cs" />
     <Compile Include="DTO\CorreiosShippingDto.cs" />
+    <Compile Include="DTO\ProductGetting.cs" />
     <Compile Include="DTO\RentalCalendarViewModel.cs" />
     <Compile Include="DTO\RentalDayGridView.cs" />
     <Compile Include="DTO\RentalGridView.cs" />

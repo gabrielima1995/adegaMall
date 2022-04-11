@@ -42,7 +42,7 @@ namespace V2.Infrastructure.Shipping.Adapters
             return CorreiosShippingCollection.Empty();
         }
 
-        public override OperationResult<CorreiosShippingCollection> GetShippingForSeller(IEnumerable<ProductWithQty> products, Store store, Address shippingAddress)
+        public override OperationResult<CorreiosShippingCollection> GetShippingForSeller(IEnumerable<ProductWithQty> products, decimal discount, Store store, Address shippingAddress)
         {
             if (config.Product.ShippingMode == ShippingMode.PerStore)
             {

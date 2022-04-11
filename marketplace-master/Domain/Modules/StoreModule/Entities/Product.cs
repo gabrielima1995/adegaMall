@@ -302,13 +302,13 @@ namespace Domain.Entities.StoreModule
                 methods.Add(ShippingMethod.NoShipping);
             if (ActualNoShippingEnabled)
                 methods.Add(ShippingMethod.ActualNoShipping);
-            if (PrivateFleetEnabled)
+            if (PrivateFleetEnabled || (Store?.PrivateFleetEnabled ?? false))
                 methods.Add(ShippingMethod.PrivateFleet);
             if (OnSitePickupEnabled)
                 methods.Add(ShippingMethod.OnSitePickup);
-            if (PACEnabled)
+            if (PACEnabled || (Store?.PacEnabled ?? false))
                 methods.Add(ShippingMethod.PostalRegular);
-            if (SedexEnabled)
+            if (SedexEnabled || (Store?.SedexEnabled ?? false))
                 methods.Add(ShippingMethod.PostalExpress);
 
             methods.Add(ShippingMethod.AsapLog);

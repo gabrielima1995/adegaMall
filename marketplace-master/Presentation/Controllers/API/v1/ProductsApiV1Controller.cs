@@ -22,6 +22,7 @@ namespace Presentation.Controllers.API.v1
             _authorizedProvider = authorizedProvider;
         }
 
+        [HttpPut]
         [Route("{id:guid}")]
         public IHttpActionResult Put([FromUri]Guid id, [FromBody] ProductEditing model)
         {
@@ -30,6 +31,7 @@ namespace Presentation.Controllers.API.v1
             return this.Result(_productService.Update(model, _authorizedProvider.Auth.Seller_Id));
         }
 
+        [HttpPut]
         [Route("ref:{ref}")]
         public IHttpActionResult PutByRef([FromUri]string @ref, [FromBody] ProductEditing model)
         {
@@ -37,6 +39,32 @@ namespace Presentation.Controllers.API.v1
             model.CustomId = @ref;
 
             return this.Result(_productService.Update(model, _authorizedProvider.Auth.Seller_Id));
+        }
+
+        [HttpGet]
+        [Route("{id:guid}", Name = "Product by id")]
+        public IHttpActionResult Get([FromUri]Guid id)
+        {
+            var product = _productService.GetById(id);
+
+            if (product == null) return NotFound();
+            if (_authorizedProvider.Auth.HasSeller &&
+                _authorizedProvider.Auth.Seller_Id != product.Store_SellerId) return BadRequest();
+
+            return Ok(new ProductGetting(product));
+        }
+
+        [HttpGet]
+        [Route("ref:{ref}", Name = "Product by ref")]
+        public IHttpActionResult GetByRef([FromUri]string @ref)
+        {
+            var product = _productService.GetByRef(@ref);
+
+            if (product == null) return NotFound();
+            if (_authorizedProvider.Auth.HasSeller &&
+                _authorizedProvider.Auth.Seller_Id != product.Store_SellerId) return BadRequest();
+
+            return Ok(new ProductGetting(product));
         }
     }
 }

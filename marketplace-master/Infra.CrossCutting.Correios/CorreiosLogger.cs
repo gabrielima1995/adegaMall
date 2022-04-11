@@ -4,9 +4,9 @@ using System.Web.Hosting;
 using Serilog;
 using Serilog.Core;
 
-namespace Presentation
+namespace Infra.Crosscutting.Correios
 {
-    public static class MarketplaceLogger
+    public static class CorreiosLogger
     {
         private static Logger _logger;
 
@@ -19,7 +19,7 @@ namespace Presentation
                         .MinimumLevel.Information()
                         .WriteTo.RollingFile(
                             Path.Combine(HostingEnvironment.MapPath("~/") ?? AppDomain.CurrentDomain.BaseDirectory,
-                                "Logs", "marketplace-errors-{Date}.txt"))
+                                "Logs", "correios-requests-{Date}.txt"))
                         .CreateLogger();
 
                 return _logger;

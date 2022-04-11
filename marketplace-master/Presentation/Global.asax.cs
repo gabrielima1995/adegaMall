@@ -12,6 +12,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Infrastructure;
 
 namespace Presentation
 {
@@ -74,8 +75,8 @@ namespace Presentation
                 MarketplaceLogger.Instance.Information("Inner: " + ex.InnerException.Message);
             MarketplaceLogger.Instance.Information("StackTrace: " + ex.StackTrace);
 
-            //var reportingService = UnityConfig.Resolve<ErrorReportingService>();
-            //reportingService.ReportError(ex);
+            var reportingService = UnityConfig.Resolve<ErrorReportingService>();
+            reportingService.ReportError(ex);
         }
 
         protected void SetResponseCompression()

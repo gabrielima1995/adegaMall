@@ -98,7 +98,7 @@ namespace V2.Infrastructure.Shipping.Adapters
         }
 
         public abstract OperationResult<CorreiosShippingCollection> GetShippingForProduct(ProductWithQty product, Address sellerAddress, Address shippingAddress, bool chargeDoubleShipping);
-        public abstract OperationResult<CorreiosShippingCollection> GetShippingForSeller(IEnumerable<ProductWithQty> products, Store store, Address shippingAddress);
+        public abstract OperationResult<CorreiosShippingCollection> GetShippingForSeller(IEnumerable<ProductWithQty> products, decimal discount, Store store, Address shippingAddress);
         public abstract OperationResult<Uri> GetTrackingLink(string trackingCode);
         public abstract DateTime? CalculateDeliveryDate(int deliveryDays);
     }

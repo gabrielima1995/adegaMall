@@ -50,14 +50,14 @@ namespace ASP
     public partial class _Views_Products__ShippingProduct_cshtml : System.Web.Mvc.WebViewPage<ShippingInfosVM>
     {
 
-#line 125 "..\..\Views\Products\_ShippingProduct.cshtml"
+#line 127 "..\..\Views\Products\_ShippingProduct.cshtml"
 public System.Web.WebPages.HelperResult DisplayDeliveryDate(DateTime? date)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 126 "..\..\Views\Products\_ShippingProduct.cshtml"
+#line 128 "..\..\Views\Products\_ShippingProduct.cshtml"
  
     if (date.HasValue)
     {
@@ -70,7 +70,7 @@ WriteLiteralTo(__razor_helper_writer, "        ");
 WriteLiteralTo(__razor_helper_writer, "(");
 
 
-#line 129 "..\..\Views\Products\_ShippingProduct.cshtml"
+#line 131 "..\..\Views\Products\_ShippingProduct.cshtml"
 WriteTo(__razor_helper_writer, Html.Localized("CART_SHIPPING_DAYS_LABEL_SHORT"));
 
 
@@ -79,7 +79,7 @@ WriteTo(__razor_helper_writer, Html.Localized("CART_SHIPPING_DAYS_LABEL_SHORT"))
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 129 "..\..\Views\Products\_ShippingProduct.cshtml"
+#line 131 "..\..\Views\Products\_ShippingProduct.cshtml"
                                WriteTo(__razor_helper_writer, date.Value.ToShortDateString());
 
 
@@ -88,7 +88,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, ")\r\n");
 
 
-#line 130 "..\..\Views\Products\_ShippingProduct.cshtml"
+#line 132 "..\..\Views\Products\_ShippingProduct.cshtml"
     }
 
 
@@ -96,7 +96,7 @@ WriteLiteralTo(__razor_helper_writer, ")\r\n");
 #line hidden
 });
 
-#line 131 "..\..\Views\Products\_ShippingProduct.cshtml"
+#line 133 "..\..\Views\Products\_ShippingProduct.cshtml"
 }
 #line default
 #line hidden
@@ -269,7 +269,7 @@ WriteLiteral("\r\n");
             #line hidden
             
             #line 46 "..\..\Views\Products\_ShippingProduct.cshtml"
-         if (Model.ShowPostalExpress && Model.MinimumCost == Model.PostalExpressCost)
+         if (Model.ShowPostalExpress)
         {
 
             
@@ -306,13 +306,15 @@ WriteLiteral("                ");
             
             #line default
             #line hidden
+WriteLiteral("\r\n                ");
+
 WriteLiteral("\r\n");
 
 WriteLiteral("                ");
 
             
-            #line 52 "..\..\Views\Products\_ShippingProduct.cshtml"
-           Write(DisplayDeliveryDate(Model.DeliveryDateSedex));
+            #line 53 "..\..\Views\Products\_ShippingProduct.cshtml"
+           Write(Html.Localized("POSTAL_EXPRESS_DELIVERY_TIME", "p", null, Model.DeliveryDaysSedex));
 
             
             #line default
@@ -320,7 +322,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </li>\r\n");
 
             
-            #line 54 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 55 "..\..\Views\Products\_ShippingProduct.cshtml"
         }
 
             
@@ -329,14 +331,14 @@ WriteLiteral("\r\n            </li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 56 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 57 "..\..\Views\Products\_ShippingProduct.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 56 "..\..\Views\Products\_ShippingProduct.cshtml"
-         if (Model.ShowPostalRegular && Model.MinimumCost == Model.PostalRegularCost)
+            #line 57 "..\..\Views\Products\_ShippingProduct.cshtml"
+         if (Model.ShowPostalRegular)
         {
 
             
@@ -345,7 +347,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            <li>\r\n                <strong>");
 
             
-            #line 59 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 60 "..\..\Views\Products\_ShippingProduct.cshtml"
                    Write(Html.Localized("PRODUCT_PAC_METHOD_LABEL"));
 
             
@@ -356,19 +358,8 @@ WriteLiteral(":</strong>\r\n");
 WriteLiteral("                ");
 
             
-            #line 60 "..\..\Views\Products\_ShippingProduct.cshtml"
-           Write(config.DefaultCurrency);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("                ");
-
-            
             #line 61 "..\..\Views\Products\_ShippingProduct.cshtml"
-           Write(Model.PostalRegularCost.DisplayDecimal(2));
+           Write(config.DefaultCurrency);
 
             
             #line default
@@ -379,7 +370,20 @@ WriteLiteral("                ");
 
             
             #line 62 "..\..\Views\Products\_ShippingProduct.cshtml"
-           Write(DisplayDeliveryDate(Model.DeliveryDatePac));
+           Write(Model.PostalRegularCost.DisplayDecimal(2));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                ");
+
+WriteLiteral("\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 64 "..\..\Views\Products\_ShippingProduct.cshtml"
+           Write(Html.Localized("POSTAL_REGULAR_DELIVERY_TIME", "p", null, Model.DeliveryDaysPac));
 
             
             #line default
@@ -387,7 +391,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </li>\r\n");
 
             
-            #line 64 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 66 "..\..\Views\Products\_ShippingProduct.cshtml"
         }
 
             
@@ -396,13 +400,13 @@ WriteLiteral("\r\n            </li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 66 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 68 "..\..\Views\Products\_ShippingProduct.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 66 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 68 "..\..\Views\Products\_ShippingProduct.cshtml"
          if (Model.ShowAsapLog && Model.MinimumCost == Model.AsapLogCost)
         {
 
@@ -412,7 +416,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            <li>\r\n                <strong>");
 
             
-            #line 69 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 71 "..\..\Views\Products\_ShippingProduct.cshtml"
                    Write(Html.Localized("PRODUCT_ASAPLOG_METHOD_LABEL"));
 
             
@@ -423,7 +427,7 @@ WriteLiteral(":</strong>\r\n");
 WriteLiteral("                ");
 
             
-            #line 70 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 72 "..\..\Views\Products\_ShippingProduct.cshtml"
            Write(config.DefaultCurrency);
 
             
@@ -434,7 +438,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 71 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 73 "..\..\Views\Products\_ShippingProduct.cshtml"
            Write(Model.AsapLogCost.DisplayDecimal(2));
 
             
@@ -447,7 +451,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 73 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 75 "..\..\Views\Products\_ShippingProduct.cshtml"
            Write(Html.Localized("ASAPLOG_DELIVERY_TIME", "p", null, Model.DeliveryDaysAsapLog));
 
             
@@ -456,7 +460,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </li>\r\n");
 
             
-            #line 75 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 77 "..\..\Views\Products\_ShippingProduct.cshtml"
         }
 
             
@@ -465,13 +469,13 @@ WriteLiteral("\r\n            </li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 77 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 79 "..\..\Views\Products\_ShippingProduct.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 77 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 79 "..\..\Views\Products\_ShippingProduct.cshtml"
          if (Model.ShowTotalExpress && Model.MinimumCost == Model.TotalExpressCost)
         {
 
@@ -481,7 +485,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            <li>\r\n                <strong>");
 
             
-            #line 80 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 82 "..\..\Views\Products\_ShippingProduct.cshtml"
                    Write(Html.Localized("PRODUCT_TOTALEXPRESS_METHOD_LABEL"));
 
             
@@ -492,7 +496,7 @@ WriteLiteral(":</strong>\r\n");
 WriteLiteral("                ");
 
             
-            #line 81 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 83 "..\..\Views\Products\_ShippingProduct.cshtml"
            Write(config.DefaultCurrency);
 
             
@@ -503,7 +507,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 82 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 84 "..\..\Views\Products\_ShippingProduct.cshtml"
            Write(Model.TotalExpressCost.DisplayDecimal(2));
 
             
@@ -516,7 +520,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 84 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 86 "..\..\Views\Products\_ShippingProduct.cshtml"
            Write(Html.Localized("TOTALEXPRESS_DELIVERY_TIME", "p", null, Model.DeliveryDaysTotalExpress));
 
             
@@ -525,7 +529,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </li>\r\n");
 
             
-            #line 86 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 88 "..\..\Views\Products\_ShippingProduct.cshtml"
         }
 
             
@@ -534,13 +538,13 @@ WriteLiteral("\r\n            </li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 88 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 90 "..\..\Views\Products\_ShippingProduct.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 88 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 90 "..\..\Views\Products\_ShippingProduct.cshtml"
          if (Model.ShowOnSitePickup)
         {
 
@@ -550,7 +554,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            <li>\r\n                <strong>");
 
             
-            #line 91 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 93 "..\..\Views\Products\_ShippingProduct.cshtml"
                    Write(Html.Localized("PRODUCT_ON_SITE_PICKUP_METHOD_LABEL"));
 
             
@@ -561,7 +565,7 @@ WriteLiteral(":</strong>\r\n");
 WriteLiteral("                ");
 
             
-            #line 92 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 94 "..\..\Views\Products\_ShippingProduct.cshtml"
            Write(config.DefaultCurrency);
 
             
@@ -572,7 +576,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 93 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 95 "..\..\Views\Products\_ShippingProduct.cshtml"
            Write(Model.OnSitePickupCost.DisplayDecimal(2));
 
             
@@ -581,7 +585,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </li>\r\n");
 
             
-            #line 95 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 97 "..\..\Views\Products\_ShippingProduct.cshtml"
         }
 
             
@@ -590,13 +594,13 @@ WriteLiteral("\r\n            </li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 97 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 99 "..\..\Views\Products\_ShippingProduct.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 97 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 99 "..\..\Views\Products\_ShippingProduct.cshtml"
          if (Model.ShowNoShipping)
         {
 
@@ -606,7 +610,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            <li>\r\n                <strong>");
 
             
-            #line 100 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 102 "..\..\Views\Products\_ShippingProduct.cshtml"
                    Write(Html.Localized("PRODUCT_NO_SHIPPING_METHOD_LABEL"));
 
             
@@ -617,7 +621,7 @@ WriteLiteral("</strong>\r\n");
 WriteLiteral("                ");
 
             
-            #line 101 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 103 "..\..\Views\Products\_ShippingProduct.cshtml"
            Write(config.DefaultCurrency);
 
             
@@ -628,7 +632,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 102 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 104 "..\..\Views\Products\_ShippingProduct.cshtml"
            Write(Model.NoShippingCost.DisplayDecimal(2));
 
             
@@ -637,7 +641,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </li>\r\n");
 
             
-            #line 104 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 106 "..\..\Views\Products\_ShippingProduct.cshtml"
         }
 
             
@@ -646,13 +650,13 @@ WriteLiteral("\r\n            </li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 106 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 108 "..\..\Views\Products\_ShippingProduct.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 106 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 108 "..\..\Views\Products\_ShippingProduct.cshtml"
          if (Model.ShowAnyShippingWithCharge && config.Product.BusinessModel.Rental.Enabled && config.Product.ShippingMode == ShippingMode.PerProduct)
         {
 
@@ -664,7 +668,7 @@ WriteLiteral("            <li>\r\n                <span>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 110 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 112 "..\..\Views\Products\_ShippingProduct.cshtml"
                Write(Html.Localized((Model.Product.RentalSettings.ChargeDoubleShipping ?? false)
                         ? "CHARGE_DOUBLE_SHIPPING_MESSAGE"
                         : "NO_CHARGE_DOUBLE_SHIPPING_MESSAGE"));
@@ -675,7 +679,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </span>\r\n            </li>\r\n");
 
             
-            #line 115 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 117 "..\..\Views\Products\_ShippingProduct.cshtml"
         }
 
             
@@ -684,21 +688,21 @@ WriteLiteral("\r\n                </span>\r\n            </li>\r\n");
 WriteLiteral("    </ul>\r\n");
 
             
-            #line 117 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 119 "..\..\Views\Products\_ShippingProduct.cshtml"
 
     
             
             #line default
             #line hidden
             
-            #line 118 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 120 "..\..\Views\Products\_ShippingProduct.cshtml"
 Write(Html.Localized("SHIPPING_METHOD_DISCLAIMER"));
 
             
             #line default
             #line hidden
             
-            #line 118 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 120 "..\..\Views\Products\_ShippingProduct.cshtml"
                                                  
 }
 else if (hasZipCode)
@@ -710,7 +714,7 @@ else if (hasZipCode)
 WriteLiteral("    <p>Região não atendida.</p>\r\n");
 
             
-            #line 123 "..\..\Views\Products\_ShippingProduct.cshtml"
+            #line 125 "..\..\Views\Products\_ShippingProduct.cshtml"
 }
 
             

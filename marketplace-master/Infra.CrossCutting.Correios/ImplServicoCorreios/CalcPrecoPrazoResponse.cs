@@ -26,10 +26,12 @@ namespace Infra.Crosscutting.Correios
             }
         }
 
-        internal static CalcPrecoPrazoResponse CommunicationError(ServicosEntrega services, string errorMessage)
+        internal static CalcPrecoPrazoResponse CommunicationError(ServicosEntrega services, 
+            string errorMessage, string mensagemErroProvedor)
         {
             var response = new CalcPrecoPrazoResponse();
-            response.Servicos.Add(new CalcPrecoPrazoResponseItemServico(services, "comms", errorMessage));
+            response.Servicos.Add(new CalcPrecoPrazoResponseItemServico(services, "comms", 
+                errorMessage, mensagemErroProvedor));
             return response;
         }
     }

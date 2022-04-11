@@ -1,6 +1,5 @@
 ﻿using Infra.Crosscutting.Correios.Infra.CrossCutting.Correios.External;
 using System;
-using System.Linq;
 using System.Globalization;
 
 namespace Infra.Crosscutting.Correios
@@ -58,6 +57,8 @@ namespace Infra.Crosscutting.Correios
         /// </summary>
         public string MensagemRetornada { get; set; }
 
+        public string MensagemErroProvedor { get; set; }
+
         public CalcPrecoPrazoResponseItemServico()
         {
         }
@@ -82,14 +83,16 @@ namespace Infra.Crosscutting.Correios
 
             CodigoRetornado = string.IsNullOrEmpty(servico.Erro) ? "0" : servico.Erro;
 
-            MensagemRetornada = servico.MsgErro;
+            MensagemRetornada = MensagemErroProvedor = servico.MsgErro;
         }
 
-        internal CalcPrecoPrazoResponseItemServico(ServicosEntrega services, string errorCode, string errorMessage)
+        internal CalcPrecoPrazoResponseItemServico(ServicosEntrega services, 
+            string errorCode, string errorMessage, string mensagemErroProvedor)
         {
             CodigoServicoEntrega = services;
             CodigoRetornado = errorCode;
             MensagemRetornada = errorMessage;
+            MensagemErroProvedor = mensagemErroProvedor;
         }
     }
 }

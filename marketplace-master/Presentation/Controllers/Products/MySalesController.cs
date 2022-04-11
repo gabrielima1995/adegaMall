@@ -63,9 +63,9 @@ namespace Presentation.Controllers.Products
         }
 
         [RequireAssistantPermissions(SellerAssistantPermissions.SalesView)]
-        public ActionResult Index()
+        public ActionResult Index(bool showCanceled = false)
         {
-            var model = orderAppService.GetMySales(GetPersonId());
+            var model = orderAppService.GetMySales(GetPersonId(), showCanceled);
             return View(string.Format(ViewPathFmt, "Index"), model);
         }
 

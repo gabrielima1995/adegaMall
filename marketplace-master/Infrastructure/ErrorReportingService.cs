@@ -25,6 +25,11 @@ namespace Infrastructure
             if (IsCrawlerOrBot())
                 return;
 
+            MarketplaceLogger.Instance.Information("Error: " + ex.Message);
+            if (ex.InnerException != null)
+                MarketplaceLogger.Instance.Information("Inner: " + ex.InnerException.Message);
+            MarketplaceLogger.Instance.Information("StackTrace: " + ex.StackTrace);
+
             var error = new
             {
                 data = ex,
@@ -33,9 +38,9 @@ namespace Infrastructure
             };
 
             var settings = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
-            var errorString = JsonConvert.SerializeObject(error, Formatting.Indented, settings);
+            var errorString = JsonConvert.SerializeObject(error, Formatting.None, settings);
 
-            SendEmail(ex.Message, errorString);
+            MarketplaceLogger.Instance.Information("Data: " + errorString);
         }
 
         private object GetRequestData()

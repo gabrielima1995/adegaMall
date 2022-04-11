@@ -43,7 +43,7 @@ namespace Domain.Services.StoreModule
                 current.SingleFreightParams.Clear();
                 foreach (var param in store.SingleFreightParams)
                     current.SingleFreightParams.Add(
-                        new SingleFreightParameter { DeliveryRange = param.DeliveryRange, Shipping = param.Shipping });
+                        new SingleFreightParameter { DeliveryRange = param.DeliveryRange, Shipping = param.Shipping, MinimumOrderAmount = param.MinimumOrderAmount});
 
                 Sanitize(current);
 
@@ -109,7 +109,7 @@ namespace Domain.Services.StoreModule
             foreach (var item in store.SingleFreightParams)
                 if (item.Id == Guid.Empty) item.Id = Guid.NewGuid();
 
-            var comparer = DynamicEqualityComprarer<SingleFreightParameter>.Create(x => x.DeliveryRange);
+            var comparer = DynamicEqualityComprarer<SingleFreightParameter>.Create(x => x.DeliveryRange.ToString() + x.MinimumOrderAmount.ToString());
             store.SingleFreightParams = store.SingleFreightParams.Distinct(comparer).ToList();
         }
     }

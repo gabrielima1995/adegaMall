@@ -80,7 +80,7 @@ namespace Infrastructure.Shipping.Adapters
             else return CorreiosShippingCollection.Empty();
         }
 
-        public override OperationResult<CorreiosShippingCollection> GetShippingForSeller(IEnumerable<ProductWithQty> products, Store store, Address shippingAddress)
+        public override OperationResult<CorreiosShippingCollection> GetShippingForSeller(IEnumerable<ProductWithQty> products, decimal discount, Store store, Address shippingAddress)
         {
             if (store?.Seller?.Address == null)
                 throw new ArgumentNullException(nameof(store.Seller.Address));
@@ -112,9 +112,13 @@ namespace Infrastructure.Shipping.Adapters
 
                     var distance = store.Seller.Address.Location.Distance(shippingAddress.Location);
 
+                    var amount = products
+                        .Sum(x => x.Quantity * x.Product.ProductPriceMapped.Price.Value) - discount;
+
                     var shippingParam = store.SingleFreightParams
-                        .Where(i => i.DeliveryRange > (distance.Value / 1000))
+                        .Where(i => i.DeliveryRange > (distance.Value / 1000) && amount >= i.MinimumOrderAmount)
                         .OrderBy(i => i.DeliveryRange)
+                        .ThenByDescending(i => i.MinimumOrderAmount)
                         .FirstOrDefault();
 
                     #endregion Obtem parametro de entrega

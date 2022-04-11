@@ -160,11 +160,16 @@ namespace V2.Application.Modules
                 cartRepository.Update(item);
             }
 
+            // calcula desconto normal
+            var validateCouponResult = ValidateCoupon(cart);
+            if (validateCouponResult.IsFailure) errors.Merge(validateCouponResult.Errors);
+
             var updateResult = UpdateCartShipping(cart);
             if (updateResult.Errors.HasErrors) errors.Merge(updateResult.Errors);
 
-            var validateCouponResult = ValidateCoupon(cart);
-            if (validateCouponResult.IsFailure) errors.Merge(validateCouponResult.Errors);
+            // calcula desconto de frete
+            var validateCouponResult2 = ValidateCoupon(cart);
+            if (validateCouponResult2.IsFailure) errors.Merge(validateCouponResult2.Errors);
 
             var commitResult = unitOfWork.Save();
             if (!commitResult.OK) errors.Merge(commitResult.Errors);
@@ -179,6 +184,13 @@ namespace V2.Application.Modules
             void RemoveDiscount()
             {
                 cart.Discount = decimal.Zero;
+                cart.ShippingDiscount = decimal.Zero;
+
+                foreach (var cartSeller in cart.Sellers)
+                {
+                    cartSeller.SellerDiscount = decimal.Zero;
+                    cartSeller.SellerShippingDiscount = decimal.Zero;
+                }
             }
 
             OperationResult InvalidCoupon(string message)
@@ -200,7 +212,7 @@ namespace V2.Application.Modules
 
             OperationResult CalculateDiscount()
             {
-                cart.Discount = decimal.Zero;
+                RemoveDiscount();
 
                 IEnumerable<CartItem> items = cart.Items;
 
@@ -208,6 +220,12 @@ namespace V2.Application.Modules
                 if (coupon.IsBySeller)
                 {
                     items = items.Where(i => i.Product.Store_SellerId == coupon.SellerId);
+                }
+
+                // cupom do produto, somente ele
+                if (coupon.IsByProduct)
+                {
+                    items = items.Where(i => i.Product.Id == coupon.ProductId);
                 }
 
                 var totalAmount = items.Sum(i => i.SubTotal);
@@ -235,7 +253,7 @@ namespace V2.Application.Modules
 
             OperationResult CalculateDeliveryDiscount()
             {
-                cart.ShippingDiscount = decimal.Zero;
+                RemoveDiscount();
 
                 IEnumerable<CartItem> items = cart.Items;
 
@@ -243,6 +261,12 @@ namespace V2.Application.Modules
                 if (coupon.IsBySeller)
                 {
                     items = items.Where(i => i.Product.Store_SellerId == coupon.SellerId);
+                }
+
+                // cupom do produto, somente ele
+                if (coupon.IsByProduct)
+                {
+                    items = items.Where(i => i.Product.Id == coupon.ProductId);
                 }
 
                 var totalAmount = items.Sum(i => i.SubTotal);
@@ -284,7 +308,7 @@ namespace V2.Application.Modules
 
             switch (coupon.UseMode)
             {
-                // primeira compra
+                // Primeira compra
                 case CouponUseMode.FirstOrder:
                     var firstOrder = couponRepository.IsFirstOrder(cart.Buyer.Id);
                     if (!firstOrder) return InvalidCoupon("Cupom já foi utilizado anteriormente.");
@@ -388,15 +412,18 @@ namespace V2.Application.Modules
                     foreach (var shippingMethod in shippingMethods)
                     {
                         cart.ShippingMethod = shippingMethod;
+
                         var products = cart.Items
                             .Where(p => p.Product.Store_SellerId == cartSeller.Seller.Id)
                             .Select(i => new ProductWithQty(i.Product, i.Quantity, i.RentalInfo.StartDate))
                             .ToList();
+                        var discount = cartSeller.SellerDiscount;
 
                         var adapter = shippingService.GetAdapter(cart.ShippingMethod);
 
                         var shippingResult = adapter.GetShippingForSeller(
                             products,
+                            discount,
                             cartSeller.Seller.Store,
                             cart.ShippingAddress);
 
@@ -990,8 +1017,11 @@ namespace V2.Application.Modules
                                 .Select(i => new ProductWithQty(i.Product, i.Quantity, i.RentalInfo.StartDate))
                                 .ToList();
 
+                            var discount = cartSeller.SellerDiscount;
+
                             var result = adapter.GetShippingForSeller(
                                 products,
+                                discount,
                                 cartSeller.Seller.Store,
                                 cart.ShippingAddress);
 

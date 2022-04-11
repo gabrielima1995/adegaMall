@@ -1,15 +1,19 @@
 ﻿using Application.Config;
 using Infra.Crosscutting.Correios.Infra.CrossCutting.Correios.External;
 using System;
+using System.Diagnostics;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Serilog.Core;
 
 namespace Infra.Crosscutting.Correios
 {
     public class CorreiosClient : ICorreiosClient
     {
         private readonly CalcPrecoPrazoWSSoapClient soapClient;
+        private Logger _logger = CorreiosLogger.Instance;
 
         public CorreiosClient()
         {
@@ -29,9 +33,14 @@ namespace Infra.Crosscutting.Correios
         {
             ValidateRequest(request);
             var serviceParams = new CalcPrecoPrazoParams(request);
+            CalcPrecoPrazoResponse result = null;
+
+            var stopWatch = new Stopwatch();
 
             try
             {
+                stopWatch.Start();
+
                 var serviceResult = await soapClient.CalcPrecoPrazoAsync(
                     serviceParams.nCdEmpresa,
                     serviceParams.sDsSenha,
@@ -48,23 +57,39 @@ namespace Infra.Crosscutting.Correios
                     serviceParams.nVlValorDeclarado,
                     serviceParams.sCdAvisoRecebimento);
 
-                return new CalcPrecoPrazoResponse(serviceResult);
+                result = new CalcPrecoPrazoResponse(serviceResult);
             }
             catch (Exception ex)
             {
                 if (ex is TimeoutException || ex is CommunicationException)
-                    return CalcPrecoPrazoResponse.CommunicationError(request.Servicos, "SHIPPING_CORREIOS_ERROR_MESSAGE");
-                throw;
+                    result = CalcPrecoPrazoResponse.CommunicationError(request.Servicos, "SHIPPING_CORREIOS_ERROR_MESSAGE", ex.Message);
+                else
+                    throw;
             }
+            finally
+            {
+                stopWatch.Stop();
+
+                _logger.Information($"Request completed in {stopWatch.ElapsedMilliseconds} ms");
+                _logger.Information($"Request: {JsonConvert.SerializeObject(serviceParams)}");
+                _logger.Information("Response: " + (result == null ? "(null)" : JsonConvert.SerializeObject(result)));
+            }
+            
+            return result;
         }
 
         public ICalcPrecoPrazoResponse CalPrecoPrazo(ICalcPrecoPrazoRequest request)
         {
             ValidateRequest(request);
             var serviceParams = new CalcPrecoPrazoParams(request);
+            CalcPrecoPrazoResponse result = null;
+
+            var stopWatch = new Stopwatch();
 
             try
             {
+                stopWatch.Start();
+
                 var serviceResult = soapClient.CalcPrecoPrazo(
                     serviceParams.nCdEmpresa,
                     serviceParams.sDsSenha,
@@ -81,14 +106,25 @@ namespace Infra.Crosscutting.Correios
                     serviceParams.nVlValorDeclarado,
                     serviceParams.sCdAvisoRecebimento);
 
-                return new CalcPrecoPrazoResponse(serviceResult);
+                result = new CalcPrecoPrazoResponse(serviceResult);
             }
             catch (Exception ex)
             {
                 if (ex is TimeoutException || ex is CommunicationException)
-                    return CalcPrecoPrazoResponse.CommunicationError(request.Servicos, "SHIPPING_CORREIOS_ERROR_MESSAGE");
-                throw;
+                    result = CalcPrecoPrazoResponse.CommunicationError(request.Servicos, "SHIPPING_CORREIOS_ERROR_MESSAGE", ex.Message);
+                else
+                    throw;
             }
+            finally
+            {
+                stopWatch.Stop();
+
+                _logger.Information($"Request completed in {stopWatch.ElapsedMilliseconds} ms");
+                _logger.Information($"Request: {JsonConvert.SerializeObject(serviceParams)}");
+                _logger.Information("Response: " + (result == null ? "(null)" : JsonConvert.SerializeObject(result)));
+            }
+
+            return result;
         }
 
         private void ValidateRequest(ICalcPrecoPrazoRequest request)

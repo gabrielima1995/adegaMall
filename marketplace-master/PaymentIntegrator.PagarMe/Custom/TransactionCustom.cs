@@ -67,9 +67,9 @@ namespace PagarMe
             set { SetAttribute("phone", value); }
         }
 
-        public TransactionStatus Status
+        public string Status
         {
-            get { return GetAttribute<TransactionStatus>("status"); }
+            get { return GetAttribute<string>("status"); }
             set { SetAttribute("status", value); }
         }
 

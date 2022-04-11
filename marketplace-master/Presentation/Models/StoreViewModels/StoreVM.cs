@@ -1,6 +1,5 @@
 ﻿using Application.Config;
 using Application.Modules.Products.Store;
-using Domain.DTO;
 using Domain.Entities.StoreModule;
 using System;
 using System.Collections.Generic;
@@ -71,7 +70,11 @@ namespace Presentation.Models
             SingleFreightEnabled = store.PrivateFleetEnabled;
 
             if (store.SingleFreightParams != null && store.SingleFreightParams.Count > 0)
-                SingleFreightParams = store.SingleFreightParams.Select(x => new SingleFreightParameterViewModel(x)).ToList();
+                SingleFreightParams = store.SingleFreightParams
+                    .OrderBy(i => i.DeliveryRange)
+                    .ThenBy(i => i.Shipping)
+                    .Select(x => new SingleFreightParameterViewModel(x))
+                    .ToList();
 
             else SingleFreightParams = MaaSConfig.Current.Product.PrivateFleetShipping.DefaultParams
                 .Select(i => new SingleFreightParameterViewModel(i))
@@ -111,7 +114,7 @@ namespace Presentation.Models
             store.SingleFreightParams.Clear();
             if (SingleFreightEnabled)
             {
-                SingleFreightParams = SingleFreightParams?.DistinctBy(i => i.Range).ToList() ?? new List<SingleFreightParameterViewModel>();
+                SingleFreightParams = SingleFreightParams?.ToList() ?? new List<SingleFreightParameterViewModel>();
                 SingleFreightParams.ForEach(param => store.SingleFreightParams.Add(param.Create()));
             }
 

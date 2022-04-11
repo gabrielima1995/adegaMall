@@ -54,7 +54,7 @@ namespace Infrastructure.Shipping.Adapters
             else return CorreiosShippingCollection.Empty();
         }
 
-        public OperationResult<CorreiosShippingCollection> GetShippingForSeller(IEnumerable<ProductWithQty> products, Store store, Address shippingAddress)
+        public OperationResult<CorreiosShippingCollection> GetShippingForSeller(IEnumerable<ProductWithQty> products, decimal discount, Store store, Address shippingAddress)
         {
             if (config.Product.ShippingMode == ShippingMode.PerStore)
                 return new ErrorDictionary(store.SellerId, CultureInfo.CurrentCulture.GetStringLocalized("STORE_NO_SHIPPING_NOT_SUPPORTED"));

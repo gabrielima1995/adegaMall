@@ -6,6 +6,7 @@ using Domain.Events.StoreModule;
 using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
 using Domain.Modules.Products.StockManagement;
+using Domain.Modules.StoreModule.Price;
 using Framework;
 using System;
 using System.Collections.Generic;
@@ -92,19 +93,73 @@ namespace Domain.Services.StoreModule
 
         public OperationResult Update(ProductEditing model, string sellerId)
         {
-            var product = model.Id != Guid.Empty
-                ? GetById(model.Id)
-                : GetByRef(model.CustomId);
+            var product = model.Id != Guid.Empty ? GetById(model.Id) : GetByRef(model.CustomId);
 
-            var errors = new ErrorDictionary();
+            if (product == null)
+                return OperationResult.Fail("InvalidProduct", "Product not found.");
 
-            if (product.Store_SellerId != (sellerId ?? product.Store_SellerId))
-                errors.Add("", "Invalid seller.");
+            if (string.IsNullOrEmpty(sellerId) || sellerId != product.Store_SellerId)
+                return OperationResult.Fail("InvalidSeller", $"The provided authentication token is invalid or does not match the one for the seller to whom the product {product.Id} is registered.");
 
-            var updateResult = Update(product, null);
-            if (!updateResult.OK) errors.AddRange(updateResult.Errors);
+            var changed = false;
 
-            return new OperationResult(errors);
+            if (model.CustomId != null && 
+                product.CustomId != model.CustomId)
+            {
+                changed = true;
+
+                product.CustomId = model.CustomId;
+            }
+
+            if (model.Price != null &&
+                product.Price != model.Price.GetValueOrDefault())
+            {
+                changed = true;
+
+                var productPrice = ProductPrice.ByPrice(product, model.Price.GetValueOrDefault(), null, null);
+                product.SetPrice(productPrice);
+            }
+
+            if (model.Title != null &&
+                product.Title != model.Title)
+            {
+                changed = true;
+
+                product.Title = model.Title;
+            }
+
+            if (!string.IsNullOrEmpty(model.Description) &&
+                product.Description != model.Description)
+            {
+                changed = true;
+
+                product.Description = model.Description;
+            }
+
+            if (!string.IsNullOrEmpty(model.Specifications) &&
+                product.Specifications != model.Specifications)
+            {
+                changed = true;
+
+                product.Specifications = model.Specifications;
+            }
+
+            if (model.CurrentStock != null &&
+                product.CurrentStock != model.CurrentStock)
+            {
+                changed = true;
+
+                product.CurrentStock = model.CurrentStock.Value;
+            }
+
+            if (changed)
+            {
+                var updateResult = Update(product, null);
+                if (updateResult.IsFailure)
+                    return new OperationResult(updateResult.Errors);
+            }
+
+            return new OperationResult();
         }
 
         public UpdateFromExternalSourceResult UpdateFromExternalSource()

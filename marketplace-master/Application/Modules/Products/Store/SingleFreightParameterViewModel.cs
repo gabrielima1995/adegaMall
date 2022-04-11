@@ -28,6 +28,15 @@ namespace Application.Modules.Products.Store
         [DisplayNameLocalized("PRODUCT_SHIPPING_LABEL")]
         public decimal Shipping { get; set; }
 
+        /// <summary>
+        /// Valor mínimo do pedido.
+        /// </summary>
+        [RequiredLocalized]
+        [RangeLocalized(0D, 100000D)]
+        [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
+        [DisplayNameLocalized("PRODUCT_SHIPPING_MIN_ORDER_AMOUNT_LABEL")]
+        public decimal MinimumOrderAmount { get; set; }
+
         public bool RequireShippingAmount => MaaSConfig.Current.Product.PrivateFleetShipping.Enabled && !MaaSConfig.Current.Product.PrivateFleetShipping.AllowFreeShipping;
 
         public SingleFreightParameterViewModel()
@@ -40,6 +49,7 @@ namespace Application.Modules.Products.Store
             Id = entity.Id;
             Range = (int)entity.DeliveryRange;
             Shipping = entity.Shipping;
+            MinimumOrderAmount = entity.MinimumOrderAmount;
         }
 
         public SingleFreightParameterViewModel(PrivateFleetParameterConfig config)
@@ -53,7 +63,8 @@ namespace Application.Modules.Products.Store
             return new SingleFreightParameter
             {
                 DeliveryRange = Range,
-                Shipping = Shipping
+                Shipping = Shipping,
+                MinimumOrderAmount = MinimumOrderAmount
             };
         }
     }

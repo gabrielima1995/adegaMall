@@ -54,7 +54,7 @@ namespace V2.Infrastructure.Shipping
         {
             var key = GetCacheKey(nameof(GetShippingForProduct), new object[]
             {
-                product.Product.Id, sellerAddress.Id, shippingAddress?.Id, chargeDoubleShipping
+                product.Product.Id, sellerAddress.Id, shippingAddress?.Id, chargeDoubleShipping, product.Quantity
             });
 
             if (cache.Get(key) == null)
@@ -69,7 +69,7 @@ namespace V2.Infrastructure.Shipping
             return cache.Get(key) as OperationResult<CorreiosShippingCollection>;
         }
 
-        public OperationResult<CorreiosShippingCollection> GetShippingForSeller(IEnumerable<ProductWithQty> products, Store store, Address shippingAddress)
+        public OperationResult<CorreiosShippingCollection> GetShippingForSeller(IEnumerable<ProductWithQty> products, decimal discount, Store store, Address shippingAddress)
         {
             IEnumerable<object> GetVariablesCache()
             {
@@ -79,6 +79,7 @@ namespace V2.Infrastructure.Shipping
                     yield return p.Quantity;
                 }
 
+                yield return discount;
                 yield return store.SellerId;
                 yield return shippingAddress?.Id;
             }
@@ -87,7 +88,7 @@ namespace V2.Infrastructure.Shipping
 
             if (cache.Get(key) == null)
             {
-                var value = wrappedAdapter.GetShippingForSeller(products, store, shippingAddress);
+                var value = wrappedAdapter.GetShippingForSeller(products, discount, store, shippingAddress);
                 cache.Add(key, value, TimeSpan.FromMinutes(5), CacheTimeoutType.Sliding);
             }
 

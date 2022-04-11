@@ -1,4 +1,5 @@
-﻿using Hangfire.Common;
+﻿using System;
+using Hangfire.Common;
 using Hangfire.Dashboard;
 using Hangfire.SqlServer;
 using Infra.Crosscutting.Hangfire;
@@ -15,7 +16,8 @@ namespace Hangfire
         {
             var options = new SqlServerStorageOptions
             {
-                PrepareSchemaIfNecessary = true
+                PrepareSchemaIfNecessary = true,
+                JobExpirationCheckInterval = TimeSpan.FromMinutes(10)
             };
 
             GlobalConfiguration.Configuration.UseSqlServerStorage(settings.ConnectionString, options);
