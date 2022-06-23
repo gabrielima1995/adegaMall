@@ -1,6 +1,8 @@
 ﻿@{ 
     var config = MaaSConfig.Current;
     var profile = User.Identity.GetLoginProfile();
+    var sellerId = profile.ActualPersonId();
+    var email = profile.Email;
 }
 
 @if (config.Product.Templates.Enabled)
@@ -26,6 +28,18 @@
                     <span class="far fa-clone"></span>
                     @Html.Localized("STORE_ADD_FROM_TEMPLATES_ALT_LINK")
                 </a>
+
+                <a href="https://integracao.adegamall.com.br/integration?userId=@sellerId&email=@email%20target="
+                   class="btn btn-default @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)">
+                    <span class="far fa-connectdevelop"></span>
+                    Configurar integração
+                </a>
+                <a href="https://integracao.adegamall.com.br/products?userId=@sellerId&email=@email%20target="
+                   class="btn btn-default @Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)">
+                    <span class="far fa-arrow-circle-o-right"></span>
+                    Importar produtos
+                </a>
+
             </div>
         </div>
     }
