@@ -53,6 +53,8 @@ namespace ASP
    
     var config = MaaSConfig.Current;
     var profile = User.Identity.GetLoginProfile();
+    var sellerId = profile.ActualPersonId();
+    var email = profile.Email;
 
             
             #line default
@@ -60,7 +62,7 @@ namespace ASP
 WriteLiteral("\r\n\r\n");
 
             
-            #line 6 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+            #line 8 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
  if (config.Product.Templates.Enabled)
 {
     if (config.Product.Templates.ForceSellerToUseTemplates)
@@ -75,26 +77,26 @@ WriteLiteral(" class=\"seller-store-add-product col-xs-12 col-sm-4 m-b-md\"");
 
 WriteLiteral(">\r\n            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 299), Tuple.Create("\"", 348)
+WriteAttribute("href", Tuple.Create(" href=\"", 377), Tuple.Create("\"", 426)
             
-            #line 11 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
-, Tuple.Create(Tuple.Create("", 306), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Templates", "Store")
+            #line 13 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+, Tuple.Create(Tuple.Create("", 384), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Templates", "Store")
             
             #line default
             #line hidden
-, 306), false)
+, 384), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 349), Tuple.Create("\"", 492)
-, Tuple.Create(Tuple.Create("", 357), Tuple.Create("btn", 357), true)
-, Tuple.Create(Tuple.Create(" ", 360), Tuple.Create("btn-primary", 361), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 427), Tuple.Create("\"", 570)
+, Tuple.Create(Tuple.Create("", 435), Tuple.Create("btn", 435), true)
+, Tuple.Create(Tuple.Create(" ", 438), Tuple.Create("btn-primary", 439), true)
             
-            #line 11 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
-        , Tuple.Create(Tuple.Create(" ", 372), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)
+            #line 13 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+        , Tuple.Create(Tuple.Create(" ", 450), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)
             
             #line default
             #line hidden
-, 373), false)
+, 451), false)
 );
 
 WriteLiteral(">\r\n                <span");
@@ -106,7 +108,7 @@ WriteLiteral("></span>\r\n");
 WriteLiteral("                ");
 
             
-            #line 13 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+            #line 15 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
            Write(Html.Localized("STORE_ADD_FROM_TEMPLATES_LINK"));
 
             
@@ -115,7 +117,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </a>\r\n        </div>\r\n");
 
             
-            #line 16 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+            #line 18 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
     }
     else
     {
@@ -137,26 +139,26 @@ WriteLiteral(" aria-label=\"...\"");
 
 WriteLiteral(">\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 831), Tuple.Create("\"", 884)
+WriteAttribute("href", Tuple.Create(" href=\"", 909), Tuple.Create("\"", 962)
             
-            #line 21 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
-, Tuple.Create(Tuple.Create("", 838), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("CreateProduct", "Store")
+            #line 23 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+, Tuple.Create(Tuple.Create("", 916), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("CreateProduct", "Store")
             
             #line default
             #line hidden
-, 838), false)
+, 916), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 885), Tuple.Create("\"", 1028)
-, Tuple.Create(Tuple.Create("", 893), Tuple.Create("btn", 893), true)
-, Tuple.Create(Tuple.Create(" ", 896), Tuple.Create("btn-default", 897), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 963), Tuple.Create("\"", 1106)
+, Tuple.Create(Tuple.Create("", 971), Tuple.Create("btn", 971), true)
+, Tuple.Create(Tuple.Create(" ", 974), Tuple.Create("btn-default", 975), true)
             
-            #line 21 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
-                , Tuple.Create(Tuple.Create(" ", 908), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)
+            #line 23 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+                , Tuple.Create(Tuple.Create(" ", 986), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)
             
             #line default
             #line hidden
-, 909), false)
+, 987), false)
 );
 
 WriteLiteral(">\r\n                    <span");
@@ -168,7 +170,7 @@ WriteLiteral("></span>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 23 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+            #line 25 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
                Write(Html.Localized("ADD_BLANK_PRODUCT_LINK"));
 
             
@@ -176,26 +178,26 @@ WriteLiteral("                    ");
             #line hidden
 WriteLiteral("\r\n                </a>\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1189), Tuple.Create("\"", 1238)
+WriteAttribute("href", Tuple.Create(" href=\"", 1267), Tuple.Create("\"", 1316)
             
-            #line 25 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
-, Tuple.Create(Tuple.Create("", 1196), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Templates", "Store")
+            #line 27 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+, Tuple.Create(Tuple.Create("", 1274), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("Templates", "Store")
             
             #line default
             #line hidden
-, 1196), false)
+, 1274), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1239), Tuple.Create("\"", 1382)
-, Tuple.Create(Tuple.Create("", 1247), Tuple.Create("btn", 1247), true)
-, Tuple.Create(Tuple.Create(" ", 1250), Tuple.Create("btn-default", 1251), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1317), Tuple.Create("\"", 1460)
+, Tuple.Create(Tuple.Create("", 1325), Tuple.Create("btn", 1325), true)
+, Tuple.Create(Tuple.Create(" ", 1328), Tuple.Create("btn-default", 1329), true)
             
-            #line 25 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
-           , Tuple.Create(Tuple.Create(" ", 1262), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)
+            #line 27 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+           , Tuple.Create(Tuple.Create(" ", 1340), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)
             
             #line default
             #line hidden
-, 1263), false)
+, 1341), false)
 );
 
 WriteLiteral(">\r\n                    <span");
@@ -207,16 +209,94 @@ WriteLiteral("></span>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 27 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+            #line 29 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
                Write(Html.Localized("STORE_ADD_FROM_TEMPLATES_ALT_LINK"));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </a>\r\n            </div>\r\n        </div>\r\n");
+WriteLiteral("\r\n                </a>\r\n\r\n                <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 1636), Tuple.Create("\"", 1730)
+, Tuple.Create(Tuple.Create("", 1643), Tuple.Create("https://integracao.adegamall.com.br/integration?userId=", 1643), true)
+            
+            #line 32 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+, Tuple.Create(Tuple.Create("", 1698), Tuple.Create<System.Object, System.Int32>(sellerId
+            
+            #line default
+            #line hidden
+, 1698), false)
+, Tuple.Create(Tuple.Create("", 1707), Tuple.Create("&email=", 1707), true)
+            
+            #line 32 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+                , Tuple.Create(Tuple.Create("", 1714), Tuple.Create<System.Object, System.Int32>(email
+            
+            #line default
+            #line hidden
+, 1714), false)
+, Tuple.Create(Tuple.Create("", 1720), Tuple.Create("%20target=", 1720), true)
+);
+
+WriteAttribute("class", Tuple.Create("\r\n                   class=\"", 1731), Tuple.Create("\"", 1894)
+, Tuple.Create(Tuple.Create("", 1759), Tuple.Create("btn", 1759), true)
+, Tuple.Create(Tuple.Create(" ", 1762), Tuple.Create("btn-default", 1763), true)
+            
+            #line 33 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+, Tuple.Create(Tuple.Create(" ", 1774), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)
+            
+            #line default
+            #line hidden
+, 1775), false)
+);
+
+WriteLiteral(">\r\n                    <span");
+
+WriteLiteral(" class=\"far fa-connectdevelop\"");
+
+WriteLiteral("></span>\r\n                    Configurar integração\r\n                </a>\r\n      " +
+"          <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 2046), Tuple.Create("\"", 2137)
+, Tuple.Create(Tuple.Create("", 2053), Tuple.Create("https://integracao.adegamall.com.br/products?userId=", 2053), true)
+            
+            #line 37 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+, Tuple.Create(Tuple.Create("", 2105), Tuple.Create<System.Object, System.Int32>(sellerId
+            
+            #line default
+            #line hidden
+, 2105), false)
+, Tuple.Create(Tuple.Create("", 2114), Tuple.Create("&email=", 2114), true)
+            
+            #line 37 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+             , Tuple.Create(Tuple.Create("", 2121), Tuple.Create<System.Object, System.Int32>(email
+            
+            #line default
+            #line hidden
+, 2121), false)
+, Tuple.Create(Tuple.Create("", 2127), Tuple.Create("%20target=", 2127), true)
+);
+
+WriteAttribute("class", Tuple.Create("\r\n                   class=\"", 2138), Tuple.Create("\"", 2301)
+, Tuple.Create(Tuple.Create("", 2166), Tuple.Create("btn", 2166), true)
+, Tuple.Create(Tuple.Create(" ", 2169), Tuple.Create("btn-default", 2170), true)
+            
+            #line 38 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+, Tuple.Create(Tuple.Create(" ", 2181), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)
+            
+            #line default
+            #line hidden
+, 2182), false)
+);
+
+WriteLiteral(">\r\n                    <span");
+
+WriteLiteral(" class=\"far fa-arrow-circle-o-right\"");
+
+WriteLiteral("></span>\r\n                    Importar produtos\r\n                </a>\r\n\r\n        " +
+"    </div>\r\n        </div>\r\n");
 
             
-            #line 31 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+            #line 45 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
     }
 }
 else
@@ -231,26 +311,26 @@ WriteLiteral(" class=\"seller-store-add-product col-xs-12 col-sm-4 m-b-md\"");
 
 WriteLiteral(">\r\n        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1673), Tuple.Create("\"", 1726)
+WriteAttribute("href", Tuple.Create(" href=\"", 2574), Tuple.Create("\"", 2627)
             
-            #line 36 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
-, Tuple.Create(Tuple.Create("", 1680), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("CreateProduct", "Store")
+            #line 50 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+, Tuple.Create(Tuple.Create("", 2581), Tuple.Create<System.Object, System.Int32>(Url.ActionLocalized("CreateProduct", "Store")
             
             #line default
             #line hidden
-, 1680), false)
+, 2581), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1727), Tuple.Create("\"", 1870)
-, Tuple.Create(Tuple.Create("", 1735), Tuple.Create("btn", 1735), true)
-, Tuple.Create(Tuple.Create(" ", 1738), Tuple.Create("btn-primary", 1739), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 2628), Tuple.Create("\"", 2771)
+, Tuple.Create(Tuple.Create("", 2636), Tuple.Create("btn", 2636), true)
+, Tuple.Create(Tuple.Create(" ", 2639), Tuple.Create("btn-primary", 2640), true)
             
-            #line 36 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
-       , Tuple.Create(Tuple.Create(" ", 1750), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)
+            #line 50 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+       , Tuple.Create(Tuple.Create(" ", 2651), Tuple.Create<System.Object, System.Int32>(Css.DisabledForSellerAssistant(profile, SellerAssistantPermissions.StoreEdit, SellerAssistantPermissions.ProductsEdit)
             
             #line default
             #line hidden
-, 1751), false)
+, 2652), false)
 );
 
 WriteLiteral(">\r\n            <span");
@@ -262,7 +342,7 @@ WriteLiteral("></span>\r\n");
 WriteLiteral("            ");
 
             
-            #line 38 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+            #line 52 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
        Write(Html.Localized("ADD_NEW_PRODUCT_LINK"));
 
             
@@ -271,7 +351,7 @@ WriteLiteral("            ");
 WriteLiteral("\r\n        </a>\r\n    </div>\r\n");
 
             
-            #line 41 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
+            #line 55 "..\..\Views\Products\Store\_CreateProductLink.cshtml"
 }
 
             
