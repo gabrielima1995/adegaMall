@@ -1231,6 +1231,7 @@
     <Compile Include="Configuration\MaasConfigConfigurationExtensions.cs" />
     <Compile Include="Configuration\NewContextConfigurationExtensions.cs" />
     <Compile Include="Controllers\API\v1\ApiControllerBase.cs" />
+    <Compile Include="Controllers\API\v1\ApiTokensApiV1Controller.cs" />
     <Compile Include="Controllers\API\v1\MetricsApiV1Controller.cs" />
     <Compile Include="Controllers\API\v1\PagedResult.cs" />
     <Compile Include="Controllers\API\v1\RentalLocksApiV1Controller.cs" />
@@ -5004,6 +5005,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\ApiTokensApiV1\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Billing\" />
     <Folder Include="Views\CookieConsent\" />

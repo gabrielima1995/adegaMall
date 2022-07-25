@@ -140,6 +140,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\ApiTokenRequest.cs" />
     <Compile Include="AssemblyMarker.cs" />
     <Compile Include="Config\Common\DateOfBirthConfig.cs" />
     <Compile Include="Config\Common\IConfigNode.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Config\Modules\StockConfig.cs" />
     <Compile Include="Config\Registers\SellerAssistantConfig.cs" />
     <Compile Include="Config\Sections\NearbyProductsConfig.cs" />
+    <Compile Include="DTO\ApiTokenResponse.cs" />
     <Compile Include="DTO\CartCustomFieldsViewModel.cs" />
     <Compile Include="DTO\CorreiosShippingDto.cs" />
     <Compile Include="DTO\ProductGetting.cs" />

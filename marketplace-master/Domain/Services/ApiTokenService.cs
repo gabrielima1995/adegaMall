@@ -41,6 +41,17 @@ namespace Domain.Services
                 .Then(result => _apiTokenRepository.Add(result, true));
         }
 
+        public ApiToken GenerateForApi(string name, string sellerId = null)
+        {
+            var resultGenerated = ApiToken.Generate(name, sellerId);
+            if (resultGenerated == null || !resultGenerated.OK) return null;
+
+            var apiToken = resultGenerated.Result;
+            if (apiToken == null) return null;
+
+            return apiToken;
+        }
+
         public OperationResult Update(ApiTokenEditing model)
         {
             return GetById(model.Id)
