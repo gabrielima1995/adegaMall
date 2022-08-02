@@ -14,6 +14,13 @@ namespace Domain
             var list = new List<VersionEntry>
             {
                 new VersionEntry(
+                    2, 46, 14, "Criação da API de token", new DateTime(2022, 08, 02),
+                    new[]
+                    {
+                        "Criados os endpoints de gestão dos tokens."
+                    }),
+
+                new VersionEntry(
                     2, 46, 10, "Hotfix produto digital", new DateTime(2020, 05, 11),
                     new[]
                     {
