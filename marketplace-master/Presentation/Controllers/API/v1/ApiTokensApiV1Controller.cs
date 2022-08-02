@@ -34,7 +34,7 @@ namespace Presentation.Controllers.API.v1
         {
             if (string.IsNullOrWhiteSpace(id))
             {
-                return BadRequest();
+                return BadRequest("O id do seller deve ser informado na url.");
             }
 
             var tokenList = _apiTokenRepository.ListByActive(id);
@@ -49,13 +49,13 @@ namespace Presentation.Controllers.API.v1
         {
             if (string.IsNullOrWhiteSpace(model.seller_id_or_email))
             {
-                return BadRequest();
+                return BadRequest("O seller não foi informado no corpo da requisição.");
             }
 
             var seller = _sellerRepository.GetById(model.seller_id_or_email);
             if (seller == null)
             {
-                return NotFound();
+                return BadRequest("O seller não foi encontrado.");
             }
 
             var name = model.name ?? seller.Name;
