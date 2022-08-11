@@ -78,13 +78,17 @@ namespace Presentation.Helpers.Modules
         {
             CreateFolderStructure(result);
             var request = WebRequest.Create(GetCloudImageUrl());
-            using (var response = request.GetResponse())
+
+            if (request.GetResponse() != null)
             {
-                using (var fileStream = File.OpenWrite(result.PhysicalPath))
+                using (var response = request.GetResponse())
                 {
-                    var sourceStream = response.GetResponseStream();
-                    sourceStream.CopyTo(fileStream);
-                    result.ExistsPhysically = File.Exists(result.PhysicalPath);
+                    using (var fileStream = File.OpenWrite(result.PhysicalPath))
+                    {
+                        var sourceStream = response.GetResponseStream();
+                        sourceStream.CopyTo(fileStream);
+                        result.ExistsPhysically = File.Exists(result.PhysicalPath);
+                    }
                 }
             }
         }

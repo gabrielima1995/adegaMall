@@ -614,6 +614,11 @@ namespace V2.Application.Modules
 
             var item = cart.GetItemByProduct(product, variant: variant);
 
+            var cartSeller = cart.Sellers
+                                .Where(p => p.Seller.Id == product.Store_SellerId )
+                                .ToList()
+                                .SingleOrDefault();
+
             // Same items with different rental dates should be considered different items
             if (item != null && item.RentalInfo != null && rentalStartUtc.HasValue && rentalEndUtc.HasValue
                 && rentalStartUtc != item.RentalInfo.StartDate && rentalEndUtc != item.RentalInfo.EndDate)
@@ -697,6 +702,13 @@ namespace V2.Application.Modules
             if (validateCouponResult.IsFailure) return validateCouponResult.Errors;
 
             var commitResult = unitOfWork.Save();
+
+            if (cartSeller != null && newQuantity <= 0)
+            {
+                cart.Sellers.Remove(cartSeller);
+                unitOfWork.Save();
+            }
+
             if (!commitResult.OK) return commitResult.Errors;
 
             return cart;
