@@ -431,7 +431,7 @@ namespace Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to errosaas@ideianoar.com.br.
+        ///   Looks up a localized string similar to errosadegamall@gmail.com.
         /// </summary>
         public static string SYS_ERROR_REPORT_TO_ADDRESS {
             get {

@@ -14,6 +14,13 @@ namespace Domain
             var list = new List<VersionEntry>
             {
                 new VersionEntry(
+                    2, 46, 16, "Mudança no e-mail de envio dos erros", new DateTime(2022, 08, 15),
+                    new[]
+                    {
+                        "Mudança no e-mail de envio dos erros."
+                    }),
+
+                new VersionEntry(
                     2, 46, 15, "Correção do BUG do carrinho", new DateTime(2022, 08, 11),
                     new[]
                     {
