@@ -1937,11 +1937,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_ProductForm.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Products\Store\_ProductGeneralTabForm.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_ProductGeneralTabForm.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Products\Store\_ProductAvailabilityTabForm.generated.cs">
       <DependentUpon>_ProductAvailabilityTabForm.cshtml</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2666,11 +2661,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_LoginPartial.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\_MenuMobile.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_MenuMobile.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shared\_Messages.generated.cs">
       <AutoGen>True</AutoGen>
