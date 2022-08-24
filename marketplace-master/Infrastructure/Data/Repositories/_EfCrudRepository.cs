@@ -169,6 +169,10 @@ namespace Infrastructure.Data.Repositories
             }
         }
 
+        public OperationResult AddAndSave(TEntity entity) => Add(entity, saveChanges: true);
+        public OperationResult UpdateAndSave(TEntity entity) => Update(entity, saveChanges: true);
+        public OperationResult DeleteAndSave(TEntity entity) => Delete(entity, saveChanges: true);
+
         public OperationResult SaveChanges()
         {
             try

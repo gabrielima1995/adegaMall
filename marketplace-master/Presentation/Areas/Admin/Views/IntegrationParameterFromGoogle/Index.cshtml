@@ -1,0 +1,143 @@
+﻿@using Domain.Modules.Integration
+
+@model List<IntegrationParameterFromGoogleVM>
+
+<section class="content-header">
+    <h1>
+        <i class="fa fa-cogs" aria-hidden="true"></i>
+        Integração com Google Shooping
+    </h1>
+</section>
+
+<section class="content container-fluid">
+
+    <div class="row">
+        <div id="divCreate" class="col-sm-6">
+            @Html.Partial("Create", new IntegrationParameterFromGoogleVM())
+        </div>
+
+        <div id="divUpdate" class="col-sm-6" style="display:none">
+            @Html.Partial("Edit", new IntegrationParameterFromGoogleVM())
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id da Conta
+                </th>
+                <th>
+                    Id do Cliente
+                </th>
+                <th>
+                    E-Mail
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody style="font-size:small">
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientEmail)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.Enabled)
+                            </td>*@
+                        <td>
+                            <a href="javascript:ActionUpdate('@item.Id')" value="Editar" class="btn-sm btn-primary">Editar</a>
+                        </td>
+                        <td>
+                            @Html.ActionLink("Deletar", "Delete", "IntegrationParameterFromGoogle", new { id = item.Id }, new { @class = "btn-sm btn-danger", onclick = "return confirm('Deseja deletar este registro?');" })
+                        </td>
+                    </tr>
+
+                }
+            }
+        </tbody>
+    </table>
+</section>
+
+@using (Html.BeginForm("Create", "IntegrationParameterFromGoogle", FormMethod.Post))
+{
+    <!-- Modal -->
+    <div class="modal fade" id="divModalCadastro" tabindex="-1" role="dialog" aria-labelledby="divModalCadastroLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="divModalCadastroLabel">Adicionar Nova Chave Google Shopping</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-4 col-lg-4">
+                            <label>AccountId</label>
+                            @Html.TextBox("txtAccountId", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-4 col-lg-4">
+                            <label>ClientID</label>
+                            @Html.TextBox("txtClientId", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-8 col-lg-8">
+                            <label>Email</label>
+                            <br />
+                            @Html.TextBox("txtClientEmail", null, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                        <input type="submit" value="Submit TextBox" />
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                        @*<input type="button" value="Create" onclick="location.href='@Url.Action("Create", "IntegrationParameterFromGoogle")'" /*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section scripts{
+    <script>
+
+        function ActionUpdate(idx) {
+
+            var obj = @Html.Raw(Json.Encode(Model));
+            var model = obj.filter(function (data) { return data.Id == idx })[0]
+
+            if (model != null) {
+                $("#divUpdate").show();
+                $("#divCreate").hide();
+
+                $(".account_editar").val(model.AccountId);
+                $(".client_editar").val(model.ClientId);
+                $(".email_editar").val(model.ClientEmail);
+                $(".privatekey_editar").val(model.PrivateKey);
+                $(".idguid_editar").val(model.Id);
+            }
+        }
+
+        function ActionCreate() {
+            $("#divCreate").show();
+            $("#divUpdate").hide();
+        }
+    </script>
+}
+

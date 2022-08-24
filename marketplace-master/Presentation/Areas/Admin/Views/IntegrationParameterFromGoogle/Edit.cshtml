@@ -1,0 +1,42 @@
+﻿@using Domain.Modules.Integration
+
+@model IntegrationParameterFromGoogleVM
+
+<h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Editar</h4>
+@using (Html.BeginForm("Edit", "IntegrationParameterFromGoogle", new { lang = Request.GetCurrentLang() }, FormMethod.Post, new { @class = "margin-top-15", role = "form" }))
+{
+    @Html.HiddenFor(i => i.Id, new { @class = "form-control idguid_editar" })
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @*@Html.TextBoxFor(i => i.AccountId, new { @class = "form-control account_editar", placeholder = "Account Id" })*@
+
+        @Html.TextBoxFor(i => i.AccountId, new { @class = "form-control account_editar", placeholder = "Account Id", id = "AccountIdEdit" })
+        @Html.ValidationMessageFor(model => model.AccountId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.TextBoxFor(i => i.ClientId, new { @class = "form-control client_editar", placeholder = "ClientId" })
+        @Html.ValidationMessageFor(model => model.ClientId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.TextBoxFor(i => i.ClientEmail, new { @class = "form-control email_editar", placeholder = Request.GetLocalizedString("EMAIL_INPUT"), type = "email" })
+        @Html.ValidationMessageFor(model => model.ClientEmail, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.TextAreaFor(m => m.PrivateKey, new { @class = "form-control privatekey_editar", placeholder = "Private Key", @rows = 5 })
+        @Html.ValidationMessageFor(model => model.PrivateKey, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.Localized("SAVE_CHANGES_BUTTON", "button", new { type = "submit", @class = "btn btn-primary btn-block" })
+        <input type="button" value="Cancelar" class="btn btn-danger btn-block" onclick="ActionCreate()" />
+    </div>
+
+
+}
+

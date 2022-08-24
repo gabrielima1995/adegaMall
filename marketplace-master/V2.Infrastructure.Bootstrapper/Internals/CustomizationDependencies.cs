@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces.Repositories;
 using Domain.Modules.Customization;
 using Domain.Modules.Customization.Interfaces;
+using Domain.Modules.Integration;
 using Domain.Services;
 using Infrastructure.Data.Repositories;
 using Unity;
@@ -43,7 +44,11 @@ namespace V2.Infrastructure.Bootstrapper.Internals
                 // Email templates
                 .RegisterType<MessageTemplateSeeder>()
                 .RegisterType<IMessageTemplateRepository, MessageTemplateRepository>()
-                .RegisterType<ITemplateEngine, DatabaseTemplateEngine>();
+                .RegisterType<ITemplateEngine, DatabaseTemplateEngine>()
+
+                // Google Shopping
+                .RegisterType<IntegrationParameterFromGoogleService>()
+                .RegisterType<IIntegrationParameterFromGoogleRepository, IntegrationParameterFromGoogleRepository>();
         }
     }
 }

@@ -5,6 +5,7 @@ using Application.Sellers;
 using Domain;
 using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
+using Domain.Modules.Integration;
 using Domain.Modules.Ratings;
 using Domain.Modules.Ratings.Queries;
 using Domain.Sellers;
@@ -55,7 +56,11 @@ namespace V2.Infrastructure.Bootstrapper.Internals
                 .RegisterType<IUserRatingsRepository, UserRatingsRepository>()
                 .RegisterType<IUserRatingAppService, UserRatingAppService>()
                 .RegisterType<IRatingsQueries, RatingsQueries>()
-                .RegisterType<CheckExpiredRatings, CheckExpiredRatings>();
+                .RegisterType<CheckExpiredRatings, CheckExpiredRatings>()
+
+                // Google Shopping
+                .RegisterType<IntegrationParameterFromGoogleService>()
+                .RegisterType<IIntegrationParameterFromGoogleRepository, IntegrationParameterFromGoogleRepository>();
         }
     }
 }

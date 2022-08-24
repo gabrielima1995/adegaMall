@@ -197,6 +197,7 @@
     <Compile Include="Events\BuyerEnabledEvent.cs" />
     <Compile Include="Events\StoreModule\RentalInfoCreated.cs" />
     <Compile Include="Events\StoreModule\ProductPriceChangedEvent.cs" />
+    <Compile Include="Interfaces\Repositories\IIntegrationParameterFromGoogleRepository.cs" />
     <Compile Include="Modules\BatchImport\DataType.cs" />
     <Compile Include="Modules\BatchImport\Field.cs" />
     <Compile Include="Modules\BatchImport\ImportExportMetadata.cs" />
@@ -280,6 +281,10 @@
     <Compile Include="Modules\Finance\GatewayRegistrationLog.cs" />
     <Compile Include="Modules\Finance\Interfaces\IGatewayRegistrationLogQueries.cs" />
     <Compile Include="Modules\Finance\Interfaces\IGatewayRegistrationLogRepository.cs" />
+    <Compile Include="Modules\Integration\IIntegrationParameterFromGoogleService.cs" />
+    <Compile Include="Modules\Integration\IntegrationParameterFromGoogle.cs" />
+    <Compile Include="Modules\Integration\IntegrationParameterFromGoogleService.cs" />
+    <Compile Include="Modules\Integration\IntegrationParameterFromGoogleVM.cs" />
     <Compile Include="Modules\LeadSales\CreditsBundle.cs" />
     <Compile Include="Modules\LeadSales\CreditsPack.cs" />
     <Compile Include="Modules\LeadSales\CreditsPackTransaction.cs" />

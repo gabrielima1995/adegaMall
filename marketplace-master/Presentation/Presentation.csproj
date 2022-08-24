@@ -521,6 +521,7 @@
     <Compile Include="Areas\Admin\Controllers\ApiTokensController.cs" />
     <Compile Include="Areas\Admin\Controllers\BannersController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomItemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IntegrationParameterFromGoogleController.cs" />
     <Compile Include="Areas\Admin\Controllers\LanguagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewCustomizeController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomizeController.cs" />
@@ -1198,11 +1199,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_LoginPartial.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Admin\Views\Shared\_Menu.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_Menu.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Views\Strings\Index.generated.cs">
       <AutoGen>True</AutoGen>
@@ -3800,6 +3796,9 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_DetailsScheduledTransfer.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Areas\Admin\Views\IntegrationParameterFromGoogle\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\IntegrationParameterFromGoogle\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\IntegrationParameterFromGoogle\Index.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

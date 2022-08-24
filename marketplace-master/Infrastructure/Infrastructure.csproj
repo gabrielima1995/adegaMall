@@ -188,6 +188,7 @@
     <Compile Include="Data\Repositories\BuyerRepository.cs" />
     <Compile Include="Data\Repositories\CartRepository.cs" />
     <Compile Include="Data\Repositories\CouponRepository.cs" />
+    <Compile Include="Data\Repositories\IntegrationParameterFromGoogleRepository.cs" />
     <Compile Include="Data\Repositories\ProductAvailabilityRepository.cs" />
     <Compile Include="Data\Repositories\DisputeRepository.cs" />
     <Compile Include="Data\Repositories\EcommerceHomeCategoryRepository.cs" />
@@ -635,6 +636,14 @@
     <Compile Include="Migrations\202109021420342_AddMinimumOrderAmount.Designer.cs">
       <DependentUpon>202109021420342_AddMinimumOrderAmount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208231245232_CreateIntegrationWithGoogleShopping.cs" />
+    <Compile Include="Migrations\202208231245232_CreateIntegrationWithGoogleShopping.Designer.cs">
+      <DependentUpon>202208231245232_CreateIntegrationWithGoogleShopping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208231254221_AlterProductToIntegrateWithGoogle.cs" />
+    <Compile Include="Migrations\202208231254221_AlterProductToIntegrateWithGoogle.Designer.cs">
+      <DependentUpon>202208231254221_AlterProductToIntegrateWithGoogle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Data\MyDbConnection.cs" />
     <Compile Include="Data\Repositories\AdminReportRepository.cs" />
@@ -941,6 +950,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202109021420342_AddMinimumOrderAmount.resx">
       <DependentUpon>202109021420342_AddMinimumOrderAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208231245232_CreateIntegrationWithGoogleShopping.resx">
+      <DependentUpon>202208231245232_CreateIntegrationWithGoogleShopping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208231254221_AlterProductToIntegrateWithGoogle.resx">
+      <DependentUpon>202208231254221_AlterProductToIntegrateWithGoogle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

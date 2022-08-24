@@ -204,6 +204,13 @@ namespace Domain.Entities.StoreModule
 
         #endregion Availability
 
+        #region Integration to Google Shopping
+
+        public bool MustBeIntegrate { get; set; } = false;
+        public DateTime? LastIntegration { get; set; }
+
+        #endregion
+
         public Product()
         {
             Id = Guid.NewGuid();

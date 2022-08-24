@@ -432,6 +432,16 @@ namespace Application.Modules.Products
 
         public Guid? TemplateId { get; set; }
 
+        #region Integration to Google Shopping
+
+        [DisplayNameLocalized("Integra com Google Shopping?")]
+        public bool MustBeIntegrate { get; set; } = false;
+
+        [DisplayNameLocalized("Último envio: ")]
+        public DateTime? LastIntegration { get; set; }
+
+        #endregion
+
         public ProductEditorViewModel()
         {
             Categories = new List<ProductCategory>();
@@ -591,6 +601,9 @@ namespace Application.Modules.Products
                 .ToList();
 
             #endregion Availability
+
+            MustBeIntegrate = product.MustBeIntegrate;
+            LastIntegration = product.LastIntegration;
         }
 
         private void SetCoverImageUrl(Product product)
@@ -644,6 +657,8 @@ namespace Application.Modules.Products
 
             if (Id != null && Id != Guid.Empty)
                 entity.Id = Id;
+
+            entity.MustBeIntegrate = MustBeIntegrate;
 
             #region Stock management
 
@@ -756,6 +771,8 @@ namespace Application.Modules.Products
 
             if (Id != null && Id != Guid.Empty)
                 entity.Id = Id;
+
+            entity.MustBeIntegrate = MustBeIntegrate;
 
             entity.Variants.Clear();
             foreach (var item in variants)

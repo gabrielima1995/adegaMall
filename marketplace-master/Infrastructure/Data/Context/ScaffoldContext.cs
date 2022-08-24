@@ -7,6 +7,7 @@ using Domain.Entities.StoreModule;
 using Domain.Entities.SubscriptionModule;
 using Domain.Modules.Customization.Entities;
 using Domain.Modules.Finance;
+using Domain.Modules.Integration;
 using Domain.Modules.ProductTemplateModule;
 using Domain.Modules.ProductWishModule;
 using Domain.Modules.QuoteBillingModule.Entities;
@@ -65,6 +66,8 @@ namespace Infrastructure.Data.Context
         public DbSet<ProductWish> ProductWishs { get; set; }
         public DbSet<ProductTemplate> ProductTemplates { get; set; }
         public DbSet<MarketplacePushSubscription> PushSubscriptions { get; set; }
+        public DbSet<IntegrationParameterFromGoogle> IntegrationParameterFromGoogle { get; set; }
+
 
         public bool IsDisposed { get; private set; }
 

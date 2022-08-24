@@ -203,6 +203,13 @@ namespace Infrastructure.Data.Repositories
                 .ToList();
         }
 
+        public List<Product> ListProdutoMustBeIntegrated()
+        {
+            return Context.Set<Product>()
+                .Where(prod => prod.MustBeIntegrate == true && prod.Deleted == false && prod.IsDisabled == false && prod.CurrentStock > 0)
+                .ToList();
+        }
+
         #region Event handlers
 
         public void Handle(ProductAddedEvent domainEvent)

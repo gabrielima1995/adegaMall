@@ -18,6 +18,7 @@ using V2.Application.Modules.Search.Products;
 using V2.Application.Modules.StoreModule;
 using V2.Application.Modules.UserRatings;
 using V2.Application.StartupProcesses;
+using V2.Application.Modules.IntegrationParameterFromGoogle;
 using FCron = Framework.Cron;
 
 namespace V2.Application
@@ -39,6 +40,8 @@ namespace V2.Application
         private readonly IUserConfigRepository userConfigRepository;
         private readonly IRepository<ProductVariant> productVariantRepository;
 
+        private readonly IntegrationParameterFromGoogleService _IntegrationParameterGoogleService;
+
         public static bool DependenciesLoaded { get; set; }
 
         public ApplicationStartup(
@@ -50,7 +53,8 @@ namespace V2.Application
             ITemplateEngine templateEngine,
             IEmailSender emailSender,
             IUserConfigRepository userConfigRepository,
-            IRepository<ProductVariant> productVariantRepository)
+            IRepository<ProductVariant> productVariantRepository,
+            IntegrationParameterFromGoogleService IntegrationParameterGoogleService)
         {
             this.configMigrator = configMigrator;
             this.cloudStorage = cloudStorage;
@@ -61,6 +65,7 @@ namespace V2.Application
             this.emailSender = emailSender;
             this.userConfigRepository = userConfigRepository;
             this.productVariantRepository = productVariantRepository;
+            this._IntegrationParameterGoogleService = IntegrationParameterGoogleService;
         }
 
         public void Startup(Action registerHangfireAction)
@@ -122,6 +127,9 @@ namespace V2.Application
 
             if (config.Payment.Enabled)
             {
+                backgroundWorker.CreateRecurring<IntegrationParameterFromGoogleService>(
+                    x => x.Run(), "IntegrationParameterGoogleService", FCron.HourInterval(8));
+
                 backgroundWorker.CreateRecurring<CheckStatusForTransactionsPendingPaymentRecurrentJob>(
                     x => x.Run(), "CheckStatusForTransactionsPendingPayment", FCron.HourInterval(1));
 

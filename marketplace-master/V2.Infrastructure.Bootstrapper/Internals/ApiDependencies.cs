@@ -1,4 +1,5 @@
 ﻿using Domain.Interfaces.Repositories;
+using Domain.Modules.Integration;
 using Infrastructure.Data.Repositories;
 using Infrastructure.Logging;
 using Unity;
@@ -24,7 +25,11 @@ namespace V2.Infrastructure.Bootstrapper.Internals
                 // Logging
                 .RegisterType<ApiLogService>()
                 .RegisterType<IRequestReceivedApiLogRepository, RequestReceivedApiLogRepository>()
-                .RegisterType<IWebhookCalledApiLogRepository, WebhookCalledApiLogRepository>();
+                .RegisterType<IWebhookCalledApiLogRepository, WebhookCalledApiLogRepository>()
+            
+                // Google Shopping
+                .RegisterType<IntegrationParameterFromGoogleService>()
+                .RegisterType<IIntegrationParameterFromGoogleRepository, IntegrationParameterFromGoogleRepository>();
         }
     }
 }

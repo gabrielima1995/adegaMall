@@ -7,6 +7,7 @@ using Domain.Addresses;
 using Domain.Config.ConfigMigrations;
 using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
+using Domain.Modules.Integration;
 using Domain.Reports;
 using Domain.Services;
 using Framework;
@@ -17,12 +18,10 @@ using Infrastructure.Caching;
 using Infrastructure.Data;
 using Infrastructure.Data.Context;
 using Infrastructure.Data.Repositories;
-using System.Configuration;
+using Infrastructure.Geocoding;
 using Unity;
-using Unity.Injection;
 using Unity.Lifetime;
 using V2.Application.Cities;
-using V2.Application.Messages;
 using V2.Application.Modules.Admin;
 using V2.Application.Modules.PushNotifications;
 using V2.Application.Modules.SiteMap;
@@ -94,7 +93,11 @@ namespace V2.Infrastructure.Bootstrapper.Internals
                 .RegisterType<IAdminNotificationQueries, AdminPushNotificationQueries>()
 
                 // Cloud storage
-                .RegisterType<ICloudStorage, AwsCloudStorage>();
+                .RegisterType<ICloudStorage, AwsCloudStorage>()
+
+                // Google Shopping
+                .RegisterType<IntegrationParameterFromGoogleService>()
+                .RegisterType<IIntegrationParameterFromGoogleRepository, IntegrationParameterFromGoogleRepository>();
         }
     }
 }
