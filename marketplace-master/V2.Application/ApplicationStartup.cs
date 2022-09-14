@@ -20,6 +20,7 @@ using V2.Application.Modules.UserRatings;
 using V2.Application.StartupProcesses;
 using V2.Application.Modules.IntegrationParameterFromGoogle;
 using FCron = Framework.Cron;
+using System.Threading.Tasks;
 
 namespace V2.Application
 {
@@ -39,6 +40,7 @@ namespace V2.Application
         private readonly IEmailSender emailSender;
         private readonly IUserConfigRepository userConfigRepository;
         private readonly IRepository<ProductVariant> productVariantRepository;
+        
 
         private readonly IntegrationParameterFromGoogleService _IntegrationParameterGoogleService;
 
@@ -70,6 +72,9 @@ namespace V2.Application
 
         public void Startup(Action registerHangfireAction)
         {
+            CancellationTokenSource source = new CancellationTokenSource();
+            CancellationToken token = source.Token;
+
             this.registerHangfireAction = registerHangfireAction;
 
             MaaSConfig.Loaded += MaaSConfig_Loaded;
@@ -90,6 +95,7 @@ namespace V2.Application
             backgroundWorker.Schedule<CalculatePriceOfProductsVersionOutJob>(i => i.RunIfNeeded(), TimeSpan.FromMinutes(10));
             backgroundWorker.Schedule<MessageTemplateSeeder>(i => i.PopulateDatabase(), TimeSpan.FromMinutes(1));
             backgroundWorker.Enqueue<SellerProfileValidationService>(i => i.RunLater());
+            ExecuteAsync(token);
         }
 
         private void MaaSConfig_Loaded(object sender, EventArgs e)
@@ -180,6 +186,16 @@ namespace V2.Application
             else appConfigRepository.Update(appConfig);
 
             appConfigRepository.SaveChanges();
+        }
+
+        protected async Task ExecuteAsync(CancellationToken stoppingToken)
+        {   
+            /*Tarefa vai rodar a cada 4 horas*/
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                 _IntegrationParameterGoogleService.Run();
+                await Task.Delay(14400000, stoppingToken);
+            }
         }
     }
 }
