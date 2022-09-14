@@ -194,7 +194,7 @@ namespace V2.Application
             while (!stoppingToken.IsCancellationRequested)
             {
                  _IntegrationParameterGoogleService.Run();
-                await Task.Delay(14400000, stoppingToken);
+                await Task.Delay(14400000, stoppingToken); 
             }
         }
     }
